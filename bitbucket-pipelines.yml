@@ -3,6 +3,8 @@ image: maven:3.5.0
 pipelines:
   default:
     - step:
+        caches:
+          - node
         script:
             - apt-get update; apt-get install -y jq unzip
             - export BITBUCKET_ACCESS_TOKEN=$(curl -s -X POST -u "$OAUTH_CLIENT_KEY:$OAUTH_CLIENT_SECRET" https://bitbucket.org/site/oauth2/access_token -d grant_type=client_credentials | jq ".access_token")
