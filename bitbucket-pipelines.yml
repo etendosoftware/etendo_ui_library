@@ -1,5 +1,4 @@
-image: maven:3.5.0
-
+image: node:10.15.0
 pipelines:
   default:
     - step:
