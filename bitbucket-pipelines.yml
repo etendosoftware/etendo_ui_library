@@ -6,6 +6,7 @@ pipelines:
         caches:
           - node
         script:
+            - node -v
             - apt-get update; apt-get install -y jq unzip
             - export BITBUCKET_ACCESS_TOKEN=$(curl -s -X POST -u "$OAUTH_CLIENT_KEY:$OAUTH_CLIENT_SECRET" https://bitbucket.org/site/oauth2/access_token -d grant_type=client_credentials | jq ".access_token")
             - export BITBUCKET_PULL_REQUEST_ID=$(curl -s -X GET "https://api.bitbucket.org/2.0/repositories/$BITBUCKET_REPO_OWNER/$BITBUCKET_REPO_SLUG/pullrequests?pagelen=1&state=OPEN&access_token=$BITBUCKET_ACCESS_TOKEN" | jq ".values[] | .id")
