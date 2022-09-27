@@ -1,8 +1,7 @@
 import React from 'react';
 import {Story, Meta} from '@storybook/react';
 
-import {Tab} from './Tab';
-import {TabSecondary} from './TabComponents/TabSecondary';
+import Tab from './Tab';
 import {TabProps} from './Tab.types';
 
 export default {
@@ -11,10 +10,9 @@ export default {
   argTypes: {},
 } as Meta<typeof Tab>;
 
-
-{/* Information to pass */}
+/* Information to pass */
 const data1 = [
-  {name: 'Usuario', route: '', key: 'usuario',},
+  {name: 'Usuario', route: '', key: 'usuario'},
   {name: 'Vehículos', route: '', key: 'vehiculos'},
   {name: 'Habilidades', route: '', key: 'habilidades'},
   {name: 'App móvil', route: '', key: 'appMovil'},
@@ -38,7 +36,7 @@ const data3 = [
   {name: 'Sales order', route: '', key: 'salesOrder'},
 ];
 
-{/* Data passage */}
+/* Data passage */
 const dataPassage1 = (data: any) => {
   return data1[data];
 };
@@ -51,59 +49,58 @@ const dataPassage3 = (data: any) => {
   return data3[data];
 };
 
-{/* Templates */}
+/* Templates */
 const Template: Story<TabProps> = args => (
-  <Tab data={data1} onChangeSelected={dataPassage1} />
+  <Tab data={data1} onChangeSelected={dataPassage1} style="primary" />
 );
 
 const Template2: Story<TabProps> = args => (
-  <Tab data={data2} onChangeSelected={dataPassage2} />
+  <Tab data={data1} onChangeSelected={dataPassage2} style="secundary" />
 );
 
 const Template3: Story<TabProps> = args => (
-  <TabSecondary data={data1} onChangeSelected={dataPassage1} />
+  <Tab data={data2} onChangeSelected={dataPassage1} style="primary" />
 );
 
 const Template4: Story<TabProps> = args => (
-  <TabSecondary data={data2} onChangeSelected={dataPassage2} />
+  <Tab data={data2} onChangeSelected={dataPassage2} style="secundary" />
 );
 
 const Template5: Story<TabProps> = args => (
-  <Tab data={data3} onChangeSelected={dataPassage3} />
+  <Tab data={data3} onChangeSelected={dataPassage3} style="primary" />
 );
 
 const Template6: Story<TabProps> = args => (
-  <TabSecondary data={data3} onChangeSelected={dataPassage3} />
+  <Tab data={data3} onChangeSelected={dataPassage3} style="secundary" />
 );
 
-
-{/* Story exports */}
-export const Primary = Template.bind({});
-Primary.args = {
-  text: 'Tab',
+/* Story exports */
+export const PrimaryStyleVersion1 = Template.bind({});
+PrimaryStyleVersion1.args = {
+  text: 'Primary Style - Version 1',
 };
 
-export const Secondary = Template2.bind({});
-Secondary.args = {
-  text: 'Secondary',
+export const SecondaryStyleVersion1 = Template2.bind({});
+SecondaryStyleVersion1.args = {
+  text: 'Secundary Style - Version 1',
 };
 
-export const Tertiary = Template3.bind({});
-Secondary.args = {
-  text: 'Tertiary',
+export const PrimaryStyleVersion2 = Template3.bind({});
+PrimaryStyleVersion1.args = {
+  text: 'Primary Style - Version 2',
 };
 
-export const Quaternary = Template4.bind({});
-Secondary.args = {
-  text: 'Quaternary',
+export const SecundaryStyleVersion2 = Template4.bind({});
+SecundaryStyleVersion2.args = {
+  text: 'Secundary Style - Version 2',
 };
 
-export const Fifth = Template5.bind({});
-Secondary.args = {
-  text: 'Fifth',
+export const PrimaryStyleVersion3 = Template5.bind({});
+PrimaryStyleVersion3.args = {
+  text: 'Primary Style - Version 3',
 };
 
-export const Sixth = Template6.bind({});
-Secondary.args = {
-  text: 'Sixth',
+export const SecundaryStyleVersion3 = Template6.bind({});
+SecundaryStyleVersion3.args = {
+  text: 'Secundary Style - Version 3',
 };

@@ -1,9 +1,7 @@
 import React from 'react';
-import '@testing-library/jest-dom';
-import {render, screen} from '@testing-library/react-native';
+import renderer from 'react-test-renderer';
 
-import {Tab} from './Tab';
-import {TabSecondary} from './TabComponents/TabSecondary';
+import Tab from './Tab';
 
 const data1 = [
   {
@@ -24,8 +22,11 @@ const dataPassage = (data: any) => {
 
 describe('Running Test for Button', () => {
   it('Check Button Disabled', () => {
-    render(<Tab data={data1} onChangeSelected={dataPassage} />);
-    render(<TabSecondary data={data1} onChangeSelected={dataPassage} />);
-    //expect(screen.getByRole('button', { name: 'Button' })).toBeDisabled();
+    const tree = renderer
+      .create(
+        <Tab data={data1} onChangeSelected={dataPassage} style="primary" />,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
   });
 });

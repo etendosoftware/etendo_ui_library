@@ -1,0 +1,244 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Running Test for Button Check Button Disabled 1`] = `
+<RCTScrollView
+  horizontal={true}
+>
+  <View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#161f56",
+          "borderBottomColor": "#161f56",
+          "borderBottomWidth": 3,
+          "borderTopColor": "#fad614",
+          "borderTopWidth": 4,
+          "height": 45,
+          "justifyContent": "center",
+          "marginTop": 50,
+          "opacity": 1,
+          "paddingHorizontal": 20,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#FFF",
+            "fontFamily": "Inter-SemiBold",
+            "textTransform": "uppercase",
+          }
+        }
+      >
+        Prod. Interés
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#eff1f8",
+          "borderBottomColor": "#161f56",
+          "borderBottomWidth": 3,
+          "borderTopColor": "transparent",
+          "borderTopWidth": 4,
+          "height": 45,
+          "justifyContent": "center",
+          "marginTop": 50,
+          "opacity": 1,
+          "paddingHorizontal": 20,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#161f56",
+            "fontFamily": "Inter-SemiBold",
+            "textTransform": "uppercase",
+          }
+        }
+      >
+        Pop Asignado
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#eff1f8",
+          "borderBottomColor": "#161f56",
+          "borderBottomWidth": 3,
+          "borderTopColor": "transparent",
+          "borderTopWidth": 4,
+          "height": 45,
+          "justifyContent": "center",
+          "marginTop": 50,
+          "opacity": 1,
+          "paddingHorizontal": 20,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#161f56",
+            "fontFamily": "Inter-SemiBold",
+            "textTransform": "uppercase",
+          }
+        }
+      >
+        Incedencias
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#eff1f8",
+          "borderBottomColor": "#161f56",
+          "borderBottomWidth": 3,
+          "borderTopColor": "transparent",
+          "borderTopWidth": 4,
+          "height": 45,
+          "justifyContent": "center",
+          "marginTop": 50,
+          "opacity": 1,
+          "paddingHorizontal": 20,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#161f56",
+            "fontFamily": "Inter-SemiBold",
+            "textTransform": "uppercase",
+          }
+        }
+      >
+        Competencia
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#eff1f8",
+          "borderBottomColor": "#161f56",
+          "borderBottomWidth": 3,
+          "borderTopColor": "transparent",
+          "borderTopWidth": 4,
+          "height": 45,
+          "justifyContent": "center",
+          "marginTop": 50,
+          "opacity": 1,
+          "paddingHorizontal": 20,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#161f56",
+            "fontFamily": "Inter-SemiBold",
+            "textTransform": "uppercase",
+          }
+        }
+      >
+        Preguntas
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#eff1f8",
+          "borderBottomColor": "#161f56",
+          "borderBottomWidth": 3,
+          "borderTopColor": "transparent",
+          "borderTopWidth": 4,
+          "height": 45,
+          "justifyContent": "center",
+          "marginTop": 50,
+          "opacity": 1,
+          "paddingHorizontal": 20,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#161f56",
+            "fontFamily": "Inter-SemiBold",
+            "textTransform": "uppercase",
+          }
+        }
+      >
+        Observaciones
+      </Text>
+    </View>
+  </View>
+</RCTScrollView>
+`;
