@@ -15,8 +15,3 @@ definitions:
 clone:
   depth: full
 
-pipelines:
-  branches:
-    '{master}': # or the name of your main branch
-      - step: *build-step
-
