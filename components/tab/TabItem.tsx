@@ -1,56 +1,32 @@
 /* Imports */
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
 
-/* Type declaration */
-type Info = {
-  name: string;
-  route: string;
-  key: string;
-};
-
-interface Props {
-  style: any;
-  item: any;
-  onPress: () => void;
-  index: number;
-  toggleItem: number;
-  styleText: 'primary' | 'secundary' | 'tertiary';
-}
+import {TabItemProps, TabStyleType, TabStyleVariant} from './Tab.types';
 
 /* Styles - This function allows to obtain the text styles of the TabItem component */
-const getStyle = (style: any, toggleItem: number, index: number) => {
-  let styles;
-  let colorActive;
-  let colorInactive;
+const getStyle = (style: TabStyleType, toggleItem: number, index: number) => {
+  let colorActive: string = '';
+  let colorInactive: string = '';
 
-  /* Primary style */
-  if (style === 'primary') {
-    colorActive = '#FFF';
-    colorInactive = '#161f56';
-    styles = StyleSheet.create({
-      itemText: {
-        fontFamily: 'Inter-SemiBold',
-        textTransform: 'uppercase',
-      },
-    });
-    /* Secundary style */
-  } else if (style === 'secundary') {
-    colorActive = '#202452';
-    colorInactive = '#808695';
-    styles = StyleSheet.create({
-      itemText: {
-        fontFamily: 'Inter-SemiBold',
-        textTransform: 'uppercase',
-      },
-    });
+  /* Choice of active and inactive color based on the style selected by the programmer */
+  switch (style) {
+    case 'primary':
+      colorActive = '#FFF';
+      colorInactive = '#161f56';
+      break;
+    case 'secondary':
+      colorActive = '#202452';
+      colorInactive = '#808695';
+    default:
+      break;
   }
 
   /* Returns the style of the chosen text based on the selected styles of the Tab component */
   if (toggleItem === index) {
-    return {color: colorActive, ...styles?.itemText};
+    return [{color: colorActive}, TabStyleVariant[style].itemText];
   } else {
-    return {color: colorInactive, ...styles?.itemText};
+    return [{color: colorInactive}, TabStyleVariant[style].itemText];
   }
 };
 
@@ -62,7 +38,7 @@ const TabItem = ({
   index,
   onPress,
   toggleItem,
-}: Props) => {
+}: TabItemProps) => {
   return (
     <TouchableOpacity
       style={style}

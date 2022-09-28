@@ -3,28 +3,26 @@ import renderer from 'react-test-renderer';
 
 import Tab from './Tab';
 
-const data1 = [
-  {
-    name: 'Prod. Interés',
-    route: '',
-    key: 'prodInteres',
-  },
-  {name: 'Pop Asignado', route: '', key: 'popAsignado'},
-  {name: 'Incedencias', route: '', key: 'incidencias'},
-  {name: 'Competencia', route: '', key: 'competencia'},
-  {name: 'Preguntas', route: '', key: 'preguntas'},
-  {name: 'Observaciones', route: '', key: 'observaciones'},
+const dataset = [
+  {name: 'Prods. of interest', route: '', key: 'prodsOfInterest'},
+  {name: 'Assigned pop', route: '', key: 'Assigned pop'},
+  {name: 'Incidents', route: '', key: 'incidents'},
+  {name: 'Competition', route: '', key: 'competition'},
+  {name: 'Questions', route: '', key: 'questions'},
+  {name: 'Observations', route: '', key: 'observations'},
 ];
 
-const dataPassage = (data: any) => {
-  return data1[data];
-};
+const onCheckSelectedMock = () => dataset[0];
 
-describe('Running Test for Button', () => {
-  it('Check Button Disabled', () => {
+describe('Running Test for Tab', () => {
+  it('Check Tab Disabled', () => {
     const tree = renderer
       .create(
-        <Tab data={data1} onChangeSelected={dataPassage} style="primary" />,
+        <Tab
+          data={dataset}
+          onChangeSelected={onCheckSelectedMock}
+          style="primary"
+        />,
       )
       .toJSON();
     expect(tree).toMatchSnapshot();

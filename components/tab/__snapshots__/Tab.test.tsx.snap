@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Running Test for Button Check Button Disabled 1`] = `
+exports[`Running Test for Tab Check Tab Disabled 1`] = `
 <RCTScrollView
   horizontal={true}
 >
@@ -34,14 +34,18 @@ exports[`Running Test for Button Check Button Disabled 1`] = `
     >
       <Text
         style={
-          Object {
-            "color": "#FFF",
-            "fontFamily": "Inter-SemiBold",
-            "textTransform": "uppercase",
-          }
+          Array [
+            Object {
+              "color": "#FFF",
+            },
+            Object {
+              "fontFamily": "Inter-SemiBold",
+              "textTransform": "uppercase",
+            },
+          ]
         }
       >
-        Prod. Interés
+        Prods. of interest
       </Text>
     </View>
     <View
@@ -73,14 +77,18 @@ exports[`Running Test for Button Check Button Disabled 1`] = `
     >
       <Text
         style={
-          Object {
-            "color": "#161f56",
-            "fontFamily": "Inter-SemiBold",
-            "textTransform": "uppercase",
-          }
+          Array [
+            Object {
+              "color": "#161f56",
+            },
+            Object {
+              "fontFamily": "Inter-SemiBold",
+              "textTransform": "uppercase",
+            },
+          ]
         }
       >
-        Pop Asignado
+        Assigned pop
       </Text>
     </View>
     <View
@@ -112,14 +120,18 @@ exports[`Running Test for Button Check Button Disabled 1`] = `
     >
       <Text
         style={
-          Object {
-            "color": "#161f56",
-            "fontFamily": "Inter-SemiBold",
-            "textTransform": "uppercase",
-          }
+          Array [
+            Object {
+              "color": "#161f56",
+            },
+            Object {
+              "fontFamily": "Inter-SemiBold",
+              "textTransform": "uppercase",
+            },
+          ]
         }
       >
-        Incedencias
+        Incidents
       </Text>
     </View>
     <View
@@ -151,14 +163,18 @@ exports[`Running Test for Button Check Button Disabled 1`] = `
     >
       <Text
         style={
-          Object {
-            "color": "#161f56",
-            "fontFamily": "Inter-SemiBold",
-            "textTransform": "uppercase",
-          }
+          Array [
+            Object {
+              "color": "#161f56",
+            },
+            Object {
+              "fontFamily": "Inter-SemiBold",
+              "textTransform": "uppercase",
+            },
+          ]
         }
       >
-        Competencia
+        Competition
       </Text>
     </View>
     <View
@@ -190,14 +206,18 @@ exports[`Running Test for Button Check Button Disabled 1`] = `
     >
       <Text
         style={
-          Object {
-            "color": "#161f56",
-            "fontFamily": "Inter-SemiBold",
-            "textTransform": "uppercase",
-          }
+          Array [
+            Object {
+              "color": "#161f56",
+            },
+            Object {
+              "fontFamily": "Inter-SemiBold",
+              "textTransform": "uppercase",
+            },
+          ]
         }
       >
-        Preguntas
+        Questions
       </Text>
     </View>
     <View
@@ -229,14 +249,18 @@ exports[`Running Test for Button Check Button Disabled 1`] = `
     >
       <Text
         style={
-          Object {
-            "color": "#161f56",
-            "fontFamily": "Inter-SemiBold",
-            "textTransform": "uppercase",
-          }
+          Array [
+            Object {
+              "color": "#161f56",
+            },
+            Object {
+              "fontFamily": "Inter-SemiBold",
+              "textTransform": "uppercase",
+            },
+          ]
         }
       >
-        Observaciones
+        Observations
       </Text>
     </View>
   </View>

@@ -11,96 +11,86 @@ export default {
 } as Meta<typeof Tab>;
 
 /* Information to pass */
-const data1 = [
-  {name: 'Usuario', route: '', key: 'usuario'},
-  {name: 'Vehículos', route: '', key: 'vehiculos'},
-  {name: 'Habilidades', route: '', key: 'habilidades'},
-  {name: 'App móvil', route: '', key: 'appMovil'},
-  {name: 'Personal', route: '', key: 'personal'},
-  {name: 'Opciones de ruteo', route: '', key: 'opcionesDeRuteo'},
-  {name: 'Mapa', route: '', key: 'mapa'},
+const dataset = [
+  {name: 'User', route: '', key: 'user'},
+  {name: 'Vehicles', route: '', key: 'vehicles'},
+  {name: 'Skills', route: '', key: 'skills'},
+  {name: 'Mobile app', route: '', key: 'movilApp'},
+  {name: 'Staff', route: '', key: 'staff'},
+  {name: 'Routing options', route: '', key: 'routing options'},
+  {name: 'Map', route: '', key: 'map'},
 ];
 
-const data2 = [
-  {name: 'Prod. Interés', route: '', key: 'prodInteres'},
-  {name: 'Pop Asignado', route: '', key: 'popAsignado'},
-  {name: 'Incedencias', route: '', key: 'incidencias'},
-  {name: 'Competencia', route: '', key: 'competencia'},
-  {name: 'Preguntas', route: '', key: 'preguntas'},
-  {name: 'Observaciones', route: '', key: 'observaciones'},
+const dataset2 = [
+  {name: 'Prods. of interest', route: '', key: 'prodsOfInterest'},
+  {name: 'Assigned pop', route: '', key: 'Assigned pop'},
+  {name: 'Incidents', route: '', key: 'incidents'},
+  {name: 'Competition', route: '', key: 'competition'},
+  {name: 'Questions', route: '', key: 'questions'},
+  {name: 'Observations', route: '', key: 'observations'},
 ];
 
-const data3 = [
+const dataset3 = [
   {name: 'Workspace', route: '', key: 'workspace'},
   {name: 'Business Partner', route: '', key: 'businessPartner'},
   {name: 'Sales order', route: '', key: 'salesOrder'},
 ];
 
-/* Data passage */
-const dataPassage1 = (data: any) => {
-  return data1[data];
-};
-
-const dataPassage2 = (data: any) => {
-  return data2[data];
-};
-
-const dataPassage3 = (data: any) => {
-  return data3[data];
-};
+/* This function allows you to select by default the first tab */
+const onCheckSelectedMock = () => dataset[0];
 
 /* Templates */
 const Template: Story<TabProps> = args => (
-  <Tab data={data1} onChangeSelected={dataPassage1} style="primary" />
+  <Tab data={dataset} onChangeSelected={onCheckSelectedMock} style="primary" />
 );
 
 const Template2: Story<TabProps> = args => (
-  <Tab data={data1} onChangeSelected={dataPassage2} style="secundary" />
+  <Tab
+    data={dataset}
+    onChangeSelected={onCheckSelectedMock}
+    style="secondary"
+  />
 );
 
 const Template3: Story<TabProps> = args => (
-  <Tab data={data2} onChangeSelected={dataPassage1} style="primary" />
+  <Tab data={dataset2} onChangeSelected={onCheckSelectedMock} style="primary" />
 );
 
 const Template4: Story<TabProps> = args => (
-  <Tab data={data2} onChangeSelected={dataPassage2} style="secundary" />
+  <Tab
+    data={dataset2}
+    onChangeSelected={onCheckSelectedMock}
+    style="secondary"
+  />
 );
 
 const Template5: Story<TabProps> = args => (
-  <Tab data={data3} onChangeSelected={dataPassage3} style="primary" />
+  <Tab data={dataset3} onChangeSelected={onCheckSelectedMock} style="primary" />
 );
 
 const Template6: Story<TabProps> = args => (
-  <Tab data={data3} onChangeSelected={dataPassage3} style="secundary" />
+  <Tab
+    data={dataset3}
+    onChangeSelected={onCheckSelectedMock}
+    style="secondary"
+  />
 );
 
 /* Story exports */
 export const PrimaryStyleVersion1 = Template.bind({});
-PrimaryStyleVersion1.args = {
-  text: 'Primary Style - Version 1',
-};
+PrimaryStyleVersion1.args = {};
 
 export const SecondaryStyleVersion1 = Template2.bind({});
-SecondaryStyleVersion1.args = {
-  text: 'Secundary Style - Version 1',
-};
+SecondaryStyleVersion1.args = {};
 
 export const PrimaryStyleVersion2 = Template3.bind({});
-PrimaryStyleVersion1.args = {
-  text: 'Primary Style - Version 2',
-};
+PrimaryStyleVersion1.args = {};
 
 export const SecundaryStyleVersion2 = Template4.bind({});
-SecundaryStyleVersion2.args = {
-  text: 'Secundary Style - Version 2',
-};
+SecundaryStyleVersion2.args = {};
 
 export const PrimaryStyleVersion3 = Template5.bind({});
-PrimaryStyleVersion3.args = {
-  text: 'Primary Style - Version 3',
-};
+PrimaryStyleVersion3.args = {};
 
 export const SecundaryStyleVersion3 = Template6.bind({});
-SecundaryStyleVersion3.args = {
-  text: 'Secundary Style - Version 3',
-};
+SecundaryStyleVersion3.args = {};
