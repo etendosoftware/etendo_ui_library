@@ -3,8 +3,7 @@ import React, {useState} from 'react';
 import {ScrollView} from 'react-native';
 
 import TabItem from './TabItem';
-import {TabProps, TabItemProps, Info, TabStyleFontSize} from './Tab.types';
-import {TabStyleType} from './Tab.types';
+import {TabProps, Info, TabStyleFontSize, TabStyleType} from './Tab.types';
 import {TabStyleVariant} from './Tab.styles';
 
 /* Styles - This function allows you to obtain the styles of the Tab component */
@@ -14,16 +13,6 @@ const getStyle = (style: TabStyleType, toggleItem: number, index: number) => {
     return [TabStyleVariant[style].tabs, TabStyleVariant[style].tabsActive];
   } else {
     return TabStyleVariant[style].tabs;
-  }
-};
-
-const getTextSize = (fontSize: TabStyleFontSize) => {
-  switch (fontSize) {
-    case 'small':
-      break;
-
-    default:
-      break;
   }
 };
 
