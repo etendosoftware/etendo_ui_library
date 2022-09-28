@@ -36,7 +36,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
         style={
           Array [
             Object {
-              "color": "#FFF",
+              "color": "#FFFFFF",
             },
             Object {
               "fontSize": 18,
@@ -82,7 +82,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
         style={
           Array [
             Object {
-              "color": "#161f56",
+              "color": "#202452",
             },
             Object {
               "fontSize": 18,
@@ -128,7 +128,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
         style={
           Array [
             Object {
-              "color": "#161f56",
+              "color": "#202452",
             },
             Object {
               "fontSize": 18,
@@ -174,7 +174,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
         style={
           Array [
             Object {
-              "color": "#161f56",
+              "color": "#202452",
             },
             Object {
               "fontSize": 18,
@@ -220,7 +220,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
         style={
           Array [
             Object {
-              "color": "#161f56",
+              "color": "#202452",
             },
             Object {
               "fontSize": 18,
@@ -266,7 +266,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
         style={
           Array [
             Object {
-              "color": "#161f56",
+              "color": "#202452",
             },
             Object {
               "fontSize": 18,

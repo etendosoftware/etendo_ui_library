@@ -4,6 +4,7 @@ import {Text, TouchableOpacity} from 'react-native';
 
 import {TabItemProps, TabStyleType, TabStyleFontSize} from './Tab.types';
 import {TabStyleVariant} from './Tab.styles';
+import {WHITE, BLUE, GREY_BLUE} from '../../styles/colors';
 
 /* Styles - This function allows to obtain the text styles of the TabItem component */
 const getStyle = (
@@ -19,12 +20,13 @@ const getStyle = (
   /* Choice of active and inactive color based on the style selected by the programmer */
   switch (style) {
     case 'primary':
-      colorActive = '#FFF';
-      colorInactive = '#161f56';
+      colorActive = WHITE;
+      colorInactive = BLUE;
       break;
     case 'secondary':
-      colorActive = '#202452';
-      colorInactive = '#808695';
+      colorActive = BLUE;
+      colorInactive = GREY_BLUE;
+      break;
     default:
       break;
   }
@@ -45,19 +47,11 @@ const getStyle = (
   }
 
   /* Returns the style of the chosen text based on the selected styles of the Tab component */
-  if (toggleItem === index) {
-    return [
-      {color: colorActive},
-      {fontSize: fontSize},
-      TabStyleVariant[style].itemText,
-    ];
-  } else {
-    return [
-      {color: colorInactive},
-      {fontSize: fontSize},
-      TabStyleVariant[style].itemText,
-    ];
-  }
+  return [
+    {color: toggleItem === index ? colorActive : colorInactive},
+    {fontSize: fontSize},
+    TabStyleVariant[style].itemText,
+  ];
 };
 
 /* TabItem component */
