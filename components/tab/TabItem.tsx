@@ -1,8 +1,9 @@
 /* Imports */
 import React from 'react';
 import {Text, TouchableOpacity} from 'react-native';
+import {TabStyleVariant} from './Tab.styles';
 
-import {TabItemProps, TabStyleType, TabStyleVariant} from './Tab.types';
+import {TabItemProps, TabStyleType} from './Tab.types';
 
 /* Styles - This function allows to obtain the text styles of the TabItem component */
 const getStyle = (style: TabStyleType, toggleItem: number, index: number) => {
