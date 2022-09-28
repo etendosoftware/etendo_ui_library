@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import {ScrollView} from 'react-native';
 
 import TabItem from './TabItem';
-import {TabProps, Info, TabStyleFontSize, TabStyleType} from './Tab.types';
+import {TabProps, Info, TabStyleType} from './Tab.types';
 import {TabStyleVariant} from './Tab.styles';
 
 /* Styles - This function allows you to obtain the styles of the Tab component */
