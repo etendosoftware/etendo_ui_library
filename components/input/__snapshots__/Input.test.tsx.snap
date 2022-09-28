@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Running Test for Input Check Input Error 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "marginBottom": 3,
+        "marginLeft": 5,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#202452",
+          "fontFamily": "Inter-Regular",
+          "fontSize": 14,
+          "fontWeight": "700",
+          "marginLeft": 5,
+        }
+      }
+    >
+      Test
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "borderRadius": 10,
+          "borderWidth": 5,
+        },
+        Object {
+          "borderColor": "transparent",
+        },
+      ]
+    }
+  >
+    <View
+      accessibilityState={
+        Object {
+          "disabled": true,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "flex-start",
+          "backgroundColor": "#FFFFFF",
+          "borderColor": "#F36A62",
+          "borderRadius": 5,
+          "borderWidth": 2,
+          "flexDirection": "row",
+          "opacity": 1,
+        }
+      }
+    >
+      <TextInput
+        multiline={true}
+        onBlur={[Function]}
+        onChangeText={[Function]}
+        onFocus={[Function]}
+        placeholder="Write a password"
+        placeholderTextColor="#808695"
+        style={
+          Object {
+            "color": "#202452",
+            "flex": 1,
+            "fontFamily": "Inter-Regular",
+            "fontSize": 14,
+            "padding": 5,
+          }
+        }
+        value="aa"
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "marginBottom": 3,
+        "marginLeft": 5,
+        "marginTop": 5,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#F36A62",
+          "fontFamily": "Inter-Regular",
+          "fontSize": 12,
+          "marginLeft": 5,
+        }
+      }
+    >
+      Only characters
+    </Text>
+  </View>
+</View>
+`;
