@@ -28,6 +28,10 @@ const styles = StyleSheet.create({
   },
 });
 
+const a = () {
+  b;
+}
+
 export const Button = ({ text, onPress, color, textColor }: ButtonProps) => (
   <View style={styles.buttonContainer}>
     <TouchableOpacity
