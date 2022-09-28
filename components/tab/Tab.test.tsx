@@ -22,6 +22,7 @@ describe('Running Test for Tab', () => {
           data={dataset}
           onChangeSelected={onCheckSelectedMock}
           style="primary"
+          typeSizeText="medium"
         />,
       )
       .toJSON();

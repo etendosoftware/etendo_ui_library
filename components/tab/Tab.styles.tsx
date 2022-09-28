@@ -7,7 +7,8 @@ import {
   LIGHT_BLUE_10,
   WHITE,
   YELLOW,
-} from '../../styles/theme';
+} from '../../styles/colors';
+import {INTER_SEMIBOLD} from '../../styles/fonts';
 
 /* Export of different styles */
 export const TabStyleVariant: TabStyleRecord = {
@@ -34,7 +35,7 @@ export const TabStyleVariant: TabStyleRecord = {
       borderTopColor: YELLOW,
     },
     itemText: {
-      fontFamily: 'Inter-SemiBold',
+      fontFamily: INTER_SEMIBOLD,
       textTransform: 'uppercase',
     },
   },
@@ -64,7 +65,7 @@ export const TabStyleVariant: TabStyleRecord = {
     },
     tabsActive: {backgroundColor: YELLOW},
     itemText: {
-      fontFamily: 'Inter-SemiBold',
+      fontFamily: INTER_SEMIBOLD,
       textTransform: 'uppercase',
     },
   },

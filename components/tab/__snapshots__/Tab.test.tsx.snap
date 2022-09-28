@@ -39,6 +39,9 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
               "color": "#FFF",
             },
             Object {
+              "fontSize": 18,
+            },
+            Object {
               "fontFamily": "Inter-SemiBold",
               "textTransform": "uppercase",
             },
@@ -80,6 +83,9 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
           Array [
             Object {
               "color": "#161f56",
+            },
+            Object {
+              "fontSize": 18,
             },
             Object {
               "fontFamily": "Inter-SemiBold",
@@ -125,6 +131,9 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
               "color": "#161f56",
             },
             Object {
+              "fontSize": 18,
+            },
+            Object {
               "fontFamily": "Inter-SemiBold",
               "textTransform": "uppercase",
             },
@@ -166,6 +175,9 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
           Array [
             Object {
               "color": "#161f56",
+            },
+            Object {
+              "fontSize": 18,
             },
             Object {
               "fontFamily": "Inter-SemiBold",
@@ -211,6 +223,9 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
               "color": "#161f56",
             },
             Object {
+              "fontSize": 18,
+            },
+            Object {
               "fontFamily": "Inter-SemiBold",
               "textTransform": "uppercase",
             },
@@ -252,6 +267,9 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
           Array [
             Object {
               "color": "#161f56",
+            },
+            Object {
+              "fontSize": 18,
             },
             Object {
               "fontFamily": "Inter-SemiBold",

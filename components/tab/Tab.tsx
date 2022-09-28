@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import {ScrollView} from 'react-native';
 
 import TabItem from './TabItem';
-import {TabProps, TabItemProps} from './Tab.types';
+import {TabProps, TabItemProps, Info, TabStyleFontSize} from './Tab.types';
 import {TabStyleType} from './Tab.types';
 import {TabStyleVariant} from './Tab.styles';
 
@@ -17,18 +17,29 @@ const getStyle = (style: TabStyleType, toggleItem: number, index: number) => {
   }
 };
 
+const getTextSize = (fontSize: TabStyleFontSize) => {
+  switch (fontSize) {
+    case 'small':
+      break;
+
+    default:
+      break;
+  }
+};
+
 /* Tab component */
-const Tab = ({data, onChangeSelected, style}: TabProps) => {
+const Tab = ({data, onChangeSelected, style, typeSizeText}: TabProps) => {
   /* Variable to handle the state of the tabs */
   const [toggleItem, setToggleItem] = useState<number>(0);
 
   return (
     <ScrollView horizontal={true}>
-      {data.map((item: TabItemProps['item'], index: number) => {
+      {data.map((item: Info, index: number) => {
         return (
           <TabItem
             style={getStyle(style, toggleItem, index)}
             styleText={style}
+            sizeText={typeSizeText}
             item={item}
             index={index}
             onPress={() => {

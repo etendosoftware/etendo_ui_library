@@ -12,6 +12,7 @@ export interface TabProps {
   data: Info[];
   onChangeSelected: (Info: Info | undefined) => Info;
   style: TabStyleType;
+  typeSizeText: TabStyleFontSize;
 }
 
 export interface TabItemProps {
@@ -21,10 +22,12 @@ export interface TabItemProps {
   index: number;
   toggleItem: number;
   styleText: TabStyleType;
+  sizeText: TabStyleFontSize;
 }
 
 /* Declaration of style types */
 export type TabStyleType = 'primary' | 'secondary';
+export type TabStyleFontSize = 'small' | 'medium' | 'large';
 
 export type TabStyleRecord = Record<
   TabStyleType,
@@ -34,5 +37,12 @@ export type TabStyleRecord = Record<
     tabs: ViewStyle;
     tabsActive: ViewStyle;
     itemText: TextStyle;
+  }
+>;
+
+export type TabStyleText = Record<
+  TabStyleFontSize,
+  {
+    fontSize: TextStyle;
   }
 >;

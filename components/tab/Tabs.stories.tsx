@@ -41,7 +41,12 @@ const onCheckSelectedMock = () => dataset[0];
 
 /* Templates */
 const Template: Story<TabProps> = args => (
-  <Tab data={dataset} onChangeSelected={onCheckSelectedMock} style="primary" />
+  <Tab
+    data={dataset}
+    onChangeSelected={onCheckSelectedMock}
+    style="primary"
+    typeSizeText="small"
+  />
 );
 
 const Template2: Story<TabProps> = args => (
@@ -49,11 +54,17 @@ const Template2: Story<TabProps> = args => (
     data={dataset}
     onChangeSelected={onCheckSelectedMock}
     style="secondary"
+    typeSizeText="small"
   />
 );
 
 const Template3: Story<TabProps> = args => (
-  <Tab data={dataset2} onChangeSelected={onCheckSelectedMock} style="primary" />
+  <Tab
+    data={dataset2}
+    onChangeSelected={onCheckSelectedMock}
+    style="primary"
+    typeSizeText="medium"
+  />
 );
 
 const Template4: Story<TabProps> = args => (
@@ -61,11 +72,17 @@ const Template4: Story<TabProps> = args => (
     data={dataset2}
     onChangeSelected={onCheckSelectedMock}
     style="secondary"
+    typeSizeText="medium"
   />
 );
 
 const Template5: Story<TabProps> = args => (
-  <Tab data={dataset3} onChangeSelected={onCheckSelectedMock} style="primary" />
+  <Tab
+    data={dataset3}
+    onChangeSelected={onCheckSelectedMock}
+    style="primary"
+    typeSizeText="large"
+  />
 );
 
 const Template6: Story<TabProps> = args => (
@@ -73,6 +90,7 @@ const Template6: Story<TabProps> = args => (
     data={dataset3}
     onChangeSelected={onCheckSelectedMock}
     style="secondary"
+    typeSizeText="large"
   />
 );
 
