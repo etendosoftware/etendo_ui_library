@@ -1,15 +1,37 @@
 image: atlassian/default-image:2
-pipelines:
-  default:
-    - step:
-        caches:
-          - node
+
+clone:
+  depth: full
+
+definitions:
+  steps:
+    - step: &build-step
+        name: SonarQube analysis
         script:
-            - node -v
-            - apt-get update; apt-get install -y jq unzip
-            - export BITBUCKET_ACCESS_TOKEN=$(curl -s -X POST -u "$OAUTH_CLIENT_KEY:$OAUTH_CLIENT_SECRET" https://bitbucket.org/site/oauth2/access_token -d grant_type=client_credentials | jq ".access_token")
-            - export BITBUCKET_PULL_REQUEST_ID=$(curl -s -X GET "https://api.bitbucket.org/2.0/repositories/$BITBUCKET_REPO_OWNER/$BITBUCKET_REPO_SLUG/pullrequests?pagelen=1&state=OPEN&access_token=$BITBUCKET_ACCESS_TOKEN" | jq ".values[] | .id")
-            - curl --insecure -OL https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-2.7.zip
-            - unzip sonar-scanner-2.7.zip
-            - chmod a+x sonar-scanner-2.7/bin/sonar-scanner
-            - ./sonar-scanner-2.7/bin/sonar-scanner -X -Dsonar.verbose=true -Dsonar.projectKey=$BITBUCKET_REPO_FULL_NAME -Dsonar.sources=. -Dsonar.bitbucket.repoSlug=$BITBUCKET_REPO_SLUG -Dsonar.bitbucket.accountName=$BITBUCKET_REPO_OWNER -Dsonar.bitbucket.branchName=$BITBUCKET_BRANCH -Dsonar.bitbucket.oauthClientKey=$OAUTH_CLIENT_KEY -Dsonar.bitbucket.oauthClientSecret=$OAUTH_CLIENT_SECRET -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_LOGIN -Dsonar.password=$SONAR_PASSWORD -Dsonar.analysis.mode=preview -Dsonar.bitbucket.pullRequestId=$BITBUCKET_PULL_REQUEST_ID -Dsonar.bitbucket.maxSeverityApprovalLevel=INFO -Dsonar.bitbucket.buildStatusEnabled=true -Dsonar.bitbucket.approvalFeatureEnabled=false -Dsonar.exclusions="test/**, node_modules/**, android, ios" -Dsonar.java.binaries=.
+          - pipe: sonarsource/sonarqube-scan:1.0.0
+            variables:
+              SONAR_HOST_URL: ${SONAR_HOST_URL} # Get the value from the repository/workspace variable.
+              SONAR_TOKEN: ${SONAR_TOKEN} # Get the value from the repository/workspace variable. You shouldn't set secret in clear text here.
+              SONAR_EXCLUDE: node_modules, android, ios
+  caches:
+    sonar: ~/.sonar
+
+pipelines:
+  branches:
+    '{master,develop}': 
+      - step: *build-step
+
+  pull-requests:
+    '**':
+      - step:
+          name: SonarQube analysis
+          caches:
+            - sonar
+          script:
+            - pipe: sonarsource/sonarqube-scan:1.0.0
+              variables:
+                SONAR_HOST_URL: ${SONAR_HOST_URL} # Get the value from the repository/workspace variable.
+                SONAR_TOKEN: ${SONAR_TOKEN} # Get the value from the repository/workspace variable. You shouldn't set secret in clear text here.
+                SONAR_EXCLUDE: node_modules, android, ios
+
+
