@@ -1,4 +1,7 @@
-image: maven:3.3.9
+image: atlassian/default-image:2
+
+clone:
+  depth: full
 
 definitions:
   steps:
@@ -9,9 +12,26 @@ definitions:
             variables:
               SONAR_HOST_URL: ${SONAR_HOST_URL} # Get the value from the repository/workspace variable.
               SONAR_TOKEN: ${SONAR_TOKEN} # Get the value from the repository/workspace variable. You shouldn't set secret in clear text here.
+              SONAR_EXCLUDE: node_modules, android, ios
   caches:
     sonar: ~/.sonar
 
-clone:
-  depth: full
+pipelines:
+  branches:
+    '{master,develop}': 
+      - step: *build-step
+
+  pull-requests:
+    '**':
+      - step:
+          name: SonarQube analysis
+          caches:
+            - sonar
+          script:
+            - pipe: sonarsource/sonarqube-scan:1.0.0
+              variables:
+                SONAR_HOST_URL: ${SONAR_HOST_URL} # Get the value from the repository/workspace variable.
+                SONAR_TOKEN: ${SONAR_TOKEN} # Get the value from the repository/workspace variable. You shouldn't set secret in clear text here.
+                SONAR_EXCLUDE: node_modules, android, ios
+
 
