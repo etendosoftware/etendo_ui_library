@@ -24,10 +24,13 @@ if (parameters) {
   addParameters(parameters);
 }
 
-argsEnhancers.forEach((enhancer) => addArgsEnhancer(enhancer));
+// temporary fix for https://github.com/storybookjs/react-native/issues/327 whilst the issue is investigated
+try {
+  argsEnhancers.forEach((enhancer) => addArgsEnhancer(enhancer));
+} catch {}
 
 const getStories = () => {
-  return [require("../components/Button.stories.tsx")];
+  return [require("../components/button/Button.stories")];
 };
 
 configure(getStories, module, false);
