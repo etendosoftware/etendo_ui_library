@@ -2,7 +2,6 @@
 import {TabStyleRecord} from './Tab.types';
 import {
   BLUE,
-  GREY_10,
   GREY_BLUE_30,
   LIGHT_BLUE_10,
   WHITE,
@@ -12,18 +11,18 @@ import {INTER_SEMIBOLD} from '../../styles/fonts';
 
 /* Export of different styles */
 export const TabStyleVariant: TabStyleRecord = {
+  /* Primary style */
   primary: {
     container: {
-      flex: 1,
       flexDirection: 'row',
+      backgroundColor: GREY_BLUE_30,
+      borderBottomColor: BLUE,
+      borderBottomWidth: 2.5,
     },
     tabs: {
-      marginTop: 50,
       paddingHorizontal: 20,
       height: 45,
       backgroundColor: GREY_BLUE_30,
-      borderBottomWidth: 3,
-      borderBottomColor: BLUE,
       justifyContent: 'center',
       alignItems: 'center',
       borderTopWidth: 4,
@@ -39,11 +38,9 @@ export const TabStyleVariant: TabStyleRecord = {
       textTransform: 'uppercase',
     },
   },
+  /* Secondary style */
   secondary: {
     container: {
-      flex: 1,
-      padding: 20,
-      backgroundColor: GREY_10,
       flexDirection: 'row',
     },
     containerTabs: {
@@ -56,7 +53,6 @@ export const TabStyleVariant: TabStyleRecord = {
       marginHorizontal: 11,
       paddingHorizontal: 20,
       height: 37,
-      marginTop: 50,
       backgroundColor: LIGHT_BLUE_10,
       borderBottomColor: BLUE,
       justifyContent: 'center',

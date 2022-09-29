@@ -66,6 +66,7 @@ const TabItem = ({
 }: TabItemProps) => {
   return (
     <TouchableOpacity
+      activeOpacity={0.5}
       style={style}
       onPress={() => {
         onPress();
