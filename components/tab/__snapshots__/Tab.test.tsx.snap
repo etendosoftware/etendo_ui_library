@@ -3,19 +3,11 @@
 exports[`Running Test for Tab Check Tab Disabled 1`] = `
 <View
   style={
-    Array [
-      Object {
-        "backgroundColor": "#EFF1F7",
-        "borderBottomColor": "#202452",
-        "borderBottomWidth": 2.5,
-        "flexDirection": "row",
-      },
-      Object {
-        "borderBottomColor": "#202452",
-        "borderBottomWidth": 3,
-        "flex": 1,
-      },
-    ]
+    Object {
+      "borderBottomColor": "#202452",
+      "borderBottomWidth": 3,
+      "flex": 1,
+    }
   }
 >
   <RCTScrollView
