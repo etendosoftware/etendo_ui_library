@@ -1,18 +1,18 @@
 import { ImageSourcePropType, TextStyle, ViewStyle } from "react-native"
 
-export type ButtonStyleType = 'primary' | 'secondary' |'terciary' |'whiteBorder' | 'white'
+export type ButtonStyleType = 'primary' | 'secondary' |'terciary' |'whiteBorder' | 'white' ;
 
-export type ButtonSizeType = 'small' | 'medium' | 'large' 
+export type ButtonSizeType = 'small' | 'medium' | 'large' ;
 
 export type buttonStyleVariant= Record<
 ButtonStyleType, {
-    container:ViewStyle,
-    text:TextStyle,
+    container: ViewStyle,
+    text: TextStyle,
     containerDisabled: ViewStyle,
     textDisabled: TextStyle,
 }> 
 
-export type buttonSizeVariant= Record<
+export type buttonSizeVariant = Record<
 ButtonSizeType, {
     buttonSize: TextStyle,
     containerSize: ViewStyle,
@@ -25,12 +25,11 @@ export type ImageType = {
     imgMarginRight?: string | number;
 };
 
-
 export interface ButtonProps {
     onPress: () => void;
     text: string;
     typeStyle: ButtonStyleType,
-    image?:ImageType,
+    image?: ImageType,
     disabled?: boolean,
     typeSize: ButtonSizeType,
 };

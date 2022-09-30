@@ -64,7 +64,9 @@ exports[`Running Test for Input Check Button disabled 1`] = `
         ]
       }
     >
+       
       Button CTA
+       
     </Text>
   </View>
 </View>

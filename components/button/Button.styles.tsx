@@ -1,7 +1,6 @@
 import { BLUE, GREY_BLUE_50, PURPLE_10, PURPLE_50, WHITE, YELLOW, YELLOW_30 } from "../../styles/colors"
 import { buttonSizeVariant, buttonStyleVariant } from "./Button.types"
 
-
 export const ButtonStyleVariant:buttonStyleVariant = {
     primary: {
         container: {
@@ -11,7 +10,7 @@ export const ButtonStyleVariant:buttonStyleVariant = {
            alignItems: 'center',
            alignSelf: 'flex-start'
         },
-        text:{
+        text: {
            color: 'white',
            fontWeight: 'bold',
         },
@@ -22,12 +21,12 @@ export const ButtonStyleVariant:buttonStyleVariant = {
             alignItems: 'center',
             alignSelf: 'flex-start'
         },
-         textDisabled:{
+         textDisabled: {
             color: 'white',
             fontWeight: 'bold',
         },
     },
-   secondary: {
+    secondary: {
         container: {
            backgroundColor: YELLOW,
            borderRadius: 5,
@@ -35,7 +34,7 @@ export const ButtonStyleVariant:buttonStyleVariant = {
            alignItems: 'center',
            alignSelf: 'flex-start'
         },
-        text:{
+        text: {
            color: BLUE,
            fontWeight: 'bold',
         },
@@ -46,12 +45,12 @@ export const ButtonStyleVariant:buttonStyleVariant = {
             alignItems: 'center',
             alignSelf: 'flex-start'
         },
-        textDisabled:{
+        textDisabled: {
             color: GREY_BLUE_50,
             fontWeight: 'bold',
         },
-   },
-   terciary: {
+    },
+    terciary: {
         container: {
            backgroundColor: PURPLE_50,
            borderRadius: 5,
@@ -59,7 +58,7 @@ export const ButtonStyleVariant:buttonStyleVariant = {
            alignItems: 'center',
            alignSelf: 'flex-start'
         },
-        text:{
+        text: {
            color: BLUE,
            fontWeight: 'bold',
         },
@@ -70,12 +69,12 @@ export const ButtonStyleVariant:buttonStyleVariant = {
             alignItems: 'center',
             alignSelf: 'flex-start'
         },
-        textDisabled:{
+        textDisabled: {
             color: GREY_BLUE_50,
             fontWeight: 'bold',
         },
-   },
-   whiteBorder: {
+    },
+    whiteBorder: {
         container: {
            backgroundColor: WHITE,
            borderRadius: 5,
@@ -85,7 +84,7 @@ export const ButtonStyleVariant:buttonStyleVariant = {
            borderColor: BLUE,
            alignSelf: 'flex-start'
         },
-        text:{
+        text: {
            color: BLUE,
            fontWeight: 'bold',
         },
@@ -98,12 +97,12 @@ export const ButtonStyleVariant:buttonStyleVariant = {
             borderColor: GREY_BLUE_50,
             alignSelf: 'flex-start'
         },
-        textDisabled:{
+        textDisabled: {
             color: GREY_BLUE_50,
             fontWeight: 'bold',
         },
-   },
-   white: {
+    },
+    white: {
         container: {
            backgroundColor: WHITE,
            borderRadius: 5,
@@ -111,7 +110,7 @@ export const ButtonStyleVariant:buttonStyleVariant = {
            alignItems: 'center',
            alignSelf: 'flex-start'
         },
-        text:{
+        text: {
            color: BLUE,
            fontWeight: 'bold',
         },
@@ -122,16 +121,16 @@ export const ButtonStyleVariant:buttonStyleVariant = {
             alignItems: 'center',
             alignSelf: 'flex-start'
         },
-        textDisabled:{
+        textDisabled: {
             color: GREY_BLUE_50,
             fontWeight: 'bold',
         },
-   }
+    }
 }
 
 export const ButtonSizeVariant:buttonSizeVariant = {
     small: {
-        containerSize:{
+        containerSize: {
             paddingVertical: 4,
             paddingHorizontal: 8,
         }, 
@@ -140,7 +139,7 @@ export const ButtonSizeVariant:buttonSizeVariant = {
         },
     },
     medium: {
-        containerSize:{
+        containerSize: {
             paddingVertical: 10,
             paddingHorizontal: 12,
         }, 
@@ -149,7 +148,7 @@ export const ButtonSizeVariant:buttonSizeVariant = {
         },
     },
     large: {
-        containerSize:{
+        containerSize: {
             paddingVertical: 14,
             paddingHorizontal: 18,
         }, 
