@@ -25,10 +25,11 @@ const Tab = ({data, onChangeSelected, style, typeSizeText}: TabProps) => {
 
   return (
     <View
-      style={[
-        TabStyleVariant[style].container,
-        {flex: 1, borderBottomColor: BLUE, borderBottomWidth: 3},
-      ]}
+      style={
+        style === 'primary'
+          ? {flex: 1, borderBottomColor: BLUE, borderBottomWidth: 3}
+          : {}
+      }
     >
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         {data.map((item: Info, index: number) => {
