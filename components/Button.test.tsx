@@ -1,12 +1,12 @@
 import React from 'react';
-import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react-native';
-
-import { Button } from './Button';
+import {Button} from './Button';
+import renderer from 'react-test-renderer';
 
 describe('Running Test for Button', () => {
   it('Check Button Disabled', () => {
-    render(<Button text="Button" onPress={() => { }} />);
-    //expect(screen.getByRole('button', { name: 'Button' })).toBeDisabled();
+    const tree = renderer
+      .create(<Button text="Button" onPress={() => {}} />)
+      .toJSON();
+    expect(tree).toMatchSnapshot();
   });
 });
