@@ -27,7 +27,12 @@ const Tab = ({data, onChangeSelected, style, typeSizeText}: TabProps) => {
     <View
       style={
         style === 'primary'
-          ? {flex: 1, borderBottomColor: BLUE, borderBottomWidth: 3}
+          ? {
+              flex: 1,
+              borderBottomWidth: 3,
+              borderBottomColor: BLUE,
+              backgroundColor: GREY_BLUE_30,
+            }
           : {}
       }
     >
