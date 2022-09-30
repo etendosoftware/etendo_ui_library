@@ -5,6 +5,7 @@ import {ScrollView, useWindowDimensions, View} from 'react-native';
 import TabItem from './TabItem';
 import {TabProps, Info, TabStyleType} from './Tab.types';
 import {TabStyleVariant} from './Tab.styles';
+import {GREY_BLUE_30, BLUE} from '../../styles/colors';
 
 /* Styles - This function allows you to obtain the styles of the Tab component */
 const getStyle = (style: TabStyleType, toggleItem: number, index: number) => {
@@ -23,7 +24,12 @@ const Tab = ({data, onChangeSelected, style, typeSizeText}: TabProps) => {
   const {height} = useWindowDimensions();
 
   return (
-    <View style={[TabStyleVariant[style].container, {height: height / 9}]}>
+    <View
+      style={[
+        TabStyleVariant[style].container,
+        {flex: 1, borderBottomColor: BLUE, borderBottomWidth: 3},
+      ]}
+    >
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         {data.map((item: Info, index: number) => {
           return (

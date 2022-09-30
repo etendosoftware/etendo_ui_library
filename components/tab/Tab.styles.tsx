@@ -34,8 +34,9 @@ export const TabStyleVariant: TabStyleRecord = {
       borderTopColor: YELLOW,
     },
     itemText: {
-      fontFamily: INTER_SEMIBOLD,
+      // fontFamily: INTER_SEMIBOLD,
       textTransform: 'uppercase',
+      fontWeight: '500',
     },
   },
   /* Secondary style */
