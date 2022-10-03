@@ -1,0 +1,161 @@
+pipeline {
+    options {
+        // This limits build concurrency to 1 per branch
+        disableConcurrentBuilds()
+    }
+
+    environment {
+        NPM_TOKEN = credentials('npmjs-access-token')
+    }
+
+    agent { label 'jenkins-jenkins-agent' }
+
+    stages {
+        stage('Build Environment') {
+            steps {
+                script {
+                    try {
+                        sh 'chmod a+x ./pipelines/build-update.sh'
+                        env.STATUSBUILD = "1"
+                        sh 'echo Building Environment'
+                        sh "npm install -g yarn"
+                        sh 'npm config set registry "https//registry.npmjs.org/"'
+                        sh 'npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN'
+                        sh "yarn install"
+                        sh 'chmod a+x ./pipelines/build-update.sh'
+                        sh 'echo Build Succesful'
+                    } catch (Exception e) {
+                        echo 'BUILD FAILED'
+                        currentBuild.result = 'FAILED'
+                        error('BUILD FAILED')
+                        env.STATUSBUILD = "0"
+                    }
+                }
+            }   
+        }
+
+        stage('Build Storybook') {
+            when {
+                expression {
+                    env.STATUSBUILD == "1"
+                }
+            }
+            steps {
+                sh 'echo Build Storybook'
+                sh 'yarn build-storybook'
+                publishHTML([
+                    allowMissing: true,
+                    alwaysLinkToLastBuild: false,
+                    keepAll: true,
+                    reportDir: 'storybook-static/',
+                    reportFiles: '*',
+                    reportName: 'STORYBOOK',
+                    reportTitles: ''
+                ])
+                sh 'echo Published Storybook'
+            }
+        }
+
+        stage('Run Tests') {
+            when {
+                expression {
+                    env.STATUSBUILD == "1"
+                }
+            }
+            steps {
+                script {
+                    try {
+                        env.STATUSTEST = "1"
+                        sh 'echo Running tests'
+                        sh 'yarn test'
+                        sh 'echo Tests Succesful'
+                    } catch (Exception e) {
+                        echo 'TEST FAILED'
+                        currentBuild.result = 'UNSTABLE'
+                        unstable('TEST FAILED')
+                        env.STATUSTEST = "0"
+                    }
+                }
+            }
+        }
+        
+        stage('Publish Next Version') {
+            when {
+                allOf {
+                    branch 'develop'
+                    expression {
+                        env.STATUSTEST == "1"
+                    }
+                }
+            }
+            steps {
+                withCredentials([sshUserPrivateKey(credentialsId: 'my-credentials', keyFileVariable: 'keyfile')]) {
+                    withCredentials([usernamePassword(credentialsId: "etendo-bot-bitbucket", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                        sh """
+                        git config user.name "Etendo Bot"
+                        git config user.email "$GIT_USERNAME"
+                        """
+                        sh 'git checkout $GIT_BRANCH'
+                        sh 'yarn config set version-git-message "Upgrade version to %s :zap:"'
+                        sh 'yarn version --patch'
+                        sh 'npm publish --tag next --access public'
+                        sh 'GIT_SSH_COMMAND=\"ssh -i ${keyfile}\" git push $GIT_URL'
+                    }
+                }               
+            }
+        }
+    }
+    
+    post {
+        success {
+            withCredentials([usernamePassword(credentialsId: "koodu_credentials", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                script {
+                    sh './pipelines/build-update.sh etendo_ui_library SUCCESSFUL "Successful" $GIT_USERNAME $GIT_PASSWORD'
+                }
+            }
+            cleanWs deleteDirs: true
+        }
+        unstable {
+            withCredentials([usernamePassword(credentialsId: "koodu_credentials", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                script {
+                    sh './pipelines/build-update.sh etendo_ui_library FAILED "Failed Tests" $GIT_USERNAME $GIT_PASSWORD'
+                }
+            }
+            cleanWs deleteDirs: true
+            mail to: 'builds@smfconsulting.es',
+            subject: "🚨 TESTS FAILED - ${currentBuild.fullDisplayName}",
+            body: """
+${new Date()}
+__________________________________________________________
+
+🚨 BUILD UNSTABLE 🚨
+            
+Some etendo-ui-library tests have failed!
+Check out the output in the following link: 
+${env.BUILD_URL}
+__________________________________________________________
+            """
+        }
+        failure {
+            withCredentials([usernamePassword(credentialsId: "koodu_credentials", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                script {
+                    sh './pipelines/build-update.sh etendo_ui_library FAILED "Build Failed" $GIT_USERNAME $GIT_PASSWORD'
+                }
+            }
+            cleanWs deleteDirs: true
+            mail to: 'builds@smfconsulting.es',
+            subject: "🚫 ERROR - ${currentBuild.fullDisplayName}",
+            body:  """
+${new Date()}
+__________________________________________________________
+
+🚫 ERROR 🚫
+
+The build or publication has failed unexpectedly.
+To more information on the failing run visit: ${env.BUILD_URL}
+__________________________________________________________
+            """
+        }
+    }
+    
+}
