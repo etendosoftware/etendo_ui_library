@@ -4,6 +4,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
 <View
   style={
     Object {
+      "backgroundColor": "#EFF1F7",
       "borderBottomColor": "#202452",
       "borderBottomWidth": 3,
       "flex": 1,

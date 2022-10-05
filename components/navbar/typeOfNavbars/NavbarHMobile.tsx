@@ -1,0 +1,30 @@
+import React from 'react';
+import {View, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {NavbarHorizontalProps, NavbarProps, NavbarStyle} from '../Navbar.types';
+import {NavbarHStyleVariant} from '../Navbar.styles';
+
+export const NavbarHMobile = ({
+  data,
+  onChangeSelected,
+}: NavbarHorizontalProps) => {
+  return (
+    <View style={NavbarHStyleVariant.mobile.container}>
+      <TouchableOpacity
+        onPress={() => {
+          /* Allows to detect the selected item */
+          onChangeSelected = onChangeSelected;
+        }}
+      >
+        <Image
+          style={NavbarHStyleVariant.mobile.tinyLogoImage}
+          source={data[0].routeImage}
+        />
+      </TouchableOpacity>
+
+      <Image
+        style={NavbarHStyleVariant.mobile.more}
+        source={data[1].routeImage}
+      />
+    </View>
+  );
+};
