@@ -55,7 +55,7 @@ exports[`Running Test for Input Check Button disabled 1`] = `
       style={
         Array [
           Object {
-            "color": "white",
+            "color": "#FFFFFF",
             "fontWeight": "bold",
           },
           Object {

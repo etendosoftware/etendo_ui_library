@@ -11,7 +11,7 @@ export const ButtonStyleVariant:buttonStyleVariant = {
            alignSelf: 'flex-start'
         },
         text: {
-           color: 'white',
+           color: WHITE,
            fontWeight: 'bold',
         },
         containerDisabled: {
@@ -19,10 +19,10 @@ export const ButtonStyleVariant:buttonStyleVariant = {
             borderRadius: 5,
             flexDirection: 'row',
             alignItems: 'center',
-            alignSelf: 'flex-start'
+            alignSelf: 'flex-start' 
         },
          textDisabled: {
-            color: 'white',
+            color: WHITE,
             fontWeight: 'bold',
         },
     },
