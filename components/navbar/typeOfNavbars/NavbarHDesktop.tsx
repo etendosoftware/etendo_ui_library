@@ -1,5 +1,9 @@
+/*  Navbar horizontal for desktop screen */
+
+/* Imports */
 import React from 'react';
 import {Image, Text, View, TouchableOpacity} from 'react-native';
+
 import {Info, NavbarHorizontalProps} from '../Navbar.types';
 import {NavbarHStyleVariant} from '../Navbar.styles';
 

@@ -1,6 +1,10 @@
+/*  Navbar horizontal for tablet screen */
+
+/* Imports */
 import React from 'react';
-import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
-import {Info, NavbarHorizontalProps, NavbarProps} from '../Navbar.types';
+import {Image, TouchableOpacity, View} from 'react-native';
+
+import {Info, NavbarHorizontalProps} from '../Navbar.types';
 import {NavbarHStyleVariant} from '../Navbar.styles';
 
 export const NavbarHTablet = ({
@@ -11,7 +15,7 @@ export const NavbarHTablet = ({
     <View style={NavbarHStyleVariant.tablet.container}>
       <TouchableOpacity
         onPress={() => {
-          /* Allows to detect the selected item */
+          /* Allows to detect the selected navigation */
           onChangeSelected = onChangeSelected;
         }}
       >

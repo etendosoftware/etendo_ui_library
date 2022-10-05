@@ -1,3 +1,8 @@
+/*  Navbar vertical: this component is created for generic screen dimensions 
+    because its parent component will give the screen size desired by the programmer 
+    in the design of the application in which it will be used, 
+    so it is not necessary to define its dimensions depending on the screen where it is located */
+
 /* Imports */
 import React, {useState} from 'react';
 import {
@@ -8,12 +13,14 @@ import {
   useWindowDimensions,
   ScrollView,
 } from 'react-native';
-import {BLUE, WHITE, YELLOW} from '../../../styles/colors';
-import {NavbarVStyleVariant} from '../Navbar.styles';
+
 import {Info} from '../Navbar.types';
+import {NavbarVStyleVariant} from '../Navbar.styles';
+import {BLUE, WHITE, YELLOW} from '../../../styles/colors';
 
 export const NavbarV = ({data, onChangeSelected}: any) => {
-  const [currentTab, setCurrentTab] = useState('Index');
+  // Use of states to control navigation
+  const [currentNav, setCurrentNav] = useState<string>('');
 
   return (
     <ScrollView
@@ -23,7 +30,7 @@ export const NavbarV = ({data, onChangeSelected}: any) => {
       {data.map((image: Info) => {
         return (
           <TouchableOpacity onPress={() => onChangeSelected}>
-            {TabButton(currentTab, setCurrentTab, image.name, image.routeImage)}
+            {NavButton(currentNav, setCurrentNav, image.name, image.routeImage)}
           </TouchableOpacity>
         );
       })}
@@ -31,10 +38,10 @@ export const NavbarV = ({data, onChangeSelected}: any) => {
   );
 };
 
-// For multiple Buttons...
-const TabButton = (
-  currentTab: any,
-  setCurrentTab: any,
+// Component created internally with the purpose of creating the buttons of this type of navigation
+const NavButton = (
+  currentNav: any,
+  setCurrentNav: any,
   title: string,
   image: any,
 ) => {
@@ -44,7 +51,7 @@ const TabButton = (
     <>
       <TouchableOpacity
         onPress={() => {
-          setCurrentTab(title);
+          setCurrentNav(title);
         }}
       >
         <View
@@ -54,7 +61,7 @@ const TabButton = (
             alignItems: 'center',
             alignSelf: 'center',
             justifyContent: 'center',
-            backgroundColor: currentTab === title ? YELLOW : 'transparent',
+            backgroundColor: currentNav === title ? YELLOW : 'transparent',
             paddingHorizontal: '100%',
             paddingVertical: '20%',
           }}
@@ -65,7 +72,7 @@ const TabButton = (
               /* Primary */
               width: width * 0.7,
               height: width * 0.7,
-              tintColor: currentTab === title ? BLUE : WHITE,
+              tintColor: currentNav === title ? BLUE : WHITE,
             }}
           />
 
@@ -77,7 +84,7 @@ const TabButton = (
               //   fontFamily: INTER_SEMIBOLD,
               fontWeight: 'bold',
               marginTop: width * 0.15,
-              color: currentTab === title ? BLUE : WHITE,
+              color: currentNav === title ? BLUE : WHITE,
               alignContent: 'center',
               alignSelf: 'center',
               textTransform: 'uppercase',

@@ -1,6 +1,10 @@
+/*  Navbar horizontal for mobile screen */
+
+/* Imports */
 import React from 'react';
-import {View, Image, StyleSheet, TouchableOpacity} from 'react-native';
-import {NavbarHorizontalProps, NavbarProps, NavbarStyle} from '../Navbar.types';
+import {View, Image, TouchableOpacity} from 'react-native';
+
+import {NavbarHorizontalProps} from '../Navbar.types';
 import {NavbarHStyleVariant} from '../Navbar.styles';
 
 export const NavbarHMobile = ({
@@ -11,7 +15,7 @@ export const NavbarHMobile = ({
     <View style={NavbarHStyleVariant.mobile.container}>
       <TouchableOpacity
         onPress={() => {
-          /* Allows to detect the selected item */
+          /* Allows to detect the selected navigation */
           onChangeSelected = onChangeSelected;
         }}
       >

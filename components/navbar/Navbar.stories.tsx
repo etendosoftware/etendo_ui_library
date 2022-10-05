@@ -2,6 +2,7 @@ import React from 'react';
 import {Story, Meta} from '@storybook/react';
 
 import {Navbar} from './Navbar';
+import {NavbarProps} from './Navbar.types';
 
 export default {
   title: 'Etendo/Navbar',
@@ -9,44 +10,43 @@ export default {
   argTypes: {},
 } as Meta<typeof Navbar>;
 
-const onCheckSelectedMock = () => datasetNavbarH[0];
-
+/* Information to pass */
 const datasetNavbarH = [
   {
     routeImage: require('../../assets/images/etendo-erp.png'),
     routeNav: '',
     key: 'dataset0',
-    name: 'Juan Peréz',
+    name: 'FirstName LastName',
   },
   {
     routeImage: require('../../assets/images/more.png'),
     routeNav: '',
     key: 'dataset1',
-    name: 'Juan Peréz',
+    name: 'FirstName LastName',
   },
   {
     routeImage: require('../../assets/images/binoculars.png'),
     routeNav: '',
     key: 'dataset2',
-    name: 'Juan Peréz',
+    name: 'FirstName LastName',
   },
   {
     routeImage: require('../../assets/images/video.png'),
     routeNav: '',
     key: 'dataset3',
-    name: 'Juan Peréz',
+    name: 'FirstName LastName',
   },
   {
     routeImage: require('../../assets/images/chat.png'),
     routeNav: '',
     key: 'dataset4',
-    name: 'Juan Peréz',
+    name: 'FirstName LastName',
   },
   {
     routeImage: require('../../assets/images/user.png'),
     routeNav: '',
     key: 'dataset5',
-    name: 'Juan Peréz',
+    name: 'FirstName LastName',
   },
 ];
 
@@ -71,16 +71,19 @@ const datasetNavbarV = [
   },
 ];
 
+/* This function allows you to select by default the first navbar */
+const onCheckSelectedMock = () => datasetNavbarH[0];
+
 /* Templates */
-const Template: Story<any> = args => (
+const Template: Story<NavbarProps> = args => (
   <Navbar
     data={datasetNavbarH}
-    onChangeSelected={onCheckSelectedMock}
+    onChangeSelected={() => datasetNavbarH[0]}
     typeOfNavbar="horizontal"
   />
 );
 
-const Template2: Story<any> = args => (
+const Template2: Story<NavbarProps> = args => (
   <Navbar
     data={datasetNavbarV}
     onChangeSelected={onCheckSelectedMock}
@@ -88,7 +91,7 @@ const Template2: Story<any> = args => (
   />
 );
 
-/* Story exports */
+/* Stories exports */
 export const NavbarHorizontal = Template.bind({});
 NavbarHorizontal.args = {};
 

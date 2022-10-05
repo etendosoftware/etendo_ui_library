@@ -1,3 +1,4 @@
+/* Imports */
 import {
   ImageSourcePropType,
   ImageStyle,
@@ -5,11 +6,6 @@ import {
   TextStyle,
   ViewStyle,
 } from 'react-native';
-
-export type NavbarStyle = 'primary';
-export type NavbarScreenDimensions = 'mobile' | 'tablet' | 'desktop';
-export type NavbarType = 'horizontal' | 'vertical';
-export type NavbarScreenGeneric = 'generic';
 
 /* Type declaration */
 export type Info = {
@@ -29,6 +25,12 @@ export interface NavbarHorizontalProps {
   data: Info[];
   onChangeSelected: (Info: Info | undefined) => Info;
 }
+
+/* Declaration of style types */
+export type NavbarStyle = 'primary';
+export type NavbarScreenDimensions = 'mobile' | 'tablet' | 'desktop';
+export type NavbarType = 'horizontal' | 'vertical';
+export type NavbarScreenGeneric = 'generic';
 
 export type NavbarStyleHorizontal = Record<
   NavbarScreenDimensions,

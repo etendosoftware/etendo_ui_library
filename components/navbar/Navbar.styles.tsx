@@ -1,17 +1,10 @@
 /* Imports */
 import {NavbarStyleHorizontal, NavbarStyleVertical} from './Navbar.types';
-import {
-  BLUE,
-  GREY_BLUE_30,
-  LIGHT_BLUE_10,
-  WHITE,
-  YELLOW,
-} from '../../styles/colors';
-import {INTER_SEMIBOLD} from '../../styles/fonts';
+import {BLUE} from '../../styles/colors';
 
 /* Export of different styles */
 export const NavbarHStyleVariant: NavbarStyleHorizontal = {
-  /* Primary style */
+  // Mobile screen
   mobile: {
     container: {
       flex: 1,
@@ -44,7 +37,7 @@ export const NavbarHStyleVariant: NavbarStyleHorizontal = {
     textUser: {
       fontSize: 15,
       fontWeight: 'bold',
-      color: '#202452',
+      color: BLUE,
     },
     more: {
       width: 28,
@@ -53,7 +46,7 @@ export const NavbarHStyleVariant: NavbarStyleHorizontal = {
       position: 'absolute',
     },
   },
-  // Tablet
+  // Tablet screen
   tablet: {
     container: {flex: 1, flexDirection: 'row', justifyContent: 'space-between'},
     containerImages: {
@@ -87,7 +80,7 @@ export const NavbarHStyleVariant: NavbarStyleHorizontal = {
     textUser: {
       fontSize: 16,
       fontWeight: 'bold',
-      color: '#202452',
+      color: BLUE,
     },
     more: {
       width: 28,
@@ -96,7 +89,7 @@ export const NavbarHStyleVariant: NavbarStyleHorizontal = {
       position: 'absolute',
     },
   },
-  // Desktop
+  // Desktop screen
   desktop: {
     container: {
       flex: 1,
@@ -139,7 +132,7 @@ export const NavbarHStyleVariant: NavbarStyleHorizontal = {
     textUser: {
       fontSize: 16,
       fontWeight: 'bold',
-      color: '#202452',
+      color: BLUE,
     },
     more: {
       width: 28,
@@ -151,13 +144,13 @@ export const NavbarHStyleVariant: NavbarStyleHorizontal = {
 };
 
 export const NavbarVStyleVariant: NavbarStyleVertical = {
-  /* Primary style */
+  // Generic screen
   generic: {
     container: {
       flex: 1,
       marginTop: '20',
       marginBottom: '20',
-      backgroundColor: '#202452',
+      backgroundColor: BLUE,
     },
   },
 };
