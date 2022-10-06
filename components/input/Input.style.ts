@@ -117,7 +117,7 @@ const defaultTextPlaceholder:TextStyle =
 const defaultHelperText:TextStyle =
 {
   color: GREY_60,
-  fontSize: 12,
+  fontSize: 10,
   fontFamily: FONT_REGULAR,
 }
 
