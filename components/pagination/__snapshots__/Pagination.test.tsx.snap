@@ -1,0 +1,186 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Running Test for Tab Check Tab Disabled 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+      "flexDirection": "row",
+      "height": 22,
+      "width": 120,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "flexDirection": "row",
+        "height": 22,
+        "width": 120,
+      }
+    }
+  >
+    <View
+      accessibilityState={
+        Object {
+          "disabled": true,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+    >
+      <Image
+        source={
+          Object {
+            "testUri": "../../../assets/images/back-double-button.png",
+          }
+        }
+        style={
+          Object {
+            "height": 22,
+            "marginRight": 17,
+            "width": 20,
+          }
+        }
+      />
+    </View>
+    <View
+      accessibilityState={
+        Object {
+          "disabled": true,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+    >
+      <Image
+        source={
+          Object {
+            "testUri": "../../../assets/images/back-button.png",
+          }
+        }
+        style={
+          Object {
+            "height": 22,
+            "marginRight": 17,
+            "width": 20,
+          }
+        }
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "#dddff6",
+          "borderRadius": 5,
+          "height": 27,
+          "justifyContent": "center",
+          "marginRight": 17,
+          "width": 27,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "alignSelf": "center",
+            "fontWeight": "bold",
+          }
+        }
+      >
+        1
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        Object {
+          "disabled": false,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+    >
+      <Image
+        source={
+          Object {
+            "testUri": "../../../assets/images/next-button.png",
+          }
+        }
+        style={
+          Object {
+            "height": 22,
+            "marginRight": 17,
+            "width": 20,
+          }
+        }
+      />
+    </View>
+    <View
+      accessibilityState={
+        Object {
+          "disabled": false,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+    >
+      <Image
+        source={
+          Object {
+            "testUri": "../../../assets/images/next-double-button.png",
+          }
+        }
+        style={
+          Object {
+            "height": 22,
+            "marginRight": 17,
+            "width": 20,
+          }
+        }
+      />
+    </View>
+  </View>
+</View>
+`;
