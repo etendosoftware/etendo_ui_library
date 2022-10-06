@@ -64,7 +64,7 @@ const datasetNavbarV = [
     name: 'Tracing',
   },
   {
-    routeImage: require('../../assets/images/pie-chart.png'),
+    routeImage: require('../../assets/images/reports.png'),
     routeNav: '',
     key: 'dataset2',
     name: 'Reports',

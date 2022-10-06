@@ -27,10 +27,10 @@ export const NavbarHDesktop = ({
               <TouchableOpacity
                 onPress={() =>
                   onChangeSelected({
-                    routeImage: require(''),
-                    routeNav: '',
-                    key: '',
-                    name: '',
+                    routeImage: image.routeImage,
+                    routeNav: image.routeNav,
+                    key: image.key,
+                    name: image.name,
                   })
                 }
               >

@@ -13,16 +13,7 @@ export const NavbarHMobile = ({
 }: NavbarHorizontalProps) => {
   return (
     <View style={NavbarHStyleVariant.mobile.container}>
-      <TouchableOpacity
-        onPress={() =>
-          onChangeSelected({
-            routeImage: require(''),
-            routeNav: '',
-            key: '',
-            name: '',
-          })
-        }
-      >
+      <TouchableOpacity onPress={() => onChangeSelected}>
         <Image
           style={NavbarHStyleVariant.mobile.tinyLogoImage}
           source={data[0].routeImage}

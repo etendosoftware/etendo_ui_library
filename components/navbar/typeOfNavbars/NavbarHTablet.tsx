@@ -13,17 +13,7 @@ export const NavbarHTablet = ({
 }: NavbarHorizontalProps) => {
   return (
     <View style={NavbarHStyleVariant.tablet.container}>
-      <TouchableOpacity
-        onPress={() =>
-          /* Allows to detect the selected navigation */
-          onChangeSelected({
-            routeImage: require(''),
-            routeNav: '',
-            key: '',
-            name: '',
-          })
-        }
-      >
+      <TouchableOpacity onPress={() => onChangeSelected}>
         <Image
           style={NavbarHStyleVariant.tablet.tinyLogo}
           source={data[0].routeImage}

@@ -33,10 +33,10 @@ export const NavbarV = ({data, onChangeSelected}: any) => {
             onPress={() =>
               /* Allows to detect the selected navigation */
               onChangeSelected({
-                routeImage: require(''),
-                routeNav: '',
-                key: '',
-                name: '',
+                routeImage: image.routeImage,
+                routeNav: image.routeNav,
+                key: image.key,
+                name: image.name,
               })
             }
           >
