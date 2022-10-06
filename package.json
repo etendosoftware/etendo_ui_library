@@ -12,8 +12,7 @@
     "prestart": "yarn update-stories",
     "storybook-watcher": "sb-rn-watcher --config-path .ondevice",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
-    "chromatic": "npx chromatic --project-token=413f5c64668f"
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.17.3",
