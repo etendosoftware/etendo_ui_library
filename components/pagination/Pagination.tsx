@@ -1,20 +1,27 @@
+/* Imports */
 import React, {useState} from 'react';
+
 import {Text, View, Image, Pressable} from 'react-native';
 import {PaginationStyleVariant} from './Pagination.styles';
 import {PaginationProps} from './Pagination.types';
 
+/* Pagination component */
 export const Pagination = ({
   currentPage,
   totalData,
   amountDataPerPage,
 }: PaginationProps) => {
+  // Will serve to set the page number where the user is
   const [page, setPage] = useState<number>(currentPage);
-  const pageNumbers: Array<number> = [];
 
+  // This constant will count the number of pages that the data table will have based on the number of row
+  // that the progammer wishes to display per page
+  const pageNumbers: Array<number> = [];
   for (let i = 1; i <= Math.ceil(totalData / amountDataPerPage); i++) {
     pageNumbers.push(i);
   }
 
+  /* Helper functions to page up or down */
   const back2Pages = (page: number) => {
     page === 2 ? setPage(page - 1) : setPage(page - 2);
   };
@@ -48,6 +55,7 @@ export const Pagination = ({
           />
         </Pressable>
 
+        {/* Text with layout to display the page number the user is on */}
         <View style={PaginationStyleVariant.primary.pageNumberContainer}>
           <Text style={PaginationStyleVariant.primary.pageNumberText}>
             {page}

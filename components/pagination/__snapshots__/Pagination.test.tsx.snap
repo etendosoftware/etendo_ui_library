@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Running Test for Tab Check Tab Disabled 1`] = `
+exports[`Running Test for Pagination Check Pagination Disabled 1`] = `
 <View
   style={
     Object {
