@@ -49,6 +49,7 @@
     "babel-jest": "^26.6.3",
     "babel-loader": "^8.2.4",
     "babel-plugin-react-native-web": "^0.17.7",
+    "chromatic": "^6.10.1",
     "eslint": "^7.32.0",
     "jest": "^26.6.3",
     "metro-react-native-babel-preset": "^0.67.0",
@@ -68,7 +69,5 @@
       "json",
       "node"
     ]
-  },
-  "readme": "ERROR: No README data found!",
-  "_id": "myapp@0.0.1"
+  }
 }

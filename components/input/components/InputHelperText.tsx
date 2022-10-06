@@ -1,13 +1,10 @@
 import React from 'react';
 import {Text, TextStyle, View} from 'react-native';
 import {styles} from '../Input.style';
+import { InputHelperProps } from '../Input.types';
 
-interface InputHelperProps {
-  styleHelper: TextStyle | TextStyle[];
-  label?: string;
-}
 
-const InputHelperText: React.FC<InputHelperProps> = ({styleHelper, label}) => {
+const InputHelperText = ({styleHelper, label}:InputHelperProps) => {
   return (
     <View style={styles.rowHelperText}>
       {label && <Text style={styleHelper}>{label}</Text>}

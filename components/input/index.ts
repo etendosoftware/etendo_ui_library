@@ -1,6 +1,6 @@
 import Input from './Input';
-import InputField from './inputComponents/InputField';
-import InputHelperText from './inputComponents/InputHelperText';
-import InputTitle from './inputComponents/InputTitle';
+import InputField from './components/InputField';
+import InputHelperText from './components/InputHelperText';
+import InputTitle from './components/InputTitle';
 
 export {Input, InputField, InputTitle, InputHelperText};

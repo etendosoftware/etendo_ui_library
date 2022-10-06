@@ -4,12 +4,12 @@ import {getImageStyle} from '../../../helpers/utilImage';
 import {styles} from '../Input.style';
 import {InputTitleProps} from '../Input.types';
 
-const InputTitle: React.FC<InputTitleProps> = ({
+const InputTitle = ({
   title,
   image,
   styleTitle,
   disabled,
-}) => {
+}:InputTitleProps) => {
   return (
     <View style={styles.rowInputTitle}>
       {image?.imgRoute && (

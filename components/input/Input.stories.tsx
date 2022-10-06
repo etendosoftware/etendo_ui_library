@@ -1,7 +1,7 @@
 import React from 'react';
-import { Story, Meta } from '@storybook/react';
+import {Story, Meta} from '@storybook/react';
 import Input  from '../input/Input';
-import { InputProps } from './Input.types';
+import {InputProps} from './Input.types';
 
 const meta: Meta = 
 {
@@ -10,10 +10,9 @@ const meta: Meta =
   argTypes:{}
 }
 
-export default meta;
-
 const Template: Story<InputProps> = (args) => <Input{...args}/>
 
+export default meta;
 export const OnlyRead  = Template.bind({})
 export const Picker = Template.bind({})
 export const SearchPressable = Template.bind({})

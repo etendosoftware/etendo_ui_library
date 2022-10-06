@@ -4,7 +4,7 @@ import {inputStyleVariants, inputVariants, styles} from './Input.style';
 import {InputProps} from './Input.types';
 import {InputTitle, InputField, InputHelperText} from './index';
 
-const Input: React.FC<InputProps> = ({
+const Input = ({
   value,
   titleLabel,
   titleImage,
@@ -20,7 +20,8 @@ const Input: React.FC<InputProps> = ({
   onFocus,
   onBlur,
   onChangeText,
-}) => {
+}:InputProps) => {
+  
   const stateStyle = () => {
     var style
     if (typeField === 'onlyRead') {

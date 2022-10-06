@@ -9,7 +9,7 @@ import {getImageStyle} from '../../../helpers/utilImage';
 import {styles} from '../Input.style';
 import {InputFieldProps} from '../Input.types';
 
-const InputField: React.FC<InputFieldProps> = ({
+const InputField = ({
   configField,
   styleField,
   value,
@@ -22,7 +22,8 @@ const InputField: React.FC<InputFieldProps> = ({
   onChangeText,
   onFocus,
   onBlur,
-}) => {
+}:InputFieldProps) => {
+  
   const [showImg, setShowImg] = useState<boolean>(false);
   const heightLines = 12;
   const numberLines = numberOfLines && numberOfLines >= 1 ?numberOfLines :  1;

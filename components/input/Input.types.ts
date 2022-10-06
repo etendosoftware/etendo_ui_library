@@ -50,13 +50,13 @@ export type TypeInputStyleVariant = Record<
   InputTypeStyle,
   {
     fieldStyle: {
-      field: ViewStyle[] | ViewStyle;
-      focus: ViewStyle[] | ViewStyle;
-      textDefault: TextStyle[] |TextStyle;
-      textPlaceholder: TextStyle[] |TextStyle;
+      field: ViewStyle | ViewStyle[];
+      focus: ViewStyle | ViewStyle[];
+      textDefault: TextStyle | TextStyle[];
+      textPlaceholder: TextStyle | TextStyle[];
     };
-    titleStyle: TextStyle[] |TextStyle;
-    helperStyle: TextStyle[] |TextStyle;
+    titleStyle: TextStyle | TextStyle[];
+    helperStyle: TextStyle | TextStyle[];
   }
 >
 
@@ -86,7 +86,7 @@ export interface InputTitleProps {
 }
 
 export interface InputHelperProps {
-  styleHelper: TextStyle;
+  styleHelper:  TextStyle | TextStyle[];
   label?: string;
 }
 
@@ -108,4 +108,9 @@ export interface InputFieldProps {
   onChangeText?: (text: string) => void;
   onFocus: (event: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   onBlur: (event: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+}
+
+export interface InputHelperProps {
+  styleHelper: TextStyle | TextStyle[];
+  label?: string;
 }

@@ -1,4 +1,4 @@
-import { ImageType } from "../components/input/Input.types"
+import {ImageType} from "../components/input/Input.types"
 
 export const getImageStyle = (image:ImageType,disabled:boolean| undefined) =>
 {
