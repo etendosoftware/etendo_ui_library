@@ -1,6 +1,6 @@
 /* Imports */
 import {PaginationStyleRecord} from './Pagination.types';
-import {BLUE, GREY_BLUE_30} from '../../styles/colors';
+import {PURPLE_50} from '../../styles/colors';
 
 /* Export of different styles */
 export const PaginationStyleVariant: PaginationStyleRecord = {
@@ -18,7 +18,7 @@ export const PaginationStyleVariant: PaginationStyleRecord = {
       marginRight: 17,
     },
     pageNumberContainer: {
-      backgroundColor: '#dddff6',
+      backgroundColor: PURPLE_50,
       width: 27,
       height: 27,
       borderRadius: 5,

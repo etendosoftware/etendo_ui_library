@@ -1,6 +1,5 @@
 /* Imports */
 import {ImageStyle, StyleProp, TextStyle, ViewStyle} from 'react-native';
-import {Pagination} from './Pagination';
 
 /* Type declaration */
 export type Info = {

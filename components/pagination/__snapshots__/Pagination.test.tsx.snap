@@ -93,7 +93,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
       style={
         Object {
           "alignSelf": "center",
-          "backgroundColor": "#dddff6",
+          "backgroundColor": "#DDDFF6",
           "borderRadius": 5,
           "height": 27,
           "justifyContent": "center",
