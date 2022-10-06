@@ -24,7 +24,16 @@ export const NavbarHDesktop = ({
         {data.map((image: Info, i: number) => {
           if (i >= 2 && i < data.length - 1) {
             return (
-              <TouchableOpacity onPress={() => onChangeSelected}>
+              <TouchableOpacity
+                onPress={() =>
+                  onChangeSelected({
+                    routeImage: require(''),
+                    routeNav: '',
+                    key: '',
+                    name: '',
+                  })
+                }
+              >
                 <Image
                   style={NavbarHStyleVariant.desktop.navIcons}
                   source={image.routeImage}

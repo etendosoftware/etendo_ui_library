@@ -14,10 +14,15 @@ export const NavbarHTablet = ({
   return (
     <View style={NavbarHStyleVariant.tablet.container}>
       <TouchableOpacity
-        onPress={() => {
+        onPress={() =>
           /* Allows to detect the selected navigation */
-          onChangeSelected = onChangeSelected;
-        }}
+          onChangeSelected({
+            routeImage: require(''),
+            routeNav: '',
+            key: '',
+            name: '',
+          })
+        }
       >
         <Image
           style={NavbarHStyleVariant.tablet.tinyLogo}

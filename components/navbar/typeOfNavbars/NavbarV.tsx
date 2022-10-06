@@ -29,7 +29,17 @@ export const NavbarV = ({data, onChangeSelected}: any) => {
     >
       {data.map((image: Info) => {
         return (
-          <TouchableOpacity onPress={() => onChangeSelected}>
+          <TouchableOpacity
+            onPress={() =>
+              /* Allows to detect the selected navigation */
+              onChangeSelected({
+                routeImage: require(''),
+                routeNav: '',
+                key: '',
+                name: '',
+              })
+            }
+          >
             {NavButton(currentNav, setCurrentNav, image.name, image.routeImage)}
           </TouchableOpacity>
         );

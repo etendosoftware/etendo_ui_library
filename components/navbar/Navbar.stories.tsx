@@ -71,14 +71,14 @@ const datasetNavbarV = [
   },
 ];
 
-/* This function allows you to select by default the first navbar */
+/* This function allows you to select by default the first navbar item */
 const onCheckSelectedMock = () => datasetNavbarH[0];
 
 /* Templates */
 const Template: Story<NavbarProps> = args => (
   <Navbar
     data={datasetNavbarH}
-    onChangeSelected={() => datasetNavbarH[0]}
+    onChangeSelected={onCheckSelectedMock}
     typeOfNavbar="horizontal"
   />
 );

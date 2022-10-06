@@ -14,10 +14,14 @@ export const NavbarHMobile = ({
   return (
     <View style={NavbarHStyleVariant.mobile.container}>
       <TouchableOpacity
-        onPress={() => {
-          /* Allows to detect the selected navigation */
-          onChangeSelected = onChangeSelected;
-        }}
+        onPress={() =>
+          onChangeSelected({
+            routeImage: require(''),
+            routeNav: '',
+            key: '',
+            name: '',
+          })
+        }
       >
         <Image
           style={NavbarHStyleVariant.mobile.tinyLogoImage}
