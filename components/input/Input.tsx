@@ -15,7 +15,6 @@ const Input: React.FC<InputProps> = ({
   numberOfLines,
   typeField,
   isError,
-  isFocusable,
   onPress,
   onSubmit,
   onFocus,
@@ -57,7 +56,6 @@ const Input: React.FC<InputProps> = ({
         onChangeText={onChangeText}
         maxLength={maxLength}
         numberOfLines={numberOfLines}
-        isFocusable={isFocusable}
       />
       <InputHelperText
         label={helperText}

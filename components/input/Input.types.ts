@@ -68,7 +68,6 @@ export interface InputProps {
   placeholder?: string;
   disabled?: boolean;
   isError?: boolean;
-  isFocusable?: boolean;
   maxLength?: number;
   numberOfLines?: number;
   typeField: InputFieldVariants;
@@ -96,7 +95,6 @@ export interface InputFieldProps {
   value?: string;
   placeholder?: string;
   configField: InputFieldConfigType;
-  isFocusable?: boolean;
   styleField: {
     field: ViewStyle | ViewStyle[];
     focus: ViewStyle | ViewStyle[];
