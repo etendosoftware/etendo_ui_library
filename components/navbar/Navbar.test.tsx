@@ -44,8 +44,8 @@ const datasetNavbarH = [
 
 const onCheckSelectedMock = () => datasetNavbarH[0];
 
-describe('Running Test for Tab', () => {
-  it('Check Tab Disabled', () => {
+describe('Running Test for Navbar', () => {
+  it('Check Navbar Disabled', () => {
     const tree = renderer
       .create(
         <Navbar
