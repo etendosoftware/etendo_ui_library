@@ -1,8 +1,20 @@
-import {ColorValue, GestureResponderEvent, ImageSourcePropType, NativeSyntheticEvent, TextInputFocusEventData, TextStyle, ViewStyle} from 'react-native';
+import {
+  ColorValue,
+  GestureResponderEvent,
+  ImageSourcePropType,
+  NativeSyntheticEvent,
+  TextInputFocusEventData,
+  TextStyle,
+  ViewStyle,
+} from 'react-native';
 
 export type InputFieldType = 'textInput' | 'text';
 
-export type InputTypeStyle = 'default' |'destructive' | 'disabled' | 'onlyRead'
+export type InputTypeStyle =
+  | 'default'
+  | 'destructive'
+  | 'disabled'
+  | 'onlyRead';
 
 export type InputFieldVariants =
   | 'onlyRead'
@@ -20,26 +32,34 @@ export type InputFieldConfigType = {
   disabledField?: boolean;
   disabledSubmit?: boolean;
   backgroundColor?: ColorValue;
-};
+}
 
-export type InputVariantsType =  Record<
-InputFieldVariants,
-{field: InputFieldConfigType}
-> 
+export type InputVariantsType = Record<
+  InputFieldVariants,
+  {field: InputFieldConfigType}
+>
 
 export type ImageType = {
   imgRoute?: ImageSourcePropType;
   imgWidth?: string | number;
   imgHeight?: string | number;
   imgMarginRight?: string | number;
-};
+}
 
 export type TypeInputStyleVariant = Record<
-InputTypeStyle,
-  {fieldStyle: {field:ViewStyle,focus:ViewStyle ,textDefault: TextStyle,textPlaceholder: TextStyle},titleStyle: TextStyle, helperStyle: TextStyle }
+  InputTypeStyle,
+  {
+    fieldStyle: {
+      field: ViewStyle[] | ViewStyle;
+      focus: ViewStyle[] | ViewStyle;
+      textDefault: TextStyle[] |TextStyle;
+      textPlaceholder: TextStyle[] |TextStyle;
+    };
+    titleStyle: TextStyle[] |TextStyle;
+    helperStyle: TextStyle[] |TextStyle;
+  }
 >
 
-//Props
 export interface InputProps {
   titleLabel?: string;
   titleImage?: ImageType;
@@ -48,25 +68,25 @@ export interface InputProps {
   placeholder?: string;
   disabled?: boolean;
   isError?: boolean;
-  maxLenght?:number;
+  isFocusable?: boolean;
+  maxLength?: number;
   numberOfLines?: number;
+  typeField: InputFieldVariants;
   onPress?: (event: GestureResponderEvent) => void;
   onSubmit?: (event: GestureResponderEvent) => void;
   onChangeText?: (text: string) => void;
-  onFocus?: (event:  NativeSyntheticEvent<TextInputFocusEventData>)=> void;
-  onBlur?: (event:  NativeSyntheticEvent<TextInputFocusEventData>)=> void;
-  typeField: InputFieldVariants;
+  onFocus?: (event: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+  onBlur?: (event: NativeSyntheticEvent<TextInputFocusEventData>) => void;
 }
 
 export interface InputTitleProps {
   title?: string;
   image?: ImageType;
-  styleTitle: TextStyle;
-  disabled?:boolean;
+  styleTitle: TextStyle | TextStyle[];
+  disabled?: boolean;
 }
 
-export interface InputHelperProps
-{
+export interface InputHelperProps {
   styleHelper: TextStyle;
   label?: string;
 }
@@ -76,12 +96,18 @@ export interface InputFieldProps {
   value?: string;
   placeholder?: string;
   configField: InputFieldConfigType;
-  styleField: {field:ViewStyle,focus:ViewStyle ,textDefault: TextStyle,textPlaceholder: TextStyle}
-  maxLenght?:number;
+  isFocusable?: boolean;
+  styleField: {
+    field: ViewStyle | ViewStyle[];
+    focus: ViewStyle | ViewStyle[];
+    textDefault: TextStyle| TextStyle[];
+    textPlaceholder: TextStyle| TextStyle[];
+  };
+  maxLength?: number;
   numberOfLines?: number;
   onPress?: (event: GestureResponderEvent) => void;
   onSubmit?: (event: GestureResponderEvent) => void;
   onChangeText?: (text: string) => void;
-  onFocus:  (event:  NativeSyntheticEvent<TextInputFocusEventData>)=> void;
-  onBlur: (event:  NativeSyntheticEvent<TextInputFocusEventData>) => void;
+  onFocus: (event: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+  onBlur: (event: NativeSyntheticEvent<TextInputFocusEventData>) => void;
 }

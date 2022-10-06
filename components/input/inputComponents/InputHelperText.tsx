@@ -1,31 +1,18 @@
-import React from 'react'
-import { StyleSheet, Text, TextStyle, View } from 'react-native'
+import React from 'react';
+import {Text, TextStyle, View} from 'react-native';
+import {styles} from '../Input.style';
 
-
-interface InputHelperProps
-{
-  styleHelper: TextStyle;
+interface InputHelperProps {
+  styleHelper: TextStyle | TextStyle[];
   label?: string;
 }
 
-const InputHelperText: React.FC<InputHelperProps> = ({styleHelper,label})=>{
+const InputHelperText: React.FC<InputHelperProps> = ({styleHelper, label}) => {
   return (
-    <>
-    <View style={styles.row}>
-    {label !== '' &&<Text style={styleHelper}>{label}</Text>}
+    <View style={styles.rowHelperText}>
+      {label && <Text style={styleHelper}>{label}</Text>}
     </View>
-    </>
-  )
-}
+  );
+};
 
-export default InputHelperText
-
-const styles = StyleSheet.create({
-  row: {
-    flexDirection: 'row',
-    marginBottom: 3,
-    alignItems: 'center',
-    marginTop:5,
-    marginLeft:5,
-  },
-});
+export default InputHelperText;

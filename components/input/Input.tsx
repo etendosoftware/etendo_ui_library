@@ -1,17 +1,8 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-} from 'react-native';
-
-import { inputStyleVariants, inputVariants } from './Input.style';
-
-import {
-  InputProps,
-} from './Input.types';
-
-import {InputTitle,InputField,InputHelperText} from '../input/index'
-
+import {View} from 'react-native';
+import {inputStyleVariants, inputVariants, styles} from './Input.style';
+import {InputProps} from './Input.types';
+import {InputTitle, InputField, InputHelperText} from './index';
 
 const Input: React.FC<InputProps> = ({
   value,
@@ -20,38 +11,39 @@ const Input: React.FC<InputProps> = ({
   helperText,
   placeholder,
   disabled,
-  maxLenght,
+  maxLength,
   numberOfLines,
+  typeField,
+  isError,
+  isFocusable,
   onPress,
   onSubmit,
   onFocus,
   onBlur,
   onChangeText,
-  typeField,
-  isError,
-  
 }) => {
-
-  const stateStyle = () =>
-  {
-    if(typeField === 'onlyRead')
-    {
-      return inputStyleVariants['onlyRead']
+  const stateStyle = () => {
+    var style
+    if (typeField === 'onlyRead') {
+      style = inputStyleVariants.onlyRead;
+    } else if (disabled) {
+      style = inputStyleVariants.disabled;
+    } else if (isError) {
+      style = inputStyleVariants.destructive;
+    } else {
+      style = inputStyleVariants.default;
     }
-    if(disabled)
-    {
-      return inputStyleVariants['disabled']
-    }
-    if(isError)
-    {
-      return inputStyleVariants['destructive']
-    }
-    return inputStyleVariants['default']
-  }
+    return style;
+  };
 
   return (
     <View style={styles.inputContainer}>
-      <InputTitle disabled={disabled} title={titleLabel} image={titleImage} styleTitle={stateStyle().titleStyle} />
+      <InputTitle
+        disabled={disabled}
+        title={titleLabel}
+        image={titleImage}
+        styleTitle={stateStyle().titleStyle}
+      />
       <InputField
         disabled={disabled}
         configField={inputVariants[typeField].field}
@@ -60,21 +52,19 @@ const Input: React.FC<InputProps> = ({
         value={value}
         onPress={onPress}
         onSubmit={onSubmit}
-        onFocus={onFocus? onFocus:()=>{}}
-        onBlur={onBlur? onBlur:()=>{}}
-        onChangeText={onChangeText}  
-        maxLenght={maxLenght}
+        onFocus={onFocus ? onFocus : () => {}}
+        onBlur={onBlur ? onBlur : () => {}}
+        onChangeText={onChangeText}
+        maxLength={maxLength}
         numberOfLines={numberOfLines}
+        isFocusable={isFocusable}
       />
-      <InputHelperText label={helperText} styleHelper={stateStyle().helperStyle}/>
+      <InputHelperText
+        label={helperText}
+        styleHelper={stateStyle().helperStyle}
+      />
     </View>
   );
 };
 
 export default Input;
-
-const styles = StyleSheet.create({
-  inputContainer: {
-    flex: 1,
-  },
-});
