@@ -56,7 +56,7 @@ export const Pagination = ({
         >
           <Image
             style={PaginationStyleVariant.primary.icon}
-            source={require('../../assets/images/back-double-button.png')}
+            source={require('../../assets/images/icons/back-double-button.png')}
           />
         </TouchableOpacity>
 
@@ -73,7 +73,7 @@ export const Pagination = ({
         >
           <Image
             style={PaginationStyleVariant.primary.icon}
-            source={require('../../assets/images/back-button.png')}
+            source={require('../../assets/images/icons/back-button.png')}
           />
         </TouchableOpacity>
 
@@ -97,7 +97,7 @@ export const Pagination = ({
         >
           <Image
             style={PaginationStyleVariant.primary.icon}
-            source={require('../../assets/images/next-button.png')}
+            source={require('../../assets/images/icons/next-button.png')}
           />
         </TouchableOpacity>
 
@@ -114,7 +114,7 @@ export const Pagination = ({
         >
           <Image
             style={PaginationStyleVariant.primary.icon}
-            source={require('../../assets/images/next-double-button.png')}
+            source={require('../../assets/images/icons/next-double-button.png')}
           />
         </TouchableOpacity>
       </View>
