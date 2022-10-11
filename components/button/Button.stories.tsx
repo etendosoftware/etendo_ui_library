@@ -28,7 +28,7 @@ primary.args =
     },
     typeStyle: 'primary',
     image: { 
-        imgRoute: require('../asset/CheckWhite.png'),
+        imgRoute: require('../../assets/images/icons/check.png'),
         imgHeight: 10,
         imgWidth: 12,
         imgMarginRight: 10 
@@ -44,7 +44,7 @@ secondary.args =
     onPress: ()=> {console.log('Press Button')},
     typeStyle: 'secondary',
     image: {
-        imgRoute: require('../asset/Check.png'),
+        imgRoute: require('../../assets/images/icons/check.png'),
         imgHeight:  10,
         imgWidth: 12,
         imgMarginRight: 10
@@ -61,7 +61,7 @@ terciary.args =
     },
     typeStyle: 'terciary',
     image: {
-        imgRoute: require('../asset/Check.png'),
+        imgRoute: require('../../assets/images/icons/check.png'),
         imgHeight: 10,
         imgWidth: 12,
         imgMarginRight: 10
@@ -79,7 +79,7 @@ whiteBorder.args =
     },
     typeStyle: 'whiteBorder',
     image: {
-        imgRoute:require('../asset/Check.png'),
+        imgRoute:require('../../assets/images/icons/check.png'),
         imgHeight:10, 
         imgWidth: 12, 
         imgMarginRight: 10
@@ -97,7 +97,7 @@ white.args =
     },
     typeStyle: 'white',
     image: { 
-        imgRoute:require('../asset/Check.png'),
+        imgRoute:require('../../assets/images/icons/check.png'),
         imgHeight:10, 
         imgWidth: 12, 
         imgMarginRight: 10

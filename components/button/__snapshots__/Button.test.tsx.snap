@@ -29,7 +29,7 @@ exports[`Running Test for Input Check Button disabled 1`] = `
     <Image
       source={
         Object {
-          "testUri": "../../../assets/images/check.png",
+          "testUri": "../../../assets/images/icons/check.png",
         }
       }
       style={
