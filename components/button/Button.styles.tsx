@@ -1,5 +1,5 @@
-import { BLUE, GREY_BLUE_50, PURPLE_10, PURPLE_50, WHITE, YELLOW, YELLOW_30 } from "../../styles/colors"
-import { buttonSizeVariant, buttonStyleVariant } from "./Button.types"
+import {BLUE, GREY_BLUE_50, PURPLE_10, PURPLE_50, WHITE, YELLOW, YELLOW_30} from '../../styles/colors'
+import {buttonSizeVariant, buttonStyleVariant} from './Button.types'
 
 export const ButtonStyleVariant:buttonStyleVariant = {
     primary: {

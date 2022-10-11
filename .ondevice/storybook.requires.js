@@ -30,7 +30,7 @@ try {
 } catch {}
 
 const getStories = () => {
-  return [require("../components/**/*.stories")];
+  return [require('../components/**/*.stories')];
 };
 
 configure(getStories, module, false);

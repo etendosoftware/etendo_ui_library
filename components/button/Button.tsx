@@ -1,8 +1,8 @@
 import React from 'react'
-import { Image, Text, TouchableOpacity, View } from 'react-native'
-import { ButtonSizeVariant, ButtonStyleVariant } from './Button.styles';
-import { addImageStyle } from '../../helpers/utilimage';
-import { ButtonProps } from './Button.types'
+import {Image, Text, TouchableOpacity, View} from 'react-native'
+import {ButtonSizeVariant, ButtonStyleVariant} from './Button.styles';
+import {addImageStyle} from '../../helpers/utilimage';
+import {ButtonProps} from './Button.types'
 
 const Button = ({ text, onPress, typeStyle, image, disabled, typeSize }: ButtonProps) => {
 

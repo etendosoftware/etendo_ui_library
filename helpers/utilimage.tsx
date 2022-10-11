@@ -1,4 +1,4 @@
-import { ImageType } from "../components/button/Button.types"
+import {ImageType} from '../components/button/Button.types'
 
 export const addImageStyle = (image:ImageType) =>
 {
