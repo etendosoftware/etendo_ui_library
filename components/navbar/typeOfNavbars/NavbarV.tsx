@@ -39,6 +39,7 @@ export const NavbarV = ({data, onChangeSelected}: any) => {
                 name: image.name,
               })
             }
+            key={image.key}
           >
             {NavButton(currentNav, setCurrentNav, image.name, image.routeImage)}
           </TouchableOpacity>
