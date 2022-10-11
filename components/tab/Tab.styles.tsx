@@ -7,7 +7,6 @@ import {
   WHITE,
   YELLOW,
 } from '../../styles/colors';
-import {INTER_SEMIBOLD} from '../../styles/fonts';
 
 /* Export of different styles */
 export const TabStyleVariant: TabStyleRecord = {
