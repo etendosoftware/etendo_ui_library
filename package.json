@@ -1,7 +1,7 @@
 {
-  "name": "ButtonComponent",
-  "version": "0.0.1",
-  "private": true,
+  "name": "etendo-ui-library",
+  "version": "1.0.9",
+  "private": false,
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -12,7 +12,8 @@
     "prestart": "yarn update-stories",
     "storybook-watcher": "sb-rn-watcher --config-path .ondevice",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "chromatic": "npx chromatic --project-token 413f5c64668f"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.17.3",
@@ -48,6 +49,7 @@
     "babel-jest": "^26.6.3",
     "babel-loader": "^8.2.4",
     "babel-plugin-react-native-web": "^0.17.7",
+    "chromatic": "^6.10.1",
     "eslint": "^7.32.0",
     "jest": "^26.6.3",
     "metro-react-native-babel-preset": "^0.67.0",
@@ -67,5 +69,7 @@
       "json",
       "node"
     ]
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "myapp@0.0.2"
 }
