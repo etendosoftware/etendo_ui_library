@@ -19,31 +19,31 @@ const datasetNavbarH = [
     name: 'FirstName LastName',
   },
   {
-    routeImage: require('../../assets/images/more.png'),
+    routeImage: require('../../assets/images/icons/hamburger.png'),
     routeNav: '',
     key: 'dataset1',
     name: 'FirstName LastName',
   },
   {
-    routeImage: require('../../assets/images/binoculars.png'),
+    routeImage: require('../../assets/images/icons/binoculars.png'),
     routeNav: '',
     key: 'dataset2',
     name: 'FirstName LastName',
   },
   {
-    routeImage: require('../../assets/images/video.png'),
+    routeImage: require('../../assets/images/icons/video.png'),
     routeNav: '',
     key: 'dataset3',
     name: 'FirstName LastName',
   },
   {
-    routeImage: require('../../assets/images/chat.png'),
+    routeImage: require('../../assets/images/icons/chat.png'),
     routeNav: '',
     key: 'dataset4',
     name: 'FirstName LastName',
   },
   {
-    routeImage: require('../../assets/images/user.png'),
+    routeImage: require('../../assets/images/icons/userNoBorder.png'),
     routeNav: '',
     key: 'dataset5',
     name: 'FirstName LastName',
@@ -52,19 +52,19 @@ const datasetNavbarH = [
 
 const datasetNavbarV = [
   {
-    routeImage: require('../../assets/images/way.png'),
+    routeImage: require('../../assets/images/icons/way.png'),
     routeNav: '',
     key: 'dataset0',
     name: 'Routes',
   },
   {
-    routeImage: require('../../assets/images/tracing.png'),
+    routeImage: require('../../assets/images/icons/tracing.png'),
     routeNav: '',
     key: 'dataset1',
     name: 'Tracing',
   },
   {
-    routeImage: require('../../assets/images/reports.png'),
+    routeImage: require('../../assets/images/icons/reports.png'),
     routeNav: '',
     key: 'dataset2',
     name: 'Reports',

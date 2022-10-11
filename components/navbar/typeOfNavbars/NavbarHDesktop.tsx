@@ -33,6 +33,7 @@ export const NavbarHDesktop = ({
                     name: image.name,
                   })
                 }
+                key={image.key}
               >
                 <Image
                   style={NavbarHStyleVariant.desktop.navIcons}

@@ -29,7 +29,7 @@ export const inputVariants: InputVariantsType = {
       image: {
         imgHeight: 4,
         imgWidth: 6,
-        imgRoute: require('./assets/images/pickerArrow.png'),
+        imgRoute: require('../../assets/images/icons/arrowPicker.png'),
       },
     },
   },
@@ -55,7 +55,7 @@ export const inputVariants: InputVariantsType = {
       image: {
         imgHeight: 12,
         imgWidth: 13,
-        imgRoute: require('./assets/images/search.png'),
+        imgRoute: require('../../assets/images/icons/search.png'),
         imgMarginRight: 5,
       },
     },
@@ -68,7 +68,7 @@ export const inputVariants: InputVariantsType = {
       image: {
         imgHeight: 12,
         imgWidth: 13,
-        imgRoute: require('./assets/images/search.png'),
+        imgRoute: require('../../assets/images/icons/search.png'),
         imgMarginRight: 5,
       },
     },

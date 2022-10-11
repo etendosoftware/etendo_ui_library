@@ -24,7 +24,10 @@ export const NavbarHTablet = ({
         {data.map((image: Info, i: number) => {
           if (i >= 2) {
             return (
-              <TouchableOpacity onPress={() => onChangeSelected}>
+              <TouchableOpacity
+                onPress={() => onChangeSelected}
+                key={image.key}
+              >
                 <Image
                   style={NavbarHStyleVariant.tablet.navIcons}
                   source={image.routeImage}
