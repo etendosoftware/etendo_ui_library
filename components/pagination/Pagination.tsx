@@ -1,13 +1,14 @@
 /* Imports */
 import React, {useState} from 'react';
 
-import {Text, View, Image, Pressable} from 'react-native';
+import {Text, View, Image, TouchableOpacity} from 'react-native';
 import {PaginationStyleVariant} from './Pagination.styles';
 import {PaginationProps} from './Pagination.types';
 
 /* Pagination component */
 export const Pagination = ({
   currentPage,
+  onChangeSelected,
   totalData,
   amountDataPerPage,
 }: PaginationProps) => {
@@ -22,8 +23,8 @@ export const Pagination = ({
   }
 
   /* Helper functions to page up or down */
-  const back2Pages = (page: number) => {
-    page === 2 ? setPage(page - 1) : setPage(page - 2);
+  const backToFirstPage = () => {
+    setPage(1);
   };
 
   const backPage = (page: number) => {
@@ -34,26 +35,47 @@ export const Pagination = ({
     setPage(page + 1);
   };
 
-  const next2Pages = (page: number, pageNumbers: Array<number>) => {
-    page === pageNumbers.length - 1 ? setPage(page + 1) : setPage(page + 2);
+  const nextLastPage = (pageNumbers: Array<number>) => {
+    setPage(pageNumbers.length);
   };
 
   return (
     <View style={PaginationStyleVariant.primary.container}>
       <View style={PaginationStyleVariant.primary.container}>
-        <Pressable disabled={page <= 1} onPress={() => back2Pages(page)}>
+        <TouchableOpacity
+          disabled={page <= 1}
+          onPress={() => {
+            /* Allows to detect the selected item */
+            backToFirstPage();
+            onChangeSelected({
+              name: '',
+              route: '',
+              key: '',
+            });
+          }}
+        >
           <Image
             style={PaginationStyleVariant.primary.icon}
             source={require('../../assets/images/back-double-button.png')}
           />
-        </Pressable>
+        </TouchableOpacity>
 
-        <Pressable disabled={page <= 1} onPress={() => backPage(page)}>
+        <TouchableOpacity
+          disabled={page <= 1}
+          onPress={() => {
+            backPage(page);
+            onChangeSelected({
+              name: '',
+              route: '',
+              key: '',
+            });
+          }}
+        >
           <Image
             style={PaginationStyleVariant.primary.icon}
             source={require('../../assets/images/back-button.png')}
           />
-        </Pressable>
+        </TouchableOpacity>
 
         {/* Text with layout to display the page number the user is on */}
         <View style={PaginationStyleVariant.primary.pageNumberContainer}>
@@ -62,25 +84,39 @@ export const Pagination = ({
           </Text>
         </View>
 
-        <Pressable
+        <TouchableOpacity
           disabled={page === pageNumbers.length}
-          onPress={() => nextPage(page)}
+          onPress={() => {
+            nextPage(page);
+            onChangeSelected({
+              name: '',
+              route: '',
+              key: '',
+            });
+          }}
         >
           <Image
             style={PaginationStyleVariant.primary.icon}
             source={require('../../assets/images/next-button.png')}
           />
-        </Pressable>
+        </TouchableOpacity>
 
-        <Pressable
+        <TouchableOpacity
           disabled={page === pageNumbers.length}
-          onPress={() => next2Pages(page, pageNumbers)}
+          onPress={() => {
+            nextLastPage(pageNumbers);
+            onChangeSelected({
+              name: '',
+              route: '',
+              key: '',
+            });
+          }}
         >
           <Image
             style={PaginationStyleVariant.primary.icon}
             source={require('../../assets/images/next-double-button.png')}
           />
-        </Pressable>
+        </TouchableOpacity>
       </View>
     </View>
   );

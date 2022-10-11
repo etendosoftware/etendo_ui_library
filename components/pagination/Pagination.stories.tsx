@@ -10,17 +10,46 @@ export default {
   argTypes: {},
 } as Meta<typeof Pagination>;
 
+/* Information to pass */
+const dataset = [
+  {name: 'User', route: '', key: 'user'},
+  {name: 'Vehicles', route: '', key: 'vehicles'},
+  {name: 'Skills', route: '', key: 'skills'},
+  {name: 'Mobile app', route: '', key: 'movilApp'},
+  {name: 'Staff', route: '', key: 'staff'},
+  {name: 'Routing options', route: '', key: 'routing options'},
+  {name: 'Map', route: '', key: 'map'},
+];
+
+/* This function allows you to select by default the first tab */
+const onCheckSelectedMock = () => dataset[0];
+
 /* Templates */
 const Template: Story<PaginationProps> = args => (
-  <Pagination currentPage={1} totalData={40} amountDataPerPage={8} />
+  <Pagination
+    currentPage={1}
+    onChangeSelected={onCheckSelectedMock}
+    totalData={40}
+    amountDataPerPage={8}
+  />
 );
 
 const Template2: Story<PaginationProps> = args => (
-  <Pagination currentPage={1} totalData={160} amountDataPerPage={10} />
+  <Pagination
+    currentPage={1}
+    onChangeSelected={onCheckSelectedMock}
+    totalData={160}
+    amountDataPerPage={10}
+  />
 );
 
 const Template3: Story<PaginationProps> = args => (
-  <Pagination currentPage={1} totalData={200} amountDataPerPage={5} />
+  <Pagination
+    currentPage={1}
+    onChangeSelected={onCheckSelectedMock}
+    totalData={200}
+    amountDataPerPage={5}
+  />
 );
 
 /* Story exports */

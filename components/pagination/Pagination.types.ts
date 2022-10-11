@@ -10,6 +10,7 @@ export type Info = {
 
 export interface PaginationProps {
   currentPage: number;
+  onChangeSelected: (Info: Info | undefined) => Info;
   totalData: number;
   amountDataPerPage: number;
 }
