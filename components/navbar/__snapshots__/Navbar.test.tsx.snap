@@ -73,7 +73,7 @@ exports[`Running Test for Navbar Check Navbar Disabled 1`] = `
           <Image
             source={
               Object {
-                "testUri": "../../../assets/images/binoculars.png",
+                "testUri": "../../../assets/images/icons/binoculars.png",
               }
             }
             style={
@@ -105,7 +105,7 @@ exports[`Running Test for Navbar Check Navbar Disabled 1`] = `
           <Image
             source={
               Object {
-                "testUri": "../../../assets/images/video.png",
+                "testUri": "../../../assets/images/icons/video.png",
               }
             }
             style={
@@ -137,7 +137,7 @@ exports[`Running Test for Navbar Check Navbar Disabled 1`] = `
           <Image
             source={
               Object {
-                "testUri": "../../../assets/images/chat.png",
+                "testUri": "../../../assets/images/icons/chat.png",
               }
             }
             style={
@@ -169,7 +169,7 @@ exports[`Running Test for Navbar Check Navbar Disabled 1`] = `
           <Image
             source={
               Object {
-                "testUri": "../../../assets/images/user.png",
+                "testUri": "../../../assets/images/icons/userNoBorder.png",
               }
             }
             style={

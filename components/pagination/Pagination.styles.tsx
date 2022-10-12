@@ -13,7 +13,7 @@ export const PaginationStyleVariant: PaginationStyleRecord = {
       flexDirection: 'row',
     },
     icon: {
-      width: 20,
+      width: 22,
       height: 22,
       marginRight: 17,
     },
