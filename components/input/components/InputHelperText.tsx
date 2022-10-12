@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, TextStyle, View} from 'react-native';
+import {Text, View} from 'react-native';
 import {styles} from '../Input.style';
 import { InputHelperProps } from '../Input.types';
 

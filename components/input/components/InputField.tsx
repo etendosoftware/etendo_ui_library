@@ -5,9 +5,10 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import {getImageStyle} from '../../../helpers/utilImage';
+import { addImageStyle } from '../../../helpers/utilimage';
+
 import {styles} from '../Input.style';
-import {InputFieldProps} from '../Input.types';
+import {ImageType, InputFieldProps} from '../Input.types';
 
 const InputField = ({
   configField,
@@ -29,7 +30,7 @@ const InputField = ({
   const numberLines = numberOfLines && numberOfLines >= 1 ?numberOfLines :  1;
   
   /*height calculated with actual font size (+10 would be the smallest size)*/
-  const heightFinal = heightLines * numberLines + 10 
+  const heightFinal = heightLines * numberLines + 14 
 
   const getStyleText = (text: string | undefined) => {
     var style
@@ -92,7 +93,7 @@ const InputField = ({
               {configField?.image?.imgRoute && (
                 <Image
                   source={configField?.image?.imgRoute}
-                  style={getImageStyle(configField.image, disabled)}
+                  style={addImageStyle(configField.image, disabled)}
                 />
               )}
             </TouchableOpacity>
@@ -103,4 +104,4 @@ const InputField = ({
   );
 };
 
-export default InputField;
+export default InputField

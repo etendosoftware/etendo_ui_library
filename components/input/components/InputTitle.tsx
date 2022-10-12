@@ -1,6 +1,7 @@
 import React from 'react';
 import {Image, Text, View} from 'react-native';
-import {getImageStyle} from '../../../helpers/utilImage';
+import { addImageStyle } from '../../../helpers/utilimage';
+
 import {styles} from '../Input.style';
 import {InputTitleProps} from '../Input.types';
 
@@ -14,7 +15,7 @@ const InputTitle = ({
     <View style={styles.rowInputTitle}>
       {image?.imgRoute && (
         <Image
-          style={[getImageStyle(image, disabled)]}
+          style={[addImageStyle(image, disabled)]}
           source={image?.imgRoute}
         />
       )}

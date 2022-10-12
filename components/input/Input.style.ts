@@ -77,7 +77,7 @@ export const inputVariants: InputVariantsType = {
 
 const defaultTitle:TextStyle = {
   color: BLUE,
-  fontSize: 10,
+  fontSize: 14,
   fontFamily: FONT_MEDIUM,
   marginBottom:5,
 }
@@ -98,7 +98,7 @@ const defaultText:TextStyle =
   paddingVertical: 5,
   paddingLeft: 7,
   color: BLUE,
-  fontSize: 10,
+  fontSize: 14,
   fontWeight: '500',
   fontFamily: FONT_MEDIUM,
 }
@@ -109,7 +109,7 @@ const defaultTextPlaceholder:TextStyle =
   paddingVertical: 5,
   paddingLeft: 7,
   color: GREY_BLUE,
-  fontSize: 10,
+  fontSize: 14,
   fontWeight: '500',
   fontFamily: FONT_MEDIUM,
 }
@@ -117,7 +117,7 @@ const defaultTextPlaceholder:TextStyle =
 const defaultHelperText:TextStyle =
 {
   color: GREY_60,
-  fontSize: 10,
+  fontSize: 14,
   fontFamily: FONT_REGULAR,
 }
 
