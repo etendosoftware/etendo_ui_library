@@ -48,6 +48,9 @@ exports[`Running Test for Input Check Button disabled 1`] = `
           Object {
             "opacity": 0.2,
           },
+          Object {
+            "tintColor": "#FFFFFF",
+          },
         ]
       }
     />

@@ -27,7 +27,7 @@ const Button = ({ text, onPress, typeStyle, image, disabled, typeSize }: ButtonP
             onPress= { onPress }>
                             {
                                 image?.imgRoute && <Image source={image.imgRoute} 
-                                style= {[addImageStyle(image), { opacity:disabled? 0.2 : 1 }]}></Image> 
+                                style= {[addImageStyle(image), { opacity:disabled? 0.2 : 1 }, ButtonStyleVariant[typeStyle].imageColor]}></Image> 
                             }
                 <Text style= {[ stateStyleText(), ButtonSizeVariant[typeSize].buttonSize ]}> { text } </Text>
             </TouchableOpacity>
