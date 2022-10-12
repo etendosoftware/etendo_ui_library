@@ -1,6 +1,6 @@
-import {ImageType} from '../components/button/Button.types'
+import {ImageType} from './utilsTypes'
 
-export const addImageStyle = (image:ImageType) =>
+export const addImageStyle = (image:ImageType,disabled?:boolean| undefined) =>
 {
   let result = []
   if(image.imgWidth)
@@ -14,6 +14,10 @@ export const addImageStyle = (image:ImageType) =>
   if(image.imgMarginRight)
   {
     result.push({marginRight: image.imgMarginRight})
+  }
+  if(disabled)
+  {
+    result.push({opacity: 0.5})
   }
   return result
 }
