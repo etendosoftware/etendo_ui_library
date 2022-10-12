@@ -1,4 +1,4 @@
-import {ColorValue, ImageSourcePropType, ImageStyle, TextStyle, ViewStyle} from 'react-native'
+import {ImageSourcePropType, ImageStyle, TextStyle, ViewStyle} from 'react-native'
 
 export type ButtonStyleType = 'primary' | 'secondary' |'terciary' |'whiteBorder' | 'white' ;
 
