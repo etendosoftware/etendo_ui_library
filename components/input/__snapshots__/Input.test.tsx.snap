@@ -21,7 +21,7 @@ exports[`Running Test for Input Check Input Error 1`] = `
         Object {
           "color": "#202452",
           "fontFamily": "Inter-Medium",
-          "fontSize": 10,
+          "fontSize": 14,
           "marginBottom": 5,
         }
       }
@@ -53,7 +53,7 @@ exports[`Running Test for Input Check Input Error 1`] = `
         "borderRadius": 3,
         "borderWidth": 1,
         "flexDirection": "row",
-        "height": 22,
+        "height": 26,
         "opacity": 1,
       }
     }
@@ -73,13 +73,13 @@ exports[`Running Test for Input Check Input Error 1`] = `
               "color": "#202452",
               "flex": 1,
               "fontFamily": "Inter-Medium",
-              "fontSize": 10,
+              "fontSize": 14,
               "fontWeight": "500",
               "paddingLeft": 7,
               "paddingVertical": 5,
             },
             Object {
-              "height": 22,
+              "height": 26,
             },
           ],
         ]
@@ -102,7 +102,7 @@ exports[`Running Test for Input Check Input Error 1`] = `
           Object {
             "color": "#808080",
             "fontFamily": "Inter-Regular",
-            "fontSize": 10,
+            "fontSize": 14,
           },
           Object {
             "color": "#F36A62",
