@@ -1,7 +1,6 @@
-import React from 'react';
-
-import {View, Text, TouchableOpacity, Image, ScrollView} from 'react-native';
 import {useState} from 'react';
+import {View, Text, TouchableOpacity, Image, ScrollView} from 'react-native';
+
 import DropdownItem from './DropdownItem';
 import {DropdownStyleVariant} from './Dropdown.styles';
 import {DropdownProps, Info} from './Dropdown.types';

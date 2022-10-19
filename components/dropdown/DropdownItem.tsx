@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, TouchableOpacity, TextStyle} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
 import {GREY_5, YELLOW} from '../../styles/colors';
 import {DropdownStyleVariant} from './Dropdown.styles';
 import {DropdownItemProps, DropdownStyleFontSize} from './Dropdown.types';
