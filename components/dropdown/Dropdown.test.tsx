@@ -14,8 +14,8 @@ const dataset = [
 
 const onCheckSelectedMock = () => dataset[0];
 
-describe('Running Test for Tab', () => {
-  it('Check Tab Disabled', () => {
+describe('Running Test for Dropdown', () => {
+  it('Check Dropdown Disabled', () => {
     const tree = renderer
       .create(
         <Dropdown
