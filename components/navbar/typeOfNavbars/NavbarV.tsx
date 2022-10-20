@@ -77,28 +77,30 @@ const NavButton = (
             paddingVertical: '20%',
           }}
         >
-          <Image
-            source={image}
+          <img
+            src={image}
             style={{
               /* Primary */
-              width: width * 0.7,
-              height: width * 0.7,
-              tintColor: currentNav === title ? BLUE : WHITE,
+              width:  50,
+              height: 50,
+              // tintColor: currentNav === title ? BLUE : WHITE,
             }}
           />
 
           <Text
             style={{
               /* Primary */
-              fontSize: width * 0.15,
+              fontSize: 10,
               justifyContent: 'center',
               //   fontFamily: INTER_SEMIBOLD,
               fontWeight: 'bold',
-              marginTop: width * 0.15,
+              marginTop: 15,
               color: currentNav === title ? BLUE : WHITE,
               alignContent: 'center',
               alignSelf: 'center',
               textTransform: 'uppercase',
+      fontFamily: "Montserrat"
+
             }}
           >
             {title}

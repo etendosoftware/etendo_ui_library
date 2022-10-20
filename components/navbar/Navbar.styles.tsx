@@ -122,6 +122,8 @@ export const NavbarHStyleVariant: NavbarStyleHorizontal = {
       width: 28,
       height: 28,
       marginRight: '25px',
+      fontFamily: "Montserrat"
+
     },
     user: {
       width: 28,
