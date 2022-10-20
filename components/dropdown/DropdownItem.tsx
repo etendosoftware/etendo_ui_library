@@ -3,7 +3,7 @@ import {Text, TouchableOpacity} from 'react-native';
 
 import {DropdownStyleVariant} from './Dropdown.styles';
 import {DropdownItemProps} from './Dropdown.types';
-import {getSizeText, getStyle} from './styles';
+import {getSizeText, getStyle} from './DropdownItem.styles';
 
 const DropdownItem = ({
   item,
