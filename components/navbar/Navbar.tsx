@@ -18,13 +18,13 @@ export const Navbar = ({data, onChangeSelected, typeOfNavbar}: NavbarProps) => {
   if (typeOfNavbar === 'horizontal') {
     return (
       <ScrollView>
-        {width < 480 && (
+        {/* {width < 480 && (
           <NavbarHMobile data={data} onChangeSelected={onChangeSelected} />
-        )}
+        )} */}
 
-        {width >= 480 && width < 768 && (
+        {/* {width >= 480 && width < 768 && (
           <NavbarHTablet data={data} onChangeSelected={onChangeSelected} />
-        )}
+        )} */}
 
         {width >= 768 && (
           <NavbarHDesktop data={data} onChangeSelected={onChangeSelected} />

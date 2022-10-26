@@ -6,11 +6,14 @@ import TabItem from './TabItem';
 import {TabProps, Info, TabStyleType} from './Tab.types';
 import {TabStyleVariant} from './Tab.styles';
 import {GREY_BLUE_30, BLUE} from '../../styles/colors';
+import Link from 'next/link';
+import {useRouter} from 'next/router';
 
 /* Styles - This function allows you to obtain the styles of the Tab component */
-const getStyle = (style: TabStyleType, toggleItem: number, index: number) => {
+
+const getStyle = (style: TabStyleType, item: Info, pathname: any) => {
   /* Returns the style chosen by the programmer */
-  if (toggleItem === index) {
+  if (item.route === pathname) {
     return [TabStyleVariant[style].tabs, TabStyleVariant[style].tabsActive];
   } else {
     return TabStyleVariant[style].tabs;
@@ -20,27 +23,18 @@ const getStyle = (style: TabStyleType, toggleItem: number, index: number) => {
 /* Tab component */
 const Tab = ({data, onChangeSelected, style, typeSizeText}: TabProps) => {
   /* Variable to handle the state of the tabs */
-  const [toggleItem, setToggleItem] = useState<number>(0);
-  const {height} = useWindowDimensions();
+  const [toggleItem, setToggleItem] = useState<number>(-1);
+  // const {height} = useWindowDimensions();
+  const router = useRouter();
+  const {pathname} = router;
 
   return (
-    <View
-      style={
-        style === 'primary'
-          ? {
-              flex: 1,
-              borderBottomWidth: 3,
-              borderBottomColor: BLUE,
-              backgroundColor: GREY_BLUE_30,
-            }
-          : {}
-      }
-    >
+    <View style={TabStyleVariant.primary.container}>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         {data.map((item: Info, index: number) => {
           return (
             <TabItem
-              style={getStyle(style, toggleItem, index)}
+              style={getStyle(style, item, pathname)}
               styleText={style}
               sizeText={typeSizeText}
               item={item}

@@ -54,9 +54,10 @@ export const Pagination = ({
             });
           }}
         >
-          <Image
-            style={PaginationStyleVariant.primary.icon}
-            source={require('../../assets/images/icons/back-double-button.png')}
+          <img
+            src={'./assets/images/icons/back-double-button.png'}
+            alt="edit"
+            style={{width: 8, height: 8, marginRight: 8}}
           />
         </TouchableOpacity>
 
@@ -71,9 +72,10 @@ export const Pagination = ({
             });
           }}
         >
-          <Image
-            style={PaginationStyleVariant.primary.icon}
-            source={require('../../assets/images/icons/back-button.png')}
+          <img
+            src={'./assets/images/icons/back-button.png'}
+            alt="edit"
+            style={{width: 8, height: 8, marginRight: 8}}
           />
         </TouchableOpacity>
 
@@ -95,9 +97,10 @@ export const Pagination = ({
             });
           }}
         >
-          <Image
-            style={PaginationStyleVariant.primary.icon}
-            source={require('../../assets/images/icons/next-button.png')}
+          <img
+            src={'./assets/images/icons/next-button.png'}
+            alt="edit"
+            style={{width: 8, height: 8, marginRight: 8}}
           />
         </TouchableOpacity>
 
@@ -112,9 +115,10 @@ export const Pagination = ({
             });
           }}
         >
-          <Image
-            style={PaginationStyleVariant.primary.icon}
-            source={require('../../assets/images/icons/next-double-button.png')}
+          <img
+            src={'./assets/images/icons/next-double-button.png'}
+            alt="edit"
+            style={{width: 8, height: 8, marginRight: 8}}
           />
         </TouchableOpacity>
       </View>

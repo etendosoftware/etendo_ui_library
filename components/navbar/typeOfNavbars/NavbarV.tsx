@@ -17,35 +17,49 @@ import {
 import {Info} from '../Navbar.types';
 import {NavbarVStyleVariant} from '../Navbar.styles';
 import {BLUE, WHITE, YELLOW} from '../../../styles/colors';
+import stylesNavbarV from './NavbarV.module.css';
+import Link from 'next/link';
+import {useRouter} from 'next/router';
+
+import styles from '../../../../styles/Home.module.css';
 
 export const NavbarV = ({data, onChangeSelected}: any) => {
   // Use of states to control navigation
   const [currentNav, setCurrentNav] = useState<string>('');
 
   return (
-    <ScrollView
-      style={NavbarVStyleVariant.generic.container}
-      showsVerticalScrollIndicator={false}
-    >
-      {data.map((image: Info) => {
-        return (
-          <TouchableOpacity
-            onPress={() =>
-              /* Allows to detect the selected navigation */
-              onChangeSelected({
-                routeImage: image.routeImage,
-                routeNav: image.routeNav,
-                key: image.key,
-                name: image.name,
-              })
-            }
-            key={image.key}
-          >
-            {NavButton(currentNav, setCurrentNav, image.name, image.routeImage)}
-          </TouchableOpacity>
-        );
-      })}
-    </ScrollView>
+    <>
+      <ScrollView
+        style={NavbarVStyleVariant.generic.container}
+        showsVerticalScrollIndicator={false}
+      >
+        {data.map((image: Info) => {
+          return (
+            <TouchableOpacity
+              onPress={() =>
+                /* Allows to detect the selected navigation */
+                onChangeSelected({
+                  routeImage: image.routeImage,
+                  routeNav: image.routeNav,
+                  key: image.key,
+                  name: image.name,
+                })
+              }
+              key={image.key}
+            >
+              {NavButton(
+                currentNav,
+                setCurrentNav,
+                image.name,
+                image.routeImage,
+                image.routeNav,
+              )}
+            </TouchableOpacity>
+          );
+        })}
+        {/* <div className={styles.arrowRight} />; */}
+      </ScrollView>
+    </>
   );
 };
 
@@ -55,8 +69,10 @@ const NavButton = (
   setCurrentNav: any,
   title: string,
   image: any,
+  routeNav: any,
 ) => {
-  const {width} = useWindowDimensions();
+  const router = useRouter();
+  const {pathname} = router;
 
   return (
     <>
@@ -64,48 +80,72 @@ const NavButton = (
         onPress={() => {
           setCurrentNav(title);
         }}
+        activeOpacity={1}
       >
-        <View
-          style={{
-            /* Primary */
-            flex: 1,
-            alignItems: 'center',
-            alignSelf: 'center',
-            justifyContent: 'center',
-            backgroundColor: currentNav === title ? YELLOW : 'transparent',
-            paddingHorizontal: '100%',
-            paddingVertical: '20%',
-          }}
-        >
-          <img
-            src={image}
+        <Link href={routeNav}>
+          <View
             style={{
               /* Primary */
-              width:  50,
-              height: 50,
-              // tintColor: currentNav === title ? BLUE : WHITE,
-            }}
-          />
-
-          <Text
-            style={{
-              /* Primary */
-              fontSize: 10,
-              justifyContent: 'center',
-              //   fontFamily: INTER_SEMIBOLD,
-              fontWeight: 'bold',
-              marginTop: 15,
-              color: currentNav === title ? BLUE : WHITE,
-              alignContent: 'center',
+              flex: 1,
+              alignItems: 'center',
               alignSelf: 'center',
-              textTransform: 'uppercase',
-      fontFamily: "Montserrat"
-
+              justifyContent: 'center',
+              backgroundColor:
+                routeNav === pathname ||
+                routeNav + 'vehicles' === pathname ||
+                routeNav + 'configuration' === pathname
+                  ? YELLOW
+                  : 'transparent',
+              paddingHorizontal: '100%',
+              paddingVertical: '11%',
             }}
           >
-            {title}
-          </Text>
-        </View>
+            {routeNav === pathname ||
+            routeNav + 'vehicles' === pathname ||
+            routeNav + 'configuration' === pathname ? (
+              <>
+                <img
+                  src={image + '-blue.png'}
+                  style={{
+                    width: 27,
+                    height: 27,
+                    // tintColor: currentNav === title ? BLUE : WHITE,
+                  }}
+                />
+              </>
+            ) : (
+              <img
+                src={image + '-white.png'}
+                style={{
+                  width: 27,
+                  height: 27,
+                  // tintColor: currentNav === title ? BLUE : WHITE,
+                }}
+              />
+            )}
+
+            <Text
+              style={{
+                /* Primary */
+                fontSize: 9.4,
+                justifyContent: 'center',
+                fontFamily: 'Poppins',
+                fontWeight: '600',
+                marginTop: 6,
+                color:
+                  routeNav === pathname ||
+                  routeNav + 'vehicles' === pathname ||
+                  routeNav + 'configuration' === pathname
+                    ? BLUE
+                    : WHITE,
+                alignContent: 'center',
+                alignSelf: 'center',
+              }}
+            >
+              {title}
+            </Text>
+          </View>
+        </Link>
       </TouchableOpacity>
     </>
   );

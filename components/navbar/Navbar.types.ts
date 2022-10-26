@@ -9,7 +9,7 @@ import {
 
 /* Type declaration */
 export type Info = {
-  routeImage: ImageSourcePropType;
+  routeImage: string;
   routeNav: string;
   key: string;
   name: string;

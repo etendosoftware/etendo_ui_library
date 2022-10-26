@@ -2,16 +2,18 @@
 import React from 'react';
 import {Text, TouchableOpacity} from 'react-native';
 
-import {TabItemProps, TabStyleType, TabStyleFontSize} from './Tab.types';
+import {TabItemProps, TabStyleType, TabStyleFontSize, Info} from './Tab.types';
 import {TabStyleVariant} from './Tab.styles';
 import {WHITE, BLUE, GREY_BLUE} from '../../styles/colors';
+import Link from 'next/link';
+import {useRouter} from 'next/router';
 
 /* Styles - This function allows to obtain the text styles of the TabItem component */
 const getStyle = (
   style: TabStyleType,
   textStyle: TabStyleFontSize,
-  toggleItem: number,
-  index: number,
+  item: Info,
+  pathname: any,
 ) => {
   let colorActive: string = '';
   let colorInactive: string = '';
@@ -48,7 +50,7 @@ const getStyle = (
 
   /* Returns the style of the chosen text based on the selected styles of the Tab component */
   return [
-    {color: toggleItem === index ? colorActive : colorInactive},
+    {color: item.route === pathname ? colorActive : colorInactive},
     {fontSize: fontSize},
     TabStyleVariant[style].itemText,
   ];
@@ -64,18 +66,23 @@ const TabItem = ({
   onPress,
   toggleItem,
 }: TabItemProps) => {
+  const router = useRouter();
+  const {pathname} = router;
+
   return (
     <TouchableOpacity
-      activeOpacity={0.5}
+      activeOpacity={1}
       style={style}
       onPress={() => {
         onPress();
       }}
       key={item.key}
     >
-      <Text style={getStyle(styleText, sizeText, toggleItem, index)}>
-        {item.name}
-      </Text>
+      <Link href={item.route}>
+        <Text style={getStyle(styleText, sizeText, item, pathname)}>
+          {item.name}
+        </Text>
+      </Link>
     </TouchableOpacity>
   );
 };
