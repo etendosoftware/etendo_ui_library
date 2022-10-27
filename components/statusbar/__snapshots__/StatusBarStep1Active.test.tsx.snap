@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Running Test for StatusBarStep1Active Check StatusBarStep1Active 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#FAD614",
+      "flex": 1,
+      "height": 45,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#202452",
+        "flex": 1,
+        "height": "50%",
+        "width": "100%",
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "backgroundColor": "#FAD614",
+        "flex": 1,
+        "height": "50%",
+        "width": "100%",
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "flex-end",
+        "backgroundColor": "#FAD614",
+        "borderTopEndRadius": 26,
+        "flex": 1,
+        "height": "100%",
+        "justifyContent": "center",
+        "position": "absolute",
+        "width": "75%",
+        "zIndex": 1,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#202452",
+          "fontSize": 17,
+          "fontWeight": "bold",
+          "marginRight": 25,
+        }
+      }
+    >
+      1. Vehicles
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#202452",
+        "borderBottomLeftRadius": 26,
+        "flex": 1,
+        "flexDirection": "row",
+        "height": "100%",
+        "justifyContent": "center",
+        "left": "75%",
+        "position": "absolute",
+        "width": "25%",
+        "zIndex": 1,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#FFFFFF",
+          "fontSize": 17,
+          "fontWeight": "bold",
+          "marginRight": 30,
+        }
+      }
+    >
+      2. Visits
+    </Text>
+    <Text
+      style={
+        Object {
+          "color": "#FFFFFF",
+          "fontSize": 17,
+          "fontWeight": "bold",
+          "marginRight": 20,
+        }
+      }
+    >
+      3. Routes
+    </Text>
+  </View>
+</View>
+`;

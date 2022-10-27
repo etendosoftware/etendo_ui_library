@@ -14,6 +14,8 @@ export type Info = {
   activeTextBottom?: string;
 };
 
+export type ArrayInfo = Array<Info>;
+
 export interface StatusBarProps {
   data: Info[];
   step: number;
