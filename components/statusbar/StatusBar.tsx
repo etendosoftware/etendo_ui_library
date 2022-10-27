@@ -4,7 +4,7 @@ import {StatusBarStyleVariant} from './StatusBar.styles';
 import {StatusBarProps} from './StatusBar.types';
 
 export const StatusBar = ({data, step}: StatusBarProps) => {
-  if (step === 1 || (step !== 2 && step !== 3)) {
+  if (step === 1 || step < 1 || step > 3) {
     return (
       <View style={StatusBarStyleVariant.primary.containerStatusBar}>
         <View
