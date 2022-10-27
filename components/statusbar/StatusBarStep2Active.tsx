@@ -25,7 +25,7 @@ export const StatusBarStep2Active = ({data}: StatusBarProps) => {
       <View
         style={
           StatusBarStyleVariant.primary
-            .containerStatusBarMiddleOfMiddleHorizontalBlueBottom
+            .containerStatusBarMiddleOfMiddleHorizontalYellowBottom
         }
       />
 

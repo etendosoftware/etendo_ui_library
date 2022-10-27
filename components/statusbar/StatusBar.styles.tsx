@@ -6,13 +6,42 @@ import {StatusBarStyleRecord} from './StatusBar.types';
 export const StatusBarStyleVariant: StatusBarStyleRecord = {
   /* Primary style */
   primary: {
+    // General container of the status bar
     containerStatusBar: {
       flex: 1,
       width: '100%',
       height: 45,
       backgroundColor: YELLOW,
     },
+
+    // Containers the status bar with blue color
     containerStatusBarMiddleBlueTop: {
+      flex: 1,
+      width: '100%',
+      height: '50%',
+      backgroundColor: BLUE,
+    },
+
+    containerStatusBarMiddleBlueBottom: {
+      flex: 1,
+      marginTop: 100,
+      width: '100%',
+      height: '50%',
+      backgroundColor: YELLOW,
+    },
+
+    containerStatusBarMiddleOfMiddleHorizontalBlueTop: {
+      left: '80%',
+      width: '20%',
+      borderRadius: 26,
+      height: '50%',
+      backgroundColor: BLUE,
+      position: 'absolute',
+      zIndex: 1,
+    },
+
+    // Containers the status bar with yellow color
+    containerStatusBarMiddleYellowTop: {
       flex: 1,
       width: '100%',
       height: '50%',
@@ -25,16 +54,31 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
       height: '50%',
       backgroundColor: YELLOW,
     },
-    containerItemActive: {
-      width: '75%',
-      height: '100%',
+
+    containerStatusBarMiddleOfMiddleHorizontalYellowTop: {
+      position: 'absolute',
+      width: '50%',
+      height: '50%',
       backgroundColor: YELLOW,
+    },
+
+    containerStatusBarMiddleOfMiddleHorizontalYellowBottom: {
+      width: '50%',
+      height: '50%',
+      backgroundColor: BLUE,
+    },
+
+    containerItemDisabledStep1AndStep2: {
+      width: '60%',
+      height: '100%',
+      backgroundColor: BLUE,
       borderTopEndRadius: 26,
       position: 'absolute',
       zIndex: 1,
       flex: 1,
-      justifyContent: 'center',
-      alignItems: 'flex-end',
+      justifyContent: 'flex-end',
+      alignItems: 'center',
+      flexDirection: 'row',
     },
 
     containerItemDisabled: {
@@ -51,9 +95,55 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
       flexDirection: 'row',
     },
 
-    textActive: {
-      marginRight: 25,
-      color: BLUE,
+    containerItemDisabledStep2: {
+      width: '40%',
+      height: '100%',
+      backgroundColor: BLUE,
+      position: 'absolute',
+      borderTopEndRadius: 26,
+      zIndex: 1,
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'row',
+      borderTopRightRadius: 26,
+    },
+
+    containerItemDisabledStep3Right: {
+      left: '80.4%',
+      width: '20%',
+      height: '100%',
+      backgroundColor: BLUE,
+      position: 'absolute',
+      zIndex: 1,
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'row',
+      borderBottomLeftRadius: 26,
+    },
+
+    // Active items section containers
+    containerItemActiveStep2: {
+      left: '40%',
+      width: '40.4%',
+      height: '100%',
+      backgroundColor: YELLOW,
+      position: 'absolute',
+      borderTopEndRadius: 26,
+      zIndex: 1,
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'row',
+      borderBottomLeftRadius: 26,
+      borderTopRightRadius: 26,
+    },
+
+    // Disable texts
+    containerItemDisabledStep1Text: {
+      marginLeft: 265,
+      color: WHITE,
       fontSize: 17,
       fontWeight: 'bold',
     },
@@ -72,128 +162,11 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
       fontWeight: 'bold',
     },
 
-    containerItemDisabledStep2: {
-      width: '40%',
-      height: '100%',
-      backgroundColor: BLUE,
-      position: 'absolute',
-      borderTopEndRadius: 26,
-      zIndex: 1,
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      flexDirection: 'row',
-      borderTopRightRadius: 26,
-    },
-
-    containerItemActiveStep2: {
-      left: '40%',
-      width: '40.4%',
-      height: '100%',
-      backgroundColor: YELLOW,
-      position: 'absolute',
-      borderTopEndRadius: 26,
-      zIndex: 1,
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      flexDirection: 'row',
-      borderBottomLeftRadius: 26,
-      borderTopRightRadius: 26,
-    },
-
-    containerStatusBarMiddleOfMiddleHorizontalYellowTop: {
-      position: 'absolute',
-      width: '50%',
-      height: '50%',
-      backgroundColor: YELLOW,
-    },
-
-    containerStatusBarMiddleOfMiddleHorizontalBlueBottom: {
-      width: '50%',
-      height: '50%',
-      backgroundColor: BLUE,
-    },
-    containerItemDisabledStep3Right: {
-      left: '80.4%',
-      width: '20%',
-      height: '100%',
-      backgroundColor: BLUE,
-      position: 'absolute',
-      zIndex: 1,
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      flexDirection: 'row',
-      borderBottomLeftRadius: 26,
-    },
-
-    containerStatusBarMiddleOfMiddleHorizontalBlueTop: {
-      left: '80%',
-      width: '20%',
-      borderRadius: 26,
-      height: '50%',
-      backgroundColor: BLUE,
-      position: 'absolute',
-      zIndex: 1,
-    },
-
-    containerItemDisabledStep1Text: {
-      marginLeft: 265,
-      color: WHITE,
-      fontSize: 17,
-      fontWeight: 'bold',
-    },
-
     containerItemDisabledStep3TextRight: {
       marginRight: 90,
       color: WHITE,
       fontSize: 17,
       fontWeight: 'bold',
-    },
-
-    // Step3
-
-    containerItemDisabledStep1AndStep2: {
-      width: '60%',
-      height: '100%',
-      backgroundColor: BLUE,
-      borderTopEndRadius: 26,
-      position: 'absolute',
-      zIndex: 1,
-      flex: 1,
-      justifyContent: 'flex-end',
-      alignItems: 'center',
-      flexDirection: 'row',
-    },
-
-    containerItemActiveStep3: {
-      left: '60%',
-      width: '40%',
-      height: '100%',
-      backgroundColor: YELLOW,
-      position: 'absolute',
-      borderBottomLeftRadius: 26,
-      zIndex: 1,
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      flexDirection: 'row',
-    },
-
-    containerStatusBarMiddleYellowTop: {
-      flex: 1,
-      width: '100%',
-      height: '50%',
-      backgroundColor: BLUE,
-    },
-
-    containerStatusBarMiddleBlueBottom: {
-      flex: 1,
-      marginTop: 100,
-      width: '100%',
-      height: '50%',
-      backgroundColor: YELLOW,
     },
 
     containerItemDisabledStep1TextSecundary: {
@@ -210,10 +183,31 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
       fontWeight: 'bold',
     },
 
-    textActiveStep3: {
-      color: BLUE,
-      fontSize: 17,
-      fontWeight: 'bold',
+    // Active items section containers
+    containerItemActive: {
+      width: '75%',
+      height: '100%',
+      backgroundColor: YELLOW,
+      borderTopEndRadius: 26,
+      position: 'absolute',
+      zIndex: 1,
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'flex-end',
+    },
+
+    containerItemActiveStep3: {
+      left: '60%',
+      width: '40%',
+      height: '100%',
+      backgroundColor: YELLOW,
+      position: 'absolute',
+      borderBottomLeftRadius: 26,
+      zIndex: 1,
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'row',
     },
 
     activeItemStep2LeftSection: {
@@ -222,6 +216,25 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
       left: 0,
       marginRight: 45,
       flexDirection: 'row',
+    },
+
+    containerItemActiveStep3LeftSection: {
+      height: '80%',
+      width: 250,
+    },
+
+    // Active texts
+    textActive: {
+      marginRight: 25,
+      color: BLUE,
+      fontSize: 17,
+      fontWeight: 'bold',
+    },
+
+    textActiveStep3: {
+      color: BLUE,
+      fontSize: 17,
+      fontWeight: 'bold',
     },
 
     activeItemStep2TextTop: {
@@ -251,11 +264,6 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
       color: '#202452',
     },
 
-    containerItemActiveStep3LeftSection: {
-      height: '80%',
-      width: 250,
-    },
-
     activeItemStep3TextTop: {
       fontSize: 14,
       marginLeft: 15,
@@ -272,6 +280,7 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
       marginLeft: 15,
     },
 
+    // images based on the active step
     step2Image: {
       height: 28,
       width: 28,
