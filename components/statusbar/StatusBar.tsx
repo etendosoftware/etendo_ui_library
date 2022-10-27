@@ -1,11 +1,10 @@
 import React from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
-import {RED} from '../../styles/colors';
+import {Image, Text, View} from 'react-native';
 import {StatusBarStyleVariant} from './StatusBar.styles';
 import {StatusBarProps} from './StatusBar.types';
 
 export const StatusBar = ({data, step}: StatusBarProps) => {
-  if (step === 1) {
+  if (step === 1 || (step !== 2 && step !== 3)) {
     return (
       <View style={StatusBarStyleVariant.primary.containerStatusBar}>
         <View
@@ -114,7 +113,7 @@ export const StatusBar = ({data, step}: StatusBarProps) => {
         </View>
       </View>
     );
-  } else if (step === 3) {
+  } else {
     return (
       <View style={StatusBarStyleVariant.primary.containerStatusBar}>
         <View
@@ -170,37 +169,6 @@ export const StatusBar = ({data, step}: StatusBarProps) => {
           </View>
 
           <Text style={StatusBarStyleVariant.primary.textActiveStep3}>
-            {data[2].step}
-          </Text>
-        </View>
-      </View>
-    );
-  } else {
-    return (
-      <View style={StatusBarStyleVariant.primary.containerStatusBar}>
-        <View
-          style={StatusBarStyleVariant.primary.containerStatusBarMiddleBlueTop}
-        />
-        <View
-          style={
-            StatusBarStyleVariant.primary.containerStatusBarMiddleYellowBottom
-          }
-        />
-
-        <View style={StatusBarStyleVariant.primary.containerItemActive}>
-          <Text style={StatusBarStyleVariant.primary.textActive}>
-            {data[0].step}
-          </Text>
-        </View>
-        <View style={StatusBarStyleVariant.primary.containerItemDisabled}>
-          <Text
-            style={StatusBarStyleVariant.primary.containerItemDisabledStep2Text}
-          >
-            {data[1].step}
-          </Text>
-          <Text
-            style={StatusBarStyleVariant.primary.containerItemDisabledStep3Text}
-          >
             {data[2].step}
           </Text>
         </View>

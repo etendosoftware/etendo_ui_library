@@ -51,7 +51,6 @@ export type StatusBarStyleRecord = Record<
 
     activeItemStep2LeftSection: ViewStyle;
 
-    // Step 3
     containerItemDisabledStep1AndStep2: ViewStyle;
     containerItemActiveStep3: ViewStyle;
     containerStatusBarMiddleBlueBottom: ViewStyle;
