@@ -1,11 +1,5 @@
-import {View} from 'react-native';
 /* Imports */
-import {
-  ImageStyle,
-  TextStyle,
-  ViewStyle,
-  ImageSourcePropType,
-} from 'react-native';
+import {ImageStyle, TextStyle, ViewStyle} from 'react-native';
 
 /* Type declaration */
 export type Info = {

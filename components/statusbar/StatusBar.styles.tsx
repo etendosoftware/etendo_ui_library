@@ -1,5 +1,5 @@
 /* Imports */
-import {BLUE, YELLOW, WHITE, RED, GREEN} from '../../styles/colors';
+import {BLUE, YELLOW, WHITE} from '../../styles/colors';
 import {StatusBarStyleRecord} from './StatusBar.types';
 
 /* Export of different styles */
