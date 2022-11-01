@@ -3,7 +3,8 @@ import {Story, Meta} from '@storybook/react';
 
 import {StatusBar} from './StatusBar';
 import {Info, StatusBarProps} from './StatusBar.types';
-import {Component} from './Component';
+import {Image, Text, View} from 'react-native';
+import {StatusBarStyleVariant} from './StatusBar.styles';
 
 export default {
   title: 'Etendo/StatusBar',
@@ -11,6 +12,27 @@ export default {
   argTypes: {},
 } as Meta<typeof StatusBar>;
 
+// Active component declaration
+const Component = () => {
+  return (
+    <>
+      <Image
+        source={require('../../assets/images/icons/calendar-secundary.png')}
+        style={StatusBarStyleVariant.primary.activeComponentImage}
+      />
+      <View style={StatusBarStyleVariant.primary.activeStepContentRightSection}>
+        <Text style={StatusBarStyleVariant.primary.textTopActiveStepContent}>
+          Current Plan date
+        </Text>
+        <Text style={StatusBarStyleVariant.primary.textBottomActiveStepContent}>
+          03 January, 2022
+        </Text>
+      </View>
+    </>
+  );
+};
+
+// Information dataset
 const dataset: Info[] = [
   {
     step: '1. Vehicles',
@@ -46,7 +68,7 @@ const dataset: Info[] = [
 
 /* Templates */
 const Template: Story<StatusBarProps> = args => (
-  <StatusBar data={dataset} step={4} />
+  <StatusBar data={dataset} step={args.step} />
 );
 
 /* Story exports */
