@@ -1,16 +1,10 @@
 import React from 'react';
-import {Story, Meta} from '@storybook/react';
+import {Image, Text, View} from 'react-native';
+import renderer from 'react-test-renderer';
 
 import {StatusBar} from './StatusBar';
-import {Info, StatusBarProps} from './StatusBar.types';
-import {Image, Text, View} from 'react-native';
 import {StatusBarStyleVariant} from './StatusBar.styles';
-
-export default {
-  title: 'Etendo/StatusBar',
-  component: StatusBar,
-  argTypes: {},
-} as Meta<typeof StatusBar>;
+import {Info} from './StatusBar.types';
 
 // Active component declaration
 const Component = () => {
@@ -66,11 +60,11 @@ const dataset: Info[] = [
   },
 ];
 
-/* Templates */
-const Template: Story<StatusBarProps> = args => (
-  <StatusBar data={dataset} step={args.step} />
-);
-
-/* Story exports */
-export const StatusBarStep1 = Template.bind({});
-StatusBarStep1.args = {};
+describe('Running Test for StatusBar', () => {
+  it('Check StatusBar', () => {
+    const tree = renderer
+      .create(<StatusBar data={dataset} step={1} />)
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+});

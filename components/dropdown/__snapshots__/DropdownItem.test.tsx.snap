@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Running Test for DropdownItem Check DropdownItem Disabled 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "backgroundColor": "#FAD614",
+      "borderBottomColor": "#D3D6E1",
+      "borderBottomWidth": 1.5,
+      "justifyContent": "center",
+      "opacity": 1,
+    }
+  }
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "fontSize": 18,
+        },
+        Object {
+          "fontWeight": "500",
+          "margin": 10,
+          "textAlign": "left",
+        },
+      ]
+    }
+  >
+    User
+  </Text>
+</View>
+`;

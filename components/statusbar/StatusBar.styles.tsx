@@ -6,290 +6,109 @@ import {StatusBarStyleRecord} from './StatusBar.types';
 export const StatusBarStyleVariant: StatusBarStyleRecord = {
   /* Primary style */
   primary: {
-    containerStatusBar: {
+    // General container of the status bar
+    statusBarContainer: {
       flex: 1,
       width: '100%',
       height: 45,
-      backgroundColor: YELLOW,
-    },
-    containerStatusBarMiddleBlueTop: {
-      flex: 1,
-      width: '100%',
-      height: '50%',
       backgroundColor: BLUE,
-    },
-
-    containerStatusBarMiddleYellowBottom: {
-      flex: 1,
-      width: '100%',
-      height: '50%',
-      backgroundColor: YELLOW,
-    },
-    containerItemActive: {
-      width: '75%',
-      height: '100%',
-      backgroundColor: YELLOW,
-      borderTopEndRadius: 26,
-      position: 'absolute',
-      zIndex: 1,
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'flex-end',
-    },
-
-    containerItemDisabled: {
-      left: '75%',
-      width: '25%',
-      height: '100%',
-      backgroundColor: BLUE,
-      position: 'absolute',
-      borderBottomLeftRadius: 26,
-      zIndex: 1,
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
       flexDirection: 'row',
-    },
-
-    textActive: {
-      marginRight: 25,
-      color: BLUE,
-      fontSize: 17,
-      fontWeight: 'bold',
-    },
-
-    containerItemDisabledStep2Text: {
-      marginRight: 30,
-      color: WHITE,
-      fontSize: 17,
-      fontWeight: 'bold',
-    },
-
-    containerItemDisabledStep3Text: {
-      marginRight: 20,
-      color: WHITE,
-      fontSize: 17,
-      fontWeight: 'bold',
-    },
-
-    containerItemDisabledStep2: {
-      width: '40%',
-      height: '100%',
-      backgroundColor: BLUE,
-      position: 'absolute',
-      borderTopEndRadius: 26,
-      zIndex: 1,
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      flexDirection: 'row',
-      borderTopRightRadius: 26,
-    },
-
-    containerItemActiveStep2: {
-      left: '40%',
-      width: '40.4%',
-      height: '100%',
-      backgroundColor: YELLOW,
-      position: 'absolute',
-      borderTopEndRadius: 26,
-      zIndex: 1,
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      flexDirection: 'row',
-      borderBottomLeftRadius: 26,
-      borderTopRightRadius: 26,
-    },
-
-    containerStatusBarMiddleOfMiddleHorizontalYellowTop: {
-      position: 'absolute',
-      width: '50%',
-      height: '50%',
-      backgroundColor: YELLOW,
-    },
-
-    containerStatusBarMiddleOfMiddleHorizontalBlueBottom: {
-      width: '50%',
-      height: '50%',
-      backgroundColor: BLUE,
-    },
-    containerItemDisabledStep3Right: {
-      left: '80.4%',
-      width: '20%',
-      height: '100%',
-      backgroundColor: BLUE,
-      position: 'absolute',
-      zIndex: 1,
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      flexDirection: 'row',
-      borderBottomLeftRadius: 26,
-    },
-
-    containerStatusBarMiddleOfMiddleHorizontalBlueTop: {
-      left: '80%',
-      width: '20%',
-      borderRadius: 26,
-      height: '50%',
-      backgroundColor: BLUE,
-      position: 'absolute',
-      zIndex: 1,
-    },
-
-    containerItemDisabledStep1Text: {
-      marginLeft: 265,
-      color: WHITE,
-      fontSize: 17,
-      fontWeight: 'bold',
-    },
-
-    containerItemDisabledStep3TextRight: {
-      marginRight: 90,
-      color: WHITE,
-      fontSize: 17,
-      fontWeight: 'bold',
-    },
-
-    // Step3
-
-    containerItemDisabledStep1AndStep2: {
-      width: '60%',
-      height: '100%',
-      backgroundColor: BLUE,
-      borderTopEndRadius: 26,
-      position: 'absolute',
-      zIndex: 1,
-      flex: 1,
       justifyContent: 'flex-end',
-      alignItems: 'center',
+      position: 'relative',
+    },
+
+    rectangleTopLeftYellow: {
+      width: 25,
+      height: '50%',
+      backgroundColor: YELLOW,
+    },
+
+    rectangleTopLeftBlue: {
+      width: 25,
+      height: '100%',
+      backgroundColor: BLUE,
+      borderTopEndRadius: 40,
+    },
+
+    activeStepContainer: {
+      flex: 0.4,
+      flexDirection: 'row',
+      backgroundColor: YELLOW,
+      borderBottomStartRadius: 31,
+      borderTopEndRadius: 31,
+    },
+
+    activeStepContent: {
+      marginLeft: '10%',
+      alignSelf: 'center',
       flexDirection: 'row',
     },
 
-    containerItemActiveStep3: {
-      left: '60%',
-      width: '40%',
-      height: '100%',
-      backgroundColor: YELLOW,
-      position: 'absolute',
-      borderBottomLeftRadius: 26,
-      zIndex: 1,
+    activeStepContentRightSection: {
+      marginLeft: '12%',
+    },
+
+    disabledStep: {
+      color: WHITE,
+      fontWeight: '600',
+      fontSize: 17,
+      alignSelf: 'center',
       flex: 1,
       justifyContent: 'center',
-      alignItems: 'center',
-      flexDirection: 'row',
+      textAlign: 'center',
     },
 
-    containerStatusBarMiddleYellowTop: {
-      flex: 1,
-      width: '100%',
-      height: '50%',
+    disabledStepContainer: {
+      flex: 0.15,
+      flexDirection: 'row',
       backgroundColor: BLUE,
+      borderBottomStartRadius: 20,
+      borderTopEndRadius: 20,
     },
 
-    containerStatusBarMiddleBlueBottom: {
-      flex: 1,
-      marginTop: 100,
-      width: '100%',
-      height: '50%',
-      backgroundColor: YELLOW,
-    },
-
-    containerItemDisabledStep1TextSecundary: {
-      marginRight: 70,
-      color: WHITE,
-      fontSize: 15,
-      fontWeight: '600',
-      fontFamily: 'Poppins',
-    },
-
-    containerItemDisabledStep2TextSecundary: {
-      marginRight: 70,
-      color: WHITE,
-      fontSize: 15,
-      fontWeight: '600',
-      fontFamily: 'Poppins',
-    },
-
-    textActiveStep3: {
+    activeStep: {
       color: BLUE,
-      fontSize: 15,
-      fontWeight: 'bold',
-      marginRight: '20px',
-    },
-
-    activeItemStep2LeftSection: {
-      width: '35%',
-      height: '80%',
-      left: 0,
-      marginRight: 45,
-      flexDirection: 'row',
-    },
-
-    activeItemStep2TextTop: {
-      fontSize: 14,
-      fontWeight: 'bold',
-      marginTop: 4,
-      color: '#202452',
-    },
-
-    activeItemStep2Text: {
-      marginLeft: 15,
-      width: 250,
-      height: 100,
-    },
-
-    activeItemStep2TextBottom: {
-      fontSize: 10,
-      fontWeight: '500',
-      color: '#202452',
-      marginTop: 2,
-    },
-
-    activeItemStep2TextRight: {
-      fontWeight: 'bold',
-      fontSize: 17,
-      paddingLeft: 110,
-      color: '#202452',
-    },
-
-    containerItemActiveStep3LeftSection: {
-      height: '80%',
-      width: 215,
-      marginBottom: '4px',
-    },
-
-    activeItemStep3TextTop: {
-      fontSize: 12,
-      marginLeft: 15,
-      marginTop: 4,
       fontWeight: '600',
-      color: '#202452',
-      fontFamily: 'Poppins',
+      fontSize: 17,
+      alignSelf: 'center',
+      flex: 1,
+      textAlign: 'right',
+      marginRight: '10%',
     },
 
-    activeItemStep3TextBottom: {
-      fontSize: 9,
+    rectangleBottomRightBlue: {
+      width: 25,
+      alignSelf: 'flex-end',
+      height: '100%',
+      backgroundColor: YELLOW,
+      transform: [{rotate: '180deg'}],
+    },
+
+    rectangleBottomRightYellow: {
+      width: 25,
+      height: '100%',
+      backgroundColor: BLUE,
+      borderTopEndRadius: 20,
+      borderColor: BLUE,
+    },
+
+    textTopActiveStepContent: {
+      fontSize: 14,
+      color: BLUE,
+      fontWeight: '600',
+    },
+
+    textBottomActiveStepContent: {
+      fontSize: 11,
+      color: BLUE,
       fontWeight: '500',
-      fontFamily: 'Poppins',
-      color: '#202452',
-      marginLeft: 15,
+      marginTop: '2%',
     },
 
-    step2Image: {
-      height: 28,
-      width: 28,
-      alignItems: 'center',
-      marginTop: '4px',
-    },
-
-    step3Image: {
-      height: 28,
-      width: 28,
-      alignItems: 'center',
-      marginTop: '4px',
-      marginLeft: '10px',
+    activeComponentImage: {
+      alignSelf: 'center',
+      width: 27,
+      height: 27,
     },
   },
 };

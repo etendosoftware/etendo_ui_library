@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Running Test for Dropdown Check Dropdown Disabled 1`] = `
+<View
+  style={
+    Object {
+      "padding": 5,
+      "width": "17%",
+    }
+  }
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#202452",
+        "borderRadius": 5,
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "opacity": 1,
+        "padding": 11,
+        "zIndex": 10,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#FFFFFF",
+          "flex": 1,
+          "fontSize": 18,
+          "fontWeight": "500",
+          "textAlign": "center",
+        }
+      }
+    >
+      Massive load
+    </Text>
+    <Image
+      resizeMode="contain"
+      source={
+        Object {
+          "testUri": "../../../assets/images/icons/arrowPicker.png",
+        }
+      }
+      style={
+        Object {
+          "height": 14,
+          "tintColor": "#FFFFFF",
+          "width": 14,
+        }
+      }
+    />
+  </View>
+</View>
+`;
