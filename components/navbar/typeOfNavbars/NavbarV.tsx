@@ -73,6 +73,9 @@ const NavButton = (
 ) => {
   const router = useRouter();
   const {pathname} = router;
+  console.log('image', image);
+  console.log('routenav', routeNav);
+  console.log('pathname', pathname);
 
   return (
     <>
@@ -92,8 +95,11 @@ const NavButton = (
               justifyContent: 'center',
               backgroundColor:
                 routeNav === pathname ||
-                routeNav + 'vehicles' === pathname ||
-                routeNav + 'configuration' === pathname
+                routeNav.replace('/vehicles', '/configuration') === pathname ||
+                routeNav + '/all' === pathname ||
+                routeNav + '/alerts' === pathname ||
+                routeNav + '/errors' === pathname ||
+                routeNav + '/vehicles' === pathname
                   ? YELLOW
                   : 'transparent',
               paddingHorizontal: '100%',
@@ -102,7 +108,11 @@ const NavButton = (
           >
             {routeNav === pathname ||
             routeNav + 'vehicles' === pathname ||
-            routeNav + 'configuration' === pathname ? (
+            routeNav + '/vehicles' === pathname ||
+            routeNav.replace('/vehicles', '/configuration') === pathname ||
+            routeNav + '/all' === pathname ||
+            routeNav + '/alerts' === pathname ||
+            routeNav + '/errors' === pathname ? (
               <>
                 <img
                   src={image + '-blue.png'}
@@ -135,7 +145,11 @@ const NavButton = (
                 color:
                   routeNav === pathname ||
                   routeNav + 'vehicles' === pathname ||
-                  routeNav + 'configuration' === pathname
+                  routeNav + '/all' === pathname ||
+                  routeNav + '/vehicles' === pathname ||
+                  routeNav + '/alerts' === pathname ||
+                  routeNav + '/errors' === pathname ||
+                  routeNav.replace('/vehicles', '/configuration') === pathname
                     ? BLUE
                     : WHITE,
                 alignContent: 'center',

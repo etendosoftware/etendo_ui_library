@@ -33,9 +33,12 @@ export type TabStyleRecord = Record<
   TabStyleType,
   {
     container: ViewStyle;
+    containerSecundary: ViewStyle;
     containerTabs?: ViewStyle;
     tabs: ViewStyle;
+    tabsSecundary: ViewStyle;
     tabsActive: ViewStyle;
+    tabsActiveSecundary: ViewStyle;
     itemText: TextStyle;
   }
 >;

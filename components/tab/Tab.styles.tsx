@@ -20,6 +20,13 @@ export const TabStyleVariant: TabStyleRecord = {
       flex: 1,
       paddingLeft: 40,
     },
+    containerSecundary: {
+      flexDirection: 'row',
+      backgroundColor: GREY_BLUE_30,
+      borderBottomColor: BLUE,
+      borderBottomWidth: 3,
+      flex: 1,
+    },
     tabs: {
       height: 35,
       backgroundColor: GREY_BLUE_30,
@@ -28,7 +35,21 @@ export const TabStyleVariant: TabStyleRecord = {
       borderTopWidth: 4,
       borderTopColor: 'transparent',
     },
+    tabsSecundary: {
+      width: 106,
+      height: 35,
+      backgroundColor: GREY_BLUE_30,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderTopWidth: 4,
+      borderTopColor: 'transparent',
+    },
     tabsActive: {
+      backgroundColor: BLUE,
+      borderTopWidth: 4,
+      borderTopColor: YELLOW,
+    },
+    tabsActiveSecundary: {
       backgroundColor: BLUE,
       borderTopWidth: 4,
       borderTopColor: YELLOW,
@@ -63,6 +84,7 @@ export const TabStyleVariant: TabStyleRecord = {
       alignItems: 'center',
       borderRadius: 10,
     },
+
     tabsActive: {backgroundColor: YELLOW},
     itemText: {
       // fontFamily: INTER_SEMIBOLD,

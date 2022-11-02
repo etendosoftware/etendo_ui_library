@@ -5,29 +5,29 @@ import {
   addDecorator,
   addParameters,
   addArgsEnhancer,
-} from '@storybook/react-native';
+} from "@storybook/react-native";
 
-import '@storybook/addon-ondevice-notes/register';
-import '@storybook/addon-ondevice-controls/register';
-import '@storybook/addon-ondevice-backgrounds/register';
-import '@storybook/addon-ondevice-actions/register';
+import "@storybook/addon-ondevice-notes/register";
+import "@storybook/addon-ondevice-controls/register";
+import "@storybook/addon-ondevice-backgrounds/register";
+import "@storybook/addon-ondevice-actions/register";
 
-import {argsEnhancers} from '@storybook/addon-actions/dist/modern/preset/addArgs';
+import { argsEnhancers } from "@storybook/addon-actions/dist/modern/preset/addArgs";
 
-import {decorators, parameters} from './preview';
+import { decorators, parameters } from "./preview";
 
 if (decorators) {
-  decorators.forEach(decorator => addDecorator(decorator));
+  decorators.forEach((decorator) => addDecorator(decorator));
 }
 
 if (parameters) {
   addParameters(parameters);
 }
 
-argsEnhancers.forEach(enhancer => addArgsEnhancer(enhancer));
+argsEnhancers.forEach((enhancer) => addArgsEnhancer(enhancer));
 
 const getStories = () => {
-  return [require('../components/**/*.stories.tsx')];
+  return [require("../components/Button.stories.tsx")];
 };
 
 configure(getStories, module, false);

@@ -16,7 +16,7 @@ export const NavbarHDesktop = ({
     <>
       <View style={NavbarHStyleVariant.desktop.container}>
         <TouchableOpacity onPress={() => onChangeSelected} activeOpacity={1}>
-          <Link href="/">
+          <Link href={data[0].routeNav}>
             <img
               src={data[0].routeImage}
               style={{

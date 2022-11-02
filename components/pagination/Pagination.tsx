@@ -55,7 +55,7 @@ export const Pagination = ({
           }}
         >
           <img
-            src={'./assets/images/icons/back-double-button.png'}
+            src={'/assets/images/icons/back-double-button.png'}
             alt="edit"
             style={{width: 8, height: 8, marginRight: 8}}
           />
@@ -73,7 +73,7 @@ export const Pagination = ({
           }}
         >
           <img
-            src={'./assets/images/icons/back-button.png'}
+            src={'/assets/images/icons/back-button.png'}
             alt="edit"
             style={{width: 8, height: 8, marginRight: 8}}
           />
@@ -98,7 +98,7 @@ export const Pagination = ({
           }}
         >
           <img
-            src={'./assets/images/icons/next-button.png'}
+            src={'/assets/images/icons/next-button.png'}
             alt="edit"
             style={{width: 8, height: 8, marginRight: 8}}
           />
@@ -116,7 +116,7 @@ export const Pagination = ({
           }}
         >
           <img
-            src={'./assets/images/icons/next-double-button.png'}
+            src={'/assets/images/icons/next-double-button.png'}
             alt="edit"
             style={{width: 8, height: 8, marginRight: 8}}
           />
