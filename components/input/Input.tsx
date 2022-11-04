@@ -1,10 +1,13 @@
 import React from 'react';
 import {View} from 'react-native';
+
 import {inputStyleVariants, inputVariants, styles} from './Input.style';
+
 import {InputProps} from './Input.types';
+
 import {InputTitle, InputField, InputHelperText} from './index';
 
-const Input = ({
+const Input: React.FC<InputProps> = ({
   value,
   titleLabel,
   titleImage,
@@ -13,27 +16,25 @@ const Input = ({
   disabled,
   maxLength,
   numberOfLines,
-  typeField,
-  isError,
+  centerText,
   onPress,
   onSubmit,
   onFocus,
   onBlur,
   onChangeText,
-}:InputProps) => {
-  
+  typeField,
+  isError,
+}) => {
   const stateStyle = () => {
-    var style
     if (typeField === 'onlyRead') {
-      style = inputStyleVariants.onlyRead;
+      return inputStyleVariants.onlyRead;
     } else if (disabled) {
-      style = inputStyleVariants.disabled;
+      return inputStyleVariants.disabled;
     } else if (isError) {
-      style = inputStyleVariants.destructive;
+      return inputStyleVariants.destructive;
     } else {
-      style = inputStyleVariants.default;
+      return inputStyleVariants.default;
     }
-    return style;
   };
 
   return (
@@ -57,6 +58,7 @@ const Input = ({
         onChangeText={onChangeText}
         maxLength={maxLength}
         numberOfLines={numberOfLines}
+        centerText={centerText}
       />
       <InputHelperText
         label={helperText}

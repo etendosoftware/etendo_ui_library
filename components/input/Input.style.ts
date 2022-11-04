@@ -75,51 +75,49 @@ export const inputVariants: InputVariantsType = {
   },
 };
 
-const defaultTitle:TextStyle = {
+const defaultTitle: TextStyle = {
   color: BLUE,
   fontSize: 14,
-  //fontFamily: FONT_MEDIUM,
-  marginBottom:5,
-}
+  fontFamily: FONT_MEDIUM,
+};
 
-const defaultField:ViewStyle = 
-{
+const defaultField: ViewStyle = {
   backgroundColor: WHITE,
+  paddingVertical: 0,
   borderWidth: 1,
   borderColor: BLUE,
   borderRadius: 3,
   flexDirection: 'row',
-  alignItems:'center'
-}
+  alignItems: 'center',
+};
 
-const defaultText:TextStyle =
-{
+const defaultText: TextStyle = {
   flex: 1,
-  paddingVertical: 5,
+  paddingVertical: 0,
+  textAlignVertical: 'center',
   paddingLeft: 7,
   color: BLUE,
   fontSize: 14,
   fontWeight: '500',
- // fontFamily: FONT_MEDIUM,
-}
+  fontFamily: FONT_MEDIUM,
+};
 
-const defaultTextPlaceholder:TextStyle =
-{
+const defaultTextPlaceholder: TextStyle = {
   flex: 1,
-  paddingVertical: 5,
+  paddingVertical: 0,
+  textAlignVertical: 'center',
   paddingLeft: 7,
   color: GREY_BLUE,
   fontSize: 14,
   fontWeight: '500',
-  // fontFamily: FONT_MEDIUM,
-}
+  fontFamily: FONT_MEDIUM,
+};
 
-const defaultHelperText:TextStyle =
-{
+const defaultHelperText: TextStyle = {
   color: GREY_60,
   fontSize: 14,
-  // fontFamily: FONT_REGULAR,
-}
+  fontFamily: FONT_REGULAR,
+};
 
 export const inputStyleVariants: TypeInputStyleVariant = {
   default: {
@@ -130,7 +128,7 @@ export const inputStyleVariants: TypeInputStyleVariant = {
         borderColor: PURPLE_50,
       },
       textDefault: defaultText,
-      textPlaceholder: defaultTextPlaceholder
+      textPlaceholder: defaultTextPlaceholder,
     },
     helperStyle: defaultHelperText,
   },
@@ -140,26 +138,26 @@ export const inputStyleVariants: TypeInputStyleVariant = {
       focus: {
         borderColor: RED_10,
       },
-      field: [defaultField,{borderColor: RED}],
+      field: [defaultField, {borderColor: RED}],
       textDefault: defaultText,
-      textPlaceholder: defaultTextPlaceholder
+      textPlaceholder: defaultTextPlaceholder,
     },
-    helperStyle: [defaultHelperText,{color: RED,}]
+    helperStyle: [defaultHelperText, {color: RED}],
   },
   disabled: {
-    titleStyle: [defaultTitle,{color: GREY_BLUE_50}],  
+    titleStyle: [defaultTitle, {color: GREY_BLUE_50}],
     fieldStyle: {
       focus: {},
-      field: [defaultField,{borderColor: GREY_BLUE_50}],
-      textDefault: [defaultText,{color:GREY_BLUE_50}],
-      textPlaceholder: [defaultTextPlaceholder,{color:GREY_BLUE_50}]
+      field: [defaultField, {borderColor: GREY_BLUE_50}],
+      textDefault: [defaultText, {color: GREY_BLUE_50}],
+      textPlaceholder: [defaultTextPlaceholder, {color: GREY_BLUE_50}],
     },
-    helperStyle: [defaultHelperText,{color: GREY_BLUE_50}]
+    helperStyle: [defaultHelperText, {color: GREY_BLUE_50}],
   },
   onlyRead: {
     titleStyle: defaultTitle,
     fieldStyle: {
-      field: [defaultField,{backgroundColor:GREY_5}],
+      field: [defaultField, {backgroundColor: GREY_5}],
       focus: {},
       textDefault: defaultText,
       textPlaceholder: defaultTextPlaceholder,
@@ -171,6 +169,7 @@ export const inputStyleVariants: TypeInputStyleVariant = {
 export const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
+    justifyContent: 'center',
   },
   rowInputTitle: {
     flexDirection: 'row',
@@ -179,12 +178,12 @@ export const styles = StyleSheet.create({
   rowHelperText: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 5,
+    marginTop:5,
   },
   buttonContainerInputField: {
     alignSelf: 'flex-start',
     paddingHorizontal: 7,
     justifyContent: 'center',
-    height:'100%',
+    height: '100%',
   },
 });

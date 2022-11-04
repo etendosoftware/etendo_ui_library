@@ -5,7 +5,7 @@ import {InputProps} from './Input.types';
 
 const meta: Meta = 
 {
-  title: 'Input',
+  title: 'Etendo/Input',
   component: Input,
   argTypes:{}
 }
