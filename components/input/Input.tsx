@@ -1,10 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
-
 import {inputStyleVariants, inputVariants, styles} from './Input.style';
-
 import {InputProps} from './Input.types';
-
 import {InputTitle, InputField, InputHelperText} from './index';
 
 const Input: React.FC<InputProps> = ({

@@ -33,7 +33,7 @@ const InputField = ({
   const heightFinal = heightLines * numberLines + 10;
 
   const getStyleText = (text: string | undefined) => {
-    var style: Array<TextStyle | TextStyle[]> = [];
+    let style: Array<TextStyle | TextStyle[]> = [];
 
     if (text) {
       style.push(styleField.textDefault);
