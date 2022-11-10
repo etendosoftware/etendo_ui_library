@@ -1,11 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Running Test for Table Check Tab Disabled 1`] = `
+exports[`Running Test for Table Check Table Disabled 1`] = `
 <View
   style={
     Array [
       Object {
         "borderColor": "#E5E5E5",
+        "borderRightWidth": 0,
         "borderTopLeftRadius": 10,
         "borderTopRightRadius": 10,
         "borderWidth": 1,
@@ -19,290 +20,151 @@ exports[`Running Test for Table Check Tab Disabled 1`] = `
     ]
   }
 >
-  <View>
-    
-    <View
-      style={
+  <View
+    style={
+      Array [
         Object {
           "backgroundColor": "#EFF1F7",
           "flexDirection": "row",
-        }
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderBottomWidth": 1,
+            "borderColor": "#E5E5E5",
+            "borderRightWidth": 1,
+            "borderTopWidth": 1,
+            "justifyContent": "center",
+            "paddingVertical": 2,
+          },
+          Object {
+            "height": 40,
+            "width": "25%",
+          },
+        ]
       }
     >
-      <View
+      <Text
+        ellipsizeMode="tail"
         style={
           Array [
             Object {
-              "alignItems": "center",
-              "borderColor": "#E5E5E5",
-              "borderRightWidth": 1,
-              "borderTopWidth": 1,
-              "justifyContent": "center",
-              "paddingVertical": 2,
-            },
-            Object {
-              "height": 20,
-              "width": "12.5%",
-            },
-            false,
-          ]
-        }
-      >
-        <Text
-          ellipsizeMode="tail"
-          style={
-            Array [
-              Object {
-                "color": "#202452",
-                "fontSize": 14,
-                "textAlign": "center",
-              },
-            ]
-          }
-        >
-          Código
-        </Text>
-      </View>
-      <View
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "borderColor": "#E5E5E5",
-              "borderRightWidth": 1,
-              "borderTopWidth": 1,
-              "justifyContent": "center",
-              "paddingVertical": 2,
-            },
-            Object {
-              "height": 20,
-              "width": "12.5%",
-            },
-            false,
-          ]
-        }
-      >
-        <Text
-          ellipsizeMode="tail"
-          style={
-            Array [
-              Object {
-                "color": "#202452",
-                "fontSize": 14,
-                "textAlign": "center",
-              },
-            ]
-          }
-        >
-          Nombre
-        </Text>
-      </View>
-      <View
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "borderColor": "#E5E5E5",
-              "borderRightWidth": 1,
-              "borderTopWidth": 1,
-              "justifyContent": "center",
-              "paddingVertical": 2,
-            },
-            Object {
-              "height": 20,
-              "width": "12.5%",
-            },
-            false,
-          ]
-        }
-      >
-        <Text
-          ellipsizeMode="tail"
-          style={
-            Array [
-              Object {
-                "color": "#202452",
-                "fontSize": 14,
-                "textAlign": "center",
-              },
-            ]
-          }
-        >
-          Descripción
-        </Text>
-      </View>
-      <View
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "borderColor": "#E5E5E5",
-              "borderRightWidth": 1,
-              "borderTopWidth": 1,
-              "justifyContent": "center",
-              "paddingVertical": 2,
-            },
-            Object {
-              "height": 20,
-              "width": "12.5%",
-            },
-            false,
-          ]
-        }
-      >
-        <Text
-          ellipsizeMode="tail"
-          style={
-            Array [
-              Object {
-                "color": "#202452",
-                "fontSize": 14,
-                "textAlign": "center",
-              },
-            ]
-          }
-        >
-          F. Caducidad
-        </Text>
-      </View>
-      <View
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "borderColor": "#E5E5E5",
-              "borderRightWidth": 1,
-              "borderTopWidth": 1,
-              "justifyContent": "center",
-              "paddingVertical": 2,
-            },
-            Object {
-              "height": 20,
-              "width": "12.5%",
-            },
-            false,
-          ]
-        }
-      >
-        <Text
-          ellipsizeMode="tail"
-          style={
-            Array [
-              Object {
-                "color": "#202452",
-                "fontSize": 14,
-                "textAlign": "center",
-              },
-            ]
-          }
-        >
-          Lote
-        </Text>
-      </View>
-      <View
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "borderColor": "#E5E5E5",
-              "borderRightWidth": 1,
-              "borderTopWidth": 1,
-              "justifyContent": "center",
-              "paddingVertical": 2,
-            },
-            Object {
-              "height": 20,
-              "width": "12.5%",
-            },
-            false,
-          ]
-        }
-      >
-        <Text
-          ellipsizeMode="tail"
-          style={
-            Array [
-              Object {
-                "color": "#202452",
-                "fontSize": 14,
-                "textAlign": "center",
-              },
-            ]
-          }
-        >
-          Cantidad
-        </Text>
-      </View>
-      <View
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "borderColor": "#E5E5E5",
-              "borderRightWidth": 1,
-              "borderTopWidth": 1,
-              "justifyContent": "center",
-              "paddingVertical": 2,
-            },
-            Object {
-              "height": 20,
-              "width": "12.5%",
-            },
-            false,
-          ]
-        }
-      >
-        <Text
-          ellipsizeMode="tail"
-          style={
-            Array [
-              Object {
-                "color": "#202452",
-                "fontSize": 14,
-                "textAlign": "center",
-              },
-            ]
-          }
-        >
-          Mover
-        </Text>
-      </View>
-      <View
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "borderColor": "#E5E5E5",
-              "borderRightWidth": 1,
-              "borderTopWidth": 1,
-              "justifyContent": "center",
-              "paddingVertical": 2,
-            },
-            Object {
-              "height": 20,
-              "width": "12.5%",
-            },
-            Object {
-              "borderRightWidth": 0,
+              "color": "#202452",
+              "fontSize": 14,
+              "textAlign": "center",
             },
           ]
         }
       >
-        <Text
-          ellipsizeMode="tail"
-          style={
-            Array [
-              Object {
-                "color": "#202452",
-                "fontSize": 14,
-                "textAlign": "center",
-              },
-            ]
-          }
-        >
-          Ver
-        </Text>
-      </View>
+        Cantidad
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderBottomWidth": 1,
+            "borderColor": "#E5E5E5",
+            "borderRightWidth": 1,
+            "borderTopWidth": 1,
+            "justifyContent": "center",
+            "paddingVertical": 2,
+          },
+          Object {
+            "height": 40,
+            "width": "25%",
+          },
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": "#202452",
+              "fontSize": 14,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        Lote
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderBottomWidth": 1,
+            "borderColor": "#E5E5E5",
+            "borderRightWidth": 1,
+            "borderTopWidth": 1,
+            "justifyContent": "center",
+            "paddingVertical": 2,
+          },
+          Object {
+            "height": 40,
+            "width": "25%",
+          },
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": "#202452",
+              "fontSize": 14,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        Codigo
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderBottomWidth": 1,
+            "borderColor": "#E5E5E5",
+            "borderRightWidth": 1,
+            "borderTopWidth": 1,
+            "justifyContent": "center",
+            "paddingVertical": 2,
+          },
+          Object {
+            "height": 40,
+            "width": "25%",
+          },
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": "#202452",
+              "fontSize": 14,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        Editar
+      </Text>
     </View>
   </View>
   <RCTScrollView
@@ -368,13 +230,25 @@ exports[`Running Test for Table Check Tab Disabled 1`] = `
         style={null}
       >
         <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Array [
               Object {
                 "flexDirection": "row",
               },
               Object {
-                "height": 20,
+                "height": 40,
               },
               Object {
                 "backgroundColor": "#FFFFFF",
@@ -393,152 +267,15 @@ exports[`Running Test for Table Check Tab Disabled 1`] = `
                   "paddingHorizontal": 5,
                 },
                 Object {
-                  "width": "12.5%",
+                  "width": "25%",
                 },
-                false,
               ]
             }
           >
             <RCTScrollView
               contentContainerStyle={
-                Object {
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                }
-              }
-              nestedScrollEnabled={true}
-            >
-              <View>
-                <Text
-                  style={
-                    Object {
-                      "color": "#202452",
-                      "fontSize": 14,
-                      "textAlign": "center",
-                    }
-                  }
-                >
-                  09123 ZEL
-                </Text>
-              </View>
-            </RCTScrollView>
-          </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "borderColor": "#E5E5E5",
-                  "borderRightWidth": 1,
-                  "borderTopWidth": 1,
-                  "justifyContent": "center",
-                  "paddingHorizontal": 5,
-                },
-                Object {
-                  "width": "12.5%",
-                },
-                false,
-              ]
-            }
-          >
-            <RCTScrollView
-              contentContainerStyle={
-                Object {
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                }
-              }
-              nestedScrollEnabled={true}
-            >
-              <View>
-                <Text
-                  style={
-                    Object {
-                      "color": "#202452",
-                      "fontSize": 14,
-                      "textAlign": "center",
-                    }
-                  }
-                >
-                  Cerveza 200ml Cusqueña
-                </Text>
-              </View>
-            </RCTScrollView>
-          </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "borderColor": "#E5E5E5",
-                  "borderRightWidth": 1,
-                  "borderTopWidth": 1,
-                  "justifyContent": "center",
-                  "paddingHorizontal": 5,
-                },
-                Object {
-                  "width": "12.5%",
-                },
-                false,
-              ]
-            }
-          >
-            <View
-              accessible={true}
-              collapsable={false}
-              focusable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
                 Object {
                   "alignItems": "center",
-                  "flex": 1,
-                  "justifyContent": "center",
-                  "opacity": 1,
-                }
-              }
-            >
-              <Image
-                source={
-                  Object {
-                    "testUri": "../../../assets/images/icons/edit.png",
-                  }
-                }
-                style={
-                  Array [
-                    Object {
-                      "height": 13,
-                      "width": 13,
-                    },
-                    Object {},
-                  ]
-                }
-              />
-            </View>
-          </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "borderColor": "#E5E5E5",
-                  "borderRightWidth": 1,
-                  "borderTopWidth": 1,
-                  "justifyContent": "center",
-                  "paddingHorizontal": 5,
-                },
-                Object {
-                  "width": "12.5%",
-                },
-                false,
-              ]
-            }
-          >
-            <RCTScrollView
-              contentContainerStyle={
-                Object {
                   "flexGrow": 1,
                   "justifyContent": "center",
                 }
@@ -552,10 +289,11 @@ exports[`Running Test for Table Check Tab Disabled 1`] = `
                       "color": "#202452",
                       "fontSize": 14,
                       "textAlign": "center",
+                      "textAlignVertical": "center",
                     }
                   }
                 >
-                  20/11/2023
+                  120
                 </Text>
               </View>
             </RCTScrollView>
@@ -571,15 +309,15 @@ exports[`Running Test for Table Check Tab Disabled 1`] = `
                   "paddingHorizontal": 5,
                 },
                 Object {
-                  "width": "12.5%",
+                  "width": "25%",
                 },
-                false,
               ]
             }
           >
             <RCTScrollView
               contentContainerStyle={
                 Object {
+                  "alignItems": "center",
                   "flexGrow": 1,
                   "justifyContent": "center",
                 }
@@ -593,6 +331,7 @@ exports[`Running Test for Table Check Tab Disabled 1`] = `
                       "color": "#202452",
                       "fontSize": 14,
                       "textAlign": "center",
+                      "textAlignVertical": "center",
                     }
                   }
                 >
@@ -612,169 +351,15 @@ exports[`Running Test for Table Check Tab Disabled 1`] = `
                   "paddingHorizontal": 5,
                 },
                 Object {
-                  "width": "12.5%",
+                  "width": "25%",
                 },
-                false,
               ]
             }
           >
             <RCTScrollView
               contentContainerStyle={
-                Object {
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                }
-              }
-              nestedScrollEnabled={true}
-            >
-              <View>
-                <Text
-                  style={
-                    Object {
-                      "color": "#202452",
-                      "fontSize": 14,
-                      "textAlign": "center",
-                    }
-                  }
-                >
-                  120
-                </Text>
-              </View>
-            </RCTScrollView>
-          </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "borderColor": "#E5E5E5",
-                  "borderRightWidth": 1,
-                  "borderTopWidth": 1,
-                  "justifyContent": "center",
-                  "paddingHorizontal": 5,
-                },
-                Object {
-                  "width": "12.5%",
-                },
-                false,
-              ]
-            }
-          >
-            <View
-              accessible={true}
-              collapsable={false}
-              focusable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
                 Object {
                   "alignItems": "center",
-                  "flex": 1,
-                  "justifyContent": "center",
-                  "opacity": 1,
-                }
-              }
-            />
-          </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "borderColor": "#E5E5E5",
-                  "borderRightWidth": 1,
-                  "borderTopWidth": 1,
-                  "justifyContent": "center",
-                  "paddingHorizontal": 5,
-                },
-                Object {
-                  "width": "12.5%",
-                },
-                Object {
-                  "borderRightWidth": 0,
-                },
-              ]
-            }
-          >
-            <View
-              accessible={true}
-              collapsable={false}
-              focusable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
-                Object {
-                  "alignItems": "center",
-                  "flex": 1,
-                  "justifyContent": "center",
-                  "opacity": 1,
-                }
-              }
-            >
-              <Image
-                source={
-                  Object {
-                    "testUri": "../../../assets/images/icons/document.png",
-                  }
-                }
-                style={
-                  Object {
-                    "height": 14,
-                    "width": 11,
-                  }
-                }
-              />
-            </View>
-          </View>
-        </View>
-      </View>
-      <View
-        onLayout={[Function]}
-        style={null}
-      >
-        <View
-          style={
-            Array [
-              Object {
-                "flexDirection": "row",
-              },
-              Object {
-                "height": 20,
-              },
-              Object {
-                "backgroundColor": "#EFF1F7",
-              },
-            ]
-          }
-        >
-          <View
-            style={
-              Array [
-                Object {
-                  "borderColor": "#E5E5E5",
-                  "borderRightWidth": 1,
-                  "borderTopWidth": 1,
-                  "justifyContent": "center",
-                  "paddingHorizontal": 5,
-                },
-                Object {
-                  "width": "12.5%",
-                },
-                false,
-              ]
-            }
-          >
-            <RCTScrollView
-              contentContainerStyle={
-                Object {
                   "flexGrow": 1,
                   "justifyContent": "center",
                 }
@@ -788,379 +373,7 @@ exports[`Running Test for Table Check Tab Disabled 1`] = `
                       "color": "#202452",
                       "fontSize": 14,
                       "textAlign": "center",
-                    }
-                  }
-                >
-                  09124 ZEL
-                </Text>
-              </View>
-            </RCTScrollView>
-          </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "borderColor": "#E5E5E5",
-                  "borderRightWidth": 1,
-                  "borderTopWidth": 1,
-                  "justifyContent": "center",
-                  "paddingHorizontal": 5,
-                },
-                Object {
-                  "width": "12.5%",
-                },
-                false,
-              ]
-            }
-          >
-            <RCTScrollView
-              contentContainerStyle={
-                Object {
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                }
-              }
-              nestedScrollEnabled={true}
-            >
-              <View>
-                <Text
-                  style={
-                    Object {
-                      "color": "#202452",
-                      "fontSize": 14,
-                      "textAlign": "center",
-                    }
-                  }
-                >
-                  Cerveza 200ml Cusqueña
-                </Text>
-              </View>
-            </RCTScrollView>
-          </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "borderColor": "#E5E5E5",
-                  "borderRightWidth": 1,
-                  "borderTopWidth": 1,
-                  "justifyContent": "center",
-                  "paddingHorizontal": 5,
-                },
-                Object {
-                  "width": "12.5%",
-                },
-                false,
-              ]
-            }
-          >
-            <View
-              accessible={true}
-              collapsable={false}
-              focusable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
-                Object {
-                  "alignItems": "center",
-                  "flex": 1,
-                  "justifyContent": "center",
-                  "opacity": 1,
-                }
-              }
-            >
-              <Image
-                source={
-                  Object {
-                    "testUri": "../../../assets/images/icons/edit.png",
-                  }
-                }
-                style={
-                  Array [
-                    Object {
-                      "height": 13,
-                      "width": 13,
-                    },
-                    Object {},
-                  ]
-                }
-              />
-            </View>
-          </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "borderColor": "#E5E5E5",
-                  "borderRightWidth": 1,
-                  "borderTopWidth": 1,
-                  "justifyContent": "center",
-                  "paddingHorizontal": 5,
-                },
-                Object {
-                  "width": "12.5%",
-                },
-                false,
-              ]
-            }
-          >
-            <RCTScrollView
-              contentContainerStyle={
-                Object {
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                }
-              }
-              nestedScrollEnabled={true}
-            >
-              <View>
-                <Text
-                  style={
-                    Object {
-                      "color": "#202452",
-                      "fontSize": 14,
-                      "textAlign": "center",
-                    }
-                  }
-                >
-                  20/11/2023
-                </Text>
-              </View>
-            </RCTScrollView>
-          </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "borderColor": "#E5E5E5",
-                  "borderRightWidth": 1,
-                  "borderTopWidth": 1,
-                  "justifyContent": "center",
-                  "paddingHorizontal": 5,
-                },
-                Object {
-                  "width": "12.5%",
-                },
-                false,
-              ]
-            }
-          >
-            <RCTScrollView
-              contentContainerStyle={
-                Object {
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                }
-              }
-              nestedScrollEnabled={true}
-            >
-              <View>
-                <Text
-                  style={
-                    Object {
-                      "color": "#202452",
-                      "fontSize": 14,
-                      "textAlign": "center",
-                    }
-                  }
-                >
-                  00002
-                </Text>
-              </View>
-            </RCTScrollView>
-          </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "borderColor": "#E5E5E5",
-                  "borderRightWidth": 1,
-                  "borderTopWidth": 1,
-                  "justifyContent": "center",
-                  "paddingHorizontal": 5,
-                },
-                Object {
-                  "width": "12.5%",
-                },
-                false,
-              ]
-            }
-          >
-            <RCTScrollView
-              contentContainerStyle={
-                Object {
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                }
-              }
-              nestedScrollEnabled={true}
-            >
-              <View>
-                <Text
-                  style={
-                    Object {
-                      "color": "#202452",
-                      "fontSize": 14,
-                      "textAlign": "center",
-                    }
-                  }
-                >
-                  120
-                </Text>
-              </View>
-            </RCTScrollView>
-          </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "borderColor": "#E5E5E5",
-                  "borderRightWidth": 1,
-                  "borderTopWidth": 1,
-                  "justifyContent": "center",
-                  "paddingHorizontal": 5,
-                },
-                Object {
-                  "width": "12.5%",
-                },
-                false,
-              ]
-            }
-          >
-            <View
-              accessible={true}
-              collapsable={false}
-              focusable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
-                Object {
-                  "alignItems": "center",
-                  "flex": 1,
-                  "justifyContent": "center",
-                  "opacity": 1,
-                }
-              }
-            />
-          </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "borderColor": "#E5E5E5",
-                  "borderRightWidth": 1,
-                  "borderTopWidth": 1,
-                  "justifyContent": "center",
-                  "paddingHorizontal": 5,
-                },
-                Object {
-                  "width": "12.5%",
-                },
-                Object {
-                  "borderRightWidth": 0,
-                },
-              ]
-            }
-          >
-            <View
-              accessible={true}
-              collapsable={false}
-              focusable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
-                Object {
-                  "alignItems": "center",
-                  "flex": 1,
-                  "justifyContent": "center",
-                  "opacity": 1,
-                }
-              }
-            >
-              <Image
-                source={
-                  Object {
-                    "testUri": "../../../assets/images/icons/document.png",
-                  }
-                }
-                style={
-                  Object {
-                    "height": 14,
-                    "width": 11,
-                  }
-                }
-              />
-            </View>
-          </View>
-        </View>
-      </View>
-      <View
-        onLayout={[Function]}
-        style={null}
-      >
-        <View
-          style={
-            Array [
-              Object {
-                "flexDirection": "row",
-              },
-              Object {
-                "height": 20,
-              },
-              Object {
-                "backgroundColor": "#FFFFFF",
-              },
-            ]
-          }
-        >
-          <View
-            style={
-              Array [
-                Object {
-                  "borderColor": "#E5E5E5",
-                  "borderRightWidth": 1,
-                  "borderTopWidth": 1,
-                  "justifyContent": "center",
-                  "paddingHorizontal": 5,
-                },
-                Object {
-                  "width": "12.5%",
-                },
-                false,
-              ]
-            }
-          >
-            <RCTScrollView
-              contentContainerStyle={
-                Object {
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                }
-              }
-              nestedScrollEnabled={true}
-            >
-              <View>
-                <Text
-                  style={
-                    Object {
-                      "color": "#202452",
-                      "fontSize": 14,
-                      "textAlign": "center",
+                      "textAlignVertical": "center",
                     }
                   }
                 >
@@ -1180,50 +393,8 @@ exports[`Running Test for Table Check Tab Disabled 1`] = `
                   "paddingHorizontal": 5,
                 },
                 Object {
-                  "width": "12.5%",
+                  "width": "25%",
                 },
-                false,
-              ]
-            }
-          >
-            <RCTScrollView
-              contentContainerStyle={
-                Object {
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                }
-              }
-              nestedScrollEnabled={true}
-            >
-              <View>
-                <Text
-                  style={
-                    Object {
-                      "color": "#202452",
-                      "fontSize": 14,
-                      "textAlign": "center",
-                    }
-                  }
-                >
-                  Cerveza 200ml Cusqueña
-                </Text>
-              </View>
-            </RCTScrollView>
-          </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "borderColor": "#E5E5E5",
-                  "borderRightWidth": 1,
-                  "borderTopWidth": 1,
-                  "justifyContent": "center",
-                  "paddingHorizontal": 5,
-                },
-                Object {
-                  "width": "12.5%",
-                },
-                false,
               ]
             }
           >
@@ -1240,31 +411,84 @@ exports[`Running Test for Table Check Tab Disabled 1`] = `
               onStartShouldSetResponder={[Function]}
               style={
                 Object {
-                  "alignItems": "center",
                   "flex": 1,
-                  "justifyContent": "center",
                   "opacity": 1,
                 }
               }
             >
-              <Image
-                source={
+              <View
+                style={
                   Object {
-                    "testUri": "../../../assets/images/icons/edit.png",
+                    "alignItems": "center",
+                    "flex": 1,
+                    "flexDirection": "row",
+                    "justifyContent": "center",
                   }
                 }
-                style={
-                  Array [
+              >
+                <Image
+                  source={
+                    Object {
+                      "testUri": "../../../assets/images/icons/edit.png",
+                    }
+                  }
+                  style={
                     Object {
                       "height": 13,
+                      "marginRight": 5,
                       "width": 13,
-                    },
-                    Object {},
-                  ]
-                }
-              />
+                    }
+                  }
+                />
+                <Text
+                  style={
+                    Object {
+                      "color": "#202452",
+                      "fontSize": 14,
+                      "fontWeight": "400",
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                >
+                  EDITAR
+                </Text>
+              </View>
             </View>
           </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              Object {
+                "height": 40,
+              },
+              Object {
+                "backgroundColor": "#EFF1F7",
+              },
+            ]
+          }
+        >
           <View
             style={
               Array [
@@ -1276,15 +500,15 @@ exports[`Running Test for Table Check Tab Disabled 1`] = `
                   "paddingHorizontal": 5,
                 },
                 Object {
-                  "width": "12.5%",
+                  "width": "25%",
                 },
-                false,
               ]
             }
           >
             <RCTScrollView
               contentContainerStyle={
                 Object {
+                  "alignItems": "center",
                   "flexGrow": 1,
                   "justifyContent": "center",
                 }
@@ -1298,88 +522,7 @@ exports[`Running Test for Table Check Tab Disabled 1`] = `
                       "color": "#202452",
                       "fontSize": 14,
                       "textAlign": "center",
-                    }
-                  }
-                >
-                  20/11/2023
-                </Text>
-              </View>
-            </RCTScrollView>
-          </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "borderColor": "#E5E5E5",
-                  "borderRightWidth": 1,
-                  "borderTopWidth": 1,
-                  "justifyContent": "center",
-                  "paddingHorizontal": 5,
-                },
-                Object {
-                  "width": "12.5%",
-                },
-                false,
-              ]
-            }
-          >
-            <RCTScrollView
-              contentContainerStyle={
-                Object {
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                }
-              }
-              nestedScrollEnabled={true}
-            >
-              <View>
-                <Text
-                  style={
-                    Object {
-                      "color": "#202452",
-                      "fontSize": 14,
-                      "textAlign": "center",
-                    }
-                  }
-                >
-                  00001
-                </Text>
-              </View>
-            </RCTScrollView>
-          </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "borderColor": "#E5E5E5",
-                  "borderRightWidth": 1,
-                  "borderTopWidth": 1,
-                  "justifyContent": "center",
-                  "paddingHorizontal": 5,
-                },
-                Object {
-                  "width": "12.5%",
-                },
-                false,
-              ]
-            }
-          >
-            <RCTScrollView
-              contentContainerStyle={
-                Object {
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                }
-              }
-              nestedScrollEnabled={true}
-            >
-              <View>
-                <Text
-                  style={
-                    Object {
-                      "color": "#202452",
-                      "fontSize": 14,
-                      "textAlign": "center",
+                      "textAlignVertical": "center",
                     }
                   }
                 >
@@ -1399,128 +542,15 @@ exports[`Running Test for Table Check Tab Disabled 1`] = `
                   "paddingHorizontal": 5,
                 },
                 Object {
-                  "width": "12.5%",
+                  "width": "25%",
                 },
-                false,
               ]
             }
           >
-            <View
-              accessible={true}
-              collapsable={false}
-              focusable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
+            <RCTScrollView
+              contentContainerStyle={
                 Object {
                   "alignItems": "center",
-                  "flex": 1,
-                  "justifyContent": "center",
-                  "opacity": 1,
-                }
-              }
-            />
-          </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "borderColor": "#E5E5E5",
-                  "borderRightWidth": 1,
-                  "borderTopWidth": 1,
-                  "justifyContent": "center",
-                  "paddingHorizontal": 5,
-                },
-                Object {
-                  "width": "12.5%",
-                },
-                Object {
-                  "borderRightWidth": 0,
-                },
-              ]
-            }
-          >
-            <View
-              accessible={true}
-              collapsable={false}
-              focusable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
-                Object {
-                  "alignItems": "center",
-                  "flex": 1,
-                  "justifyContent": "center",
-                  "opacity": 1,
-                }
-              }
-            >
-              <Image
-                source={
-                  Object {
-                    "testUri": "../../../assets/images/icons/document.png",
-                  }
-                }
-                style={
-                  Object {
-                    "height": 14,
-                    "width": 11,
-                  }
-                }
-              />
-            </View>
-          </View>
-        </View>
-      </View>
-      <View
-        onLayout={[Function]}
-        style={null}
-      >
-        <View
-          style={
-            Array [
-              Object {
-                "flexDirection": "row",
-              },
-              Object {
-                "height": 20,
-              },
-              Object {
-                "backgroundColor": "#EFF1F7",
-              },
-            ]
-          }
-        >
-          <View
-            style={
-              Array [
-                Object {
-                  "borderColor": "#E5E5E5",
-                  "borderRightWidth": 1,
-                  "borderTopWidth": 1,
-                  "justifyContent": "center",
-                  "paddingHorizontal": 5,
-                },
-                Object {
-                  "width": "12.5%",
-                },
-                false,
-              ]
-            }
-          >
-            <RCTScrollView
-              contentContainerStyle={
-                Object {
                   "flexGrow": 1,
                   "justifyContent": "center",
                 }
@@ -1534,184 +564,7 @@ exports[`Running Test for Table Check Tab Disabled 1`] = `
                       "color": "#202452",
                       "fontSize": 14,
                       "textAlign": "center",
-                    }
-                  }
-                >
-                  09124 ZEL
-                </Text>
-              </View>
-            </RCTScrollView>
-          </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "borderColor": "#E5E5E5",
-                  "borderRightWidth": 1,
-                  "borderTopWidth": 1,
-                  "justifyContent": "center",
-                  "paddingHorizontal": 5,
-                },
-                Object {
-                  "width": "12.5%",
-                },
-                false,
-              ]
-            }
-          >
-            <RCTScrollView
-              contentContainerStyle={
-                Object {
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                }
-              }
-              nestedScrollEnabled={true}
-            >
-              <View>
-                <Text
-                  style={
-                    Object {
-                      "color": "#202452",
-                      "fontSize": 14,
-                      "textAlign": "center",
-                    }
-                  }
-                >
-                  Cerveza 200ml Cusqueña
-                </Text>
-              </View>
-            </RCTScrollView>
-          </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "borderColor": "#E5E5E5",
-                  "borderRightWidth": 1,
-                  "borderTopWidth": 1,
-                  "justifyContent": "center",
-                  "paddingHorizontal": 5,
-                },
-                Object {
-                  "width": "12.5%",
-                },
-                false,
-              ]
-            }
-          >
-            <View
-              accessible={true}
-              collapsable={false}
-              focusable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
-                Object {
-                  "alignItems": "center",
-                  "flex": 1,
-                  "justifyContent": "center",
-                  "opacity": 1,
-                }
-              }
-            >
-              <Image
-                source={
-                  Object {
-                    "testUri": "../../../assets/images/icons/edit.png",
-                  }
-                }
-                style={
-                  Array [
-                    Object {
-                      "height": 13,
-                      "width": 13,
-                    },
-                    Object {},
-                  ]
-                }
-              />
-            </View>
-          </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "borderColor": "#E5E5E5",
-                  "borderRightWidth": 1,
-                  "borderTopWidth": 1,
-                  "justifyContent": "center",
-                  "paddingHorizontal": 5,
-                },
-                Object {
-                  "width": "12.5%",
-                },
-                false,
-              ]
-            }
-          >
-            <RCTScrollView
-              contentContainerStyle={
-                Object {
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                }
-              }
-              nestedScrollEnabled={true}
-            >
-              <View>
-                <Text
-                  style={
-                    Object {
-                      "color": "#202452",
-                      "fontSize": 14,
-                      "textAlign": "center",
-                    }
-                  }
-                >
-                  20/11/2023
-                </Text>
-              </View>
-            </RCTScrollView>
-          </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "borderColor": "#E5E5E5",
-                  "borderRightWidth": 1,
-                  "borderTopWidth": 1,
-                  "justifyContent": "center",
-                  "paddingHorizontal": 5,
-                },
-                Object {
-                  "width": "12.5%",
-                },
-                false,
-              ]
-            }
-          >
-            <RCTScrollView
-              contentContainerStyle={
-                Object {
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                }
-              }
-              nestedScrollEnabled={true}
-            >
-              <View>
-                <Text
-                  style={
-                    Object {
-                      "color": "#202452",
-                      "fontSize": 14,
-                      "textAlign": "center",
+                      "textAlignVertical": "center",
                     }
                   }
                 >
@@ -1731,15 +584,15 @@ exports[`Running Test for Table Check Tab Disabled 1`] = `
                   "paddingHorizontal": 5,
                 },
                 Object {
-                  "width": "12.5%",
+                  "width": "25%",
                 },
-                false,
               ]
             }
           >
             <RCTScrollView
               contentContainerStyle={
                 Object {
+                  "alignItems": "center",
                   "flexGrow": 1,
                   "justifyContent": "center",
                 }
@@ -1753,6 +606,156 @@ exports[`Running Test for Table Check Tab Disabled 1`] = `
                       "color": "#202452",
                       "fontSize": 14,
                       "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                >
+                  09124 ZEL
+                </Text>
+              </View>
+            </RCTScrollView>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "borderColor": "#E5E5E5",
+                  "borderRightWidth": 1,
+                  "borderTopWidth": 1,
+                  "justifyContent": "center",
+                  "paddingHorizontal": 5,
+                },
+                Object {
+                  "width": "25%",
+                },
+              ]
+            }
+          >
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "flex": 1,
+                  "opacity": 1,
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "flex": 1,
+                    "flexDirection": "row",
+                    "justifyContent": "center",
+                  }
+                }
+              >
+                <Image
+                  source={
+                    Object {
+                      "testUri": "../../../assets/images/icons/edit.png",
+                    }
+                  }
+                  style={
+                    Object {
+                      "height": 13,
+                      "marginRight": 5,
+                      "width": 13,
+                    }
+                  }
+                />
+                <Text
+                  style={
+                    Object {
+                      "color": "#202452",
+                      "fontSize": 14,
+                      "fontWeight": "400",
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                >
+                  EDITAR
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              Object {
+                "height": 40,
+              },
+              Object {
+                "backgroundColor": "#FFFFFF",
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "borderColor": "#E5E5E5",
+                  "borderRightWidth": 1,
+                  "borderTopWidth": 1,
+                  "justifyContent": "center",
+                  "paddingHorizontal": 5,
+                },
+                Object {
+                  "width": "25%",
+                },
+              ]
+            }
+          >
+            <RCTScrollView
+              contentContainerStyle={
+                Object {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                }
+              }
+              nestedScrollEnabled={true}
+            >
+              <View>
+                <Text
+                  style={
+                    Object {
+                      "color": "#202452",
+                      "fontSize": 14,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
                     }
                   }
                 >
@@ -1772,32 +775,36 @@ exports[`Running Test for Table Check Tab Disabled 1`] = `
                   "paddingHorizontal": 5,
                 },
                 Object {
-                  "width": "12.5%",
+                  "width": "25%",
                 },
-                false,
               ]
             }
           >
-            <View
-              accessible={true}
-              collapsable={false}
-              focusable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
+            <RCTScrollView
+              contentContainerStyle={
                 Object {
                   "alignItems": "center",
-                  "flex": 1,
+                  "flexGrow": 1,
                   "justifyContent": "center",
-                  "opacity": 1,
                 }
               }
-            />
+              nestedScrollEnabled={true}
+            >
+              <View>
+                <Text
+                  style={
+                    Object {
+                      "color": "#202452",
+                      "fontSize": 14,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                >
+                  00001
+                </Text>
+              </View>
+            </RCTScrollView>
           </View>
           <View
             style={
@@ -1810,10 +817,49 @@ exports[`Running Test for Table Check Tab Disabled 1`] = `
                   "paddingHorizontal": 5,
                 },
                 Object {
-                  "width": "12.5%",
+                  "width": "25%",
+                },
+              ]
+            }
+          >
+            <RCTScrollView
+              contentContainerStyle={
+                Object {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                }
+              }
+              nestedScrollEnabled={true}
+            >
+              <View>
+                <Text
+                  style={
+                    Object {
+                      "color": "#202452",
+                      "fontSize": 14,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                >
+                  09123 ZEL
+                </Text>
+              </View>
+            </RCTScrollView>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "borderColor": "#E5E5E5",
+                  "borderRightWidth": 1,
+                  "borderTopWidth": 1,
+                  "justifyContent": "center",
+                  "paddingHorizontal": 5,
                 },
                 Object {
-                  "borderRightWidth": 0,
+                  "width": "25%",
                 },
               ]
             }
@@ -1831,26 +877,282 @@ exports[`Running Test for Table Check Tab Disabled 1`] = `
               onStartShouldSetResponder={[Function]}
               style={
                 Object {
-                  "alignItems": "center",
                   "flex": 1,
-                  "justifyContent": "center",
                   "opacity": 1,
                 }
               }
             >
-              <Image
-                source={
-                  Object {
-                    "testUri": "../../../assets/images/icons/document.png",
-                  }
-                }
+              <View
                 style={
                   Object {
-                    "height": 14,
-                    "width": 11,
+                    "alignItems": "center",
+                    "flex": 1,
+                    "flexDirection": "row",
+                    "justifyContent": "center",
                   }
                 }
-              />
+              >
+                <Image
+                  source={
+                    Object {
+                      "testUri": "../../../assets/images/icons/edit.png",
+                    }
+                  }
+                  style={
+                    Object {
+                      "height": 13,
+                      "marginRight": 5,
+                      "width": 13,
+                    }
+                  }
+                />
+                <Text
+                  style={
+                    Object {
+                      "color": "#202452",
+                      "fontSize": 14,
+                      "fontWeight": "400",
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                >
+                  EDITAR
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              Object {
+                "height": 40,
+              },
+              Object {
+                "backgroundColor": "#EFF1F7",
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "borderColor": "#E5E5E5",
+                  "borderRightWidth": 1,
+                  "borderTopWidth": 1,
+                  "justifyContent": "center",
+                  "paddingHorizontal": 5,
+                },
+                Object {
+                  "width": "25%",
+                },
+              ]
+            }
+          >
+            <RCTScrollView
+              contentContainerStyle={
+                Object {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                }
+              }
+              nestedScrollEnabled={true}
+            >
+              <View>
+                <Text
+                  style={
+                    Object {
+                      "color": "#202452",
+                      "fontSize": 14,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                >
+                  120
+                </Text>
+              </View>
+            </RCTScrollView>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "borderColor": "#E5E5E5",
+                  "borderRightWidth": 1,
+                  "borderTopWidth": 1,
+                  "justifyContent": "center",
+                  "paddingHorizontal": 5,
+                },
+                Object {
+                  "width": "25%",
+                },
+              ]
+            }
+          >
+            <RCTScrollView
+              contentContainerStyle={
+                Object {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                }
+              }
+              nestedScrollEnabled={true}
+            >
+              <View>
+                <Text
+                  style={
+                    Object {
+                      "color": "#202452",
+                      "fontSize": 14,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                >
+                  00002
+                </Text>
+              </View>
+            </RCTScrollView>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "borderColor": "#E5E5E5",
+                  "borderRightWidth": 1,
+                  "borderTopWidth": 1,
+                  "justifyContent": "center",
+                  "paddingHorizontal": 5,
+                },
+                Object {
+                  "width": "25%",
+                },
+              ]
+            }
+          >
+            <RCTScrollView
+              contentContainerStyle={
+                Object {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                }
+              }
+              nestedScrollEnabled={true}
+            >
+              <View>
+                <Text
+                  style={
+                    Object {
+                      "color": "#202452",
+                      "fontSize": 14,
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                >
+                  09124 ZEL
+                </Text>
+              </View>
+            </RCTScrollView>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "borderColor": "#E5E5E5",
+                  "borderRightWidth": 1,
+                  "borderTopWidth": 1,
+                  "justifyContent": "center",
+                  "paddingHorizontal": 5,
+                },
+                Object {
+                  "width": "25%",
+                },
+              ]
+            }
+          >
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "flex": 1,
+                  "opacity": 1,
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "flex": 1,
+                    "flexDirection": "row",
+                    "justifyContent": "center",
+                  }
+                }
+              >
+                <Image
+                  source={
+                    Object {
+                      "testUri": "../../../assets/images/icons/edit.png",
+                    }
+                  }
+                  style={
+                    Object {
+                      "height": 13,
+                      "marginRight": 5,
+                      "width": 13,
+                    }
+                  }
+                />
+                <Text
+                  style={
+                    Object {
+                      "color": "#202452",
+                      "fontSize": 14,
+                      "fontWeight": "400",
+                      "textAlign": "center",
+                      "textAlignVertical": "center",
+                    }
+                  }
+                >
+                  EDITAR
+                </Text>
+              </View>
             </View>
           </View>
         </View>

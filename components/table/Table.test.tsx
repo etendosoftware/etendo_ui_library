@@ -1,14 +1,22 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import TableCellEdit from './components/TableCellEdit';
 import Table from './Table';
-import {TablePassData} from './Table.types';
+
+const onPress = (id:string) => {
+  console.log(id)
+}
 
 describe('Running Test for Table', () => {
-  it('Check Tab Disabled', () => {
+  it('Check Table Disabled', () => {
     const tree = renderer
       .create(
         <Table
-          addedItems={[
+          onRowPress={primary => {
+            console.log(primary);
+          }}
+          heightRow={40}
+          data={[
             {
               searchKey: '09123 ZEL',
               productName: 'Cerveza 200ml Cusqueña',
@@ -46,68 +54,47 @@ describe('Running Test for Table', () => {
               move: false,
             },
           ]}
-          config={{
-            title: '',
-            heightRow: 20,
-            columns: [
-              {
-                type: 'cellText',
-                nameColumn: 'Código',
-                key: 'searchKey',
-                width: '12.5%',
-              },
-              {
-                type: 'cellText',
-                nameColumn: 'Nombre',
-                key: 'productName',
-                width: '12.5%',
-              },
-              {
-                type: 'cellEdit',
-                nameColumn: 'Descripción',
-                key: 'description',
-                width: '12.5%',
-              },
-              {
-                type: 'cellText',
-                nameColumn: 'F. Caducidad',
-                key: 'caducidad',
-                width: '12.5%',
-              },
-              {
-                type: 'cellText',
-                nameColumn: 'Lote',
-                key: 'lote',
-                width: '12.5%',
-              },
-              {
-                type: 'cellText',
-                nameColumn: 'Cantidad',
-                key: 'movementQuantity',
-                width: '12.5%',
-              },
-              {
-                type: 'cellCheck',
-                nameColumn: 'Mover',
-                key: 'move',
-                width: '12.5%',
-              },
-              {
-                type: 'cellOnlyRead',
-                nameColumn: 'Ver',
-                key: '',
-                width: '12.5%',
-              },
-            ],
-          }}
-          passDataToParent={function ({
-            typeColumnPress,
-            key,
-            indexCurrent,
-          }: TablePassData): void {
-            console.log(typeColumnPress, key, indexCurrent);
-          }}
-        />,
+          columns={[
+            {
+              primary: false,
+              displayKey: 'movementQuantity',
+              visible: true,
+              key: 'productName',
+              width: '25%',
+              label: 'Cantidad',
+            },
+            {
+              primary: false,
+              displayKey: 'lote',
+              visible: true,
+              key: 'productName',
+              width: '25%',
+              label: 'Lote',
+            },
+            {
+              primary: false,
+              displayKey: 'searchKey',
+              visible: true,
+              key: 'productName',
+              width: '25%',
+              label: 'Codigo',
+            },
+            {
+              primary: false,
+              displayKey: 'searchKey',
+              visible: true,
+              key: 'lote',
+              width: '25%',
+              label: 'Editar',
+              actions: [
+                {
+                  component: <TableCellEdit label={'EDITAR'} />,
+                  onAction: onPress,
+                },
+              ],
+            },
+          ]}
+        />
       )
       .toJSON();
     expect(tree).toMatchSnapshot();

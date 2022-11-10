@@ -2,6 +2,7 @@ import React from 'react';
 import {Story, Meta} from '@storybook/react';
 import Table from './Table';
 import {TableProps} from './Table.types';
+import TableCellEdit from './components/TableCellEdit';
 
 const meta: Meta = {
   title: 'Etendo/Tables',
@@ -15,7 +16,11 @@ export default meta;
 export const table = Template.bind({});
 
 table.args = {
-  addedItems: [
+  onRowPress: primary => {
+    console.log(primary);
+  },
+  heightRow: 40,
+  data: [
     {
       searchKey: '09123 ZEL',
       productName: 'Cerveza 200ml Cusqueña',
@@ -53,57 +58,54 @@ table.args = {
       move: false,
     },
   ],
-  config: {
-    heightRow: 35,
-    columns: [
-      {
-        type: 'cellText',
-        nameColumn: 'Código',
-        key: 'searchKey',
-        width: '12.5%',
-      },
-      {
-        type: 'cellText',
-        nameColumn: 'Nombre',
-        key: 'productName',
-        width: '12.5%',
-      },
-      {
-        type: 'cellEdit',
-        nameColumn: 'Descripción',
-        key: 'description',
-        width: '12.5%',
-      },
-      {
-        type: 'cellText',
-        nameColumn: 'F. Caducidad',
-        key: 'caducidad',
-        width: '12.5%',
-      },
-      {
-        type: 'cellText',
-        nameColumn: 'Lote',
-        key: 'lote',
-        width: '12.5%',
-      },
-      {
-        type: 'cellText',
-        nameColumn: 'Cantidad',
-        key: 'movementQuantity',
-        width: '12.5%',
-      },
-      {
-        type: 'cellCheck',
-        nameColumn: 'Mover',
-        key: 'move',
-        width: '12.5%',
-      },
-      {
-        type: 'cellOnlyRead',
-        nameColumn: 'Ver',
-        key: '',
-        width: '12.5%',
-      },
-    ],
-  },
+  columns: [
+    {
+      primary: false,
+      displayKey: 'movementQuantity',
+      visible: true,
+      key: 'productName',
+      width: '25%',
+      label: 'Cantidad',
+    },
+    {
+      primary: false,
+      displayKey: 'lote',
+      visible: true,
+      key: 'productName',
+      width: '25%',
+      label: 'Lote',
+    },
+    {
+      primary: false,
+      displayKey: 'searchKey',
+      visible: true,
+      key: 'productName',
+      width: '25%',
+      label: 'Codigo',
+    },
+    {
+      primary: false,
+      displayKey: 'searchKey',
+      visible: true,
+      key: 'lote',
+      width: '25%',
+      label: 'Editar',
+      actions: [
+        {
+          component: <TableCellEdit label={'EDITAR'} />,
+          onAction: id => {
+            console.log(id);
+          },
+        },
+      ],
+    },
+    {
+      primary: true,
+      displayKey: 'searchKey',
+      visible: false,
+      key: 'productName',
+      width: '25%',
+      label: 'Codigo',
+    },
+  ],
 };

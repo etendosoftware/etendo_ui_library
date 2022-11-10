@@ -8,17 +8,18 @@ export const styles = StyleSheet.create({
     borderColor: GREY_10,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
+    borderRightWidth: 0,
   },
   titleContainer: {
     backgroundColor: GREY_BLUE_30,
-    padding: 7,
     borderColor: GREY_10,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
   titleText: {
-    color: BLUE,
     fontSize: 14,
+    color: BLUE,
+    textAlign: 'center',
   },
   headerContainer: {
     backgroundColor: GREY_BLUE_30,
@@ -26,6 +27,7 @@ export const styles = StyleSheet.create({
   },
   headerCell: {
     borderTopWidth: 1,
+    borderBottomWidth: 1,
     borderRightWidth: 1,
     borderColor: GREY_10,
     paddingVertical: 2,
@@ -43,6 +45,14 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     color: BLUE,
     textAlign: 'center',
+    textAlignVertical: 'center',
+  },
+  cellTextEdit: {
+    fontSize: 14,
+    fontWeight: '400',
+    color: BLUE,
+    textAlign: 'center',
+    textAlignVertical: 'center',
   },
   cellTextTitle: {
     fontSize: 14,
@@ -51,12 +61,14 @@ export const styles = StyleSheet.create({
   },
   scrollCell: {
     flexGrow: 1,
+    alignItems: 'center',
     justifyContent: 'center',
   },
   centerItem: {
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
+    flexDirection: 'row',
   },
   row: {
     flexDirection: 'row',
@@ -67,5 +79,10 @@ export const styles = StyleSheet.create({
     borderColor: GREY_40,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  imgEdit: {
+    height: 13,
+    width: 13,
+    marginRight: 5,
   },
 });

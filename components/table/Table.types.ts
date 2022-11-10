@@ -1,39 +1,31 @@
 export interface TableProps {
-  addedItems: Array<any>;
-  config: ConfigTable;
-  passDataToParent: ({
-    typeColumnPress,
-    key,
-    indexCurrent,
-  }: TablePassData) => void;
+  data: Array<any>;
+  columns: Columns[];
+  title?: string;
+  heightRow: string | number;
+  onRowPress: (primary: string) => void;
 }
-
-export type TablePassData = {
-  typeColumnPress: TypeColumn;
-  key: string;
-  indexCurrent: number;
-};
+export interface TableCellProps {
+  label: string;
+}
 
 export interface TableHeaderProps {
-  config: ConfigTable;
+  title?: string;
+  heightRow: string | number;
+  columns: Columns[];
 }
 
-export type ConfigTable = {
-  title?: string;
-  heightRow: number;
-  columns: Columns[];
-};
-
 export type Columns = {
-  type: TypeColumn;
-  nameColumn: string;
-  key?: string;
+  primary: boolean;
+  displayKey: string;
+  visible: boolean;
+  label: string;
+  key: string;
   width: string | number;
+  actions?: Actions[];
 };
 
-export type TypeColumn =
-  | 'cellText'
-  | 'cellEdit'
-  | 'cellTextInput'
-  | 'cellCheck'
-  | 'cellOnlyRead';
+export type Actions = {
+  component: JSX.Element;
+  onAction: (id: string) => void;
+};

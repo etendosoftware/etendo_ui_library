@@ -1,35 +1,35 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 import {styles} from '../Table.styles';
-import {removeLastBorderCell} from '../../../helpers/utilTable';
-import {TableHeaderProps} from '../Table.types';
+import {Columns, TableHeaderProps} from '../Table.types';
 
-const TableHeaders = ({config}: TableHeaderProps) => {
+const TableHeaders = ({title, columns, heightRow}: TableHeaderProps) => {
   return (
-    <View>
-      {config.title && (
+    <>
+      {title && (
         <View style={styles.titleContainer}>
-          <Text style={styles.titleText}>{config.title}</Text>
+          <Text style={styles.titleText}>{title}</Text>
         </View>
       )}
-      <View style={styles.headerContainer}>
-        {config.columns.map((item: any, colIndex: number) => {
+      <View style={[styles.headerContainer]}>
+        {columns.map((item: Columns, colIndex: number) => {
           return (
-            <View
-              style={[
-                styles.headerCell,
-                {width: item.width, height: config.heightRow},
-                removeLastBorderCell(colIndex, config.columns.length - 1),
-              ]}
-              key={'HeaderTable' + colIndex}>
-              <Text ellipsizeMode="tail" style={[styles.cellTextTitle]}>
-                {item.nameColumn}
-              </Text>
-            </View>
+            item.visible && (
+              <View
+                style={[
+                  styles.headerCell,
+                  {width: item.width, height: heightRow},
+                ]}
+                key={'HeaderTable' + colIndex}>
+                <Text ellipsizeMode="tail" style={[styles.cellTextTitle]}>
+                  {item.label}
+                </Text>
+              </View>
+            )
           );
         })}
       </View>
-    </View>
+    </>
   );
 };
 

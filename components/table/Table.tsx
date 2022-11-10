@@ -1,161 +1,71 @@
 import React from 'react';
-import {
-  FlatList,
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-} from 'react-native';
-import {GREEN} from '../../styles/colors';
-import {Input} from '../../components/input';
-import {TableProps} from './Table.types';
+import {FlatList, Pressable, Text, TouchableOpacity, View} from 'react-native';
+import {Actions, Columns, TableProps} from './Table.types';
 import {styles} from './Table.styles';
 import TableHeaders from './components/TableHeaders';
-import {
-  removeLastBorderCell,
-  removeHeaderBorder,
-  paintOddRows,
-} from '../../helpers/utilTable';
+import {paintOddRows, removeHeaderBorder} from '../../helpers/utilTable';
+import TableCell from './components/TableCell';
 
-const MovementTable = ({addedItems, config, passDataToParent}: TableProps) => {
-  const getIcon = (check: boolean) => {
-    if (check) {
-      return (
-        <Image
-          style={{height: 14, width: 14}}
-          source={require('../../assets/images/icons/checkTrue.png')}
-        />
-      );
-    } else {
-      return (
-        <Image
-          style={{height: 14, width: 14}}
-          source={require('../../assets/images/icons/checkFalse.png')}
-        />
-      );
+const Table = ({data, columns, title, heightRow, onRowPress}: TableProps) => {
+  const findPrimaryId = (col: Columns[], indexRow: number) => {
+    let primary: string = '';
+    for (const element of col) {
+      if (element.primary === true) {
+        primary = data[indexRow][element.key];
+        break;
+      }
     }
+    return primary;
   };
-
-  const switchColumn = (col: any, item: any, index: number) => {
-    if (col.type === 'cellText') {
-      return (
-        <ScrollView
-          nestedScrollEnabled={true}
-          contentContainerStyle={styles.scrollCell}>
-          <Text style={styles.cellText}>{item[col.key]}</Text>
-        </ScrollView>
-      );
-    }
-    if (col.type === 'cellOnlyRead') {
-      return (
-        <TouchableOpacity
-          activeOpacity={0.6}
-          style={styles.centerItem}
-          onPress={() => {
-            passDataToParent({
-              typeColumnPress: col.type,
-              key: col.key,
-              indexCurrent: index,
-            });
-          }}>
-          <Image
-            style={{height: 14, width: 11}}
-            source={require('../../assets/images/icons/document.png')}
-          />
-        </TouchableOpacity>
-      );
-    }
-    if (col.type === 'cellEdit') {
-      return (
-        <TouchableOpacity
-          activeOpacity={0.6}
-          style={styles.centerItem}
-          onPress={() => {
-            passDataToParent({
-              typeColumnPress: col.type,
-              key: col.key,
-              indexCurrent: index,
-            });
-          }}>
-          <Image
-            style={[
-              {height: 13, width: 13},
-              item[col.key] ? {tintColor: GREEN} : {},
-            ]}
-            source={require('../../assets/images/icons/edit.png')}
-          />
-        </TouchableOpacity>
-      );
-    }
-    if (col.type === 'cellTextInput') {
-      return (
-        <Input
-          centerText={true}
-          value={item[col.key]}
-          typeField={'textPressable'}
-          onPress={() =>
-            passDataToParent({
-              typeColumnPress: col.type,
-              key: col.key,
-              indexCurrent: index,
-            })
-          }
-        />
-      );
-    }
-    if (col.type === 'cellCheck') {
-      return (
-        <TouchableOpacity
-          activeOpacity={0.6}
-          style={styles.centerItem}
-          onPress={() => {
-            passDataToParent({
-              typeColumnPress: col.type,
-              key: col.key,
-              indexCurrent: index,
-            });
-          }}>
-          {(() => {
-            getIcon(item[col.key]);
-          })()}
-        </TouchableOpacity>
-      );
-    }
-  };
-
-  const renderItem = (item: any, index: number, config: any) => {
+  const renderItem = (item: any, index: number) => {
     return (
-      <View
-        style={[styles.row, {height: config.heightRow}, paintOddRows(index)]}>
-        {config.columns.map((col: any, colIndex: number) => {
+      <Pressable
+        onPress={() => {
+          onRowPress(findPrimaryId(columns, index));
+        }}
+        style={[styles.row, {height: heightRow}, paintOddRows(index)]}>
+        {columns.map((col: Columns, colIndex: number) => {
           return (
-            <View
-              style={[
-                styles.cell,
-                {width: col.width},
-                removeLastBorderCell(colIndex, config.columns.length - 1),
-              ]}
-              key={'movementTable' + colIndex}>
-              {switchColumn(col, item, index)}
-            </View>
+            col.visible && (
+              <View
+                style={[styles.cell, {width: col.width}]}
+                key={'movementTable' + colIndex}>
+                {col.actions ? (
+                  col.actions?.map((itemAction: Actions, index: number) => {
+                    return (
+                      <TouchableOpacity
+                        onPress={() => itemAction.onAction(item[col.key])}
+                        style={{flex: 1}}
+                        key={'tableCellCustom' + index}>
+                        {itemAction.component}
+                      </TouchableOpacity>
+                    );
+                  })
+                ) : (
+                  <TableCell
+                    label={item[col.displayKey]}
+                    key={'tableCell' + index}
+                  />
+                )}
+              </View>
+            )
           );
         })}
-      </View>
+      </Pressable>
     );
   };
   return (
     <>
-      <View style={[styles.container, removeHeaderBorder(config.title)]}>
-        <TableHeaders config={config} />
+      <View style={[styles.container, removeHeaderBorder(title)]}>
+        <TableHeaders title={title} heightRow={heightRow} columns={columns} />
         <FlatList
-          data={addedItems}
-          renderItem={item => renderItem(item.item, item.index, config)}
+          data={data}
+          renderItem={item => renderItem(item.item, item.index)}
           keyExtractor={(item: any, index: number) => 'Table: ' + index}
         />
       </View>
-      {!addedItems.length && (
-        <View style={[styles.placeholderContainer, {height: config.heightRow}]}>
+      {!data.length && (
+        <View style={[styles.placeholderContainer, {height: heightRow}]}>
           <Text style={[styles.titleText]}>No hay resultados.</Text>
         </View>
       )}
@@ -163,4 +73,4 @@ const MovementTable = ({addedItems, config, passDataToParent}: TableProps) => {
   );
 };
 
-export default MovementTable;
+export default Table;

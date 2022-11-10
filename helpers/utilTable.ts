@@ -1,16 +1,14 @@
-import { GREY_BLUE_30, WHITE } from "../styles/colors";
+import {GREY_BLUE_30, WHITE} from '../styles/colors';
 
-export const removeLastBorderCell = (colIndex:number,length:number) => {
-    return colIndex === length && {borderRightWidth:0}
-  }
-
-export const removeHeaderBorder = (header:any) => {
-  return  !header && {
-    borderTopWidth:0,
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 0,
-  }
-}
+export const removeHeaderBorder = (header: any) => {
+  return (
+    !header && {
+      borderTopWidth: 0,
+      borderTopLeftRadius: 0,
+      borderTopRightRadius: 0,
+    }
+  );
+};
 export const paintOddRows = (index: number) => {
   return index % 2 !== 0
     ? {backgroundColor: GREY_BLUE_30}
