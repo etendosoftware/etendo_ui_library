@@ -61,7 +61,7 @@ exports[`Running Test for Table Check Table Disabled 1`] = `
           ]
         }
       >
-        Cantidad
+        Quantity
       </Text>
     </View>
     <View
@@ -95,7 +95,7 @@ exports[`Running Test for Table Check Table Disabled 1`] = `
           ]
         }
       >
-        Lote
+        Lot
       </Text>
     </View>
     <View
@@ -129,7 +129,7 @@ exports[`Running Test for Table Check Table Disabled 1`] = `
           ]
         }
       >
-        Codigo
+        Code
       </Text>
     </View>
     <View
@@ -163,7 +163,7 @@ exports[`Running Test for Table Check Table Disabled 1`] = `
           ]
         }
       >
-        Editar
+        Edit
       </Text>
     </View>
   </View>
@@ -171,39 +171,39 @@ exports[`Running Test for Table Check Table Disabled 1`] = `
     data={
       Array [
         Object {
-          "caducidad": "20/11/2023",
           "description": "",
-          "lote": "00001",
+          "expiration": "20/11/2023",
+          "lot": "00001",
           "move": false,
           "movementQuantity": 120,
-          "productName": "Cerveza 200ml Cusqueña",
+          "productName": "Beer 200ml Cusqueña",
           "searchKey": "09123 ZEL",
         },
         Object {
-          "caducidad": "20/11/2023",
           "description": "",
-          "lote": "00002",
+          "expiration": "20/11/2023",
+          "lot": "00002",
           "move": false,
           "movementQuantity": 120,
-          "productName": "Cerveza 200ml Cusqueña",
+          "productName": "Beer 200ml Cusqueña",
           "searchKey": "09124 ZEL",
         },
         Object {
-          "caducidad": "20/11/2023",
           "description": "",
-          "lote": "00001",
+          "expiration": "20/11/2023",
+          "lot": "00001",
           "move": false,
           "movementQuantity": 120,
-          "productName": "Cerveza 200ml Cusqueña",
+          "productName": "Beer 200ml Cusqueña",
           "searchKey": "09123 ZEL",
         },
         Object {
-          "caducidad": "20/11/2023",
           "description": "",
-          "lote": "00002",
+          "expiration": "20/11/2023",
+          "lot": "00002",
           "move": false,
           "movementQuantity": 120,
-          "productName": "Cerveza 200ml Cusqueña",
+          "productName": "Beer 200ml Cusqueña",
           "searchKey": "09124 ZEL",
         },
       ]
@@ -451,7 +451,7 @@ exports[`Running Test for Table Check Table Disabled 1`] = `
                     }
                   }
                 >
-                  EDITAR
+                  EDIT
                 </Text>
               </View>
             </View>
@@ -684,7 +684,7 @@ exports[`Running Test for Table Check Table Disabled 1`] = `
                     }
                   }
                 >
-                  EDITAR
+                  EDIT
                 </Text>
               </View>
             </View>
@@ -917,7 +917,7 @@ exports[`Running Test for Table Check Table Disabled 1`] = `
                     }
                   }
                 >
-                  EDITAR
+                  EDIT
                 </Text>
               </View>
             </View>
@@ -1150,7 +1150,7 @@ exports[`Running Test for Table Check Table Disabled 1`] = `
                     }
                   }
                 >
-                  EDITAR
+                  EDIT
                 </Text>
               </View>
             </View>

@@ -6,7 +6,7 @@ import {
   TextStyle,
   TouchableOpacity,
 } from 'react-native';
-import {getImageStyle} from '../../../helpers/utilimage'
+import {getImageStyle} from '../../../helpers/image_utils'
 import {styles} from '../Input.style';
 import {InputFieldProps} from '../Input.types';
 

@@ -3,16 +3,20 @@ import {FlatList, Pressable, Text, TouchableOpacity, View} from 'react-native';
 import {Actions, Columns, TableProps} from './Table.types';
 import {styles} from './Table.styles';
 import TableHeaders from './components/TableHeaders';
-import {paintOddRows, removeHeaderBorder} from '../../helpers/utilTable';
+import {paintOddRows, removeHeaderBorder} from '../../helpers/table_utils';
 import TableCell from './components/TableCell';
 
 const Table = ({data, columns, title, heightRow, onRowPress}: TableProps) => {
   const findPrimaryId = (col: Columns[], indexRow: number) => {
     let primary: string = '';
-    for (const element of col) {
-      if (element.primary === true) {
-        primary = data[indexRow][element.key];
-        break;
+    if(indexRow){
+      for (const element of col) {
+        if (element.primary === true) {
+          if(element.key){
+            primary = data[indexRow][element.key];
+          }
+          break;
+        }
       }
     }
     return primary;
@@ -34,7 +38,7 @@ const Table = ({data, columns, title, heightRow, onRowPress}: TableProps) => {
                   col.actions?.map((itemAction: Actions, index: number) => {
                     return (
                       <TouchableOpacity
-                        onPress={() => itemAction.onAction(item[col.key])}
+                        onPress={() => col.key ? itemAction.onAction(item[col.key]): {}}
                         style={{flex: 1}}
                         key={'tableCellCustom' + index}>
                         {itemAction.component}
@@ -43,7 +47,7 @@ const Table = ({data, columns, title, heightRow, onRowPress}: TableProps) => {
                   })
                 ) : (
                   <TableCell
-                    label={item[col.displayKey]}
+                    label={col.displayKey? item[col.displayKey]: ''}
                     key={'tableCell' + index}
                   />
                 )}
@@ -66,7 +70,7 @@ const Table = ({data, columns, title, heightRow, onRowPress}: TableProps) => {
       </View>
       {!data.length && (
         <View style={[styles.placeholderContainer, {height: heightRow}]}>
-          <Text style={[styles.titleText]}>No hay resultados.</Text>
+          <Text style={[styles.titleText]}>No results.</Text>
         </View>
       )}
     </>

@@ -16,12 +16,12 @@ export interface TableHeaderProps {
 }
 
 export type Columns = {
-  primary: boolean;
-  displayKey: string;
-  visible: boolean;
-  label: string;
-  key: string;
-  width: string | number;
+  primary?: boolean;
+  displayKey?: string;
+  visible?: boolean;
+  label?: string;
+  key?: string;
+  width?: string | number;
   actions?: Actions[];
 };
 

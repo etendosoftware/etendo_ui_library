@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image, Text, View} from 'react-native';
-import {getImageStyle} from '../../../helpers/utilimage';
+import {getImageStyle} from '../../../helpers/image_utils';
 import {styles} from '../Input.style';
 import {InputTitleProps} from '../Input.types';
 
