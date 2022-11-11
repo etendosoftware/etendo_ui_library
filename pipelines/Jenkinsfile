@@ -12,17 +12,21 @@ pipeline {
 
     stages {
         stage('Build Environment') {
+            when {
+                expression {
+                    ISUPGRADECOMMIT = sh (script: "git log -1 | grep 'Upgrade version to'", returnStatus: true)
+                    ISUPGRADECOMMIT != 0
+                }
+            }
             steps {
                 script {
                     try {
-                        sh 'chmod a+x ./pipelines/build-update.sh'
                         env.STATUSBUILD = "1"
                         sh 'echo Building Environment'
                         sh "npm install -g yarn"
                         sh 'npm config set registry "https//registry.npmjs.org/"'
                         sh 'npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN'
                         sh "yarn install"
-                        sh 'chmod a+x ./pipelines/build-update.sh'
                         sh 'echo Build Succesful'
                     } catch (Exception e) {
                         echo 'BUILD FAILED'
@@ -31,12 +35,13 @@ pipeline {
                         env.STATUSBUILD = "0"
                     }
                 }
-            }   
+            }
         }
 
         stage('Build Storybook') {
             when {
                 expression {
+                    ISUPGRADECOMMIT != 0
                     env.STATUSBUILD == "1"
                 }
             }
@@ -59,6 +64,7 @@ pipeline {
         stage('Run Tests') {
             when {
                 expression {
+                    ISUPGRADECOMMIT != 0
                     env.STATUSBUILD == "1"
                 }
             }
@@ -84,6 +90,7 @@ pipeline {
                 allOf {
                     branch 'develop'
                     expression {
+                        ISUPGRADECOMMIT != 0
                         env.STATUSTEST == "1"
                     }
                 }
@@ -107,6 +114,9 @@ pipeline {
     }
     
     post {
+        always {
+            sh 'chmod a+x ./pipelines/build-update.sh'
+        }
         success {
             withCredentials([usernamePassword(credentialsId: "koodu_credentials", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                 script {
