@@ -2,7 +2,6 @@ export interface TableProps {
   data: Array<any>;
   columns: Columns[];
   title?: string;
-  heightRow: string | number;
   onRowPress: (primary: string) => void;
 }
 export interface TableCellProps {
@@ -11,7 +10,6 @@ export interface TableCellProps {
 
 export interface TableHeaderProps {
   title?: string;
-  heightRow: string | number;
   columns: Columns[];
 }
 

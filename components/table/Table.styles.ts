@@ -33,6 +33,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 2,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingHorizontal: 5,
   },
   cell: {
     justifyContent: 'center',
@@ -46,6 +47,7 @@ export const styles = StyleSheet.create({
     color: BLUE,
     textAlign: 'center',
     textAlignVertical: 'center',
+    paddingVertical: 10,
   },
   cellTextEdit: {
     fontSize: 14,
@@ -58,6 +60,7 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     color: BLUE,
     textAlign: 'center',
+    paddingVertical: 10,
   },
   scrollCell: {
     flexGrow: 1,
@@ -67,8 +70,9 @@ export const styles = StyleSheet.create({
   centerItem: {
     alignItems: 'center',
     justifyContent: 'center',
-    flex: 1,
     flexDirection: 'row',
+    height: '100%',
+    paddingVertical: 10,
   },
   row: {
     flexDirection: 'row',
@@ -84,5 +88,8 @@ export const styles = StyleSheet.create({
     height: 13,
     width: 13,
     marginRight: 5,
+  },
+  cellEditContainer: {
+    height: '100%',
   },
 });

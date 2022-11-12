@@ -3,8 +3,7 @@ import {Story, Meta} from '@storybook/react';
 import Input  from '../input/Input';
 import {InputProps} from './Input.types';
 
-const meta: Meta = 
-{
+const meta: Meta = {
   title: 'Etendo/Input',
   component: Input,
   argTypes:{}

@@ -3,9 +3,9 @@ import renderer from 'react-test-renderer';
 import TableCellEdit from './components/TableCellEdit';
 import Table from './Table';
 
-const onPress = (id:string) => {
-  console.log(id)
-}
+const onPress = (id: string) => {
+  console.log(id);
+};
 
 describe('Running Test for Table', () => {
   it('Check Table Disabled', () => {
@@ -15,41 +15,302 @@ describe('Running Test for Table', () => {
           onRowPress={primary => {
             console.log(primary);
           }}
-          heightRow={40}
           data={[
             {
               searchKey: '09123 ZEL',
-              productName: 'Beer 200ml Cusqueña',
-              description: '',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description: 'Deserunt tempor anim Elit irure esse dolor in sit.',
               expiration: '20/11/2023',
               lot: '00001',
-              movementQuantity: 120,
-              move: false,
-            },
-            {
-              searchKey: '09124 ZEL',
-              productName: 'Beer 200ml Cusqueña',
-              description: '',
-              expiration: '20/11/2023',
-              lot: '00002',
               movementQuantity: 120,
               move: false,
             },
             {
               searchKey: '09123 ZEL',
-              productName: 'Beer 200ml Cusqueña',
-              description: '',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description:
+                'Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.',
               expiration: '20/11/2023',
               lot: '00001',
               movementQuantity: 120,
               move: false,
             },
             {
-              searchKey: '09124 ZEL',
-              productName: 'Beer 200ml Cusqueña',
-              description: '',
+              searchKey: '09123 ZEL',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description: 'Deserun.',
               expiration: '20/11/2023',
-              lot: '00002',
+              lot: '00001',
+              movementQuantity: 120,
+              move: false,
+            },
+            {
+              searchKey: '09123 ZEL',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description:
+                'Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.',
+              expiration: '20/11/2023',
+              lot: '00001',
+              movementQuantity: 120,
+              move: false,
+            },
+            {
+              searchKey: '09123 ZEL',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description:
+                'Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.',
+              expiration: '20/11/2023',
+              lot: '00001',
+              movementQuantity: 120,
+              move: false,
+            },
+            {
+              searchKey: '09123 ZEL',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description:
+                'Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.',
+              expiration: '20/11/2023',
+              lot: '00001',
+              movementQuantity: 120,
+              move: false,
+            },
+            {
+              searchKey: '09123 ZEL',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description:
+                'Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.',
+              expiration: '20/11/2023',
+              lot: '00001',
+              movementQuantity: 120,
+              move: false,
+            },
+            {
+              searchKey: '09123 ZEL',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description:
+                'Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.',
+              expiration: '20/11/2023',
+              lot: '00001',
+              movementQuantity: 120,
+              move: false,
+            },
+            {
+              searchKey: '09123 ZEL',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description:
+                'Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.',
+              expiration: '20/11/2023',
+              lot: '00001',
+              movementQuantity: 120,
+              move: false,
+            },
+            {
+              searchKey: '09123 ZEL',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description:
+                'Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.',
+              expiration: '20/11/2023',
+              lot: '00001',
+              movementQuantity: 120,
+              move: false,
+            },
+            {
+              searchKey: '09123 ZEL',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description:
+                'Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.',
+              expiration: '20/11/2023',
+              lot: '00001',
+              movementQuantity: 120,
+              move: false,
+            },
+            {
+              searchKey: '09123 ZEL',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description:
+                'Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.',
+              expiration: '20/11/2023',
+              lot: '00001',
+              movementQuantity: 120,
+              move: false,
+            },
+            {
+              searchKey: '09123 ZEL',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description:
+                'Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.',
+              expiration: '20/11/2023',
+              lot: '00001',
+              movementQuantity: 120,
+              move: false,
+            },
+            {
+              searchKey: '09123 ZEL',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description:
+                'Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.',
+              expiration: '20/11/2023',
+              lot: '00001',
+              movementQuantity: 120,
+              move: false,
+            },
+            {
+              searchKey: '09123 ZEL',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description:
+                'Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.',
+              expiration: '20/11/2023',
+              lot: '00001',
+              movementQuantity: 120,
+              move: false,
+            },
+            {
+              searchKey: '09123 ZEL',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description:
+                'Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.',
+              expiration: '20/11/2023',
+              lot: '00001',
+              movementQuantity: 120,
+              move: false,
+            },
+            {
+              searchKey: '09123 ZEL',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description:
+                'Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.',
+              expiration: '20/11/2023',
+              lot: '00001',
+              movementQuantity: 120,
+              move: false,
+            },
+            {
+              searchKey: '09123 ZEL',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description:
+                'Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.',
+              expiration: '20/11/2023',
+              lot: '00001',
+              movementQuantity: 120,
+              move: false,
+            },
+            {
+              searchKey: '09123 ZEL',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description:
+                'Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.',
+              expiration: '20/11/2023',
+              lot: '00001',
+              movementQuantity: 120,
+              move: false,
+            },
+            {
+              searchKey: '09123 ZEL',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description:
+                'Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.',
+              expiration: '20/11/2023',
+              lot: '00001',
+              movementQuantity: 120,
+              move: false,
+            },
+            {
+              searchKey: '09123 ZEL',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description:
+                'Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.',
+              expiration: '20/11/2023',
+              lot: '00001',
+              movementQuantity: 120,
+              move: false,
+            },
+            {
+              searchKey: '09123 ZEL',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description:
+                'Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.',
+              expiration: '20/11/2023',
+              lot: '00001',
+              movementQuantity: 120,
+              move: false,
+            },
+            {
+              searchKey: '09123 ZEL',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description:
+                'Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.',
+              expiration: '20/11/2023',
+              lot: '00001',
+              movementQuantity: 120,
+              move: false,
+            },
+            {
+              searchKey: '09123 ZEL',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description:
+                'Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.',
+              expiration: '20/11/2023',
+              lot: '00001',
+              movementQuantity: 120,
+              move: false,
+            },
+            {
+              searchKey: '09123 ZEL',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description:
+                'Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.',
+              expiration: '20/11/2023',
+              lot: '00001',
+              movementQuantity: 120,
+              move: false,
+            },
+            {
+              searchKey: '09123 ZEL',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description:
+                'Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.',
+              expiration: '20/11/2023',
+              lot: '00001',
+              movementQuantity: 120,
+              move: false,
+            },
+            {
+              searchKey: '09123 ZEL',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description:
+                'Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.',
+              expiration: '20/11/2023',
+              lot: '00001',
+              movementQuantity: 120,
+              move: false,
+            },
+            {
+              searchKey: '09123 ZEL',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description:
+                'Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.',
+              expiration: '20/11/2023',
+              lot: '00001',
+              movementQuantity: 120,
+              move: false,
+            },
+            {
+              searchKey: '09123 ZEL',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description:
+                'Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.',
+              expiration: '20/11/2023',
+              lot: '00001',
+              movementQuantity: 120,
+              move: false,
+            },
+            {
+              searchKey: '09123 ZEL',
+              productName: 'Fernet Branca 750cc Full. Quirino Bebidas',
+              description:
+                'Deserunt tempor anim commodo occaecat consectetur velit nostrud ea laborum fugiat ipsum aliquip. Elit irure esse dolor in sit.',
+              expiration: '20/11/2023',
+              lot: '00001',
               movementQuantity: 120,
               move: false,
             },
@@ -59,15 +320,15 @@ describe('Running Test for Table', () => {
               primary: false,
               displayKey: 'movementQuantity',
               visible: true,
-              key: 'quantity',
+              key: 'movementQuantity',
               width: '25%',
               label: 'Quantity',
             },
             {
               primary: false,
-              displayKey: 'lot',
+              displayKey: 'description',
               visible: true,
-              key: 'lot',
+              key: 'description',
               width: '25%',
               label: 'Lot',
             },
@@ -81,7 +342,7 @@ describe('Running Test for Table', () => {
             },
             {
               primary: false,
-              displayKey: 'searchKey',
+              displayKey: 'lot',
               visible: true,
               key: 'lot',
               width: '25%',
@@ -89,12 +350,22 @@ describe('Running Test for Table', () => {
               actions: [
                 {
                   component: <TableCellEdit label={'EDIT'} />,
-                  onAction: onPress,
+                  onAction: id => {
+                    onPress(id);
+                  },
                 },
               ],
             },
+            {
+              primary: true,
+              displayKey: 'searchKey',
+              visible: false,
+              key: 'productName',
+              width: '25%',
+              label: 'Code',
+            },
           ]}
-        />
+        />,
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
