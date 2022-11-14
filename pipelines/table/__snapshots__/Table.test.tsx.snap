@@ -17,9 +17,6 @@ exports[`Running Test for Table Check Table Disabled 1`] = `
         "borderTopRightRadius": 0,
         "borderTopWidth": 0,
       },
-      Object {
-        "height": undefined,
-      },
     ]
   }
 >
@@ -59,7 +56,6 @@ exports[`Running Test for Table Check Table Disabled 1`] = `
             Object {
               "color": "#202452",
               "fontSize": 14,
-              "fontWeight": "600",
               "paddingVertical": 10,
               "textAlign": "center",
             },
@@ -95,7 +91,6 @@ exports[`Running Test for Table Check Table Disabled 1`] = `
             Object {
               "color": "#202452",
               "fontSize": 14,
-              "fontWeight": "600",
               "paddingVertical": 10,
               "textAlign": "center",
             },
@@ -131,7 +126,6 @@ exports[`Running Test for Table Check Table Disabled 1`] = `
             Object {
               "color": "#202452",
               "fontSize": 14,
-              "fontWeight": "600",
               "paddingVertical": 10,
               "textAlign": "center",
             },
@@ -167,7 +161,6 @@ exports[`Running Test for Table Check Table Disabled 1`] = `
             Object {
               "color": "#202452",
               "fontSize": 14,
-              "fontWeight": "600",
               "paddingVertical": 10,
               "textAlign": "center",
             },
@@ -466,8 +459,6 @@ exports[`Running Test for Table Check Table Disabled 1`] = `
     removeClippedSubviews={false}
     renderItem={[Function]}
     scrollEventThrottle={50}
-    showsHorizontalScrollIndicator={false}
-    showsVerticalScrollIndicator={false}
     stickyHeaderIndices={Array []}
     viewabilityConfigCallbackPairs={Array []}
   >

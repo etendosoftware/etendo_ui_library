@@ -77,10 +77,7 @@ SearchTextInput.args =
   numberOfLines: 1,
   typeField:'searchTextInput',
   isError:false,
-  onPress:()=> {console.log('Press Field')},
-  onChangeText:(text)=>console.log(text),
-  onFocus:()=> {console.log('On Focus')},
-  onBlur:()=> {console.log('On Blur')},
+ 
 }
 
 TextPressable.args =

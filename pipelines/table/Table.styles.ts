@@ -61,7 +61,6 @@ export const styles = StyleSheet.create({
     color: BLUE,
     textAlign: 'center',
     paddingVertical: 10,
-    fontWeight: '600',
   },
   scrollCell: {
     flexGrow: 1,

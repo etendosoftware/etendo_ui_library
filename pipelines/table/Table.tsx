@@ -6,16 +6,16 @@ import TableHeaders from './components/TableHeaders';
 import {paintOddRows, removeHeaderBorder} from '../../helpers/table_utils';
 import TableCell from './components/TableCell';
 
-const Table: React.FC<TableProps> = ({data, columns, title, onRowPress,tableHeight}) => {
+const Table: React.FC<TableProps> = ({data, columns, title, onRowPress}) => {
   const findPrimaryId = (col: Columns[], indexRow: number) => {
     let primary: string = '';
-    if (indexRow >= 0) {
+    if (indexRow) {
       for (const element of col) {
         if (element.primary === true) {
           if (element.key) {
             primary = data[indexRow][element.key];
-            break;
           }
+          break;
         }
       }
     }
@@ -62,12 +62,10 @@ const Table: React.FC<TableProps> = ({data, columns, title, onRowPress,tableHeig
   };
   return (
     <>
-      <View style={[styles.container, removeHeaderBorder(title), {height: tableHeight}]}>
-        <TableHeaders title={title} columns={columns}/>
+      <View style={[styles.container, removeHeaderBorder(title)]}>
+        <TableHeaders title={title} columns={columns} />
         <FlatList
           data={data}
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
           renderItem={item => renderItem(item.item, item.index)}
           keyExtractor={(item: any, index: number) => 'Table: ' + index}
         />
