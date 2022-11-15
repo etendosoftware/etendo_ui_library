@@ -32,19 +32,19 @@ export type InputFieldConfigType = {
   disabledField?: boolean;
   disabledSubmit?: boolean;
   backgroundColor?: ColorValue;
-}
+};
 
 export type InputVariantsType = Record<
   InputFieldVariants,
   {field: InputFieldConfigType}
->
+>;
 
 export type ImageType = {
   imgRoute?: ImageSourcePropType;
   imgWidth?: string | number;
   imgHeight?: string | number;
   imgMarginRight?: string | number;
-}
+};
 
 export type TypeInputStyleVariant = Record<
   InputTypeStyle,
@@ -58,7 +58,7 @@ export type TypeInputStyleVariant = Record<
     titleStyle: TextStyle | TextStyle[];
     helperStyle: TextStyle | TextStyle[];
   }
->
+>;
 
 export interface InputProps {
   titleLabel?: string;
@@ -69,6 +69,7 @@ export interface InputProps {
   disabled?: boolean;
   isError?: boolean;
   maxLength?: number;
+  centerText?: boolean;
   numberOfLines?: number;
   typeField: InputFieldVariants;
   onPress?: (event: GestureResponderEvent) => void;
@@ -86,7 +87,7 @@ export interface InputTitleProps {
 }
 
 export interface InputHelperProps {
-  styleHelper:  TextStyle | TextStyle[];
+  styleHelper: TextStyle | TextStyle[];
   label?: string;
 }
 
@@ -98,10 +99,11 @@ export interface InputFieldProps {
   styleField: {
     field: ViewStyle | ViewStyle[];
     focus: ViewStyle | ViewStyle[];
-    textDefault: TextStyle| TextStyle[];
-    textPlaceholder: TextStyle| TextStyle[];
+    textDefault: TextStyle | TextStyle[];
+    textPlaceholder: TextStyle | TextStyle[];
   };
   maxLength?: number;
+  centerText?: boolean;
   numberOfLines?: number;
   onPress?: (event: GestureResponderEvent) => void;
   onSubmit?: (event: GestureResponderEvent) => void;
