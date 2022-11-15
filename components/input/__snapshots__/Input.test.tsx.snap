@@ -5,6 +5,7 @@ exports[`Running Test for Input Check Input Error 1`] = `
   style={
     Object {
       "flex": 1,
+      "justifyContent": "center",
     }
   }
 >
@@ -20,8 +21,8 @@ exports[`Running Test for Input Check Input Error 1`] = `
       style={
         Object {
           "color": "#202452",
+          "fontFamily": "Inter-Medium",
           "fontSize": 14,
-          "marginBottom": 5,
         }
       }
     >
@@ -52,8 +53,9 @@ exports[`Running Test for Input Check Input Error 1`] = `
         "borderRadius": 3,
         "borderWidth": 1,
         "flexDirection": "row",
-        "height": 26,
+        "height": 22,
         "opacity": 1,
+        "paddingVertical": 0,
       }
     }
   >
@@ -67,19 +69,23 @@ exports[`Running Test for Input Check Input Error 1`] = `
       placeholder="Write a password"
       style={
         Array [
-          Array [
-            Object {
-              "color": "#202452",
-              "flex": 1,
-              "fontSize": 14,
-              "fontWeight": "500",
-              "paddingLeft": 7,
-              "paddingVertical": 5,
-            },
-            Object {
-              "height": 26,
-            },
-          ],
+          Object {
+            "color": "#202452",
+            "flex": 1,
+            "fontFamily": "Inter-Medium",
+            "fontSize": 14,
+            "fontWeight": "500",
+            "paddingLeft": 7,
+            "paddingVertical": 0,
+            "textAlignVertical": "center",
+          },
+          Object {
+            "paddingTop": 5,
+            "textAlignVertical": "top",
+          },
+          Object {
+            "height": 22,
+          },
         ]
       }
       value="Render Test"
@@ -99,6 +105,7 @@ exports[`Running Test for Input Check Input Error 1`] = `
         Array [
           Object {
             "color": "#808080",
+            "fontFamily": "Inter-Regular",
             "fontSize": 14,
           },
           Object {
