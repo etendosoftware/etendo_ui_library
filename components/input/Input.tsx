@@ -14,6 +14,7 @@ const Input = ({
   maxLength,
   numberOfLines,
   typeField,
+  keyboardType,
   isError,
   onPress,
   onSubmit,
@@ -57,6 +58,7 @@ const Input = ({
         onChangeText={onChangeText}
         maxLength={maxLength}
         numberOfLines={numberOfLines}
+        keyboardType={keyboardType}
       />
       <InputHelperText
         label={helperText}

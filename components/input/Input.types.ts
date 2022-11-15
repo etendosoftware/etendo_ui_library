@@ -2,6 +2,7 @@ import {
   ColorValue,
   GestureResponderEvent,
   ImageSourcePropType,
+  KeyboardType,
   NativeSyntheticEvent,
   TextInputFocusEventData,
   TextStyle,
@@ -71,6 +72,7 @@ export interface InputProps {
   maxLength?: number;
   numberOfLines?: number;
   typeField: InputFieldVariants;
+  keyboardType?: KeyboardType;
   onPress?: (event: GestureResponderEvent) => void;
   onSubmit?: (event: GestureResponderEvent) => void;
   onChangeText?: (text: string) => void;
@@ -103,6 +105,7 @@ export interface InputFieldProps {
   };
   maxLength?: number;
   numberOfLines?: number;
+  keyboardType?: KeyboardType;
   onPress?: (event: GestureResponderEvent) => void;
   onSubmit?: (event: GestureResponderEvent) => void;
   onChangeText?: (text: string) => void;

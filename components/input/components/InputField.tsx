@@ -18,6 +18,7 @@ const InputField = ({
   placeholder,
   maxLength,
   numberOfLines,
+  keyboardType,
   onPress,
   onSubmit,
   onChangeText,
@@ -67,6 +68,7 @@ const InputField = ({
               numberOfLines={numberOfLines}
               placeholder={placeholder}
               maxLength={maxLength}
+              keyboardType={keyboardType}
             />
           );
         }
