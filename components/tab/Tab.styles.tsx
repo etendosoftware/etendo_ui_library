@@ -36,8 +36,8 @@ export const TabStyleVariant: TabStyleRecord = {
       borderTopColor: 'transparent',
     },
     tabsSecundary: {
-      width: 106,
-      height: 35,
+      height: 40,
+      width: 184,
       backgroundColor: GREY_BLUE_30,
       justifyContent: 'center',
       alignItems: 'center',
@@ -50,6 +50,7 @@ export const TabStyleVariant: TabStyleRecord = {
       borderTopColor: YELLOW,
     },
     tabsActiveSecundary: {
+      width: 184,
       backgroundColor: BLUE,
       borderTopWidth: 4,
       borderTopColor: YELLOW,
@@ -61,6 +62,14 @@ export const TabStyleVariant: TabStyleRecord = {
       fontSize: 12,
       paddingHorizontal: 20,
       paddingVertical: 11,
+    },
+    itemTextSecundary: {
+      fontFamily: 'Poppins',
+      textTransform: 'uppercase',
+      fontWeight: '600',
+      fontSize: 12,
+      paddingVertical: 100,
+      paddingHorizontal: 100,
     },
   },
   /* Secondary style */

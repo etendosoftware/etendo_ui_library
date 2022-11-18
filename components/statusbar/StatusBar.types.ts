@@ -16,6 +16,7 @@ export interface StatusBarProps {
 
 export type ItemProp = {
   item: Info;
+  step: number;
 };
 
 /* Declaration of style types */

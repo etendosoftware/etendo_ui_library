@@ -99,7 +99,17 @@ const NavButton = (
                 routeNav + '/all' === pathname ||
                 routeNav + '/alerts' === pathname ||
                 routeNav + '/errors' === pathname ||
-                routeNav + '/vehicles' === pathname
+                routeNav + '/vehicles' === pathname ||
+                routeNav.replace('/vehicles', '/configuration') === pathname ||
+                routeNav.replace('/routes', '/routes/visits') === pathname ||
+                routeNav.replace('/routes', '/routes/visits/valid') ===
+                  pathname ||
+                routeNav.replace('/routes', '/routes/visits/wrong') ===
+                  pathname ||
+                routeNav.replace('/routes', '/routes/visits/valid-list') ===
+                  pathname ||
+                routeNav.replace('/routes', '/routes/visits/wrong-list') ===
+                  pathname
                   ? YELLOW
                   : 'transparent',
               paddingHorizontal: '100%',
@@ -112,7 +122,14 @@ const NavButton = (
             routeNav.replace('/vehicles', '/configuration') === pathname ||
             routeNav + '/all' === pathname ||
             routeNav + '/alerts' === pathname ||
-            routeNav + '/errors' === pathname ? (
+            routeNav + '/errors' === pathname ||
+            routeNav.replace('/routes', '/routes/visits') === pathname ||
+            routeNav.replace('/routes', '/routes/visits/valid') === pathname ||
+            routeNav.replace('/routes', '/routes/visits/wrong') === pathname ||
+            routeNav.replace('/routes', '/routes/visits/valid-list') ===
+              pathname ||
+            routeNav.replace('/routes', '/routes/visits/wrong-list') ===
+              pathname ? (
               <>
                 <img
                   src={image + '-blue.png'}
@@ -149,7 +166,16 @@ const NavButton = (
                   routeNav + '/vehicles' === pathname ||
                   routeNav + '/alerts' === pathname ||
                   routeNav + '/errors' === pathname ||
-                  routeNav.replace('/vehicles', '/configuration') === pathname
+                  routeNav.replace('/vehicles', '/configuration') ===
+                    pathname ||
+                  routeNav.replace('/routes', '/routes/visits/valid') ===
+                    pathname ||
+                  routeNav.replace('/routes', '/routes/visits/wrong') ===
+                    pathname ||
+                  routeNav.replace('/routes', '/routes/visits/valid-list') ===
+                    pathname ||
+                  routeNav.replace('/routes', '/routes/visits/wrong-list') ===
+                    pathname
                     ? BLUE
                     : WHITE,
                 alignContent: 'center',

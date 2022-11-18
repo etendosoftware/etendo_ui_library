@@ -10,7 +10,7 @@ export type Info = {
 
 export interface TabProps {
   data: Info[];
-  onChangeSelected: (Info: Info | undefined) => Info;
+  onChangeSelected: (Info: Info | undefined) => Info | Array<Info>;
   style: TabStyleType;
   typeSizeText: TabStyleFontSize;
 }
@@ -40,6 +40,7 @@ export type TabStyleRecord = Record<
     tabsActive: ViewStyle;
     tabsActiveSecundary: ViewStyle;
     itemText: TextStyle;
+    itemTextSecundary: TextStyle;
   }
 >;
 

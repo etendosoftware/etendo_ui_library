@@ -8,6 +8,7 @@ import {TabStyleVariant} from './Tab.styles';
 import {GREY_BLUE_30, BLUE} from '../../styles/colors';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
+import TabItemSecundary from './TabItemSecundary';
 
 /* Styles - This function allows you to obtain the styles of the Tab component */
 
@@ -41,7 +42,7 @@ const TabSecundary = ({
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         {data.map((item: Info, index: number) => {
           return (
-            <TabItem
+            <TabItemSecundary
               style={getStyle(style, item, pathname)}
               styleText={style}
               sizeText={typeSizeText}

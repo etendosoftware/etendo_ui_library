@@ -52,7 +52,7 @@ const getStyle = (
   return [
     {color: item.route === pathname ? colorActive : colorInactive},
     {fontSize: fontSize},
-    TabStyleVariant[style].itemText,
+    TabStyleVariant[style].itemTextSecundary,
   ];
 };
 

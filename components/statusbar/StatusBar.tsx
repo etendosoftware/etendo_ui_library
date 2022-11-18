@@ -13,9 +13,9 @@ export const StatusBar = ({data, step}: StatusBarProps) => {
     <View style={StatusBarStyleVariant.primary.statusBarContainer}>
       {data.map((item, idx) => {
         if (idx === step - 1) {
-          return <StepActive item={item} />;
+          return <StepActive item={item} step={step} />;
         } else {
-          return <StepDisabled item={item} />;
+          return <StepDisabled item={item} step={step} />;
         }
       })}
     </View>
