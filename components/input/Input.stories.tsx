@@ -3,9 +3,8 @@ import {Story, Meta} from '@storybook/react';
 import Input  from '../input/Input';
 import {InputProps} from './Input.types';
 
-const meta: Meta = 
-{
-  title: 'Input',
+const meta: Meta = {
+  title: 'Etendo/Input',
   component: Input,
   argTypes:{}
 }
@@ -78,10 +77,7 @@ SearchTextInput.args =
   numberOfLines: 1,
   typeField:'searchTextInput',
   isError:false,
-  onPress:()=> {console.log('Press Field')},
-  onChangeText:(text)=>console.log(text),
-  onFocus:()=> {console.log('On Focus')},
-  onBlur:()=> {console.log('On Blur')},
+ 
 }
 
 TextPressable.args =

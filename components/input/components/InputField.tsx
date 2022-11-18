@@ -3,12 +3,12 @@ import {
   Image,
   Text,
   TextInput,
+  TextStyle,
   TouchableOpacity,
 } from 'react-native';
-import { addImageStyle } from '../../../helpers/utilimage';
-
+import {getImageStyle} from '../../../helpers/image_utils'
 import {styles} from '../Input.style';
-import {ImageType, InputFieldProps} from '../Input.types';
+import {InputFieldProps} from '../Input.types';
 
 const InputField = ({
   configField,
@@ -18,29 +18,38 @@ const InputField = ({
   placeholder,
   maxLength,
   numberOfLines,
+  keyboardType,
+  centerText,
   onPress,
   onSubmit,
   onChangeText,
   onFocus,
   onBlur,
-}:InputFieldProps) => {
-  
+}: InputFieldProps) => {
   const [showImg, setShowImg] = useState<boolean>(false);
   const heightLines = 12;
-  const numberLines = numberOfLines && numberOfLines >= 1 ?numberOfLines :  1;
-  
+  const numberLines = numberOfLines && numberOfLines >= 1 ? numberOfLines : 1;
+
   /*height calculated with actual font size (+10 would be the smallest size)*/
-  const heightFinal = heightLines * numberLines + 14 
+  const heightFinal = heightLines * numberLines + 10;
 
   const getStyleText = (text: string | undefined) => {
-    var style
-    
+    let style: Array<TextStyle | TextStyle[]> = [];
+
     if (text) {
-      style = styleField.textDefault;
+      style.push(styleField.textDefault);
     } else {
-      style = styleField.textPlaceholder;
+      style.push(styleField.textPlaceholder);
     }
-    return [style,{  height: heightFinal}];
+    if (centerText) {
+      style.push({textAlign: 'center', paddingLeft: 0});
+    }
+    if (numberLines > 0) {
+      style.push({textAlignVertical: 'top', paddingTop: 5});
+    }
+   
+    style.push({height: heightFinal});
+    return style;
   };
 
   useEffect(() => {
@@ -49,7 +58,7 @@ const InputField = ({
 
   return (
     <TouchableOpacity
-      style={[styleField.field,{height: heightFinal}]}
+      style={[styleField.field, {height: heightFinal}]}
       onPress={onPress}
       disabled={disabled || configField.disabledField}>
       {(() => {
@@ -61,12 +70,12 @@ const InputField = ({
               onBlur={onBlur}
               onFocus={onFocus}
               value={value}
-              style={[getStyleText(value)]}
+              style={getStyleText(value)}
               onChangeText={onChangeText}
               multiline={true}
-              numberOfLines={numberOfLines}
               placeholder={placeholder}
               maxLength={maxLength}
+              keyboardType={keyboardType}
             />
           );
         }
@@ -75,10 +84,8 @@ const InputField = ({
             <Text
               ellipsizeMode="tail"
               numberOfLines={numberOfLines}
-              style={[
-                getStyleText(value),  
-              ]}>
-              {value ? value: placeholder}
+              style={getStyleText(value)}>
+              {value ? value : placeholder}
             </Text>
           );
         }
@@ -93,7 +100,7 @@ const InputField = ({
               {configField?.image?.imgRoute && (
                 <Image
                   source={configField?.image?.imgRoute}
-                  style={addImageStyle(configField.image, disabled)}
+                  style={getImageStyle(configField.image, disabled)}
                 />
               )}
             </TouchableOpacity>
@@ -104,4 +111,4 @@ const InputField = ({
   );
 };
 
-export default InputField
+export default InputField;

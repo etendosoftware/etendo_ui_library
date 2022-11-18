@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {ButtonSizeVariant, ButtonStyleVariant} from './Button.styles';
-import {addImageStyle} from '../../helpers/utilimage';
+import {addImageStyle} from '../../helpers/image_utils';
 import {ButtonProps} from './Button.types';
 
 const Button = ({
