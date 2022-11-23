@@ -67,7 +67,6 @@ const NavButton = (
   image: any,
   routeNav: any,
 ) => {
-  //const {width} = useWindowDimensions();
   const router = useRouter();
   const {pathname} = router;
   return (
