@@ -79,6 +79,7 @@ const defaultTitle: TextStyle = {
   color: BLUE,
   fontSize: 14,
   fontFamily: FONT_MEDIUM,
+  marginTop: 10,
 };
 
 const defaultField: ViewStyle = {
@@ -89,6 +90,7 @@ const defaultField: ViewStyle = {
   borderRadius: 3,
   flexDirection: 'row',
   alignItems: 'center',
+  marginTop: 3,
 };
 
 const defaultText: TextStyle = {
@@ -178,7 +180,7 @@ export const styles = StyleSheet.create({
   rowHelperText: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop:5,
+    marginTop: 5,
   },
   buttonContainerInputField: {
     alignSelf: 'flex-start',

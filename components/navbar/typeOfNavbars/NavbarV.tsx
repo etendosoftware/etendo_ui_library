@@ -14,14 +14,11 @@ import {
   ScrollView,
 } from 'react-native';
 
+import {useRouter} from 'next/router';
 import {Info} from '../Navbar.types';
 import {NavbarVStyleVariant} from '../Navbar.styles';
 import {BLUE, WHITE, YELLOW} from '../../../styles/colors';
-import stylesNavbarV from './NavbarV.module.css';
 import Link from 'next/link';
-import {useRouter} from 'next/router';
-
-import styles from '../../../../styles/Home.module.css';
 
 export const NavbarV = ({data, onChangeSelected}: any) => {
   // Use of states to control navigation
@@ -57,7 +54,6 @@ export const NavbarV = ({data, onChangeSelected}: any) => {
             </TouchableOpacity>
           );
         })}
-        {/* <div className={styles.arrowRight} />; */}
       </ScrollView>
     </>
   );
@@ -71,19 +67,15 @@ const NavButton = (
   image: any,
   routeNav: any,
 ) => {
+  //const {width} = useWindowDimensions();
   const router = useRouter();
   const {pathname} = router;
-  console.log('image', image);
-  console.log('routenav', routeNav);
-  console.log('pathname', pathname);
-
   return (
     <>
       <TouchableOpacity
         onPress={() => {
           setCurrentNav(title);
         }}
-        activeOpacity={1}
       >
         <Link href={routeNav}>
           <View
@@ -93,93 +85,32 @@ const NavButton = (
               alignItems: 'center',
               alignSelf: 'center',
               justifyContent: 'center',
-              backgroundColor:
-                routeNav === pathname ||
-                routeNav.replace('/vehicles', '/configuration') === pathname ||
-                routeNav + '/all' === pathname ||
-                routeNav + '/alerts' === pathname ||
-                routeNav + '/errors' === pathname ||
-                routeNav + '/vehicles' === pathname ||
-                routeNav.replace('/vehicles', '/configuration') === pathname ||
-                routeNav.replace('/routes', '/routes/visits') === pathname ||
-                routeNav.replace('/routes', '/routes/visits/valid') ===
-                  pathname ||
-                routeNav.replace('/routes', '/routes/visits/wrong') ===
-                  pathname ||
-                routeNav.replace('/routes', '/routes/visits/valid-list') ===
-                  pathname ||
-                routeNav.replace('/routes', '/routes/visits/wrong-list') ===
-                  pathname
-                  ? YELLOW
-                  : 'transparent',
+              backgroundColor: currentNav === title ? YELLOW : 'transparent',
               paddingHorizontal: '100%',
-              paddingVertical: '11%',
+              paddingVertical: '20%',
             }}
           >
-            {routeNav === pathname ||
-            routeNav + 'vehicles' === pathname ||
-            routeNav + '/vehicles' === pathname ||
-            routeNav.replace('/vehicles', '/configuration') === pathname ||
-            routeNav + '/all' === pathname ||
-            routeNav + '/alerts' === pathname ||
-            routeNav + '/errors' === pathname ||
-            routeNav.replace('/routes', '/routes/visits') === pathname ||
-            routeNav.replace('/routes', '/routes/visits/valid') === pathname ||
-            routeNav.replace('/routes', '/routes/visits/wrong') === pathname ||
-            routeNav.replace('/routes', '/routes/visits/valid-list') ===
-              pathname ||
-            routeNav.replace('/routes', '/routes/visits/wrong-list') ===
-              pathname ? (
-              <>
-                <img
-                  src={image + '-blue.png'}
-                  style={{
-                    width: 27,
-                    height: 27,
-                    // tintColor: currentNav === title ? BLUE : WHITE,
-                  }}
-                />
-              </>
-            ) : (
-              <img
-                src={image + '-white.png'}
-                style={{
-                  width: 27,
-                  height: 27,
-                  // tintColor: currentNav === title ? BLUE : WHITE,
-                }}
-              />
-            )}
+            <Image
+              source={image}
+              style={{
+                /* Primary */
+                width: 27,
+                height: 27,
+                tintColor: currentNav === title ? BLUE : WHITE,
+              }}
+            />
 
             <Text
               style={{
                 /* Primary */
-                fontSize: 9.4,
+                fontSize: 10,
                 justifyContent: 'center',
-                fontFamily: 'Poppins',
-                fontWeight: '600',
-                marginTop: 6,
-                color:
-                  routeNav === pathname ||
-                  routeNav + 'vehicles' === pathname ||
-                  routeNav + '/all' === pathname ||
-                  routeNav + '/vehicles' === pathname ||
-                  routeNav + '/alerts' === pathname ||
-                  routeNav + '/errors' === pathname ||
-                  routeNav.replace('/vehicles', '/configuration') ===
-                    pathname ||
-                  routeNav.replace('/routes', '/routes/visits/valid') ===
-                    pathname ||
-                  routeNav.replace('/routes', '/routes/visits/wrong') ===
-                    pathname ||
-                  routeNav.replace('/routes', '/routes/visits/valid-list') ===
-                    pathname ||
-                  routeNav.replace('/routes', '/routes/visits/wrong-list') ===
-                    pathname
-                    ? BLUE
-                    : WHITE,
+                fontWeight: 'bold',
+                color: currentNav === title ? BLUE : WHITE,
                 alignContent: 'center',
                 alignSelf: 'center',
+                textTransform: 'uppercase',
+                fontFamily: 'Poppins',
               }}
             >
               {title}
