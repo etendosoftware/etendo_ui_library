@@ -4,7 +4,7 @@
     so it is not necessary to define its dimensions depending on the screen where it is located */
 
 /* Imports */
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Image,
   Text,
@@ -50,6 +50,7 @@ export const NavbarV = ({data, onChangeSelected}: any) => {
                 image.name,
                 image.routeImage,
                 image.routeNav,
+                image.key,
               )}
             </TouchableOpacity>
           );
@@ -66,16 +67,20 @@ const NavButton = (
   title: string,
   image: any,
   routeNav: any,
+  key: string,
 ) => {
   const router = useRouter();
   const {pathname} = router;
+  const path = pathname.split('/');
+  useEffect(() => {
+    if (key === path[1]) {
+      setCurrentNav(key);
+    }
+  }, [path]);
+
   return (
     <>
-      <TouchableOpacity
-        onPress={() => {
-          setCurrentNav(title);
-        }}
-      >
+      <TouchableOpacity>
         <Link href={routeNav}>
           <View
             style={{
@@ -84,7 +89,7 @@ const NavButton = (
               alignItems: 'center',
               alignSelf: 'center',
               justifyContent: 'center',
-              backgroundColor: currentNav === title ? YELLOW : 'transparent',
+              backgroundColor: currentNav === key ? YELLOW : 'transparent',
               paddingHorizontal: '100%',
               paddingVertical: '20%',
             }}
@@ -93,9 +98,9 @@ const NavButton = (
               source={image}
               style={{
                 /* Primary */
-                width: 27,
-                height: 27,
-                tintColor: currentNav === title ? BLUE : WHITE,
+                width: 30,
+                height: 30,
+                tintColor: currentNav === key ? BLUE : WHITE,
               }}
             />
 
@@ -105,11 +110,12 @@ const NavButton = (
                 fontSize: 10,
                 justifyContent: 'center',
                 fontWeight: 'bold',
-                color: currentNav === title ? BLUE : WHITE,
+                color: currentNav === key ? BLUE : WHITE,
                 alignContent: 'center',
                 alignSelf: 'center',
                 textTransform: 'uppercase',
                 fontFamily: 'Poppins',
+                marginTop: 10,
               }}
             >
               {title}
