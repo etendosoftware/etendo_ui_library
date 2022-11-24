@@ -1,8 +1,8 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text} from 'react-native';
 import {ItemProp} from './StatusBar.types';
 import {StatusBarStyleVariant} from './StatusBar.styles';
-
+import {ViewEtendo as View} from './StatusBar';
 export const StepActive = ({item, step}: ItemProp) => {
   return (
     <>

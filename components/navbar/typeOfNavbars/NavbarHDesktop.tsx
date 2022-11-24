@@ -2,11 +2,13 @@
 
 /* Imports */
 import React from 'react';
-import {Image, Text, View, TouchableOpacity} from 'react-native';
+import {Image, Text, TouchableOpacity} from 'react-native';
 
 import {Info, NavbarHorizontalProps} from '../Navbar.types';
 import {NavbarHStyleVariant} from '../Navbar.styles';
 import Link from 'next/link';
+
+import {ViewEtendo as View} from '../../viewEtendo/ViewEtendo';
 
 export const NavbarHDesktop = ({
   data,

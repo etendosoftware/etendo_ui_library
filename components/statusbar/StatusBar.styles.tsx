@@ -28,6 +28,7 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
       height: '100%',
       backgroundColor: BLUE,
       borderTopEndRadius: 40,
+      borderTopRightRadius: 40,
     },
 
     activeStepContainer: {
@@ -35,7 +36,9 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
       flexDirection: 'row',
       backgroundColor: YELLOW,
       borderBottomStartRadius: 31,
+      borderBottomLeftRadius: 29,
       borderTopEndRadius: 31,
+      borderTopRightRadius: 31,
     },
 
     activeStepContent: {
@@ -64,7 +67,8 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
       flexDirection: 'row',
       backgroundColor: BLUE,
       borderBottomStartRadius: 20,
-      borderTopEndRadius: 20,
+      borderBottomLeftRadius: 20,
+      borderTopRightRadius: 20,
     },
 
     activeStep: {
@@ -91,6 +95,7 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
       height: '100%',
       backgroundColor: BLUE,
       borderTopEndRadius: 20,
+      borderBottomLeftRadius: 19,
       borderColor: BLUE,
     },
 
