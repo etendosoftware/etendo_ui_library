@@ -4,7 +4,7 @@
     so it is not necessary to define its dimensions depending on the screen where it is located */
 
 /* Imports */
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Image,
   Text,
@@ -14,14 +14,11 @@ import {
   ScrollView,
 } from 'react-native';
 
+import {useRouter} from 'next/router';
 import {Info} from '../Navbar.types';
 import {NavbarVStyleVariant} from '../Navbar.styles';
 import {BLUE, WHITE, YELLOW} from '../../../styles/colors';
-import stylesNavbarV from './NavbarV.module.css';
 import Link from 'next/link';
-import {useRouter} from 'next/router';
-
-import styles from '../../../../styles/Home.module.css';
 
 export const NavbarV = ({data, onChangeSelected}: any) => {
   // Use of states to control navigation
@@ -53,11 +50,11 @@ export const NavbarV = ({data, onChangeSelected}: any) => {
                 image.name,
                 image.routeImage,
                 image.routeNav,
+                image.key,
               )}
             </TouchableOpacity>
           );
         })}
-        {/* <div className={styles.arrowRight} />; */}
       </ScrollView>
     </>
   );
@@ -70,21 +67,20 @@ const NavButton = (
   title: string,
   image: any,
   routeNav: any,
+  key: string,
 ) => {
   const router = useRouter();
   const {pathname} = router;
-  console.log('image', image);
-  console.log('routenav', routeNav);
-  console.log('pathname', pathname);
+  const path = pathname.split('/');
+  useEffect(() => {
+    if (key === path[1]) {
+      setCurrentNav(key);
+    }
+  }, [path]);
 
   return (
     <>
-      <TouchableOpacity
-        onPress={() => {
-          setCurrentNav(title);
-        }}
-        activeOpacity={1}
-      >
+      <TouchableOpacity>
         <Link href={routeNav}>
           <View
             style={{
@@ -93,93 +89,33 @@ const NavButton = (
               alignItems: 'center',
               alignSelf: 'center',
               justifyContent: 'center',
-              backgroundColor:
-                routeNav === pathname ||
-                routeNav.replace('/vehicles', '/configuration') === pathname ||
-                routeNav + '/all' === pathname ||
-                routeNav + '/alerts' === pathname ||
-                routeNav + '/errors' === pathname ||
-                routeNav + '/vehicles' === pathname ||
-                routeNav.replace('/vehicles', '/configuration') === pathname ||
-                routeNav.replace('/routes', '/routes/visits') === pathname ||
-                routeNav.replace('/routes', '/routes/visits/valid') ===
-                  pathname ||
-                routeNav.replace('/routes', '/routes/visits/wrong') ===
-                  pathname ||
-                routeNav.replace('/routes', '/routes/visits/valid-list') ===
-                  pathname ||
-                routeNav.replace('/routes', '/routes/visits/wrong-list') ===
-                  pathname
-                  ? YELLOW
-                  : 'transparent',
+              backgroundColor: currentNav === key ? YELLOW : 'transparent',
               paddingHorizontal: '100%',
-              paddingVertical: '11%',
+              paddingVertical: '20%',
             }}
           >
-            {routeNav === pathname ||
-            routeNav + 'vehicles' === pathname ||
-            routeNav + '/vehicles' === pathname ||
-            routeNav.replace('/vehicles', '/configuration') === pathname ||
-            routeNav + '/all' === pathname ||
-            routeNav + '/alerts' === pathname ||
-            routeNav + '/errors' === pathname ||
-            routeNav.replace('/routes', '/routes/visits') === pathname ||
-            routeNav.replace('/routes', '/routes/visits/valid') === pathname ||
-            routeNav.replace('/routes', '/routes/visits/wrong') === pathname ||
-            routeNav.replace('/routes', '/routes/visits/valid-list') ===
-              pathname ||
-            routeNav.replace('/routes', '/routes/visits/wrong-list') ===
-              pathname ? (
-              <>
-                <img
-                  src={image + '-blue.png'}
-                  style={{
-                    width: 27,
-                    height: 27,
-                    // tintColor: currentNav === title ? BLUE : WHITE,
-                  }}
-                />
-              </>
-            ) : (
-              <img
-                src={image + '-white.png'}
-                style={{
-                  width: 27,
-                  height: 27,
-                  // tintColor: currentNav === title ? BLUE : WHITE,
-                }}
-              />
-            )}
+            <Image
+              source={image}
+              style={{
+                /* Primary */
+                width: 30,
+                height: 30,
+                tintColor: currentNav === key ? BLUE : WHITE,
+              }}
+            />
 
             <Text
               style={{
                 /* Primary */
-                fontSize: 9.4,
+                fontSize: 10,
                 justifyContent: 'center',
-                fontFamily: 'Poppins',
-                fontWeight: '600',
-                marginTop: 6,
-                color:
-                  routeNav === pathname ||
-                  routeNav + 'vehicles' === pathname ||
-                  routeNav + '/all' === pathname ||
-                  routeNav + '/vehicles' === pathname ||
-                  routeNav + '/alerts' === pathname ||
-                  routeNav + '/errors' === pathname ||
-                  routeNav.replace('/vehicles', '/configuration') ===
-                    pathname ||
-                  routeNav.replace('/routes', '/routes/visits/valid') ===
-                    pathname ||
-                  routeNav.replace('/routes', '/routes/visits/wrong') ===
-                    pathname ||
-                  routeNav.replace('/routes', '/routes/visits/valid-list') ===
-                    pathname ||
-                  routeNav.replace('/routes', '/routes/visits/wrong-list') ===
-                    pathname
-                    ? BLUE
-                    : WHITE,
+                fontWeight: 'bold',
+                color: currentNav === key ? BLUE : WHITE,
                 alignContent: 'center',
                 alignSelf: 'center',
+                textTransform: 'uppercase',
+                fontFamily: 'Poppins',
+                marginTop: 10,
               }}
             >
               {title}
