@@ -91,7 +91,7 @@ const NavButton = (
               justifyContent: 'center',
               backgroundColor: currentNav === key ? YELLOW : 'transparent',
               paddingHorizontal: '100%',
-              paddingVertical: '20%',
+              paddingVertical: '11%',
             }}
           >
             <Image
@@ -99,6 +99,7 @@ const NavButton = (
               style={{
                 /* Primary */
                 width: 30,
+                resizeMode: 'contain',
                 height: 30,
                 tintColor: currentNav === key ? BLUE : WHITE,
               }}
