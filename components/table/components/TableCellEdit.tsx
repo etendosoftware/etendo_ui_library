@@ -6,9 +6,9 @@ import {TableCellProps} from '../Table.types';
 const TableCellEdit = ({label}: TableCellProps) => {
   return (
     <View style={styles.centerItem}>
-      <Image
-        style={styles.imgEdit}
-        source={require('../../../assets/images/icons/edit.png')}
+      <img
+        style={{height: 13, width: 13, marginRight: 5}}
+        src={'/assets/images/icons/edit.png'}
       />
       <Text style={styles.cellTextEdit}>{label}</Text>
     </View>

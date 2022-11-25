@@ -57,7 +57,7 @@ export const Pagination = ({
           <img
             src={'/assets/images/icons/back-double-button.png'}
             alt="edit"
-            style={{width: 8, height: 8, marginRight: 8}}
+            style={{width: 10, height: 10, marginRight: 10}}
           />
         </TouchableOpacity>
 
@@ -75,7 +75,7 @@ export const Pagination = ({
           <img
             src={'/assets/images/icons/back-button.png'}
             alt="edit"
-            style={{width: 8, height: 8, marginRight: 8}}
+            style={{width: 10, height: 10, marginRight: 10}}
           />
         </TouchableOpacity>
 
@@ -100,7 +100,7 @@ export const Pagination = ({
           <img
             src={'/assets/images/icons/next-button.png'}
             alt="edit"
-            style={{width: 8, height: 8, marginRight: 8}}
+            style={{width: 10, height: 10, marginRight: 10}}
           />
         </TouchableOpacity>
 
@@ -118,7 +118,7 @@ export const Pagination = ({
           <img
             src={'/assets/images/icons/next-double-button.png'}
             alt="edit"
-            style={{width: 8, height: 8, marginRight: 8}}
+            style={{width: 10, height: 10, marginRight: 10}}
           />
         </TouchableOpacity>
       </View>

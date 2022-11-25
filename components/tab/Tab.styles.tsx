@@ -37,7 +37,7 @@ export const TabStyleVariant: TabStyleRecord = {
     },
     tabsSecundary: {
       height: 40,
-      width: 184,
+      width: 212.5,
       backgroundColor: GREY_BLUE_30,
       justifyContent: 'center',
       alignItems: 'center',
@@ -50,7 +50,7 @@ export const TabStyleVariant: TabStyleRecord = {
       borderTopColor: YELLOW,
     },
     tabsActiveSecundary: {
-      width: 184,
+      width: 212.5,
       backgroundColor: BLUE,
       borderTopWidth: 4,
       borderTopColor: YELLOW,

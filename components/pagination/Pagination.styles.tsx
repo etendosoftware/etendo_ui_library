@@ -21,8 +21,8 @@ export const PaginationStyleVariant: PaginationStyleRecord = {
     },
     pageNumberContainer: {
       backgroundColor: PURPLE_50,
-      width: 18,
-      height: 18,
+      width: 25,
+      height: 25,
       borderRadius: 3,
       justifyContent: 'center',
       alignSelf: 'center',
