@@ -44,7 +44,7 @@ export const Pagination = ({
     <View style={PaginationStyleVariant.primary.container}>
       <View style={PaginationStyleVariant.primary.container}>
         <TouchableOpacity
-          disabled={page <= 1}
+          disabled={page <= 1 || totalData === 0}
           onPress={() => {
             /* Allows to detect the selected item */
             backToFirstPage();
@@ -59,7 +59,7 @@ export const Pagination = ({
         </TouchableOpacity>
 
         <TouchableOpacity
-          disabled={page <= 1}
+          disabled={page <= 1 || totalData === 0}
           onPress={() => {
             backPage(page);
             if (page !== 1) {
@@ -82,7 +82,7 @@ export const Pagination = ({
         </View>
 
         <TouchableOpacity
-          disabled={page === pageNumbers.length}
+          disabled={page === pageNumbers.length || totalData === 0}
           onPress={() => {
             nextPage(page);
             if (page !== Math.ceil(totalData / 8)) {
@@ -98,7 +98,7 @@ export const Pagination = ({
         </TouchableOpacity>
 
         <TouchableOpacity
-          disabled={page === pageNumbers.length}
+          disabled={page === pageNumbers.length || totalData === 0}
           onPress={() => {
             nextLastPage(pageNumbers);
             if (page !== Math.ceil(totalData / 8)) {
