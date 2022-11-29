@@ -29,7 +29,7 @@ const Table: React.FC<TableProps> = ({
   };
   const renderItem = (item: any, index: number) => {
     return (
-      <Pressable
+      <View
         onPress={() => {
           onRowPress(findPrimaryId(columns, index));
         }}
@@ -66,7 +66,7 @@ const Table: React.FC<TableProps> = ({
             )
           );
         })}
-      </Pressable>
+      </View>
     );
   };
   return (

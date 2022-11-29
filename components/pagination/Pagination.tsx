@@ -104,7 +104,7 @@ export const Pagination = ({
             if (page !== Math.ceil(totalData / 8)) {
               onChangeSelected(
                 Math.ceil(totalData / amountDataPerPage),
-                totalData - 4,
+                totalData - (totalData % amountDataPerPage),
               );
             }
           }}
