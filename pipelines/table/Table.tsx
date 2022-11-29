@@ -27,13 +27,15 @@ const Table: React.FC<TableProps> = ({data, columns, title, onRowPress}) => {
         onPress={() => {
           onRowPress(findPrimaryId(columns, index));
         }}
-        style={[styles.row, paintOddRows(index)]}>
+        style={[styles.row, paintOddRows(index)]}
+      >
         {columns.map((col: Columns, colIndex: number) => {
           return (
             col.visible && (
               <View
                 style={[styles.cell, {width: col.width}]}
-                key={'movementTable' + colIndex}>
+                key={'movementTable' + colIndex}
+              >
                 {col.actions ? (
                   col.actions?.map((itemAction: Actions, index: number) => {
                     return (
@@ -42,7 +44,8 @@ const Table: React.FC<TableProps> = ({data, columns, title, onRowPress}) => {
                         onPress={() =>
                           col.key ? itemAction.onAction(item[col.key]) : {}
                         }
-                        key={'tableCellCustom' + index}>
+                        key={'tableCellCustom' + index}
+                      >
                         {itemAction.component}
                       </TouchableOpacity>
                     );
@@ -70,11 +73,11 @@ const Table: React.FC<TableProps> = ({data, columns, title, onRowPress}) => {
           keyExtractor={(item: any, index: number) => 'Table: ' + index}
         />
       </View>
-      {!data.length && (
+      {/* {!data.length && (
         <View style={[styles.placeholderContainer]}>
           <Text style={[styles.titleText]}>No results.</Text>
         </View>
-      )}
+      )} */}
     </>
   );
 };

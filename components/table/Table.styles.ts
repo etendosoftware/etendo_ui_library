@@ -34,7 +34,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 5,
-    paddingVertical: '0.5%',
+    paddingVertical: 10,
   },
   cell: {
     justifyContent: 'center',
@@ -49,7 +49,7 @@ export const styles = StyleSheet.create({
     color: BLUE,
     textAlign: 'center',
     textAlignVertical: 'center',
-    paddingVertical: '7.5%',
+    paddingVertical: 22.5,
   },
   cellTextEdit: {
     fontSize: 14,
@@ -77,7 +77,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
     height: '100%',
-    paddingVertical: 10,
+    paddingVertical: 5,
   },
   row: {
     flexDirection: 'row',

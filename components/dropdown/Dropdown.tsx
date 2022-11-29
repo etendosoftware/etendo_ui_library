@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {View, Text, TouchableOpacity, Image, ScrollView} from 'react-native';
 
 import DropdownItem from './DropdownItem';
@@ -12,29 +12,56 @@ const Dropdown = ({
   typeSizeText,
 }: DropdownProps) => {
   const [showOptions, setShowOptions] = useState(false);
-  const [toggleItem, setToggleItem] = useState<number>(-1);
+  const [toggleItem, setToggleItem] = useState<any>(undefined);
+  const [chooseOption, setChooseOption] = useState(text);
+
+  const catMenu = useRef(null);
+
+  const handleShowOptions = () => {
+    setShowOptions(!open);
+  };
+
+  useEffect(() => {
+    setChooseOption(text);
+  }, [text]);
+
+  const closeOpenMenus = e => {
+    if (catMenu.current && showOptions && !catMenu.current.contains(e.target)) {
+      setShowOptions(false);
+    }
+  };
+
+  document.addEventListener('mousedown', closeOpenMenus);
 
   return (
-    <View style={DropdownStyleVariant.primary.container}>
+    <View style={DropdownStyleVariant.primary.container} ref={catMenu}>
       <TouchableOpacity
         style={DropdownStyleVariant.primary.dropDownButton}
         activeOpacity={1}
-        onPress={() => setShowOptions(!showOptions)}
+        onPress={(e: any) => {
+          setShowOptions(!showOptions);
+        }}
       >
         <Text style={DropdownStyleVariant.primary.dropDownButtonText}>
-          {text}
+          {chooseOption}
         </Text>
         {showOptions ? (
-          <Image
-            source={require('../../assets/images/icons/arrowPicker.png')}
-            style={DropdownStyleVariant.primary.iconWithOptionsDisplayed}
-            resizeMode="contain"
+          <img
+            src={'/assets/images/icons/arrow-picker-top.png'}
+            style={{
+              width: 10,
+              position: 'absolute',
+              right: 15,
+            }}
           />
         ) : (
-          <Image
-            source={require('../../assets/images/icons/arrowPicker.png')}
-            style={DropdownStyleVariant.primary.iconWithOptionsNotDisplayed}
-            resizeMode="contain"
+          <img
+            src={'/assets/images/icons/arrow-picker.png'}
+            style={{
+              width: 10,
+              position: 'absolute',
+              right: 15,
+            }}
           />
         )}
       </TouchableOpacity>
@@ -49,11 +76,10 @@ const Dropdown = ({
                 onPress={() => {
                   /* Allows to detect the selected item */
                   setToggleItem(index);
-                  onChangeSelected({
-                    name: item.name,
-                    route: item.route,
-                    key: item.key,
-                  });
+                  onChangeSelected(item.name);
+                  setChooseOption(item.name);
+                  setToggleItem(index);
+                  handleShowOptions();
                 }}
                 key={item.key}
                 toggleItem={toggleItem}

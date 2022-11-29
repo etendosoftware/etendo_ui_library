@@ -31,7 +31,7 @@ export const PaginationStyleVariant: PaginationStyleRecord = {
     pageNumberText: {
       fontWeight: '500',
       fontFamily: 'Poppins',
-      fontSize: 9.5,
+      fontSize: 12,
       alignSelf: 'center',
     },
   },

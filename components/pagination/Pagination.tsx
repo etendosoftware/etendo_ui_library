@@ -11,6 +11,7 @@ export const Pagination = ({
   onChangeSelected,
   totalData,
   amountDataPerPage,
+  pagination,
 }: PaginationProps) => {
   // Will serve to set the page number where the user is
   const [page, setPage] = useState<number>(currentPage);
@@ -47,11 +48,7 @@ export const Pagination = ({
           onPress={() => {
             /* Allows to detect the selected item */
             backToFirstPage();
-            onChangeSelected({
-              name: '',
-              route: '',
-              key: '',
-            });
+            onChangeSelected(1, 0);
           }}
         >
           <img
@@ -65,11 +62,9 @@ export const Pagination = ({
           disabled={page <= 1}
           onPress={() => {
             backPage(page);
-            onChangeSelected({
-              name: '',
-              route: '',
-              key: '',
-            });
+            if (page !== 1) {
+              onChangeSelected(page - 1, pagination - amountDataPerPage);
+            }
           }}
         >
           <img
@@ -90,11 +85,9 @@ export const Pagination = ({
           disabled={page === pageNumbers.length}
           onPress={() => {
             nextPage(page);
-            onChangeSelected({
-              name: '',
-              route: '',
-              key: '',
-            });
+            if (page !== Math.ceil(totalData / 8)) {
+              onChangeSelected(page + 1, pagination + amountDataPerPage);
+            }
           }}
         >
           <img
@@ -108,11 +101,12 @@ export const Pagination = ({
           disabled={page === pageNumbers.length}
           onPress={() => {
             nextLastPage(pageNumbers);
-            onChangeSelected({
-              name: '',
-              route: '',
-              key: '',
-            });
+            if (page !== Math.ceil(totalData / 8)) {
+              onChangeSelected(
+                Math.ceil(totalData / amountDataPerPage),
+                totalData - 4,
+              );
+            }
           }}
         >
           <img

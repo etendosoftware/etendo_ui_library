@@ -12,26 +12,22 @@ import {
 export const DropdownStyleVariant: DropdownStyleRecord = {
   /* Primary style */
   primary: {
-    container: {
-      width: '17%',
-      padding: 5,
-    },
+    container: {flex: 1},
     dropDownButton: {
-      flex: 1,
-      backgroundColor: BLUE,
-      padding: 11,
+      backgroundColor: WHITE,
       borderRadius: 5,
       flexDirection: 'row',
-      justifyContent: 'space-between',
+      justifyContent: 'center',
       alignItems: 'center',
-      zIndex: 10,
+      width: '100%',
+      height: 34,
+      zIndex: 50,
     },
     dropDownButtonText: {
-      color: WHITE,
-      fontSize: 18,
+      color: BLUE,
+      fontSize: 13,
+      fontFamily: 'Poppins',
       fontWeight: '500',
-      flex: 1,
-      textAlign: 'center',
     },
     iconWithOptionsDisplayed: {
       width: 14,
@@ -49,19 +45,23 @@ export const DropdownStyleVariant: DropdownStyleRecord = {
       borderWidth: 1,
       borderColor: GREY_BLUE,
       borderRadius: 3,
-      top: -6,
+      width: '100%',
+      zIndex: 50,
     },
     option: {
       backgroundColor: GREY_5,
       borderBottomWidth: 1.5,
       borderBottomColor: GREY_BLUE_50,
       justifyContent: 'center',
+      borderRadius: 3,
     },
     textOption: {
-      margin: 10,
-      //   fontSize: 18,
+      margin: 4,
+      fontSize: 13,
       textAlign: 'left',
       fontWeight: '500',
+      color: BLUE,
+      fontFamily: 'Poppins',
     },
   },
 };
