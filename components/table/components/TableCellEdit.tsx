@@ -3,10 +3,10 @@ import {Image, Text, View} from 'react-native';
 import {styles} from '../Table.styles';
 import {TableCellProps} from '../Table.types';
 
-const TableCellEdit = ({label}: TableCellProps) => {
+const TableCellEdit = ({label, image}: TableCellProps) => {
   return (
     <View style={styles.centerItem}>
-      <img style={{width: 18}} src={'/assets/images/icons/edit.png'} />
+      <img style={{width: 18}} src={image} />
     </View>
   );
 };
