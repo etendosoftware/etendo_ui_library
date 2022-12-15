@@ -24,7 +24,6 @@ const getStyle = (style: TabStyleType, item: Info, pathname: any) => {
 const Tab = ({data, onChangeSelected, style, typeSizeText}: TabProps) => {
   /* Variable to handle the state of the tabs */
   const [toggleItem, setToggleItem] = useState<number>(-1);
-  // const {height} = useWindowDimensions();
   const router = useRouter();
   const {pathname} = router;
 

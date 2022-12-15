@@ -1,12 +1,10 @@
 /* Imports */
 import React from 'react';
 
-import {View} from 'react-native';
-import {BLUE, WHITE, YELLOW} from '../../styles/colors';
+import {Platform} from 'react-native';
 import {StatusBarStyleVariant} from './StatusBar.styles';
-// import {StatusBarStyleVariant} from './StatusBar.styles';
 
-import {StatusBarProps, StatusBarStyleRecord} from './StatusBar.types';
+import {StatusBarProps} from './StatusBar.types';
 import {StepActive} from './StepActive';
 import {StepDisabled} from './StepDisabled';
 
@@ -17,6 +15,7 @@ export const ViewEtendo = (props: any) => {
 };
 
 export const StatusBar = ({data, step}: StatusBarProps) => {
+  console.log(Platform.OS);
   return (
     <ViewEtendo style={StatusBarStyleVariant.primary.statusBarContainer}>
       {data.map((item, idx) => {

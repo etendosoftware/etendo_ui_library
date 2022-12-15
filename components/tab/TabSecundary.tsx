@@ -1,12 +1,9 @@
 /* Imports */
 import React, {useState} from 'react';
-import {ScrollView, useWindowDimensions, View} from 'react-native';
+import {ScrollView, View} from 'react-native';
 
-import TabItem from './TabItem';
 import {TabProps, Info, TabStyleType} from './Tab.types';
 import {TabStyleVariant} from './Tab.styles';
-import {GREY_BLUE_30, BLUE} from '../../styles/colors';
-import Link from 'next/link';
 import {useRouter} from 'next/router';
 import TabItemSecundary from './TabItemSecundary';
 
@@ -33,7 +30,6 @@ const TabSecundary = ({
 }: TabProps) => {
   /* Variable to handle the state of the tabs */
   const [toggleItem, setToggleItem] = useState<number>(-1);
-  // const {height} = useWindowDimensions();
   const router = useRouter();
   const {pathname} = router;
 
