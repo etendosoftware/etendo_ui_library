@@ -177,6 +177,5 @@ export const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     paddingHorizontal: 10,
     justifyContent: 'center',
-    // height: '100%',
   },
 });

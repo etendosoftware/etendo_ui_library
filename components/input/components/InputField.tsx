@@ -28,8 +28,6 @@ const InputField = ({
 }: InputFieldProps) => {
   const [showImg, setShowImg] = useState<boolean>(false);
 
-  /*height calculated with actual font size (+10 would be the smallest size)*/
-
   const getStyleText = (text: string | undefined) => {
     let style: Array<TextStyle | TextStyle[]> = [];
 
