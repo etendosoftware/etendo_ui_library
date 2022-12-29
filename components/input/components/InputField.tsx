@@ -34,7 +34,6 @@ const InputField = ({
     let style: Array<TextStyle | TextStyle[]> = [];
 
     if (text) {
-      console.log('styles', styleField.textDefault);
       style.push(styleField.textDefault, {fontSize: fontSize});
     } else {
       style.push(styleField.textPlaceholder, {fontSize: fontSize});
