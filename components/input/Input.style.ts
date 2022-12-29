@@ -10,7 +10,6 @@ import {
   PURPLE_50,
   RED,
   RED_10,
-  WHITE,
 } from '../../styles/colors';
 
 export const inputVariants: InputVariantsType = {
@@ -82,20 +81,17 @@ const defaultTitle: TextStyle = {
 };
 
 const defaultField: ViewStyle = {
-  backgroundColor: WHITE,
-  paddingVertical: 0,
   borderWidth: 1,
   borderColor: BLUE,
-  borderRadius: 3,
+  marginVertical: 5,
+  borderRadius: 5,
   flexDirection: 'row',
   alignItems: 'center',
 };
 
 const defaultText: TextStyle = {
-  flex: 1,
-  paddingVertical: 0,
-  textAlignVertical: 'center',
-  paddingLeft: 7,
+  width: '100%',
+  padding: 10,
   color: BLUE,
   fontSize: 14,
   fontWeight: '500',
@@ -103,12 +99,10 @@ const defaultText: TextStyle = {
 };
 
 const defaultTextPlaceholder: TextStyle = {
-  flex: 1,
-  paddingVertical: 0,
-  textAlignVertical: 'center',
-  paddingLeft: 7,
-  color: GREY_BLUE,
+  width: '100%',
   fontSize: 14,
+  padding: 10,
+  color: GREY_BLUE,
   fontWeight: '500',
   fontFamily: FONT_MEDIUM,
 };
@@ -178,12 +172,11 @@ export const styles = StyleSheet.create({
   rowHelperText: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop:5,
   },
   buttonContainerInputField: {
     alignSelf: 'flex-start',
-    paddingHorizontal: 7,
+    paddingHorizontal: 10,
     justifyContent: 'center',
-    height: '100%',
+    // height: '100%',
   },
 });

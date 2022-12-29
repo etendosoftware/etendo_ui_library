@@ -21,6 +21,8 @@ const Input: React.FC<InputProps> = ({
   onChangeText,
   typeField,
   isError,
+  fontSize,
+  password,
 }) => {
   const stateStyle = () => {
     if (typeField === 'onlyRead') {
@@ -56,6 +58,8 @@ const Input: React.FC<InputProps> = ({
         maxLength={maxLength}
         numberOfLines={numberOfLines}
         centerText={centerText}
+        fontSize={fontSize}
+        password={password}
       />
       <InputHelperText
         label={helperText}
