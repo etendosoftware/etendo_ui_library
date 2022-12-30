@@ -163,7 +163,6 @@ export const inputStyleVariants: TypeInputStyleVariant = {
 export const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
-    justifyContent: 'center',
   },
   rowInputTitle: {
     flexDirection: 'row',

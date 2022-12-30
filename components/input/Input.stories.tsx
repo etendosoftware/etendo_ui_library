@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React from 'react';
+import {useState} from '@storybook/addons';
 import {Story, Meta} from '@storybook/react';
 import Input from '../input/Input';
 import {InputProps} from './Input.types';
@@ -125,7 +126,7 @@ TextInput.args = {
   numberOfLines: 5,
   typeField: 'textInput',
   isError: false,
-  fontSize: 20,
+  fontSize: 25,
   password: true,
   onPress: () => {
     console.log('Press Field');
