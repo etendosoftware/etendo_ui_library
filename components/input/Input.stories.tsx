@@ -1,6 +1,7 @@
 import React from 'react';
 import {Story, Meta} from '@storybook/react';
-import Input  from '../input/Input';
+import {Input} from '../input/index'
+import {action} from '@storybook/addon-actions';
 import {InputProps} from './Input.types';
 
 const meta: Meta = {
@@ -29,8 +30,9 @@ OnlyRead.args =
   numberOfLines: 1,
   typeField:'onlyRead',
   isError:true,
+  keyboardType:'text',
   onPress:()=> {console.log('Press Field')},
-  onChangeText:(text)=>console.log(text),
+  onChangeText:(text)=> action('onAction')(text),
   onFocus:()=> {console.log('On Focus')},
   onBlur:()=> {console.log('On Blur')},
 }
@@ -45,6 +47,7 @@ Picker.args =
   numberOfLines: 1,
   typeField:'picker',
   isError:false,
+  keyboardType:'text',
   onPress:()=> {console.log('Press Field')},
   onChangeText:(text)=>console.log(text),
   onFocus:()=> {console.log('On Focus')},
@@ -61,6 +64,7 @@ SearchPressable.args =
   numberOfLines: 1,
   typeField:'searchPressable',
   isError:false,
+  keyboardType:'text',
   onPress:()=> {console.log('Press Field')},
   onChangeText:(text)=>console.log(text),
   onFocus:()=> {console.log('On Focus')},
@@ -77,7 +81,11 @@ SearchTextInput.args =
   numberOfLines: 1,
   typeField:'searchTextInput',
   isError:false,
- 
+  keyboardType:'text',
+  onPress:()=> {console.log('Press Field')},
+  onChangeText:(text)=> action('onAction')(text),
+  onFocus:()=> {console.log('On Focus')},
+  onBlur:()=> {console.log('On Blur')},
 }
 
 TextPressable.args =
@@ -86,10 +94,10 @@ TextPressable.args =
   helperText:'Only characters',
   placeholder:'Write a password',
   disabled:false,
-  value:'',
   numberOfLines: 5,
   typeField:'textPressable',
   isError:false,
+  keyboardType:'text',
   onPress:()=> {console.log('Press Field')},
   onChangeText:(text)=>console.log(text),
   onFocus:()=> {console.log('On Focus')},
@@ -107,8 +115,8 @@ TextInput.args =
   numberOfLines: 5,
   typeField:'textInput',
   isError:false,
+  keyboardType:'text',
   onPress:()=> {console.log('Press Field')},
-  onChangeText:(text)=>console.log(text),
   onFocus:()=> {console.log('On Focus')},
   onBlur:()=> {console.log('On Blur')},
 }

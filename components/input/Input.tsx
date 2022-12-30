@@ -14,6 +14,7 @@ const Input: React.FC<InputProps> = ({
   maxLength,
   numberOfLines,
   centerText,
+  keyboardType,
   onPress,
   onSubmit,
   onFocus,
@@ -53,6 +54,7 @@ const Input: React.FC<InputProps> = ({
         onFocus={onFocus ? onFocus : () => {}}
         onBlur={onBlur ? onBlur : () => {}}
         onChangeText={onChangeText}
+        keyboardType={keyboardType}
         maxLength={maxLength}
         numberOfLines={numberOfLines}
         centerText={centerText}

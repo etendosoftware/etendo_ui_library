@@ -4,11 +4,11 @@ import {
   Text,
   TextInput,
   TextStyle,
-  TouchableOpacity,
+  TouchableOpacity,KeyboardType
 } from 'react-native';
 import {getImageStyle} from '../../../helpers/image_utils'
 import {styles} from '../Input.style';
-import {InputFieldProps} from '../Input.types';
+import {InputFieldProps, KeyboardTypes} from '../Input.types';
 
 const InputField = ({
   configField,
@@ -19,6 +19,7 @@ const InputField = ({
   maxLength,
   numberOfLines,
   centerText,
+  keyboardType,
   onPress,
   onSubmit,
   onChangeText,
@@ -28,6 +29,7 @@ const InputField = ({
   const [showImg, setShowImg] = useState<boolean>(false);
   const heightLines = 12;
   const numberLines = numberOfLines && numberOfLines >= 1 ? numberOfLines : 1;
+  const regex = /^[0-9.,]+$/g;
 
   /*height calculated with actual font size (+10 would be the smallest size)*/
   const heightFinal = heightLines * numberLines + 10;
@@ -51,6 +53,23 @@ const InputField = ({
     return style;
   };
 
+  const getKeyboardType = (keyboardType:KeyboardTypes | undefined):KeyboardType | undefined => {
+    if(keyboardType === 'number'){
+      return 'numeric'
+    }
+    return 'default'
+  }
+
+  const getOnChangeText = (text: string) => {
+    if(onChangeText) {
+      let result:string = ''
+      if(keyboardType === 'number'){
+        result = text.replace(regex, ``);
+      } 
+      onChangeText(result)
+    }
+  }
+ 
   useEffect(() => {
     configField?.image ? setShowImg(true) : setShowImg(false);
   }, [configField?.image]);
@@ -70,10 +89,11 @@ const InputField = ({
               onFocus={onFocus}
               value={value}
               style={getStyleText(value)}
-              onChangeText={onChangeText}
+              onChangeText={getOnChangeText}
               multiline={true}
               placeholder={placeholder}
               maxLength={maxLength}
+              keyboardType={getKeyboardType(keyboardType)}
             />
           );
         }
