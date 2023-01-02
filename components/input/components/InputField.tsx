@@ -113,18 +113,28 @@ const InputField = ({
       {(() => {
         if (showImg) {
           return (
-            <TouchableOpacity
-              onPress={onSubmit}
-              style={styles.buttonContainerInputField}
-              disabled={configField?.disabledSubmit || disabled}
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                flex: 1,
+                position: 'absolute',
+                right: 10,
+              }}
             >
-              {configField?.image?.imgRoute && (
-                <Image
-                  source={configField?.image?.imgRoute}
-                  style={getImageStyle(configField.image, disabled)}
-                />
-              )}
-            </TouchableOpacity>
+              <TouchableOpacity
+                onPress={onSubmit}
+                style={styles.buttonContainerInputField}
+                disabled={configField?.disabledSubmit || disabled}
+              >
+                {configField?.image?.imgRoute && (
+                  <Image
+                    source={configField?.image?.imgRoute}
+                    style={getImageStyle(configField.image, disabled)}
+                  />
+                )}
+              </TouchableOpacity>
+            </View>
           );
         }
       })()}
