@@ -75,6 +75,8 @@ export interface InputProps {
   numberOfLines?: number;
   typeField: InputFieldVariants;
   keyboardType?: KeyboardTypes;
+  fontSize?: number;
+  password?: boolean;
   onPress?: (event: GestureResponderEvent) => void;
   onSubmit?: (event: GestureResponderEvent) => void;
   onChangeText?: (text: string) => void;
@@ -109,6 +111,8 @@ export interface InputFieldProps {
   maxLength?: number;
   centerText?: boolean;
   numberOfLines?: number;
+  fontSize?: number;
+  password?: boolean;
   onPress?: (event: GestureResponderEvent) => void;
   onSubmit?: (event: GestureResponderEvent) => void;
   onChangeText?: (text: string) => void;
