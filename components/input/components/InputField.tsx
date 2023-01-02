@@ -52,11 +52,13 @@ const InputField = ({
 
   const getOnChangeText = (text: string) => {
     if(onChangeText) {
-      let result:string = ''
       if(keyboardType === 'number'){
-        result = text.replace(regex, ``);
-      } 
-      onChangeText(result)
+        if(text.match(regex)){
+          onChangeText(text)
+        }
+        return
+      }
+      onChangeText(text)
     }
   }
  
@@ -92,7 +94,7 @@ const InputField = ({
                   {paddingRight: password ? 50 : 10},
                 ]}
                 keyboardType={getKeyboardType(keyboardType)}
-                onChangeText={onChangeText}
+                onChangeText={getOnChangeText}
                 placeholder={placeholder}
                 maxLength={maxLength}
                 secureTextEntry={showPassword}
