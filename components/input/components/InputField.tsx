@@ -10,8 +10,7 @@ import {
 import {getImageStyle} from '../../../helpers/image_utils';
 import {styles} from '../Input.style';
 import {InputFieldProps} from '../Input.types';
-import {webPasswordImage} from '../../../assets/images/';
-import {mobilePasswordImage} from '../../../assets/images/';
+import {webPasswordImage, mobilePasswordImage} from '../../../assets/images/';
 
 const InputField = ({
   configField,
