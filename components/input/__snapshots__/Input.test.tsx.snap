@@ -86,10 +86,10 @@ exports[`Running Test for Input Check Input Error 1`] = `
               Object {
                 "fontSize": undefined,
               },
+              Object {
+                "paddingRight": 10,
+              },
             ],
-            Object {
-              "paddingRight": 10,
-            },
           ]
         }
         value="Render Test"
