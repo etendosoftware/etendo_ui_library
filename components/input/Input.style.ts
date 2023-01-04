@@ -188,4 +188,8 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     right: 10,
   },
+  passwordImage: {
+    height: 22,
+    width: 22,
+  },
 });

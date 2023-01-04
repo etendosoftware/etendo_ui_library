@@ -11,7 +11,7 @@ import {
 import {getImageStyle} from '../../../helpers/image_utils';
 import {styles} from '../Input.style';
 import {InputFieldProps, KeyboardTypes} from '../Input.types';
-import {webPasswordImage,mobilePasswordImage} from '../../../assets/images/';
+import {webPasswordImage, mobilePasswordImage} from '../../../assets/images/';
 
 const InputField = ({
   configField,
@@ -108,10 +108,7 @@ const InputField = ({
                     source={
                       !showPassword ? webPasswordImage : mobilePasswordImage
                     }
-                    style={{
-                      height: 22,
-                      width: 22,
-                    }}
+                    style={styles.passwordImage}
                   />
                 </TouchableOpacity>
               )}
