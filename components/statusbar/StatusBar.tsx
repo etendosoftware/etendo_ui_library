@@ -15,7 +15,6 @@ export const ViewEtendo = (props: any) => {
 };
 
 export const StatusBar = ({data, step}: StatusBarProps) => {
-  console.log(Platform.OS);
   return (
     <ViewEtendo style={StatusBarStyleVariant.primary.statusBarContainer}>
       {data.map((item, idx) => {

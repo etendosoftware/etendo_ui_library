@@ -1,22 +1,35 @@
 /* Imports */
 import React, {useState} from 'react';
-import {ScrollView, useWindowDimensions, View} from 'react-native';
+import {Platform, ScrollView, useWindowDimensions, View} from 'react-native';
 
 import TabItem from './TabItem';
 import {TabProps, Info, TabStyleType} from './Tab.types';
 import {TabStyleVariant} from './Tab.styles';
-import {GREY_BLUE_30, BLUE} from '../../styles/colors';
-import Link from 'next/link';
 import {useRouter} from 'next/router';
 
-/* Styles - This function allows you to obtain the styles of the Tab component */
+const isWeb = Platform.OS;
 
-const getStyle = (style: TabStyleType, item: Info, pathname: any) => {
+/* Styles - This function allows you to obtain the styles of the Tab component */
+const getStyle = (
+  style: TabStyleType,
+  item: Info,
+  pathname: any,
+  toggleItem?: any,
+  index?: number,
+) => {
   /* Returns the style chosen by the programmer */
-  if (item.route === pathname) {
-    return [TabStyleVariant[style].tabs, TabStyleVariant[style].tabsActive];
-  } else {
-    return TabStyleVariant[style].tabs;
+  if (isWeb) {
+    if (item.route === pathname) {
+      return [TabStyleVariant[style].tabs, TabStyleVariant[style].tabsActive];
+    } else {
+      return TabStyleVariant[style].tabs;
+    }
+  } else if (toggleItem === index) {
+    if (item.route === pathname) {
+      return [TabStyleVariant[style].tabs, TabStyleVariant[style].tabsActive];
+    } else {
+      return TabStyleVariant[style].tabs;
+    }
   }
 };
 
@@ -33,7 +46,7 @@ const Tab = ({data, onChangeSelected, style, typeSizeText}: TabProps) => {
         {data.map((item: Info, index: number) => {
           return (
             <TabItem
-              style={getStyle(style, item, pathname)}
+              style={getStyle(style, item, pathname, toggleItem, index)}
               styleText={style}
               sizeText={typeSizeText}
               item={item}

@@ -25,8 +25,6 @@ export const NavbarHDesktop = ({
                 /* Primary */
                 height: 27,
                 marginLeft: 14,
-
-                // tintColor: currentNav === title ? BLUE : WHITE,
               }}
             />
           </Link>
@@ -53,7 +51,6 @@ export const NavbarHDesktop = ({
                       /* Primary */
                       height: 22,
                       marginRight: 28,
-                      // tintColor: currentNav === title ? BLUE : WHITE,
                     }}
                   />
                 </TouchableOpacity>
@@ -71,7 +68,6 @@ export const NavbarHDesktop = ({
                   height: 22,
                   marginLeft: 20,
                   marginRight: 7,
-                  // tintColor: currentNav === title ? BLUE : WHITE,
                 }}
               />
             )}
