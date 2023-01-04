@@ -175,4 +175,17 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 10,
     justifyContent: 'center',
   },
+  passwordContainer: {
+    right: 20,
+    position: 'absolute',
+    alignSelf: 'center',
+    marginLeft: 10,
+  },
+  showImgContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+    position: 'absolute',
+    right: 10,
+  },
 });
