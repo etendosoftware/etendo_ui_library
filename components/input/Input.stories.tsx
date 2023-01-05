@@ -126,7 +126,7 @@ TextInput.args = {
   numberOfLines: 5,
   typeField: 'textInput',
   isError: false,
-  fontSize: 25,
+  fontSize: 14,
   password: true,
   onPress: () => {
     console.log('Press Field');
