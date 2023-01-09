@@ -14,6 +14,7 @@ const Input: React.FC<InputProps> = ({
   maxLength,
   numberOfLines,
   centerText,
+  keyboardType,
   onPress,
   onSubmit,
   onFocus,
@@ -21,6 +22,8 @@ const Input: React.FC<InputProps> = ({
   onChangeText,
   typeField,
   isError,
+  fontSize,
+  password,
 }) => {
   const stateStyle = () => {
     if (typeField === 'onlyRead') {
@@ -53,9 +56,12 @@ const Input: React.FC<InputProps> = ({
         onFocus={onFocus ? onFocus : () => {}}
         onBlur={onBlur ? onBlur : () => {}}
         onChangeText={onChangeText}
+        keyboardType={keyboardType}
         maxLength={maxLength}
         numberOfLines={numberOfLines}
         centerText={centerText}
+        fontSize={fontSize}
+        password={password}
       />
       <InputHelperText
         label={helperText}
