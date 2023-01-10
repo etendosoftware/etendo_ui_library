@@ -45,6 +45,11 @@ const InputField = ({
 
     return style;
   };
+  useEffect(()=> {
+    if(!password){
+      setShowPassword(false)
+    }
+  },[password])
 
   const getKeyboardType = (keyboardType:KeyboardTypes | undefined):KeyboardType | undefined => {
     if(keyboardType === 'number'){
