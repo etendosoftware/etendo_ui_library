@@ -39,6 +39,11 @@ const InputField = ({
 
     return style;
   };
+  useEffect(()=> {
+    if(!password){
+      setShowPassword(false)
+    }
+  },[password])
 
   useEffect(() => {
     configField?.image ? setShowImg(true) : setShowImg(false);
