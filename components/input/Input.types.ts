@@ -24,6 +24,8 @@ export type InputFieldVariants =
   | 'searchTextInput'
   | 'searchPressable';
 
+export type KeyboardTypes = 'text' | 'number';
+
 export type InputFieldConfigType = {
   type: InputFieldType;
   image?: ImageType;
@@ -72,6 +74,7 @@ export interface InputProps {
   centerText?: boolean;
   numberOfLines?: number;
   typeField: InputFieldVariants;
+  keyboardType?: KeyboardTypes;
   fontSize?: number;
   password?: boolean;
   onPress?: (event: GestureResponderEvent) => void;
@@ -98,6 +101,7 @@ export interface InputFieldProps {
   value?: string;
   placeholder?: string;
   configField: InputFieldConfigType;
+  keyboardType?: KeyboardTypes;
   styleField: {
     field: ViewStyle | ViewStyle[];
     focus: ViewStyle | ViewStyle[];

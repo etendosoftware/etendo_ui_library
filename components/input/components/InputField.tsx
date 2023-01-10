@@ -5,11 +5,12 @@ import {
   TextInput,
   TextStyle,
   TouchableOpacity,
-  View,
+  KeyboardType, 
+  View
 } from 'react-native';
 import {getImageStyle} from '../../../helpers/image_utils';
 import {styles} from '../Input.style';
-import {InputFieldProps} from '../Input.types';
+import {InputFieldProps, KeyboardTypes} from '../Input.types';
 import {webPasswordImage, mobilePasswordImage} from '../../../assets/images/';
 
 const InputField = ({
@@ -19,6 +20,7 @@ const InputField = ({
   disabled,
   placeholder,
   maxLength,
+  keyboardType,
   onPress,
   onSubmit,
   onChangeText,
@@ -28,6 +30,7 @@ const InputField = ({
   password,
 }: InputFieldProps) => {
   const [showImg, setShowImg] = useState<boolean>(false);
+  const regex = /^[0-9.,]+$/g;
 
   const getStyleText = (text: string | undefined, password?: boolean) => {
     let style: Array<TextStyle | TextStyle[]> = [];
@@ -48,6 +51,25 @@ const InputField = ({
     }
   },[password])
 
+  const getKeyboardType = (keyboardType:KeyboardTypes | undefined):KeyboardType | undefined => {
+    if(keyboardType === 'number'){
+      return 'numeric'
+    }
+    return 'default'
+  }
+
+  const getOnChangeText = (text: string) => {
+    if(onChangeText) {
+      if(keyboardType === 'number'){
+        if(text.match(regex)){
+          onChangeText(text)
+        }
+        return
+      }
+      onChangeText(text)
+    }
+  }
+ 
   useEffect(() => {
     configField?.image ? setShowImg(true) : setShowImg(false);
   }, [configField?.image]);
@@ -75,8 +97,9 @@ const InputField = ({
                 onBlur={onBlur}
                 onFocus={onFocus}
                 value={value}
+                keyboardType={getKeyboardType(keyboardType)}
+                onChangeText={getOnChangeText}
                 style={[getStyleText(value, password)]}
-                onChangeText={onChangeText}
                 placeholder={placeholder}
                 maxLength={maxLength}
                 secureTextEntry={showPassword}

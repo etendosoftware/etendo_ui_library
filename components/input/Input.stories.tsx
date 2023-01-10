@@ -32,6 +32,7 @@ OnlyRead.args = {
   numberOfLines: 1,
   typeField: 'onlyRead',
   isError: true,
+  keyboardType:'text',
   onPress: () => {
     console.log('Press Field');
   },
@@ -53,6 +54,7 @@ Picker.args = {
   numberOfLines: 1,
   typeField: 'picker',
   isError: false,
+  keyboardType:'text',
   onPress: () => {
     console.log('Press Field');
   },
@@ -74,6 +76,7 @@ SearchPressable.args = {
   numberOfLines: 1,
   typeField: 'searchPressable',
   isError: false,
+  keyboardType:'text',
   onPress: () => {
     console.log('Press Field');
   },
@@ -95,6 +98,7 @@ SearchTextInput.args = {
   numberOfLines: 1,
   typeField: 'searchTextInput',
   isError: false,
+  keyboardType:'text',
 };
 
 TextPressable.args = {
@@ -106,10 +110,10 @@ TextPressable.args = {
   numberOfLines: 5,
   typeField: 'textPressable',
   isError: false,
+  keyboardType:'text',
   onPress: () => {
     console.log('Press Field');
   },
-  onChangeText: text => console.log(text),
   onFocus: () => {
     console.log('On Focus');
   },
@@ -128,6 +132,8 @@ TextInput.args = {
   isError: false,
   fontSize: 14,
   password: true,
+  keyboardType:'text',
+  onChangeText: text => console.log(text),
   onPress: () => {
     console.log('Press Field');
   },
