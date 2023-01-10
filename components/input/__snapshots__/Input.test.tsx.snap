@@ -1,0 +1,124 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Running Test for Input Check Input Error 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#202452",
+          "fontFamily": "Inter-Medium",
+          "fontSize": 14,
+        }
+      }
+    >
+      Test
+    </Text>
+  </View>
+  <View
+    accessibilityState={
+      Object {
+        "disabled": true,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "borderColor": "#F36A62",
+        "borderRadius": 5,
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "marginVertical": 5,
+        "opacity": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "width": "100%",
+        }
+      }
+    >
+      <TextInput
+        editable={true}
+        focusable={true}
+        onBlur={[Function]}
+        onChangeText={[Function]}
+        onFocus={[Function]}
+        placeholder="Write a password"
+        style={
+          Array [
+            Array [
+              Object {
+                "color": "#202452",
+                "fontFamily": "Inter-Medium",
+                "fontSize": 14,
+                "fontWeight": "500",
+                "padding": 10,
+                "width": "100%",
+              },
+              Object {
+                "fontSize": undefined,
+              },
+              Object {
+                "paddingRight": 10,
+              },
+            ],
+          ]
+        }
+        value="Render Test"
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#808080",
+            "fontFamily": "Inter-Regular",
+            "fontSize": 14,
+          },
+          Object {
+            "color": "#F36A62",
+          },
+        ]
+      }
+    >
+      Only characters
+    </Text>
+  </View>
+</View>
+`;
