@@ -46,8 +46,8 @@ const Dropdown = ({
           {chooseOption}
         </Text>
         {showOptions ? (
-          <img
-            src={'/assets/images/icons/arrow-picker-top.png'}
+          <Image
+            source={require('../../assets/images/icons/arrow-picker-top.png')}
             style={{
               width: 10,
               position: 'absolute',
@@ -55,8 +55,8 @@ const Dropdown = ({
             }}
           />
         ) : (
-          <img
-            src={'/assets/images/icons/arrow-picker.png'}
+          <Image
+            source={require('../../assets/images/icons/arrow-picker.png')}
             style={{
               width: 10,
               position: 'absolute',

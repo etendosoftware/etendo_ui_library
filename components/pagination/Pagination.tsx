@@ -1,7 +1,7 @@
 /* Imports */
 import React, {useState} from 'react';
 
-import {Text, View, Image, TouchableOpacity} from 'react-native';
+import {Text, View, Image, TouchableOpacity, Platform} from 'react-native';
 import {PaginationStyleVariant} from './Pagination.styles';
 import {PaginationProps} from './Pagination.types';
 
@@ -51,11 +51,18 @@ export const Pagination = ({
             onChangeSelected(1, 0);
           }}
         >
-          <img
-            src={'/assets/images/icons/back-double-button.png'}
-            alt="edit"
-            style={{width: 10, height: 10, marginRight: 10}}
-          />
+          {Platform.OS === 'web' ? (
+            <img
+              src={'/assets/images/icons/back-double-button.png'}
+              alt="back-double-button"
+              style={{width: 10, height: 10, marginRight: 10}}
+            />
+          ) : (
+            <Image
+              source={require('../../assets/images/icons/back-double-button.png')}
+              style={{width: 10, height: 10, marginRight: 10}}
+            />
+          )}
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -67,11 +74,18 @@ export const Pagination = ({
             }
           }}
         >
-          <img
-            src={'/assets/images/icons/back-button.png'}
-            alt="edit"
-            style={{width: 10, height: 10, marginRight: 10}}
-          />
+          {Platform.OS === 'web' ? (
+            <img
+              src={'/assets/images/icons/back-button.png'}
+              alt="back-button"
+              style={{width: 10, height: 10, marginRight: 10}}
+            />
+          ) : (
+            <Image
+              source={require('../../assets/images/icons/back-button.png')}
+              style={{width: 10, height: 10, marginRight: 10}}
+            />
+          )}
         </TouchableOpacity>
 
         {/* Text with layout to display the page number the user is on */}
@@ -90,11 +104,18 @@ export const Pagination = ({
             }
           }}
         >
-          <img
-            src={'/assets/images/icons/next-button.png'}
-            alt="edit"
-            style={{width: 10, height: 10, marginRight: 10}}
-          />
+          {Platform.OS === 'web' ? (
+            <img
+              src={'/assets/images/icons/next-button.png'}
+              alt="next-button"
+              style={{width: 10, height: 10, marginRight: 10}}
+            />
+          ) : (
+            <Image
+              source={require('../../assets/images/icons/next-button.png')}
+              style={{width: 10, height: 10, marginRight: 10}}
+            />
+          )}
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -109,11 +130,18 @@ export const Pagination = ({
             }
           }}
         >
-          <img
-            src={'/assets/images/icons/next-double-button.png'}
-            alt="edit"
-            style={{width: 10, height: 10, marginRight: 10}}
-          />
+          {Platform.OS === 'web' ? (
+            <img
+              src={'/assets/images/icons/next-double-button.png'}
+              alt="next-double-button"
+              style={{width: 10, height: 10, marginRight: 10}}
+            />
+          ) : (
+            <Image
+              source={require('../../assets/images/icons/next-double-button.png')}
+              style={{width: 10, height: 10, marginRight: 10}}
+            />
+          )}
         </TouchableOpacity>
       </View>
     </View>
