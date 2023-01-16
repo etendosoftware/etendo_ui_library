@@ -1,23 +1,17 @@
 /* Imports */
 import React from 'react';
-import {Platform, Text, TouchableOpacity} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
 
 import {TabItemProps, TabStyleType, TabStyleFontSize, Info} from './Tab.types';
 import {TabStyleVariant} from './Tab.styles';
 import {WHITE, BLUE, GREY_BLUE} from '../../styles/colors';
-import Link from 'next/link';
-import {useRouter} from 'next/router';
-
-const isWeb = Platform.OS;
 
 /* Styles - This function allows to obtain the text styles of the TabItem component */
 const getStyle = (
   style: TabStyleType,
   textStyle: TabStyleFontSize,
-  item?: Info,
-  pathname?: any,
-  toggleItem?: number,
-  index?: number,
+  item: Info,
+  pathname: string | undefined,
 ) => {
   let colorActive: string = '';
   let colorInactive: string = '';
@@ -53,14 +47,6 @@ const getStyle = (
   }
 
   /* Returns the style of the chosen text based on the selected styles of the Tab component */
-  if (isWeb) {
-    return [
-      {color: toggleItem === index ? colorActive : colorInactive},
-      {fontSize: fontSize},
-      TabStyleVariant[style].itemText,
-    ];
-  }
-
   return [
     {color: item.route === pathname ? colorActive : colorInactive},
     {fontSize: fontSize},
@@ -77,9 +63,10 @@ const TabItem = ({
   index,
   onPress,
   toggleItem,
+  renderItem,
+  pathname,
 }: TabItemProps) => {
-  const router = useRouter();
-  const {pathname} = router;
+  const styles = getStyle(styleText, sizeText, item, pathname);
 
   return (
     <TouchableOpacity
@@ -90,25 +77,10 @@ const TabItem = ({
       }}
       key={item.key}
     >
-      {isWeb ? (
-        <Text
-          style={getStyle(
-            styleText,
-            sizeText,
-            undefined,
-            undefined,
-            toggleItem,
-            index,
-          )}
-        >
-          {item.name}
-        </Text>
+      {!renderItem ? (
+        <Text style={styles}>{item.name}</Text>
       ) : (
-        <Link href={item.route}>
-          <Text style={getStyle(styleText, sizeText, item, pathname)}>
-            {item.name}
-          </Text>
-        </Link>
+        renderItem(item, styles)
       )}
     </TouchableOpacity>
   );

@@ -13,6 +13,8 @@ export interface TabProps {
   onChangeSelected: (Info: Info | undefined) => Info | Array<Info>;
   style: TabStyleType;
   typeSizeText: TabStyleFontSize;
+  renderItem: any;
+  pathname?: any;
 }
 
 export interface TabItemProps {
@@ -23,6 +25,8 @@ export interface TabItemProps {
   toggleItem: number;
   styleText: TabStyleType;
   sizeText: TabStyleFontSize;
+  renderItem: (item: any, styles: any) => JSX.Element;
+  pathname?: string;
 }
 
 /* Declaration of style types */

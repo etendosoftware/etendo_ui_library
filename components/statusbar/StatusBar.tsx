@@ -1,7 +1,6 @@
 /* Imports */
 import React from 'react';
 
-import {Platform} from 'react-native';
 import {StatusBarStyleVariant} from './StatusBar.styles';
 
 import {StatusBarProps} from './StatusBar.types';

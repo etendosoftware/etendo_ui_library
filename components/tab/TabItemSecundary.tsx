@@ -5,15 +5,13 @@ import {Text, TouchableOpacity} from 'react-native';
 import {TabItemProps, TabStyleType, TabStyleFontSize, Info} from './Tab.types';
 import {TabStyleVariant} from './Tab.styles';
 import {WHITE, BLUE, GREY_BLUE} from '../../styles/colors';
-import Link from 'next/link';
-import {useRouter} from 'next/router';
 
 /* Styles - This function allows to obtain the text styles of the TabItem component */
 const getStyle = (
   style: TabStyleType,
   textStyle: TabStyleFontSize,
   item: Info,
-  pathname: any,
+  pathname: string | undefined,
 ) => {
   let colorActive: string = '';
   let colorInactive: string = '';
@@ -52,7 +50,7 @@ const getStyle = (
   return [
     {color: item.route === pathname ? colorActive : colorInactive},
     {fontSize: fontSize},
-    TabStyleVariant[style].itemTextSecundary,
+    TabStyleVariant[style].itemText,
   ];
 };
 
@@ -65,9 +63,10 @@ const TabItemSecundary = ({
   index,
   onPress,
   toggleItem,
+  renderItem,
+  pathname,
 }: TabItemProps) => {
-  const router = useRouter();
-  const {pathname} = router;
+  const styles = getStyle(styleText, sizeText, item, pathname);
 
   return (
     <TouchableOpacity
@@ -78,11 +77,11 @@ const TabItemSecundary = ({
       }}
       key={item.key}
     >
-      <Link href={item.route}>
-        <Text style={getStyle(styleText, sizeText, item, pathname)}>
-          {item.name}
-        </Text>
-      </Link>
+      {!renderItem ? (
+        <Text style={styles}>{item.name}</Text>
+      ) : (
+        renderItem(item, styles)
+      )}
     </TouchableOpacity>
   );
 };
