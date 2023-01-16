@@ -2,7 +2,7 @@
 
 /* Imports */
 import React from 'react';
-import {Image, Text, TouchableOpacity} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
 
 import {Info, NavbarHorizontalProps} from '../Navbar.types';
 import {NavbarHStyleVariant} from '../Navbar.styles';
