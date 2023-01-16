@@ -96,7 +96,6 @@ export const TabStyleVariant: TabStyleRecord = {
 
     tabsActive: {backgroundColor: YELLOW},
     itemText: {
-      // fontFamily: INTER_SEMIBOLD,
       textTransform: 'uppercase',
       fontWeight: '500',
     },
