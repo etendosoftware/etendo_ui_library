@@ -27,7 +27,6 @@ const Tab = ({
 }: TabProps) => {
   /* Variable to handle the state of the tabs */
   const [toggleItem, setToggleItem] = useState<number>(-1);
-  // const {height} = useWindowDimensions();
 
   return (
     <View style={TabStyleVariant.primary.container}>

@@ -73,11 +73,6 @@ const Table: React.FC<TableProps> = ({data, columns, title, onRowPress}) => {
           keyExtractor={(item: any, index: number) => 'Table: ' + index}
         />
       </View>
-      {/* {!data.length && (
-        <View style={[styles.placeholderContainer]}>
-          <Text style={[styles.titleText]}>No results.</Text>
-        </View>
-      )} */}
     </>
   );
 };

@@ -2,7 +2,6 @@ import {
   ColorValue,
   GestureResponderEvent,
   ImageSourcePropType,
-  KeyboardType,
   NativeSyntheticEvent,
   TextInputFocusEventData,
   TextStyle,
