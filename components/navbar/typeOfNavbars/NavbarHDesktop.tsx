@@ -49,10 +49,8 @@ export const NavbarHDesktop = ({
                   <img
                     src={image.routeImage}
                     style={{
-                      /* Primary */
                       height: 22,
                       marginRight: 28,
-                      // tintColor: currentNav === title ? BLUE : WHITE,
                     }}
                   />
                 </TouchableOpacity>
@@ -66,11 +64,9 @@ export const NavbarHDesktop = ({
               <img
                 src={data[data.length - 1].routeImage}
                 style={{
-                  /* Primary */
                   height: 22,
                   marginLeft: 20,
                   marginRight: 7,
-                  // tintColor: currentNav === title ? BLUE : WHITE,
                 }}
               />
             )}

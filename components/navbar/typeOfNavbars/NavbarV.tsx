@@ -67,15 +67,8 @@ const NavButton = (
   routeNav: any,
   key: string,
   renderItem: any,
-  pathname: string,
+  pathname?: string | undefined,
 ) => {
-  const path = pathname.split('/');
-  useEffect(() => {
-    if (key === path[1]) {
-      setCurrentNav(key);
-    }
-  }, [path]);
-
   return (
     <>
       <TouchableOpacity>

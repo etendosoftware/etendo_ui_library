@@ -4,6 +4,7 @@ import {View, Text, TouchableOpacity, Image, ScrollView} from 'react-native';
 import DropdownItem from './DropdownItem';
 import {DropdownStyleVariant} from './Dropdown.styles';
 import {DropdownProps, Info} from './Dropdown.types';
+import {arrowPicker, arrowPickerTop} from '../../assets/images';
 
 const Dropdown = ({
   data,
@@ -46,19 +47,35 @@ const Dropdown = ({
           {chooseOption}
         </Text>
         {showOptions ? (
-          <Image
-            source={require('../../assets/images/icons/arrow-picker-top.png')}
-            style={{
-              width: 10,
-              position: 'absolute',
-              right: 15,
-            }}
+          window.__NEXT_DATA__ ? (
+            <img
+              src={'/assets/images/icons/arrow-picker-top.png'}
+              style={{width: 11, height: 11, position: 'absolute', right: 15}}
+            />
+          ) : (
+            <Image
+              source={arrowPickerTop}
+              style={{
+                width: 11,
+                height: 9,
+                resizeMode: 'stretch',
+                position: 'absolute',
+                right: 15,
+              }}
+            />
+          )
+        ) : window.__NEXT_DATA__ ? (
+          <img
+            src={'/assets/images/icons/arrow-picker.png'}
+            style={{width: 11, height: 11, position: 'absolute', right: 15}}
           />
         ) : (
           <Image
-            source={require('../../assets/images/icons/arrow-picker.png')}
+            source={arrowPicker}
             style={{
-              width: 10,
+              width: 11,
+              height: 9,
+              resizeMode: 'stretch',
               position: 'absolute',
               right: 15,
             }}

@@ -4,6 +4,12 @@ import React, {useState} from 'react';
 import {Text, View, Image, TouchableOpacity, Platform} from 'react-native';
 import {PaginationStyleVariant} from './Pagination.styles';
 import {PaginationProps} from './Pagination.types';
+import {
+  backButton,
+  backDoubleButton,
+  nextButton,
+  nextDoubleButton,
+} from '../../assets/images';
 
 /* Pagination component */
 export const Pagination = ({
@@ -51,7 +57,7 @@ export const Pagination = ({
             onChangeSelected(1, 0);
           }}
         >
-          {Platform.OS === 'web' ? (
+          {window.__NEXT_DATA__ ? (
             <img
               src={'/assets/images/icons/back-double-button.png'}
               alt="back-double-button"
@@ -59,7 +65,7 @@ export const Pagination = ({
             />
           ) : (
             <Image
-              source={require('../../assets/images/icons/back-double-button.png')}
+              source={backDoubleButton}
               style={{width: 10, height: 10, marginRight: 10}}
             />
           )}
@@ -74,7 +80,7 @@ export const Pagination = ({
             }
           }}
         >
-          {Platform.OS === 'web' ? (
+          {window.__NEXT_DATA__ ? (
             <img
               src={'/assets/images/icons/back-button.png'}
               alt="back-button"
@@ -82,7 +88,7 @@ export const Pagination = ({
             />
           ) : (
             <Image
-              source={require('../../assets/images/icons/back-button.png')}
+              source={backButton}
               style={{width: 10, height: 10, marginRight: 10}}
             />
           )}
@@ -104,7 +110,7 @@ export const Pagination = ({
             }
           }}
         >
-          {Platform.OS === 'web' ? (
+          {window.__NEXT_DATA__ ? (
             <img
               src={'/assets/images/icons/next-button.png'}
               alt="next-button"
@@ -112,7 +118,7 @@ export const Pagination = ({
             />
           ) : (
             <Image
-              source={require('../../assets/images/icons/next-button.png')}
+              source={nextButton}
               style={{width: 10, height: 10, marginRight: 10}}
             />
           )}
@@ -130,7 +136,7 @@ export const Pagination = ({
             }
           }}
         >
-          {Platform.OS === 'web' ? (
+          {window.__NEXT_DATA__ ? (
             <img
               src={'/assets/images/icons/next-double-button.png'}
               alt="next-double-button"
@@ -138,7 +144,7 @@ export const Pagination = ({
             />
           ) : (
             <Image
-              source={require('../../assets/images/icons/next-double-button.png')}
+              source={nextDoubleButton}
               style={{width: 10, height: 10, marginRight: 10}}
             />
           )}
