@@ -1,5 +1,5 @@
 /* Imports */
-import {ImageStyle, StyleProp, TextStyle, ViewStyle} from 'react-native';
+import {ImageStyle, TextStyle, ViewStyle} from 'react-native';
 
 /* Type declaration */
 export type Info = {
@@ -14,6 +14,7 @@ export interface PaginationProps {
   totalData: number;
   amountDataPerPage: number;
   pagination: number;
+  isWeb?: boolean | undefined;
 }
 
 /* Declaration of style types */

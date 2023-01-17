@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Running Test for Navbar Check Navbar Disabled 1`] = `
-<RCTScrollView>
-  <View />
-</RCTScrollView>
-`;

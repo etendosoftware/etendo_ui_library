@@ -18,6 +18,7 @@ export const Pagination = ({
   totalData,
   amountDataPerPage,
   pagination,
+  isWeb,
 }: PaginationProps) => {
   // Will serve to set the page number where the user is
   const [page, setPage] = useState<number>(currentPage);
@@ -57,7 +58,7 @@ export const Pagination = ({
             onChangeSelected(1, 0);
           }}
         >
-          {window.__NEXT_DATA__ ? (
+          {Platform.OS === 'web' && isWeb ? (
             <img
               src={'/assets/images/icons/back-double-button.png'}
               alt="back-double-button"
@@ -80,7 +81,7 @@ export const Pagination = ({
             }
           }}
         >
-          {window.__NEXT_DATA__ ? (
+          {Platform.OS === 'web' && isWeb ? (
             <img
               src={'/assets/images/icons/back-button.png'}
               alt="back-button"
@@ -110,12 +111,14 @@ export const Pagination = ({
             }
           }}
         >
-          {window.__NEXT_DATA__ ? (
-            <img
-              src={'/assets/images/icons/next-button.png'}
-              alt="next-button"
-              style={{width: 10, height: 10, marginRight: 10}}
-            />
+          {Platform.OS === 'web' && isWeb ? (
+            <div>
+              <img
+                src={'/assets/images/icons/next-button.png'}
+                alt="next-button"
+                style={{width: 10, height: 10, marginRight: 10}}
+              />
+            </div>
           ) : (
             <Image
               source={nextButton}
@@ -136,7 +139,7 @@ export const Pagination = ({
             }
           }}
         >
-          {window.__NEXT_DATA__ ? (
+          {Platform.OS === 'web' && isWeb ? (
             <img
               src={'/assets/images/icons/next-double-button.png'}
               alt="next-double-button"

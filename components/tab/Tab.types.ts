@@ -13,7 +13,7 @@ export interface TabProps {
   onChangeSelected: (Info: Info | undefined) => Info | Array<Info>;
   style: TabStyleType;
   typeSizeText: TabStyleFontSize;
-  renderItem: any;
+  renderItem?: any;
   pathname?: any;
 }
 

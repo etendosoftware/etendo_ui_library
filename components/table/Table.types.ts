@@ -8,6 +8,7 @@ export interface TableProps {
 export interface TableCellProps {
   label: string;
   image: string;
+  isWeb: boolean | undefined;
 }
 
 export interface TableHeaderProps {
