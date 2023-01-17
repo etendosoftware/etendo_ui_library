@@ -11,7 +11,7 @@ import {
 import {getImageStyle} from '../../../helpers/image_utils';
 import {styles} from '../Input.style';
 import {InputFieldProps, KeyboardTypes} from '../Input.types';
-import {webPasswordImage, mobilePasswordImage} from '../../../assets/images/';
+import {passwordShown, passwordNotShown} from '../../../assets/images/';
 
 const InputField = ({
   configField,
@@ -111,12 +111,21 @@ const InputField = ({
                   onPress={() => setShowPassword(!showPassword)}
                   style={styles.passwordContainer}
                 >
-                  <Image
-                    source={
-                      !showPassword ? webPasswordImage : mobilePasswordImage
-                    }
-                    style={styles.passwordImage}
-                  />
+                  {window.__NEXT_DATA__ ? (
+                    <img
+                      src={
+                        !showPassword
+                          ? '/assets/images/icons/active-password.png'
+                          : '/assets/images/icons/disabled-password.png'
+                      }
+                      style={{width: 22, height: 22}}
+                    />
+                  ) : (
+                    <Image
+                      source={!showPassword ? passwordNotShown : passwordShown}
+                      style={styles.passwordImage}
+                    />
+                  )}
                 </TouchableOpacity>
               )}
             </View>
