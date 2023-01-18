@@ -11,7 +11,10 @@ import {
 import {getImageStyle} from '../../../helpers/image_utils';
 import {styles} from '../Input.style';
 import {InputFieldProps, KeyboardTypes} from '../Input.types';
-import {passwordShown, passwordNotShown} from '../../../assets/images/';
+import {
+  activePasswordIcon,
+  disabledPasswordIcon,
+} from '../../../assets/images/icons';
 
 const InputField = ({
   configField,
@@ -115,14 +118,18 @@ const InputField = ({
                     <img
                       src={
                         !showPassword
-                          ? '/assets/images/icons/active-password.png'
-                          : '/assets/images/icons/disabled-password.png'
+                          ? disabledPasswordIcon
+                          : activePasswordIcon
                       }
                       style={{width: 22, height: 22}}
                     />
                   ) : (
                     <Image
-                      source={!showPassword ? passwordNotShown : passwordShown}
+                      source={
+                        !showPassword
+                          ? disabledPasswordIcon
+                          : activePasswordIcon
+                      }
                       style={styles.passwordImage}
                     />
                   )}

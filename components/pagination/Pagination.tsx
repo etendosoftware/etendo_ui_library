@@ -5,11 +5,9 @@ import {Text, View, Image, TouchableOpacity, Platform} from 'react-native';
 import {PaginationStyleVariant} from './Pagination.styles';
 import {PaginationProps} from './Pagination.types';
 import {
-  backButton,
-  backDoubleButton,
-  nextButton,
-  nextDoubleButton,
-} from '../../assets/images';
+  arrowDoublePickerHorizontalIcon,
+  arrowPickerHorizontalIcon,
+} from '../../assets/images/icons';
 
 /* Pagination component */
 export const Pagination = ({
@@ -60,14 +58,24 @@ export const Pagination = ({
         >
           {Platform.OS === 'web' && isWeb ? (
             <img
-              src={'/assets/images/icons/back-double-button.png'}
+              src={arrowDoublePickerHorizontalIcon}
               alt="back-double-button"
-              style={{width: 10, height: 10, marginRight: 10}}
+              style={{
+                width: 10,
+                height: 10,
+                marginRight: 10,
+                rotate: '180deg',
+              }}
             />
           ) : (
             <Image
-              source={backDoubleButton}
-              style={{width: 10, height: 10, marginRight: 10}}
+              source={arrowDoublePickerHorizontalIcon}
+              style={{
+                width: 10,
+                height: 10,
+                marginRight: 10,
+                transform: [{rotate: '180deg'}],
+              }}
             />
           )}
         </TouchableOpacity>
@@ -83,14 +91,19 @@ export const Pagination = ({
         >
           {Platform.OS === 'web' && isWeb ? (
             <img
-              src={'/assets/images/icons/back-button.png'}
+              src={arrowPickerHorizontalIcon}
               alt="back-button"
-              style={{width: 10, height: 10, marginRight: 10}}
+              style={{width: 10, height: 10, marginRight: 10, rotate: '180deg'}}
             />
           ) : (
             <Image
-              source={backButton}
-              style={{width: 10, height: 10, marginRight: 10}}
+              source={arrowPickerHorizontalIcon}
+              style={{
+                width: 10,
+                height: 10,
+                marginRight: 10,
+                transform: [{rotate: '180deg'}],
+              }}
             />
           )}
         </TouchableOpacity>
@@ -114,14 +127,14 @@ export const Pagination = ({
           {Platform.OS === 'web' && isWeb ? (
             <div>
               <img
-                src={'/assets/images/icons/next-button.png'}
+                src={arrowPickerHorizontalIcon}
                 alt="next-button"
                 style={{width: 10, height: 10, marginRight: 10}}
               />
             </div>
           ) : (
             <Image
-              source={nextButton}
+              source={arrowPickerHorizontalIcon}
               style={{width: 10, height: 10, marginRight: 10}}
             />
           )}
@@ -141,13 +154,13 @@ export const Pagination = ({
         >
           {Platform.OS === 'web' && isWeb ? (
             <img
-              src={'/assets/images/icons/next-double-button.png'}
+              src={arrowDoublePickerHorizontalIcon}
               alt="next-double-button"
               style={{width: 10, height: 10, marginRight: 10}}
             />
           ) : (
             <Image
-              source={nextDoubleButton}
+              source={arrowDoublePickerHorizontalIcon}
               style={{width: 10, height: 10, marginRight: 10}}
             />
           )}
