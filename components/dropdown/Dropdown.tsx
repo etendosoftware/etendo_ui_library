@@ -26,7 +26,7 @@ const Dropdown = ({
     setChooseOption(text);
   }, [text]);
 
-  const closeOpenMenus = e => {
+  const closeOpenMenus = (e: any) => {
     if (catMenu.current && showOptions && !catMenu.current.contains(e.target)) {
       setShowOptions(false);
     }
@@ -50,7 +50,7 @@ const Dropdown = ({
           window.__NEXT_DATA__ ? (
             <img
               src={'/assets/images/icons/arrow-picker-top.png'}
-              style={{width: 11, height: 11, position: 'absolute', right: 15}}
+              style={{width: 10, height: 7, position: 'absolute', right: 15}}
             />
           ) : (
             <Image
@@ -67,7 +67,7 @@ const Dropdown = ({
         ) : window.__NEXT_DATA__ ? (
           <img
             src={'/assets/images/icons/arrow-picker.png'}
-            style={{width: 11, height: 11, position: 'absolute', right: 15}}
+            style={{width: 10, height: 7, position: 'absolute', right: 15}}
           />
         ) : (
           <Image
