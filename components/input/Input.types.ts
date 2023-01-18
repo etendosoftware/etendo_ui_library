@@ -42,7 +42,7 @@ export type InputVariantsType = Record<
 >;
 
 export type ImageType = {
-  imgRoute?: ImageSourcePropType;
+  imgRoute?: ImageSourcePropType | string;
   imgWidth?: string | number;
   imgHeight?: string | number;
   imgMarginRight?: string | number;

@@ -29,7 +29,7 @@ export const inputVariants: InputVariantsType = {
       image: {
         imgHeight: 8,
         imgWidth: 12,
-        imgRoute: require(arrowPickerVerticalIcon),
+        imgRoute: arrowPickerVerticalIcon,
       },
     },
   },
