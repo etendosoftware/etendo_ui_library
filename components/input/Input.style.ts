@@ -11,6 +11,7 @@ import {
   RED,
   RED_10,
 } from '../../styles/colors';
+import {arrowPickerVerticalIcon} from '../../assets/images/icons';
 
 export const inputVariants: InputVariantsType = {
   onlyRead: {
@@ -28,7 +29,7 @@ export const inputVariants: InputVariantsType = {
       image: {
         imgHeight: 8,
         imgWidth: 12,
-        imgRoute: require('../../assets/images/icons/arrowPicker.png'),
+        imgRoute: require(arrowPickerVerticalIcon),
       },
     },
   },

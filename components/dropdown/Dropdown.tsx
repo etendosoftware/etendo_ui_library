@@ -32,6 +32,53 @@ const Dropdown = ({
     }
   };
 
+  const showOptionsIcon = (isNext: boolean) => {
+    return isNext ? (
+      <img
+        src={arrowPickerVerticalIcon}
+        style={{
+          width: 10,
+          height: 7,
+          position: 'absolute',
+          right: 15,
+          rotate: '180deg',
+        }}
+      />
+    ) : (
+      <Image
+        source={arrowPickerVerticalIcon}
+        style={{
+          width: 11,
+          height: 9,
+          resizeMode: 'stretch',
+          position: 'absolute',
+          right: 15,
+          transform: [{rotate: '180deg'}],
+        }}
+      />
+    );
+  };
+
+  const notShowOptionsIcon = (isNext: boolean) => {
+    return isNext ? (
+      <img
+        src={arrowPickerVerticalIcon}
+        style={{width: 10, height: 7, position: 'absolute', right: 15}}
+      />
+    ) : (
+      <Image
+        source={arrowPickerVerticalIcon}
+        style={{
+          width: 11,
+          height: 9,
+          resizeMode: 'stretch',
+          position: 'absolute',
+          right: 15,
+        }}
+      />
+    );
+  };
+
   document.addEventListener('mousedown', closeOpenMenus);
 
   return (
@@ -46,48 +93,9 @@ const Dropdown = ({
         <Text style={DropdownStyleVariant.primary.dropDownButtonText}>
           {chooseOption}
         </Text>
-        {showOptions ? (
-          window.__NEXT_DATA__ ? (
-            <img
-              src={arrowPickerVerticalIcon}
-              style={{
-                width: 10,
-                height: 7,
-                position: 'absolute',
-                right: 15,
-                rotate: '180deg',
-              }}
-            />
-          ) : (
-            <Image
-              source={arrowPickerVerticalIcon}
-              style={{
-                width: 11,
-                height: 9,
-                resizeMode: 'stretch',
-                position: 'absolute',
-                right: 15,
-                transform: [{rotate: '180deg'}],
-              }}
-            />
-          )
-        ) : window.__NEXT_DATA__ ? (
-          <img
-            src={arrowPickerVerticalIcon}
-            style={{width: 10, height: 7, position: 'absolute', right: 15}}
-          />
-        ) : (
-          <Image
-            source={arrowPickerVerticalIcon}
-            style={{
-              width: 11,
-              height: 9,
-              resizeMode: 'stretch',
-              position: 'absolute',
-              right: 15,
-            }}
-          />
-        )}
+        {showOptions
+          ? showOptionsIcon(window.__NEXT_DATA__)
+          : notShowOptionsIcon(window.__NEXT_DATA__)}
       </TouchableOpacity>
 
       {showOptions && (

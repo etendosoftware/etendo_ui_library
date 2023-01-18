@@ -14,7 +14,7 @@ export interface PaginationProps {
   totalData: number;
   amountDataPerPage: number;
   pagination: number;
-  isWeb?: boolean | undefined;
+  isWeb?: boolean;
 }
 
 /* Declaration of style types */

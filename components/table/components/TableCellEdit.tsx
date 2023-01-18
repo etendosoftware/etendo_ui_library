@@ -1,16 +1,16 @@
 import React from 'react';
-import {Image, Platform, Text, View} from 'react-native';
+import {Image, View} from 'react-native';
 import {styles} from '../Table.styles';
 import {TableCellProps} from '../Table.types';
-import {editImage} from '../../../assets/images';
+import {editIcon} from '../../../assets/images/icons';
 
 const TableCellEdit = ({label, image, isWeb}: TableCellProps) => {
   return (
     <View style={styles.centerItem}>
       {isWeb ? (
-        <img style={{width: 18}} src={image} />
+        <img style={{width: 18}} src={editIcon} />
       ) : (
-        <Image source={editImage} style={{width: 18, height: 18}} />
+        <Image source={editIcon} style={{width: 18, height: 18}} />
       )}
     </View>
   );
