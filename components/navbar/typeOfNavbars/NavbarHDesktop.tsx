@@ -2,7 +2,7 @@
 
 /* Imports */
 import React from 'react';
-import {Image, Text, TouchableOpacity} from 'react-native';
+import {Button, Text, TouchableOpacity} from 'react-native';
 
 import {Info, NavbarHorizontalProps} from '../Navbar.types';
 import {NavbarHStyleVariant} from '../Navbar.styles';
@@ -13,6 +13,8 @@ import {ViewEtendo as View} from '../../viewEtendo/ViewEtendo';
 export const NavbarHDesktop = ({
   data,
   onChangeSelected,
+  title,
+  navigationLogin,
 }: NavbarHorizontalProps) => {
   return (
     <>
@@ -83,6 +85,12 @@ export const NavbarHDesktop = ({
           )}
         </View>
       </View>
+      <TouchableOpacity
+        style={NavbarHStyleVariant.desktop.logout}
+        onPress={navigationLogin}
+      >
+        <Text style={NavbarHStyleVariant.desktop.textLogout}>{title}</Text>
+      </TouchableOpacity>
     </>
   );
 };

@@ -1,7 +1,7 @@
 /* Imports */
 
 import {NavbarStyleHorizontal, NavbarStyleVertical} from './Navbar.types';
-import {BLUE} from '../../styles/colors';
+import {BLUE, WHITE} from '../../styles/colors';
 
 /* Export of different styles */
 export const NavbarHStyleVariant: NavbarStyleHorizontal = {
@@ -43,6 +43,12 @@ export const NavbarHStyleVariant: NavbarStyleHorizontal = {
       height: 28,
       marginLeft: '90%',
       position: 'absolute',
+    },
+    logout: {
+      backgroundColor: BLUE,
+    },
+    textLogout: {
+      color: WHITE,
     },
   },
   // Tablet screen
@@ -86,6 +92,12 @@ export const NavbarHStyleVariant: NavbarStyleHorizontal = {
       height: 28,
       marginLeft: '90%',
       position: 'absolute',
+    },
+    logout: {
+      backgroundColor: BLUE,
+    },
+    textLogout: {
+      color: WHITE,
     },
   },
   // Desktop screen
@@ -141,6 +153,16 @@ export const NavbarHStyleVariant: NavbarStyleHorizontal = {
       height: 28,
       marginLeft: '90%',
       position: 'absolute',
+    },
+    logout: {
+      backgroundColor: BLUE,
+      borderRadius: 8,
+    },
+    textLogout: {
+      color: WHITE,
+      alignSelf: 'center',
+      padding: 5,
+      fontFamily: 'Poppins',
     },
   },
 };

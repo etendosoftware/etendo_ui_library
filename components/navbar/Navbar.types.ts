@@ -1,5 +1,5 @@
 /* Imports */
-import {ImageStyle, StyleProp, TextStyle, ViewStyle} from 'react-native';
+import { ImageStyle, StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 /* Type declaration */
 export type Info = {
@@ -18,6 +18,8 @@ export interface NavbarProps {
 export interface NavbarHorizontalProps {
   data: Info[];
   onChangeSelected: () => void;
+  title: String,
+  navigationLogin: () => any
 }
 
 /* Declaration of style types */
@@ -38,10 +40,12 @@ export type NavbarStyleHorizontal = Record<
     user: StyleProp<ImageStyle>;
     textUser: StyleProp<TextStyle>;
     more: StyleProp<ImageStyle>;
+    logout: StyleProp<ViewStyle>
+    textLogout: StyleProp<TextStyle>
   }
 >;
 
 export type NavbarStyleVertical = Record<
   NavbarScreenGeneric,
-  {container: StyleProp<ViewStyle>}
+  { container: StyleProp<ViewStyle> }
 >;
