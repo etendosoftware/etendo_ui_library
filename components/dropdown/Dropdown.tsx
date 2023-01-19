@@ -1,5 +1,12 @@
 import React, {useState, useRef, useEffect} from 'react';
-import {View, Text, TouchableOpacity, Image, ScrollView} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+  Platform,
+} from 'react-native';
 
 import DropdownItem from './DropdownItem';
 import {DropdownStyleVariant} from './Dropdown.styles';
@@ -16,6 +23,7 @@ const Dropdown = ({
   const [toggleItem, setToggleItem] = useState<any>(undefined);
   const [chooseOption, setChooseOption] = useState(text);
 
+  const PLATFORM_IS_WEB = Platform.OS === 'web';
   const catMenu = useRef(null);
 
   const handleShowOptions = () => {
@@ -32,8 +40,8 @@ const Dropdown = ({
     }
   };
 
-  const showOptionsIcon = (isNext: boolean) => {
-    return isNext ? (
+  const showOptionsIcon = (isWeb: boolean) => {
+    return isWeb ? (
       <img
         src={arrowPickerVerticalIcon}
         style={{
@@ -59,8 +67,8 @@ const Dropdown = ({
     );
   };
 
-  const notShowOptionsIcon = (isNext: boolean) => {
-    return isNext ? (
+  const notShowOptionsIcon = (isWeb: boolean) => {
+    return isWeb ? (
       <img
         src={arrowPickerVerticalIcon}
         style={{width: 10, height: 7, position: 'absolute', right: 15}}
@@ -94,8 +102,8 @@ const Dropdown = ({
           {chooseOption}
         </Text>
         {showOptions
-          ? showOptionsIcon(window.__NEXT_DATA__)
-          : notShowOptionsIcon(window.__NEXT_DATA__)}
+          ? showOptionsIcon(PLATFORM_IS_WEB)
+          : notShowOptionsIcon(PLATFORM_IS_WEB)}
       </TouchableOpacity>
 
       {showOptions && (

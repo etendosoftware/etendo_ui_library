@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   KeyboardType,
   View,
+  Platform,
 } from 'react-native';
 import {getImageStyle} from '../../../helpers/image_utils';
 import {styles} from '../Input.style';
@@ -34,6 +35,7 @@ const InputField = ({
 }: InputFieldProps) => {
   const [showImg, setShowImg] = useState<boolean>(false);
   const regex = /^[0-9.,]+$/g;
+  const PLATFORM_IS_WEB = Platform.OS === 'web';
 
   const getStyleText = (text: string | undefined, password?: boolean) => {
     let style: Array<TextStyle | TextStyle[]> = [];
@@ -114,7 +116,7 @@ const InputField = ({
                   onPress={() => setShowPassword(!showPassword)}
                   style={styles.passwordContainer}
                 >
-                  {window.__NEXT_DATA__ ? (
+                  {PLATFORM_IS_WEB ? (
                     <img
                       src={
                         !showPassword
