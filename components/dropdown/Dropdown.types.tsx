@@ -10,7 +10,7 @@ export type Info = {
 
 export interface DropdownProps {
   data: Info[];
-  onChangeSelected: (Info: Info | undefined) => Info;
+  onChangeSelected: ({type}: any) => void;
   text: string;
   style?: DropdownStyleType;
   typeSizeText: DropdownStyleFontSize;

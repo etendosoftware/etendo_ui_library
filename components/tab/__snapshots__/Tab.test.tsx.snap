@@ -8,6 +8,8 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
       "borderBottomColor": "#202452",
       "borderBottomWidth": 3,
       "flex": 1,
+      "flexDirection": "row",
+      "paddingLeft": 50,
     }
   }
 >
@@ -30,13 +32,12 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
         style={
           Object {
             "alignItems": "center",
-            "backgroundColor": "#202452",
-            "borderTopColor": "#FAD614",
+            "backgroundColor": "#EFF1F7",
+            "borderTopColor": "transparent",
             "borderTopWidth": 4,
-            "height": 45,
+            "height": 35,
             "justifyContent": "center",
             "opacity": 1,
-            "paddingHorizontal": 20,
           }
         }
       >
@@ -44,13 +45,17 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
           style={
             Array [
               Object {
-                "color": "#FFFFFF",
+                "color": "#202452",
               },
               Object {
                 "fontSize": 18,
               },
               Object {
-                "fontWeight": "500",
+                "fontFamily": "Poppins",
+                "fontSize": 12,
+                "fontWeight": "600",
+                "paddingHorizontal": 20,
+                "paddingVertical": 11,
                 "textTransform": "uppercase",
               },
             ]
@@ -76,10 +81,9 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             "backgroundColor": "#EFF1F7",
             "borderTopColor": "transparent",
             "borderTopWidth": 4,
-            "height": 45,
+            "height": 35,
             "justifyContent": "center",
             "opacity": 1,
-            "paddingHorizontal": 20,
           }
         }
       >
@@ -93,7 +97,11 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
                 "fontSize": 18,
               },
               Object {
-                "fontWeight": "500",
+                "fontFamily": "Poppins",
+                "fontSize": 12,
+                "fontWeight": "600",
+                "paddingHorizontal": 20,
+                "paddingVertical": 11,
                 "textTransform": "uppercase",
               },
             ]
@@ -119,10 +127,9 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             "backgroundColor": "#EFF1F7",
             "borderTopColor": "transparent",
             "borderTopWidth": 4,
-            "height": 45,
+            "height": 35,
             "justifyContent": "center",
             "opacity": 1,
-            "paddingHorizontal": 20,
           }
         }
       >
@@ -136,7 +143,11 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
                 "fontSize": 18,
               },
               Object {
-                "fontWeight": "500",
+                "fontFamily": "Poppins",
+                "fontSize": 12,
+                "fontWeight": "600",
+                "paddingHorizontal": 20,
+                "paddingVertical": 11,
                 "textTransform": "uppercase",
               },
             ]
@@ -162,10 +173,9 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             "backgroundColor": "#EFF1F7",
             "borderTopColor": "transparent",
             "borderTopWidth": 4,
-            "height": 45,
+            "height": 35,
             "justifyContent": "center",
             "opacity": 1,
-            "paddingHorizontal": 20,
           }
         }
       >
@@ -179,7 +189,11 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
                 "fontSize": 18,
               },
               Object {
-                "fontWeight": "500",
+                "fontFamily": "Poppins",
+                "fontSize": 12,
+                "fontWeight": "600",
+                "paddingHorizontal": 20,
+                "paddingVertical": 11,
                 "textTransform": "uppercase",
               },
             ]
@@ -205,10 +219,9 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             "backgroundColor": "#EFF1F7",
             "borderTopColor": "transparent",
             "borderTopWidth": 4,
-            "height": 45,
+            "height": 35,
             "justifyContent": "center",
             "opacity": 1,
-            "paddingHorizontal": 20,
           }
         }
       >
@@ -222,7 +235,11 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
                 "fontSize": 18,
               },
               Object {
-                "fontWeight": "500",
+                "fontFamily": "Poppins",
+                "fontSize": 12,
+                "fontWeight": "600",
+                "paddingHorizontal": 20,
+                "paddingVertical": 11,
                 "textTransform": "uppercase",
               },
             ]
@@ -248,10 +265,9 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             "backgroundColor": "#EFF1F7",
             "borderTopColor": "transparent",
             "borderTopWidth": 4,
-            "height": 45,
+            "height": 35,
             "justifyContent": "center",
             "opacity": 1,
-            "paddingHorizontal": 20,
           }
         }
       >
@@ -265,7 +281,11 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
                 "fontSize": 18,
               },
               Object {
-                "fontWeight": "500",
+                "fontFamily": "Poppins",
+                "fontSize": 12,
+                "fontWeight": "600",
+                "paddingHorizontal": 20,
+                "paddingVertical": 11,
                 "textTransform": "uppercase",
               },
             ]

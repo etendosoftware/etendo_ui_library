@@ -1,9 +1,17 @@
-import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, Image, ScrollView} from 'react-native';
+import React, {useState, useRef, useEffect} from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+  Platform,
+} from 'react-native';
 
 import DropdownItem from './DropdownItem';
 import {DropdownStyleVariant} from './Dropdown.styles';
 import {DropdownProps, Info} from './Dropdown.types';
+import {arrowPickerVerticalIcon} from '../../assets/images/icons';
 
 const Dropdown = ({
   data,
@@ -12,31 +20,90 @@ const Dropdown = ({
   typeSizeText,
 }: DropdownProps) => {
   const [showOptions, setShowOptions] = useState(false);
-  const [toggleItem, setToggleItem] = useState<number>(-1);
+  const [toggleItem, setToggleItem] = useState<any>(undefined);
+  const [chooseOption, setChooseOption] = useState(text);
+
+  const PLATFORM_IS_WEB = Platform.OS === 'web';
+  const catMenu = useRef(null);
+
+  const handleShowOptions = () => {
+    setShowOptions(!open);
+  };
+
+  useEffect(() => {
+    setChooseOption(text);
+  }, [text]);
+
+  const closeOpenMenus = (e: any) => {
+    if (catMenu.current && showOptions && !catMenu.current.contains(e.target)) {
+      setShowOptions(false);
+    }
+  };
+
+  const showOptionsIcon = (isWeb: boolean) => {
+    return isWeb ? (
+      <img
+        src={arrowPickerVerticalIcon}
+        style={{
+          width: 10,
+          height: 7,
+          position: 'absolute',
+          right: 15,
+          rotate: '180deg',
+        }}
+      />
+    ) : (
+      <Image
+        source={arrowPickerVerticalIcon}
+        style={{
+          width: 11,
+          height: 9,
+          resizeMode: 'stretch',
+          position: 'absolute',
+          right: 15,
+          transform: [{rotate: '180deg'}],
+        }}
+      />
+    );
+  };
+
+  const notShowOptionsIcon = (isWeb: boolean) => {
+    return isWeb ? (
+      <img
+        src={arrowPickerVerticalIcon}
+        style={{width: 10, height: 7, position: 'absolute', right: 15}}
+      />
+    ) : (
+      <Image
+        source={arrowPickerVerticalIcon}
+        style={{
+          width: 11,
+          height: 9,
+          resizeMode: 'stretch',
+          position: 'absolute',
+          right: 15,
+        }}
+      />
+    );
+  };
+
+  document.addEventListener('mousedown', closeOpenMenus);
 
   return (
-    <View style={DropdownStyleVariant.primary.container}>
+    <View style={DropdownStyleVariant.primary.container} ref={catMenu}>
       <TouchableOpacity
         style={DropdownStyleVariant.primary.dropDownButton}
         activeOpacity={1}
-        onPress={() => setShowOptions(!showOptions)}
+        onPress={(e: any) => {
+          setShowOptions(!showOptions);
+        }}
       >
         <Text style={DropdownStyleVariant.primary.dropDownButtonText}>
-          {text}
+          {chooseOption}
         </Text>
-        {showOptions ? (
-          <Image
-            source={require('../../assets/images/icons/arrowPicker.png')}
-            style={DropdownStyleVariant.primary.iconWithOptionsDisplayed}
-            resizeMode="contain"
-          />
-        ) : (
-          <Image
-            source={require('../../assets/images/icons/arrowPicker.png')}
-            style={DropdownStyleVariant.primary.iconWithOptionsNotDisplayed}
-            resizeMode="contain"
-          />
-        )}
+        {showOptions
+          ? showOptionsIcon(PLATFORM_IS_WEB)
+          : notShowOptionsIcon(PLATFORM_IS_WEB)}
       </TouchableOpacity>
 
       {showOptions && (
@@ -49,11 +116,10 @@ const Dropdown = ({
                 onPress={() => {
                   /* Allows to detect the selected item */
                   setToggleItem(index);
-                  onChangeSelected({
-                    name: item.name,
-                    route: item.route,
-                    key: item.key,
-                  });
+                  onChangeSelected(item.name);
+                  setChooseOption(item.name);
+                  setToggleItem(index);
+                  handleShowOptions();
                 }}
                 key={item.key}
                 toggleItem={toggleItem}

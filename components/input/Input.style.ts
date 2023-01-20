@@ -11,6 +11,7 @@ import {
   RED,
   RED_10,
 } from '../../styles/colors';
+import {arrowPickerVerticalIcon} from '../../assets/images/icons';
 
 export const inputVariants: InputVariantsType = {
   onlyRead: {
@@ -28,7 +29,7 @@ export const inputVariants: InputVariantsType = {
       image: {
         imgHeight: 8,
         imgWidth: 12,
-        imgRoute: require('../../assets/images/icons/arrowPicker.png'),
+        imgRoute: arrowPickerVerticalIcon,
       },
     },
   },
@@ -76,6 +77,7 @@ const defaultTitle: TextStyle = {
   color: BLUE,
   fontSize: 14,
   fontFamily: FONT_MEDIUM,
+  marginTop: 10,
 };
 
 const defaultField: ViewStyle = {
@@ -85,6 +87,7 @@ const defaultField: ViewStyle = {
   borderRadius: 5,
   flexDirection: 'row',
   alignItems: 'center',
+  marginTop: 3,
 };
 
 const defaultText: TextStyle = {

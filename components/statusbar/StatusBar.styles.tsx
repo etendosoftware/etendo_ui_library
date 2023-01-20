@@ -28,6 +28,7 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
       height: '100%',
       backgroundColor: BLUE,
       borderTopEndRadius: 40,
+      borderTopRightRadius: 40,
     },
 
     activeStepContainer: {
@@ -35,7 +36,9 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
       flexDirection: 'row',
       backgroundColor: YELLOW,
       borderBottomStartRadius: 31,
+      borderBottomLeftRadius: 29,
       borderTopEndRadius: 31,
+      borderTopRightRadius: 31,
     },
 
     activeStepContent: {
@@ -51,11 +54,12 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
     disabledStep: {
       color: WHITE,
       fontWeight: '600',
-      fontSize: 17,
+      fontSize: 16,
       alignSelf: 'center',
       flex: 1,
       justifyContent: 'center',
       textAlign: 'center',
+      fontFamily: 'Poppins',
     },
 
     disabledStepContainer: {
@@ -63,17 +67,19 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
       flexDirection: 'row',
       backgroundColor: BLUE,
       borderBottomStartRadius: 20,
-      borderTopEndRadius: 20,
+      borderBottomLeftRadius: 20,
+      borderTopRightRadius: 20,
     },
 
     activeStep: {
       color: BLUE,
       fontWeight: '600',
-      fontSize: 17,
+      fontSize: 16,
       alignSelf: 'center',
       flex: 1,
       textAlign: 'right',
       marginRight: '10%',
+      fontFamily: 'Poppins',
     },
 
     rectangleBottomRightBlue: {
@@ -89,6 +95,7 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
       height: '100%',
       backgroundColor: BLUE,
       borderTopEndRadius: 20,
+      borderBottomLeftRadius: 19,
       borderColor: BLUE,
     },
 
@@ -96,6 +103,7 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
       fontSize: 14,
       color: BLUE,
       fontWeight: '600',
+      fontFamily: 'Poppins',
     },
 
     textBottomActiveStepContent: {
@@ -103,6 +111,7 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
       color: BLUE,
       fontWeight: '500',
       marginTop: '2%',
+      fontFamily: 'Poppins',
     },
 
     activeComponentImage: {

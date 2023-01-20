@@ -33,32 +33,6 @@ const Template: Story<NavbarProps> = () => (
   />
 );
 
-const Template2: Story<NavbarProps> = () => (
-  <Dropdown
-    data={dataset}
-    onChangeSelected={onCheckSelectedMock}
-    text="New vehicle"
-    style="primary"
-    typeSizeText="medium"
-  />
-);
-
-const Template3: Story<NavbarProps> = () => (
-  <Dropdown
-    data={dataset}
-    onChangeSelected={onCheckSelectedMock}
-    text="Assets"
-    style="primary"
-    typeSizeText="large"
-  />
-);
-
 /* Story exports */
-export const DropdownSmallText = Template.bind({});
-DropdownSmallText.args = {};
-
-export const DropdownMediumText = Template2.bind({});
-DropdownMediumText.args = {};
-
-export const DropdownLargeText = Template3.bind({});
-DropdownLargeText.args = {};
+export const DropdownComponent = Template.bind({});
+DropdownComponent.args = {};

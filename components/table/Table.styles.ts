@@ -20,6 +20,7 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     color: BLUE,
     textAlign: 'center',
+    fontFamily: 'Poppins',
   },
   headerContainer: {
     backgroundColor: GREY_BLUE_30,
@@ -30,10 +31,10 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderRightWidth: 1,
     borderColor: GREY_10,
-    paddingVertical: 2,
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 5,
+    paddingVertical: 10,
   },
   cell: {
     justifyContent: 'center',
@@ -44,13 +45,15 @@ export const styles = StyleSheet.create({
   },
   cellText: {
     fontSize: 14,
+    fontFamily: 'Poppins',
     color: BLUE,
     textAlign: 'center',
     textAlignVertical: 'center',
-    paddingVertical: 10,
+    paddingVertical: 22.5,
   },
   cellTextEdit: {
     fontSize: 14,
+    fontFamily: 'Poppins',
     fontWeight: '400',
     color: BLUE,
     textAlign: 'center',
@@ -62,6 +65,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     paddingVertical: 10,
     fontWeight: '600',
+    fontFamily: 'Poppins',
   },
   scrollCell: {
     flexGrow: 1,
@@ -73,7 +77,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
     height: '100%',
-    paddingVertical: 10,
+    paddingVertical: 5,
   },
   row: {
     flexDirection: 'row',

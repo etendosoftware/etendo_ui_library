@@ -55,7 +55,7 @@ const getStyle = (
 };
 
 /* TabItem component */
-const TabItem = ({
+const TabItemSecundary = ({
   style,
   styleText,
   sizeText,
@@ -86,4 +86,4 @@ const TabItem = ({
   );
 };
 
-export default TabItem;
+export default TabItemSecundary;

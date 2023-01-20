@@ -1,4 +1,5 @@
 /* Imports */
+
 import {NavbarStyleHorizontal, NavbarStyleVertical} from './Navbar.types';
 import {BLUE} from '../../styles/colors';
 
@@ -9,8 +10,6 @@ export const NavbarHStyleVariant: NavbarStyleHorizontal = {
     container: {
       flex: 1,
       flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
     },
     tinyLogo: {
       width: 112,
@@ -95,6 +94,7 @@ export const NavbarHStyleVariant: NavbarStyleHorizontal = {
       flex: 1,
       flexDirection: 'row',
       justifyContent: 'space-between',
+      alignItems: 'center',
     },
     containerImages: {
       width: 550,
@@ -119,8 +119,8 @@ export const NavbarHStyleVariant: NavbarStyleHorizontal = {
       alignSelf: 'center',
     },
     navIcons: {
-      width: 28,
-      height: 28,
+      width: 25,
+      height: 25,
       marginRight: '25px',
     },
     user: {
@@ -130,9 +130,11 @@ export const NavbarHStyleVariant: NavbarStyleHorizontal = {
       marginLeft: '22px',
     },
     textUser: {
-      fontSize: 16,
-      fontWeight: 'bold',
+      marginRight: 30,
+      fontSize: 12,
+      fontWeight: '700',
       color: BLUE,
+      fontFamily: 'Poppins',
     },
     more: {
       width: 28,

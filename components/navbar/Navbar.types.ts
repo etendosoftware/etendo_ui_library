@@ -1,15 +1,9 @@
 /* Imports */
-import {
-  ImageSourcePropType,
-  ImageStyle,
-  StyleProp,
-  TextStyle,
-  ViewStyle,
-} from 'react-native';
+import {ImageStyle, StyleProp, TextStyle, ViewStyle} from 'react-native';
 
 /* Type declaration */
 export type Info = {
-  routeImage: ImageSourcePropType;
+  routeImage: string;
   routeNav: string;
   key: string;
   name: string;
@@ -17,13 +11,14 @@ export type Info = {
 
 export interface NavbarProps {
   data: Info[];
-  onChangeSelected: (Info: Info | undefined) => Info;
+  onChangeSelected: () => void;
   typeOfNavbar: NavbarType;
 }
 
 export interface NavbarHorizontalProps {
   data: Info[];
-  onChangeSelected: (Info: Info | undefined) => Info;
+  onChangeSelected: () => void;
+  renderItem?: (routeNav: string, routeImage: string) => JSX.Element;
 }
 
 /* Declaration of style types */

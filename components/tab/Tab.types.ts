@@ -10,9 +10,11 @@ export type Info = {
 
 export interface TabProps {
   data: Info[];
-  onChangeSelected: (Info: Info | undefined) => Info;
+  onChangeSelected: (Info: Info | undefined) => Info | Array<Info>;
   style: TabStyleType;
   typeSizeText: TabStyleFontSize;
+  renderItem?: any;
+  pathname?: any;
 }
 
 export interface TabItemProps {
@@ -23,6 +25,8 @@ export interface TabItemProps {
   toggleItem: number;
   styleText: TabStyleType;
   sizeText: TabStyleFontSize;
+  renderItem: (item: any, styles: any) => JSX.Element;
+  pathname?: string;
 }
 
 /* Declaration of style types */
@@ -33,10 +37,14 @@ export type TabStyleRecord = Record<
   TabStyleType,
   {
     container: ViewStyle;
+    containerSecundary: ViewStyle;
     containerTabs?: ViewStyle;
     tabs: ViewStyle;
+    tabsSecundary: ViewStyle;
     tabsActive: ViewStyle;
+    tabsActiveSecundary: ViewStyle;
     itemText: TextStyle;
+    itemTextSecundary: TextStyle;
   }
 >;
 

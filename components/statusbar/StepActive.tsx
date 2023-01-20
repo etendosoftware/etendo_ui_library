@@ -1,9 +1,9 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text} from 'react-native';
 import {ItemProp} from './StatusBar.types';
 import {StatusBarStyleVariant} from './StatusBar.styles';
-
-export const StepActive = ({item}: ItemProp) => {
+import {ViewEtendo as View} from './StatusBar';
+export const StepActive = ({item, step}: ItemProp) => {
   return (
     <>
       <View
@@ -14,9 +14,11 @@ export const StepActive = ({item}: ItemProp) => {
       </View>
 
       <View style={StatusBarStyleVariant.primary.activeStepContainer}>
-        <View style={StatusBarStyleVariant.primary.activeStepContent}>
-          {item.componentActive}
-        </View>
+        {step !== 1 && (
+          <View style={StatusBarStyleVariant.primary.activeStepContent}>
+            {item.componentActive}
+          </View>
+        )}
         <Text style={StatusBarStyleVariant.primary.activeStep}>
           {item.step}
         </Text>

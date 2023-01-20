@@ -7,6 +7,8 @@ export interface TableProps {
 }
 export interface TableCellProps {
   label: string;
+  image: string;
+  isWeb: boolean | undefined;
 }
 
 export interface TableHeaderProps {
@@ -25,6 +27,6 @@ export type Columns = {
 };
 
 export type Actions = {
-  component: JSX.Element;
+  component: JSX.Element | any;
   onAction: (id: string) => void;
 };

@@ -5,13 +5,17 @@ import {
   TextInput,
   TextStyle,
   TouchableOpacity,
-  KeyboardType, 
-  View
+  KeyboardType,
+  View,
+  Platform,
 } from 'react-native';
 import {getImageStyle} from '../../../helpers/image_utils';
 import {styles} from '../Input.style';
 import {InputFieldProps, KeyboardTypes} from '../Input.types';
-import {webPasswordImage, mobilePasswordImage} from '../../../assets/images/';
+import {
+  activePasswordIcon,
+  disabledPasswordIcon,
+} from '../../../assets/images/icons';
 
 const InputField = ({
   configField,
@@ -31,6 +35,7 @@ const InputField = ({
 }: InputFieldProps) => {
   const [showImg, setShowImg] = useState<boolean>(false);
   const regex = /^[0-9.,]+$/g;
+  const PLATFORM_IS_WEB = Platform.OS === 'web';
 
   const getStyleText = (text: string | undefined, password?: boolean) => {
     let style: Array<TextStyle | TextStyle[]> = [];
@@ -45,31 +50,33 @@ const InputField = ({
 
     return style;
   };
-  useEffect(()=> {
-    if(!password){
-      setShowPassword(false)
+  useEffect(() => {
+    if (!password) {
+      setShowPassword(false);
     }
-  },[password])
+  }, [password]);
 
-  const getKeyboardType = (keyboardType:KeyboardTypes | undefined):KeyboardType | undefined => {
-    if(keyboardType === 'number'){
-      return 'numeric'
+  const getKeyboardType = (
+    keyboardType: KeyboardTypes | undefined,
+  ): KeyboardType | undefined => {
+    if (keyboardType === 'number') {
+      return 'numeric';
     }
-    return 'default'
-  }
+    return 'default';
+  };
 
   const getOnChangeText = (text: string) => {
-    if(onChangeText) {
-      if(keyboardType === 'number'){
-        if(text.match(regex)){
-          onChangeText(text)
+    if (onChangeText) {
+      if (keyboardType === 'number') {
+        if (text.match(regex)) {
+          onChangeText(text);
         }
-        return
+        return;
       }
-      onChangeText(text)
+      onChangeText(text);
     }
-  }
- 
+  };
+
   useEffect(() => {
     configField?.image ? setShowImg(true) : setShowImg(false);
   }, [configField?.image]);
@@ -109,12 +116,25 @@ const InputField = ({
                   onPress={() => setShowPassword(!showPassword)}
                   style={styles.passwordContainer}
                 >
-                  <Image
-                    source={
-                      !showPassword ? webPasswordImage : mobilePasswordImage
-                    }
-                    style={styles.passwordImage}
-                  />
+                  {PLATFORM_IS_WEB ? (
+                    <img
+                      src={
+                        !showPassword
+                          ? disabledPasswordIcon
+                          : activePasswordIcon
+                      }
+                      style={{width: 22, height: 22}}
+                    />
+                  ) : (
+                    <Image
+                      source={
+                        !showPassword
+                          ? disabledPasswordIcon
+                          : activePasswordIcon
+                      }
+                      style={styles.passwordImage}
+                    />
+                  )}
                 </TouchableOpacity>
               )}
             </View>
