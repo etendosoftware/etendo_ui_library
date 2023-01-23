@@ -16,7 +16,7 @@ import {
   activePasswordIcon,
   disabledPasswordIcon,
 } from '../../../assets/images/icons';
-import {BLACK} from '../../../styles/colors';
+import {BLACK, GREY_BLUE_50} from '../../../styles/colors';
 
 const InputField = ({
   configField,
@@ -32,7 +32,7 @@ const InputField = ({
   onFocus,
   onBlur,
   fontSize,
-  height,
+  // height,
   password,
 }: InputFieldProps) => {
   const [showImg, setShowImg] = useState<boolean>(false);
@@ -45,16 +45,16 @@ const InputField = ({
     if (text) {
       style.push(styleField.textDefault, {
         fontSize: fontSize,
-        height: height,
-        color: BLACK,
-        fontFamily: 'Inter-Medium',
+        // height: height,
+        color: GREY_BLUE_50,
+        // fontFamily: 'Inter-Medium',
       });
     } else {
       style.push(styleField.textPlaceholder, {
         fontSize: fontSize,
-        height: height,
+        // height: height,
         color: BLACK,
-        fontFamily: 'Inter-Medium',
+        // fontFamily: 'Inter-Medium',
       });
     }
 

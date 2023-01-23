@@ -10,7 +10,8 @@ const Button = ({
   typeStyle,
   image,
   disabled,
-  typeSize,
+  width,
+  height,
 }: ButtonProps) => {
   const stateStyleContainer = () => {
     if (disabled) {
@@ -27,25 +28,24 @@ const Button = ({
   };
 
   return (
-    <View>
-      <TouchableOpacity style={[stateStyleContainer()]} onPress={onPress}>
-        {image?.imgRoute && (
-          <Image
-            source={image.imgRoute}
-            style={[
-              addImageStyle(image),
-              {opacity: disabled ? 0.2 : 1},
-              ButtonStyleVariant[typeStyle].imageColor,
-            ]}
-          />
-        )}
-        <Text
-          style={[stateStyleText(), ButtonSizeVariant[typeSize].buttonSize]}
-        >
-          {text}
-        </Text>
-      </TouchableOpacity>
-    </View>
+    <TouchableOpacity
+      style={[stateStyleContainer(), {width: width, height: height}]}
+      onPress={onPress}
+    >
+      {image?.imgRoute && (
+        <Image
+          source={image.imgRoute}
+          style={[
+            addImageStyle(image),
+            {opacity: disabled ? 0.2 : 1},
+            ButtonStyleVariant[typeStyle].imageColor,
+          ]}
+        />
+      )}
+      <Text style={[stateStyleText(), ButtonSizeVariant['medium'].buttonSize]}>
+        {text}
+      </Text>
+    </TouchableOpacity>
   );
 };
 
