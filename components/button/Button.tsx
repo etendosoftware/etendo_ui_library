@@ -28,13 +28,7 @@ const Button = ({
 
   return (
     <View>
-      <TouchableOpacity
-        style={[
-          stateStyleContainer(),
-          ButtonSizeVariant[typeSize].containerSize,
-        ]}
-        onPress={onPress}
-      >
+      <TouchableOpacity style={[stateStyleContainer()]} onPress={onPress}>
         {image?.imgRoute && (
           <Image
             source={image.imgRoute}
@@ -43,13 +37,12 @@ const Button = ({
               {opacity: disabled ? 0.2 : 1},
               ButtonStyleVariant[typeStyle].imageColor,
             ]}
-          ></Image>
+          />
         )}
         <Text
           style={[stateStyleText(), ButtonSizeVariant[typeSize].buttonSize]}
         >
-          {' '}
-          {text}{' '}
+          {text}
         </Text>
       </TouchableOpacity>
     </View>

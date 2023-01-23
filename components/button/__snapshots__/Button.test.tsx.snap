@@ -21,8 +21,6 @@ exports[`Running Test for Input Check Button disabled 1`] = `
         "borderRadius": 5,
         "flexDirection": "row",
         "opacity": 1,
-        "paddingHorizontal": 18,
-        "paddingVertical": 14,
       }
     }
   >
@@ -67,9 +65,7 @@ exports[`Running Test for Input Check Button disabled 1`] = `
         ]
       }
     >
-       
       Button CTA
-       
     </Text>
   </View>
 </View>
