@@ -12,6 +12,7 @@ describe('Running Test for Input', () => {
           placeholder="Write a password"
           disabled={false}
           value="Render Test"
+          keyboardType='text'
           onPress={() => {
             console.log('Press Field');
           }}

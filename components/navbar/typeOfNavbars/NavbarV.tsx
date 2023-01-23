@@ -5,22 +5,18 @@
 
 /* Imports */
 import React, {useEffect, useState} from 'react';
-import {
-  Image,
-  Text,
-  TouchableOpacity,
-  View,
-  useWindowDimensions,
-  ScrollView,
-} from 'react-native';
+import {Image, Text, TouchableOpacity, View, ScrollView} from 'react-native';
 
-import {useRouter} from 'next/router';
 import {Info} from '../Navbar.types';
 import {NavbarVStyleVariant} from '../Navbar.styles';
 import {BLUE, WHITE, YELLOW} from '../../../styles/colors';
-import Link from 'next/link';
 
-export const NavbarV = ({data, onChangeSelected}: any) => {
+export const NavbarV = ({
+  data,
+  onChangeSelected,
+  renderItem,
+  pathname,
+}: any) => {
   // Use of states to control navigation
   const [currentNav, setCurrentNav] = useState<string>('');
 
@@ -51,6 +47,8 @@ export const NavbarV = ({data, onChangeSelected}: any) => {
                 image.routeImage,
                 image.routeNav,
                 image.key,
+                renderItem,
+                pathname,
               )}
             </TouchableOpacity>
           );
@@ -68,9 +66,9 @@ const NavButton = (
   image: any,
   routeNav: any,
   key: string,
+  renderItem: any,
+  pathname: any,
 ) => {
-  const router = useRouter();
-  const {pathname} = router;
   const path = pathname.split('/');
   useEffect(() => {
     if (key === path[1]) {
@@ -81,7 +79,9 @@ const NavButton = (
   return (
     <>
       <TouchableOpacity>
-        <Link href={routeNav}>
+        {renderItem ? (
+          renderItem(routeNav, image, currentNav, key, title)
+        ) : (
           <View
             style={{
               /* Primary */
@@ -107,7 +107,6 @@ const NavButton = (
 
             <Text
               style={{
-                /* Primary */
                 fontSize: 10,
                 justifyContent: 'center',
                 fontWeight: 'bold',
@@ -122,7 +121,7 @@ const NavButton = (
               {title}
             </Text>
           </View>
-        </Link>
+        )}
       </TouchableOpacity>
     </>
   );

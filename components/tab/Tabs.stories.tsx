@@ -51,46 +51,10 @@ const Template: Story<TabProps> = args => (
 
 const Template2: Story<TabProps> = args => (
   <Tab
-    data={dataset}
-    onChangeSelected={onCheckSelectedMock}
-    style="secondary"
-    typeSizeText="small"
-  />
-);
-
-const Template3: Story<TabProps> = args => (
-  <Tab
     data={dataset2}
     onChangeSelected={onCheckSelectedMock}
     style="primary"
     typeSizeText="medium"
-  />
-);
-
-const Template4: Story<TabProps> = args => (
-  <Tab
-    data={dataset2}
-    onChangeSelected={onCheckSelectedMock}
-    style="secondary"
-    typeSizeText="medium"
-  />
-);
-
-const Template5: Story<TabProps> = args => (
-  <Tab
-    data={dataset3}
-    onChangeSelected={onCheckSelectedMock}
-    style="primary"
-    typeSizeText="large"
-  />
-);
-
-const Template6: Story<TabProps> = args => (
-  <Tab
-    data={dataset3}
-    onChangeSelected={onCheckSelectedMock}
-    style="secondary"
-    typeSizeText="large"
   />
 );
 
@@ -98,17 +62,5 @@ const Template6: Story<TabProps> = args => (
 export const PrimaryStyleVersion1 = Template.bind({});
 PrimaryStyleVersion1.args = {};
 
-export const SecondaryStyleVersion1 = Template2.bind({});
-SecondaryStyleVersion1.args = {};
-
-export const PrimaryStyleVersion2 = Template3.bind({});
-PrimaryStyleVersion1.args = {};
-
-export const SecundaryStyleVersion2 = Template4.bind({});
-SecundaryStyleVersion2.args = {};
-
-export const PrimaryStyleVersion3 = Template5.bind({});
-PrimaryStyleVersion3.args = {};
-
-export const SecundaryStyleVersion3 = Template6.bind({});
-SecundaryStyleVersion3.args = {};
+export const PrimaryStyleVersion2 = Template2.bind({});
+PrimaryStyleVersion2.args = {};

@@ -10,8 +10,8 @@ import {
   PURPLE_50,
   RED,
   RED_10,
-  WHITE,
 } from '../../styles/colors';
+import {arrowPickerVerticalIcon} from '../../assets/images/icons';
 
 export const inputVariants: InputVariantsType = {
   onlyRead: {
@@ -27,9 +27,9 @@ export const inputVariants: InputVariantsType = {
       disabledField: false,
       disabledSubmit: true,
       image: {
-        imgHeight: 4,
-        imgWidth: 6,
-        imgRoute: require('../../assets/images/icons/arrowPicker.png'),
+        imgHeight: 8,
+        imgWidth: 12,
+        imgRoute: arrowPickerVerticalIcon,
       },
     },
   },
@@ -53,10 +53,9 @@ export const inputVariants: InputVariantsType = {
       disabledField: true,
       disabledSubmit: false,
       image: {
-        imgHeight: 12,
-        imgWidth: 13,
+        imgHeight: 15,
+        imgWidth: 15,
         imgRoute: require('../../assets/images/icons/search.png'),
-        imgMarginRight: 5,
       },
     },
   },
@@ -66,10 +65,9 @@ export const inputVariants: InputVariantsType = {
       disabledField: false,
       disabledSubmit: false,
       image: {
-        imgHeight: 12,
-        imgWidth: 13,
+        imgHeight: 15,
+        imgWidth: 15,
         imgRoute: require('../../assets/images/icons/search.png'),
-        imgMarginRight: 5,
       },
     },
   },
@@ -83,21 +81,18 @@ const defaultTitle: TextStyle = {
 };
 
 const defaultField: ViewStyle = {
-  backgroundColor: WHITE,
-  paddingVertical: 0,
   borderWidth: 1,
   borderColor: BLUE,
-  borderRadius: 3,
+  marginVertical: 5,
+  borderRadius: 5,
   flexDirection: 'row',
   alignItems: 'center',
   marginTop: 3,
 };
 
 const defaultText: TextStyle = {
-  flex: 1,
-  paddingVertical: 0,
-  textAlignVertical: 'center',
-  paddingLeft: 7,
+  width: '100%',
+  padding: 10,
   color: BLUE,
   fontSize: 14,
   fontWeight: '500',
@@ -105,12 +100,10 @@ const defaultText: TextStyle = {
 };
 
 const defaultTextPlaceholder: TextStyle = {
-  flex: 1,
-  paddingVertical: 0,
-  textAlignVertical: 'center',
-  paddingLeft: 7,
-  color: GREY_BLUE,
+  width: '100%',
   fontSize: 14,
+  padding: 10,
+  color: GREY_BLUE,
   fontWeight: '500',
   fontFamily: FONT_MEDIUM,
 };
@@ -171,7 +164,6 @@ export const inputStyleVariants: TypeInputStyleVariant = {
 export const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
-    justifyContent: 'center',
   },
   rowInputTitle: {
     flexDirection: 'row',
@@ -180,12 +172,27 @@ export const styles = StyleSheet.create({
   rowHelperText: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 5,
   },
   buttonContainerInputField: {
     alignSelf: 'flex-start',
-    paddingHorizontal: 7,
+    paddingHorizontal: 10,
     justifyContent: 'center',
-    height: '100%',
+  },
+  passwordContainer: {
+    right: 20,
+    position: 'absolute',
+    alignSelf: 'center',
+    marginLeft: 10,
+  },
+  showImgContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+    position: 'absolute',
+    right: 10,
+  },
+  passwordImage: {
+    height: 22,
+    width: 22,
   },
 });

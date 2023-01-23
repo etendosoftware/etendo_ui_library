@@ -1,9 +1,17 @@
 import React, {useState, useRef, useEffect} from 'react';
-import {View, Text, TouchableOpacity, Image, ScrollView} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+  Platform,
+} from 'react-native';
 
 import DropdownItem from './DropdownItem';
 import {DropdownStyleVariant} from './Dropdown.styles';
 import {DropdownProps, Info} from './Dropdown.types';
+import {arrowPickerVerticalIcon} from '../../assets/images/icons';
 
 const Dropdown = ({
   data,
@@ -15,6 +23,7 @@ const Dropdown = ({
   const [toggleItem, setToggleItem] = useState<any>(undefined);
   const [chooseOption, setChooseOption] = useState(text);
 
+  const PLATFORM_IS_WEB = Platform.OS === 'web';
   const catMenu = useRef(null);
 
   const handleShowOptions = () => {
@@ -25,10 +34,57 @@ const Dropdown = ({
     setChooseOption(text);
   }, [text]);
 
-  const closeOpenMenus = e => {
+  const closeOpenMenus = (e: any) => {
     if (catMenu.current && showOptions && !catMenu.current.contains(e.target)) {
       setShowOptions(false);
     }
+  };
+
+  const showOptionsIcon = (isWeb: boolean) => {
+    return isWeb ? (
+      <img
+        src={arrowPickerVerticalIcon}
+        style={{
+          width: 10,
+          height: 7,
+          position: 'absolute',
+          right: 15,
+          rotate: '180deg',
+        }}
+      />
+    ) : (
+      <Image
+        source={arrowPickerVerticalIcon}
+        style={{
+          width: 11,
+          height: 9,
+          resizeMode: 'stretch',
+          position: 'absolute',
+          right: 15,
+          transform: [{rotate: '180deg'}],
+        }}
+      />
+    );
+  };
+
+  const notShowOptionsIcon = (isWeb: boolean) => {
+    return isWeb ? (
+      <img
+        src={arrowPickerVerticalIcon}
+        style={{width: 10, height: 7, position: 'absolute', right: 15}}
+      />
+    ) : (
+      <Image
+        source={arrowPickerVerticalIcon}
+        style={{
+          width: 11,
+          height: 9,
+          resizeMode: 'stretch',
+          position: 'absolute',
+          right: 15,
+        }}
+      />
+    );
   };
 
   document.addEventListener('mousedown', closeOpenMenus);
@@ -45,25 +101,9 @@ const Dropdown = ({
         <Text style={DropdownStyleVariant.primary.dropDownButtonText}>
           {chooseOption}
         </Text>
-        {showOptions ? (
-          <img
-            src={'/assets/images/icons/arrow-picker-top.png'}
-            style={{
-              width: 10,
-              position: 'absolute',
-              right: 15,
-            }}
-          />
-        ) : (
-          <img
-            src={'/assets/images/icons/arrow-picker.png'}
-            style={{
-              width: 10,
-              position: 'absolute',
-              right: 15,
-            }}
-          />
-        )}
+        {showOptions
+          ? showOptionsIcon(PLATFORM_IS_WEB)
+          : notShowOptionsIcon(PLATFORM_IS_WEB)}
       </TouchableOpacity>
 
       {showOptions && (

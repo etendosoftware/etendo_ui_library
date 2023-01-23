@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, Pressable, Text, TouchableOpacity, View} from 'react-native';
+import {FlatList, Pressable, TouchableOpacity, View} from 'react-native';
 import {Actions, Columns, TableProps} from './Table.types';
 import {styles} from './Table.styles';
 import TableHeaders from './components/TableHeaders';
@@ -73,11 +73,6 @@ const Table: React.FC<TableProps> = ({data, columns, title, onRowPress}) => {
           keyExtractor={(item: any, index: number) => 'Table: ' + index}
         />
       </View>
-      {/* {!data.length && (
-        <View style={[styles.placeholderContainer]}>
-          <Text style={[styles.titleText]}>No results.</Text>
-        </View>
-      )} */}
     </>
   );
 };

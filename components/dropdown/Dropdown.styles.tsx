@@ -22,6 +22,8 @@ export const DropdownStyleVariant: DropdownStyleRecord = {
       width: '100%',
       height: 34,
       zIndex: 50,
+      borderWidth: 1,
+      borderColor: BLUE,
     },
     dropDownButtonText: {
       color: BLUE,
@@ -53,7 +55,6 @@ export const DropdownStyleVariant: DropdownStyleRecord = {
       borderBottomWidth: 1.5,
       borderBottomColor: GREY_BLUE_50,
       justifyContent: 'center',
-      borderRadius: 3,
     },
     textOption: {
       margin: 4,

@@ -2,11 +2,10 @@
 
 /* Imports */
 import React from 'react';
-import {Button, Text, TouchableOpacity} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
 
 import {Info, NavbarHorizontalProps} from '../Navbar.types';
 import {NavbarHStyleVariant} from '../Navbar.styles';
-import Link from 'next/link';
 
 import {ViewEtendo as View} from '../../viewEtendo/ViewEtendo';
 
@@ -15,23 +14,23 @@ export const NavbarHDesktop = ({
   onChangeSelected,
   title,
   navigationLogin,
+  renderItem,
 }: NavbarHorizontalProps) => {
   return (
     <>
       <View style={NavbarHStyleVariant.desktop.container}>
         <TouchableOpacity onPress={() => onChangeSelected} activeOpacity={1}>
-          <Link href={data[0].routeNav}>
+          {renderItem ? (
+            renderItem(data[0].routeNav, data[0].routeImage)
+          ) : (
             <img
               src={data[0].routeImage}
               style={{
-                /* Primary */
                 height: 27,
                 marginLeft: 14,
-
-                // tintColor: currentNav === title ? BLUE : WHITE,
               }}
             />
-          </Link>
+          )}
         </TouchableOpacity>
         <View style={NavbarHStyleVariant.desktop.containerImages}>
           {data.map((image: Info, i: number) => {
@@ -47,15 +46,12 @@ export const NavbarHDesktop = ({
                     })
                   }
                   key={image.key}
-                  activeOpacity={1}
-                >
+                  activeOpacity={1}>
                   <img
                     src={image.routeImage}
                     style={{
-                      /* Primary */
                       height: 22,
                       marginRight: 28,
-                      // tintColor: currentNav === title ? BLUE : WHITE,
                     }}
                   />
                 </TouchableOpacity>
@@ -69,11 +65,9 @@ export const NavbarHDesktop = ({
               <img
                 src={data[data.length - 1].routeImage}
                 style={{
-                  /* Primary */
                   height: 22,
                   marginLeft: 20,
                   marginRight: 7,
-                  // tintColor: currentNav === title ? BLUE : WHITE,
                 }}
               />
             )}
@@ -87,8 +81,7 @@ export const NavbarHDesktop = ({
       </View>
       <TouchableOpacity
         style={NavbarHStyleVariant.desktop.logout}
-        onPress={navigationLogin}
-      >
+        onPress={navigationLogin}>
         <Text style={NavbarHStyleVariant.desktop.textLogout}>{title}</Text>
       </TouchableOpacity>
     </>

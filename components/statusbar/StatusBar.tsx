@@ -1,12 +1,9 @@
 /* Imports */
 import React from 'react';
 
-import {View} from 'react-native';
-import {BLUE, WHITE, YELLOW} from '../../styles/colors';
 import {StatusBarStyleVariant} from './StatusBar.styles';
-// import {StatusBarStyleVariant} from './StatusBar.styles';
 
-import {StatusBarProps, StatusBarStyleRecord} from './StatusBar.types';
+import {StatusBarProps} from './StatusBar.types';
 import {StepActive} from './StepActive';
 import {StepDisabled} from './StepDisabled';
 
