@@ -25,7 +25,6 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       color: WHITE,
       fontWeight: '600',
       fontSize: 16,
-      fontFamily: 'Inter-Bold',
     },
     containerDisabled: {
       backgroundColor: GREY_BLUE_50,

@@ -32,7 +32,7 @@ const InputField = ({
   onFocus,
   onBlur,
   fontSize,
-  // height,
+  height,
   password,
 }: InputFieldProps) => {
   const [showImg, setShowImg] = useState<boolean>(false);
@@ -45,16 +45,14 @@ const InputField = ({
     if (text) {
       style.push(styleField.textDefault, {
         fontSize: fontSize,
-        // height: height,
-        color: GREY_BLUE_50,
-        // fontFamily: 'Inter-Medium',
+        height: height,
+        color: BLACK,
       });
     } else {
       style.push(styleField.textPlaceholder, {
         fontSize: fontSize,
-        // height: height,
+        height: height,
         color: BLACK,
-        // fontFamily: 'Inter-Medium',
       });
     }
 

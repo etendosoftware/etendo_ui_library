@@ -84,8 +84,9 @@ exports[`Running Test for Input Check Input Error 1`] = `
                 "width": "100%",
               },
               Object {
-                "color": "#D3D6E1",
+                "color": "#000000",
                 "fontSize": undefined,
+                "height": undefined,
               },
               Object {
                 "paddingRight": 10,
