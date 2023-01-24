@@ -46,9 +46,17 @@ export const NavbarHStyleVariant: NavbarStyleHorizontal = {
     },
     logout: {
       backgroundColor: BLUE,
+      borderRadius: 5,
     },
     textLogout: {
       color: WHITE,
+      alignSelf: 'center',
+      padding: 10,
+      paddingLeft: 15,
+      paddingRight: 15,
+      fontFamily: 'Poppins',
+      fontWeight: '700',
+      fontSize: 12,
     },
   },
   // Tablet screen
@@ -95,9 +103,17 @@ export const NavbarHStyleVariant: NavbarStyleHorizontal = {
     },
     logout: {
       backgroundColor: BLUE,
+      borderRadius: 5,
     },
     textLogout: {
       color: WHITE,
+      alignSelf: 'center',
+      padding: 10,
+      paddingLeft: 15,
+      paddingRight: 15,
+      fontFamily: 'Poppins',
+      fontWeight: '700',
+      fontSize: 12,
     },
   },
   // Desktop screen
@@ -156,13 +172,17 @@ export const NavbarHStyleVariant: NavbarStyleHorizontal = {
     },
     logout: {
       backgroundColor: BLUE,
-      borderRadius: 8,
+      borderRadius: 5,
     },
     textLogout: {
       color: WHITE,
       alignSelf: 'center',
-      padding: 5,
+      padding: 10,
+      paddingLeft: 15,
+      paddingRight: 15,
       fontFamily: 'Poppins',
+      fontWeight: '700',
+      fontSize: 12,
     },
   },
 };
