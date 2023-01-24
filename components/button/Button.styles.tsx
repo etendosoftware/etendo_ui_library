@@ -16,12 +16,12 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       borderRadius: 5,
       flexDirection: 'row',
       alignItems: 'center',
-      alignSelf: 'flex-start',
+      justifyContent:'center',
       width: 150,
     },
     text: {
       color: WHITE,
-      fontFamily: 'Poppins',
+      fontFamily: 'Inter-Medium',
       fontWeight: '600',
     },
     containerDisabled: {
@@ -153,33 +153,38 @@ export const ButtonStyleVariant: buttonStyleVariant = {
   },
 };
 
-export const ButtonSizeVariant: buttonSizeVariant = {
-  small: {
-    containerSize: {
-      paddingVertical: 4,
-      paddingHorizontal: 8,
+export const ButtonSizeVariant:buttonSizeVariant = {
+    small: {
+        containerSize: {
+            paddingVertical: 4,
+            paddingHorizontal: 8,
+        }, 
+        buttonSize: {
+            fontSize: 14,
+        },
     },
-    buttonSize: {
-      fontSize: 14,
+    medium: {
+        containerSize: {
+            paddingVertical: 10,
+            paddingHorizontal: 12,
+        }, 
+        buttonSize: {
+            fontSize: 18,
+        },
     },
-  },
-  medium: {
-    containerSize: {
-      paddingVertical: 10,
-      flex: 1,
-      justifyContent: 'center',
-    },
-    buttonSize: {
-      fontSize: 16,
-    },
-  },
-  large: {
-    containerSize: {
-      paddingVertical: 14,
-      paddingHorizontal: 18,
-    },
-    buttonSize: {
-      fontSize: 20,
-    },
-  },
-};
+    large: {
+        containerSize: {
+            paddingVertical: 14,
+            paddingHorizontal: 18,
+        }, 
+        buttonSize: {
+            fontSize: 20,
+        },
+    }
+}
+
+export const stylesStories = {
+    buttonContainer:{
+        marginRight: 20
+    }
+}

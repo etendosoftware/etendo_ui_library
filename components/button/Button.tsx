@@ -10,7 +10,7 @@ const Button = ({
   typeStyle,
   image,
   disabled,
-  typeSize,
+  fontSize,
 }: ButtonProps) => {
   const stateStyleContainer = () => {
     if (disabled) {
@@ -31,7 +31,7 @@ const Button = ({
       <TouchableOpacity
         style={[
           stateStyleContainer(),
-          ButtonSizeVariant[typeSize].containerSize,
+          ButtonSizeVariant[fontSize].containerSize,
         ]}
         onPress={onPress}
       >
@@ -46,10 +46,9 @@ const Button = ({
           ></Image>
         )}
         <Text
-          style={[stateStyleText(), ButtonSizeVariant[typeSize].buttonSize]}
+          style={[stateStyleText(), ButtonSizeVariant[fontSize].buttonSize]}
         >
-          {' '}
-          {text}{' '}
+          {text}
         </Text>
       </TouchableOpacity>
     </View>

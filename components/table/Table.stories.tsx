@@ -4,7 +4,7 @@ import Table from './Table';
 import {TableProps} from './Table.types';
 import TableCellEdit from './components/TableCellEdit';
 import {action} from '@storybook/addon-actions';
-import data from './Table.json';
+import data from './TableData.json';
 
 const meta: Meta = {
   title: 'Etendo/Tables',
@@ -14,9 +14,9 @@ const meta: Meta = {
 const Template: Story<TableProps> = args => <Table {...args} />;
 
 export default meta;
-export const table = Template.bind({});
+export const TableDefault = Template.bind({});
 
-table.args = {
+TableDefault.args = {
   onRowPress(primary) {
     action('onRowPress')(primary);
   },

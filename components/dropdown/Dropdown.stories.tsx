@@ -1,14 +1,14 @@
 import React from 'react';
 import {Story, Meta} from '@storybook/react';
-
 import Dropdown from './Dropdown';
-import {NavbarProps} from '../navbar/Navbar.types';
+import {DropdownProps, Info} from './Dropdown.types';
+import {View} from 'react-native';
 
-export default {
+const meta: Meta = {
   title: 'Etendo/Dropdown',
   component: Dropdown,
   argTypes: {},
-} as Meta<typeof Dropdown>;
+};
 
 const dataset = [
   {name: 'User', route: '', key: 'user'},
@@ -20,19 +20,52 @@ const dataset = [
   {name: 'Map', route: '', key: 'map'},
 ];
 
-const onCheckSelectedMock = () => dataset[0];
+const Template0: Story<DropdownProps> = ({...args}) => {
+  return <Dropdown {...args} />;
+};
 
-/* Templates */
-const Template: Story<NavbarProps> = () => (
-  <Dropdown
-    data={dataset}
-    onChangeSelected={onCheckSelectedMock}
-    text="Massive load"
-    style="primary"
-    typeSizeText="small"
-  />
+const Template1: Story<DropdownProps> = args => (
+  <View style={{flexDirection: 'row',alignItems:'flex-start'}}>
+    <View style={{marginRight:20, width: 200}}>
+      <Dropdown
+        data={dataset}
+        onChangeSelected={(Info: Info) => {}}
+        label={'Massive load'}
+        style={'primary'}
+        typeSizeText={'small'}
+      />
+    </View>
+  
+    <View style={{marginRight:20, width: 200}}>
+      <Dropdown
+        data={dataset}
+        onChangeSelected={(Info: Info) => {}}
+        label={'Massive load'}
+        style={'primary'}
+        typeSizeText={'medium'}
+      />
+      </View>
+   
+    <View style={{marginRight:20, width: 200}}>
+      <Dropdown
+        data={dataset}
+        onChangeSelected={(Info: Info) => {}}
+        label={'Massive load'}
+        style={'primary'}
+        typeSizeText={'large'}
+      />
+    </View>
+  </View>
 );
 
-/* Story exports */
-export const DropdownComponent = Template.bind({});
-DropdownComponent.args = {};
+export default meta;
+export const DropdownDefault = Template0.bind({});
+export const DropdownVariants = Template1.bind({});
+
+DropdownDefault.args = {
+  data: dataset,
+  onChangeSelected: (Info: Info) => {},
+  label: 'Massive load',
+  style: 'primary',
+  typeSizeText: 'medium',
+};

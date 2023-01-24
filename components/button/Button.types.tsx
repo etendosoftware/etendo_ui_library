@@ -32,5 +32,5 @@ export interface ButtonProps {
     typeStyle: ButtonStyleType,
     image?: ImageType,
     disabled?: boolean,
-    typeSize: ButtonSizeType,
+    fontSize: ButtonSizeType,
 };

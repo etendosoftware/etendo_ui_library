@@ -72,5 +72,5 @@ const Template: Story<StatusBarProps> = args => (
 );
 
 /* Story exports */
-export const StatusBarStep1 = Template.bind({});
-StatusBarStep1.args = {};
+export const StatusBarDefault = Template.bind({});
+StatusBarDefault.args = {};
