@@ -18,7 +18,7 @@ export interface NavbarProps {
 export interface NavbarHorizontalProps {
   data: Info[];
   onChangeSelected: () => void;
-  title: String,
+  title: string,
   navigationLogin: () => any
   renderItem?: (routeNav: string, routeImage: string) => JSX.Element;
 }
