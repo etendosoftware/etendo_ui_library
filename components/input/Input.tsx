@@ -23,6 +23,7 @@ const Input: React.FC<InputProps> = ({
   typeField,
   isError,
   fontSize,
+  height,
   password,
 }) => {
   const stateStyle = () => {
@@ -61,6 +62,7 @@ const Input: React.FC<InputProps> = ({
         numberOfLines={numberOfLines}
         centerText={centerText}
         fontSize={fontSize}
+        height={height}
         password={password}
       />
       <InputHelperText

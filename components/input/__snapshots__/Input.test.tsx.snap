@@ -20,7 +20,6 @@ exports[`Running Test for Input Check Input Error 1`] = `
       style={
         Object {
           "color": "#202452",
-          "fontFamily": "Inter-Medium",
           "fontSize": 14,
           "marginTop": 10,
         }
@@ -79,14 +78,15 @@ exports[`Running Test for Input Check Input Error 1`] = `
             Array [
               Object {
                 "color": "#202452",
-                "fontFamily": "Inter-Medium",
                 "fontSize": 14,
                 "fontWeight": "500",
                 "padding": 10,
                 "width": "100%",
               },
               Object {
+                "color": "#000000",
                 "fontSize": undefined,
+                "height": undefined,
               },
               Object {
                 "paddingRight": 10,

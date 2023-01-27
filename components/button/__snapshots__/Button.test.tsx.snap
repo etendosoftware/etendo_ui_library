@@ -1,76 +1,72 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Running Test for Input Check Button disabled 1`] = `
-<View>
-  <View
-    accessible={true}
-    collapsable={false}
-    focusable={true}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#D3D6E1",
+      "borderRadius": 5,
+      "flexDirection": "row",
+      "height": undefined,
+      "opacity": 1,
+      "width": undefined,
+    }
+  }
+>
+  <Image
+    source={
       Object {
-        "alignItems": "center",
-        "alignSelf": "flex-start",
-        "backgroundColor": "#D3D6E1",
-        "borderRadius": 5,
-        "flexDirection": "row",
-        "opacity": 1,
-        "paddingHorizontal": 18,
-        "paddingVertical": 14,
+        "testUri": "../../../assets/images/icons/check.png",
       }
     }
-  >
-    <Image
-      source={
+    style={
+      Array [
+        Array [
+          Object {
+            "width": 16,
+          },
+          Object {
+            "height": 12,
+          },
+          Object {
+            "marginRight": 10,
+          },
+        ],
         Object {
-          "testUri": "../../../assets/images/icons/check.png",
-        }
-      }
-      style={
-        Array [
-          Array [
-            Object {
-              "width": 16,
-            },
-            Object {
-              "height": 12,
-            },
-            Object {
-              "marginRight": 10,
-            },
-          ],
-          Object {
-            "opacity": 0.2,
-          },
-          Object {
-            "tintColor": "#FFFFFF",
-          },
-        ]
-      }
-    />
-    <Text
-      style={
-        Array [
-          Object {
-            "color": "#FFFFFF",
-            "fontWeight": "bold",
-          },
-          Object {
-            "fontSize": 20,
-          },
-        ]
-      }
-    >
-       
-      Button CTA
-       
-    </Text>
-  </View>
+          "opacity": 0.2,
+        },
+        Object {
+          "tintColor": "#FFFFFF",
+        },
+      ]
+    }
+  />
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#FFFFFF",
+          "fontWeight": "bold",
+        },
+        Object {
+          "fontSize": 16,
+        },
+      ]
+    }
+  >
+    Button CTA
+  </Text>
 </View>
 `;
