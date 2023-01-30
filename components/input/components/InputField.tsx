@@ -16,6 +16,7 @@ import {
   activePasswordIcon,
   disabledPasswordIcon,
 } from '../../../assets/images/icons';
+import {BLACK, GREY_BLUE_50} from '../../../styles/colors';
 
 const InputField = ({
   configField,
@@ -31,6 +32,7 @@ const InputField = ({
   onFocus,
   onBlur,
   fontSize,
+  height,
   password,
 }: InputFieldProps) => {
   const [showImg, setShowImg] = useState<boolean>(false);
@@ -41,9 +43,17 @@ const InputField = ({
     let style: Array<TextStyle | TextStyle[]> = [];
 
     if (text) {
-      style.push(styleField.textDefault, {fontSize: fontSize});
+      style.push(styleField.textDefault, {
+        fontSize: fontSize,
+        height: height,
+        color: BLACK,
+      });
     } else {
-      style.push(styleField.textPlaceholder, {fontSize: fontSize});
+      style.push(styleField.textPlaceholder, {
+        fontSize: fontSize,
+        height: height,
+        color: BLACK,
+      });
     }
 
     style.push({paddingRight: password ? 50 : 10});
@@ -129,8 +139,8 @@ const InputField = ({
                     <Image
                       source={
                         !showPassword
-                          ? disabledPasswordIcon
-                          : activePasswordIcon
+                          ? {uri: disabledPasswordIcon}
+                          : {uri: activePasswordIcon}
                       }
                       style={styles.passwordImage}
                     />

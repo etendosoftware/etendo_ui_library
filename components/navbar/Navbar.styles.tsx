@@ -1,7 +1,7 @@
 /* Imports */
 
 import {NavbarStyleHorizontal, NavbarStyleVertical} from './Navbar.types';
-import {BLUE} from '../../styles/colors';
+import {BLUE, WHITE} from '../../styles/colors';
 
 /* Export of different styles */
 export const NavbarHStyleVariant: NavbarStyleHorizontal = {
@@ -43,6 +43,20 @@ export const NavbarHStyleVariant: NavbarStyleHorizontal = {
       height: 28,
       marginLeft: '90%',
       position: 'absolute',
+    },
+    logout: {
+      backgroundColor: BLUE,
+      borderRadius: 5,
+    },
+    textLogout: {
+      color: WHITE,
+      alignSelf: 'center',
+      padding: 10,
+      paddingLeft: 15,
+      paddingRight: 15,
+      fontFamily: 'Poppins',
+      fontWeight: '700',
+      fontSize: 12,
     },
   },
   // Tablet screen
@@ -86,6 +100,20 @@ export const NavbarHStyleVariant: NavbarStyleHorizontal = {
       height: 28,
       marginLeft: '90%',
       position: 'absolute',
+    },
+    logout: {
+      backgroundColor: BLUE,
+      borderRadius: 5,
+    },
+    textLogout: {
+      color: WHITE,
+      alignSelf: 'center',
+      padding: 10,
+      paddingLeft: 15,
+      paddingRight: 15,
+      fontFamily: 'Poppins',
+      fontWeight: '700',
+      fontSize: 12,
     },
   },
   // Desktop screen
@@ -141,6 +169,20 @@ export const NavbarHStyleVariant: NavbarStyleHorizontal = {
       height: 28,
       marginLeft: '90%',
       position: 'absolute',
+    },
+    logout: {
+      backgroundColor: BLUE,
+      borderRadius: 5,
+    },
+    textLogout: {
+      color: WHITE,
+      alignSelf: 'center',
+      padding: 10,
+      paddingLeft: 15,
+      paddingRight: 15,
+      fontFamily: 'Poppins',
+      fontWeight: '700',
+      fontSize: 12,
     },
   },
 };

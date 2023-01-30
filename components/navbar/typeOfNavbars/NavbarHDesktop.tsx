@@ -12,6 +12,8 @@ import {ViewEtendo as View} from '../../viewEtendo/ViewEtendo';
 export const NavbarHDesktop = ({
   data,
   onChangeSelected,
+  title,
+  navigationLogin,
   renderItem,
 }: NavbarHorizontalProps) => {
   return (
@@ -44,8 +46,7 @@ export const NavbarHDesktop = ({
                     })
                   }
                   key={image.key}
-                  activeOpacity={1}
-                >
+                  activeOpacity={1}>
                   <img
                     src={image.routeImage}
                     style={{
@@ -78,6 +79,11 @@ export const NavbarHDesktop = ({
           )}
         </View>
       </View>
+      <TouchableOpacity
+        style={NavbarHStyleVariant.desktop.logout}
+        onPress={navigationLogin}>
+        <Text style={NavbarHStyleVariant.desktop.textLogout}>{title}</Text>
+      </TouchableOpacity>
     </>
   );
 };
