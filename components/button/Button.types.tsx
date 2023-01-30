@@ -41,15 +41,6 @@ export type ImageType = {
 };
 
 export interface ButtonProps {
-<<<<<<< HEAD
-    onPress: () => void;
-    text: string;
-    typeStyle: ButtonStyleType,
-    image?: ImageType,
-    disabled?: boolean,
-    fontSize: ButtonSizeType,
-};
-=======
   onPress: () => void;
   text: string;
   typeStyle: ButtonStyleType;
@@ -59,4 +50,3 @@ export interface ButtonProps {
   width?: number | string;
   height?: number | string;
 }
->>>>>>> 1c1af782d80cf14592d82d6b8914d194436a09bc

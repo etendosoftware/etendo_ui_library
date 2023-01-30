@@ -21,35 +21,35 @@ const Template1: Story<ButtonProps> = (args) => <View style={{flexDirection:'row
         onPress={()=>{}} 
         text={'Primary'} 
         typeStyle={'primary'} 
-        fontSize={'medium'} />
+        typeSize={'medium'} />
     </View>
     <View style={stylesStories.buttonContainer}>
         <Button 
         onPress={()=>{}} 
         text={'Secondary'} 
         typeStyle={'secondary'} 
-        fontSize={'medium'} />
+        typeSize={'medium'} />
     </View>
     <View style={stylesStories.buttonContainer}>
         <Button 
         onPress={()=>{}} 
         text={'Terciary'} 
         typeStyle={'terciary'} 
-        fontSize={'medium'} />
+        typeSize={'medium'} />
     </View>
     <View style={stylesStories.buttonContainer}>
         <Button 
         onPress={()=>{}} 
         text={'White'} 
         typeStyle={'white'} 
-        fontSize={'medium'} />
+        typeSize={'medium'} />
     </View>
     <View style={stylesStories.buttonContainer}>
         <Button 
         onPress={()=>{}} 
         text={'WhiteBorder'} 
         typeStyle={'whiteBorder'} 
-        fontSize={'medium'} />
+        typeSize={'medium'} />
     </View>
 </View>
 
