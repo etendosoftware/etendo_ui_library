@@ -7,6 +7,7 @@ import {
   GREY_BLUE_50,
   WHITE,
 } from '../../styles/colors';
+import {StyleSheet} from 'react-native';
 
 /* Export of different styles */
 export const DropdownStyleVariant: DropdownStyleRecord = {
@@ -58,7 +59,6 @@ export const DropdownStyleVariant: DropdownStyleRecord = {
     },
     textOption: {
       margin: 4,
-      fontSize: 13,
       textAlign: 'left',
       paddingLeft: 5,
       fontWeight: '500',
@@ -67,3 +67,13 @@ export const DropdownStyleVariant: DropdownStyleRecord = {
     },
   },
 };
+
+export const styles = StyleSheet.create({
+  storiesContainer: {
+    alignItems: 'flex-start',
+  },
+  storiesDropdownContainer: {
+    marginBottom: 20,
+    width: 200,
+  },
+});

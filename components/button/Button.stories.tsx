@@ -2,70 +2,118 @@ import React from 'react';
 import Button from '../button/Button';
 import {Story, Meta} from '@storybook/react';
 import {ButtonProps} from './Button.types';
-import { View } from 'react-native';
-import { stylesStories } from './Button.styles';
+import {View} from 'react-native';
+import {styles} from './Button.styles';
 
 const meta: Meta = {
   title: 'Etendo/Button',
   component: Button,
-  argTypes: {}
-}
+  argTypes: {},
+};
 
 export default meta;
 
-const Template0: Story<ButtonProps> = (args) => <Button{...args}/>
+const Template0: Story<ButtonProps> = args => <Button {...args} />;
 
-const Template1: Story<ButtonProps> = (args) => <View style={{flexDirection:'row'}}>
-    <View style={stylesStories.buttonContainer}>
-        <Button 
-        onPress={()=>{}} 
-        text={'Primary'} 
-        typeStyle={'primary'} 
-        typeSize={'medium'} />
+const Template1: Story<ButtonProps> = args => (
+  <View style={styles.storiesContainer}>
+    <View style={styles.storiesButtonContainer}>
+      <Button
+        onPress={() => {}}
+        image={{
+          imgRoute: require('../../assets/images/icons/check.png'),
+          imgHeight: 10,
+          imgWidth: 12,
+          imgMarginRight: 10,
+        }}
+        text={'Primary'}
+        typeStyle={'primary'}
+        typeSize={'medium'}
+        width={150}
+        height={50}
+      />
     </View>
-    <View style={stylesStories.buttonContainer}>
-        <Button 
-        onPress={()=>{}} 
-        text={'Secondary'} 
-        typeStyle={'secondary'} 
-        typeSize={'medium'} />
+    <View style={styles.storiesButtonContainer}>
+      <Button
+        onPress={() => {}}
+        image={{
+          imgRoute: require('../../assets/images/icons/check.png'),
+          imgHeight: 10,
+          imgWidth: 12,
+          imgMarginRight: 10,
+        }}
+        text={'Secondary'}
+        typeStyle={'secondary'}
+        typeSize={'medium'}
+        width={150}
+        height={50}
+      />
     </View>
-    <View style={stylesStories.buttonContainer}>
-        <Button 
-        onPress={()=>{}} 
-        text={'Terciary'} 
-        typeStyle={'terciary'} 
-        typeSize={'medium'} />
+    <View style={styles.storiesButtonContainer}>
+      <Button
+        onPress={() => {}}
+        image={{
+          imgRoute: require('../../assets/images/icons/check.png'),
+          imgHeight: 10,
+          imgWidth: 12,
+          imgMarginRight: 10,
+        }}
+        text={'Terciary'}
+        typeStyle={'terciary'}
+        typeSize={'medium'}
+        width={150}
+        height={50}
+      />
     </View>
-    <View style={stylesStories.buttonContainer}>
-        <Button 
-        onPress={()=>{}} 
-        text={'White'} 
-        typeStyle={'white'} 
-        typeSize={'medium'} />
+    <View style={styles.storiesButtonContainer}>
+      <Button
+        onPress={() => {}}
+        image={{
+          imgRoute: require('../../assets/images/icons/check.png'),
+          imgHeight: 10,
+          imgWidth: 12,
+          imgMarginRight: 10,
+        }}
+        text={'White'}
+        typeStyle={'white'}
+        typeSize={'medium'}
+        width={150}
+        height={50}
+      />
     </View>
-    <View style={stylesStories.buttonContainer}>
-        <Button 
-        onPress={()=>{}} 
-        text={'WhiteBorder'} 
-        typeStyle={'whiteBorder'} 
-        typeSize={'medium'} />
+    <View style={styles.storiesButtonContainer}>
+      <Button
+        onPress={() => {}}
+        image={{
+          imgRoute: require('../../assets/images/icons/check.png'),
+          imgHeight: 10,
+          imgWidth: 12,
+          imgMarginRight: 10,
+        }}
+        text={'WhiteBorder'}
+        typeStyle={'whiteBorder'}
+        typeSize={'medium'}
+        width={150}
+        height={50}
+      />
     </View>
-</View>
+  </View>
+);
 
-export const ButtonDefault = Template0.bind({})
-export const ButtonVariants = Template1.bind({})
+export const ButtonDefault = Template0.bind({});
+export const ButtonVariants = Template1.bind({});
 
-ButtonDefault.args =
-{
-    text:'Button',
-    typeStyle: 'primary',
-    image: { 
-        imgRoute: require('../../assets/images/icons/check.png'),
-        imgHeight: 10,
-        imgWidth: 12,
-        imgMarginRight: 10 
-    },
-    disabled: false,
-    fontSize: 'medium'
-}
+ButtonDefault.args = {
+  text: 'Button',
+  typeStyle: 'primary',
+  image: {
+    imgRoute: require('../../assets/images/icons/check.png'),
+    imgHeight: 10,
+    imgWidth: 12,
+    imgMarginRight: 10,
+  },
+  disabled: false,
+  typeSize: 'medium',
+  width:150,
+  height:50
+};

@@ -1,3 +1,4 @@
+import { StyleSheet } from 'react-native';
 import {
   BLUE,
   GREY_BLUE_50,
@@ -18,7 +19,6 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       justifyContent: 'center',
       width: '100%',
       height: '100%',
-      alignSelf: 'center',
       alignItems: 'center',
     },
     text: {
@@ -30,8 +30,8 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       backgroundColor: GREY_BLUE_50,
       borderRadius: 5,
       flexDirection: 'row',
+      justifyContent: 'center',
       alignItems: 'center',
-      alignSelf: 'flex-start',
     },
     textDisabled: {
       color: WHITE,
@@ -47,7 +47,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       borderRadius: 5,
       flexDirection: 'row',
       alignItems: 'center',
-      alignSelf: 'flex-start',
+      justifyContent: 'center',
     },
     text: {
       color: BLUE,
@@ -57,8 +57,8 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       backgroundColor: YELLOW_30,
       borderRadius: 5,
       flexDirection: 'row',
+      justifyContent: 'center',
       alignItems: 'center',
-      alignSelf: 'flex-start',
     },
     textDisabled: {
       color: GREY_BLUE_50,
@@ -73,8 +73,8 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       backgroundColor: PURPLE_50,
       borderRadius: 5,
       flexDirection: 'row',
+      justifyContent: 'center',
       alignItems: 'center',
-      alignSelf: 'flex-start',
     },
     text: {
       color: BLUE,
@@ -84,8 +84,8 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       backgroundColor: PURPLE_10,
       borderRadius: 5,
       flexDirection: 'row',
+      justifyContent: 'center',
       alignItems: 'center',
-      alignSelf: 'flex-start',
     },
     textDisabled: {
       color: GREY_BLUE_50,
@@ -100,10 +100,10 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       backgroundColor: WHITE,
       borderRadius: 5,
       flexDirection: 'row',
-      alignItems: 'center',
       borderWidth: 2,
       borderColor: BLUE,
-      alignSelf: 'flex-start',
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     text: {
       color: BLUE,
@@ -113,10 +113,10 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       backgroundColor: WHITE,
       borderRadius: 5,
       flexDirection: 'row',
-      alignItems: 'center',
       borderWidth: 2,
       borderColor: GREY_BLUE_50,
-      alignSelf: 'flex-start',
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     textDisabled: {
       color: GREY_BLUE_50,
@@ -131,8 +131,8 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       backgroundColor: WHITE,
       borderRadius: 5,
       flexDirection: 'row',
+      justifyContent: 'center',
       alignItems: 'center',
-      alignSelf: 'flex-start',
     },
     text: {
       color: BLUE,
@@ -142,8 +142,8 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       backgroundColor: WHITE,
       borderRadius: 5,
       flexDirection: 'row',
+      justifyContent: 'center',
       alignItems: 'center',
-      alignSelf: 'flex-start',
     },
     textDisabled: {
       color: GREY_BLUE_50,
@@ -185,8 +185,11 @@ export const ButtonSizeVariant:buttonSizeVariant = {
     }
 }
 
-export const stylesStories = {
-    buttonContainer:{
-        marginRight: 20
+export const styles = StyleSheet.create({
+  storiesContainer:{
+    alignItems:'flex-start'
+  },
+  storiesButtonContainer:{
+        marginBottom: 20
     }
-}
+})

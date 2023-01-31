@@ -3,6 +3,7 @@ import {Story, Meta} from '@storybook/react';
 import Dropdown from './Dropdown';
 import {DropdownProps, Info} from './Dropdown.types';
 import {View} from 'react-native';
+import { styles } from './Dropdown.styles';
 
 const meta: Meta = {
   title: 'Etendo/Dropdown',
@@ -21,36 +22,34 @@ const dataset = [
 ];
 
 const Template0: Story<DropdownProps> = ({...args}) => {
-  return <Dropdown {...args} />;
+  return <View style={styles.storiesDropdownContainer}><Dropdown {...args} /></View>;
 };
 
 const Template1: Story<DropdownProps> = args => (
-  <View style={{flexDirection: 'row',alignItems:'flex-start'}}>
-    <View style={{marginRight:20, width: 200}}>
+  <View style={styles.storiesContainer}>
+    <View style={styles.storiesDropdownContainer}>
       <Dropdown
         data={dataset}
         onChangeSelected={(Info: Info) => {}}
-        label={'Massive load'}
+        text={'Small'}
         style={'primary'}
         typeSizeText={'small'}
       />
     </View>
-  
-    <View style={{marginRight:20, width: 200}}>
+    <View style={styles.storiesDropdownContainer}>
       <Dropdown
         data={dataset}
         onChangeSelected={(Info: Info) => {}}
-        label={'Massive load'}
+        text={'Medium'}
         style={'primary'}
         typeSizeText={'medium'}
       />
       </View>
-   
-    <View style={{marginRight:20, width: 200}}>
+      <View style={styles.storiesDropdownContainer}>
       <Dropdown
         data={dataset}
         onChangeSelected={(Info: Info) => {}}
-        label={'Massive load'}
+        text={'Large'}
         style={'primary'}
         typeSizeText={'large'}
       />
@@ -65,7 +64,7 @@ export const DropdownVariants = Template1.bind({});
 DropdownDefault.args = {
   data: dataset,
   onChangeSelected: (Info: Info) => {},
-  label: 'Massive load',
+  text: 'Dropdown',
   style: 'primary',
   typeSizeText: 'medium',
 };

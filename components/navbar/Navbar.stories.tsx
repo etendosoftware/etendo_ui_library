@@ -3,6 +3,8 @@ import {Story, Meta} from '@storybook/react';
 
 import {Navbar} from './Navbar';
 import {NavbarProps} from './Navbar.types';
+import { View } from 'react-native';
+import { NavbarV } from './typeOfNavbars/NavbarV';
 
 export default {
   title: 'Etendo/Navbar',
@@ -11,7 +13,7 @@ export default {
 } as Meta<typeof Navbar>;
 
 /* Information to pass */
-const datasetNavbarH = [
+const datasetNavbarH = [  
   {
     routeImage: require('../../assets/images/etendo-erp.png'),
     routeNav: '',
@@ -75,25 +77,22 @@ const datasetNavbarV = [
 const onCheckSelectedMock = () => datasetNavbarH[0];
 
 /* Templates */
-const Template: Story<NavbarProps> = args => (
-  <Navbar
-    data={datasetNavbarH}
-    onChangeSelected={onCheckSelectedMock}
-    typeOfNavbar="horizontal"
-  />
-);
-
-const Template2: Story<NavbarProps> = args => (
-  <Navbar
-    data={datasetNavbarV}
-    onChangeSelected={onCheckSelectedMock}
-    typeOfNavbar="vertical"
-  />
+const Template1: Story<any> = args => (
+  <View style={{width: 100}}>
+    <NavbarV
+        data={datasetNavbarV}
+        onChangeSelected={onCheckSelectedMock}
+        typeOfNavbar="vertical"
+        pathname={'./login'}
+      />
+  </View>
 );
 
 /* Stories exports */
-export const NavbarHorizontal = Template.bind({});
-NavbarHorizontal.args = {};
-
-export const NavbarVertical = Template2.bind({});
-NavbarVertical.args = {};
+export const NavbarVerticalDefault = Template1.bind({});
+NavbarVerticalDefault.args = {
+  data:datasetNavbarV,
+  onChangeSelected:()=>{},
+  typeOfNavbar:"vertical",
+  pathname:"./login"
+};
