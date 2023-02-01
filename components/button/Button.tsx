@@ -3,6 +3,7 @@ import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {ButtonSizeVariant, ButtonStyleVariant} from './Button.styles';
 import {addImageStyle} from '../../helpers/image_utils';
 import {ButtonProps} from './Button.types';
+import { FONT_REGULAR } from '../../styles/fonts';
 
 const Button = ({
   text,
@@ -42,7 +43,7 @@ const Button = ({
           ]}
         />
       )}
-      <Text style={[stateStyleText(), ButtonSizeVariant['medium'].buttonSize]}>
+      <Text style={[stateStyleText(), ButtonSizeVariant['medium'].buttonSize,{  fontFamily: FONT_REGULAR,}]}>
         {text}
       </Text>
     </TouchableOpacity>

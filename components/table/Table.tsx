@@ -6,13 +6,13 @@ import TableHeaders from './components/TableHeaders';
 import {paintOddRows, removeHeaderBorder} from '../../helpers/table_utils';
 import TableCell from './components/TableCell';
 
-const Table: React.FC<TableProps> = ({
+const Table = ({
   data,
   columns,
   title,
   onRowPress,
   tableHeight,
-}) => {
+}:TableProps) => {
   const findPrimaryId = (col: Columns[], indexRow: number) => {
     let primary: string = '';
     if (indexRow >= 0) {
@@ -58,9 +58,9 @@ const Table: React.FC<TableProps> = ({
                   })
                 ) : (
                   <TableCell
-                    label={col.displayKey ? item[col.displayKey] : ''}
-                    key={'tableCell' + index}
-                  />
+                      label={col.displayKey ? item[col.displayKey] : ''}
+                      key={'tableCell' + index}                 
+                    />
                 )}
               </View>
             )

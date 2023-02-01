@@ -78,7 +78,7 @@ const InputField = ({
   const getOnChangeText = (text: string) => {
     if (onChangeText) {
       if (keyboardType === 'number') {
-        if (text.match(regex)) {
+        if (text.match(regex) || text.length === 0) {
           onChangeText(text);
         }
         return;
