@@ -63,6 +63,9 @@ exports[`Running Test for Input Check Button disabled 1`] = `
         Object {
           "fontSize": 18,
         },
+        Object {
+          "fontFamily": "Inter-Regular",
+        },
       ]
     }
   >
