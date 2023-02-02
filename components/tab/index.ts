@@ -1,5 +1,5 @@
 import Tab from './Tab';
-import TabSecundary from './TabSecundary';
+import TabSecundary from './SecondaryTab';
 
 import TabItem from './TabItem';
 import TabItemSecundary from './TabItemSecundary';
