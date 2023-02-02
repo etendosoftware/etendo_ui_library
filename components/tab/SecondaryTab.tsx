@@ -8,6 +8,8 @@ const SecondaryTab = ({
   setSelectedTab,
   height,
   renderItem,
+  fontFamily,
+  fontWeight,
 }: any) => {
   // if it is web
   if (renderItem) {
@@ -34,7 +36,13 @@ const SecondaryTab = ({
           ]}
           onPress={() => setSelectedTab(index)}
         >
-          <Text style={{color: index === selectedTab ? WHITE : BLUE}}>
+          <Text
+            style={{
+              color: index === selectedTab ? WHITE : BLUE,
+              fontFamily: fontFamily,
+              fontWeight: fontWeight,
+            }}
+          >
             {tabItem.name}
           </Text>
         </TouchableOpacity>
