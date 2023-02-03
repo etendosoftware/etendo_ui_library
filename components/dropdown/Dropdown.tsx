@@ -87,7 +87,9 @@ const Dropdown = ({
     );
   };
 
-  document.addEventListener('mousedown', closeOpenMenus);
+  if(Platform.OS === 'web'){
+    document.addEventListener('mousedown', closeOpenMenus);
+  }
 
   return (
     <View style={DropdownStyleVariant.primary.container} ref={catMenu}>

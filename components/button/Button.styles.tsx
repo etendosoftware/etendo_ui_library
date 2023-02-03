@@ -187,9 +187,15 @@ export const ButtonSizeVariant:buttonSizeVariant = {
 
 export const styles = StyleSheet.create({
   storiesContainer:{
-    alignItems:'flex-start'
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    alignItems:'flex-start',
+    flex: 1,
+    width: '100%',
+    justifyContent: 'space-between',
   },
   storiesButtonContainer:{
-        marginBottom: 20
+    height: 100,
+    width: '30%',
     }
 })

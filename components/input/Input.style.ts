@@ -192,4 +192,15 @@ export const styles = StyleSheet.create({
     height: 22,
     width: 22,
   },
+  storiesContainer: {
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    flex: 1,
+    width: '100%',
+    justifyContent: 'space-between',
+  },
+  storiesInputContainer: {
+    height: 100,
+    width: '30%',
+  },
 });

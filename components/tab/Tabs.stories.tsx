@@ -27,7 +27,7 @@ const dataset = [
 const onCheckSelectedMock = () => dataset[0];
 
 /* Templates */
-const Template0: Story<TabProps> = (args) => <Tab {...args}/>
+const Template0: Story<TabProps> = (args) => <View style={{height: 50}}><Tab {...args}/></View>
 
 /* Story exports */
 export const TabsDefault = Template0.bind({});
@@ -36,7 +36,7 @@ TabsDefault.args = {
   data:dataset,
   onChangeSelected:onCheckSelectedMock,
   style:"primary",
-  typeSizeText:"small"
+  typeSizeText:"small",
 };
 
 

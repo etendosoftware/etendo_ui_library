@@ -4,6 +4,7 @@ import {Story, Meta} from '@storybook/react';
 import Input from '../input/Input';
 import {InputProps} from './Input.types';
 import { View } from 'react-native';
+import { styles } from './Input.style';
 
 const meta: Meta = {
   title: 'Etendo/Input',
@@ -18,8 +19,8 @@ const Template0: Story<InputProps> = ({value = '', onChangeText, ...args}) => {
 
 
 const Template1: Story<InputProps> = args => (
-  <View style={{flexDirection: 'column'}}>
-    <View style={{marginBottom:20}}>
+  <View style={styles.storiesContainer}>
+    <View style={styles.storiesInputContainer}>
       <Input
         titleLabel='Only Read'
         helperText=''
@@ -32,7 +33,7 @@ const Template1: Story<InputProps> = args => (
         keyboardType='text'
       />
     </View>
-    <View style={{marginBottom:20}}>
+    <View style={styles.storiesInputContainer}>
       <Input
         titleLabel='Picker'
         helperText='Only characters'
@@ -45,7 +46,7 @@ const Template1: Story<InputProps> = args => (
         keyboardType='text'
       />
     </View>
-    <View style={{marginBottom:20}}>
+    <View style={styles.storiesInputContainer}>
       <Input
         titleLabel='Search Presseable'
         helperText='Only characters'
@@ -58,7 +59,7 @@ const Template1: Story<InputProps> = args => (
         keyboardType='text'
       />
     </View>
-    <View style={{marginBottom:20}}>
+    <View style={styles.storiesInputContainer}>
       <Input
         titleLabel='Search TextInput'
         helperText='Only characters'
@@ -71,7 +72,7 @@ const Template1: Story<InputProps> = args => (
         keyboardType='text'
       />
     </View>
-    <View style={{marginBottom:20}}>
+    <View style={styles.storiesInputContainer}>
       <Input
         titleLabel='Text Pressable'
         helperText='Only characters'
@@ -84,7 +85,7 @@ const Template1: Story<InputProps> = args => (
         keyboardType='text'
       />
     </View>
-    <View style={{marginBottom:20}}>
+    <View style={styles.storiesInputContainer}>
       <Input
         titleLabel='Text Input'
         helperText='Only characters'
@@ -99,7 +100,7 @@ const Template1: Story<InputProps> = args => (
         keyboardType='text'
       />
     </View>
-    <View style={{marginBottom:20}}>
+    <View style={styles.storiesInputContainer}>
       <Input
         titleLabel='Text Input With Security'
         helperText='Only characters'

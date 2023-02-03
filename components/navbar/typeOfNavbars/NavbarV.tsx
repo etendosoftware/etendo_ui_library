@@ -6,7 +6,6 @@
 /* Imports */
 import React, {useEffect, useState} from 'react';
 import {Image, Text, TouchableOpacity, View, ScrollView} from 'react-native';
-
 import {Info} from '../Navbar.types';
 import {NavbarVStyleVariant} from '../Navbar.styles';
 import {BLUE, WHITE, YELLOW} from '../../../styles/colors';
@@ -95,7 +94,7 @@ const NavButton = (
             }}
           >
             <Image
-              source={image}
+              source={{uri: image}}
               style={{
                 /* Primary */
                 width: 30,

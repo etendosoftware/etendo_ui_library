@@ -17,7 +17,6 @@ export const TabStyleVariant: TabStyleRecord = {
       backgroundColor: GREY_BLUE_30,
       borderBottomColor: BLUE,
       borderBottomWidth: 3,
-      flex: 1,
       paddingLeft: 50,
     },
     containerSecundary: {

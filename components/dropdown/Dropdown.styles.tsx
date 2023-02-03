@@ -71,9 +71,10 @@ export const DropdownStyleVariant: DropdownStyleRecord = {
 export const styles = StyleSheet.create({
   storiesContainer: {
     alignItems: 'flex-start',
+    justifyContent:'space-between',
+    flexDirection:'row'
   },
   storiesDropdownContainer: {
-    marginBottom: 20,
-    width: 200,
+    width: '30%',
   },
 });

@@ -69,7 +69,7 @@ export const Pagination = ({
             />
           ) : (
             <Image
-              source={arrowDoublePickerHorizontalIcon}
+            source={{uri:arrowPickerHorizontalIcon}}
               style={{
                 width: 10,
                 height: 10,
@@ -97,7 +97,7 @@ export const Pagination = ({
             />
           ) : (
             <Image
-              source={arrowPickerHorizontalIcon}
+              source={{uri:arrowPickerHorizontalIcon}}
               style={{
                 width: 10,
                 height: 10,
@@ -134,7 +134,7 @@ export const Pagination = ({
             </div>
           ) : (
             <Image
-              source={arrowPickerHorizontalIcon}
+            source={{uri:arrowPickerHorizontalIcon}}
               style={{width: 10, height: 10, marginRight: 10}}
             />
           )}
@@ -160,7 +160,7 @@ export const Pagination = ({
             />
           ) : (
             <Image
-              source={arrowDoublePickerHorizontalIcon}
+            source={{uri:arrowPickerHorizontalIcon}}
               style={{width: 10, height: 10, marginRight: 10}}
             />
           )}
