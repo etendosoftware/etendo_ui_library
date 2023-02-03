@@ -18,7 +18,9 @@ export const Navbar = ({data, onChangeSelected, typeOfNavbar}: NavbarProps) => {
   if (typeOfNavbar === 'horizontal') {
     return (
       <ScrollView>
-      
+        {width >= 768 && (
+          <NavbarHDesktop data={data} onChangeSelected={onChangeSelected} />
+        )}
       </ScrollView>
     );
     // NavbarVertical

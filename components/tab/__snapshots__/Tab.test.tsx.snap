@@ -7,7 +7,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
       "backgroundColor": "#EFF1F7",
       "borderBottomColor": "#202452",
       "borderBottomWidth": 3,
-      "flex": 1,
       "flexDirection": "row",
       "paddingLeft": 50,
     }
