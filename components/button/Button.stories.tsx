@@ -114,6 +114,6 @@ ButtonDefault.args = {
   },
   disabled: false,
   typeSize: 'medium',
-  width:150,
-  height:50
+  width: 150,
+  height: 50,
 };

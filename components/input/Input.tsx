@@ -25,7 +25,7 @@ const Input = ({
   fontSize,
   height,
   password,
-}:InputProps) => {
+}: InputProps) => {
   const stateStyle = () => {
     if (typeField === 'onlyRead') {
       return inputStyleVariants.onlyRead;

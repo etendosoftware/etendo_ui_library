@@ -8,6 +8,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
       "borderBottomColor": "#202452",
       "borderBottomWidth": 3,
       "flexDirection": "row",
+      "height": 50,
       "paddingLeft": 50,
     }
   }
@@ -34,7 +35,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             "backgroundColor": "#EFF1F7",
             "borderTopColor": "transparent",
             "borderTopWidth": 4,
-            "height": 35,
             "justifyContent": "center",
             "opacity": 1,
           }
@@ -50,7 +50,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
                 "fontSize": 18,
               },
               Object {
-                "fontFamily": "Poppins",
                 "fontSize": 12,
                 "fontWeight": "600",
                 "paddingHorizontal": 20,
@@ -80,7 +79,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             "backgroundColor": "#EFF1F7",
             "borderTopColor": "transparent",
             "borderTopWidth": 4,
-            "height": 35,
             "justifyContent": "center",
             "opacity": 1,
           }
@@ -96,7 +94,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
                 "fontSize": 18,
               },
               Object {
-                "fontFamily": "Poppins",
                 "fontSize": 12,
                 "fontWeight": "600",
                 "paddingHorizontal": 20,
@@ -126,7 +123,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             "backgroundColor": "#EFF1F7",
             "borderTopColor": "transparent",
             "borderTopWidth": 4,
-            "height": 35,
             "justifyContent": "center",
             "opacity": 1,
           }
@@ -142,7 +138,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
                 "fontSize": 18,
               },
               Object {
-                "fontFamily": "Poppins",
                 "fontSize": 12,
                 "fontWeight": "600",
                 "paddingHorizontal": 20,
@@ -172,7 +167,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             "backgroundColor": "#EFF1F7",
             "borderTopColor": "transparent",
             "borderTopWidth": 4,
-            "height": 35,
             "justifyContent": "center",
             "opacity": 1,
           }
@@ -188,7 +182,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
                 "fontSize": 18,
               },
               Object {
-                "fontFamily": "Poppins",
                 "fontSize": 12,
                 "fontWeight": "600",
                 "paddingHorizontal": 20,
@@ -218,7 +211,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             "backgroundColor": "#EFF1F7",
             "borderTopColor": "transparent",
             "borderTopWidth": 4,
-            "height": 35,
             "justifyContent": "center",
             "opacity": 1,
           }
@@ -234,7 +226,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
                 "fontSize": 18,
               },
               Object {
-                "fontFamily": "Poppins",
                 "fontSize": 12,
                 "fontWeight": "600",
                 "paddingHorizontal": 20,
@@ -264,7 +255,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             "backgroundColor": "#EFF1F7",
             "borderTopColor": "transparent",
             "borderTopWidth": 4,
-            "height": 35,
             "justifyContent": "center",
             "opacity": 1,
           }
@@ -280,7 +270,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
                 "fontSize": 18,
               },
               Object {
-                "fontFamily": "Poppins",
                 "fontSize": 12,
                 "fontWeight": "600",
                 "paddingHorizontal": 20,

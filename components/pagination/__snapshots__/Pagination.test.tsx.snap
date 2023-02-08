@@ -126,7 +126,6 @@ exports[`Running Test for Pagination Check Pagination Disabled 1`] = `
         style={
           Object {
             "alignSelf": "center",
-            "fontFamily": "Poppins",
             "fontSize": 12,
             "fontWeight": "500",
           }

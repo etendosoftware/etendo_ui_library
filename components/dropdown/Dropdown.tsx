@@ -54,7 +54,7 @@ const Dropdown = ({
       />
     ) : (
       <Image
-        source={arrowPickerVerticalIcon}
+        source={{uri: arrowPickerVerticalIcon}}
         style={{
           width: 11,
           height: 9,
@@ -75,7 +75,7 @@ const Dropdown = ({
       />
     ) : (
       <Image
-        source={arrowPickerVerticalIcon}
+        source={{uri: arrowPickerVerticalIcon}}
         style={{
           width: 11,
           height: 9,
@@ -87,7 +87,7 @@ const Dropdown = ({
     );
   };
 
-  if(Platform.OS === 'web'){
+  if (Platform.OS === 'web') {
     document.addEventListener('mousedown', closeOpenMenus);
   }
 
@@ -98,8 +98,7 @@ const Dropdown = ({
         activeOpacity={1}
         onPress={(e: any) => {
           setShowOptions(!showOptions);
-        }}
-      >
+        }}>
         <Text style={DropdownStyleVariant.primary.dropDownButtonText}>
           {chooseOption}
         </Text>

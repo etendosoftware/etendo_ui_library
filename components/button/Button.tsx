@@ -1,9 +1,9 @@
 import React from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {Image, Text, TouchableOpacity} from 'react-native';
 import {ButtonSizeVariant, ButtonStyleVariant} from './Button.styles';
 import {addImageStyle} from '../../helpers/image_utils';
 import {ButtonProps} from './Button.types';
-import { FONT_REGULAR } from '../../styles/fonts';
+
 
 const Button = ({
   text,
@@ -31,8 +31,7 @@ const Button = ({
   return (
     <TouchableOpacity
       style={[stateStyleContainer(), {width: width, height: height}]}
-      onPress={onPress}
-    >
+      onPress={onPress}>
       {image?.imgRoute && (
         <Image
           source={image.imgRoute}
@@ -43,7 +42,7 @@ const Button = ({
           ]}
         />
       )}
-      <Text style={[stateStyleText(), ButtonSizeVariant['medium'].buttonSize,{  fontFamily: FONT_REGULAR,}]}>
+      <Text style={[stateStyleText(), ButtonSizeVariant['medium'].buttonSize]}>
         {text}
       </Text>
     </TouchableOpacity>

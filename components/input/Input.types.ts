@@ -1,7 +1,6 @@
 import {
   ColorValue,
   GestureResponderEvent,
-  ImageSourcePropType,
   NativeSyntheticEvent,
   TextInputFocusEventData,
   TextStyle,
@@ -42,7 +41,7 @@ export type InputVariantsType = Record<
 >;
 
 export type ImageType = {
-  imgRoute?: ImageSourcePropType | string;
+  imgRoute?: string;
   imgWidth?: string | number;
   imgHeight?: string | number;
   imgMarginRight?: string | number;

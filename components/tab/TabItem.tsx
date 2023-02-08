@@ -75,8 +75,7 @@ const TabItem = ({
       onPress={() => {
         onPress();
       }}
-      key={item.key}
-    >
+      key={item.key}>
       {!renderItem ? (
         <Text style={styles}>{item.name}</Text>
       ) : (

@@ -1,5 +1,4 @@
 import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
-import {FONT_MEDIUM, FONT_REGULAR} from '../../styles/fonts';
 import {InputVariantsType, TypeInputStyleVariant} from './Input.types';
 import {
   BLUE,
@@ -11,7 +10,7 @@ import {
   RED,
   RED_10,
 } from '../../styles/colors';
-import {arrowPickerVerticalIcon} from '../../assets/images/icons';
+import {arrowPickerVerticalIcon, searchIcon} from '../../assets/images/icons';
 
 export const inputVariants: InputVariantsType = {
   onlyRead: {
@@ -55,7 +54,7 @@ export const inputVariants: InputVariantsType = {
       image: {
         imgHeight: 15,
         imgWidth: 15,
-        imgRoute: require('../../assets/images/icons/search.png'),
+        imgRoute: searchIcon,
       },
     },
   },
@@ -67,7 +66,7 @@ export const inputVariants: InputVariantsType = {
       image: {
         imgHeight: 15,
         imgWidth: 15,
-        imgRoute: require('../../assets/images/icons/search.png'),
+        imgRoute: searchIcon,
       },
     },
   },
@@ -108,7 +107,6 @@ const defaultTextPlaceholder: TextStyle = {
 const defaultHelperText: TextStyle = {
   color: GREY_60,
   fontSize: 14,
-  fontFamily: FONT_REGULAR,
 };
 
 export const inputStyleVariants: TypeInputStyleVariant = {

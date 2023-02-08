@@ -3,13 +3,13 @@ import {Story, Meta} from '@storybook/react';
 
 import Tab from './Tab';
 import {TabProps} from './Tab.types';
-import { View } from 'react-native';
+import {View} from 'react-native';
 
 const meta: Meta = {
   title: 'Etendo/Tab',
   component: Tab,
-  argTypes: {}
-}
+  argTypes: {},
+};
 export default meta;
 
 /* Information to pass */
@@ -27,18 +27,18 @@ const dataset = [
 const onCheckSelectedMock = () => dataset[0];
 
 /* Templates */
-const Template0: Story<TabProps> = (args) => <View style={{height: 50}}><Tab {...args}/></View>
+const Template0: Story<TabProps> = args => (
+  <View style={{height: 100}}>
+    <Tab {...args} />
+  </View>
+);
 
 /* Story exports */
 export const TabsDefault = Template0.bind({});
 
 TabsDefault.args = {
-  data:dataset,
-  onChangeSelected:onCheckSelectedMock,
-  style:"primary",
-  typeSizeText:"small",
+  data: dataset,
+  onChangeSelected: onCheckSelectedMock,
+  style: 'primary',
+  typeSizeText: 'small',
 };
-
-
-
-

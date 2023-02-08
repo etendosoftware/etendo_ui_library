@@ -2,7 +2,7 @@ import React from 'react';
 import {Story, Meta} from '@storybook/react';
 
 import {StatusBar} from './StatusBar';
-import {Info, StatusBarProps} from './StatusBar.types';
+import {StatusBarProps} from './StatusBar.types';
 import {Image, Text, View} from 'react-native';
 import {StatusBarStyleVariant} from './StatusBar.styles';
 
@@ -13,14 +13,14 @@ const meta: Meta = {
 
 /* Templates */
 const Template0: Story<StatusBarProps> = args => (
-  <View style={{height:50}}>
-  <StatusBar {...args} />
+  <View style={{height: 50}}>
+    <StatusBar {...args} />
   </View>
 );
 
 const Component = () => {
   return (
-    <View style={{height:100}}>
+    <View style={{height: 100}}>
       <Image
         source={require('../../assets/images/icons/calendar-secundary.png')}
         style={StatusBarStyleVariant.primary.activeComponentImage}
@@ -43,7 +43,7 @@ export default meta;
 export const StatusBarDefault = Template0.bind({});
 
 StatusBarDefault.args = {
-  data:[
+  data: [
     {
       step: '1. Vehicles',
       routeNav: '/vehicles',
@@ -75,7 +75,5 @@ StatusBarDefault.args = {
       componentActive: <Component />,
     },
   ],
-  step: 0
-}
-
-
+  step: 0,
+};

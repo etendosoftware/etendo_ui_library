@@ -29,7 +29,6 @@ export const DropdownStyleVariant: DropdownStyleRecord = {
     dropDownButtonText: {
       color: BLUE,
       fontSize: 13,
-      fontFamily: 'Poppins',
       fontWeight: '500',
     },
     iconWithOptionsDisplayed: {
@@ -63,7 +62,6 @@ export const DropdownStyleVariant: DropdownStyleRecord = {
       paddingLeft: 5,
       fontWeight: '500',
       color: BLUE,
-      fontFamily: 'Poppins',
     },
   },
 };
@@ -71,8 +69,8 @@ export const DropdownStyleVariant: DropdownStyleRecord = {
 export const styles = StyleSheet.create({
   storiesContainer: {
     alignItems: 'flex-start',
-    justifyContent:'space-between',
-    flexDirection:'row'
+    justifyContent: 'space-between',
+    flexDirection: 'row',
   },
   storiesDropdownContainer: {
     width: '30%',

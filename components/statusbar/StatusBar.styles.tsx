@@ -59,7 +59,6 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
       flex: 1,
       justifyContent: 'center',
       textAlign: 'center',
-      fontFamily: 'Poppins',
     },
 
     disabledStepContainer: {
@@ -79,7 +78,6 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
       flex: 1,
       textAlign: 'right',
       marginRight: '10%',
-      fontFamily: 'Poppins',
     },
 
     rectangleBottomRightBlue: {
@@ -103,7 +101,6 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
       fontSize: 14,
       color: BLUE,
       fontWeight: '600',
-      fontFamily: 'Poppins',
     },
 
     textBottomActiveStepContent: {
@@ -111,7 +108,6 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
       color: BLUE,
       fontWeight: '500',
       marginTop: '2%',
-      fontFamily: 'Poppins',
     },
 
     activeComponentImage: {

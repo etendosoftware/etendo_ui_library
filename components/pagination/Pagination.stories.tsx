@@ -3,7 +3,7 @@ import {Story, Meta} from '@storybook/react';
 
 import {Pagination} from './Pagination';
 import {PaginationProps} from './Pagination.types';
-import { View } from 'react-native';
+import {View} from 'react-native';
 
 export default {
   title: 'Etendo/Pagination',
@@ -27,14 +27,14 @@ const onCheckSelectedMock = () => dataset[0];
 
 /* Templates */
 const Template: Story<PaginationProps> = args => (
-  <View style={{height:50}}>
+  <View style={{height: 50}}>
     <Pagination
       currentPage={1}
       onChangeSelected={onCheckSelectedMock}
       totalData={40}
-      amountDataPerPage={8} 
-      pagination={0}  
-      />
+      amountDataPerPage={8}
+      pagination={0}
+    />
   </View>
 );
 

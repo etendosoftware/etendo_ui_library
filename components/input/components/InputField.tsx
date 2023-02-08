@@ -16,7 +16,7 @@ import {
   activePasswordIcon,
   disabledPasswordIcon,
 } from '../../../assets/images/icons';
-import {BLACK, GREY_BLUE_50} from '../../../styles/colors';
+import {BLACK} from '../../../styles/colors';
 
 const InputField = ({
   configField,
@@ -97,8 +97,7 @@ const InputField = ({
     <TouchableOpacity
       style={styleField.field}
       onPress={onPress}
-      disabled={disabled || configField.disabledField}
-    >
+      disabled={disabled || configField.disabledField}>
       {(() => {
         if (configField?.type === 'textInput') {
           return (
@@ -106,8 +105,7 @@ const InputField = ({
               style={{
                 flexDirection: 'row',
                 width: '100%',
-              }}
-            >
+              }}>
               <TextInput
                 editable={!disabled || !configField.disabledField}
                 focusable={!disabled || !configField.disabledField}
@@ -124,8 +122,7 @@ const InputField = ({
               {password && (
                 <TouchableOpacity
                   onPress={() => setShowPassword(!showPassword)}
-                  style={styles.passwordContainer}
-                >
+                  style={styles.passwordContainer}>
                   {PLATFORM_IS_WEB ? (
                     <img
                       src={
@@ -165,11 +162,10 @@ const InputField = ({
               <TouchableOpacity
                 onPress={onSubmit}
                 style={styles.buttonContainerInputField}
-                disabled={configField?.disabledSubmit || disabled}
-              >
+                disabled={configField?.disabledSubmit || disabled}>
                 {configField?.image?.imgRoute && (
                   <Image
-                    source={configField?.image?.imgRoute}
+                    source={{uri: configField.image.imgRoute}}
                     style={getImageStyle(configField.image, disabled)}
                   />
                 )}

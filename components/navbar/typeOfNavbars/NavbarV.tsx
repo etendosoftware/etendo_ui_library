@@ -23,8 +23,7 @@ export const NavbarV = ({
     <>
       <ScrollView
         style={NavbarVStyleVariant.generic.container}
-        showsVerticalScrollIndicator={false}
-      >
+        showsVerticalScrollIndicator={false}>
         {data.map((image: Info) => {
           return (
             <TouchableOpacity
@@ -37,8 +36,7 @@ export const NavbarV = ({
                   name: image.name,
                 })
               }
-              key={image.key}
-            >
+              key={image.key}>
               {NavButton(
                 currentNav,
                 setCurrentNav,
@@ -84,15 +82,10 @@ const NavButton = (
           <View
             style={{
               /* Primary */
-              flex: 1,
               alignItems: 'center',
-              alignSelf: 'center',
               justifyContent: 'center',
               backgroundColor: currentNav === key ? YELLOW : 'transparent',
-              paddingHorizontal: '100%',
-              paddingVertical: '11%',
-            }}
-          >
+            }}>
             <Image
               source={{uri: image}}
               style={{
@@ -100,6 +93,7 @@ const NavButton = (
                 width: 30,
                 resizeMode: 'contain',
                 height: 30,
+                marginTop: 50,
                 tintColor: currentNav === key ? BLUE : WHITE,
               }}
             />
@@ -113,10 +107,9 @@ const NavButton = (
                 alignContent: 'center',
                 alignSelf: 'center',
                 textTransform: 'uppercase',
-                fontFamily: 'Poppins',
+
                 marginTop: 10,
-              }}
-            >
+              }}>
               {title}
             </Text>
           </View>

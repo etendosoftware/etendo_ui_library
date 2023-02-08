@@ -10,8 +10,8 @@ const TableCellEdit = ({isWeb}: TableCellProps) => {
       {isWeb ? (
         <img style={{width: 18}} src={editIcon} />
       ) : (
-        <Image source={{uri:editIcon}} style={{width: 18, height: 18}} />
-      )}  
+        <Image source={{uri: editIcon}} style={{width: 18, height: 18}} />
+      )}
     </View>
   );
 };

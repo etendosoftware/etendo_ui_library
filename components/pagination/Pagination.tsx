@@ -54,8 +54,7 @@ export const Pagination = ({
             /* Allows to detect the selected item */
             backToFirstPage();
             onChangeSelected(1, 0);
-          }}
-        >
+          }}>
           {Platform.OS === 'web' && isWeb ? (
             <img
               src={arrowDoublePickerHorizontalIcon}
@@ -69,7 +68,7 @@ export const Pagination = ({
             />
           ) : (
             <Image
-            source={{uri:arrowPickerHorizontalIcon}}
+              source={{uri: arrowPickerHorizontalIcon}}
               style={{
                 width: 10,
                 height: 10,
@@ -87,8 +86,7 @@ export const Pagination = ({
             if (page !== 1) {
               onChangeSelected(page - 1, pagination - amountDataPerPage);
             }
-          }}
-        >
+          }}>
           {Platform.OS === 'web' && isWeb ? (
             <img
               src={arrowPickerHorizontalIcon}
@@ -97,7 +95,7 @@ export const Pagination = ({
             />
           ) : (
             <Image
-              source={{uri:arrowPickerHorizontalIcon}}
+              source={{uri: arrowPickerHorizontalIcon}}
               style={{
                 width: 10,
                 height: 10,
@@ -122,8 +120,7 @@ export const Pagination = ({
             if (page !== Math.ceil(totalData / 8)) {
               onChangeSelected(page + 1, pagination + amountDataPerPage);
             }
-          }}
-        >
+          }}>
           {Platform.OS === 'web' && isWeb ? (
             <div>
               <img
@@ -134,7 +131,7 @@ export const Pagination = ({
             </div>
           ) : (
             <Image
-            source={{uri:arrowPickerHorizontalIcon}}
+              source={{uri: arrowPickerHorizontalIcon}}
               style={{width: 10, height: 10, marginRight: 10}}
             />
           )}
@@ -150,8 +147,7 @@ export const Pagination = ({
                 totalData - (totalData % amountDataPerPage) - 8,
               );
             }
-          }}
-        >
+          }}>
           {Platform.OS === 'web' && isWeb ? (
             <img
               src={arrowDoublePickerHorizontalIcon}
@@ -160,7 +156,7 @@ export const Pagination = ({
             />
           ) : (
             <Image
-            source={{uri:arrowPickerHorizontalIcon}}
+              source={{uri: arrowPickerHorizontalIcon}}
               style={{width: 10, height: 10, marginRight: 10}}
             />
           )}
