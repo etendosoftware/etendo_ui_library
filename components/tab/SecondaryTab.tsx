@@ -34,7 +34,7 @@ const SecondaryTab = ({
               borderTopColor: index === selectedTab ? YELLOW : 'transparent',
             },
           ]}
-          onPress={() => setSelectedTab(index)}
+          onPress={() => (setSelectedTab ? setSelectedTab(index) : {})}
         >
           <Text
             style={{
