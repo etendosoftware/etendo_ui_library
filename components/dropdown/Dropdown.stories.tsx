@@ -3,7 +3,7 @@ import {Story, Meta} from '@storybook/react';
 import Dropdown from './Dropdown';
 import {DropdownProps, Info} from './Dropdown.types';
 import {View} from 'react-native';
-import { styles } from './Dropdown.styles';
+import {styles} from './Dropdown.styles';
 
 const meta: Meta = {
   title: 'Etendo/Dropdown',
@@ -22,7 +22,11 @@ const dataset = [
 ];
 
 const Template0: Story<DropdownProps> = ({...args}) => {
-  return <View style={styles.storiesDropdownContainer}><Dropdown {...args} /></View>;
+  return (
+    <View style={styles.storiesDropdownContainer}>
+      <Dropdown {...args} />
+    </View>
+  );
 };
 
 const Template1: Story<DropdownProps> = args => (
@@ -44,8 +48,8 @@ const Template1: Story<DropdownProps> = args => (
         style={'primary'}
         typeSizeText={'medium'}
       />
-      </View>
-      <View style={styles.storiesDropdownContainer}>
+    </View>
+    <View style={styles.storiesDropdownContainer}>
       <Dropdown
         data={dataset}
         onChangeSelected={(Info: Info) => {}}

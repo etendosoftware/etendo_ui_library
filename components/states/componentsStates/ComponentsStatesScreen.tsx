@@ -2,25 +2,17 @@ import {View, Text} from 'react-native';
 import React from 'react';
 import {Table} from '../../table';
 import TableData from './TableComponentsStatesData.json';
-import { styles } from './ComponentsStatesScreen.style';
+import {styles} from './ComponentsStatesScreen.style';
 
 const ComponentsStatesScreen = () => {
   return (
     <View>
-      <Text
-        style={styles.title}
-      >
-        Component state
-      </Text>
-      <Text
-        style={styles.description}
-      >
+      <Text style={styles.title}>Component state</Text>
+      <Text style={styles.description}>
         Here you will find all our components and their states. They are updated
         automatically based on configuration of the component story.
       </Text>
-      <Text
-        style={styles.lenghtComponents}
-      >
+      <Text style={styles.lenghtComponents}>
         Number of components: {TableData.length}
       </Text>
       <Table
@@ -48,7 +40,7 @@ const ComponentsStatesScreen = () => {
             label: 'State',
           },
         ]}
-        onRowPress={()=>{}}
+        onRowPress={() => {}}
       />
     </View>
   );

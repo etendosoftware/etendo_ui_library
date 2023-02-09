@@ -2,25 +2,25 @@ import React from 'react';
 import {Story, Meta} from '@storybook/react';
 import Table from './Table';
 import {TableProps} from './Table.types';
-import TableCellEdit from './components/TableCellEdit';
-import {action} from '@storybook/addon-actions';
 import data from './TableData.json';
+import {View} from 'react-native';
 
 const meta: Meta = {
   title: 'Etendo/Tables',
   component: Table,
 };
 
-const Template: Story<TableProps> = args => <Table {...args} />;
+const Template: Story<TableProps> = args => (
+  <View>
+    <Table {...args} />
+  </View>
+);
 
 export default meta;
 export const TableDefault = Template.bind({});
 
 TableDefault.args = {
-  onRowPress(primary) {
-    action('onRowPress')(primary);
-  },
-  tableHeight: 400,
+  onRowPress: () => {},
   data: data,
   columns: [
     {
@@ -53,22 +53,8 @@ TableDefault.args = {
       displayKey: 'about',
       visible: true,
       key: 'about',
-      width: '20%',
+      width: '40%',
       label: 'Description',
-    },
-    {
-      key: '_id',
-      visible: true,
-      width: '20%',
-      label: 'Edit',
-      actions: [
-        {
-          component: <TableCellEdit label={'EDIT'} />,
-          onAction: (id: string) => {
-            action('onAction')(id);
-          },
-        },
-      ],
     },
   ],
 };

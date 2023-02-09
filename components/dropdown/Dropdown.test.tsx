@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import {Pagination} from './Pagination';
+import Dropdown from './Dropdown';
 
 const dataset = [
   {name: 'User', route: '', key: 'user'},
@@ -19,12 +19,12 @@ describe('Running Test for Pagination', () => {
   it('Check Pagination Disabled', () => {
     const tree = renderer
       .create(
-        <Pagination
-          currentPage={1}
-          onChangeSelected={onCheckSelectedMock}
-          totalData={40}
-          amountDataPerPage={8}
-          pagination={0}
+        <Dropdown
+          data={dataset}
+          onChangeSelected={() => {}}
+          text={'Large'}
+          style={'primary'}
+          typeSizeText={'large'}
         />,
       )
       .toJSON();

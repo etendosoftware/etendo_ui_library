@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 import {
   BLUE,
   GREY_BLUE_50,
@@ -155,41 +155,47 @@ export const ButtonStyleVariant: buttonStyleVariant = {
   },
 };
 
-export const ButtonSizeVariant:buttonSizeVariant = {
-    small: {
-        containerSize: {
-            paddingVertical: 4,
-            paddingHorizontal: 8,
-        }, 
-        buttonSize: {
-            fontSize: 14,
-        },
+export const ButtonSizeVariant: buttonSizeVariant = {
+  small: {
+    containerSize: {
+      paddingVertical: 4,
+      paddingHorizontal: 8,
     },
-    medium: {
-        containerSize: {
-            paddingVertical: 10,
-            paddingHorizontal: 12,
-        }, 
-        buttonSize: {
-            fontSize: 18,
-        },
+    buttonSize: {
+      fontSize: 14,
     },
-    large: {
-        containerSize: {
-            paddingVertical: 14,
-            paddingHorizontal: 18,
-        }, 
-        buttonSize: {
-            fontSize: 20,
-        },
-    }
-}
+  },
+  medium: {
+    containerSize: {
+      paddingVertical: 10,
+      paddingHorizontal: 12,
+    },
+    buttonSize: {
+      fontSize: 18,
+    },
+  },
+  large: {
+    containerSize: {
+      paddingVertical: 14,
+      paddingHorizontal: 18,
+    },
+    buttonSize: {
+      fontSize: 20,
+    },
+  },
+};
 
 export const styles = StyleSheet.create({
-  storiesContainer:{
-    alignItems:'flex-start'
+  storiesContainer: {
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    flex: 1,
+    width: '100%',
+    justifyContent: 'space-between',
   },
-  storiesButtonContainer:{
-        marginBottom: 20
-    }
-})
+  storiesButtonContainer: {
+    height: 100,
+    width: '30%',
+  },
+});

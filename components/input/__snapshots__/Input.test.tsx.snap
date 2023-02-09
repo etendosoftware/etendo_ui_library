@@ -111,7 +111,6 @@ exports[`Running Test for Input Check Input Error 1`] = `
         Array [
           Object {
             "color": "#808080",
-            "fontFamily": "Inter-Regular",
             "fontSize": 14,
           },
           Object {

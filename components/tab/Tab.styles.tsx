@@ -17,18 +17,17 @@ export const TabStyleVariant: TabStyleRecord = {
       backgroundColor: GREY_BLUE_30,
       borderBottomColor: BLUE,
       borderBottomWidth: 3,
-      flex: 1,
       paddingLeft: 50,
+      height: 50,
     },
     containerSecundary: {
       flexDirection: 'row',
       backgroundColor: GREY_BLUE_30,
       borderBottomColor: BLUE,
       borderBottomWidth: 3,
-      flex: 1,
+      height: 50,
     },
     tabs: {
-      height: 35,
       backgroundColor: GREY_BLUE_30,
       justifyContent: 'center',
       alignItems: 'center',
@@ -56,7 +55,6 @@ export const TabStyleVariant: TabStyleRecord = {
       borderTopColor: YELLOW,
     },
     itemText: {
-      fontFamily: 'Poppins',
       textTransform: 'uppercase',
       fontWeight: '600',
       fontSize: 12,
@@ -64,7 +62,6 @@ export const TabStyleVariant: TabStyleRecord = {
       paddingVertical: 11,
     },
     itemTextSecundary: {
-      fontFamily: 'Poppins',
       textTransform: 'uppercase',
       fontWeight: '600',
       fontSize: 12,

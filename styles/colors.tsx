@@ -20,7 +20,7 @@ export const GREY_40 = '#999999';
 export const GREY_10 = '#E5E5E5';
 export const GREY_5 = '#F2F2F2';
 
-export const LIGHT_BLACK = '#00000000';
+export const LIGHT_BLACK = '#4A4F62';
 export const BLACK = '#000000';
 
 export const LIGHT_BLUE = '#3E97FF';
