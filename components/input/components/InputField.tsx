@@ -9,7 +9,7 @@ import {
   View,
   Platform,
 } from 'react-native';
-import {getImageStyle} from '../../../helpers/image_utils';
+import addImageStyle from '../../../helpers/image_utils';
 import {styles} from '../Input.style';
 import {InputFieldProps, KeyboardTypes} from '../Input.types';
 import {
@@ -166,7 +166,7 @@ const InputField = ({
                 {configField?.image?.imgRoute && (
                   <Image
                     source={{uri: configField.image.imgRoute}}
-                    style={getImageStyle(configField.image, disabled)}
+                    style={addImageStyle(configField.image, disabled)}
                   />
                 )}
               </TouchableOpacity>
