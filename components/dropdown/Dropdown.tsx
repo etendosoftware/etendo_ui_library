@@ -27,7 +27,7 @@ const Dropdown = ({
   const catMenu = useRef(null);
 
   const handleShowOptions = () => {
-    setShowOptions(!open);
+    setShowOptions(!showOptions);
   };
 
   useEffect(() => {
