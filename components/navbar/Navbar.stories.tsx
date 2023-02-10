@@ -6,6 +6,8 @@ import {Navbar} from './Navbar';
 import {View} from 'react-native';
 import {NavbarV} from './typeOfNavbars/NavbarV';
 import {reportIcon, tracingIcon, wayIcon} from '../../assets/images/icons';
+import { styles } from './Navbar.styles';
+import addMarginContainer from '../../helpers/addMargin';
 
 export default {
   title: 'Etendo/Navbar',
@@ -36,7 +38,7 @@ const datasetNavbarV = [
 
 /* Templates */
 const Template1: Story<any> = args => (
-  <View style={{width: 100, height: 355}}>
+  <View style={[styles.storiesContainer,addMarginContainer()]}>
     <NavbarV
       data={datasetNavbarV}
       onChangeSelected={() => {}}

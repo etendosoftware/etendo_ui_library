@@ -4,6 +4,7 @@ import Table from './Table';
 import {TableProps} from './Table.types';
 import data from './TableData.json';
 import {View} from 'react-native';
+import addMarginContainer from '../../helpers/addMargin';
 
 const meta: Meta = {
   title: 'Etendo/Tables',
@@ -11,7 +12,7 @@ const meta: Meta = {
 };
 
 const Template: Story<TableProps> = args => (
-  <View>
+  <View style={addMarginContainer()}>
     <Table {...args} />
   </View>
 );

@@ -4,6 +4,8 @@ import {Story, Meta} from '@storybook/react';
 import Tab from './Tab';
 import {TabProps} from './Tab.types';
 import {View} from 'react-native';
+import { styles } from './Tab.styles';
+import addMarginContainer from '../../helpers/addMargin';
 
 const meta: Meta = {
   title: 'Etendo/Tab',
@@ -28,7 +30,7 @@ const onCheckSelectedMock = () => dataset[0];
 
 /* Templates */
 const Template0: Story<TabProps> = args => (
-  <View style={{height: 100}}>
+  <View style={[styles.storiesContainer, addMarginContainer()]}>
     <Tab {...args} />
   </View>
 );

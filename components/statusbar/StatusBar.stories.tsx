@@ -4,7 +4,8 @@ import {Story, Meta} from '@storybook/react';
 import {StatusBar} from './StatusBar';
 import {StatusBarProps} from './StatusBar.types';
 import {Image, Text, View} from 'react-native';
-import {StatusBarStyleVariant} from './StatusBar.styles';
+import {StatusBarStyleVariant, styles} from './StatusBar.styles';
+import addMarginContainer from '../../helpers/addMargin';
 
 const meta: Meta = {
   title: 'Etendo/StatusBar',
@@ -13,14 +14,14 @@ const meta: Meta = {
 
 /* Templates */
 const Template0: Story<StatusBarProps> = args => (
-  <View style={{height: 50}}>
+  <View style={[styles.storiesContainer,addMarginContainer()]}>
     <StatusBar {...args} />
   </View>
 );
 
 const Component = () => {
   return (
-    <View style={{flexDirection:'row'}}>
+    <View style={styles.storiesComponentContainer}>
       <Image
         source={require('../../assets/images/icons/calendar-secundary.png')}
         style={StatusBarStyleVariant.primary.activeComponentImage}

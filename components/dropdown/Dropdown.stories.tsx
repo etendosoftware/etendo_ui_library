@@ -4,6 +4,7 @@ import Dropdown from './Dropdown';
 import {DropdownProps, Info} from './Dropdown.types';
 import {View} from 'react-native';
 import {styles} from './Dropdown.styles';
+import addMarginContainer from '../../helpers/addMargin';
 
 const meta: Meta = {
   title: 'Etendo/Dropdown',
@@ -23,14 +24,14 @@ const dataset = [
 
 const Template0: Story<DropdownProps> = ({...args}) => {
   return (
-    <View style={styles.storiesDropdownContainer}>
+    <View style={[styles.storiesDropdownContainer,addMarginContainer()]}>
       <Dropdown {...args} />
     </View>
   );
 };
 
 const Template1: Story<DropdownProps> = args => (
-  <View style={styles.storiesContainer}>
+  <View style={[styles.storiesContainer,addMarginContainer()]}>
     <View style={styles.storiesDropdownContainer}>
       <Dropdown
         data={dataset}

@@ -2,6 +2,7 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {styles} from './GetStartedScreen.style';
+import addMarginContainer from '../../../../helpers/addMargin';
 
 const GetStartedScreen = () => {
   const copyToClipboardYarn = () => {
@@ -11,7 +12,7 @@ const GetStartedScreen = () => {
     Clipboard.setString('npm install etendo-ui-library');
   };
   return (
-    <View>
+    <View style={addMarginContainer()}>
       <Text style={styles.title}>Etendo UI</Text>
       <Text style={styles.description}>
         Welcome to Etendo UI We rely heavily on jest and snapshots to ensure our

@@ -4,6 +4,7 @@ import {Story, Meta} from '@storybook/react';
 import {ButtonProps} from './Button.types';
 import {View} from 'react-native';
 import {styles} from './Button.styles';
+import addMarginContainer from '../../helpers/addMargin';
 
 const meta: Meta = {
   title: 'Etendo/Button',
@@ -13,10 +14,10 @@ const meta: Meta = {
 
 export default meta;
 
-const Template0: Story<ButtonProps> = args => <Button {...args} />;
+const Template0: Story<ButtonProps> = args => <View style={[styles.storiesContainer,addMarginContainer()]}><Button {...args} /></View>;
 
 const Template1: Story<ButtonProps> = args => (
-  <View style={styles.storiesContainer}>
+  <View style={[styles.storiesContainer,addMarginContainer()]}>
     <View style={styles.storiesButtonContainer}>
       <Button
         onPress={() => {}}

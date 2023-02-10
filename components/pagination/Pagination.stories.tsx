@@ -4,6 +4,8 @@ import {Story, Meta} from '@storybook/react';
 import {Pagination} from './Pagination';
 import {PaginationProps} from './Pagination.types';
 import {View} from 'react-native';
+import addMarginContainer from '../../helpers/addMargin';
+import { styles } from './Pagination.styles';
 
 export default {
   title: 'Etendo/Pagination',
@@ -27,7 +29,7 @@ const onCheckSelectedMock = () => dataset[0];
 
 /* Templates */
 const Template: Story<PaginationProps> = args => (
-  <View style={{height: 50}}>
+  <View style={[styles.storiesContainer,addMarginContainer()]}>
     <Pagination
       currentPage={1}
       onChangeSelected={onCheckSelectedMock}

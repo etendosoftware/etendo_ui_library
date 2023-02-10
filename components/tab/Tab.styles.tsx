@@ -7,6 +7,7 @@ import {
   WHITE,
   YELLOW,
 } from '../../styles/colors';
+import { StyleSheet } from 'react-native';
 
 /* Export of different styles */
 export const TabStyleVariant: TabStyleRecord = {
@@ -98,3 +99,9 @@ export const TabStyleVariant: TabStyleRecord = {
     },
   },
 };
+
+export const styles = StyleSheet.create({
+  storiesContainer:{
+    height: 100
+  }
+});

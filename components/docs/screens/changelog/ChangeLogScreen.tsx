@@ -1,10 +1,11 @@
 import {View, Text} from 'react-native';
 import React from 'react';
 import {styles} from './ChangeLogScreen.style';
+import addMarginContainer from '../../../../helpers/addMargin';
 
 const ChangeLogScreen = () => {
   return (
-    <View>
+    <View style={addMarginContainer()}>
       <Text style={styles.title}>Change Log</Text>
       <Text style={styles.version}>1.0.4</Text>
       <Text style={styles.feature}>Features</Text>
