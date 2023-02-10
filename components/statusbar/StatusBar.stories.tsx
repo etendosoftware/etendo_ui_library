@@ -20,7 +20,7 @@ const Template0: Story<StatusBarProps> = args => (
 
 const Component = () => {
   return (
-    <View style={{height: 100}}>
+    <View style={{flexDirection:'row'}}>
       <Image
         source={require('../../assets/images/icons/calendar-secundary.png')}
         style={StatusBarStyleVariant.primary.activeComponentImage}
