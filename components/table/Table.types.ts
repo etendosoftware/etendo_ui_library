@@ -6,8 +6,6 @@ export interface TableProps {
   onRowPress: (primary: string) => void;
 }
 export interface TableCellProps {
-  label: string;
-  image: string;
   isWeb: boolean | undefined;
 }
 

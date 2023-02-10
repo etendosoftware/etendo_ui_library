@@ -2,25 +2,26 @@ import React from 'react';
 import {Story, Meta} from '@storybook/react';
 import Table from './Table';
 import {TableProps} from './Table.types';
-import TableCellEdit from './components/TableCellEdit';
-import {action} from '@storybook/addon-actions';
-import data from './Table.json';
+import data from './TableData.json';
+import {View} from 'react-native';
+import addMarginContainer from '../../helpers/addMargin';
 
 const meta: Meta = {
   title: 'Etendo/Tables',
   component: Table,
 };
 
-const Template: Story<TableProps> = args => <Table {...args} />;
+const Template: Story<TableProps> = args => (
+  <View style={addMarginContainer()}>
+    <Table {...args} />
+  </View>
+);
 
 export default meta;
-export const table = Template.bind({});
+export const TableDefault = Template.bind({});
 
-table.args = {
-  onRowPress(primary) {
-    action('onRowPress')(primary);
-  },
-  tableHeight: 400,
+TableDefault.args = {
+  onRowPress: () => {},
   data: data,
   columns: [
     {
@@ -53,22 +54,8 @@ table.args = {
       displayKey: 'about',
       visible: true,
       key: 'about',
-      width: '20%',
+      width: '40%',
       label: 'Description',
-    },
-    {
-      key: '_id',
-      visible: true,
-      width: '20%',
-      label: 'Edit',
-      actions: [
-        {
-          component: <TableCellEdit label={'EDIT'} />,
-          onAction: (id: string) => {
-            action('onAction')(id);
-          },
-        },
-      ],
     },
   ],
 };

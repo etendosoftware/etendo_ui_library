@@ -24,6 +24,7 @@ describe('Running Test for Pagination', () => {
           onChangeSelected={onCheckSelectedMock}
           totalData={40}
           amountDataPerPage={8}
+          pagination={0}
         />,
       )
       .toJSON();

@@ -3,12 +3,16 @@ import {Story, Meta} from '@storybook/react';
 
 import Tab from './Tab';
 import {TabProps} from './Tab.types';
+import {View} from 'react-native';
+import { styles } from './Tab.styles';
+import addMarginContainer from '../../helpers/addMargin';
 
-export default {
-  title: 'Etendo/Tabs',
+const meta: Meta = {
+  title: 'Etendo/Tab',
   component: Tab,
   argTypes: {},
-} as Meta<typeof Tab>;
+};
+export default meta;
 
 /* Information to pass */
 const dataset = [
@@ -21,46 +25,22 @@ const dataset = [
   {name: 'Map', route: '', key: 'map'},
 ];
 
-const dataset2 = [
-  {name: 'Prods. of interest', route: '', key: 'prodsOfInterest'},
-  {name: 'Assigned pop', route: '', key: 'Assigned pop'},
-  {name: 'Incidents', route: '', key: 'incidents'},
-  {name: 'Competition', route: '', key: 'competition'},
-  {name: 'Questions', route: '', key: 'questions'},
-  {name: 'Observations', route: '', key: 'observations'},
-];
-
-const dataset3 = [
-  {name: 'Workspace', route: '', key: 'workspace'},
-  {name: 'Business Partner', route: '', key: 'businessPartner'},
-  {name: 'Sales order', route: '', key: 'salesOrder'},
-];
-
 /* This function allows you to select by default the first tab */
 const onCheckSelectedMock = () => dataset[0];
 
 /* Templates */
-const Template: Story<TabProps> = args => (
-  <Tab
-    data={dataset}
-    onChangeSelected={onCheckSelectedMock}
-    style="primary"
-    typeSizeText="small"
-  />
-);
-
-const Template2: Story<TabProps> = args => (
-  <Tab
-    data={dataset2}
-    onChangeSelected={onCheckSelectedMock}
-    style="primary"
-    typeSizeText="medium"
-  />
+const Template0: Story<TabProps> = args => (
+  <View style={[styles.storiesContainer, addMarginContainer()]}>
+    <Tab {...args} />
+  </View>
 );
 
 /* Story exports */
-export const PrimaryStyleVersion1 = Template.bind({});
-PrimaryStyleVersion1.args = {};
+export const TabsDefault = Template0.bind({});
 
-export const PrimaryStyleVersion2 = Template2.bind({});
-PrimaryStyleVersion2.args = {};
+TabsDefault.args = {
+  data: dataset,
+  onChangeSelected: onCheckSelectedMock,
+  style: 'primary',
+  typeSizeText: 'small',
+};

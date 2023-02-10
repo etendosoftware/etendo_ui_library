@@ -1,14 +1,16 @@
 import React from 'react';
 import {Story, Meta} from '@storybook/react';
-
 import Dropdown from './Dropdown';
-import {NavbarProps} from '../navbar/Navbar.types';
+import {DropdownProps, Info} from './Dropdown.types';
+import {View} from 'react-native';
+import {styles} from './Dropdown.styles';
+import addMarginContainer from '../../helpers/addMargin';
 
-export default {
+const meta: Meta = {
   title: 'Etendo/Dropdown',
   component: Dropdown,
   argTypes: {},
-} as Meta<typeof Dropdown>;
+};
 
 const dataset = [
   {name: 'User', route: '', key: 'user'},
@@ -20,19 +22,54 @@ const dataset = [
   {name: 'Map', route: '', key: 'map'},
 ];
 
-const onCheckSelectedMock = () => dataset[0];
+const Template0: Story<DropdownProps> = ({...args}) => {
+  return (
+    <View style={[styles.storiesDropdownContainer,addMarginContainer()]}>
+      <Dropdown {...args} />
+    </View>
+  );
+};
 
-/* Templates */
-const Template: Story<NavbarProps> = () => (
-  <Dropdown
-    data={dataset}
-    onChangeSelected={onCheckSelectedMock}
-    text="Massive load"
-    style="primary"
-    typeSizeText="small"
-  />
+const Template1: Story<DropdownProps> = args => (
+  <View style={[styles.storiesContainer,addMarginContainer()]}>
+    <View style={styles.storiesDropdownContainer}>
+      <Dropdown
+        data={dataset}
+        onChangeSelected={(Info: Info) => {}}
+        text={'Small'}
+        style={'primary'}
+        typeSizeText={'small'}
+      />
+    </View>
+    <View style={styles.storiesDropdownContainer}>
+      <Dropdown
+        data={dataset}
+        onChangeSelected={(Info: Info) => {}}
+        text={'Medium'}
+        style={'primary'}
+        typeSizeText={'medium'}
+      />
+    </View>
+    <View style={styles.storiesDropdownContainer}>
+      <Dropdown
+        data={dataset}
+        onChangeSelected={(Info: Info) => {}}
+        text={'Large'}
+        style={'primary'}
+        typeSizeText={'large'}
+      />
+    </View>
+  </View>
 );
 
-/* Story exports */
-export const DropdownComponent = Template.bind({});
-DropdownComponent.args = {};
+export default meta;
+export const DropdownDefault = Template0.bind({});
+export const DropdownVariants = Template1.bind({});
+
+DropdownDefault.args = {
+  data: dataset,
+  onChangeSelected: (Info: Info) => {},
+  text: 'Dropdown',
+  style: 'primary',
+  typeSizeText: 'medium',
+};
