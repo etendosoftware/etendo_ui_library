@@ -2,11 +2,7 @@ import React, {useState} from 'react';
 import {Story, Meta} from '@storybook/react';
 
 import Tab from './Tab';
-import {TabProps} from './Tab.types';
 import {View} from 'react-native';
-import SecondaryTab from './SecondaryTab';
-import {styles} from './Tab.styles';
-import addMarginContainer from '../../helpers/addMargin';
 
 const meta: Meta = {
   title: 'Etendo/Tab',
@@ -16,17 +12,7 @@ const meta: Meta = {
 export default meta;
 
 /* Information to pass */
-const dataset = [
-  {name: 'User', route: '', key: 'user'},
-  {name: 'Vehicles', route: '', key: 'vehicles'},
-  {name: 'Skills', route: '', key: 'skills'},
-  {name: 'Mobile app', route: '', key: 'movilApp'},
-  {name: 'Staff', route: '', key: 'staff'},
-  {name: 'Routing options', route: '', key: 'routing options'},
-  {name: 'Map', route: '', key: 'map'},
-];
-
-const datasetTabSecundary = [
+const datasetTab = [
   {name: 'Home', route: '/home', key: 'user'},
   {name: 'About', route: '/about', key: 'vehicles'},
   {name: 'Staff', route: '/staff', key: 'staff'},
@@ -34,23 +20,15 @@ const datasetTabSecundary = [
   {name: 'Logout', route: '/logout', key: 'movilApp'},
 ];
 
-/* This function allows you to select by default the first tab */
-const onCheckSelectedMock = () => dataset[0];
-
 /* Templates */
-const Template0: Story<TabProps> = args => (
-  <View style={[styles.storiesContainer, addMarginContainer()]}>
-    <Tab {...args} />
-  </View>
-);
 
-const Template1: Story<any> = args => {
+const Template0: Story<any> = args => {
   const [selectedTab, setSelectedTab] = useState(0);
 
   return (
     <View style={{padding: 20}}>
-      <SecondaryTab
-        tabInformation={datasetTabSecundary}
+      <Tab
+        tabInformation={datasetTab}
         selectedTab={selectedTab}
         setSelectedTab={setSelectedTab}
         height={40}
@@ -60,12 +38,4 @@ const Template1: Story<any> = args => {
 };
 
 /* Story exports */
-export const TabsDefault = Template0.bind({});
-export const SecondaryTabDefault = Template1.bind({});
-
-TabsDefault.args = {
-  data: dataset,
-  onChangeSelected: onCheckSelectedMock,
-  style: 'primary',
-  typeSizeText: 'small',
-};
+export const TabDefault = Template0.bind({});
