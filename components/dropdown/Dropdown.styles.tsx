@@ -13,7 +13,6 @@ import {StyleSheet} from 'react-native';
 export const DropdownStyleVariant: DropdownStyleRecord = {
   /* Primary style */
   primary: {
-    container: {flex: 1},
     dropDownButton: {
       backgroundColor: WHITE,
       borderRadius: 5,
@@ -74,5 +73,6 @@ export const styles = StyleSheet.create({
   },
   storiesDropdownContainer: {
     width: '30%',
+
   },
 });

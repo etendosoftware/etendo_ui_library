@@ -5,7 +5,11 @@ pipeline {
     }
 
     environment {
-        NPM_TOKEN = credentials('npmjs-access-token')
+        NPM_TOKEN           = credentials('npmjs-access-token')
+        URL_REPO            = 'https://bitbucket.org/koodu_software/etendo_ui_library'
+        COMMIT_AUTHOR_NAME  = sh(returnStdout: true, script: "git log -1 --pretty=format:'%an'").trim()
+        COMMIT_AUTHOR_EMAIL = sh(returnStdout: true, script: "git log -1 --pretty=format:'%ae'").trim()
+
     }
 
     agent { label 'jenkins-jenkins-agent' }
@@ -125,6 +129,24 @@ pipeline {
             }
             cleanWs deleteDirs: true
         }
+        fixed {
+            mail to: 'builds@smfconsulting.es',
+            subject: "✅ FIXED - ${currentBuild.fullDisplayName}",
+            body: """
+${new Date()}
+__________________________________________________________
+
+✅ ERRORS FIXED ✅
+
+Commit: ${URL_REPO}/commits/${env.GIT_COMMIT}
+Author: ${COMMIT_AUTHOR_NAME} <${COMMIT_AUTHOR_EMAIL}>
+            
+The problems found in the previous run/s have been fixed!  💪
+Check out the output in the following link: 
+${env.BUILD_URL}
+__________________________________________________________
+            """
+        }
         unstable {
             withCredentials([usernamePassword(credentialsId: "koodu_credentials", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                 script {
@@ -139,6 +161,9 @@ ${new Date()}
 __________________________________________________________
 
 🚨 BUILD UNSTABLE 🚨
+
+Commit: ${URL_REPO}/commits/${env.GIT_COMMIT}
+Author: ${COMMIT_AUTHOR_NAME} <${COMMIT_AUTHOR_EMAIL}>
             
 Some etendo-ui-library tests have failed!
 Check out the output in the following link: 
@@ -160,6 +185,9 @@ ${new Date()}
 __________________________________________________________
 
 🚫 ERROR 🚫
+
+Commit: ${URL_REPO}/commits/${env.GIT_COMMIT}
+Author: ${COMMIT_AUTHOR_NAME} <${COMMIT_AUTHOR_EMAIL}>
 
 The build or publication has failed unexpectedly.
 To more information on the failing run visit: ${env.BUILD_URL}

@@ -3,10 +3,11 @@ import React from 'react';
 import {Table} from '../../table';
 import TableData from './TableComponentsStatesData.json';
 import {styles} from './ComponentsStatesScreen.style';
+import addMarginContainer from '../../../helpers/addMargin';
 
 const ComponentsStatesScreen = () => {
   return (
-    <View>
+    <View style={addMarginContainer()}>
       <Text style={styles.title}>Component state</Text>
       <Text style={styles.description}>
         Here you will find all our components and their states. They are updated

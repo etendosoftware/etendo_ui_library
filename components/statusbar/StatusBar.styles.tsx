@@ -1,4 +1,5 @@
 /* Imports */
+import { StyleSheet } from 'react-native';
 import {BLUE, YELLOW, WHITE} from '../../styles/colors';
 import {StatusBarStyleRecord} from './StatusBar.types';
 
@@ -117,3 +118,13 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
     },
   },
 };
+
+
+export const styles = StyleSheet.create({
+  storiesComponentContainer: {
+    flexDirection:'row'
+  },
+  storiesContainer:{
+    height: 50,
+  }
+});

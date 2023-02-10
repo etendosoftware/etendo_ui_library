@@ -44,5 +44,6 @@ export const getSizeText = (sizeText: DropdownStyleFontSize) => {
 export const stylesStories = {
   dropdownContainer: {
     marginRight: 20,
+ 
   },
 };

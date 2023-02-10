@@ -2,6 +2,7 @@
 
 import {NavbarStyleHorizontal, NavbarStyleVertical} from './Navbar.types';
 import {BLUE, WHITE} from '../../styles/colors';
+import { StyleSheet } from 'react-native';
 
 /* Export of different styles */
 export const NavbarHStyleVariant: NavbarStyleHorizontal = {
@@ -194,3 +195,9 @@ export const NavbarVStyleVariant: NavbarStyleVertical = {
     },
   },
 };
+
+export const styles = StyleSheet.create({
+  storiesContainer: {
+    width: 100, height: 355
+  }
+});

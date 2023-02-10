@@ -5,6 +5,8 @@ import Tab from './Tab';
 import {TabProps} from './Tab.types';
 import {View} from 'react-native';
 import SecondaryTab from './SecondaryTab';
+import {styles} from './Tab.styles';
+import addMarginContainer from '../../helpers/addMargin';
 
 const meta: Meta = {
   title: 'Etendo/Tab',
@@ -36,7 +38,12 @@ const datasetTabSecundary = [
 const onCheckSelectedMock = () => dataset[0];
 
 /* Templates */
-const Template0: Story<TabProps> = args => <Tab {...args} />;
+const Template0: Story<TabProps> = args => (
+  <View style={[styles.storiesContainer, addMarginContainer()]}>
+    <Tab {...args} />
+  </View>
+);
+
 const Template1: Story<any> = args => {
   const [selectedTab, setSelectedTab] = useState(0);
 
