@@ -1,6 +1,7 @@
 /* Imports */
 import {PaginationStyleRecord} from './Pagination.types';
 import {PURPLE_50} from '../../styles/colors';
+import { StyleSheet } from 'react-native';
 
 /* Export of different styles */
 export const PaginationStyleVariant: PaginationStyleRecord = {
@@ -30,9 +31,14 @@ export const PaginationStyleVariant: PaginationStyleRecord = {
     },
     pageNumberText: {
       fontWeight: '500',
-      fontFamily: 'Poppins',
       fontSize: 12,
       alignSelf: 'center',
     },
   },
 };
+
+export const styles = StyleSheet.create({
+  storiesContainer: {
+    height: 50,
+  }
+});

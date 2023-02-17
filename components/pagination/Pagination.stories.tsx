@@ -3,6 +3,9 @@ import {Story, Meta} from '@storybook/react';
 
 import {Pagination} from './Pagination';
 import {PaginationProps} from './Pagination.types';
+import {View} from 'react-native';
+import addMarginContainer from '../../helpers/addMargin';
+import { styles } from './Pagination.styles';
 
 export default {
   title: 'Etendo/Pagination',
@@ -26,38 +29,17 @@ const onCheckSelectedMock = () => dataset[0];
 
 /* Templates */
 const Template: Story<PaginationProps> = args => (
-  <Pagination
-    currentPage={1}
-    onChangeSelected={onCheckSelectedMock}
-    totalData={40}
-    amountDataPerPage={8}
-  />
-);
-
-const Template2: Story<PaginationProps> = args => (
-  <Pagination
-    currentPage={1}
-    onChangeSelected={onCheckSelectedMock}
-    totalData={160}
-    amountDataPerPage={10}
-  />
-);
-
-const Template3: Story<PaginationProps> = args => (
-  <Pagination
-    currentPage={1}
-    onChangeSelected={onCheckSelectedMock}
-    totalData={200}
-    amountDataPerPage={5}
-  />
+  <View style={[styles.storiesContainer,addMarginContainer()]}>
+    <Pagination
+      currentPage={1}
+      onChangeSelected={onCheckSelectedMock}
+      totalData={40}
+      amountDataPerPage={8}
+      pagination={0}
+    />
+  </View>
 );
 
 /* Story exports */
-export const PaginationVersion1 = Template.bind({});
-PaginationVersion1.args = {};
-
-export const PaginationVersion2 = Template2.bind({});
-PaginationVersion2.args = {};
-
-export const PaginationVersion3 = Template3.bind({});
-PaginationVersion3.args = {};
+export const PaginationDefault = Template.bind({});
+PaginationDefault.args = {};

@@ -26,8 +26,7 @@ export const NavbarHTablet = ({
             return (
               <TouchableOpacity
                 onPress={() => onChangeSelected}
-                key={image.key}
-              >
+                key={image.key}>
                 <Image
                   style={NavbarHStyleVariant.tablet.navIcons}
                   source={image.routeImage}

@@ -27,7 +27,7 @@ const Dropdown = ({
   const catMenu = useRef(null);
 
   const handleShowOptions = () => {
-    setShowOptions(!open);
+    setShowOptions(!showOptions);
   };
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const Dropdown = ({
       />
     ) : (
       <Image
-        source={arrowPickerVerticalIcon}
+        source={{uri: arrowPickerVerticalIcon}}
         style={{
           width: 11,
           height: 9,
@@ -75,7 +75,7 @@ const Dropdown = ({
       />
     ) : (
       <Image
-        source={arrowPickerVerticalIcon}
+        source={{uri: arrowPickerVerticalIcon}}
         style={{
           width: 11,
           height: 9,
@@ -87,7 +87,9 @@ const Dropdown = ({
     );
   };
 
-  document.addEventListener('mousedown', closeOpenMenus);
+  if (Platform.OS === 'web') {
+    document.addEventListener('mousedown', closeOpenMenus);
+  }
 
   return (
     <View style={DropdownStyleVariant.primary.container} ref={catMenu}>
@@ -96,8 +98,7 @@ const Dropdown = ({
         activeOpacity={1}
         onPress={(e: any) => {
           setShowOptions(!showOptions);
-        }}
-      >
+        }}>
         <Text style={DropdownStyleVariant.primary.dropDownButtonText}>
           {chooseOption}
         </Text>

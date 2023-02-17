@@ -6,13 +6,7 @@ import TableHeaders from './components/TableHeaders';
 import {paintOddRows, removeHeaderBorder} from '../../helpers/table_utils';
 import TableCell from './components/TableCell';
 
-const Table: React.FC<TableProps> = ({
-  data,
-  columns,
-  title,
-  onRowPress,
-  tableHeight,
-}) => {
+const Table = ({data, columns, title, onRowPress, tableHeight}: TableProps) => {
   const findPrimaryId = (col: Columns[], indexRow: number) => {
     let primary: string = '';
     if (indexRow >= 0) {
@@ -33,15 +27,13 @@ const Table: React.FC<TableProps> = ({
         onPress={() => {
           onRowPress(findPrimaryId(columns, index));
         }}
-        style={[styles.row, paintOddRows(index)]}
-      >
+        style={[styles.row, paintOddRows(index)]}>
         {columns.map((col: Columns, colIndex: number) => {
           return (
             col.visible && (
               <View
                 style={[styles.cell, {width: col.width}]}
-                key={'movementTable' + colIndex}
-              >
+                key={'movementTable' + colIndex}>
                 {col.actions ? (
                   col.actions?.map((itemAction: Actions, index: number) => {
                     return (
@@ -50,8 +42,7 @@ const Table: React.FC<TableProps> = ({
                         onPress={() =>
                           col.key ? itemAction.onAction(item[col.key]) : {}
                         }
-                        key={'tableCellCustom' + index}
-                      >
+                        key={'tableCellCustom' + index}>
                         {itemAction.component}
                       </TouchableOpacity>
                     );
@@ -76,8 +67,7 @@ const Table: React.FC<TableProps> = ({
           styles.container,
           removeHeaderBorder(title),
           {height: tableHeight},
-        ]}
-      >
+        ]}>
         <TableHeaders title={title} columns={columns} />
         <FlatList
           data={data}

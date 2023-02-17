@@ -2,6 +2,7 @@
 
 import {NavbarStyleHorizontal, NavbarStyleVertical} from './Navbar.types';
 import {BLUE, WHITE} from '../../styles/colors';
+import { StyleSheet } from 'react-native';
 
 /* Export of different styles */
 export const NavbarHStyleVariant: NavbarStyleHorizontal = {
@@ -54,7 +55,6 @@ export const NavbarHStyleVariant: NavbarStyleHorizontal = {
       padding: 10,
       paddingLeft: 15,
       paddingRight: 15,
-      fontFamily: 'Poppins',
       fontWeight: '700',
       fontSize: 12,
     },
@@ -111,7 +111,7 @@ export const NavbarHStyleVariant: NavbarStyleHorizontal = {
       padding: 10,
       paddingLeft: 15,
       paddingRight: 15,
-      fontFamily: 'Poppins',
+
       fontWeight: '700',
       fontSize: 12,
     },
@@ -162,7 +162,6 @@ export const NavbarHStyleVariant: NavbarStyleHorizontal = {
       fontSize: 12,
       fontWeight: '700',
       color: BLUE,
-      fontFamily: 'Poppins',
     },
     more: {
       width: 28,
@@ -180,7 +179,7 @@ export const NavbarHStyleVariant: NavbarStyleHorizontal = {
       padding: 10,
       paddingLeft: 15,
       paddingRight: 15,
-      fontFamily: 'Poppins',
+
       fontWeight: '700',
       fontSize: 12,
     },
@@ -192,9 +191,13 @@ export const NavbarVStyleVariant: NavbarStyleVertical = {
   generic: {
     container: {
       flex: 1,
-      marginTop: '20',
-      marginBottom: '20',
       backgroundColor: BLUE,
     },
   },
 };
+
+export const styles = StyleSheet.create({
+  storiesContainer: {
+    width: 100, height: 355
+  }
+});

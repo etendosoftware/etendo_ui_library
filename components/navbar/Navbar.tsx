@@ -1,9 +1,6 @@
 /* Imports */
 import React from 'react';
 import {ScrollView, useWindowDimensions} from 'react-native';
-
-import {NavbarHMobile} from './typeOfNavbars/NavbarHMobile';
-import {NavbarHTablet} from './typeOfNavbars/NavbarHTablet';
 import {NavbarHDesktop} from './typeOfNavbars/NavbarHDesktop';
 import {NavbarProps} from './Navbar.types';
 import {NavbarV} from './typeOfNavbars/NavbarV';
@@ -25,7 +22,6 @@ export const Navbar = ({data, onChangeSelected, typeOfNavbar}: NavbarProps) => {
         )}
       </ScrollView>
     );
-
     // NavbarVertical
   } else {
     return <NavbarV data={data} onChangeSelected={onChangeSelected} />;

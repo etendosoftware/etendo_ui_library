@@ -3,6 +3,9 @@ import {useState} from '@storybook/addons';
 import {Story, Meta} from '@storybook/react';
 import Input from '../input/Input';
 import {InputProps} from './Input.types';
+import {View} from 'react-native';
+import {styles} from './Input.style';
+import addMarginContainer from '../../helpers/addMargin';
 
 const meta: Meta = {
   title: 'Etendo/Input',
@@ -10,20 +13,120 @@ const meta: Meta = {
   argTypes: {},
 };
 
-const Template: Story<InputProps> = ({value = '', onChangeText, ...args}) => {
+const Template0: Story<InputProps> = ({value = '', onChangeText, ...args}) => {
   const [text, setText] = useState(value);
-  return <Input onChangeText={text => setText(text)} value={text} {...args} />;
+  return (
+    <View style={[styles.storiesInputContainer,addMarginContainer()]}>
+      <Input onChangeText={text => setText(text)} value={text} {...args} />
+    </View>
+  );
 };
 
-export default meta;
-export const OnlyRead = Template.bind({});
-export const Picker = Template.bind({});
-export const SearchPressable = Template.bind({});
-export const SearchTextInput = Template.bind({});
-export const TextPressable = Template.bind({});
-export const TextInput = Template.bind({});
+const Template1: Story<InputProps> = args => (
+  <View style={[styles.storiesContainer,addMarginContainer()]}>
+    <View style={styles.storiesInputContainer}>
+      <Input
+        titleLabel="Only Read"
+        helperText=""
+        placeholder="Write a password"
+        disabled={false}
+        value="27/04/2022"
+        numberOfLines={1}
+        typeField="onlyRead"
+        isError={true}
+        keyboardType="text"
+      />
+    </View>
+    <View style={styles.storiesInputContainer}>
+      <Input
+        titleLabel="Picker"
+        helperText="Only characters"
+        placeholder="Write a password"
+        disabled={false}
+        value=""
+        numberOfLines={1}
+        typeField="picker"
+        isError={false}
+        keyboardType="text"
+      />
+    </View>
+    <View style={styles.storiesInputContainer}>
+      <Input
+        titleLabel="Search Presseable"
+        helperText="Only characters"
+        placeholder="Write a password"
+        disabled={false}
+        value=""
+        numberOfLines={1}
+        typeField="searchPressable"
+        isError={false}
+        keyboardType="text"
+      />
+    </View>
+    <View style={styles.storiesInputContainer}>
+      <Input
+        titleLabel="Search TextInput"
+        helperText="Only characters"
+        placeholder="Write a password"
+        disabled={false}
+        value=""
+        numberOfLines={1}
+        typeField="searchTextInput"
+        isError={false}
+        keyboardType="text"
+      />
+    </View>
+    <View style={styles.storiesInputContainer}>
+      <Input
+        titleLabel="Text Pressable"
+        helperText="Only characters"
+        placeholder="Write a password"
+        disabled={false}
+        value=""
+        numberOfLines={5}
+        typeField="textPressable"
+        isError={false}
+        keyboardType="text"
+      />
+    </View>
+    <View style={styles.storiesInputContainer}>
+      <Input
+        titleLabel="Text Input"
+        helperText="Only characters"
+        placeholder="Write a password"
+        disabled={false}
+        value=""
+        numberOfLines={5}
+        typeField="textInput"
+        isError={false}
+        fontSize={14}
+        password={false}
+        keyboardType="text"
+      />
+    </View>
+    <View style={styles.storiesInputContainer}>
+      <Input
+        titleLabel="Text Input With Security"
+        helperText="Only characters"
+        placeholder="Write a password"
+        disabled={false}
+        value=""
+        numberOfLines={5}
+        typeField="textInput"
+        isError={false}
+        fontSize={14}
+        password={true}
+        keyboardType="text"
+      />
+    </View>
+  </View>
+);
 
-OnlyRead.args = {
+export default meta;
+export const InputDefault = Template0.bind({});
+export const InputVariant = Template1.bind({});
+
+InputDefault.args = {
   titleLabel: 'Only Read',
   helperText: '',
   placeholder: 'Write a password',
@@ -32,115 +135,5 @@ OnlyRead.args = {
   numberOfLines: 1,
   typeField: 'onlyRead',
   isError: true,
-  keyboardType:'text',
-  onPress: () => {
-    console.log('Press Field');
-  },
-  onChangeText: text => console.log(text),
-  onFocus: () => {
-    console.log('On Focus');
-  },
-  onBlur: () => {
-    console.log('On Blur');
-  },
-};
-
-Picker.args = {
-  titleLabel: 'Picker',
-  helperText: 'Only characters',
-  placeholder: 'Write a password',
-  disabled: false,
-  value: '',
-  numberOfLines: 1,
-  typeField: 'picker',
-  isError: false,
-  keyboardType:'text',
-  onPress: () => {
-    console.log('Press Field');
-  },
-  onChangeText: text => console.log(text),
-  onFocus: () => {
-    console.log('On Focus');
-  },
-  onBlur: () => {
-    console.log('On Blur');
-  },
-};
-
-SearchPressable.args = {
-  titleLabel: 'Search Presseable',
-  helperText: 'Only characters',
-  placeholder: 'Write a password',
-  disabled: false,
-  value: '',
-  numberOfLines: 1,
-  typeField: 'searchPressable',
-  isError: false,
-  keyboardType:'text',
-  onPress: () => {
-    console.log('Press Field');
-  },
-  onChangeText: text => console.log(text),
-  onFocus: () => {
-    console.log('On Focus');
-  },
-  onBlur: () => {
-    console.log('On Blur');
-  },
-};
-
-SearchTextInput.args = {
-  titleLabel: 'Search TextInput',
-  helperText: 'Only characters',
-  placeholder: 'Write a password',
-  disabled: false,
-  value: '',
-  numberOfLines: 1,
-  typeField: 'searchTextInput',
-  isError: false,
-  keyboardType:'text',
-};
-
-TextPressable.args = {
-  titleLabel: 'Text Pressable',
-  helperText: 'Only characters',
-  placeholder: 'Write a password',
-  disabled: false,
-  value: '',
-  numberOfLines: 5,
-  typeField: 'textPressable',
-  isError: false,
-  keyboardType:'text',
-  onPress: () => {
-    console.log('Press Field');
-  },
-  onFocus: () => {
-    console.log('On Focus');
-  },
-  onBlur: () => {
-    console.log('On Blur');
-  },
-};
-
-TextInput.args = {
-  titleLabel: 'Text Input',
-  helperText: 'Only characters',
-  placeholder: 'Write a password',
-  disabled: false,
-  numberOfLines: 5,
-  typeField: 'textInput',
-  isError: false,
-  fontSize: 14,
-  password: true,
-  keyboardType:'text',
-  onChangeText: text => console.log(text),
-  onPress: () => {
-    console.log('Press Field');
-  },
-  onFocus: () => {
-    console.log('On Focus');
-  },
-  onBlur: () => {
-    console.log('On Blur');
-  },
+  keyboardType: 'text',
 };

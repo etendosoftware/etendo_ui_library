@@ -1,5 +1,21 @@
-import {Tab, TabItem, TabSecundary} from './tab';
-import {Button} from './Button';
+import {Button} from './button';
+import {Dropdown} from './dropdown';
+import {Input} from './input';
+import {Navbar} from './navbar';
+import {Pagination} from './pagination';
 import {StatusBar} from './statusbar';
+import {Tab} from './tab';
+import {Table} from './table';
+import {ViewEtendo} from './viewEtendo/ViewEtendo';
 
-export {Tab, TabItem, TabSecundary, Button, StatusBar};
+export {
+  Button,
+  Dropdown,
+  Input,
+  Navbar,
+  Pagination,
+  StatusBar,
+  Tab,
+  Table,
+  ViewEtendo,
+};

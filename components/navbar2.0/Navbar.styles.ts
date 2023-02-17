@@ -8,6 +8,21 @@ export const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
-    paddingHorizontal: 20,
+  },
+  leftContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    display: 'flex',
+    width: '50%',
+    paddingHorizontal: 32,
+  },
+  rightContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    display: 'flex',
+    width: '50%',
+    paddingHorizontal: 32,
   },
 });

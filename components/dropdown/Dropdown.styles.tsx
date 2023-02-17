@@ -7,12 +7,12 @@ import {
   GREY_BLUE_50,
   WHITE,
 } from '../../styles/colors';
+import {StyleSheet} from 'react-native';
 
 /* Export of different styles */
 export const DropdownStyleVariant: DropdownStyleRecord = {
   /* Primary style */
   primary: {
-    container: {flex: 1},
     dropDownButton: {
       backgroundColor: WHITE,
       borderRadius: 5,
@@ -28,7 +28,6 @@ export const DropdownStyleVariant: DropdownStyleRecord = {
     dropDownButtonText: {
       color: BLUE,
       fontSize: 13,
-      fontFamily: 'Poppins',
       fontWeight: '500',
     },
     iconWithOptionsDisplayed: {
@@ -58,12 +57,22 @@ export const DropdownStyleVariant: DropdownStyleRecord = {
     },
     textOption: {
       margin: 4,
-      fontSize: 13,
       textAlign: 'left',
       paddingLeft: 5,
       fontWeight: '500',
       color: BLUE,
-      fontFamily: 'Poppins',
     },
   },
 };
+
+export const styles = StyleSheet.create({
+  storiesContainer: {
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
+  storiesDropdownContainer: {
+    width: '30%',
+
+  },
+});

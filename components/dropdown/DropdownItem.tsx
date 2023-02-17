@@ -19,15 +19,13 @@ const DropdownItem = ({
         onPress();
       }}
       key={item.key}
-      activeOpacity={1}
-    >
+      activeOpacity={1}>
       <Text
         key={item.key}
         style={[
           {fontSize: getSizeText(sizeText)},
           DropdownStyleVariant.primary.textOption,
-        ]}
-      >
+        ]}>
         {item.name}
       </Text>
     </TouchableOpacity>
