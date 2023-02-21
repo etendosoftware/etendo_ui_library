@@ -6,6 +6,7 @@ pipeline {
 
     environment {
         NPM_TOKEN           = credentials('npmjs-access-token')
+        EMAIL_ADDRESS       = credentials('email_builds')
         URL_REPO            = 'https://bitbucket.org/koodu_software/etendo_ui_library'
         COMMIT_AUTHOR_NAME  = sh(returnStdout: true, script: "git log -1 --pretty=format:'%an'").trim()
         COMMIT_AUTHOR_EMAIL = sh(returnStdout: true, script: "git log -1 --pretty=format:'%ae'").trim()
@@ -130,7 +131,7 @@ pipeline {
             cleanWs deleteDirs: true
         }
         fixed {
-            mail to: 'builds@smfconsulting.es',
+            mail to: EMAIL_ADDRESS,
             subject: "✅ FIXED - ${currentBuild.fullDisplayName}",
             body: """
 ${new Date()}
@@ -154,7 +155,7 @@ __________________________________________________________
                 }
             }
             cleanWs deleteDirs: true
-            mail to: 'builds@smfconsulting.es',
+            mail to: EMAIL_ADDRESS,
             subject: "🚨 TESTS FAILED - ${currentBuild.fullDisplayName}",
             body: """
 ${new Date()}
@@ -178,7 +179,7 @@ __________________________________________________________
                 }
             }
             cleanWs deleteDirs: true
-            mail to: 'builds@smfconsulting.es',
+            mail to: EMAIL_ADDRESS,
             subject: "🚫 ERROR - ${currentBuild.fullDisplayName}",
             body:  """
 ${new Date()}
