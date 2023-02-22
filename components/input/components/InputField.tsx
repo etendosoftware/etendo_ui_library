@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   Image,
   Text,
@@ -8,6 +8,7 @@ import {
   KeyboardType,
   View,
   Platform,
+  GestureResponderEvent,
 } from 'react-native';
 import addImageStyle from '../../../helpers/image_utils';
 import {styles} from '../Input.style';
@@ -17,8 +18,10 @@ import {
   disabledPasswordIcon,
 } from '../../../assets/images/icons';
 import {BLACK} from '../../../styles/colors';
+import InputOptions from './InputOptions';
 
 const InputField = ({
+  type,
   configField,
   styleField,
   value,
@@ -36,6 +39,15 @@ const InputField = ({
   password,
 }: InputFieldProps) => {
   const [showImg, setShowImg] = useState<boolean>(false);
+  const [showOptions, setShowOptions] = useState<boolean>(false);
+  const [posicionModal, setPosicionModal] = useState<any>({
+    top: 0,
+    left: 0,
+    width: 0,
+    height: 0,
+  });
+
+  const refComponente = useRef<TouchableOpacity>(null);
   const regex = /^[0-9.,]+$/g;
   const PLATFORM_IS_WEB = Platform.OS === 'web';
 
@@ -60,6 +72,25 @@ const InputField = ({
 
     return style;
   };
+
+
+  const getTopLeft = () => {
+    if (refComponente.current) {
+      refComponente.current.measure(
+        (
+          x: number,
+          y: number,
+          width: number,
+          height: number,
+          pageX: number,
+          pageY: number,
+        ) => {
+          setPosicionModal({top: pageY + height, left: pageX, width, height});
+        },
+      );
+    }
+  };
+
   useEffect(() => {
     if (!password) {
       setShowPassword(false);
@@ -93,10 +124,22 @@ const InputField = ({
 
   const [showPassword, setShowPassword] = useState(password);
 
+  const handleOnPress = (event:GestureResponderEvent) =>{
+    if(type === 'picker'){
+      getTopLeft();
+      setShowOptions(true)
+    }
+
+    if(onPress){
+      onPress(event)
+    }
+  }
   return (
+    <>
     <TouchableOpacity
+      ref={refComponente}
       style={styleField.field}
-      onPress={onPress}
+      onPress={handleOnPress}
       disabled={disabled || configField.disabledField}>
       {(() => {
         if (configField?.type === 'textInput') {
@@ -174,7 +217,9 @@ const InputField = ({
           );
         }
       })()}
+     <InputOptions />
     </TouchableOpacity>
+    </>
   );
 };
 

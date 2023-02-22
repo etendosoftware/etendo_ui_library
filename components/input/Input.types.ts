@@ -108,6 +108,7 @@ export interface InputFieldProps {
     textDefault: TextStyle | TextStyle[];
     textPlaceholder: TextStyle | TextStyle[];
   };
+  type: InputFieldVariants;
   maxLength?: number;
   centerText?: boolean;
   numberOfLines?: number;

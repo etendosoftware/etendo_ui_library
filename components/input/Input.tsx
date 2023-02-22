@@ -48,6 +48,7 @@ const Input = ({
       />
       <InputField
         disabled={disabled}
+        type={typeField}
         configField={inputVariants[typeField].field}
         styleField={stateStyle().fieldStyle}
         placeholder={placeholder}
