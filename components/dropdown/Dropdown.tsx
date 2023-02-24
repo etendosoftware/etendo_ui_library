@@ -98,7 +98,8 @@ const Dropdown = ({
         activeOpacity={1}
         onPress={(e: any) => {
           setShowOptions(!showOptions);
-        }}>
+        }}
+      >
         <Text style={DropdownStyleVariant.primary.dropDownButtonText}>
           {chooseOption}
         </Text>
@@ -117,9 +118,8 @@ const Dropdown = ({
                 onPress={() => {
                   /* Allows to detect the selected item */
                   setToggleItem(index);
-                  onChangeSelected(item.name);
+                  onChangeSelected(item);
                   setChooseOption(item.name);
-                  setToggleItem(index);
                   handleShowOptions();
                 }}
                 key={item.key}
