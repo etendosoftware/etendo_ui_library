@@ -15,11 +15,14 @@ const Input = ({
   numberOfLines,
   centerText,
   keyboardType,
+  displayKey,
+  dataPicker,
   onPress,
   onSubmit,
   onFocus,
   onBlur,
   onChangeText,
+  onOptionSelected,
   typeField,
   isError,
   fontSize,
@@ -58,6 +61,7 @@ const Input = ({
         onFocus={onFocus ? onFocus : () => {}}
         onBlur={onBlur ? onBlur : () => {}}
         onChangeText={onChangeText}
+        onOptionSelected={onOptionSelected}
         keyboardType={keyboardType}
         maxLength={maxLength}
         numberOfLines={numberOfLines}
@@ -65,6 +69,8 @@ const Input = ({
         fontSize={fontSize}
         height={height}
         password={password}
+        dataPicker={dataPicker}
+        displayKey={displayKey}
       />
       <InputHelperText
         label={helperText}

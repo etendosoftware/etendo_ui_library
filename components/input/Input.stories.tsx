@@ -16,14 +16,14 @@ const meta: Meta = {
 const Template0: Story<InputProps> = ({value = '', onChangeText, ...args}) => {
   const [text, setText] = useState(value);
   return (
-    <View style={[styles.storiesInputContainer,addMarginContainer()]}>
+    <View style={[styles.storiesInputContainer, addMarginContainer()]}>
       <Input onChangeText={text => setText(text)} value={text} {...args} />
     </View>
   );
 };
 
 const Template1: Story<InputProps> = args => (
-  <View style={[styles.storiesContainer,addMarginContainer()]}>
+  <View style={[styles.storiesContainer, addMarginContainer()]}>
     <View style={styles.storiesInputContainer}>
       <Input
         titleLabel="Only Read"
@@ -48,6 +48,17 @@ const Template1: Story<InputProps> = args => (
         typeField="picker"
         isError={false}
         keyboardType="text"
+        onOptionSelected={(item: any, index: number) => {
+          console.log(item);
+        }}
+        displayKey="label"
+        dataPicker={[
+          {label: 'aaa'},
+          {label: 'bbb'},
+          {label: 'bbb'},
+          {label: 'bbb'},
+          {label: 'bbb'},
+        ]}
       />
     </View>
     <View style={styles.storiesInputContainer}>

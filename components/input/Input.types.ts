@@ -77,11 +77,14 @@ export interface InputProps {
   fontSize?: number;
   height?: number | string;
   password?: boolean;
-  onPress?: (event: GestureResponderEvent) => void;
-  onSubmit?: (event: GestureResponderEvent) => void;
+  dataPicker?: any;
+  displayKey?: string;
+  onPress?: (event?: GestureResponderEvent) => void;
+  onSubmit?: (event?: GestureResponderEvent) => void;
   onChangeText?: (text: string) => void;
-  onFocus?: (event: NativeSyntheticEvent<TextInputFocusEventData>) => void;
-  onBlur?: (event: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+  onFocus?: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+  onBlur?: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+  onOptionSelected?: any;
 }
 
 export interface InputTitleProps {
@@ -115,11 +118,14 @@ export interface InputFieldProps {
   fontSize?: number;
   height?: number | string;
   password?: boolean;
-  onPress?: (event: GestureResponderEvent) => void;
-  onSubmit?: (event: GestureResponderEvent) => void;
+  dataPicker?: any;
+  displayKey?: string;
+  onOptionSelected?: any;
+  onPress?: (event?: GestureResponderEvent) => void;
+  onSubmit?: (event?: GestureResponderEvent) => void;
   onChangeText?: (text: string) => void;
-  onFocus: (event: NativeSyntheticEvent<TextInputFocusEventData>) => void;
-  onBlur: (event: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+  onFocus: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+  onBlur: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
 }
 
 export interface InputHelperProps {

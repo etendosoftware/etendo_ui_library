@@ -29,9 +29,12 @@ const InputField = ({
   placeholder,
   maxLength,
   keyboardType,
+  dataPicker,
+  displayKey,
   onPress,
   onSubmit,
   onChangeText,
+  onOptionSelected,
   onFocus,
   onBlur,
   fontSize,
@@ -39,7 +42,10 @@ const InputField = ({
   password,
 }: InputFieldProps) => {
   const [showImg, setShowImg] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState(password);
   const [showOptions, setShowOptions] = useState<boolean>(false);
+  const [dataOptionsFilter, setDataOptionsFilter] = useState<any>([]);
+  const [filterValue, setFilterValue] = useState<string>('');
   const [posicionModal, setPosicionModal] = useState<any>({
     top: 0,
     left: 0,
@@ -73,7 +79,6 @@ const InputField = ({
     return style;
   };
 
-
   const getTopLeft = () => {
     if (refComponente.current) {
       refComponente.current.measure(
@@ -91,11 +96,18 @@ const InputField = ({
     }
   };
 
-  useEffect(() => {
-    if (!password) {
-      setShowPassword(false);
-    }
-  }, [password]);
+  const handleOnChangeFilterText = (filterText: string) => {
+    setFilterValue(filterText);
+    setDataOptionsFilter(
+      dataPicker.filter((item: any) => item.label.includes(filterText)),
+    );
+  };
+
+  const handleOnClose = () => {
+    setShowOptions(false)
+    setDataOptionsFilter(dataPicker)
+    setFilterValue('')
+  }
 
   const getKeyboardType = (
     keyboardType: KeyboardTypes | undefined,
@@ -122,103 +134,128 @@ const InputField = ({
     configField?.image ? setShowImg(true) : setShowImg(false);
   }, [configField?.image]);
 
-  const [showPassword, setShowPassword] = useState(password);
+  useEffect(() => {
+    if (!password) {
+      setShowPassword(false);
+    }
+  }, [password]);
 
-  const handleOnPress = (event:GestureResponderEvent) =>{
-    if(type === 'picker'){
+  useEffect(() => {
+    if (dataPicker) setDataOptionsFilter(dataPicker);
+  }, [dataPicker]);
+
+  useEffect(() => {
+    if (filterValue) setFilterValue('');
+  }, [showOptions]);
+
+  const handleOnPress = (event?: GestureResponderEvent) => {
+    if (type === 'picker') {
       getTopLeft();
-      setShowOptions(true)
+      setShowOptions(true);
     }
 
-    if(onPress){
-      onPress(event)
+    if (onPress) {
+      onPress(event);
     }
-  }
+  };
   return (
     <>
-    <TouchableOpacity
-      ref={refComponente}
-      style={styleField.field}
-      onPress={handleOnPress}
-      disabled={disabled || configField.disabledField}>
-      {(() => {
-        if (configField?.type === 'textInput') {
-          return (
-            <View
-              style={{
-                flexDirection: 'row',
-                width: '100%',
-              }}>
-              <TextInput
-                editable={!disabled || !configField.disabledField}
-                focusable={!disabled || !configField.disabledField}
-                onBlur={onBlur}
-                onFocus={onFocus}
-                value={value}
-                keyboardType={getKeyboardType(keyboardType)}
-                onChangeText={getOnChangeText}
-                style={[getStyleText(value, password)]}
-                placeholder={placeholder}
-                maxLength={maxLength}
-                secureTextEntry={showPassword}
-              />
-              {password && (
+      <TouchableOpacity
+        ref={refComponente}
+        style={styleField.field}
+        onPress={handleOnPress}
+        disabled={disabled || configField.disabledField}
+      >
+        {(() => {
+          if (configField?.type === 'textInput') {
+            return (
+              <View
+                style={{
+                  flexDirection: 'row',
+                  width: '100%',
+                }}
+              >
+                <TextInput
+                  editable={!disabled || !configField.disabledField}
+                  focusable={!disabled || !configField.disabledField}
+                  onBlur={onBlur}
+                  onFocus={onFocus}
+                  value={value}
+                  keyboardType={getKeyboardType(keyboardType)}
+                  onChangeText={getOnChangeText}
+                  style={[getStyleText(value, password)]}
+                  placeholder={placeholder}
+                  maxLength={maxLength}
+                  secureTextEntry={showPassword}
+                />
+                {password && (
+                  <TouchableOpacity
+                    onPress={() => setShowPassword(!showPassword)}
+                    style={styles.passwordContainer}
+                  >
+                    {PLATFORM_IS_WEB ? (
+                      <img
+                        src={
+                          !showPassword
+                            ? disabledPasswordIcon
+                            : activePasswordIcon
+                        }
+                        style={{width: 22, height: 22}}
+                      />
+                    ) : (
+                      <Image
+                        source={
+                          !showPassword
+                            ? {uri: disabledPasswordIcon}
+                            : {uri: activePasswordIcon}
+                        }
+                        style={styles.passwordImage}
+                      />
+                    )}
+                  </TouchableOpacity>
+                )}
+              </View>
+            );
+          }
+          if (configField?.type === 'text') {
+            return (
+              <Text ellipsizeMode="tail" style={getStyleText(value, password)}>
+                {value ? value : placeholder}
+              </Text>
+            );
+          }
+        })()}
+        {(() => {
+          if (showImg) {
+            return (
+              <View style={styles.showImgContainer}>
                 <TouchableOpacity
-                  onPress={() => setShowPassword(!showPassword)}
-                  style={styles.passwordContainer}>
-                  {PLATFORM_IS_WEB ? (
-                    <img
-                      src={
-                        !showPassword
-                          ? disabledPasswordIcon
-                          : activePasswordIcon
-                      }
-                      style={{width: 22, height: 22}}
-                    />
-                  ) : (
+                  onPress={onSubmit}
+                  style={styles.buttonContainerInputField}
+                  disabled={configField?.disabledSubmit || disabled}
+                >
+                  {configField?.image?.imgRoute && (
                     <Image
-                      source={
-                        !showPassword
-                          ? {uri: disabledPasswordIcon}
-                          : {uri: activePasswordIcon}
-                      }
-                      style={styles.passwordImage}
+                      source={{uri: configField.image.imgRoute}}
+                      style={addImageStyle(configField.image, disabled)}
                     />
                   )}
                 </TouchableOpacity>
-              )}
-            </View>
-          );
-        }
-        if (configField?.type === 'text') {
-          return (
-            <Text ellipsizeMode="tail" style={getStyleText(value, password)}>
-              {value ? value : placeholder}
-            </Text>
-          );
-        }
-      })()}
-      {(() => {
-        if (showImg) {
-          return (
-            <View style={styles.showImgContainer}>
-              <TouchableOpacity
-                onPress={onSubmit}
-                style={styles.buttonContainerInputField}
-                disabled={configField?.disabledSubmit || disabled}>
-                {configField?.image?.imgRoute && (
-                  <Image
-                    source={{uri: configField.image.imgRoute}}
-                    style={addImageStyle(configField.image, disabled)}
-                  />
-                )}
-              </TouchableOpacity>
-            </View>
-          );
-        }
-      })()}
-     <InputOptions />
-    </TouchableOpacity>
+              </View>
+            );
+          }
+        })()}
+        <InputOptions
+          onOptionSelected={onOptionSelected}
+          showOptions={showOptions}
+          posicionModal={posicionModal}
+          data={dataOptionsFilter}
+          onClose={handleOnClose}
+          onChangeFilterText={handleOnChangeFilterText}
+          filterValue={filterValue} 
+          displayKey={displayKey}  
+        />
+      </TouchableOpacity>
     </>
   );
 };
