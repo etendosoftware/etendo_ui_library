@@ -9,6 +9,7 @@ import {
   View,
   Platform,
   GestureResponderEvent,
+  Dimensions,
 } from 'react-native';
 import addImageStyle from '../../../helpers/image_utils';
 import {styles} from '../Input.style';
@@ -52,7 +53,7 @@ const InputField = ({
     width: 0,
     height: 0,
   });
-
+  const windowHeight = Dimensions.get('window').height;
   const refComponente = useRef<TouchableOpacity>(null);
   const regex = /^[0-9.,]+$/g;
   const PLATFORM_IS_WEB = Platform.OS === 'web';
@@ -90,7 +91,17 @@ const InputField = ({
           pageX: number,
           pageY: number,
         ) => {
-          setPosicionModal({top: pageY + height, left: pageX, width, height});
+          let alto = pageY + height + 188;
+          if (alto > windowHeight) {
+            setPosicionModal({
+              top: pageY - height - 188,
+              left: pageX,
+              width,
+              height,
+            });
+          } else {
+            setPosicionModal({top: pageY + height, left: pageX, width, height});
+          }
         },
       );
     }
@@ -104,10 +115,10 @@ const InputField = ({
   };
 
   const handleOnClose = () => {
-    setShowOptions(false)
-    setDataOptionsFilter(dataPicker)
-    setFilterValue('')
-  }
+    setShowOptions(false);
+    setDataOptionsFilter(dataPicker);
+    setFilterValue('');
+  };
 
   const getKeyboardType = (
     keyboardType: KeyboardTypes | undefined,
@@ -252,8 +263,8 @@ const InputField = ({
           data={dataOptionsFilter}
           onClose={handleOnClose}
           onChangeFilterText={handleOnChangeFilterText}
-          filterValue={filterValue} 
-          displayKey={displayKey}  
+          filterValue={filterValue}
+          displayKey={displayKey}
         />
       </TouchableOpacity>
     </>
