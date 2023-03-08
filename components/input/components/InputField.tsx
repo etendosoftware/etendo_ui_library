@@ -47,7 +47,7 @@ const InputField = ({
   const [showOptions, setShowOptions] = useState<boolean>(false);
   const [dataOptionsFilter, setDataOptionsFilter] = useState<any>([]);
   const [filterValue, setFilterValue] = useState<string>('');
-  const [posicionModal, setPosicionModal] = useState<any>({
+  const [positionModal, setpositionModal] = useState<any>({
     top: 0,
     left: 0,
     width: 0,
@@ -91,16 +91,16 @@ const InputField = ({
           pageX: number,
           pageY: number,
         ) => {
-          let alto = pageY + height + 188;
-          if (alto > windowHeight) {
-            setPosicionModal({
+          let dropdownHeight = pageY + height + 188;
+          if (dropdownHeight > windowHeight) {
+            setpositionModal({
               top: pageY - height - 188,
               left: pageX,
               width,
               height,
             });
           } else {
-            setPosicionModal({top: pageY + height, left: pageX, width, height});
+            setpositionModal({top: pageY + height, left: pageX, width, height});
           }
         },
       );
@@ -259,7 +259,7 @@ const InputField = ({
         <InputOptions
           onOptionSelected={onOptionSelected}
           showOptions={showOptions}
-          posicionModal={posicionModal}
+          positionModal={positionModal}
           data={dataOptionsFilter}
           onClose={handleOnClose}
           onChangeFilterText={handleOnChangeFilterText}

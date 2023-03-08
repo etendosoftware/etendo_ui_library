@@ -132,3 +132,19 @@ export interface InputHelperProps {
   styleHelper: TextStyle | TextStyle[];
   label?: string;
 }
+
+export interface InputOptionsProps {
+  data: any;
+  displayKey?: string;
+  onOptionSelected: (item: any, index: number) => void;
+  showOptions: boolean;
+  positionModal: {
+    top: number;
+    left: number;
+    width: number;
+    height: number;
+  };
+  onClose: (event?: GestureResponderEvent) => void;
+  onChangeFilterText: (text: string) => void;
+  filterValue: string;
+}

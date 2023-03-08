@@ -22,10 +22,15 @@ const Template0: Story<InputProps> = ({value = '', onChangeText, ...args}) => {
   );
 };
 
-const Template1: Story<InputProps> = args => (
-  <View style={[styles.storiesContainer, addMarginContainer()]}>
+
+const Template1: Story<InputProps> = ({}) => {
+
+  const [optionSelected, setOptionSelected] = useState([]);
+
+  return <View style={[styles.storiesContainer, addMarginContainer()]}>
     <View style={styles.storiesInputContainer}>
       <Input
+      
         titleLabel="Only Read"
         helperText=""
         placeholder="Write a password"
@@ -43,21 +48,24 @@ const Template1: Story<InputProps> = args => (
         helperText="Only characters"
         placeholder="Write a password"
         disabled={false}
-        value=""
+        value={optionSelected.label}
         numberOfLines={1}
         typeField="picker"
         isError={false}
         keyboardType="text"
         onOptionSelected={(item: any, index: number) => {
-          console.log(item);
+          setOptionSelected(item)
         }}
         displayKey="label"
         dataPicker={[
-          {label: 'aaa'},
-          {label: 'bbb'},
-          {label: 'bbb'},
-          {label: 'bbb'},
-          {label: 'bbb'},
+          {label: 'Option 1',id: '1'},
+          {label: 'Option 2',id: '2'},
+          {label: 'Option 3',id: '3'},
+          {label: 'Option 4',id: '4'},
+          {label: 'Option 5',id: '5'},
+          {label: 'Option 6',id: '6'},
+          {label: 'Option 7',id: '7'},
+          {label: 'Option 8',id: '8'},
         ]}
       />
     </View>
@@ -131,7 +139,7 @@ const Template1: Story<InputProps> = args => (
       />
     </View>
   </View>
-);
+};
 
 export default meta;
 export const InputDefault = Template0.bind({});
@@ -148,3 +156,4 @@ InputDefault.args = {
   isError: true,
   keyboardType: 'text',
 };
+

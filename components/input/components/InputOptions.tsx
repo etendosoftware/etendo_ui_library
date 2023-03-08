@@ -1,5 +1,4 @@
 import {
-  GestureResponderEvent,
   Image,
   Modal,
   ScrollView,
@@ -13,28 +12,13 @@ import React, {useState} from 'react';
 import {styles} from '../Input.style';
 import {SearchGrey64} from '../../../assets/images/icons';
 import {GREY_40} from '../../../styles/colors';
-
-interface InputOptionsProps {
-  data: any;
-  displayKey?: string;
-  onOptionSelected: (item: any, index: number) => void;
-  showOptions: boolean;
-  posicionModal: {
-    top: number;
-    left: number;
-    width: number;
-    height: number;
-  };
-  onClose: (event?: GestureResponderEvent) => void;
-  onChangeFilterText: (text: string) => void;
-  filterValue: string;
-}
+import { InputOptionsProps } from '../Input.types';
 
 const InputOptions = ({
   data,
   onOptionSelected,
   showOptions,
-  posicionModal,
+  positionModal,
   onClose,
   filterValue,
   onChangeFilterText,
@@ -88,9 +72,9 @@ const InputOptions = ({
           style={[
             styles.optionsContainer,
             {
-              width: posicionModal.width,
-              top: posicionModal.top + 5,
-              left: posicionModal.left,
+              width: positionModal.width,
+              top: positionModal.top + 5,
+              left: positionModal.left,
             },
           ]}
         >

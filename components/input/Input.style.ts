@@ -3,7 +3,6 @@ import {InputVariantsType, TypeInputStyleVariant} from './Input.types';
 import {
   BLUE,
   GREY_10,
-  GREY_40,
   GREY_5,
   GREY_60,
   GREY_BLUE,
