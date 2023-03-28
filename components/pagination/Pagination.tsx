@@ -5,7 +5,8 @@ import {Text, View, Image, TouchableOpacity, Platform} from 'react-native';
 import {PaginationStyleVariant} from './Pagination.styles';
 import {PaginationProps} from './Pagination.types';
 import {
-  arrowDoublePickerHorizontalIcon,
+  arrowFirst,
+  arrowLast,
   arrowPickerHorizontalIcon,
 } from '../../assets/images/icons';
 
@@ -54,26 +55,25 @@ export const Pagination = ({
             /* Allows to detect the selected item */
             backToFirstPage();
             onChangeSelected(1, 0);
-          }}>
+          }}
+        >
           {Platform.OS === 'web' && isWeb ? (
             <img
-              src={arrowDoublePickerHorizontalIcon}
+              src={arrowFirst}
               alt="back-double-button"
               style={{
                 width: 10,
                 height: 10,
                 marginRight: 10,
-                rotate: '180deg',
               }}
             />
           ) : (
             <Image
-              source={{uri: arrowPickerHorizontalIcon}}
+              source={{uri: arrowFirst}}
               style={{
                 width: 10,
                 height: 10,
                 marginRight: 10,
-                transform: [{rotate: '180deg'}],
               }}
             />
           )}
@@ -86,7 +86,8 @@ export const Pagination = ({
             if (page !== 1) {
               onChangeSelected(page - 1, pagination - amountDataPerPage);
             }
-          }}>
+          }}
+        >
           {Platform.OS === 'web' && isWeb ? (
             <img
               src={arrowPickerHorizontalIcon}
@@ -120,7 +121,8 @@ export const Pagination = ({
             if (page !== Math.ceil(totalData / 8)) {
               onChangeSelected(page + 1, pagination + amountDataPerPage);
             }
-          }}>
+          }}
+        >
           {Platform.OS === 'web' && isWeb ? (
             <div>
               <img
@@ -147,16 +149,17 @@ export const Pagination = ({
                 totalData - (totalData % amountDataPerPage) - 8,
               );
             }
-          }}>
+          }}
+        >
           {Platform.OS === 'web' && isWeb ? (
             <img
-              src={arrowDoublePickerHorizontalIcon}
+              src={arrowLast}
               alt="next-double-button"
               style={{width: 10, height: 10, marginRight: 10}}
             />
           ) : (
             <Image
-              source={{uri: arrowPickerHorizontalIcon}}
+              source={{uri: arrowLast}}
               style={{width: 10, height: 10, marginRight: 10}}
             />
           )}
