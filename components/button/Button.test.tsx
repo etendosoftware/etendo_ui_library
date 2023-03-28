@@ -11,7 +11,7 @@ describe('Running Test for Input', () => {
           onPress={() => {}}
           typeStyle={'primary'}
           image={{
-            imgRoute: require('../../assets/images/icons/check.png'),
+            imgRoute: require('../../assets/images/icons/check.svg'),
             imgHeight: 12,
             imgWidth: 16,
             imgMarginRight: 10,
