@@ -1,7 +1,7 @@
 export const advanceCalendar = require('./advance-calendar.svg')
 export const arrowPickerVerticalIcon = require('./arrow-down.svg')
 export const arrowFirst = require('./arrow-first.svg')
-export const arrowDoublePickerHorizontalIcon = require('./arrow-last.svg')
+export const arrowLast = require('./arrow-last.svg')
 export const arrowPickerHorizontalIcon = require('./arrow-right.svg')
 export const backIcon = require('./back.svg')
 export const calendarIcon = require('./calendar.svg')

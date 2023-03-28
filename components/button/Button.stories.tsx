@@ -5,6 +5,7 @@ import {ButtonProps} from './Button.types';
 import {View} from 'react-native';
 import {styles} from './Button.styles';
 import addMarginContainer from '../../helpers/addMargin';
+import {checkIcon} from '../../assets/images/icons';
 
 const meta: Meta = {
   title: 'Etendo/Button',
@@ -26,7 +27,7 @@ const Template1: Story<ButtonProps> = args => (
       <Button
         onPress={() => {}}
         image={{
-          imgRoute: require('../../assets/images/icons/check.svg'),
+          imgRoute: checkIcon,
           imgHeight: 10,
           imgWidth: 12,
           imgMarginRight: 10,
@@ -42,7 +43,7 @@ const Template1: Story<ButtonProps> = args => (
       <Button
         onPress={() => {}}
         image={{
-          imgRoute: require('../../assets/images/icons/check.svg'),
+          imgRoute: checkIcon,
           imgHeight: 10,
           imgWidth: 12,
           imgMarginRight: 10,
@@ -58,7 +59,7 @@ const Template1: Story<ButtonProps> = args => (
       <Button
         onPress={() => {}}
         image={{
-          imgRoute: require('../../assets/images/icons/check.svg'),
+          imgRoute: checkIcon,
           imgHeight: 10,
           imgWidth: 12,
           imgMarginRight: 10,
@@ -74,7 +75,7 @@ const Template1: Story<ButtonProps> = args => (
       <Button
         onPress={() => {}}
         image={{
-          imgRoute: require('../../assets/images/icons/check.svg'),
+          imgRoute: checkIcon,
           imgHeight: 10,
           imgWidth: 12,
           imgMarginRight: 10,
@@ -90,7 +91,7 @@ const Template1: Story<ButtonProps> = args => (
       <Button
         onPress={() => {}}
         image={{
-          imgRoute: require('../../assets/images/icons/check.svg'),
+          imgRoute: checkIcon,
           imgHeight: 10,
           imgWidth: 12,
           imgMarginRight: 10,
@@ -112,7 +113,7 @@ ButtonDefault.args = {
   text: 'Button',
   typeStyle: 'primary',
   image: {
-    imgRoute: require('../../assets/images/icons/check.svg'),
+    imgRoute: checkIcon,
     imgHeight: 10,
     imgWidth: 12,
     imgMarginRight: 10,
