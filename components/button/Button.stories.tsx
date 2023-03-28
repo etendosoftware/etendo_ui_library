@@ -14,15 +14,19 @@ const meta: Meta = {
 
 export default meta;
 
-const Template0: Story<ButtonProps> = args => <View style={[styles.storiesContainer,addMarginContainer()]}><Button {...args} /></View>;
+const Template0: Story<ButtonProps> = args => (
+  <View style={[styles.storiesContainer, addMarginContainer()]}>
+    <Button {...args} />
+  </View>
+);
 
 const Template1: Story<ButtonProps> = args => (
-  <View style={[styles.storiesContainer,addMarginContainer()]}>
+  <View style={[styles.storiesContainer, addMarginContainer()]}>
     <View style={styles.storiesButtonContainer}>
       <Button
         onPress={() => {}}
         image={{
-          imgRoute: require('../../assets/images/icons/check.png'),
+          imgRoute: require('../../assets/images/icons/check.svg'),
           imgHeight: 10,
           imgWidth: 12,
           imgMarginRight: 10,
@@ -38,7 +42,7 @@ const Template1: Story<ButtonProps> = args => (
       <Button
         onPress={() => {}}
         image={{
-          imgRoute: require('../../assets/images/icons/check.png'),
+          imgRoute: require('../../assets/images/icons/check.svg'),
           imgHeight: 10,
           imgWidth: 12,
           imgMarginRight: 10,
@@ -54,7 +58,7 @@ const Template1: Story<ButtonProps> = args => (
       <Button
         onPress={() => {}}
         image={{
-          imgRoute: require('../../assets/images/icons/check.png'),
+          imgRoute: require('../../assets/images/icons/check.svg'),
           imgHeight: 10,
           imgWidth: 12,
           imgMarginRight: 10,
@@ -70,7 +74,7 @@ const Template1: Story<ButtonProps> = args => (
       <Button
         onPress={() => {}}
         image={{
-          imgRoute: require('../../assets/images/icons/check.png'),
+          imgRoute: require('../../assets/images/icons/check.svg'),
           imgHeight: 10,
           imgWidth: 12,
           imgMarginRight: 10,
@@ -86,7 +90,7 @@ const Template1: Story<ButtonProps> = args => (
       <Button
         onPress={() => {}}
         image={{
-          imgRoute: require('../../assets/images/icons/check.png'),
+          imgRoute: require('../../assets/images/icons/check.svg'),
           imgHeight: 10,
           imgWidth: 12,
           imgMarginRight: 10,
@@ -108,7 +112,7 @@ ButtonDefault.args = {
   text: 'Button',
   typeStyle: 'primary',
   image: {
-    imgRoute: require('../../assets/images/icons/check.png'),
+    imgRoute: require('../../assets/images/icons/check.svg'),
     imgHeight: 10,
     imgWidth: 12,
     imgMarginRight: 10,
