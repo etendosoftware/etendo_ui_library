@@ -1,17 +1,11 @@
 import React, {useState, useRef, useEffect} from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-  Platform,
-} from 'react-native';
+import {View, Text, TouchableOpacity, ScrollView, Platform} from 'react-native';
 
 import DropdownItem from './DropdownItem';
 import {DropdownStyleVariant} from './Dropdown.styles';
 import {DropdownProps, Info} from './Dropdown.types';
 import {arrowPickerVerticalIcon} from '../../assets/images/icons';
+import CustomImage from '../../SecondaryComponents/CustomImage';
 
 const Dropdown = ({
   data,
@@ -40,10 +34,9 @@ const Dropdown = ({
     }
   };
 
-  const showOptionsIcon = (isWeb: boolean) => {
-    return isWeb ? (
-      <img
-        src={arrowPickerVerticalIcon}
+  const showOptionsIcon = () => {
+    return (
+      <CustomImage
         style={{
           width: 10,
           height: 7,
@@ -51,43 +44,28 @@ const Dropdown = ({
           right: 15,
           rotate: '180deg',
         }}
-      />
-    ) : (
-      <Image
-        source={{uri: arrowPickerVerticalIcon}}
-        style={{
-          width: 11,
-          height: 9,
-          resizeMode: 'stretch',
-          position: 'absolute',
-          right: 15,
-          transform: [{rotate: '180deg'}],
-        }}
-      />
-    );
-  };
-
-  const notShowOptionsIcon = (isWeb: boolean) => {
-    return isWeb ? (
-      <img
         src={arrowPickerVerticalIcon}
-        style={{width: 10, height: 7, position: 'absolute', right: 15}}
-      />
-    ) : (
-      <Image
         source={{uri: arrowPickerVerticalIcon}}
-        style={{
-          width: 11,
-          height: 9,
-          resizeMode: 'stretch',
-          position: 'absolute',
-          right: 15,
-        }}
       />
     );
   };
 
-  if (Platform.OS === 'web') {
+  const notShowOptionsIcon = () => {
+    return (
+      <CustomImage
+        style={{
+          width: 10,
+          height: 7,
+          position: 'absolute',
+          right: 15,
+        }}
+        src={arrowPickerVerticalIcon}
+        source={{uri: arrowPickerVerticalIcon}}
+      />
+    );
+  };
+
+  if (PLATFORM_IS_WEB) {
     document.addEventListener('mousedown', closeOpenMenus);
   }
 
@@ -103,14 +81,12 @@ const Dropdown = ({
         <Text style={DropdownStyleVariant.primary.dropDownButtonText}>
           {chooseOption}
         </Text>
-        {showOptions
-          ? showOptionsIcon(PLATFORM_IS_WEB)
-          : notShowOptionsIcon(PLATFORM_IS_WEB)}
+        {showOptions ? showOptionsIcon() : notShowOptionsIcon()}
       </TouchableOpacity>
 
       {showOptions && (
         <ScrollView style={DropdownStyleVariant.primary.containerOptions}>
-          {data.map((item: Info, index: number) => {
+          {data?.map((item: Info, index: number) => {
             return (
               <DropdownItem
                 item={item}

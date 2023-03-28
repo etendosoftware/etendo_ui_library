@@ -50,11 +50,10 @@ exports[`Running Test for Pagination Check Pagination Disabled 1`] = `
       }
       style={
         Object {
-          "height": 9,
+          "height": 7,
           "position": "absolute",
-          "resizeMode": "stretch",
           "right": 15,
-          "width": 11,
+          "width": 10,
         }
       }
     />

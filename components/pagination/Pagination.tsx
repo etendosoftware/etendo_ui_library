@@ -1,7 +1,7 @@
 /* Imports */
 import React, {useState} from 'react';
 
-import {Text, View, Image, TouchableOpacity, Platform} from 'react-native';
+import {Text, View, TouchableOpacity} from 'react-native';
 import {PaginationStyleVariant} from './Pagination.styles';
 import {PaginationProps} from './Pagination.types';
 import {
@@ -9,6 +9,7 @@ import {
   arrowLast,
   arrowPickerHorizontalIcon,
 } from '../../assets/images/icons';
+import CustomImage from '../../SecondaryComponents/CustomImage';
 
 /* Pagination component */
 export const Pagination = ({
@@ -17,7 +18,6 @@ export const Pagination = ({
   totalData,
   amountDataPerPage,
   pagination,
-  isWeb,
 }: PaginationProps) => {
   // Will serve to set the page number where the user is
   const [page, setPage] = useState<number>(currentPage);
@@ -57,26 +57,16 @@ export const Pagination = ({
             onChangeSelected(1, 0);
           }}
         >
-          {Platform.OS === 'web' && isWeb ? (
-            <img
-              src={arrowFirst}
-              alt="back-double-button"
-              style={{
-                width: 10,
-                height: 10,
-                marginRight: 10,
-              }}
-            />
-          ) : (
-            <Image
-              source={{uri: arrowFirst}}
-              style={{
-                width: 10,
-                height: 10,
-                marginRight: 10,
-              }}
-            />
-          )}
+          <CustomImage
+            src={arrowFirst}
+            alt="back-double-button"
+            source={{uri: arrowFirst}}
+            style={{
+              width: 10,
+              height: 10,
+              marginRight: 10,
+            }}
+          />
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -88,23 +78,17 @@ export const Pagination = ({
             }
           }}
         >
-          {Platform.OS === 'web' && isWeb ? (
-            <img
-              src={arrowPickerHorizontalIcon}
-              alt="back-button"
-              style={{width: 10, height: 10, marginRight: 10, rotate: '180deg'}}
-            />
-          ) : (
-            <Image
-              source={{uri: arrowPickerHorizontalIcon}}
-              style={{
-                width: 10,
-                height: 10,
-                marginRight: 10,
-                transform: [{rotate: '180deg'}],
-              }}
-            />
-          )}
+          <CustomImage
+            src={arrowPickerHorizontalIcon}
+            alt="back-button"
+            source={{uri: arrowPickerHorizontalIcon}}
+            style={{
+              width: 10,
+              height: 10,
+              marginRight: 10,
+              rotate: '180deg',
+            }}
+          />
         </TouchableOpacity>
 
         {/* Text with layout to display the page number the user is on */}
@@ -123,20 +107,16 @@ export const Pagination = ({
             }
           }}
         >
-          {Platform.OS === 'web' && isWeb ? (
-            <div>
-              <img
-                src={arrowPickerHorizontalIcon}
-                alt="next-button"
-                style={{width: 10, height: 10, marginRight: 10}}
-              />
-            </div>
-          ) : (
-            <Image
-              source={{uri: arrowPickerHorizontalIcon}}
-              style={{width: 10, height: 10, marginRight: 10}}
-            />
-          )}
+          <CustomImage
+            style={{
+              width: 10,
+              height: 10,
+              marginRight: 10,
+            }}
+            src={arrowPickerHorizontalIcon}
+            alt="next-button"
+            source={{uri: arrowPickerHorizontalIcon}}
+          />
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -151,18 +131,16 @@ export const Pagination = ({
             }
           }}
         >
-          {Platform.OS === 'web' && isWeb ? (
-            <img
-              src={arrowLast}
-              alt="next-double-button"
-              style={{width: 10, height: 10, marginRight: 10}}
-            />
-          ) : (
-            <Image
-              source={{uri: arrowLast}}
-              style={{width: 10, height: 10, marginRight: 10}}
-            />
-          )}
+          <CustomImage
+            style={{
+              width: 10,
+              height: 10,
+              marginRight: 10,
+            }}
+            src={arrowLast}
+            alt="next-double-button"
+            source={{uri: arrowLast}}
+          />
         </TouchableOpacity>
       </View>
     </View>
