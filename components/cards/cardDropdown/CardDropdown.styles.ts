@@ -1,0 +1,146 @@
+import {StyleSheet} from 'react-native';
+import {
+  BLUE,
+  GREY_10,
+  GREY_BLUE,
+  PURPLE_50,
+  WHITE,
+} from '../../../styles/colors';
+
+export const styles = StyleSheet.create({
+  cardContainer: {
+    width: 272,
+    height: 168,
+    backgroundColor: WHITE,
+    borderRadius: 16,
+    padding: 24,
+    paddingRight: 23,
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  cardImageContainer: {
+    width: 68,
+    height: 68,
+    borderRadius: 16,
+    backgroundColor: PURPLE_50,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  cardImage: {
+    width: 40,
+    height: 40,
+  },
+  cardImageDropDown: {
+    width: 17,
+    height: 16,
+    marginTop: 5,
+  },
+  cardTitle: {
+    fontSize: 22,
+    color: BLUE,
+  },
+  cardDropdownContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  storiesContainer: {},
+  cardOptionContainer: {
+    width: 272,
+    borderRadius: 16,
+    overflow: 'hidden',
+    display: 'flex',
+    backgroundColor: WHITE,
+  },
+  cardOptionHeader: {
+    backgroundColor: BLUE,
+    height: 52,
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 24,
+  },
+  cardOptionHeaderTitle: {
+    color: WHITE,
+    fontWeight: '500',
+    fontSize: 16,
+  },
+  cardOptionHeaderImage: {
+    height: 20,
+    width: 21,
+    marginRight: 12,
+  },
+  cardOptionHeaderUp: {
+    height: 12,
+    width: 12,
+  },
+  cardHeaderLeftPart: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  cardItemContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    minHeight: 86,
+    borderBottomWidth: 1,
+    borderBottomColor: GREY_10,
+    paddingHorizontal: 24,
+    paddingVertical: 20,
+    backgroundColor: 'red',
+    borderWidth: 5,
+  },
+  cardItemImageContainer: {
+    width: 46,
+    height: 46,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 12,
+  },
+  cardItemImageCenter: {
+    width: 24,
+    height: 24,
+    position: 'absolute',
+  },
+  cardImageCircle: {
+    width: 46,
+    height: 46,
+  },
+  cardItemTitle: {
+    color: BLUE,
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  cardItemDescription: {
+    color: GREY_BLUE,
+    fontSize: 14,
+    fontWeight: '500',
+  },
+  overlay: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    zIndex: -1,
+  },
+  cardOptionSkeletonContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    paddingHorizontal: 24,
+    paddingVertical: 20,
+  },
+  cardOptionSkeletonRightContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginLeft: 12,
+  },
+  cardOptionSeparation: {
+    height: 6,
+  },
+});
