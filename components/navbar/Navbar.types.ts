@@ -1,52 +1,125 @@
-/* Imports */
-import {ImageStyle, StyleProp, TextStyle, ViewStyle} from 'react-native';
-
-/* Type declaration */
-export type Info = {
-  routeImage: string;
-  routeNav: string;
-  key: string;
-  name: string;
-};
+import {GestureResponderEvent} from 'react-native';
 
 export interface NavbarProps {
-  data: Info[];
-  onChangeSelected: () => void;
-  typeOfNavbar: NavbarType;
+  name?: string;
+  email?: string;
+  leftComponent?: React.ReactNode;
+  rightComponent?: React.ReactNode;
+  optionsProfile?: OptionProfileItem[];
+  onOptionSelectedProfile: (item: string, index: number) => void;
+  onPressLogo: () => void;
+  onPressMenuBurger: () => void;
 }
 
-export interface NavbarHorizontalProps {
-  data: Info[];
-  onChangeSelected: () => void;
+export interface EtendoLogoProps {
+  onPress: (event: GestureResponderEvent) => void;
+}
+
+export type OptionNotificationType = 'warning' | 'success' | 'error' | 'new';
+
+export type OptionNotificationItem = {
   title: string;
-  navigationLogin: () => any;
-  renderItem?: (routeNav: string, routeImage: string) => JSX.Element;
+  time: string;
+  type: OptionNotificationType;
+};
+
+export interface NotificationProps {
+  anyNotification?: boolean;
+  data?: OptionNotificationItem[];
+  onOptionSelected: (item: OptionNotificationItem, index: number) => void;
+  onViewAllNotifications: (event: GestureResponderEvent) => void;
+  onMarkAllAsReadNotifications: (event: GestureResponderEvent) => void;
 }
 
-/* Declaration of style types */
-export type NavbarStyle = 'primary';
-export type NavbarScreenDimensions = 'mobile' | 'tablet' | 'desktop';
-export type NavbarType = 'horizontal' | 'vertical';
-export type NavbarScreenGeneric = 'generic';
+export type PosicionModalType = {
+  top: number;
+  left: number;
+  width: number;
+  height: number;
+};
 
-export type NavbarStyleHorizontal = Record<
-  NavbarScreenDimensions,
-  {
-    container: StyleProp<ViewStyle>;
-    containerImages?: StyleProp<ViewStyle>;
-    containerUser?: StyleProp<ViewStyle>;
-    tinyLogo: StyleProp<ImageStyle>;
-    tinyLogoImage: StyleProp<ImageStyle>;
-    navIcons: StyleProp<ImageStyle>;
-    user: StyleProp<ImageStyle>;
-    textUser: StyleProp<TextStyle>;
-    more: StyleProp<ImageStyle>;
-    logout: StyleProp<ViewStyle>;
-    textLogout: StyleProp<TextStyle>;
-  }
->;
+export interface NotificationOptionProps {
+  optionsNotifications?: OptionNotificationItem[];
+  onOptionSelected: (item: OptionNotificationItem, index: number) => void;
+  onViewAllNotifications: (event: GestureResponderEvent) => void;
+  onMarkAllAsReadNotifications: (event: GestureResponderEvent) => void;
+  posicionModal: PosicionModalType;
+}
 
-export type NavbarStyleVertical = Record<
-  NavbarScreenGeneric,
-  {container: StyleProp<ViewStyle>}
->;
+export type OptionProfileItem = {
+  title: string;
+  image: string;
+  route: string;
+};
+
+export interface ProfileProps {
+  profileImage?: string;
+  name?: string;
+  email?: string;
+  data?: OptionProfileItem[];
+  onOptionSelected: (item: string, index: number) => void;
+}
+
+export interface ProfileImageProps {
+  image?: string;
+  name?: string;
+}
+
+export interface ProfileOptionsProps {
+  profileImage?: string;
+  name?: string;
+  email?: string;
+  posicionModal: PosicionModalType;
+  data?: OptionProfileItem[];
+  onOptionSelected: (item: string, index: number) => void;
+}
+
+export type DrawerCurrentPageType = {
+  image?: string;
+  label?: string;
+};
+
+export type DrawerDataSubMenuType = {
+  label?: string;
+  route?: string;
+};
+
+export type DrawerDataSectionType = {
+  image?: string;
+  label?: string;
+  route?: string;
+  subMenu?: DrawerDataSubMenuType[];
+};
+
+export type DrawerDataContentType = {
+  sectionType: 'sections';
+  titleSection?: string;
+  dataSection?: DrawerDataSectionType[];
+};
+
+export type DrawerDataType = {
+  currentPage: DrawerCurrentPageType;
+  content: DrawerDataContentType[];
+};
+
+export interface DrawerLateralProps {
+  data: DrawerDataType;
+  version?: string;
+  copyright?: string;
+  showDrawer: boolean;
+  onOptionSelected: (route?: string) => void;
+  onCloseDrawer: (event?: GestureResponderEvent) => void;
+}
+export interface DrawerSectionsContainerType {
+  data?: DrawerDataContentType;
+  onOptionSelected: (route?: string) => void;
+}
+
+export interface DrawerLatertalMenuProps {
+  data: DrawerDataSectionType;
+  onSelectOption: (route?: string) => void;
+}
+
+export interface MenuBurgerProps {
+  onPress: (event: GestureResponderEvent) => void;
+}

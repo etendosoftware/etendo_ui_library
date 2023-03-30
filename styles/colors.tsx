@@ -1,4 +1,5 @@
 export const BLUE = '#202452';
+export const BLUE_20 = 'rgba(113, 130, 255, 0.2)'
 
 export const YELLOW = '#FAD614';
 export const YELLOW_30 = '#FEF7D0';

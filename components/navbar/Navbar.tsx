@@ -1,29 +1,47 @@
-/* Imports */
+import {Dimensions, View} from 'react-native';
 import React from 'react';
-import {ScrollView, useWindowDimensions} from 'react-native';
-import {NavbarHDesktop} from './typeOfNavbars/NavbarHDesktop';
+import {styles} from './Navbar.styles';
 import {NavbarProps} from './Navbar.types';
-import {NavbarV} from './typeOfNavbars/NavbarV';
+import {Welcome, Profile, EtendoLogo} from './index';
+import MenuBurger from './components/MenuBurger/MenuBurger';
 
-export const Navbar = ({data, onChangeSelected, typeOfNavbar}: NavbarProps) => {
-  // This constant allows to know the size of the user's screen width
-  const {width} = useWindowDimensions();
+const Navbar = ({
+  name,
+  email,
+  leftComponent,
+  rightComponent,
+  optionsProfile,
+  onOptionSelectedProfile,
+  onPressMenuBurger,
+  onPressLogo,
+}: NavbarProps) => {
 
-  // The following conditional allows to know the type of navigation chosen by the programmer
+  const screenWidth = Dimensions.get('window').width;
+  const isTablet = screenWidth > 700;
 
-  // NavbarHorizontal
-  if (typeOfNavbar === 'horizontal') {
-    return (
-      <ScrollView>
-        {width >= 768 && (
-          <NavbarHDesktop data={data} onChangeSelected={onChangeSelected} title={''} navigationLogin={function () {
-            throw new Error('Function not implemented.');
-          } } />
-        )}
-      </ScrollView>
-    );
-    // NavbarVertical
-  } else {
-    return <NavbarV data={data} onChangeSelected={onChangeSelected} />;
-  }
+  return (
+    <View style={styles.container}>
+      <View style={styles.leftContainer}>
+        {isTablet ? (
+          <>
+            <EtendoLogo onPress={onPressLogo} />
+            <Welcome name={name + '!'} />
+            {leftComponent}
+          </>
+        ): <MenuBurger onPress={onPressMenuBurger}></MenuBurger>
+        }
+      </View>
+      <View style={styles.rightContainer}>
+      {isTablet?<>{rightComponent}</>:null}
+        <Profile
+          data={optionsProfile}
+          name={name}
+          email={email}
+          onOptionSelected={onOptionSelectedProfile}
+        />
+      </View>
+    </View>
+  );
 };
+
+export default Navbar;

@@ -1,13 +1,12 @@
 import React from 'react';
 import {Story, Meta} from '@storybook/react';
-
-import {Navbar} from './Navbar';
-
-import {View} from 'react-native';
-import {NavbarV} from './typeOfNavbars/NavbarV';
-import {reportIcon, tracingIcon, wayIcon} from '../../assets/images/icons';
-import { styles } from './Navbar.styles';
+import { View} from 'react-native';
+import {styles} from './Navbar.styles';
 import addMarginContainer from '../../helpers/addMargin';
+import {DrawerLateral, Navbar, Notification} from './index';
+import {NavbarProps} from './Navbar.types';
+import {drawerData, notificationData, profileData} from './DataNavBar';
+import {useState} from '@storybook/addons';
 
 export default {
   title: 'Etendo/Navbar',
@@ -15,44 +14,54 @@ export default {
   argTypes: {},
 } as Meta<typeof Navbar>;
 
-const datasetNavbarV = [
-  {
-    routeImage: wayIcon,
-    routeNav: '',
-    key: 'dataset0',
-    name: 'Routes',
-  },
-  {
-    routeImage: tracingIcon,
-    routeNav: '',
-    key: 'dataset1',
-    name: 'Tracing',
-  },
-  {
-    routeImage: reportIcon,
-    routeNav: '',
-    key: 'dataset2',
-    name: 'Reports',
-  },
-];
-
 /* Templates */
-const Template1: Story<any> = args => (
-  <View style={[styles.storiesContainer,addMarginContainer()]}>
-    <NavbarV
-      data={datasetNavbarV}
-      onChangeSelected={() => {}}
-      typeOfNavbar="vertical"
-      pathname={'./login'}
-    />
-  </View>
-);
+const Template1: Story<NavbarProps> = ({...args}) => {
+  const [visibleDrawer, setVisibleDrawer] = useState<boolean>(false);
+  const [dataNotification, setDataNotification] = useState<any[]>(notificationData);
+
+  const  OnOptionSelectedotification = (item:any,index:number) => {
+    setDataNotification(dataNotification.filter((item, i) => i !== index));
+  } 
+  return (
+    <View style={[styles.storiesContainer, addMarginContainer()]}>
+      <Navbar
+        name="Dana"
+        email="dana.scott@etendo.es"
+        leftComponent={<></>}
+        rightComponent={
+          <>
+            <Notification
+              data={dataNotification}
+              onOptionSelected={OnOptionSelectedotification}
+              onViewAllNotifications={() => {console.log('onViewAllNotifications');}}
+              onMarkAllAsReadNotifications={()=> setDataNotification([])}
+              anyNotification={dataNotification.length > 0}
+            />
+          </>
+        }
+        optionsProfile={profileData}
+        onOptionSelectedProfile={(item, index) => {
+          console.log(item, index);
+        }}
+        onPressLogo={() => {
+          console.log('onPressLogo');
+        }}
+        onPressMenuBurger={() => {
+          setVisibleDrawer(true);
+        }}
+      />
+      <DrawerLateral
+        data={drawerData}
+        onOptionSelected={route => console.log(route)}
+        showDrawer={visibleDrawer}
+        onCloseDrawer={() => {
+          setVisibleDrawer(false);
+        }}
+      />
+    </View>
+  );
+};
 
 /* Stories exports */
 export const NavbarVerticalDefault = Template1.bind({});
-NavbarVerticalDefault.args = {
-  data: datasetNavbarV,
-  onChangeSelected: () => {},
-  typeOfNavbar: 'vertical',
-  pathname: './login',
-};
+NavbarVerticalDefault.args = {};

@@ -1,4 +1,5 @@
 export const BLUE = '#202452';
+export const BLUE_20 = 'rgba(113, 130, 255, 0.2)';
 
 export const YELLOW = '#FAD614';
 export const YELLOW_30 = '#FEF7D0';
@@ -20,6 +21,7 @@ export const GREY_40 = '#999999';
 export const GREY_10 = '#E5E5E5';
 export const GREY_5 = '#F2F2F2';
 
+export const BLACK_TRANSPARENT = 'rgba(0, 0, 0, 0.5)';
 export const LIGHT_BLACK = '#4A4F62';
 export const BLACK = '#000000';
 
