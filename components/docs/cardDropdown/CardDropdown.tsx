@@ -1,6 +1,6 @@
 import { View, Text, Image, TouchableOpacity, Dimensions } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
-import { CardVariant, styles } from './CardDropdown.styles'
+import { styles } from './CardDropdown.styles'
 import CardDropdownOptions from './component/CardDropdownOptions'
 
 const CardDropdown = () => {
@@ -63,15 +63,15 @@ const CardDropdown = () => {
     }
   }
   return (
-    <TouchableOpacity ref={refComponente} style={[styles.cardContainer,CardVariant['primary'].colorCardContainer]} activeOpacity={0.8}>
-        <View style={[styles.cardImageContainer,CardVariant['primary'].colorCardImageContainer]}>    
+    <TouchableOpacity ref={refComponente} style={styles.cardContainer} activeOpacity={0.8}>
+        <View style={styles.cardImageContainer}>    
             <Image style={styles.cardImage} source={require('../../../assets/images/icons/box.png')} />
         </View>
         <TouchableOpacity style={styles.cardDropdownContainer} activeOpacity={0.7} onPress={()=>{handleOnPressDropdown()}}>
-            <Text style={[styles.cardTitle,CardVariant['primary'].colorCardTitle]}>Physical inventory</Text>
+            <Text style={styles.cardTitle}>Physical inventory</Text>
             <Image style={styles.cardImageDropDown} source={require('../../../assets/images/icons/down.png')} />
         </TouchableOpacity>
-        <CardDropdownOptions data={[1,2,3,4]} onLayout={onLayout} visible={visibleOptions} positionModal={positionModal} onPressOption={handleOnPressOption} onClose={handleOnCloseDropdown} loading={false}/>
+        <CardDropdownOptions onLayout={onLayout} visible={visibleOptions} positionModal={positionModal} onPressOption={handleOnPressOption} onClose={handleOnCloseDropdown}/>
     </TouchableOpacity>
   )
 }  
