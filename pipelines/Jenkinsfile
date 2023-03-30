@@ -128,7 +128,7 @@ pipeline {
                     }
                 }
                 echo 'Publishing Storybook in Chromatic'
-                sh 'yes | npx chromatic --project-token=$CHROMATIC_TOKEN'
+                sh 'yes | npx chromatic --project-token=$CHROMATIC_TOKEN --auto-accept-changes'
             }
         }
     }
