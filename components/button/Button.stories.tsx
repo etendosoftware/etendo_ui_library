@@ -5,7 +5,7 @@ import {ButtonProps} from './Button.types';
 import {View} from 'react-native';
 import {styles} from './Button.styles';
 import addMarginContainer from '../../helpers/addMargin';
-import {checkIcon} from '../../assets/images/icons';
+import {CheckIcon} from '../../assets/images/icons/CheckIcon';
 
 const meta: Meta = {
   title: 'Etendo/Button',
@@ -26,12 +26,16 @@ const Template1: Story<ButtonProps> = args => (
     <View style={styles.storiesButtonContainer}>
       <Button
         onPress={() => {}}
-        image={{
-          imgRoute: checkIcon,
-          imgHeight: 10,
-          imgWidth: 12,
-          imgMarginRight: 10,
-        }}
+        image={
+          <CheckIcon
+            fill={'white'}
+            style={{
+              marginRight: 10,
+              width: 12,
+              height: 10,
+            }}
+          />
+        }
         text={'Primary'}
         typeStyle={'primary'}
         typeSize={'medium'}
@@ -42,12 +46,15 @@ const Template1: Story<ButtonProps> = args => (
     <View style={styles.storiesButtonContainer}>
       <Button
         onPress={() => {}}
-        image={{
-          imgRoute: checkIcon,
-          imgHeight: 10,
-          imgWidth: 12,
-          imgMarginRight: 10,
-        }}
+        image={
+          <CheckIcon
+            style={{
+              marginRight: 10,
+              width: 12,
+              height: 10,
+            }}
+          />
+        }
         text={'Secondary'}
         typeStyle={'secondary'}
         typeSize={'medium'}
@@ -58,12 +65,15 @@ const Template1: Story<ButtonProps> = args => (
     <View style={styles.storiesButtonContainer}>
       <Button
         onPress={() => {}}
-        image={{
-          imgRoute: checkIcon,
-          imgHeight: 10,
-          imgWidth: 12,
-          imgMarginRight: 10,
-        }}
+        image={
+          <CheckIcon
+            style={{
+              marginRight: 10,
+              width: 12,
+              height: 10,
+            }}
+          />
+        }
         text={'Terciary'}
         typeStyle={'terciary'}
         typeSize={'medium'}
@@ -74,12 +84,15 @@ const Template1: Story<ButtonProps> = args => (
     <View style={styles.storiesButtonContainer}>
       <Button
         onPress={() => {}}
-        image={{
-          imgRoute: checkIcon,
-          imgHeight: 10,
-          imgWidth: 12,
-          imgMarginRight: 10,
-        }}
+        image={
+          <CheckIcon
+            style={{
+              marginRight: 10,
+              width: 12,
+              height: 10,
+            }}
+          />
+        }
         text={'White'}
         typeStyle={'white'}
         typeSize={'medium'}
@@ -90,12 +103,15 @@ const Template1: Story<ButtonProps> = args => (
     <View style={styles.storiesButtonContainer}>
       <Button
         onPress={() => {}}
-        image={{
-          imgRoute: checkIcon,
-          imgHeight: 10,
-          imgWidth: 12,
-          imgMarginRight: 10,
-        }}
+        image={
+          <CheckIcon
+            style={{
+              marginRight: 10,
+              width: 12,
+              height: 10,
+            }}
+          />
+        }
         text={'WhiteBorder'}
         typeStyle={'whiteBorder'}
         typeSize={'medium'}
@@ -112,12 +128,6 @@ export const ButtonVariants = Template1.bind({});
 ButtonDefault.args = {
   text: 'Button',
   typeStyle: 'primary',
-  image: {
-    imgRoute: checkIcon,
-    imgHeight: 10,
-    imgWidth: 12,
-    imgMarginRight: 10,
-  },
   disabled: false,
   typeSize: 'medium',
   width: 150,

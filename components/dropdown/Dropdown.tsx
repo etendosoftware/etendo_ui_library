@@ -4,8 +4,7 @@ import {View, Text, TouchableOpacity, ScrollView, Platform} from 'react-native';
 import DropdownItem from './DropdownItem';
 import {DropdownStyleVariant} from './Dropdown.styles';
 import {DropdownProps, Info} from './Dropdown.types';
-import {arrowPickerVerticalIcon} from '../../assets/images/icons';
-import CustomImage from '../../SecondaryComponents/CustomImage';
+import {ArrowDown} from '../../assets/images/icons/ArrowDown';
 
 const Dropdown = ({
   data,
@@ -36,7 +35,7 @@ const Dropdown = ({
 
   const showOptionsIcon = () => {
     return (
-      <CustomImage
+      <ArrowDown
         style={{
           width: 10,
           height: 7,
@@ -44,23 +43,19 @@ const Dropdown = ({
           right: 15,
           rotate: '180deg',
         }}
-        src={arrowPickerVerticalIcon}
-        source={{uri: arrowPickerVerticalIcon}}
       />
     );
   };
 
   const notShowOptionsIcon = () => {
     return (
-      <CustomImage
+      <ArrowDown
         style={{
           width: 10,
           height: 7,
           position: 'absolute',
           right: 15,
         }}
-        src={arrowPickerVerticalIcon}
-        source={{uri: arrowPickerVerticalIcon}}
       />
     );
   };

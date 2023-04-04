@@ -40,23 +40,68 @@ exports[`Running Test for Pagination Check Pagination Disabled 1`] = `
     >
       Large
     </Text>
-    <Image
-      source={
-        Object {
-          "uri": Object {
-            "testUri": "../../../assets/images/icons/arrow-down.svg",
-          },
-        }
-      }
+    <RNSVGSvgView
+      align="xMidYMid"
+      bbHeight="7"
+      bbWidth="10"
+      fill="none"
+      focusable={false}
+      height={7}
+      meetOrSlice={0}
+      minX={0}
+      minY={0}
       style={
-        Object {
-          "height": 7,
-          "position": "absolute",
-          "right": 15,
-          "width": 10,
-        }
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+            "borderWidth": 0,
+          },
+          Array [
+            Object {
+              "height": 7,
+              "position": "absolute",
+              "right": 15,
+              "width": 10,
+            },
+          ],
+          Object {
+            "flex": 0,
+            "height": 7,
+            "width": 10,
+          },
+        ]
       }
-    />
+      vbHeight={29}
+      vbWidth={41}
+      width={10}
+    >
+      <RNSVGGroup
+        fill={null}
+        propList={
+          Array [
+            "fill",
+          ]
+        }
+      >
+        <RNSVGPath
+          clipRule={0}
+          d="M25.134 26.8356C22.869 29.5727 18.6723 29.5727 16.4072 26.8356L2.08173 9.52459C-0.973901 5.83214 1.65231 0.249999 6.44513 0.249999L35.0961 0.25C39.8889 0.25 42.5152 5.83213 39.4595 9.52458L25.134 26.8356Z"
+          fill={
+            Object {
+              "payload": 4280296530,
+              "type": 0,
+            }
+          }
+          fillRule={0}
+          propList={
+            Array [
+              "fill",
+              "fillRule",
+            ]
+          }
+        />
+      </RNSVGGroup>
+    </RNSVGSvgView>
   </View>
 </View>
 `;

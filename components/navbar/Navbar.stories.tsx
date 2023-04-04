@@ -5,9 +5,12 @@ import {Navbar} from './Navbar';
 
 import {View} from 'react-native';
 import {NavbarV} from './typeOfNavbars/NavbarV';
-import {reportIcon, tracingIcon, wayIcon} from '../../assets/images/icons';
-import { styles } from './Navbar.styles';
+import {tracingIcon} from '../../assets/images/icons/tracing.svg';
+import {styles} from './Navbar.styles';
 import addMarginContainer from '../../helpers/addMargin';
+import {WayIcon} from '../../assets/images/icons/WayIcon';
+import {TracingIcon} from '../../assets/images/icons/TracingIcon';
+import {ReportsIcon} from '../../assets/images/icons/ReportsIcon';
 
 export default {
   title: 'Etendo/Navbar',
@@ -17,19 +20,31 @@ export default {
 
 const datasetNavbarV = [
   {
-    routeImage: wayIcon,
+    routeImage: (
+      <WayIcon fill="white" style={{width: 40, height: 40, marginTop: 40}} />
+    ),
     routeNav: '',
     key: 'dataset0',
     name: 'Routes',
   },
   {
-    routeImage: tracingIcon,
+    routeImage: (
+      <TracingIcon
+        fill="white"
+        style={{width: 40, height: 40, marginTop: 45}}
+      />
+    ),
     routeNav: '',
     key: 'dataset1',
     name: 'Tracing',
   },
   {
-    routeImage: reportIcon,
+    routeImage: (
+      <ReportsIcon
+        fill="white"
+        style={{width: 40, height: 40, marginTop: 45}}
+      />
+    ),
     routeNav: '',
     key: 'dataset2',
     name: 'Reports',
@@ -38,7 +53,7 @@ const datasetNavbarV = [
 
 /* Templates */
 const Template1: Story<any> = args => (
-  <View style={[styles.storiesContainer,addMarginContainer()]}>
+  <View style={[styles.storiesContainer, addMarginContainer()]}>
     <NavbarV
       data={datasetNavbarV}
       onChangeSelected={() => {}}
