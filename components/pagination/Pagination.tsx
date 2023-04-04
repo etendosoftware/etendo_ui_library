@@ -8,7 +8,6 @@ import {ArrowLeft} from '../../assets/images/icons/ArrowLeft';
 import {ArrowFirst} from '../../assets/images/icons/ArrowFirst';
 import {ArrowRight} from '../../assets/images/icons/ArrowRight';
 import {ArrowLast} from '../../assets/images/icons/ArrowLast';
-// import {arrowLeft} from '../../assets/images/icons';
 
 /* Pagination component */
 export const Pagination = ({
