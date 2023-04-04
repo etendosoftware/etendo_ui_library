@@ -1,5 +1,5 @@
 import React, {CSSProperties} from 'react';
-import {Platform, ViewStyle} from 'react-native';
+import {ViewStyle} from 'react-native';
 import {Svg, Path} from 'react-native-svg';
 
 export interface SvgImageProps {
