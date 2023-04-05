@@ -41,7 +41,7 @@ const Tab = ({
                 index === selectedTab
                   ? BLUE
                   : index === hoveredTab
-                  ? GREY_BLUE_30 // Nuevo color cuando el cursor está sobre la pestaña
+                  ? GREY_BLUE_30
                   : GREY_BLUE_50,
               height: height,
               borderTopColor: index === selectedTab ? YELLOW : 'transparent',
