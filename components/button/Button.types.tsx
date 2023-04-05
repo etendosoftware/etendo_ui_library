@@ -7,8 +7,6 @@ export type ButtonStyleType =
   | 'whiteBorder'
   | 'white';
 
-export type ButtonSizeType = 'small' | 'medium' | 'large';
-
 export type buttonStyleVariant = Record<
   ButtonStyleType,
   {
@@ -20,21 +18,12 @@ export type buttonStyleVariant = Record<
   }
 >;
 
-export type buttonSizeVariant = Record<
-  ButtonSizeType,
-  {
-    buttonSize: TextStyle;
-    containerSize: ViewStyle;
-  }
->;
-
 export interface ButtonProps {
   onPress: () => void;
   text: string;
   typeStyle: ButtonStyleType;
   image?: React.ReactNode;
   disabled?: boolean;
-  typeSize: ButtonSizeType;
-  width?: number | string;
+  width?: number | string | 'full';
   height?: number | string;
 }

@@ -38,9 +38,7 @@ const Template1: Story<ButtonProps> = args => (
         }
         text={'Primary'}
         typeStyle={'primary'}
-        typeSize={'medium'}
-        width={150}
-        height={50}
+        width={'full'}
       />
     </View>
     <View style={styles.storiesButtonContainer}>
@@ -57,9 +55,7 @@ const Template1: Story<ButtonProps> = args => (
         }
         text={'Secondary'}
         typeStyle={'secondary'}
-        typeSize={'medium'}
-        width={150}
-        height={50}
+        width={'full'}
       />
     </View>
     <View style={styles.storiesButtonContainer}>
@@ -76,9 +72,7 @@ const Template1: Story<ButtonProps> = args => (
         }
         text={'Terciary'}
         typeStyle={'terciary'}
-        typeSize={'medium'}
-        width={150}
-        height={50}
+        width={'full'}
       />
     </View>
     <View style={styles.storiesButtonContainer}>
@@ -95,9 +89,7 @@ const Template1: Story<ButtonProps> = args => (
         }
         text={'White'}
         typeStyle={'white'}
-        typeSize={'medium'}
-        width={150}
-        height={50}
+        width={'full'}
       />
     </View>
     <View style={styles.storiesButtonContainer}>
@@ -114,9 +106,7 @@ const Template1: Story<ButtonProps> = args => (
         }
         text={'WhiteBorder'}
         typeStyle={'whiteBorder'}
-        typeSize={'medium'}
-        width={150}
-        height={50}
+        width={'full'}
       />
     </View>
   </View>
@@ -129,7 +119,6 @@ ButtonDefault.args = {
   text: 'Button',
   typeStyle: 'primary',
   disabled: false,
-  typeSize: 'medium',
   width: 150,
   height: 50,
 };
