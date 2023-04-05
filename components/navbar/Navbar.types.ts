@@ -1,9 +1,9 @@
 /* Imports */
-import {ImageStyle, StyleProp, TextStyle, ViewStyle} from 'react-native';
+import { ImageStyle, StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 /* Type declaration */
 export type Info = {
-  routeImage: string;
+  routeImage: React.ReactNode;
   routeNav: string;
   key: string;
   name: string;
@@ -20,7 +20,7 @@ export interface NavbarHorizontalProps {
   onChangeSelected: () => void;
   title: string;
   navigationLogin: () => any;
-  renderItem?: (routeNav: string, routeImage: string) => JSX.Element;
+  renderItem?: (routeNav: string, routeImage: React.ReactNode) => JSX.Element;
 }
 
 /* Declaration of style types */
@@ -48,5 +48,5 @@ export type NavbarStyleHorizontal = Record<
 
 export type NavbarStyleVertical = Record<
   NavbarScreenGeneric,
-  {container: StyleProp<ViewStyle>}
+  { container: StyleProp<ViewStyle> }
 >;

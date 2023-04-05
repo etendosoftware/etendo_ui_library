@@ -1,15 +1,13 @@
 /* Imports */
 import React, {useState} from 'react';
 
-import {Text, View, TouchableOpacity} from 'react-native';
+import {Text, View, TouchableOpacity, Image} from 'react-native';
 import {PaginationStyleVariant} from './Pagination.styles';
 import {PaginationProps} from './Pagination.types';
-import {
-  arrowFirst,
-  arrowLast,
-  arrowPickerHorizontalIcon,
-} from '../../assets/images/icons';
-import CustomImage from '../../SecondaryComponents/CustomImage';
+import {ArrowLeft} from '../../assets/images/icons/ArrowLeft';
+import {ArrowFirst} from '../../assets/images/icons/ArrowFirst';
+import {ArrowRight} from '../../assets/images/icons/ArrowRight';
+import {ArrowLast} from '../../assets/images/icons/ArrowLast';
 
 /* Pagination component */
 export const Pagination = ({
@@ -45,7 +43,6 @@ export const Pagination = ({
   const nextLastPage = (pageNumbers: Array<number>) => {
     setPage(pageNumbers.length);
   };
-
   return (
     <View style={PaginationStyleVariant.primary.container}>
       <View style={PaginationStyleVariant.primary.container}>
@@ -57,10 +54,7 @@ export const Pagination = ({
             onChangeSelected(1, 0);
           }}
         >
-          <CustomImage
-            src={arrowFirst}
-            alt="back-double-button"
-            source={{uri: arrowFirst}}
+          <ArrowFirst
             style={{
               width: 10,
               height: 10,
@@ -78,15 +72,11 @@ export const Pagination = ({
             }
           }}
         >
-          <CustomImage
-            src={arrowPickerHorizontalIcon}
-            alt="back-button"
-            source={{uri: arrowPickerHorizontalIcon}}
+          <ArrowLeft
             style={{
-              width: 10,
               height: 10,
+              width: 10,
               marginRight: 10,
-              rotate: '180deg',
             }}
           />
         </TouchableOpacity>
@@ -107,15 +97,12 @@ export const Pagination = ({
             }
           }}
         >
-          <CustomImage
+          <ArrowRight
             style={{
-              width: 10,
               height: 10,
+              width: 10,
               marginRight: 10,
             }}
-            src={arrowPickerHorizontalIcon}
-            alt="next-button"
-            source={{uri: arrowPickerHorizontalIcon}}
           />
         </TouchableOpacity>
 
@@ -131,15 +118,12 @@ export const Pagination = ({
             }
           }}
         >
-          <CustomImage
+          <ArrowLast
             style={{
-              width: 10,
               height: 10,
+              width: 10,
               marginRight: 10,
             }}
-            src={arrowLast}
-            alt="next-double-button"
-            source={{uri: arrowLast}}
           />
         </TouchableOpacity>
       </View>

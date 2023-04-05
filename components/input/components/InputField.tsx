@@ -11,12 +11,10 @@ import {
 import addImageStyle from '../../../helpers/image_utils';
 import {styles} from '../Input.style';
 import {InputFieldProps, KeyboardTypes} from '../Input.types';
-import {
-  activePasswordIcon,
-  disabledPasswordIcon,
-} from '../../../assets/images/icons';
+
 import {BLACK} from '../../../styles/colors';
-import CustomImage from '../../../SecondaryComponents/CustomImage';
+import {ShowPassword} from '../../../assets/images/icons/ShowPassword';
+import {HidePassword} from '../../../assets/images/icons/HidePassword';
 
 const InputField = ({
   configField,
@@ -125,20 +123,11 @@ const InputField = ({
                   onPress={() => setShowPassword(!showPassword)}
                   style={styles.passwordContainer}
                 >
-                  <CustomImage
-                    style={{
-                      width: 22,
-                      height: 22,
-                    }}
-                    src={
-                      !showPassword ? disabledPasswordIcon : activePasswordIcon
-                    }
-                    source={
-                      !showPassword
-                        ? {uri: disabledPasswordIcon}
-                        : {uri: activePasswordIcon}
-                    }
-                  />
+                  {showPassword ? (
+                    <ShowPassword style={{width: 22, height: 22}} />
+                  ) : (
+                    <HidePassword style={{width: 22, height: 22}} />
+                  )}
                 </TouchableOpacity>
               )}
             </View>
@@ -161,12 +150,7 @@ const InputField = ({
                 style={styles.buttonContainerInputField}
                 disabled={configField?.disabledSubmit || disabled}
               >
-                {configField?.image?.imgRoute && (
-                  <Image
-                    source={{uri: configField.image.imgRoute}}
-                    style={addImageStyle(configField.image, disabled)}
-                  />
-                )}
+                {configField?.image && configField?.image}
               </TouchableOpacity>
             </View>
           );

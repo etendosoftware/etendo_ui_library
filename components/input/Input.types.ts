@@ -27,7 +27,7 @@ export type KeyboardTypes = 'text' | 'number';
 
 export type InputFieldConfigType = {
   type: InputFieldType;
-  image?: ImageType;
+  image?: React.ReactNode;
   width?: string | number;
   height?: string | number;
   disabledField?: boolean;
@@ -37,15 +37,8 @@ export type InputFieldConfigType = {
 
 export type InputVariantsType = Record<
   InputFieldVariants,
-  {field: InputFieldConfigType}
+  { field: InputFieldConfigType }
 >;
-
-export type ImageType = {
-  imgRoute?: string;
-  imgWidth?: string | number;
-  imgHeight?: string | number;
-  imgMarginRight?: string | number;
-};
 
 export type TypeInputStyleVariant = Record<
   InputTypeStyle,
@@ -63,7 +56,7 @@ export type TypeInputStyleVariant = Record<
 
 export interface InputProps {
   titleLabel?: string;
-  titleImage?: ImageType;
+  titleImage?: React.ReactNode;
   value: string;
   helperText?: string;
   placeholder?: string;
@@ -86,7 +79,7 @@ export interface InputProps {
 
 export interface InputTitleProps {
   title?: string;
-  image?: ImageType;
+  image?: React.ReactNode;
   styleTitle: TextStyle | TextStyle[];
   disabled?: boolean;
 }
