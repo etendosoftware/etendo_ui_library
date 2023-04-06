@@ -52,7 +52,9 @@ const CardDropdown = ({
     if (isDropdown) {
       setVisibleOptions(true);
     } else {
-      if (onPress) onPress(route);
+      if (onPress) {
+        onPress(route);
+      }
     }
   };
 
@@ -104,7 +106,7 @@ const CardDropdown = ({
       fill: getStyle().colorCardImageFill,
       style: styles.cardImage,
     });
-    
+
   const windowHeight = Dimensions.get('window').height;
   const refComponente = useRef<TouchableOpacity>(null);
 
