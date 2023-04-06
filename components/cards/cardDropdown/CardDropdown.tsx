@@ -1,39 +1,75 @@
-import { View, Text, Image, TouchableOpacity, Dimensions } from 'react-native'
-import React, { useEffect, useRef, useState } from 'react'
-import { CardVariant, styles } from './CardDropdown.styles'
-import CardDropdownOptions from './component/CardDropdownOptions'
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Dimensions,
+  LayoutChangeEvent,
+} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {CardVariant, styles} from './CardDropdown.styles';
+import {ArrowDown} from '../../../assets/images/icons/ArrowDown';
+import CardSkeleton from './component/CardSkeleton';
+import {CardDrpopdownProps, PositionModalType} from './CardDropdown.types';
+import CardDropdownOptions from './component/CardDropdownOptions';
 
-const CardDropdown = () => {
+const CardDropdown = ({
+  title,
+  image,
+  route,
+  onPress,
+  dataOptions,
+  disabled,
+  isDropdown,
+  styleType = 'primary',
+}: CardDrpopdownProps) => {
   const [visibleOptions, setVisibleOptions] = useState<boolean>(false);
-  const [positionModal, setpositionModal] = useState<any>({
+  const [heightDropdown, setHeightDropdown] = useState<number>(0);
+  const [positionModal, setpositionModal] = useState<PositionModalType>({
     top: 0,
     left: 0,
     width: 0,
     height: 0,
   });
-  const [heightDropdown, setHeightDropdown] = useState<number>(0);
 
-  const windowHeight = Dimensions.get('window').height;
-  const refComponente = useRef<TouchableOpacity>(null);
+  const getStyle = () => {
+    if (disabled) {
+      if (styleType === 'primary') {
+        return CardVariant['disabledPrimary'];
+      }
+      if (styleType === 'secondary') {
+        return CardVariant['disabledSecondary'];
+      }
+    }
+    return CardVariant[styleType];
+  };
 
-  const onLayout = (event:any) => {
-    const { height } = event.nativeEvent.layout;
+  const onLayout = (event: LayoutChangeEvent) => {
+    const {height} = event.nativeEvent.layout;
     setHeightDropdown(height);
   };
 
   const handleOnPressDropdown = () => {
-    setVisibleOptions(true)
-  }
-  const handleOnCloseDropdown = () => {
-    setVisibleOptions(false)
-  }
-  const handleOnPressOption = (item:any) => {
-    setVisibleOptions(false)
-  }
+    if (isDropdown) {
+      setVisibleOptions(true);
+    } else {
+      if (onPress) onPress(route);
+    }
+  };
 
-  useEffect(()=> {
+  const handleOnCloseDropdown = () => {
+    setVisibleOptions(false);
+  };
+
+  const handleOnPressOption = (item?: string) => {
+    if (item && onPress) {
+      onPress(item);
+    }
+    setVisibleOptions(false);
+  };
+
+  useEffect(() => {
     getTopLeft();
-  },[heightDropdown])
+  }, [heightDropdown]);
 
   const getTopLeft = () => {
     if (refComponente.current) {
@@ -47,7 +83,7 @@ const CardDropdown = () => {
           pageY: number,
         ) => {
           let dropdownHeight = pageY + heightDropdown;
-          
+
           if (dropdownHeight > windowHeight) {
             setpositionModal({
               top: pageY - heightDropdown + height,
@@ -56,24 +92,67 @@ const CardDropdown = () => {
               height,
             });
           } else {
-            setpositionModal({top: pageY , left: pageX, width, height});
+            setpositionModal({top: pageY, left: pageX, width, height});
           }
         },
       );
     }
-  }
-  return (
-    <TouchableOpacity ref={refComponente} style={[styles.cardContainer,CardVariant['primary'].colorCardContainer]} activeOpacity={0.8}>
-        <View style={[styles.cardImageContainer,CardVariant['primary'].colorCardImageContainer]}>    
-            <Image style={styles.cardImage} source={require('../../../assets/images/icons/box.png')} />
-        </View>
-        <TouchableOpacity style={styles.cardDropdownContainer} activeOpacity={0.7} onPress={()=>{handleOnPressDropdown()}}>
-            <Text style={[styles.cardTitle,CardVariant['primary'].colorCardTitle]}>Physical inventory</Text>
-            <Image style={styles.cardImageDropDown} source={require('../../../assets/images/icons/down.png')} />
-        </TouchableOpacity>
-        <CardDropdownOptions data={[1,2,3,4]} onLayout={onLayout} visible={visibleOptions} positionModal={positionModal} onPressOption={handleOnPressOption} onClose={handleOnCloseDropdown} loading={false}/>
-    </TouchableOpacity>
-  )
-}  
+  };
+  const newImage =
+    image &&
+    React.cloneElement(image, {
+      fill: getStyle().colorCardImageFill,
+      style: styles.cardImage,
+    });
+    
+  const windowHeight = Dimensions.get('window').height;
+  const refComponente = useRef<TouchableOpacity>(null);
 
-export default CardDropdown
+  return title && image ? (
+    <TouchableOpacity
+      ref={refComponente}
+      style={[styles.cardContainer, getStyle().colorCardContainer]}
+      activeOpacity={0.8}
+      onPress={() => {
+        handleOnPressDropdown();
+      }}
+      disabled={disabled}
+    >
+      <View
+        style={[styles.cardImageContainer, getStyle().colorCardImageContainer]}
+      >
+        {image && newImage}
+      </View>
+      <View style={styles.cardDropdownContainer}>
+        <Text
+          ellipsizeMode={'tail'}
+          numberOfLines={1}
+          style={[styles.cardTitle, getStyle().colorCardTitle]}
+        >
+          {title}
+        </Text>
+        {isDropdown && (
+          <ArrowDown
+            style={styles.cardArrowImage}
+            fill={getStyle().colorCardArrowImageFill}
+          />
+        )}
+      </View>
+      <CardDropdownOptions
+        onLayout={onLayout}
+        visible={visibleOptions}
+        positionModal={positionModal}
+        onPressOption={handleOnPressOption}
+        onClose={handleOnCloseDropdown}
+        data={dataOptions}
+        styleType={styleType}
+        title={title}
+        image={image}
+      />
+    </TouchableOpacity>
+  ) : (
+    <CardSkeleton disabled={disabled} styleType={styleType} />
+  );
+};
+
+export default CardDropdown;

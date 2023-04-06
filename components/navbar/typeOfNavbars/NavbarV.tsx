@@ -90,7 +90,6 @@ const NavButton = (
             }}
           >
             {image}
-
             <Text
               style={{
                 fontSize: 10,

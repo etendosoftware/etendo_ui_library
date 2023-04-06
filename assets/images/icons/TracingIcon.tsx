@@ -1,9 +1,9 @@
-import React, {CSSProperties} from 'react';
-import {ViewStyle} from 'react-native';
+import React from 'react';
+import {ImageStyle} from 'react-native';
 import {Svg, Path, G, Defs, ClipPath, Rect} from 'react-native-svg';
 
 export interface SvgImageProps {
-  style?: CSSProperties;
+  style?: ImageStyle;
   fill?: string;
 }
 
@@ -14,7 +14,7 @@ export const TracingIcon = ({style, fill}: SvgImageProps) => {
       height={style?.height || 40}
       viewBox="0 0 40 40"
       fill="none"
-      style={style as ViewStyle}
+      style={style}
     >
       <G clip-path="url(#clip0_241_133)">
         <Path

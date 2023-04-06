@@ -1,9 +1,9 @@
-import React, {CSSProperties} from 'react';
-import {ViewStyle} from 'react-native';
+import React from 'react';
+import {ImageStyle, ViewStyle} from 'react-native';
 import {Svg, Path} from 'react-native-svg';
 
 export interface SvgImageProps {
-  style?: CSSProperties;
+  style?: ImageStyle;
   fill?: string;
 }
 export const CancelIcon = ({style, fill}: SvgImageProps) => {
@@ -13,7 +13,7 @@ export const CancelIcon = ({style, fill}: SvgImageProps) => {
       height={style?.height || 32}
       viewBox="0 0 33 32"
       fill="none"
-      style={style as ViewStyle}
+      style={style}
     >
       <Path
         fill-rule="evenodd"

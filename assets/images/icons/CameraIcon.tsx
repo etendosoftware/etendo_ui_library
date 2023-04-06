@@ -1,9 +1,9 @@
-import React, {CSSProperties} from 'react';
-import {ViewStyle} from 'react-native';
+import React from 'react';
+import {ImageStyle} from 'react-native';
 import {Svg, Path, G, Defs, Rect} from 'react-native-svg';
 
 export interface SvgImageProps {
-  style?: CSSProperties;
+  style?: ImageStyle;
   fill?: string;
 }
 export const CameraIcon = ({style, fill}: SvgImageProps) => {
@@ -13,7 +13,7 @@ export const CameraIcon = ({style, fill}: SvgImageProps) => {
       height={style?.height || 32}
       viewBox="0 0 41 32"
       fill="none"
-      style={style as ViewStyle}
+      style={style}
     >
       <G clip-path="url(#clip0_1_469)">
         <Path

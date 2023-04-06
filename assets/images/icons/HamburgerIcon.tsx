@@ -1,9 +1,9 @@
-import React, {CSSProperties} from 'react';
-import {ViewStyle} from 'react-native';
+import React from 'react';
+import {ImageStyle} from 'react-native';
 import {Svg, Path} from 'react-native-svg';
 
 export interface SvgImageProps {
-  style?: CSSProperties;
+  style?: ImageStyle;
   fill?: string;
 }
 
@@ -14,7 +14,7 @@ export const HamburgerIcon = ({style, fill}: SvgImageProps) => {
       height={style?.height || 32}
       viewBox="0 0 41 32"
       fill="none"
-      style={style as ViewStyle}
+      style={style}
     >
       <Path
         d="M37.7336 -7.62939e-06H3.06356C1.59172 -7.62939e-06 0.39856 1.19315 0.39856 2.66499C0.39856 4.13683 1.59172 5.32999 3.06356 5.32999H37.7336C39.2054 5.32999 40.3986 4.13683 40.3986 2.66499C40.3986 1.19315 39.2054 -7.62939e-06 37.7336 -7.62939e-06Z"

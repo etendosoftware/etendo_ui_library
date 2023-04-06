@@ -4,28 +4,59 @@ import {
   Modal,
   TouchableOpacity,
   ScrollView,
-  Image,
+  Pressable,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {CardVariant, styles} from '../CardDropdown.styles';
 import CardDropdownSkeleton from './CardDropdownSkeleton';
+import {PURPLE_10, WHITE, YELLOW, BLUE_60} from '../../../../styles/colors';
+import {ArrowDown} from '../../../../assets/images/icons/ArrowDown';
+import {
+  CardDropdownData,
+  CardDropdownOptionsProps,
+} from '../CardDropdown.types';
 
 const CardDropdownOptions = ({
   data,
   visible,
   positionModal,
-  loading,
   onClose,
   onPressOption,
   onLayout,
-}: any) => {
+  styleType,
+  title,
+  image,
+}: CardDropdownOptionsProps) => {
+  const [indexHover, setIndexHover] = useState<number>(-1);
+  const newImage = image ? (
+    React.cloneElement(image, {
+      fill: YELLOW,
+      style: styles.cardOptionHeaderImagenSize,
+    })
+  ) : (
+    <></>
+  );
 
-  const getContainerOptionStyle = () => {
-    if(data?.length == 1){
-      return styles.cardOneItemContainer
-    } 
-    return [styles.cardItemContainer,CardVariant['primary'].colorCardItemContainer]
-  }
+  const getContainerOptionStyle = (indexCurrent: number) => {
+    let styleFinal = [];
+    if (data?.length === 1) {
+      styleFinal.push(styles.cardOneItemContainer);
+    } else if (data?.length && data.length - 1 === indexCurrent) {
+      styleFinal.push(styles.cardLastItemContainer);
+    } else {
+      styleFinal.push(styles.cardItemContainer);
+    }
+    if (indexCurrent === indexHover) {
+      if (styleType === 'primary') {
+        styleFinal.push({backgroundColor: PURPLE_10});
+      }
+      if (styleType === 'secondary') {
+        styleFinal.push({backgroundColor: BLUE_60});
+      }
+    }
+    styleFinal.push([CardVariant[styleType].colorCardItemContainer]);
+    return styleFinal;
+  };
 
   return (
     <Modal transparent={true} visible={visible} animationType="fade">
@@ -33,7 +64,7 @@ const CardDropdownOptions = ({
         onLayout={onLayout}
         style={[
           styles.cardOptionContainer,
-          CardVariant['primary'].colorCardOptionContainer,
+          CardVariant[styleType].colorCardOptionContainer,
           {
             width: positionModal.width,
             top: positionModal.top,
@@ -41,56 +72,87 @@ const CardDropdownOptions = ({
           },
         ]}
       >
-        {loading ? (
-          <CardDropdownSkeleton onClose={onClose} />
+        {!data?.length ? (
+          <CardDropdownSkeleton onClose={onClose} styleType={styleType} />
         ) : (
           <>
             <TouchableOpacity
-              style={[styles.cardOptionHeader, CardVariant['primary'].colorCardOptionHeader]}
+              style={[
+                styles.cardOptionHeader,
+                CardVariant[styleType].colorCardOptionHeader,
+              ]}
               activeOpacity={0.7}
               onPress={onClose}
             >
               <View style={styles.cardHeaderLeftPart}>
-                <Image
-                  style={styles.cardOptionHeaderImage}
-                  source={require('../../../../assets/images/icons/boxYellow.png')}
-                />
-                <Text style={[styles.cardOptionHeaderTitle, CardVariant['primary'].colorCardOptionHeaderTitle]}>
-                  Physical inventory
+                <View style={styles.cardOptionHeaderImg}>
+                  {image && newImage}
+                </View>
+                <Text
+                  ellipsizeMode={'tail'}
+                  numberOfLines={1}
+                  style={[
+                    styles.cardOptionHeaderTitle,
+                    CardVariant[styleType].colorCardOptionHeaderTitle,
+                  ]}
+                >
+                  {title}
                 </Text>
+                <View style={styles.cardOptionArrowContainer}>
+                  <ArrowDown style={styles.cardOptionArrowImage} fill={WHITE} />
+                </View>
               </View>
-              <Image
-                style={styles.cardOptionHeaderUp}
-                source={require('../../../../assets/images/icons/up.png')}
-              />
             </TouchableOpacity>
             <ScrollView showsVerticalScrollIndicator={false}>
-              {data.map((item: any, index: number) => {
+              {data.map((item: CardDropdownData, index: number) => {
+                let newImageMap: HTMLElement = <></>;
+                if (item?.image) {
+                  newImageMap = React.cloneElement(item.image, {
+                    fill: CardVariant[styleType].colorCardImageOptionFill,
+                    style: styles.cardOptionImagenSize,
+                  });
+                }
                 return (
-                  <TouchableOpacity
-                    style={getContainerOptionStyle()}
+                  <Pressable
+                    onHoverIn={() => {
+                      setIndexHover(index);
+                    }}
+                    onHoverOut={() => {
+                      setIndexHover(-1);
+                    }}
+                    style={getContainerOptionStyle(index)}
                     key={index}
                     onPress={() => {
-                      onPressOption(item);
+                      onPressOption(item?.route);
                     }}
                   >
-                    <View style={styles.cardItemImageContainer}>
-                      <Image
-                        style={styles.cardImageCircle}
-                        source={require('../../../../assets/images/icons/circle.png')}
-                      />
-                      <Image
-                        style={styles.cardItemImageCenter}
-                        source={require('../../../../assets/images/icons/box.png')}
-                      />
+                    <View
+                      style={[
+                        styles.cardItemImageContainer,
+                        CardVariant[styleType].colorCardItemImageContainer,
+                      ]}
+                    >
+                      {newImageMap}
                     </View>
-                    <View>
-                      <Text style={[styles.cardItemTitle,CardVariant['primary'].colorCardItemTitle]}>Convert</Text>
-                      <Text style={[styles.cardItemDescription,CardVariant['primary'].colorCardItemDescription]}>
-                        Leartn about metrics.
+                    <View style={styles.cardItemTextContainer}>
+                      <Text
+                        style={[
+                          styles.cardItemTitle,
+                          CardVariant[styleType].colorCardItemTitle,
+                        ]}
+                      >
+                        {item?.title}
+                      </Text>
+                      <Text
+                        style={[
+                          styles.cardItemDescription,
+                          CardVariant[styleType].colorCardItemDescription,
+                        ]}
+                      >
+                        {item?.description}
                       </Text>
                     </View>
-                  </TouchableOpacity>
+                  </Pressable>
                 );
               })}
             </ScrollView>
