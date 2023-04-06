@@ -36,9 +36,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       color: WHITE,
       fontWeight: 'bold',
     },
-    imageColor: {
-      tintColor: WHITE,
-    },
+    imageColor: WHITE,
   },
   secondary: {
     container: {
@@ -64,9 +62,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       color: GREY_BLUE_50,
       fontWeight: 'bold',
     },
-    imageColor: {
-      tintColor: BLUE,
-    },
+    imageColor: BLUE,
   },
   terciary: {
     container: {
@@ -92,9 +88,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       color: GREY_BLUE_50,
       fontWeight: 'bold',
     },
-    imageColor: {
-      tintColor: BLUE,
-    },
+    imageColor: BLUE,
   },
   whiteBorder: {
     container: {
@@ -124,9 +118,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       color: GREY_BLUE_50,
       fontWeight: 'bold',
     },
-    imageColor: {
-      tintColor: BLUE,
-    },
+    imageColor: BLUE,
   },
   white: {
     container: {
@@ -152,9 +144,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       color: GREY_BLUE_50,
       fontWeight: 'bold',
     },
-    imageColor: {
-      tintColor: BLUE,
-    },
+    imageColor: BLUE,
   },
 };
 

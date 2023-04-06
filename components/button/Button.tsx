@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import {Pressable, Text, View} from 'react-native';
 import {
-  BLUE_90,
-  GREEN_10,
-  LIGHT_BLUE_10,
-  PURPLE_10,
-  RED,
-  YELLOW_30,
+  BLUE,
+  BLUE_80,
+  LIGHT_PURPLE_60,
+  PURPLE,
+  WHITE,
+  YELLOW_50,
 } from '../../styles/colors';
 import {ButtonStyleVariant} from './Button.styles';
 import {ButtonProps, ButtonStyleType} from './Button.types';
@@ -25,19 +25,28 @@ const Button = ({
   const getHoveredBackgroundColor = (backgroundColor: ButtonStyleType) => {
     switch (backgroundColor) {
       case 'primary':
-        return BLUE_90;
+        return BLUE_80;
       case 'secondary':
-        return YELLOW_30;
+        return YELLOW_50;
       case 'terciary':
-        return PURPLE_10;
-      case 'white':
-        return LIGHT_BLUE_10;
+        return LIGHT_PURPLE_60;
       case 'whiteBorder':
-        return GREEN_10;
-      default:
-        return RED;
+        return BLUE;
     }
   };
+  const getHoveredTextColorAndViewColor = (typeStyle: ButtonStyleType) => {
+    switch (typeStyle) {
+      case 'white':
+        return PURPLE;
+      case 'whiteBorder':
+        return WHITE;
+      case 'primary':
+        return WHITE;
+      default:
+        return BLUE;
+    }
+  };
+
   const stateStyleContainer = () => {
     if (disabled) {
       return ButtonStyleVariant[typeStyle].containerDisabled;
@@ -64,8 +73,25 @@ const Button = ({
     if (disabled) {
       return ButtonStyleVariant[typeStyle].textDisabled;
     }
+    if (isHovered) {
+      const hoveredTextColor = getHoveredTextColorAndViewColor(typeStyle);
+      if (hoveredTextColor) {
+        return {
+          ...ButtonStyleVariant[typeStyle].text,
+          color: hoveredTextColor,
+        };
+      }
+    }
     return ButtonStyleVariant[typeStyle].text;
   };
+
+  const newImage =
+    image &&
+    React.cloneElement(image, {
+      fill: isHovered
+        ? getHoveredTextColorAndViewColor(typeStyle)
+        : ButtonStyleVariant[typeStyle].imageColor,
+    });
 
   return (
     <Pressable
@@ -74,7 +100,7 @@ const Button = ({
       style={[stateStyleContainer(), {height: height}]}
       onPress={onPress}
     >
-      <View>{image && image}</View>
+      <View>{image && newImage}</View>
       <Text style={[stateStyleText()]}>{text}</Text>
     </Pressable>
   );

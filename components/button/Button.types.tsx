@@ -1,4 +1,4 @@
-import {ImageStyle, TextStyle, ViewStyle} from 'react-native';
+import {ColorValue, TextStyle, ViewStyle} from 'react-native';
 
 export type ButtonStyleType =
   | 'primary'
@@ -14,7 +14,7 @@ export type buttonStyleVariant = Record<
     text: TextStyle;
     containerDisabled: ViewStyle;
     textDisabled: TextStyle;
-    imageColor: ImageStyle;
+    imageColor: ColorValue;
   }
 >;
 
