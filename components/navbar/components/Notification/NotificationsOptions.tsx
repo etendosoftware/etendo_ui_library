@@ -25,14 +25,11 @@ const NotificationsOptions = ({
   const [indexHover, setIndexHover] = useState<number>(-1);
 
   const getOptionImageType = (type: OptionNotificationType) => {
-    if (type === 'warning') {
-      return <PointIcon fill={YELLOW} style={styles.optionImageSize} />;
-    } else if (type === 'success') {
-      return <PointIcon fill={GREEN} style={styles.optionImageSize} />;
-    } else if (type === 'error') {
-      return <PointIcon fill={RED} style={styles.optionImageSize} />;
-    } else {
-      return <PointIcon fill={LIGHT_BLUE} style={styles.optionImageSize} />;
+    switch(type){
+      case 'warning': return <PointIcon fill={YELLOW} style={styles.optionImageSize} />;
+      case 'success':return <PointIcon fill={GREEN} style={styles.optionImageSize} />;
+      case 'error': return <PointIcon fill={RED} style={styles.optionImageSize} />;
+      default: return <PointIcon fill={LIGHT_BLUE} style={styles.optionImageSize} />;
     }
   };
 
