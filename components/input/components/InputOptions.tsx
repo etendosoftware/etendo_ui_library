@@ -1,6 +1,6 @@
 import {
-  Image,
   Modal,
+  Pressable,
   ScrollView,
   Text,
   TextInput,
@@ -10,9 +10,10 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {styles} from '../Input.style';
-import {SearchGrey64} from '../../../assets/images/icons';
-import {GREY_40} from '../../../styles/colors';
-import { InputOptionsProps } from '../Input.types';
+
+import {GREY_40, PURPLE_10} from '../../../styles/colors';
+import {InputOptionsProps} from '../Input.types';
+import {SearchIcon} from '../../../assets/images/icons/SearchIcon';
 
 const InputOptions = ({
   data,
@@ -26,6 +27,7 @@ const InputOptions = ({
 }: InputOptionsProps) => {
   const [showSearchImg, setShowSearchImg] = useState<boolean>(true);
   const [placeholderText, setPlaceholderText] = useState<string>('Search');
+  const [indexHover, setIndexHover] = useState<number>(-1);
 
   const handleOptionSelected = (item: any, index: number) => {
     onOptionSelected(item, index);
@@ -46,6 +48,12 @@ const InputOptions = ({
     onClose();
     setPlaceholderText('Search');
     setShowSearchImg(true);
+  };
+
+  const getBackground = (index: number): ViewStyle | undefined => {
+    if (indexHover === index) {
+      return {backgroundColor: PURPLE_10};
+    }
   };
 
   const addRadius = (add: boolean): ViewStyle => {
@@ -85,10 +93,7 @@ const InputOptions = ({
             ]}
           >
             {!filterValue && showSearchImg && (
-              <Image
-                style={styles.optionFilterImg}
-                source={{uri: SearchGrey64}}
-              />
+              <SearchIcon style={styles.optionFilterImg} />
             )}
             <TextInput
               onFocus={handleOnFocus}
@@ -106,10 +111,17 @@ const InputOptions = ({
           >
             {data?.map((item: any, index: number) => {
               return (
-                <TouchableOpacity
+                <Pressable
+                  onHoverIn={() => {
+                    setIndexHover(index);
+                  }}
+                  onHoverOut={() => {
+                    setIndexHover(-1);
+                  }}
                   key={index}
                   style={[
                     styles.optionContainer,
+                    getBackground(index),
                     addRadius(index === data.length - 1),
                   ]}
                   onPress={() => handleOptionSelected(item, index)}
@@ -117,7 +129,7 @@ const InputOptions = ({
                   {displayKey && (
                     <Text style={styles.optionText}>{item[displayKey]}</Text>
                   )}
-                </TouchableOpacity>
+                </Pressable>
               );
             })}
           </ScrollView>

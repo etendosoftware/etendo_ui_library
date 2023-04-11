@@ -1,25 +1,21 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {
-  Image,
   Text,
   TextInput,
   TextStyle,
   TouchableOpacity,
   KeyboardType,
   View,
-  Platform,
   GestureResponderEvent,
   Dimensions,
 } from 'react-native';
-import addImageStyle from '../../../helpers/image_utils';
 import {styles} from '../Input.style';
 import {InputFieldProps, KeyboardTypes} from '../Input.types';
-import {
-  activePasswordIcon,
-  disabledPasswordIcon,
-} from '../../../assets/images/icons';
+
 import {BLACK} from '../../../styles/colors';
 import InputOptions from './InputOptions';
+import { ShowPassword } from '../../../assets/images/icons/ShowPassword';
+import { HidePassword } from '../../../assets/images/icons/HidePassword';
 
 const InputField = ({
   type,
@@ -56,7 +52,6 @@ const InputField = ({
   const windowHeight = Dimensions.get('window').height;
   const refComponente = useRef<TouchableOpacity>(null);
   const regex = /^[0-9.,]+$/g;
-  const PLATFORM_IS_WEB = Platform.OS === 'web';
 
   const getStyleText = (text: string | undefined, password?: boolean) => {
     let style: Array<TextStyle | TextStyle[]> = [];
@@ -110,7 +105,7 @@ const InputField = ({
   const handleOnChangeFilterText = (filterText: string) => {
     setFilterValue(filterText);
     setDataOptionsFilter(
-      dataPicker.filter((item: any) => item.label.includes(filterText)),
+      dataPicker.filter((item: any) => item.label.toLocaleLowerCase().includes(filterText.toLocaleLowerCase())),
     );
   };
 
@@ -199,32 +194,18 @@ const InputField = ({
                   maxLength={maxLength}
                   secureTextEntry={showPassword}
                 />
-                {password && (
-                  <TouchableOpacity
-                    onPress={() => setShowPassword(!showPassword)}
-                    style={styles.passwordContainer}
-                  >
-                    {PLATFORM_IS_WEB ? (
-                      <img
-                        src={
-                          !showPassword
-                            ? disabledPasswordIcon
-                            : activePasswordIcon
-                        }
-                        style={{width: 22, height: 22}}
-                      />
-                    ) : (
-                      <Image
-                        source={
-                          !showPassword
-                            ? {uri: disabledPasswordIcon}
-                            : {uri: activePasswordIcon}
-                        }
-                        style={styles.passwordImage}
-                      />
-                    )}
-                  </TouchableOpacity>
-                )}
+                 {password && (
+                <TouchableOpacity
+                  onPress={() => setShowPassword(!showPassword)}
+                  style={styles.passwordContainer}
+                >
+                  {showPassword ? (
+                    <ShowPassword style={{width: 22, height: 22}} />
+                  ) : (
+                    <HidePassword style={{width: 22, height: 22}} />
+                  )}
+                </TouchableOpacity>
+              )}
               </View>
             );
           }
@@ -240,19 +221,14 @@ const InputField = ({
           if (showImg) {
             return (
               <View style={styles.showImgContainer}>
-                <TouchableOpacity
-                  onPress={onSubmit}
-                  style={styles.buttonContainerInputField}
-                  disabled={configField?.disabledSubmit || disabled}
-                >
-                  {configField?.image?.imgRoute && (
-                    <Image
-                      source={{uri: configField.image.imgRoute}}
-                      style={addImageStyle(configField.image, disabled)}
-                    />
-                  )}
-                </TouchableOpacity>
-              </View>
+              <TouchableOpacity
+                onPress={onSubmit}
+                style={styles.buttonContainerInputField}
+                disabled={configField?.disabledSubmit || disabled}
+              >
+                {configField?.image && configField?.image}
+              </TouchableOpacity>
+            </View>
             );
           }
         })()}

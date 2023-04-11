@@ -1,13 +1,13 @@
 /* Imports */
 import React, {useState} from 'react';
 
-import {Text, View, Image, TouchableOpacity, Platform} from 'react-native';
+import {Text, View, TouchableOpacity, Image} from 'react-native';
 import {PaginationStyleVariant} from './Pagination.styles';
 import {PaginationProps} from './Pagination.types';
-import {
-  arrowDoublePickerHorizontalIcon,
-  arrowPickerHorizontalIcon,
-} from '../../assets/images/icons';
+import {ArrowLeft} from '../../assets/images/icons/ArrowLeft';
+import {ArrowFirst} from '../../assets/images/icons/ArrowFirst';
+import {ArrowRight} from '../../assets/images/icons/ArrowRight';
+import {ArrowLast} from '../../assets/images/icons/ArrowLast';
 
 /* Pagination component */
 export const Pagination = ({
@@ -16,7 +16,6 @@ export const Pagination = ({
   totalData,
   amountDataPerPage,
   pagination,
-  isWeb,
 }: PaginationProps) => {
   // Will serve to set the page number where the user is
   const [page, setPage] = useState<number>(currentPage);
@@ -44,7 +43,6 @@ export const Pagination = ({
   const nextLastPage = (pageNumbers: Array<number>) => {
     setPage(pageNumbers.length);
   };
-
   return (
     <View style={PaginationStyleVariant.primary.container}>
       <View style={PaginationStyleVariant.primary.container}>
@@ -54,29 +52,15 @@ export const Pagination = ({
             /* Allows to detect the selected item */
             backToFirstPage();
             onChangeSelected(1, 0);
-          }}>
-          {Platform.OS === 'web' && isWeb ? (
-            <img
-              src={arrowDoublePickerHorizontalIcon}
-              alt="back-double-button"
-              style={{
-                width: 10,
-                height: 10,
-                marginRight: 10,
-                rotate: '180deg',
-              }}
-            />
-          ) : (
-            <Image
-              source={{uri: arrowPickerHorizontalIcon}}
-              style={{
-                width: 10,
-                height: 10,
-                marginRight: 10,
-                transform: [{rotate: '180deg'}],
-              }}
-            />
-          )}
+          }}
+        >
+          <ArrowFirst
+            style={{
+              width: 10,
+              height: 10,
+              marginRight: 10,
+            }}
+          />
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -86,24 +70,15 @@ export const Pagination = ({
             if (page !== 1) {
               onChangeSelected(page - 1, pagination - amountDataPerPage);
             }
-          }}>
-          {Platform.OS === 'web' && isWeb ? (
-            <img
-              src={arrowPickerHorizontalIcon}
-              alt="back-button"
-              style={{width: 10, height: 10, marginRight: 10, rotate: '180deg'}}
-            />
-          ) : (
-            <Image
-              source={{uri: arrowPickerHorizontalIcon}}
-              style={{
-                width: 10,
-                height: 10,
-                marginRight: 10,
-                transform: [{rotate: '180deg'}],
-              }}
-            />
-          )}
+          }}
+        >
+          <ArrowLeft
+            style={{
+              height: 10,
+              width: 10,
+              marginRight: 10,
+            }}
+          />
         </TouchableOpacity>
 
         {/* Text with layout to display the page number the user is on */}
@@ -120,21 +95,15 @@ export const Pagination = ({
             if (page !== Math.ceil(totalData / 8)) {
               onChangeSelected(page + 1, pagination + amountDataPerPage);
             }
-          }}>
-          {Platform.OS === 'web' && isWeb ? (
-            <div>
-              <img
-                src={arrowPickerHorizontalIcon}
-                alt="next-button"
-                style={{width: 10, height: 10, marginRight: 10}}
-              />
-            </div>
-          ) : (
-            <Image
-              source={{uri: arrowPickerHorizontalIcon}}
-              style={{width: 10, height: 10, marginRight: 10}}
-            />
-          )}
+          }}
+        >
+          <ArrowRight
+            style={{
+              height: 10,
+              width: 10,
+              marginRight: 10,
+            }}
+          />
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -147,19 +116,15 @@ export const Pagination = ({
                 totalData - (totalData % amountDataPerPage) - 8,
               );
             }
-          }}>
-          {Platform.OS === 'web' && isWeb ? (
-            <img
-              src={arrowDoublePickerHorizontalIcon}
-              alt="next-double-button"
-              style={{width: 10, height: 10, marginRight: 10}}
-            />
-          ) : (
-            <Image
-              source={{uri: arrowPickerHorizontalIcon}}
-              style={{width: 10, height: 10, marginRight: 10}}
-            />
-          )}
+          }}
+        >
+          <ArrowLast
+            style={{
+              height: 10,
+              width: 10,
+              marginRight: 10,
+            }}
+          />
         </TouchableOpacity>
       </View>
     </View>

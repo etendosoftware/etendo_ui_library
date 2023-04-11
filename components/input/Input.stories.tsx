@@ -25,7 +25,7 @@ const Template0: Story<InputProps> = ({value = '', onChangeText, ...args}) => {
 
 const Template1: Story<InputProps> = ({}) => {
 
-  const [optionSelected, setOptionSelected] = useState([]);
+  const [optionSelected, setOptionSelected] = useState({label: ''});
 
   return <View style={[styles.storiesContainer, addMarginContainer()]}>
     <View style={styles.storiesInputContainer}>

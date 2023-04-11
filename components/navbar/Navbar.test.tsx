@@ -1,41 +1,47 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {etendoLogo} from '../../assets/images/etendo-erp.png';
+import {Binoculars} from '../../assets/images/icons/Binoculars';
+import {ChatIcon} from '../../assets/images/icons/ChatIcon';
+import {HamburgerIcon} from '../../assets/images/icons/HamburgerIcon';
+import {SlideShow} from '../../assets/images/icons/SlideShow';
+import {UserNoBorder} from '../../assets/images/icons/UserNoBorder';
 
 import {Navbar} from './Navbar';
 
 const datasetNavbarH = [
   {
-    routeImage: require('../../assets/images/etendo-erp.png'),
+    routeImage: etendoLogo,
     routeNav: '',
     key: 'dataset0',
     name: 'FirstName LastName',
   },
   {
-    routeImage: require('../../assets/images/icons/hamburger.png'),
+    routeImage: <HamburgerIcon />,
     routeNav: '',
     key: 'dataset1',
     name: 'FirstName LastName',
   },
   {
-    routeImage: require('../../assets/images/icons/binoculars.png'),
+    routeImage: <Binoculars />,
     routeNav: '',
     key: 'dataset2',
     name: 'FirstName LastName',
   },
   {
-    routeImage: require('../../assets/images/icons/video.png'),
+    routeImage: <SlideShow />,
     routeNav: '',
     key: 'dataset3',
     name: 'FirstName LastName',
   },
   {
-    routeImage: require('../../assets/images/icons/chat.png'),
+    routeImage: <ChatIcon />,
     routeNav: '',
     key: 'dataset4',
     name: 'FirstName LastName',
   },
   {
-    routeImage: require('../../assets/images/icons/userNoBorder.png'),
+    routeImage: <UserNoBorder />,
     routeNav: '',
     key: 'dataset5',
     name: 'FirstName LastName',

@@ -1,17 +1,10 @@
 import React, {useState, useRef, useEffect} from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-  Platform,
-} from 'react-native';
+import {View, Text, TouchableOpacity, ScrollView, Platform} from 'react-native';
 
 import DropdownItem from './DropdownItem';
 import {DropdownStyleVariant} from './Dropdown.styles';
 import {DropdownProps, Info} from './Dropdown.types';
-import {arrowPickerVerticalIcon} from '../../assets/images/icons';
+import {ArrowDown} from '../../assets/images/icons/ArrowDown';
 
 const Dropdown = ({
   data,
@@ -40,10 +33,9 @@ const Dropdown = ({
     }
   };
 
-  const showOptionsIcon = (isWeb: boolean) => {
-    return isWeb ? (
-      <img
-        src={arrowPickerVerticalIcon}
+  const showOptionsIcon = () => {
+    return (
+      <ArrowDown
         style={{
           width: 10,
           height: 7,
@@ -52,34 +44,15 @@ const Dropdown = ({
           rotate: '180deg',
         }}
       />
-    ) : (
-      <Image
-        source={{uri: arrowPickerVerticalIcon}}
-        style={{
-          width: 11,
-          height: 9,
-          resizeMode: 'stretch',
-          position: 'absolute',
-          right: 15,
-          transform: [{rotate: '180deg'}],
-        }}
-      />
     );
   };
 
-  const notShowOptionsIcon = (isWeb: boolean) => {
-    return isWeb ? (
-      <img
-        src={arrowPickerVerticalIcon}
-        style={{width: 10, height: 7, position: 'absolute', right: 15}}
-      />
-    ) : (
-      <Image
-        source={{uri: arrowPickerVerticalIcon}}
+  const notShowOptionsIcon = () => {
+    return (
+      <ArrowDown
         style={{
-          width: 11,
-          height: 9,
-          resizeMode: 'stretch',
+          width: 10,
+          height: 7,
           position: 'absolute',
           right: 15,
         }}
@@ -87,7 +60,7 @@ const Dropdown = ({
     );
   };
 
-  if (Platform.OS === 'web') {
+  if (PLATFORM_IS_WEB) {
     document.addEventListener('mousedown', closeOpenMenus);
   }
 
@@ -98,18 +71,17 @@ const Dropdown = ({
         activeOpacity={1}
         onPress={(e: any) => {
           setShowOptions(!showOptions);
-        }}>
+        }}
+      >
         <Text style={DropdownStyleVariant.primary.dropDownButtonText}>
           {chooseOption}
         </Text>
-        {showOptions
-          ? showOptionsIcon(PLATFORM_IS_WEB)
-          : notShowOptionsIcon(PLATFORM_IS_WEB)}
+        {showOptions ? showOptionsIcon() : notShowOptionsIcon()}
       </TouchableOpacity>
 
       {showOptions && (
         <ScrollView style={DropdownStyleVariant.primary.containerOptions}>
-          {data.map((item: Info, index: number) => {
+          {data?.map((item: Info, index: number) => {
             return (
               <DropdownItem
                 item={item}
@@ -117,9 +89,8 @@ const Dropdown = ({
                 onPress={() => {
                   /* Allows to detect the selected item */
                   setToggleItem(index);
-                  onChangeSelected(item.name);
+                  onChangeSelected(item);
                   setChooseOption(item.name);
-                  setToggleItem(index);
                   handleShowOptions();
                 }}
                 key={item.key}
