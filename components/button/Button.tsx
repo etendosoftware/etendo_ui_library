@@ -97,7 +97,7 @@ const Button = ({
     <Pressable
       onHoverIn={handleHoverIn}
       onHoverOut={handleHoverOut}
-      style={[stateStyleContainer(), {height: height}]}
+      style={[stateStyleContainer(), {height: height, width: width}]}
       onPress={onPress}
     >
       <View>{image && newImage}</View>
