@@ -42,21 +42,15 @@ const Template1: Story<NavbarProps> = ({...args}) => {
             <Notification
               data={dataNotification}
               onOptionSelected={OnOptionSelectedotification}
-              onViewAllNotifications={() => {
-                console.log('onViewAllNotifications');
-              }}
+              onViewAllNotifications={() => {}}
               onMarkAllAsReadNotifications={() => setDataNotification([])}
               anyNotification={dataNotification.length > 0}
             />
           </>
         }
         optionsProfile={profileData}
-        onOptionSelectedProfile={(item, index) => {
-          console.log(item, index);
-        }}
-        onPressLogo={() => {
-          console.log('onPressLogo');
-        }}
+        onOptionSelectedProfile={(item, index) => {}}
+        onPressLogo={() => {}}
         onPressMenuBurger={() => {
           setVisibleDrawer(true);
         }}
