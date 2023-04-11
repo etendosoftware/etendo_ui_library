@@ -13,7 +13,9 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
     accessible={true}
     collapsable={false}
     focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -21,18 +23,21 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "#D3D6E1",
-        "borderBottomColor": "#202452",
-        "borderBottomWidth": 3,
-        "borderTopColor": "transparent",
-        "borderTopWidth": 4,
-        "flex": 0.2,
-        "height": 40,
-        "justifyContent": "center",
-        "opacity": 1,
-      }
+      Array [
+        Object {
+          "alignItems": "center",
+          "borderBottomColor": "#202452",
+          "borderBottomWidth": 3,
+          "borderTopWidth": 4,
+          "justifyContent": "center",
+        },
+        Object {
+          "backgroundColor": "#D3D6E1",
+          "borderTopColor": "transparent",
+          "flex": 0.2,
+          "height": 40,
+        },
+      ]
     }
   >
     <Text
@@ -51,7 +56,9 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
     accessible={true}
     collapsable={false}
     focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -59,18 +66,21 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "#202452",
-        "borderBottomColor": "#202452",
-        "borderBottomWidth": 3,
-        "borderTopColor": "#FAD614",
-        "borderTopWidth": 4,
-        "flex": 0.2,
-        "height": 40,
-        "justifyContent": "center",
-        "opacity": 1,
-      }
+      Array [
+        Object {
+          "alignItems": "center",
+          "borderBottomColor": "#202452",
+          "borderBottomWidth": 3,
+          "borderTopWidth": 4,
+          "justifyContent": "center",
+        },
+        Object {
+          "backgroundColor": "#202452",
+          "borderTopColor": "#FAD614",
+          "flex": 0.2,
+          "height": 40,
+        },
+      ]
     }
   >
     <Text
@@ -89,7 +99,9 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
     accessible={true}
     collapsable={false}
     focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -97,18 +109,21 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "#D3D6E1",
-        "borderBottomColor": "#202452",
-        "borderBottomWidth": 3,
-        "borderTopColor": "transparent",
-        "borderTopWidth": 4,
-        "flex": 0.2,
-        "height": 40,
-        "justifyContent": "center",
-        "opacity": 1,
-      }
+      Array [
+        Object {
+          "alignItems": "center",
+          "borderBottomColor": "#202452",
+          "borderBottomWidth": 3,
+          "borderTopWidth": 4,
+          "justifyContent": "center",
+        },
+        Object {
+          "backgroundColor": "#D3D6E1",
+          "borderTopColor": "transparent",
+          "flex": 0.2,
+          "height": 40,
+        },
+      ]
     }
   >
     <Text
@@ -127,7 +142,9 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
     accessible={true}
     collapsable={false}
     focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -135,18 +152,21 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "#D3D6E1",
-        "borderBottomColor": "#202452",
-        "borderBottomWidth": 3,
-        "borderTopColor": "transparent",
-        "borderTopWidth": 4,
-        "flex": 0.2,
-        "height": 40,
-        "justifyContent": "center",
-        "opacity": 1,
-      }
+      Array [
+        Object {
+          "alignItems": "center",
+          "borderBottomColor": "#202452",
+          "borderBottomWidth": 3,
+          "borderTopWidth": 4,
+          "justifyContent": "center",
+        },
+        Object {
+          "backgroundColor": "#D3D6E1",
+          "borderTopColor": "transparent",
+          "flex": 0.2,
+          "height": 40,
+        },
+      ]
     }
   >
     <Text
@@ -165,7 +185,9 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
     accessible={true}
     collapsable={false}
     focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -173,18 +195,21 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "#D3D6E1",
-        "borderBottomColor": "#202452",
-        "borderBottomWidth": 3,
-        "borderTopColor": "transparent",
-        "borderTopWidth": 4,
-        "flex": 0.2,
-        "height": 40,
-        "justifyContent": "center",
-        "opacity": 1,
-      }
+      Array [
+        Object {
+          "alignItems": "center",
+          "borderBottomColor": "#202452",
+          "borderBottomWidth": 3,
+          "borderTopWidth": 4,
+          "justifyContent": "center",
+        },
+        Object {
+          "backgroundColor": "#D3D6E1",
+          "borderTopColor": "transparent",
+          "flex": 0.2,
+          "height": 40,
+        },
+      ]
     }
   >
     <Text
