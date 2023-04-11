@@ -36,11 +36,17 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     zIndex: 2,
     width: 350,
+    overflow: 'hidden',
   },
   option: {
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: GREY_5,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  optionLogOut: {
+    padding: 20,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -59,6 +65,10 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  profileImageSize: {
+    width: 40,
+    height: 40,
+  },
   roundImage: {
     width: 40,
     height: 40,
@@ -67,6 +77,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     display: 'flex',
+    overflow: 'hidden',
   },
   optionsHeaderContainer: {
     flexDirection: 'row',
@@ -78,13 +89,24 @@ export const styles = StyleSheet.create({
   optionsHeaderTextContainer: {
     marginLeft: 10,
   },
-  optionsHeaderTextName: {color: BLUE, fontWeight: '600', fontSize: 14},
-  optionsHeaderTextEmail: {color: GREY_60, fontWeight: '500', fontSize: 12},
+  optionsHeaderTextName: {
+    color: BLUE,
+    fontWeight: '600',
+    fontSize: 14,
+    width: 180,
+  },
+  optionsHeaderTextEmail: {
+    color: GREY_60,
+    fontWeight: '500',
+    fontSize: 12,
+    width: 180,
+  },
   optionsItemsText: {
     color: BLUE,
     fontWeight: '500',
     fontSize: 14,
     textAlignVertical: 'center',
+    width: 180,
   },
   optionItemContainer: {
     flexDirection: 'row',
@@ -92,13 +114,17 @@ export const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
   },
-  optionItemImage: {
+  optionItemImageSize: {
     height: 20,
     width: 20,
+  },
+  optionItemImage: {
     marginRight: 10,
+    height: 20,
+    width: 20,
   },
   optionLogOutContainer: {padding: 10},
 });
 
-export const widthOptions = 310;
+export const widthOptions = 256;
 export const spaceBetween = 5;

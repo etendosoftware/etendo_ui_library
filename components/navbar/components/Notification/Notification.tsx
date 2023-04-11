@@ -1,10 +1,15 @@
-import {Image, Modal, TouchableOpacity} from 'react-native';
+import {Modal, TouchableOpacity} from 'react-native';
 import React, {useRef, useState} from 'react';
 import {styles} from './Notification.styles';
 import NotificationsOptions from './NotificationsOptions';
-import {NotificationActive64} from '../../../../assets/images/icons/base64/notification-active-64';
-import {Notification64} from '../../../../assets/images/icons/base64/notification-64';
-import {NotificationProps, OptionNotificationItem, PosicionModalType} from '../../Navbar.types';
+import {
+  NotificationProps,
+  OptionNotificationItem,
+  PosicionModalType,
+} from '../../Navbar.types';
+import {BellActiveIcon} from '../../../../assets/images/icons/BellActiveIcon';
+import {BellIcon} from '../../../../assets/images/icons/BellIcon';
+import {WHITE} from '../../../../styles/colors';
 
 const Notification = ({
   anyNotification,
@@ -59,15 +64,9 @@ const Notification = ({
         }}
       >
         {anyNotification ? (
-          <Image
-            style={styles.imageNotification}
-            source={{uri: NotificationActive64}}
-          />
+          <BellActiveIcon style={styles.imageNotification} fill={WHITE} />
         ) : (
-          <Image
-            style={styles.imageNotification}
-            source={{uri: Notification64}}
-          />
+          <BellIcon style={styles.imageNotification} fill={WHITE} />
         )}
       </TouchableOpacity>
       <Modal transparent={true} visible={showOptions} animationType="fade">

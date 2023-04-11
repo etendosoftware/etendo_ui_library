@@ -1,33 +1,112 @@
-import React from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
-import {DrawerDataSectionType, DrawerSectionsContainerType } from '../../Navbar.types';
+import React, {useState} from 'react';
+import {Pressable, Text, View} from 'react-native';
+import {
+  DrawerCurrentIndexType,
+  DrawerDataSectionType,
+  DrawerSectionsContainerType,
+} from '../../Navbar.types';
 import {styles} from './DrawerLateral.styles';
 import DrawerLateralSubMenu from './DrawerLateralSubMenu';
+import {
+  getCurrentSelectIndex,
+  getStyleImageSelected,
+  getStyleSelected,
+} from './DrawerLateralHelper';
 
 const DrawerSectionsContainer = ({
   data,
+  currentIndex,
+  indexSection,
   onOptionSelected,
 }: DrawerSectionsContainerType) => {
+  const [indexHover, setIndexHover] = useState<DrawerCurrentIndexType>({
+    indexSection: -1,
+    indexSubSection: -1,
+    indexSubSectionItem: -1,
+  });
   return (
     <>
       <View style={styles.modalSection}>
-        <Text style={styles.modalSectionTitle}>{data?.titleSection}</Text>
+        <Text
+          numberOfLines={2}
+          ellipsizeMode="tail"
+          style={styles.modalSectionTitle}
+        >
+          {data?.titleSection}
+        </Text>
         <View style={styles.modalSectionContentContainer}>
-          {data?.dataSection?.map((item: DrawerDataSectionType, index: number) => {
-          if (item?.subMenu) {
-              return <DrawerLateralSubMenu key={'DrawerLateralSubMenu' + index} data={item} onSelectOption={(route)=>{onOptionSelected(route)}} />;
-            } else {
-              return (
-                <TouchableOpacity  key={'DrawerDataSection' + index} style={styles.modalSectionItemContainer} onPress={()=> onOptionSelected(item?.route)}>
-                  <Image
-                    style={styles.modalSectionItemImage}
-                    source={{uri: item?.image}}
+          {data?.dataSection?.map(
+            (item: DrawerDataSectionType, index: number) => {
+              if (item?.subMenu) {
+                return (
+                  <DrawerLateralSubMenu
+                    key={'DrawerLateralSubMenu' + index}
+                    data={item}
+                    indexSection={indexSection}
+                    indexSubSection={index}
+                    currentIndex={currentIndex}
+                    onSelectOption={(
+                      route?: string,
+                      index?: DrawerCurrentIndexType,
+                    ) => {
+                      onOptionSelected(route, index);
+                    }}
                   />
-                  <Text style={styles.modalSectionItemText}>{item?.label}</Text>
-                </TouchableOpacity>
-              );
-            }
-          })}
+                );
+              } else {
+                return (
+                  <Pressable
+                    onHoverIn={() => {
+                      setIndexHover({
+                        indexSection: indexSection,
+                        indexSubSection: index,
+                        indexSubSectionItem: 0,
+                      });
+                    }}
+                    onHoverOut={() => {
+                      setIndexHover({
+                        indexSection: -1,
+                        indexSubSection: -1,
+                        indexSubSectionItem: -1,
+                      });
+                    }}
+                    key={'DrawerDataSection' + index}
+                    style={[
+                      styles.modalSectionItemContainer,
+                      getStyleSelected(currentIndex, indexSection, index, 0),
+                      getStyleSelected(indexHover, indexSection, index, 0),
+                    ]}
+                    onPress={() =>
+                      onOptionSelected(
+                        item?.route,
+                        getCurrentSelectIndex(indexSection, index, 0),
+                      )
+                    }
+                  >
+                    {item?.image && (
+                      <item.image.type
+                        {...item.image.props}
+                        fill={getStyleImageSelected(
+                          currentIndex,
+                          indexSection,
+                          index,
+                          0,
+                        )}
+                        style={styles.modalSectionItemImage}
+                      />
+                    )}
+                    <Text
+                      numberOfLines={2}
+                      ellipsizeMode="tail"
+                      style={styles.modalSectionItemText}
+                    >
+                      {item?.label}
+                    </Text>
+                  </Pressable>
+                );
+              }
+            },
+          )}
         </View>
       </View>
     </>

@@ -7,16 +7,14 @@ import {
   TouchableOpacity,
   KeyboardType,
   View,
-  Platform,
 } from 'react-native';
 import addImageStyle from '../../../helpers/image_utils';
 import {styles} from '../Input.style';
 import {InputFieldProps, KeyboardTypes} from '../Input.types';
-import {
-  activePasswordIcon,
-  disabledPasswordIcon,
-} from '../../../assets/images/icons';
+
 import {BLACK} from '../../../styles/colors';
+import {ShowPassword} from '../../../assets/images/icons/ShowPassword';
+import {HidePassword} from '../../../assets/images/icons/HidePassword';
 
 const InputField = ({
   configField,
@@ -37,7 +35,6 @@ const InputField = ({
 }: InputFieldProps) => {
   const [showImg, setShowImg] = useState<boolean>(false);
   const regex = /^[0-9.,]+$/g;
-  const PLATFORM_IS_WEB = Platform.OS === 'web';
 
   const getStyleText = (text: string | undefined, password?: boolean) => {
     let style: Array<TextStyle | TextStyle[]> = [];
@@ -97,7 +94,8 @@ const InputField = ({
     <TouchableOpacity
       style={styleField.field}
       onPress={onPress}
-      disabled={disabled || configField.disabledField}>
+      disabled={disabled || configField.disabledField}
+    >
       {(() => {
         if (configField?.type === 'textInput') {
           return (
@@ -105,7 +103,8 @@ const InputField = ({
               style={{
                 flexDirection: 'row',
                 width: '100%',
-              }}>
+              }}
+            >
               <TextInput
                 editable={!disabled || !configField.disabledField}
                 focusable={!disabled || !configField.disabledField}
@@ -122,25 +121,12 @@ const InputField = ({
               {password && (
                 <TouchableOpacity
                   onPress={() => setShowPassword(!showPassword)}
-                  style={styles.passwordContainer}>
-                  {PLATFORM_IS_WEB ? (
-                    <img
-                      src={
-                        !showPassword
-                          ? disabledPasswordIcon
-                          : activePasswordIcon
-                      }
-                      style={{width: 22, height: 22}}
-                    />
+                  style={styles.passwordContainer}
+                >
+                  {showPassword ? (
+                    <ShowPassword style={{width: 22, height: 22}} />
                   ) : (
-                    <Image
-                      source={
-                        !showPassword
-                          ? {uri: disabledPasswordIcon}
-                          : {uri: activePasswordIcon}
-                      }
-                      style={styles.passwordImage}
-                    />
+                    <HidePassword style={{width: 22, height: 22}} />
                   )}
                 </TouchableOpacity>
               )}
@@ -162,13 +148,9 @@ const InputField = ({
               <TouchableOpacity
                 onPress={onSubmit}
                 style={styles.buttonContainerInputField}
-                disabled={configField?.disabledSubmit || disabled}>
-                {configField?.image?.imgRoute && (
-                  <Image
-                    source={{uri: configField.image.imgRoute}}
-                    style={addImageStyle(configField.image, disabled)}
-                  />
-                )}
+                disabled={configField?.disabledSubmit || disabled}
+              >
+                {configField?.image && configField?.image}
               </TouchableOpacity>
             </View>
           );

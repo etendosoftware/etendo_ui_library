@@ -1,9 +1,4 @@
-import {
-  ImageSourcePropType,
-  ImageStyle,
-  TextStyle,
-  ViewStyle,
-} from 'react-native';
+import {ImageStyle, TextStyle, ViewStyle} from 'react-native';
 
 export type ButtonStyleType =
   | 'primary'
@@ -33,18 +28,11 @@ export type buttonSizeVariant = Record<
   }
 >;
 
-export type ImageType = {
-  imgRoute?: ImageSourcePropType;
-  imgWidth?: string | number;
-  imgHeight?: string | number;
-  imgMarginRight?: string | number;
-};
-
 export interface ButtonProps {
   onPress: () => void;
   text: string;
   typeStyle: ButtonStyleType;
-  image?: ImageType;
+  image?: React.ReactNode;
   disabled?: boolean;
   typeSize: ButtonSizeType;
   width?: number | string;

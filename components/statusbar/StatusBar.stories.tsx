@@ -6,6 +6,8 @@ import {StatusBarProps} from './StatusBar.types';
 import {Image, Text, View} from 'react-native';
 import {StatusBarStyleVariant, styles} from './StatusBar.styles';
 import addMarginContainer from '../../helpers/addMargin';
+import {calendarSecundaryIcon} from '../../assets/images/icons';
+import {CalendarSecundary} from '../../assets/images/icons/CalendarSecundary';
 
 const meta: Meta = {
   title: 'Etendo/StatusBar',
@@ -14,7 +16,7 @@ const meta: Meta = {
 
 /* Templates */
 const Template0: Story<StatusBarProps> = args => (
-  <View style={[styles.storiesContainer,addMarginContainer()]}>
+  <View style={[styles.storiesContainer, addMarginContainer()]}>
     <StatusBar {...args} />
   </View>
 );
@@ -22,9 +24,12 @@ const Template0: Story<StatusBarProps> = args => (
 const Component = () => {
   return (
     <View style={styles.storiesComponentContainer}>
-      <Image
-        source={require('../../assets/images/icons/calendar-secundary.png')}
-        style={StatusBarStyleVariant.primary.activeComponentImage}
+      <CalendarSecundary
+        width={44}
+        height={44}
+        style={{
+          alignSelf: 'center',
+        }}
       />
       <View style={StatusBarStyleVariant.primary.activeStepContentRightSection}>
         <Text style={StatusBarStyleVariant.primary.textTopActiveStepContent}>

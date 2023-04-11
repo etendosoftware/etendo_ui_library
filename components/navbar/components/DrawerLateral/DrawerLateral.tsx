@@ -1,13 +1,10 @@
 import React from 'react';
+import {View, Modal, TouchableOpacity, Text, ScrollView} from 'react-native';
 import {
-  View,
-  Modal,
-  TouchableOpacity,
-  Image,
-  Text,
-  ScrollView,
-} from 'react-native';
-import {DrawerDataContentType, DrawerLateralProps} from '../../Navbar.types';
+  DrawerCurrentIndexType,
+  DrawerDataContentType,
+  DrawerLateralProps,
+} from '../../Navbar.types';
 import EtendoLogo from '../EtendoLogo/EtendoLogo';
 import {styles} from './DrawerLateral.styles';
 import DrawerSectionsContainer from './DrawerSectionsContainer';
@@ -17,11 +14,15 @@ const DrawerLateral = ({
   showDrawer,
   version,
   copyright,
+  currentIndex,
   onOptionSelected,
   onCloseDrawer,
 }: DrawerLateralProps) => {
-  const handleOptionSelected = (route?: string) => {
-    onOptionSelected(route);
+  const handleOptionSelected = (
+    route?: string,
+    index?: DrawerCurrentIndexType,
+  ) => {
+    onOptionSelected(route, index);
     onCloseDrawer();
   };
 
@@ -31,20 +32,12 @@ const DrawerLateral = ({
         <View style={styles.modalContainer}>
           <View style={styles.modalContainerUp}>
             <View style={styles.modalContent}>
-              <EtendoLogo onPress={() => {}} />
-              <View style={styles.modalCurrentContainer}>
-                <Image
-                  style={styles.modalCurrentImage}
-                  source={{uri: data?.currentPage?.image}}
-                />
-                <Text style={styles.modalCurrentLabel}>
-                  {data?.currentPage?.label}
-                </Text>
-              </View>
               <ScrollView
                 showsVerticalScrollIndicator={false}
                 style={styles.modalSectionsContainer}
               >
+                <EtendoLogo onPress={() => {}} />
+                <View style={styles.modalMargin} />
                 {data?.content?.map(
                   (item: DrawerDataContentType, index: number) => {
                     if (item.sectionType === 'sections') {
@@ -53,6 +46,8 @@ const DrawerLateral = ({
                           key={'drawerSection' + index}
                           data={item}
                           onOptionSelected={handleOptionSelected}
+                          currentIndex={currentIndex}
+                          indexSection={index}
                         />
                       );
                     }
@@ -62,8 +57,16 @@ const DrawerLateral = ({
             </View>
           </View>
           <View style={styles.modalContainerDown}>
-            <Text style={styles.version}>{version}</Text>
-            <Text style={styles.copyright}>{copyright}</Text>
+            <Text numberOfLines={1} ellipsizeMode="tail" style={styles.version}>
+              {'V ' + version}
+            </Text>
+            <Text
+              numberOfLines={2}
+              ellipsizeMode="tail"
+              style={styles.copyright}
+            >
+              {copyright}
+            </Text>
           </View>
         </View>
         <TouchableOpacity

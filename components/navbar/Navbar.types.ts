@@ -3,8 +3,8 @@ import {GestureResponderEvent} from 'react-native';
 export interface NavbarProps {
   name?: string;
   email?: string;
-  leftComponent?: React.ReactNode;
-  rightComponent?: React.ReactNode;
+  leftComponent?: React.ReactElement;
+  rightComponent?: React.ReactElement;
   optionsProfile?: OptionProfileItem[];
   onOptionSelectedProfile: (item: string, index: number) => void;
   onPressLogo: () => void;
@@ -48,12 +48,12 @@ export interface NotificationOptionProps {
 
 export type OptionProfileItem = {
   title: string;
-  image: string;
+  image: React.ReactElement;
   route: string;
 };
 
 export interface ProfileProps {
-  profileImage?: string;
+  profileImage?: React.ReactElement;
   name?: string;
   email?: string;
   data?: OptionProfileItem[];
@@ -61,12 +61,12 @@ export interface ProfileProps {
 }
 
 export interface ProfileImageProps {
-  image?: string;
+  image?: React.ReactElement;
   name?: string;
 }
 
 export interface ProfileOptionsProps {
-  profileImage?: string;
+  profileImage?: React.ReactElement;
   name?: string;
   email?: string;
   posicionModal: PosicionModalType;
@@ -75,7 +75,7 @@ export interface ProfileOptionsProps {
 }
 
 export type DrawerCurrentPageType = {
-  image?: string;
+  image?: React.ReactElement;
   label?: string;
 };
 
@@ -85,7 +85,7 @@ export type DrawerDataSubMenuType = {
 };
 
 export type DrawerDataSectionType = {
-  image?: string;
+  image?: React.ReactElement;
   label?: string;
   route?: string;
   subMenu?: DrawerDataSubMenuType[];
@@ -98,7 +98,6 @@ export type DrawerDataContentType = {
 };
 
 export type DrawerDataType = {
-  currentPage: DrawerCurrentPageType;
   content: DrawerDataContentType[];
 };
 
@@ -107,19 +106,40 @@ export interface DrawerLateralProps {
   version?: string;
   copyright?: string;
   showDrawer: boolean;
-  onOptionSelected: (route?: string) => void;
+  currentIndex?: DrawerCurrentIndexType;
+  onOptionSelected: (
+    route?: string,
+    currentIndex?: DrawerCurrentIndexType,
+  ) => void;
   onCloseDrawer: (event?: GestureResponderEvent) => void;
 }
 export interface DrawerSectionsContainerType {
   data?: DrawerDataContentType;
-  onOptionSelected: (route?: string) => void;
+  currentIndex?: DrawerCurrentIndexType;
+  indexSection: number;
+  onOptionSelected: (
+    route?: string,
+    currentIndex?: DrawerCurrentIndexType,
+  ) => void;
 }
 
 export interface DrawerLatertalMenuProps {
   data: DrawerDataSectionType;
-  onSelectOption: (route?: string) => void;
+  currentIndex?: DrawerCurrentIndexType;
+  indexSection: number;
+  indexSubSection: number;
+  onSelectOption: (
+    route?: string,
+    currentIndex?: DrawerCurrentIndexType,
+  ) => void;
 }
 
 export interface MenuBurgerProps {
   onPress: (event: GestureResponderEvent) => void;
 }
+
+export type DrawerCurrentIndexType = {
+  indexSection: number;
+  indexSubSection: number;
+  indexSubSectionItem: number;
+};

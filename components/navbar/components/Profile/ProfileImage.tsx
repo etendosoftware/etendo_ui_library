@@ -1,15 +1,20 @@
-import {View, Text, Image} from 'react-native';
-import React from 'react';
+import {View, Text} from 'react-native';
+import React, {useEffect} from 'react';
 import {styles} from './Profile.styles';
 import {ProfileImageProps} from '../../Navbar.types';
 
 const ProfileImage = ({image, name}: ProfileImageProps) => {
+  let newImageMap: HTMLElement = <></>;
+  useEffect(() => {
+    if (image) {
+      newImageMap = React.cloneElement(image, {
+        style: styles.profileImageSize,
+      });
+    }
+  }, []);
+
   if (image) {
-    return (
-      <View>
-        <Image source={{uri: image}} style={styles.roundImage} />
-      </View>
-    );
+    return <View style={styles.roundImage}>{image && image}</View>;
   } else {
     return (
       <View style={styles.roundImage}>

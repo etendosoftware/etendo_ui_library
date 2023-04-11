@@ -4,6 +4,7 @@ import {
   BLUE,
   BLUE_20,
   GREY_60,
+  PURPLE_10,
   WHITE,
 } from '../../../../styles/colors';
 
@@ -12,8 +13,11 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   openButton: {
-    color: 'blue',
+    color: BLUE,
     fontWeight: 'bold',
+  },
+  modalMargin: {
+    marginBottom: 32,
   },
   overlay: {
     position: 'absolute',
@@ -36,7 +40,11 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   modalContainerDown: {
-    height: 100,
+    height: 80,
+    marginHorizontal: 24,
+    paddingTop: 16,
+    borderTopWidth: 1,
+    borderTopColor: BLUE_20,
   },
   modalContent: {
     backgroundColor: BLUE,
@@ -47,7 +55,7 @@ export const styles = StyleSheet.create({
   },
   modalCurrentContainer: {
     marginVertical: 30,
-    backgroundColor: BLUE_20,
+    backgroundColor: PURPLE_10,
     height: 40,
     alignItems: 'center',
     display: 'flex',
@@ -71,20 +79,25 @@ export const styles = StyleSheet.create({
     fontSize: 16,
   },
   modalSectionContentContainer: {
-    marginHorizontal: 20,
-    marginTop: 30,
+    marginTop: 20,
   },
   modalSectionItemContainer: {
     flexDirection: 'row',
-    marginBottom: 30,
+    height: 40,
+    marginBottom: 20,
     display: 'flex',
     alignItems: 'center',
+    paddingLeft: 16,
+    borderRadius: 8,
   },
-  modalSectionItemNoMarginContainer: {
+  modalSectionSubItemContainer: {
     flexDirection: 'row',
-
+    height: 40,
+    marginBottom: 20,
     display: 'flex',
     alignItems: 'center',
+    paddingLeft: 15,
+    borderRadius: 8,
   },
   modalSectionItemImage: {
     width: 20,
@@ -94,6 +107,7 @@ export const styles = StyleSheet.create({
   modalSectionItemText: {
     color: WHITE,
     fontSize: 16,
+    width: 150,
   },
   modalSectionMenuDropdownImage: {
     width: 8,
@@ -102,16 +116,12 @@ export const styles = StyleSheet.create({
   },
   modalSectionSubMenuContainer: {
     display: 'flex',
-    paddingLeft: 30,
-    paddingTop: 20,
+    paddingLeft: 15,
     marginLeft: 20,
     marginBottom: 20,
-    marginTop: 20,
+    marginTop: 5,
     borderLeftWidth: 1,
     borderColor: GREY_60,
-  },
-  modalSectionSubItemContainer: {
-    marginBottom: 20,
   },
   copyright: {color: GREY_60},
   version: {color: GREY_60},

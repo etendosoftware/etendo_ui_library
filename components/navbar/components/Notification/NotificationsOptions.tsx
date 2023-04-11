@@ -1,15 +1,19 @@
-import {View, Text, TouchableOpacity, Image} from 'react-native';
-import React from 'react';
+import {View, Text, TouchableOpacity, Pressable, ViewStyle} from 'react-native';
+import React, {useState} from 'react';
 import {spaceBetween, styles, widthOptions} from './Notification.styles';
-import {PointNotificationYellow64} from '../../../../assets/images/icons/base64/point-notification-yellow-64';
-import {PointNotificationGreen64} from '../../../../assets/images/icons/base64/point-notification-green-64';
-import {PointNotificationRed64} from '../../../../assets/images/icons/base64/point-notification-red-64';
-import {PointNotificationBlue64} from '../../../../assets/images/icons/base64/point-notification-blue-64';
+import {PointIcon} from '../../../../assets/images/icons/PointIcon';
 import {
   NotificationOptionProps,
   OptionNotificationType,
   OptionNotificationItem,
 } from '../../Navbar.types';
+import {
+  GREEN,
+  LIGHT_BLUE,
+  PURPLE_10,
+  RED,
+  YELLOW,
+} from '../../../../styles/colors';
 
 const NotificationsOptions = ({
   optionsNotifications,
@@ -18,15 +22,23 @@ const NotificationsOptions = ({
   onMarkAllAsReadNotifications,
   posicionModal,
 }: NotificationOptionProps) => {
+  const [indexHover, setIndexHover] = useState<number>(-1);
+
   const getOptionImageType = (type: OptionNotificationType) => {
     if (type === 'warning') {
-      return PointNotificationYellow64;
+      return <PointIcon fill={YELLOW} style={styles.optionImageSize} />;
     } else if (type === 'success') {
-      return PointNotificationGreen64;
+      return <PointIcon fill={GREEN} style={styles.optionImageSize} />;
     } else if (type === 'error') {
-      return PointNotificationRed64;
+      return <PointIcon fill={RED} style={styles.optionImageSize} />;
     } else {
-      return PointNotificationBlue64;
+      return <PointIcon fill={LIGHT_BLUE} style={styles.optionImageSize} />;
+    }
+  };
+
+  const getBackground = (index: number): ViewStyle | undefined => {
+    if (indexHover === index) {
+      return {backgroundColor: PURPLE_10};
     }
   };
 
@@ -50,22 +62,33 @@ const NotificationsOptions = ({
           </View>
           {optionsNotifications?.map(
             (item: OptionNotificationItem, index: number) => {
-                return (
-                  <TouchableOpacity
-                    key={index}
-                    style={styles.option}
-                    onPress={() => onOptionSelected(item, index)}
-                  >
-                    <Image
-                      source={{uri: getOptionImageType(item.type)}}
-                      style={styles.optionImage}
-                    />
-                    <View>
-                      <Text style={styles.optionText}>{item.title}</Text>
-                      <Text style={styles.optionTimeText}>{item.time}</Text>
-                    </View>
-                  </TouchableOpacity>
-                );
+              return (
+                <Pressable
+                  onHoverIn={() => {
+                    setIndexHover(index);
+                  }}
+                  onHoverOut={() => {
+                    setIndexHover(-1);
+                  }}
+                  key={index}
+                  style={[styles.option, getBackground(index)]}
+                  onPress={() => onOptionSelected(item, index)}
+                >
+                  <View style={styles.optionImage}>
+                    {getOptionImageType(item?.type)}
+                  </View>
+                  <View>
+                    <Text
+                      numberOfLines={2}
+                      ellipsizeMode="tail"
+                      style={styles.optionText}
+                    >
+                      {item?.title}
+                    </Text>
+                    <Text style={styles.optionTimeText}>{item?.time}</Text>
+                  </View>
+                </Pressable>
+              );
             },
           )}
           <View style={styles.optionViewAllTextContainer}>

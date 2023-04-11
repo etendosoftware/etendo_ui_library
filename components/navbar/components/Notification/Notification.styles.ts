@@ -46,7 +46,8 @@ export const styles = StyleSheet.create({
     padding: 15,
   },
   option: {
-    padding: 10,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
     borderBottomWidth: 1,
     borderBottomColor: GREY_5,
     flexDirection: 'row',
@@ -56,6 +57,7 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     color: BLACK,
     marginBottom: 5,
+    width: 300,
   },
   optionTimeText: {
     fontSize: 12,
@@ -69,6 +71,10 @@ export const styles = StyleSheet.create({
     marginRight: 10,
     alignSelf: 'flex-start',
     marginTop: 10,
+  },
+  optionImageSize: {
+    height: 8,
+    width: 8,
   },
   optionViewAllText: {color: LIGHT_BLUE, fontSize: 12},
   optionViewAllTextContainer: {padding: 15},

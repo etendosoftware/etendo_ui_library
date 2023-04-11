@@ -9,8 +9,8 @@ export const styles = StyleSheet.create({
     marginLeft: 32,
   },
   imageStar: {
-    height: 36,
-    width: 30,
+    height: 40,
+    width: 40,
     marginRight: 10,
   },
   titleWelcome: {
@@ -22,5 +22,6 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     color: WHITE,
     fontWeight: '800',
+    width: 150,
   },
 });

@@ -1,62 +1,143 @@
-import {Text, TouchableOpacity, Image, View} from 'react-native';
+import {Pressable, Text, View} from 'react-native';
 import React, {useState} from 'react';
-import {DropdownArrowGrey64} from '../../../../assets/images/icons/base64/dropdown-arrow-grey-64';
 import {styles} from './DrawerLateral.styles';
 import {
+  DrawerCurrentIndexType,
   DrawerDataSubMenuType,
   DrawerLatertalMenuProps,
 } from '../../Navbar.types';
+import {WHITE} from '../../../../styles/colors';
+import {ArrowDown} from '../../../../assets/images/icons/ArrowDown';
+import {
+  getCurrentSelectIndex,
+  getStyleImageSelectedSubSection,
+  getStyleSelected,
+} from './DrawerLateralHelper';
 
 const DrawerLateralSubMenu = ({
   data,
+  indexSection,
+  currentIndex,
+  indexSubSection,
   onSelectOption,
 }: DrawerLatertalMenuProps) => {
   const [showSubMenu, setShowSubMenu] = useState<boolean>(false);
+  const [indexHover, setIndexHover] = useState<DrawerCurrentIndexType>({
+    indexSection: -1,
+    indexSubSection: -1,
+    indexSubSectionItem: -1,
+  });
 
-  const addMarginBottom = (isMargin:boolean) => {
-    if(isMargin){
-      return {marginBottom: 30}
+  const removeMarginBottom = (isRemove: boolean) => {
+    if (isRemove) {
+      return {marginBottom: 0};
     }
-    return {}
-  }
+  };
 
-  const handleOnPress = (route?: string) => {
-    onSelectOption(route);
+  const handleOnPress = (route?: string, index?: DrawerCurrentIndexType) => {
+    onSelectOption(route, index);
     setShowSubMenu(!showSubMenu);
   };
 
   return (
     <>
-      <TouchableOpacity
+      <Pressable
+        onHoverIn={() => {
+          setIndexHover({
+            indexSection: indexSection,
+            indexSubSection: indexSubSection,
+            indexSubSectionItem: -1,
+          });
+        }}
+        onHoverOut={() => {
+          setIndexHover({
+            indexSection: -1,
+            indexSubSection: -1,
+            indexSubSectionItem: -1,
+          });
+        }}
         style={[
-          styles.modalSectionItemNoMarginContainer,
-          addMarginBottom(!showSubMenu) 
+          styles.modalSectionItemContainer,
+          getStyleSelected(indexHover, indexSection, indexSubSection, -1),
+          removeMarginBottom(showSubMenu),
         ]}
         onPress={() => {
           setShowSubMenu(!showSubMenu);
         }}
       >
-        <Image
-          style={styles.modalSectionItemImage}
-          source={{uri: data?.image}}
-        />
-        <Text style={styles.modalSectionItemText}>{data?.label}</Text>
-        <Image
-          style={styles.modalSectionMenuDropdownImage}
-          source={{uri: DropdownArrowGrey64}}
-        />
-      </TouchableOpacity>
+        {data?.image && (
+          <data.image.type
+            {...data.image.props}
+            fill={getStyleImageSelectedSubSection(
+              currentIndex,
+              indexSection,
+              indexSubSection,
+            )}
+            style={styles.modalSectionItemImage}
+          />
+        )}
+        <Text
+          numberOfLines={2}
+          ellipsizeMode="tail"
+          style={styles.modalSectionItemText}
+        >
+          {data?.label}
+        </Text>
+        <ArrowDown style={styles.modalSectionMenuDropdownImage} fill={WHITE} />
+      </Pressable>
       {showSubMenu && (
         <View style={styles.modalSectionSubMenuContainer}>
           {data?.subMenu?.map((item: DrawerDataSubMenuType, index) => {
             return (
-              <TouchableOpacity
-              key={'drawerDataSubMenu' + index}
-                onPress={() => handleOnPress(item?.route)}
-                style={styles.modalSectionSubItemContainer}
+              <Pressable
+                onHoverIn={() => {
+                  setIndexHover({
+                    indexSection: indexSection,
+                    indexSubSection: indexSubSection,
+                    indexSubSectionItem: index,
+                  });
+                }}
+                onHoverOut={() => {
+                  setIndexHover({
+                    indexSection: -1,
+                    indexSubSection: -1,
+                    indexSubSectionItem: -1,
+                  });
+                }}
+                key={'drawerDataSubMenu' + index}
+                onPress={() =>
+                  handleOnPress(
+                    item?.route,
+                    getCurrentSelectIndex(indexSection, indexSubSection, index),
+                  )
+                }
+                style={[
+                  styles.modalSectionSubItemContainer,
+                  removeMarginBottom(
+                    data?.subMenu ? data.subMenu.length - 1 === index : false,
+                  ),
+                  getStyleSelected(
+                    currentIndex,
+                    indexSection,
+                    indexSubSection,
+                    index,
+                  ),
+                  getStyleSelected(
+                    indexHover,
+                    indexSection,
+                    indexSubSection,
+                    index,
+                  ),
+                ]}
               >
-                <Text style={styles.modalSectionItemText}>{item.label}</Text>
-              </TouchableOpacity>
+                <Text
+                  numberOfLines={2}
+                  ellipsizeMode="tail"
+                  style={styles.modalSectionItemText}
+                >
+                  {item?.label}
+                </Text>
+              </Pressable>
             );
           })}
         </View>

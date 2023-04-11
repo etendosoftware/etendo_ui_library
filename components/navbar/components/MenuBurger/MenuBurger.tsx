@@ -1,13 +1,14 @@
-import {TouchableOpacity, Image} from 'react-native';
+import {TouchableOpacity} from 'react-native';
 import React from 'react';
-import {MenuBurger64} from '../../../../assets/images/icons/base64/menu-burger-64';
-import {styles} from './MenuBurger.styles';
 import {MenuBurgerProps} from '../../Navbar.types';
+import {MenuburgerIcon} from '../../../../assets/images/icons/MenuburgerIcon';
+import {WHITE} from '../../../../styles/colors';
+import {styles} from './MenuBurger.styles';
 
 const MenuBurger = ({onPress}: MenuBurgerProps) => {
   return (
     <TouchableOpacity onPress={onPress}>
-      <Image source={{uri: MenuBurger64}} style={styles.menuBurgerImage} />
+      <MenuburgerIcon fill={WHITE} style={styles.menuBurgerImage} />
     </TouchableOpacity>
   );
 };

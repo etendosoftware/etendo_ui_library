@@ -15,7 +15,6 @@ const Navbar = ({
   onPressMenuBurger,
   onPressLogo,
 }: NavbarProps) => {
-
   const screenWidth = Dimensions.get('window').width;
   const isTablet = screenWidth > 700;
 
@@ -28,11 +27,12 @@ const Navbar = ({
             <Welcome name={name + '!'} />
             {leftComponent}
           </>
-        ): <MenuBurger onPress={onPressMenuBurger}></MenuBurger>
-        }
+        ) : (
+          <MenuBurger onPress={onPressMenuBurger}></MenuBurger>
+        )}
       </View>
       <View style={styles.rightContainer}>
-      {isTablet?<>{rightComponent}</>:null}
+        {isTablet ? <>{rightComponent}</> : null}
         <Profile
           data={optionsProfile}
           name={name}

@@ -1,5 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {CheckIcon} from '../../assets/images/icons/CheckIcon';
 import Button from './Button';
 
 describe('Running Test for Input', () => {
@@ -10,12 +11,16 @@ describe('Running Test for Input', () => {
           text={'Button CTA'}
           onPress={() => {}}
           typeStyle={'primary'}
-          image={{
-            imgRoute: require('../../assets/images/icons/check.png'),
-            imgHeight: 12,
-            imgWidth: 16,
-            imgMarginRight: 10,
-          }}
+          image={
+            <CheckIcon
+              fill={'white'}
+              style={{
+                marginRight: 10,
+                width: 12,
+                height: 10,
+              }}
+            />
+          }
           disabled={true}
           typeSize={'large'}
         />,

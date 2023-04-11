@@ -1,13 +1,13 @@
-import {Image, TouchableOpacity} from 'react-native';
+import {TouchableOpacity} from 'react-native';
 import React from 'react';
-import {LogoEtendoBase64} from '../../../../assets/images/logo/base64/logo-etendo-64';
 import {styles} from './EtendoLogo.styles';
 import {EtendoLogoProps} from '../../Navbar.types';
+import {EtendoWhiteLogo} from '../../../../assets/images/logo/EtendoWhiteLogo';
 
 const EtendoLogo = ({onPress}: EtendoLogoProps) => {
   return (
     <TouchableOpacity onPress={onPress}>
-      <Image style={styles.image} source={{uri: LogoEtendoBase64}} />
+      <EtendoWhiteLogo style={styles.image} />
     </TouchableOpacity>
   );
 };
