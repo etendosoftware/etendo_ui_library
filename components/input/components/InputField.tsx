@@ -89,7 +89,7 @@ const InputField = ({
           let dropdownHeight = pageY + height + 188;
           if (dropdownHeight > windowHeight) {
             setpositionModal({
-              top: pageY - height - 188,
+              top: pageY - height - 145,
               left: pageX,
               width,
               height,
