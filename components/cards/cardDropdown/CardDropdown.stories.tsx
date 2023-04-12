@@ -1,6 +1,6 @@
 import React from 'react';
 import {Story, Meta} from '@storybook/react';
-import {View} from 'react-native';
+import {View,ScrollView} from 'react-native';
 import addMarginContainer from '../../../helpers/addMargin';
 import CardDropdown from './CardDropdown';
 import {DeliveryBox} from '../../../assets/images/icons/DeliveryBox';
@@ -11,6 +11,7 @@ import {CardDrpopdownProps} from './CardDropdown.types';
 import CardDropdownSkeleton from './component/CardDropdownSkeleton';
 import CardSkeleton from './component/CardSkeleton';
 import {styles} from './CardDropdown.styles';
+import { cardDataDropdown } from './CardDropdown.data';
 
 const meta: Meta = {
   title: 'Etendo/CardDropdown',
@@ -18,14 +19,14 @@ const meta: Meta = {
   argTypes: {},
 };
 
-const Template0: Story<CardDrpopdownProps> = args => (
+const TemplateDefault: Story<CardDrpopdownProps> = args => (
   <View style={[addMarginContainer()]}>
     <CardDropdown {...args} />
   </View>
 );
 
-const Template1: Story<CardDrpopdownProps> = args => (
-  <View style={[addMarginContainer()]}>
+const TemplateVariants: Story<CardDrpopdownProps> = args => (
+  <ScrollView style={[addMarginContainer()]}>
     <View style={styles.cardDropdownStoriesRow}>
       <View style={styles.cardDropdownStoriesContainer}>
         <CardDropdown
@@ -33,32 +34,7 @@ const Template1: Story<CardDrpopdownProps> = args => (
           image={<DeliveryBox />}
           route="/home"
           onPress={route => {}}
-          dataOptions={[
-            {
-              title: 'Convert',
-              description: 'Learn about your.',
-              image: <UsersIcon />,
-              route: '/convert',
-            },
-            {
-              title: 'Team dashboard',
-              description: 'Monitor your metrics.',
-              image: <Binoculars />,
-              route: '/dashboard',
-            },
-            {
-              title: 'Limitless segmentation',
-              description: 'Surface hidden trends.',
-              image: <DocumentIcon />,
-              route: '/limitless',
-            },
-            {
-              title: 'Group analytics',
-              description: 'Measure B2B account health.',
-              image: <DeliveryBox />,
-              route: '/analytics',
-            },
-          ]}
+          dataOptions={cardDataDropdown}
           styleType={'primary'}
           disabled={false}
           isDropdown={true}
@@ -70,32 +46,7 @@ const Template1: Story<CardDrpopdownProps> = args => (
           image={<DeliveryBox />}
           route="/home"
           onPress={route => {}}
-          dataOptions={[
-            {
-              title: 'Convert',
-              description: 'Learn about your.',
-              image: <UsersIcon />,
-              route: '/convert',
-            },
-            {
-              title: 'Team dashboard',
-              description: 'Monitor your metrics.',
-              image: <Binoculars />,
-              route: '/dashboard',
-            },
-            {
-              title: 'Limitless segmentation',
-              description: 'Surface hidden trends.',
-              image: <DocumentIcon />,
-              route: '/limitless',
-            },
-            {
-              title: 'Group analytics',
-              description: 'Measure B2B account health.',
-              image: <DeliveryBox />,
-              route: '/analytics',
-            },
-          ]}
+          dataOptions={cardDataDropdown}
           styleType={'secondary'}
           disabled={false}
           isDropdown={true}
@@ -107,32 +58,7 @@ const Template1: Story<CardDrpopdownProps> = args => (
           image={<DeliveryBox />}
           route="/home"
           onPress={route => {}}
-          dataOptions={[
-            {
-              title: 'Convert',
-              description: 'Learn about your.',
-              image: <UsersIcon />,
-              route: '/convert',
-            },
-            {
-              title: 'Team dashboard',
-              description: 'Monitor your metrics.',
-              image: <Binoculars />,
-              route: '/dashboard',
-            },
-            {
-              title: 'Limitless segmentation',
-              description: 'Surface hidden trends.',
-              image: <DocumentIcon />,
-              route: '/limitless',
-            },
-            {
-              title: 'Group analytics',
-              description: 'Measure B2B account health.',
-              image: <DeliveryBox />,
-              route: '/analytics',
-            },
-          ]}
+          dataOptions={cardDataDropdown}
           styleType={'primary'}
           disabled={true}
           isDropdown={true}
@@ -144,32 +70,7 @@ const Template1: Story<CardDrpopdownProps> = args => (
           image={<DeliveryBox />}
           route="/home"
           onPress={route => {}}
-          dataOptions={[
-            {
-              title: 'Convert',
-              description: 'Learn about your.',
-              image: <UsersIcon />,
-              route: '/convert',
-            },
-            {
-              title: 'Team dashboard',
-              description: 'Monitor your metrics.',
-              image: <Binoculars />,
-              route: '/dashboard',
-            },
-            {
-              title: 'Limitless segmentation',
-              description: 'Surface hidden trends.',
-              image: <DocumentIcon />,
-              route: '/limitless',
-            },
-            {
-              title: 'Group analytics',
-              description: 'Measure B2B account health.',
-              image: <DeliveryBox />,
-              route: '/analytics',
-            },
-          ]}
+          dataOptions={cardDataDropdown}
           styleType={'secondary'}
           disabled={true}
           isDropdown={true}
@@ -189,32 +90,7 @@ const Template1: Story<CardDrpopdownProps> = args => (
           image={<DeliveryBox />}
           route="/home"
           onPress={route => {}}
-          dataOptions={[
-            {
-              title: 'Convert',
-              description: 'Learn about your.',
-              image: <UsersIcon />,
-              route: '/convert',
-            },
-            {
-              title: 'Team dashboard',
-              description: 'Monitor your metrics.',
-              image: <Binoculars />,
-              route: '/dashboard',
-            },
-            {
-              title: 'Limitless segmentation',
-              description: 'Surface hidden trends.',
-              image: <DocumentIcon />,
-              route: '/limitless',
-            },
-            {
-              title: 'Group analytics',
-              description: 'Measure B2B account health.',
-              image: <DeliveryBox />,
-              route: '/analytics',
-            },
-          ]}
+          dataOptions={cardDataDropdown}
           styleType={'primary'}
           disabled={false}
           isDropdown={false}
@@ -226,32 +102,7 @@ const Template1: Story<CardDrpopdownProps> = args => (
           image={<DeliveryBox />}
           route="/home"
           onPress={route => {}}
-          dataOptions={[
-            {
-              title: 'Convert',
-              description: 'Learn about your.',
-              image: <UsersIcon />,
-              route: '/convert',
-            },
-            {
-              title: 'Team dashboard',
-              description: 'Monitor your metrics.',
-              image: <Binoculars />,
-              route: '/dashboard',
-            },
-            {
-              title: 'Limitless segmentation',
-              description: 'Surface hidden trends.',
-              image: <DocumentIcon />,
-              route: '/limitless',
-            },
-            {
-              title: 'Group analytics',
-              description: 'Measure B2B account health.',
-              image: <DeliveryBox />,
-              route: '/analytics',
-            },
-          ]}
+          dataOptions={cardDataDropdown}
           styleType={'secondary'}
           disabled={false}
           isDropdown={false}
@@ -263,32 +114,7 @@ const Template1: Story<CardDrpopdownProps> = args => (
           image={<DeliveryBox />}
           route="/home"
           onPress={route => {}}
-          dataOptions={[
-            {
-              title: 'Convert',
-              description: 'Learn about your.',
-              image: <UsersIcon />,
-              route: '/convert',
-            },
-            {
-              title: 'Team dashboard',
-              description: 'Monitor your metrics.',
-              image: <Binoculars />,
-              route: '/dashboard',
-            },
-            {
-              title: 'Limitless segmentation',
-              description: 'Surface hidden trends.',
-              image: <DocumentIcon />,
-              route: '/limitless',
-            },
-            {
-              title: 'Group analytics',
-              description: 'Measure B2B account health.',
-              image: <DeliveryBox />,
-              route: '/analytics',
-            },
-          ]}
+          dataOptions={cardDataDropdown}
           styleType={'primary'}
           disabled={true}
           isDropdown={false}
@@ -300,42 +126,17 @@ const Template1: Story<CardDrpopdownProps> = args => (
           image={<DeliveryBox />}
           route="/home"
           onPress={route => {}}
-          dataOptions={[
-            {
-              title: 'Convert',
-              description: 'Learn about your.',
-              image: <UsersIcon />,
-              route: '/convert',
-            },
-            {
-              title: 'Team dashboard',
-              description: 'Monitor your metrics.',
-              image: <Binoculars />,
-              route: '/dashboard',
-            },
-            {
-              title: 'Limitless segmentation',
-              description: 'Surface hidden trends.',
-              image: <DocumentIcon />,
-              route: '/limitless',
-            },
-            {
-              title: 'Group analytics',
-              description: 'Measure B2B account health.',
-              image: <DeliveryBox />,
-              route: '/analytics',
-            },
-          ]}
+          dataOptions={cardDataDropdown}
           styleType={'secondary'}
           disabled={true}
           isDropdown={false}
         />
       </View>
     </View>
-  </View>
+  </ScrollView>
 );
-const Template2: Story<CardDrpopdownProps> = args => (
-  <View style={styles.cardDropdownStoriesRow}>
+const TemplatePlaceholder: Story<CardDrpopdownProps> = args => (
+  <ScrollView style={[styles.cardDropdownStoriesRow,addMarginContainer()]}> 
     <View style={styles.cardDropdownStoriesSkeletonContainer}>
       <CardSkeleton styleType={'primary'} />
     </View>
@@ -348,20 +149,45 @@ const Template2: Story<CardDrpopdownProps> = args => (
     <View style={styles.cardDropdownStoriesSkeletonOptionContainerBlue}>
       <CardDropdownSkeleton onClose={() => {}} styleType={'secondary'} />
     </View>
-  </View>
+  </ScrollView>
 );
 
 export default meta;
-export const CardDropdownDefault = Template0.bind({});
-export const CardDropdownVariants = Template1.bind({});
-export const CardDropdownPlaceholder = Template2.bind({});
+export const CardDropdownDefault = TemplateDefault.bind({});
+export const CardDropdownVariants = TemplateVariants.bind({});
+export const CardDropdownPlaceholder = TemplatePlaceholder.bind({});
 
 CardDropdownDefault.args = {
   title: 'Physical inventory',
   image: <DeliveryBox />,
   route: '/home',
   onPress: route => {},
-  dataOptions: [],
+  dataOptions: [
+    {
+      title: 'Convert',
+      description: 'Learn about your.',
+      image: <UsersIcon />,
+      route: '/convert',
+    },
+    {
+      title: 'Team dashboard',
+      description: 'Monitor your metrics.',
+      image: <Binoculars />,
+      route: '/dashboard',
+    },
+    {
+      title: 'Limitless segmentation',
+      description: 'Surface hidden trends.',
+      image: <DocumentIcon />,
+      route: '/limitless',
+    },
+    {
+      title: 'Group analytics',
+      description: 'Measure B2B account health.',
+      image: <DeliveryBox />,
+      route: '/analytics',
+    },
+  ],
   styleType: 'primary',
   disabled: false,
   isDropdown: true,

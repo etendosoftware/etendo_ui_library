@@ -5,7 +5,6 @@ import {Navbar} from './Navbar';
 
 import {View} from 'react-native';
 import {NavbarV} from './typeOfNavbars/NavbarV';
-import {tracingIcon} from '../../assets/images/icons/tracing.svg';
 import {styles} from './Navbar.styles';
 import addMarginContainer from '../../helpers/addMargin';
 import {WayIcon} from '../../assets/images/icons/WayIcon';
