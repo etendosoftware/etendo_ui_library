@@ -19,6 +19,14 @@ export default {
 } as Meta<typeof Navbar>;
 
 /* Templates */
+const Template0: Story<NavbarProps> = ({...args}) => {
+  return (
+    <View style={[styles.storiesContainer, addMarginContainer()]}>
+      <Navbar {...args} />
+    </View>
+  );
+};
+
 const Template1: Story<NavbarProps> = ({...args}) => {
   const [visibleDrawer, setVisibleDrawer] = useState<boolean>(false);
   const [currentIndex, setCurrentIndex] = useState<
@@ -73,5 +81,18 @@ const Template1: Story<NavbarProps> = ({...args}) => {
 };
 
 /* Stories exports */
-export const NavbarVerticalDefault = Template1.bind({});
-NavbarVerticalDefault.args = {};
+export const NavbarVerticalDefault = Template0.bind({});
+export const NavbarVerticalVariant = Template1.bind({});
+
+NavbarVerticalDefault.args = {
+  name: 'Dana',
+  email: 'dana.scott@etendo.es',
+  leftComponent: <></>,
+  rightComponent: <></>,
+  optionsProfile: profileData,
+  onOptionSelectedProfile: () => {},
+  onPressMenuBurger: ()=> {},
+  onPressLogo: () => {},
+};
+
+NavbarVerticalVariant.args = {};
