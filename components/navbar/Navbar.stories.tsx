@@ -19,7 +19,7 @@ export default {
 } as Meta<typeof Navbar>;
 
 /* Templates */
-const Template0: Story<NavbarProps> = ({...args}) => {
+const TemplateDefault: Story<NavbarProps> = ({...args}) => {
   return (
     <View style={[styles.storiesContainer, addMarginContainer()]}>
       <Navbar {...args} />
@@ -27,7 +27,7 @@ const Template0: Story<NavbarProps> = ({...args}) => {
   );
 };
 
-const Template1: Story<NavbarProps> = ({...args}) => {
+const TemplateVariant: Story<NavbarProps> = ({...args}) => {
   const [visibleDrawer, setVisibleDrawer] = useState<boolean>(false);
   const [currentIndex, setCurrentIndex] = useState<
     DrawerCurrentIndexType | undefined
@@ -81,8 +81,8 @@ const Template1: Story<NavbarProps> = ({...args}) => {
 };
 
 /* Stories exports */
-export const NavbarVerticalDefault = Template0.bind({});
-export const NavbarVerticalVariant = Template1.bind({});
+export const NavbarVerticalDefault = TemplateDefault.bind({});
+export const NavbarVerticalVariant = TemplateVariant.bind({});
 
 NavbarVerticalDefault.args = {
   name: 'Dana',
