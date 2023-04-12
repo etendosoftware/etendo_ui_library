@@ -9,7 +9,7 @@ import {
   NavbarProps,
   OptionNotificationItem,
 } from './Navbar.types';
-import {drawerData, notificationData, profileData} from './Navbarr.data';
+import {drawerData, notificationData, profileData} from './Navbar.data';
 import {useState} from '@storybook/addons';
 
 export default {
