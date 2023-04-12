@@ -13,7 +13,7 @@ const meta: Meta = {
   argTypes: {},
 };
 
-const Template0: Story<InputProps> = ({value = '', onChangeText, ...args}) => {
+const TemplateDefault: Story<InputProps> = ({value = '', onChangeText, ...args}) => {
   const [text, setText] = useState(value);
   return (
     <View style={[styles.storiesInputContainer, addMarginContainer()]}>
@@ -23,7 +23,7 @@ const Template0: Story<InputProps> = ({value = '', onChangeText, ...args}) => {
 };
 
 
-const Template1: Story<InputProps> = ({}) => {
+const TemplateVariant: Story<InputProps> = ({}) => {
 
   const [optionSelected, setOptionSelected] = useState({label: ''});
 
@@ -142,8 +142,8 @@ const Template1: Story<InputProps> = ({}) => {
 };
 
 export default meta;
-export const InputDefault = Template0.bind({});
-export const InputVariant = Template1.bind({});
+export const InputDefault = TemplateDefault.bind({});
+export const InputVariant = TemplateVariant.bind({});
 
 InputDefault.args = {
   titleLabel: 'Only Read',
