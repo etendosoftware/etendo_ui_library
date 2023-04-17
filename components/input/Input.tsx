@@ -12,7 +12,6 @@ const Input = ({
   placeholder,
   disabled,
   maxLength,
-  numberOfLines,
   centerText,
   keyboardType,
   onPress,
@@ -22,13 +21,10 @@ const Input = ({
   onChangeText,
   typeField,
   isError,
-  fontSize,
-  height,
-  password,
 }: InputProps) => {
   const stateStyle = () => {
-    if (typeField === 'onlyRead') {
-      return inputStyleVariants.onlyRead;
+    if (typeField === 'readOnly') {
+      return inputStyleVariants.readOnly;
     } else if (disabled) {
       return inputStyleVariants.disabled;
     } else if (isError) {
@@ -42,8 +38,8 @@ const Input = ({
     <View style={styles.inputContainer}>
       <InputTitle
         disabled={disabled}
-        title={titleLabel}
-        image={titleImage}
+        titleLabel={titleLabel}
+        titleImage={titleImage}
         styleTitle={stateStyle().titleStyle}
       />
       <InputField
@@ -59,11 +55,8 @@ const Input = ({
         onChangeText={onChangeText}
         keyboardType={keyboardType}
         maxLength={maxLength}
-        numberOfLines={numberOfLines}
         centerText={centerText}
-        fontSize={fontSize}
-        height={height}
-        password={password}
+        type={typeField}
       />
       <InputHelperText
         label={helperText}

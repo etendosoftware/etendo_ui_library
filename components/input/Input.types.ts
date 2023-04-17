@@ -2,7 +2,7 @@ import {
   ColorValue,
   GestureResponderEvent,
   NativeSyntheticEvent,
-  TextInputFocusEventData,
+  TargetedEvent,
   TextStyle,
   ViewStyle,
 } from 'react-native';
@@ -13,21 +13,22 @@ export type InputTypeStyle =
   | 'default'
   | 'destructive'
   | 'disabled'
-  | 'onlyRead';
+  | 'readOnly';
 
 export type InputFieldVariants =
-  | 'onlyRead'
+  | 'readOnly'
   | 'picker'
   | 'textInput'
-  | 'textPressable'
-  | 'searchTextInput'
-  | 'searchPressable';
+  | 'textInputSearch'
+  | 'textInputPassword'
+  | 'pressableText'
+  | 'pressableSearch';
 
 export type KeyboardTypes = 'text' | 'number';
 
 export type InputFieldConfigType = {
   type: InputFieldType;
-  image?: React.ReactNode;
+  image?: React.ReactElement;
   width?: string | number;
   height?: string | number;
   disabledField?: boolean;
@@ -37,7 +38,7 @@ export type InputFieldConfigType = {
 
 export type InputVariantsType = Record<
   InputFieldVariants,
-  { field: InputFieldConfigType }
+  {field: InputFieldConfigType}
 >;
 
 export type TypeInputStyleVariant = Record<
@@ -56,7 +57,7 @@ export type TypeInputStyleVariant = Record<
 
 export interface InputProps {
   titleLabel?: string;
-  titleImage?: React.ReactNode;
+  titleImage?: React.ReactElement;
   value: string;
   helperText?: string;
   placeholder?: string;
@@ -64,22 +65,18 @@ export interface InputProps {
   isError?: boolean;
   maxLength?: number;
   centerText?: boolean;
-  numberOfLines?: number;
   typeField: InputFieldVariants;
   keyboardType?: KeyboardTypes;
-  fontSize?: number;
-  height?: number | string;
-  password?: boolean;
   onPress?: (event: GestureResponderEvent) => void;
   onSubmit?: (event: GestureResponderEvent) => void;
   onChangeText?: (text: string) => void;
-  onFocus?: (event: NativeSyntheticEvent<TextInputFocusEventData>) => void;
-  onBlur?: (event: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+  onFocus?: (event: NativeSyntheticEvent<TargetedEvent>) => void;
+  onBlur?: (event: NativeSyntheticEvent<TargetedEvent>) => void;
 }
 
 export interface InputTitleProps {
-  title?: string;
-  image?: React.ReactNode;
+  titleLabel?: string;
+  titleImage?: React.ReactElement;
   styleTitle: TextStyle | TextStyle[];
   disabled?: boolean;
 }
@@ -101,17 +98,14 @@ export interface InputFieldProps {
     textDefault: TextStyle | TextStyle[];
     textPlaceholder: TextStyle | TextStyle[];
   };
+  type: InputFieldVariants;
   maxLength?: number;
   centerText?: boolean;
-  numberOfLines?: number;
-  fontSize?: number;
-  height?: number | string;
-  password?: boolean;
   onPress?: (event: GestureResponderEvent) => void;
   onSubmit?: (event: GestureResponderEvent) => void;
   onChangeText?: (text: string) => void;
-  onFocus: (event: NativeSyntheticEvent<TextInputFocusEventData>) => void;
-  onBlur: (event: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+  onFocus: (event: NativeSyntheticEvent<TargetedEvent>) => void;
+  onBlur: (event: NativeSyntheticEvent<TargetedEvent>) => void;
 }
 
 export interface InputHelperProps {

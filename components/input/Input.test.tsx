@@ -23,7 +23,7 @@ describe('Running Test for Input', () => {
           onBlur={() => {
             console.log('On Blur');
           }}
-          typeField="searchTextInput"
+          typeField="picker"
           isError={true}
         />,
       )

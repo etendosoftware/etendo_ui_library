@@ -2,26 +2,27 @@
 
 exports[`Running Test for Input Check Input Error 1`] = `
 <View
-  style={
-    Object {
-      "flex": 1,
-    }
-  }
+  style={Object {}}
 >
   <View
     style={
       Object {
         "alignItems": "center",
+        "display": "flex",
         "flexDirection": "row",
+        "height": 29,
+        "justifyContent": "flex-start",
+        "marginLeft": 5,
       }
     }
   >
     <Text
+      ellipsizeMode="tail"
+      numberOfLines={1}
       style={
         Object {
           "color": "#202452",
-          "fontSize": 14,
-          "marginTop": 10,
+          "fontSize": 16,
         }
       }
     >
@@ -29,84 +30,186 @@ exports[`Running Test for Input Check Input Error 1`] = `
     </Text>
   </View>
   <View
-    accessibilityState={
-      Object {
-        "disabled": true,
-      }
-    }
-    accessible={true}
-    collapsable={false}
-    focusable={true}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
-      Object {
-        "alignItems": "center",
-        "borderColor": "#F36A62",
-        "borderRadius": 5,
-        "borderWidth": 1,
-        "flexDirection": "row",
-        "marginTop": 3,
-        "marginVertical": 5,
-        "opacity": 1,
-      }
+      Array [
+        Array [
+          Object {
+            "borderColor": "transparent",
+            "borderRadius": 10,
+            "borderWidth": 5,
+          },
+          Object {
+            "borderColor": "#FEF0EF",
+          },
+        ],
+        Array [
+          Object {
+            "borderColor": "transparent",
+          },
+        ],
+      ]
     }
   >
     <View
+      accessibilityState={
+        Object {
+          "disabled": false,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
+          "alignItems": "center",
+          "borderColor": "#F36A62",
+          "borderRadius": 5,
+          "borderWidth": 2,
+          "display": "flex",
           "flexDirection": "row",
-          "width": "100%",
+          "height": 50,
+          "opacity": 1,
+          "overflow": "hidden",
+          "paddingRight": 0,
         }
       }
     >
-      <TextInput
-        editable={true}
-        focusable={true}
-        keyboardType="default"
-        onBlur={[Function]}
-        onChangeText={[Function]}
-        onFocus={[Function]}
-        placeholder="Write a password"
+      <Text
+        ellipsizeMode="tail"
+        numberOfLines={1}
         style={
           Array [
             Array [
               Object {
+                "alignItems": "center",
                 "color": "#202452",
+                "display": "flex",
+                "flex": 1,
                 "fontSize": 14,
                 "fontWeight": "500",
-                "padding": 10,
-                "width": "100%",
-              },
-              Object {
-                "color": "#000000",
-                "fontSize": undefined,
-                "height": undefined,
-              },
-              Object {
-                "paddingRight": 10,
+                "height": 50,
+                "minWidth": 0,
+                "paddingLeft": 15,
+                "textAlignVertical": "center",
               },
             ],
+            Object {},
           ]
         }
-        value="Render Test"
-      />
+      >
+        Render Test
+      </Text>
+      <View
+        accessibilityState={
+          Object {
+            "disabled": true,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "display": "flex",
+            "height": "100%",
+            "justifyContent": "center",
+            "opacity": 1,
+            "width": 35,
+          }
+        }
+      >
+        <RNSVGSvgView
+          align="xMidYMid"
+          bbHeight="10"
+          bbWidth="10"
+          fill="none"
+          focusable={false}
+          height={10}
+          meetOrSlice={0}
+          minX={0}
+          minY={0}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Array [
+                Object {
+                  "height": 10,
+                  "width": 10,
+                },
+              ],
+              Object {
+                "flex": 0,
+                "height": 10,
+                "width": 10,
+              },
+            ]
+          }
+          vbHeight={29}
+          vbWidth={41}
+          width={10}
+        >
+          <RNSVGGroup
+            fill={null}
+            propList={
+              Array [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGPath
+              clipRule={0}
+              d="M25.134 26.8356C22.869 29.5727 18.6723 29.5727 16.4072 26.8356L2.08173 9.52459C-0.973901 5.83214 1.65231 0.249999 6.44513 0.249999L35.0961 0.25C39.8889 0.25 42.5152 5.83213 39.4595 9.52458L25.134 26.8356Z"
+              fill={
+                Object {
+                  "payload": 4280296530,
+                  "type": 0,
+                }
+              }
+              fillRule={0}
+              propList={
+                Array [
+                  "fill",
+                  "fillRule",
+                ]
+              }
+            />
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
     </View>
   </View>
   <View
     style={
       Object {
-        "alignItems": "center",
+        "alignItems": "flex-end",
         "flexDirection": "row",
+        "height": 25,
+        "marginLeft": 5,
       }
     }
   >
     <Text
+      ellipsizeMode="tail"
+      numberOfLines={1}
       style={
         Array [
           Object {
