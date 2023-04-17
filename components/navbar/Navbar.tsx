@@ -11,6 +11,7 @@ const Navbar = ({
   leftComponent,
   rightComponent,
   optionsProfile,
+  profileImage,
   onOptionSelectedProfile,
   onPressMenuBurger,
   onPressLogo,
@@ -38,6 +39,7 @@ const Navbar = ({
           name={name}
           email={email}
           onOptionSelected={onOptionSelectedProfile}
+          profileImage={profileImage}
         />
       </View>
     </View>

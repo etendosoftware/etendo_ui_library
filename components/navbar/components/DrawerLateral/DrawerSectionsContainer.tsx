@@ -83,18 +83,16 @@ const DrawerSectionsContainer = ({
                       )
                     }
                   >
-                    {item?.image && (
-                      <item.image.type
-                        {...item.image.props}
-                        fill={getStyleImageSelected(
+                    {item?.image &&
+                      React.cloneElement(item.image, {
+                        fill: getStyleImageSelected(
                           currentIndex,
                           indexSection,
                           index,
                           0,
-                        )}
-                        style={styles.modalSectionItemImage}
-                      />
-                    )}
+                        ),
+                        style: styles.modalSectionItemImage,
+                      })}
                     <Text
                       numberOfLines={2}
                       ellipsizeMode="tail"

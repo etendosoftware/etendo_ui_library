@@ -65,17 +65,16 @@ const DrawerLateralSubMenu = ({
           setShowSubMenu(!showSubMenu);
         }}
       >
-        {data?.image && (
-          <data.image.type
-            {...data.image.props}
-            fill={getStyleImageSelectedSubSection(
+        {data?.image &&
+          React.cloneElement(data.image, {
+            ...data.image.props,
+            fill: getStyleImageSelectedSubSection(
               currentIndex,
               indexSection,
               indexSubSection,
-            )}
-            style={styles.modalSectionItemImage}
-          />
-        )}
+            ),
+            style: styles.modalSectionItemImage,
+          })}
         <Text
           numberOfLines={2}
           ellipsizeMode="tail"

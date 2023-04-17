@@ -6,6 +6,7 @@ export interface NavbarProps {
   leftComponent?: React.ReactElement;
   rightComponent?: React.ReactElement;
   optionsProfile?: OptionProfileItem[];
+  profileImage?: React.ReactElement;
   onOptionSelectedProfile: (item: string, index: number) => void;
   onPressLogo: () => void;
   onPressMenuBurger: () => void;

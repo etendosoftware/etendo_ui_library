@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  Dimensions,
-  Pressable,
-  ViewStyle,
-} from 'react-native';
+import {View, Text, Dimensions, Pressable, ViewStyle} from 'react-native';
 import React, {useState} from 'react';
 import {spaceBetween, styles, widthOptions} from './Profile.styles';
 import ProfileImage from './ProfileImage';
@@ -79,13 +73,6 @@ const ProfileOptions = ({
         </View>
       </View>
       {data?.map((item, index) => {
-        let newImageMap: HTMLElement = <></>;
-        if (item?.image) {
-          newImageMap = React.cloneElement(item.image, {
-            fill: BLUE,
-            style: styles.optionItemImageSize,
-          });
-        }
         return (
           <Pressable
             key={index}
@@ -99,7 +86,13 @@ const ProfileOptions = ({
             }}
           >
             <View style={styles.optionItemContainer}>
-              <View style={styles.optionItemImage}>{newImageMap}</View>
+              <View style={styles.optionItemImage}>
+                {item?.image &&
+                  React.cloneElement(item.image, {
+                    fill: BLUE,
+                    style: styles.optionItemImageSize,
+                  })}
+              </View>
               <Text
                 numberOfLines={2}
                 ellipsizeMode="tail"

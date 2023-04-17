@@ -57,7 +57,7 @@ const TemplateVariant: Story<NavbarProps> = ({...args}) => {
           </>
         }
         optionsProfile={profileData}
-        onOptionSelectedProfile={(item, index) => {}}
+        onOptionSelectedProfile={() => {}}
         onPressLogo={() => {}}
         onPressMenuBurger={() => {
           setVisibleDrawer(true);

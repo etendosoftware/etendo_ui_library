@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity, Pressable, ViewStyle} from 'react-native';
+import {View, Text, TouchableOpacity, Pressable, ViewStyle, ColorValue} from 'react-native';
 import React, {useState} from 'react';
 import {spaceBetween, styles, widthOptions} from './Notification.styles';
 import {PointIcon} from '../../../../assets/images/icons/PointIcon';
@@ -24,12 +24,12 @@ const NotificationsOptions = ({
 }: NotificationOptionProps) => {
   const [indexHover, setIndexHover] = useState<number>(-1);
 
-  const getOptionImageType = (type: OptionNotificationType) => {
+  const getOptionImageType = (type: OptionNotificationType):string => {
     switch(type){
-      case 'warning': return <PointIcon fill={YELLOW} style={styles.optionImageSize} />;
-      case 'success':return <PointIcon fill={GREEN} style={styles.optionImageSize} />;
-      case 'error': return <PointIcon fill={RED} style={styles.optionImageSize} />;
-      default: return <PointIcon fill={LIGHT_BLUE} style={styles.optionImageSize} />;
+      case 'warning': return YELLOW;
+      case 'success':return GREEN;
+      case 'error': return RED;
+      default: return LIGHT_BLUE;
     }
   };
 
@@ -72,7 +72,7 @@ const NotificationsOptions = ({
                   onPress={() => onOptionSelected(item, index)}
                 >
                   <View style={styles.optionImage}>
-                    {getOptionImageType(item?.type)}
+                    <PointIcon fill={getOptionImageType(item?.type)} style={styles.optionImageSize} />
                   </View>
                   <View>
                     <Text

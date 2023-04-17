@@ -36,3 +36,5 @@ export const GREEN_10 = '#E5F7ED';
 
 export const RED = '#F36A62';
 export const RED_10 = '#FEF0EF';
+
+export const DEFAULT_COLOR_THEME = BLUE;
