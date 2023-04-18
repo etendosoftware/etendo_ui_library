@@ -4,9 +4,9 @@ export const BLUE_50 = '#575A72';
 export const BLUE_60 = '#4B539D';
 export const BLUE_80 = '#303775';
 export const BLUE = '#202452';
-export const DARK_BLUE = '#353C7D';
 
 export const YELLOW = '#FAD614';
+export const YELLOW_50 = '#FFEB7A';
 export const YELLOW_30 = '#FEF7D0';
 
 export const GREY_BLUE = '#808695';
@@ -16,6 +16,8 @@ export const GREY_BLUE_10 = '#F2F5F9';
 
 export const PURPLE = '#7182FF';
 export const PURPLE_60 = '#564BC7';
+export const LIGHT_PURPLE_60 = '#EBECFA';
+
 export const PURPLE_50 = '#DDDFF6';
 export const PURPLE_10 = '#F5F5FC';
 

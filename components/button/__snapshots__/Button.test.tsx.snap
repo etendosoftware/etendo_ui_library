@@ -5,7 +5,9 @@ exports[`Running Test for Input Check Button disabled 1`] = `
   accessible={true}
   collapsable={false}
   focusable={true}
+  onBlur={[Function]}
   onClick={[Function]}
+  onFocus={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -13,16 +15,19 @@ exports[`Running Test for Input Check Button disabled 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
-      "alignItems": "center",
-      "backgroundColor": "#D3D6E1",
-      "borderRadius": 5,
-      "flexDirection": "row",
-      "height": undefined,
-      "justifyContent": "center",
-      "opacity": 1,
-      "width": undefined,
-    }
+    Array [
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#D3D6E1",
+        "borderRadius": 5,
+        "flexDirection": "row",
+        "justifyContent": "center",
+      },
+      Object {
+        "height": undefined,
+        "width": "auto",
+      },
+    ]
   }
 >
   <View>
@@ -89,9 +94,6 @@ exports[`Running Test for Input Check Button disabled 1`] = `
         Object {
           "color": "#FFFFFF",
           "fontWeight": "bold",
-        },
-        Object {
-          "fontSize": 18,
         },
       ]
     }

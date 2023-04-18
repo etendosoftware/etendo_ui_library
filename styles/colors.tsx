@@ -4,7 +4,6 @@ export const BLUE_50 = '#575A72';
 export const BLUE_60 = '#4B539D';
 export const BLUE_80 = '#303775';
 export const BLUE = '#202452';
-export const DARK_BLUE = '#353C7D';
 
 export const YELLOW = '#FAD614';
 export const YELLOW_30 = '#FEF7D0';
