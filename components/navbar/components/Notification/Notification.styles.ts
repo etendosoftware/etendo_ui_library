@@ -80,7 +80,6 @@ export const styles = StyleSheet.create({
   optionViewAllTextContainer: {padding: 15},
   modalBackground: {
     flex: 1,
-    backgroundColor: BLACK_TRANSPARENT,
     justifyContent: 'center',
     alignItems: 'center',
   },

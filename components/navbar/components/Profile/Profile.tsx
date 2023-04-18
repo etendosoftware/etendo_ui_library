@@ -1,5 +1,5 @@
 import {TouchableOpacity, Modal} from 'react-native';
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {styles} from './Profile.styles';
 import ProfileOptions from './ProfileOptions';
 import ProfileImage from './ProfileImage';
@@ -21,6 +21,12 @@ const Profile = ({
   });
 
   const refComponente = useRef<TouchableOpacity>(null);
+
+  useEffect(()=>{
+    if(showOptions){
+      getTopLeft();
+    }
+  })
 
   const getTopLeft = () => {
     if (refComponente.current) {

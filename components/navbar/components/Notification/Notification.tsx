@@ -1,5 +1,5 @@
 import {Modal, TouchableOpacity} from 'react-native';
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {styles} from './Notification.styles';
 import NotificationsOptions from './NotificationsOptions';
 import {
@@ -35,6 +35,12 @@ const Notification = ({
     height: 0,
   });
   const refComponente = useRef<TouchableOpacity>(null);
+
+  useEffect(()=>{
+    if(showOptions){
+      getTopLeft();
+    }
+  })
 
   const getTopLeft = () => {
     if (refComponente.current) {
