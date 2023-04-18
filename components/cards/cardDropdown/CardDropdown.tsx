@@ -70,8 +70,10 @@ const CardDropdown = ({
   };
 
   useEffect(() => {
-    getTopLeft();
-  }, [heightDropdown]);
+    if (visibleOptions){ 
+      getTopLeft();
+    }
+  });
 
   const getTopLeft = () => {
     if (refComponente.current) {
@@ -88,7 +90,7 @@ const CardDropdown = ({
 
           if (dropdownHeight > windowHeight) {
             setpositionModal({
-              top: pageY - heightDropdown + height,
+              top: windowHeight - heightDropdown - heightExtra,
               left: pageX,
               width,
               height,
@@ -100,6 +102,7 @@ const CardDropdown = ({
       );
     }
   };
+  
   const newImage =
     image &&
     React.cloneElement(image, {
@@ -109,6 +112,7 @@ const CardDropdown = ({
 
   const windowHeight = Dimensions.get('window').height;
   const refComponente = useRef<TouchableOpacity>(null);
+  const heightExtra = 20
 
   return title && image ? (
     <TouchableOpacity
