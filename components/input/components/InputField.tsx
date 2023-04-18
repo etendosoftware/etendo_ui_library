@@ -75,6 +75,12 @@ const InputField = ({
     return style;
   };
 
+  useEffect(() => {
+    if (showOptions){ 
+      getTopLeft();
+    }
+  });
+
   const getTopLeft = () => {
     if (refComponente.current) {
       refComponente.current.measure(
@@ -89,7 +95,7 @@ const InputField = ({
           let dropdownHeight = pageY + height + 188;
           if (dropdownHeight > windowHeight) {
             setpositionModal({
-              top: pageY - height - 145,
+              top: pageY - height - 150,
               left: pageX,
               width,
               height,
