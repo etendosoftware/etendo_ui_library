@@ -6,16 +6,19 @@ import {
   TouchableOpacity,
   KeyboardType,
   View,
-  GestureResponderEvent,
+  NativeSyntheticEvent,
+  TextInputFocusEventData,
+  ViewStyle,
+  Platform,
   Dimensions,
+  GestureResponderEvent,
 } from 'react-native';
+
 import {styles} from '../Input.style';
 import {InputFieldProps, KeyboardTypes} from '../Input.types';
-
-import {BLACK} from '../../../styles/colors';
+import {ShowPassword} from '../../../assets/images/icons/ShowPassword';
+import {HidePassword} from '../../../assets/images/icons/HidePassword';
 import InputOptions from './InputOptions';
-import { ShowPassword } from '../../../assets/images/icons/ShowPassword';
-import { HidePassword } from '../../../assets/images/icons/HidePassword';
 
 const InputField = ({
   type,
@@ -34,12 +37,9 @@ const InputField = ({
   onOptionSelected,
   onFocus,
   onBlur,
-  fontSize,
-  height,
-  password,
 }: InputFieldProps) => {
-  const [showImg, setShowImg] = useState<boolean>(false);
-  const [showPassword, setShowPassword] = useState(password);
+  const [isFocus, setIsFocus] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [showOptions, setShowOptions] = useState<boolean>(false);
   const [dataOptionsFilter, setDataOptionsFilter] = useState<any>([]);
   const [filterValue, setFilterValue] = useState<string>('');
@@ -52,31 +52,35 @@ const InputField = ({
   const windowHeight = Dimensions.get('window').height;
   const refComponente = useRef<TouchableOpacity>(null);
   const regex = /^[0-9.,]+$/g;
+  const isWeb = Platform.OS === 'web';
 
-  const getStyleText = (text: string | undefined, password?: boolean) => {
+  const disableOutline = () => {
+    let outline = {};
+    if (isWeb) {
+      return (outline = {outline: 'none'});
+    }
+    return outline;
+  };
+  const getStyleText = (text?: string): TextStyle | TextStyle[] => {
     let style: Array<TextStyle | TextStyle[]> = [];
 
     if (text) {
-      style.push(styleField.textDefault, {
-        fontSize: fontSize,
-        height: height,
-        color: BLACK,
-      });
+      style.push(styleField.textDefault);
     } else {
-      style.push(styleField.textPlaceholder, {
-        fontSize: fontSize,
-        height: height,
-        color: BLACK,
-      });
+      style.push(styleField.textPlaceholder);
     }
 
-    style.push({paddingRight: password ? 50 : 10});
-
-    return style;
+    return style as TextStyle;
   };
 
   useEffect(() => {
-    if (showOptions){ 
+    if (dataPicker) {
+      setDataOptionsFilter(dataPicker);
+    }
+  }, [dataPicker]);
+
+  useEffect(() => {
+    if (showOptions) {
       getTopLeft();
     }
   });
@@ -95,7 +99,7 @@ const InputField = ({
           let dropdownHeight = pageY + height + 188;
           if (dropdownHeight > windowHeight) {
             setpositionModal({
-              top: pageY - height - 150,
+              top: pageY - height - 136,
               left: pageX,
               width,
               height,
@@ -111,7 +115,9 @@ const InputField = ({
   const handleOnChangeFilterText = (filterText: string) => {
     setFilterValue(filterText);
     setDataOptionsFilter(
-      dataPicker.filter((item: any) => item.label.toLocaleLowerCase().includes(filterText.toLocaleLowerCase())),
+      dataPicker.filter((item: any) =>
+        item.label.toLocaleLowerCase().includes(filterText.toLocaleLowerCase()),
+      ),
     );
   };
 
@@ -142,23 +148,53 @@ const InputField = ({
     }
   };
 
-  useEffect(() => {
-    configField?.image ? setShowImg(true) : setShowImg(false);
-  }, [configField?.image]);
-
-  useEffect(() => {
-    if (!password) {
-      setShowPassword(false);
+  const getFocusStyle = (): ViewStyle[] => {
+    let style: ViewStyle[] = [];
+    if (!isFocus) {
+      style.push({borderColor: 'transparent'});
     }
-  }, [password]);
+    return style;
+  };
 
-  useEffect(() => {
-    if (dataPicker) setDataOptionsFilter(dataPicker);
-  }, [dataPicker]);
+  const removePaddingField = (): ViewStyle => {
+    let style: ViewStyle = {};
+    if (configField?.image) {
+      style = {paddingRight: 0};
+    }
+    return style;
+  };
 
-  useEffect(() => {
-    if (filterValue) setFilterValue('');
-  }, [showOptions]);
+  const onPressFocus = (
+    event: NativeSyntheticEvent<TextInputFocusEventData>,
+  ) => {
+    onFocus(event);
+    setIsFocus(true);
+  };
+
+  const onPressBlur = (
+    event: NativeSyntheticEvent<TextInputFocusEventData>,
+  ) => {
+    onBlur(event);
+    setIsFocus(false);
+  };
+
+  const getImage = (image: React.ReactElement): React.ReactElement => {
+    if (type === 'textInputPassword') {
+      if (showPassword) {
+        return <HidePassword style={styles.inputImageSize} />;
+      }
+      return <ShowPassword style={styles.inputImageSize} />;
+    }
+    return image;
+  };
+
+  const handlePressImage = () => {
+    if (type === 'textInputPassword') {
+      setShowPassword(prevState => !prevState);
+    } else {
+      onSubmit;
+    }
+  };
 
   const handleOnPress = (event?: GestureResponderEvent) => {
     if (type === 'picker') {
@@ -170,74 +206,48 @@ const InputField = ({
       onPress(event);
     }
   };
+
   return (
-    <>
+    <View style={[styleField.focus, getFocusStyle()]}>
       <TouchableOpacity
         ref={refComponente}
-        style={styleField.field}
-        onPress={handleOnPress}
+        style={[styleField.field, removePaddingField()]}
         disabled={disabled || configField.disabledField}
+        onPress={handleOnPress}
       >
-        {(() => {
-          if (configField?.type === 'textInput') {
-            return (
-              <View
-                style={{
-                  flexDirection: 'row',
-                  width: '100%',
-                }}
-              >
-                <TextInput
-                  editable={!disabled || !configField.disabledField}
-                  focusable={!disabled || !configField.disabledField}
-                  onBlur={onBlur}
-                  onFocus={onFocus}
-                  value={value}
-                  keyboardType={getKeyboardType(keyboardType)}
-                  onChangeText={getOnChangeText}
-                  style={[getStyleText(value, password)]}
-                  placeholder={placeholder}
-                  maxLength={maxLength}
-                  secureTextEntry={showPassword}
-                />
-                 {password && (
-                <TouchableOpacity
-                  onPress={() => setShowPassword(!showPassword)}
-                  style={styles.passwordContainer}
-                >
-                  {showPassword ? (
-                    <ShowPassword style={{width: 22, height: 22}} />
-                  ) : (
-                    <HidePassword style={{width: 22, height: 22}} />
-                  )}
-                </TouchableOpacity>
-              )}
-              </View>
-            );
-          }
-          if (configField?.type === 'text') {
-            return (
-              <Text ellipsizeMode="tail" style={getStyleText(value, password)}>
-                {value ? value : placeholder}
-              </Text>
-            );
-          }
-        })()}
-        {(() => {
-          if (showImg) {
-            return (
-              <View style={styles.showImgContainer}>
-              <TouchableOpacity
-                onPress={onSubmit}
-                style={styles.buttonContainerInputField}
-                disabled={configField?.disabledSubmit || disabled}
-              >
-                {configField?.image && configField?.image}
-              </TouchableOpacity>
-            </View>
-            );
-          }
-        })()}
+        {configField?.type === 'textInput' && (
+          <TextInput
+            editable={!disabled || !configField.disabledField}
+            focusable={!disabled || !configField.disabledField}
+            onBlur={onPressBlur}
+            onFocus={onPressFocus}
+            value={value}
+            keyboardType={getKeyboardType(keyboardType)}
+            onChangeText={getOnChangeText}
+            style={[getStyleText(value), disableOutline()]}
+            placeholder={placeholder}
+            maxLength={maxLength}
+            secureTextEntry={showPassword}
+          />
+        )}
+        {configField?.type === 'text' && (
+          <Text
+            numberOfLines={1}
+            ellipsizeMode="tail"
+            style={[getStyleText(value), disableOutline()]}
+          >
+            {value ? value : placeholder}
+          </Text>
+        )}
+        {configField?.image && (
+          <TouchableOpacity
+            onPress={handlePressImage}
+            style={styles.buttonContainerInputField}
+            disabled={configField?.disabledSubmit || disabled}
+          >
+            {getImage(configField.image)}
+          </TouchableOpacity>
+        )}
         <InputOptions
           onOptionSelected={onOptionSelected}
           showOptions={showOptions}
@@ -249,7 +259,7 @@ const InputField = ({
           displayKey={displayKey}
         />
       </TouchableOpacity>
-    </>
+    </View>
   );
 };
 

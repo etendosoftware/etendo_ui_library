@@ -34,6 +34,7 @@ const InputOptions = ({
     onClose();
   };
 
+
   const handleOnBlur = () => {
     setShowSearchImg(true);
     setPlaceholderText('Search');

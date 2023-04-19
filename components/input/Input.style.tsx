@@ -15,9 +15,10 @@ import {
 } from '../../styles/colors';
 import {ArrowDown} from '../../assets/images/icons/ArrowDown';
 import {SearchIcon} from '../../assets/images/icons/SearchIcon';
+import {ShowPassword} from '../../assets/images/icons/ShowPassword';
 
 export const inputVariants: InputVariantsType = {
-  onlyRead: {
+  readOnly: {
     field: {
       type: 'text',
       disabledField: true,
@@ -39,14 +40,14 @@ export const inputVariants: InputVariantsType = {
       disabledSubmit: false,
     },
   },
-  textPressable: {
+  pressableText: {
     field: {
       type: 'text',
       disabledField: false,
       disabledSubmit: false,
     },
   },
-  searchTextInput: {
+  textInputSearch: {
     field: {
       type: 'textInput',
       disabledField: true,
@@ -54,7 +55,7 @@ export const inputVariants: InputVariantsType = {
       image: <SearchIcon style={{height: 15, width: 15}} />,
     },
   },
-  searchPressable: {
+  pressableSearch: {
     field: {
       type: 'text',
       disabledField: false,
@@ -62,38 +63,62 @@ export const inputVariants: InputVariantsType = {
       image: <SearchIcon style={{height: 15, width: 15}} />,
     },
   },
+  textInputPassword: {
+    field: {
+      type: 'textInput',
+      image: <ShowPassword style={{height: 15, width: 15}} />,
+      disabledField: true,
+      disabledSubmit: false,
+    },
+  },
 };
 
 const defaultTitle: TextStyle = {
   color: BLUE,
-  fontSize: 14,
-  marginTop: 10,
+  fontSize: 16,
 };
 
 const defaultField: ViewStyle = {
-  borderWidth: 1,
+  overflow: 'hidden',
+  height: 50,
+  borderWidth: 2,
   borderColor: BLUE,
-  marginVertical: 5,
   borderRadius: 5,
   flexDirection: 'row',
+  display: 'flex',
   alignItems: 'center',
-  marginTop: 3,
+  paddingRight: 15,
+};
+
+const defaultFocus: ViewStyle = {
+  borderWidth: 5,
+  borderColor: 'transparent',
+  borderRadius: 10,
 };
 
 const defaultText: TextStyle = {
-  width: '100%',
-  padding: 10,
   color: BLUE,
   fontSize: 14,
   fontWeight: '500',
+  flex: 1,
+  alignItems: 'center',
+  paddingLeft: 15,
+  minWidth: 0,
+  height: 50,
+  display: 'flex',
+  textAlignVertical: 'center',
 };
-
 const defaultTextPlaceholder: TextStyle = {
-  width: '100%',
-  fontSize: 14,
-  padding: 10,
   color: GREY_BLUE,
+  fontSize: 14,
   fontWeight: '500',
+  flex: 1,
+  alignItems: 'center',
+  paddingLeft: 15,
+  minWidth: 0,
+  height: 50,
+  display: 'flex',
+  textAlignVertical: 'center',
 };
 
 const defaultHelperText: TextStyle = {
@@ -106,9 +131,12 @@ export const inputStyleVariants: TypeInputStyleVariant = {
     titleStyle: defaultTitle,
     fieldStyle: {
       field: defaultField,
-      focus: {
-        borderColor: PURPLE_50,
-      },
+      focus: [
+        defaultFocus,
+        {
+          borderColor: PURPLE_50,
+        },
+      ],
       textDefault: defaultText,
       textPlaceholder: defaultTextPlaceholder,
     },
@@ -117,9 +145,12 @@ export const inputStyleVariants: TypeInputStyleVariant = {
   destructive: {
     titleStyle: defaultTitle,
     fieldStyle: {
-      focus: {
-        borderColor: RED_10,
-      },
+      focus: [
+        defaultFocus,
+        {
+          borderColor: RED_10,
+        },
+      ],
       field: [defaultField, {borderColor: RED}],
       textDefault: defaultText,
       textPlaceholder: defaultTextPlaceholder,
@@ -129,18 +160,18 @@ export const inputStyleVariants: TypeInputStyleVariant = {
   disabled: {
     titleStyle: [defaultTitle, {color: GREY_BLUE_50}],
     fieldStyle: {
-      focus: {},
+      focus: defaultFocus,
       field: [defaultField, {borderColor: GREY_BLUE_50}],
       textDefault: [defaultText, {color: GREY_BLUE_50}],
       textPlaceholder: [defaultTextPlaceholder, {color: GREY_BLUE_50}],
     },
     helperStyle: [defaultHelperText, {color: GREY_BLUE_50}],
   },
-  onlyRead: {
+  readOnly: {
     titleStyle: defaultTitle,
     fieldStyle: {
       field: [defaultField, {backgroundColor: GREY_5}],
-      focus: {},
+      focus: defaultFocus,
       textDefault: defaultText,
       textPlaceholder: defaultTextPlaceholder,
     },
@@ -149,33 +180,50 @@ export const inputStyleVariants: TypeInputStyleVariant = {
 };
 
 export const styles = StyleSheet.create({
-  inputContainer: {
-    flex: 1,
+  inputContainer: {},
+  inputImageSize: {
+    height: 15,
+    width: 15,
+  },
+  rowInputTitleImg: {
+    height: 10,
+    width: 10,
+    marginRight: 5,
   },
   rowInputTitle: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'flex-start',
+    display: 'flex',
+    height: 29,
+    marginLeft: 5,
+  },
+  rowInputTitleText: {
+    fontSize: 16,
+    color: BLUE,
   },
   rowHelperText: {
+    height: 25,
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-end',
+    marginLeft: 5,
   },
   buttonContainerInputField: {
     alignSelf: 'flex-start',
-    paddingHorizontal: 10,
+    width: 35,
+    height: '100%',
     justifyContent: 'center',
+    display: 'flex',
+    alignItems: 'center',
   },
   passwordContainer: {
     right: 20,
-    position: 'absolute',
     alignSelf: 'center',
     marginLeft: 10,
   },
   showImgContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1,
-    position: 'absolute',
     right: 10,
   },
   passwordImage: {
@@ -185,13 +233,11 @@ export const styles = StyleSheet.create({
   storiesContainer: {
     flexWrap: 'wrap',
     flexDirection: 'row',
-    flex: 1,
-    width: '100%',
     justifyContent: 'space-between',
   },
   storiesInputContainer: {
-    height: 100,
-    width: '30%',
+    height: 115,
+    width: 300,
   },
   optionContainer: {
     paddingHorizontal: 20,
@@ -225,7 +271,7 @@ export const styles = StyleSheet.create({
     zIndex: 2,
   },
   optionsItemsContainer: {
-    height: 140,
+    maxHeight: 140,
   },
   optionFilterContainer: {
     height: 35,

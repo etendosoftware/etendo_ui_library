@@ -2,6 +2,7 @@ import {
   ColorValue,
   GestureResponderEvent,
   NativeSyntheticEvent,
+  TargetedEvent,
   TextInputFocusEventData,
   TextStyle,
   ViewStyle,
@@ -13,21 +14,22 @@ export type InputTypeStyle =
   | 'default'
   | 'destructive'
   | 'disabled'
-  | 'onlyRead';
+  | 'readOnly';
 
 export type InputFieldVariants =
-  | 'onlyRead'
+  | 'readOnly'
   | 'picker'
   | 'textInput'
-  | 'textPressable'
-  | 'searchTextInput'
-  | 'searchPressable';
+  | 'textInputSearch'
+  | 'textInputPassword'
+  | 'pressableText'
+  | 'pressableSearch';
 
 export type KeyboardTypes = 'text' | 'number';
 
 export type InputFieldConfigType = {
   type: InputFieldType;
-  image?: React.ReactNode;
+  image?: React.ReactElement;
   width?: string | number;
   height?: string | number;
   disabledField?: boolean;
@@ -37,7 +39,7 @@ export type InputFieldConfigType = {
 
 export type InputVariantsType = Record<
   InputFieldVariants,
-  { field: InputFieldConfigType }
+  {field: InputFieldConfigType}
 >;
 
 export type TypeInputStyleVariant = Record<
@@ -56,7 +58,7 @@ export type TypeInputStyleVariant = Record<
 
 export interface InputProps {
   titleLabel?: string;
-  titleImage?: React.ReactNode;
+  titleImage?: React.ReactElement;
   value: string;
   helperText?: string;
   placeholder?: string;
@@ -64,12 +66,10 @@ export interface InputProps {
   isError?: boolean;
   maxLength?: number;
   centerText?: boolean;
-  numberOfLines?: number;
   typeField: InputFieldVariants;
   keyboardType?: KeyboardTypes;
   fontSize?: number;
   height?: number | string;
-  password?: boolean;
   dataPicker?: any;
   displayKey?: string;
   onPress?: (event?: GestureResponderEvent) => void;
@@ -81,8 +81,8 @@ export interface InputProps {
 }
 
 export interface InputTitleProps {
-  title?: string;
-  image?: React.ReactNode;
+  titleLabel?: string;
+  titleImage?: React.ReactElement;
   styleTitle: TextStyle | TextStyle[];
   disabled?: boolean;
 }
@@ -110,7 +110,6 @@ export interface InputFieldProps {
   numberOfLines?: number;
   fontSize?: number;
   height?: number | string;
-  password?: boolean;
   dataPicker?: any;
   displayKey?: string;
   onOptionSelected?: any;

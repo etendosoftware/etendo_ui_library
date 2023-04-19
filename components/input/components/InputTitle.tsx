@@ -1,15 +1,35 @@
 import React from 'react';
-import {Image, Text, View} from 'react-native';
-import addImageStyle from '../../../helpers/image_utils';
+import {Text, View} from 'react-native';
 import {styles} from '../Input.style';
 import {InputTitleProps} from '../Input.types';
+import {BLUE, GREY_BLUE_50} from '../../../styles/colors';
 
-const InputTitle = ({title, image, styleTitle, disabled}: InputTitleProps) => {
-  return (
+const InputTitle = ({
+  titleLabel,
+  titleImage,
+  styleTitle,
+  disabled,
+}: InputTitleProps) => {
+  const getImage = (image: React.ReactElement) => {
+    if (image) {
+      return React.cloneElement(image, {
+        style: styles.rowInputTitleImg,
+        fill: disabled ? GREY_BLUE_50 : BLUE,
+      });
+    }
+  };
+
+  return titleImage || titleLabel ? (
     <View style={styles.rowInputTitle}>
-
-      {title && <Text style={styleTitle}>{title}</Text>}
+      {titleImage && getImage(titleImage)}
+      {titleLabel && (
+        <Text numberOfLines={1} ellipsizeMode="tail" style={styleTitle}>
+          {titleLabel}
+        </Text>
+      )}
     </View>
+  ) : (
+    <></>
   );
 };
 

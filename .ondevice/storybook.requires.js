@@ -34,7 +34,6 @@ const getStories = () => {
     require('../components/button/Button.stories.tsx'),
     require('../components/cards/cardDropdown/CardDropdown.stories.tsx'),
     require('../components/docs/Docs.stories.tsx'),
-    require('../components/dropdown/Dropdown.stories.tsx'),
     require('../components/input/Input.stories.tsx'),
     require('../components/navbar/Navbar.stories.tsx'),
     require('../components/pagination/Pagination.stories.tsx'),
