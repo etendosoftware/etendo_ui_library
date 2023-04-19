@@ -31,7 +31,6 @@ export const GREY_5 = '#F2F2F2';
 export const BLACK_TRANSPARENT = 'rgba(0, 0, 0, 0.5)';
 export const LIGHT_BLACK = '#4A4F62';
 export const BLACK = '#000000';
-export const BLACK_TRANSPARENT = 'rgba(0,0,0,0.5)';
 
 export const LIGHT_BLUE = '#3E97FF';
 export const LIGHT_BLUE_10 = '#ECF5FF';
