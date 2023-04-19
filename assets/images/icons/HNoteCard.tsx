@@ -1,9 +1,9 @@
-import React, {CSSProperties} from 'react';
-import {ViewStyle} from 'react-native';
+import React from 'react';
+import {ImageStyle} from 'react-native';
 import {Svg, Path, Mask, Rect} from 'react-native-svg';
 
 export interface SvgImageProps {
-  style?: CSSProperties;
+  style?: ImageStyle;
   fill?: string;
 }
 
@@ -14,7 +14,7 @@ export const HNoteCard = ({style, fill}: SvgImageProps) => {
       height={style?.height || 34}
       viewBox="0 0 43 34"
       fill="none"
-      style={style as ViewStyle}
+      style={style}
     >
       <Mask
         id="path-1-outside-1_1_520"

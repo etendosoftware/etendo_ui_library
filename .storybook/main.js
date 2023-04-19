@@ -1,3 +1,4 @@
+const path = require('path');
 module.exports = {
   stories: ['../components/**/*.stories.?(ts|tsx|js|jsx)'],
   addons: [
@@ -7,4 +8,16 @@ module.exports = {
     '@storybook/addon-actions',
   ],
   framework: '@storybook/react',
+  webpackFinal: async (config, {configType}) => {
+    // Exclude react-native-linear-gradient from being bundled in Storybook
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'react-native-linear-gradient': path.resolve(
+        __dirname,
+        '../node_modules/react-native-web-linear-gradient',
+      ),
+    };
+
+    return config;
+  },
 };

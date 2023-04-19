@@ -1,9 +1,9 @@
-import React, {CSSProperties} from 'react';
-import {ViewStyle} from 'react-native';
+import React from 'react';
+import {ImageStyle} from 'react-native';
 import {Svg, Path} from 'react-native-svg';
 
 export interface SvgImageProps {
-  style?: CSSProperties;
+  style?: ImageStyle;
   fill?: string;
 }
 export const ItemsIcon = ({style, fill}: SvgImageProps) => {
@@ -13,7 +13,7 @@ export const ItemsIcon = ({style, fill}: SvgImageProps) => {
       height={style?.height || 32}
       viewBox="0 0 48 32"
       fill="none"
-      style={style as ViewStyle}
+      style={style}
     >
       <Path
         d="M28.3014 13.0896C33.5438 13.0896 38.7862 13.0896 44.0286 13.0896C45.5858 13.0896 46.7227 13.881 47.0774 15.1863C47.545 16.9086 46.5259 18.529 44.7623 18.8466C44.4626 18.8935 44.1594 18.9138 43.8561 18.9072C33.4515 18.9072 23.046 18.9096 12.6397 18.9144C11.5247 18.9144 10.5505 18.6393 9.87398 17.7025C9.23265 16.8104 9.1294 15.8214 9.56789 14.83C10.0319 13.7853 10.8821 13.2108 12.0275 13.1066C12.2887 13.0811 12.5535 13.0896 12.8159 13.0896C17.9781 13.0896 23.1399 13.0896 28.3014 13.0896Z"

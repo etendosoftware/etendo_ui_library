@@ -56,14 +56,12 @@ exports[`Running Test for Pagination Check Pagination Disabled 1`] = `
             "backgroundColor": "transparent",
             "borderWidth": 0,
           },
-          Array [
-            Object {
-              "height": 7,
-              "position": "absolute",
-              "right": 15,
-              "width": 10,
-            },
-          ],
+          Object {
+            "height": 7,
+            "position": "absolute",
+            "right": 15,
+            "width": 10,
+          },
           Object {
             "flex": 0,
             "height": 7,

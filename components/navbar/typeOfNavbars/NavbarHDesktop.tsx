@@ -23,13 +23,7 @@ export const NavbarHDesktop = ({
           {renderItem ? (
             renderItem(data[0].routeNav, data[0].routeImage)
           ) : (
-            <img
-              src={data[0].routeImage}
-              style={{
-                height: 27,
-                marginLeft: 14,
-              }}
-            />
+            <></>
           )}
         </TouchableOpacity>
         <View style={NavbarHStyleVariant.desktop.containerImages}>
@@ -38,22 +32,10 @@ export const NavbarHDesktop = ({
               return (
                 <TouchableOpacity
                   onPress={() =>
-                    onChangeSelected({
-                      routeImage: image.routeImage,
-                      routeNav: image.routeNav,
-                      key: image.key,
-                      name: image.name,
-                    })
+                    onChangeSelected()
                   }
                   key={image.key}
                   activeOpacity={1}>
-                  <img
-                    src={image.routeImage}
-                    style={{
-                      height: 22,
-                      marginRight: 28,
-                    }}
-                  />
                 </TouchableOpacity>
               );
             }
@@ -62,14 +44,7 @@ export const NavbarHDesktop = ({
         <View style={NavbarHStyleVariant.desktop.containerUser}>
           <TouchableOpacity onPress={() => onChangeSelected} activeOpacity={1}>
             {data.length > 1 && (
-              <img
-                src={data[data.length - 1].routeImage}
-                style={{
-                  height: 22,
-                  marginLeft: 20,
-                  marginRight: 7,
-                }}
-              />
+<></>
             )}
           </TouchableOpacity>
           {data.length > 0 && (
