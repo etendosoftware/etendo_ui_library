@@ -13,8 +13,8 @@ const ProfileOptions = ({
   data,
   onOptionSelected,
 }: ProfileOptionsProps) => {
-  const [indexHover, setIndexHover] = useState<number>(-1);
-  const [logOutHover, setLogOutHover] = useState<boolean>(false);
+  const [indexHover, setIndexHover] = useState(-1);
+  const [logOutHover, setLogOutHover] = useState(false);
 
   const screenWidth = Dimensions.get('window').width;
   const isMobile = screenWidth < 320;
@@ -35,13 +35,9 @@ const ProfileOptions = ({
       return {backgroundColor: PURPLE_10};
     }
   };
-  const getBackgroundLogOut = (): ViewStyle | undefined => {
-    if (logOutHover) {
-      return {backgroundColor: PURPLE_10};
-    }
-  };
 
   const defaultNameValue = 'A';
+
   return (
     <View
       style={[
@@ -61,49 +57,47 @@ const ProfileOptions = ({
             ellipsizeMode="tail"
             style={styles.optionsHeaderTextName}
           >
-            {name ? name : defaultNameValue}
+            {name || defaultNameValue}
           </Text>
           <Text
             numberOfLines={1}
             ellipsizeMode="tail"
             style={styles.optionsHeaderTextEmail}
           >
-            {email ? email : ''}
+            {email || ''}
           </Text>
         </View>
       </View>
-      {data?.map((item, index) => {
-        return (
-          <Pressable
-            key={index}
-            style={[styles.option, getBackground(index)]}
-            onPress={() => handleOptionSelected(item.route, index)}
-            onHoverIn={() => {
-              setIndexHover(index);
-            }}
-            onHoverOut={() => {
-              setIndexHover(-1);
-            }}
-          >
-            <View style={styles.optionItemContainer}>
-              <View style={styles.optionItemImage}>
-                {item?.image &&
-                  React.cloneElement(item.image, {
-                    fill: BLUE,
-                    style: styles.optionItemImageSize,
-                  })}
-              </View>
-              <Text
-                numberOfLines={2}
-                ellipsizeMode="tail"
-                style={styles.optionsItemsText}
-              >
-                {item?.title}
-              </Text>
+      {data?.map((item, index) => (
+        <Pressable
+          key={index}
+          style={[styles.option, getBackground(index)]}
+          onPress={() => handleOptionSelected(item.route, index)}
+          onHoverIn={() => {
+            setIndexHover(index);
+          }}
+          onHoverOut={() => {
+            setIndexHover(-1);
+          }}
+        >
+          <View style={styles.optionItemContainer}>
+            <View style={styles.optionItemImage}>
+              {item?.image &&
+                React.cloneElement(item.image, {
+                  fill: BLUE,
+                  style: styles.optionItemImageSize,
+                })}
             </View>
-          </Pressable>
-        );
-      })}
+            <Text
+              numberOfLines={2}
+              ellipsizeMode="tail"
+              style={styles.optionsItemsText}
+            >
+              {item?.title}
+            </Text>
+          </View>
+        </Pressable>
+      ))}
       <Pressable
         onHoverIn={() => {
           setLogOutHover(true);
@@ -111,9 +105,9 @@ const ProfileOptions = ({
         onHoverOut={() => {
           setLogOutHover(false);
         }}
-        style={[styles.optionLogOut, getBackgroundLogOut()]}
+        style={[styles.optionLogOut, logOutHover && {backgroundColor: PURPLE_10}]}
         onPress={() => {
-          handleOptionSelected('loguot', 0);
+          handleOptionSelected('logout', 0);
         }}
       >
         <View>
@@ -124,4 +118,4 @@ const ProfileOptions = ({
   );
 };
 
-export default ProfileOptions;
+export default ProfileOptions

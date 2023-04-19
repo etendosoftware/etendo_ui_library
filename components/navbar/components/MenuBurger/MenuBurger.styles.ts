@@ -1,8 +1,6 @@
-import {StyleSheet} from 'react-native';
-
-export const styles = StyleSheet.create({
+export const styles = {
   menuBurgerImage: {
     width: 20,
     height: 20,
   },
-});
+};

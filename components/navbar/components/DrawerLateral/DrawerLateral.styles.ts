@@ -1,8 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {
-  BLACK_TRANSPARENT,
   BLUE,
-  BLUE_20,
+  BLUE_80,
   GREY_60,
   PURPLE_10,
   WHITE,
@@ -43,7 +42,7 @@ export const styles = StyleSheet.create({
     marginHorizontal: 24,
     paddingTop: 16,
     borderTopWidth: 1,
-    borderTopColor: BLUE_20,
+    borderTopColor: BLUE_80,
   },
   modalContent: {
     backgroundColor: BLUE,

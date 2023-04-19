@@ -1,5 +1,12 @@
-import {View, Text, TouchableOpacity, Pressable, ViewStyle, ColorValue} from 'react-native';
 import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Pressable,
+  ViewStyle,
+  ColorValue,
+} from 'react-native';
 import {spaceBetween, styles, widthOptions} from './Notification.styles';
 import {PointIcon} from '../../../../assets/images/icons/PointIcon';
 import {
@@ -24,12 +31,16 @@ const NotificationsOptions = ({
 }: NotificationOptionProps) => {
   const [indexHover, setIndexHover] = useState<number>(-1);
 
-  const getOptionImageType = (type: OptionNotificationType):string => {
-    switch(type){
-      case 'warning': return YELLOW;
-      case 'success':return GREEN;
-      case 'error': return RED;
-      default: return LIGHT_BLUE;
+  const getOptionImageType = (type: OptionNotificationType): string => {
+    switch (type) {
+      case 'warning':
+        return YELLOW;
+      case 'success':
+        return GREEN;
+      case 'error':
+        return RED;
+      default:
+        return LIGHT_BLUE;
     }
   };
 
@@ -58,7 +69,7 @@ const NotificationsOptions = ({
             </TouchableOpacity>
           </View>
           {optionsNotifications?.map(
-            (item: OptionNotificationItem, index: number) => {
+            (optionNotificationItem: OptionNotificationItem, index: number) => {
               return (
                 <Pressable
                   onHoverIn={() => {
@@ -69,10 +80,15 @@ const NotificationsOptions = ({
                   }}
                   key={index}
                   style={[styles.option, getBackground(index)]}
-                  onPress={() => onOptionSelected(item, index)}
+                  onPress={() =>
+                    onOptionSelected(optionNotificationItem, index)
+                  }
                 >
                   <View style={styles.optionImage}>
-                    <PointIcon fill={getOptionImageType(item?.type)} style={styles.optionImageSize} />
+                    <PointIcon
+                      fill={getOptionImageType(optionNotificationItem?.type)}
+                      style={styles.optionImageSize}
+                    />
                   </View>
                   <View>
                     <Text
@@ -80,9 +96,11 @@ const NotificationsOptions = ({
                       ellipsizeMode="tail"
                       style={styles.optionText}
                     >
-                      {item?.title}
+                      {optionNotificationItem?.title}
                     </Text>
-                    <Text style={styles.optionTimeText}>{item?.time}</Text>
+                    <Text style={styles.optionTimeText}>
+                      {optionNotificationItem?.time}
+                    </Text>
                   </View>
                 </Pressable>
               );

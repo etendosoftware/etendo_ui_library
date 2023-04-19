@@ -1,15 +1,11 @@
-import {Modal, TouchableOpacity} from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
-import {styles} from './Notification.styles';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
+import { Modal, TouchableOpacity, StyleSheet } from 'react-native';
+import { BellActiveIcon } from '../../../../assets/images/icons/BellActiveIcon';
+import { BellIcon } from '../../../../assets/images/icons/BellIcon';
+import { WHITE } from '../../../../styles/colors';
+import { NotificationProps, OptionNotificationItem, PosicionModalType } from '../../Navbar.types';
 import NotificationsOptions from './NotificationsOptions';
-import {
-  NotificationProps,
-  OptionNotificationItem,
-  PosicionModalType,
-} from '../../Navbar.types';
-import {BellActiveIcon} from '../../../../assets/images/icons/BellActiveIcon';
-import {BellIcon} from '../../../../assets/images/icons/BellIcon';
-import {WHITE} from '../../../../styles/colors';
+import { styles } from './Notification.styles';
 
 const Notification = ({
   anyNotification,
@@ -18,16 +14,7 @@ const Notification = ({
   onViewAllNotifications,
   onMarkAllAsReadNotifications,
 }: NotificationProps) => {
-  const [showOptions, setShowOptions] = useState<boolean>(false);
-
-  const handleOptionSelected = (
-    item: OptionNotificationItem,
-    index: number,
-  ) => {
-    onOptionSelected(item, index);
-    setShowOptions(false);
-  };
-
+  const [showOptions, setShowOptions] = useState(false);
   const [posicionModal, setPosicionModal] = useState<PosicionModalType>({
     top: 0,
     left: 0,
@@ -36,11 +23,13 @@ const Notification = ({
   });
   const refComponente = useRef<TouchableOpacity>(null);
 
-  useEffect(()=>{
-    if(showOptions){
-      getTopLeft();
-    }
-  })
+  const handleOptionSelected = useMemo(
+    () => (item: OptionNotificationItem, index: number) => {
+      onOptionSelected(item, index);
+      setShowOptions(false);
+    },
+    [onOptionSelected]
+  );
 
   const getTopLeft = () => {
     if (refComponente.current) {
@@ -53,11 +42,17 @@ const Notification = ({
           pageX: number,
           pageY: number,
         ) => {
-          setPosicionModal({top: pageY + height, left: pageX, width, height});
+          setPosicionModal({ top: pageY + height, left: pageX, width, height });
         },
       );
     }
   };
+
+  useEffect(() => {
+    if (showOptions) {
+      getTopLeft();
+    }
+  });
 
   return (
     <>
@@ -93,5 +88,6 @@ const Notification = ({
     </>
   );
 };
+
 
 export default Notification;

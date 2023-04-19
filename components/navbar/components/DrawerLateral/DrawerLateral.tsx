@@ -1,12 +1,12 @@
-import React from 'react';
-import {View, Modal, TouchableOpacity, Text, ScrollView} from 'react-native';
+import React, { useMemo } from 'react';
+import { View, Modal, TouchableOpacity, Text, ScrollView } from 'react-native';
 import {
   DrawerCurrentIndexType,
   DrawerDataContentType,
   DrawerLateralProps,
 } from '../../Navbar.types';
 import EtendoLogo from '../EtendoLogo/EtendoLogo';
-import {styles} from './DrawerLateral.styles';
+import { styles } from './DrawerLateral.styles';
 import DrawerSectionsContainer from './DrawerSectionsContainer';
 
 const DrawerLateral = ({
@@ -18,13 +18,34 @@ const DrawerLateral = ({
   onOptionSelected,
   onCloseDrawer,
 }: DrawerLateralProps) => {
-  const handleOptionSelected = (
-    route?: string,
-    index?: DrawerCurrentIndexType,
-  ) => {
-    onOptionSelected(route, index);
-    onCloseDrawer();
-  };
+  const handleOptionSelected = useMemo(
+    () => (route?: string, index?: DrawerCurrentIndexType) => {
+      onOptionSelected(route, index);
+      onCloseDrawer();
+    },
+    [onOptionSelected, onCloseDrawer]
+  );
+
+  const drawerContent = useMemo(
+    () =>
+      data?.content?.map(
+        (item: DrawerDataContentType, index: number) => {
+          if (item.sectionType === 'sections') {
+            return (
+              <DrawerSectionsContainer
+                key={'drawerSection' + index}
+                data={item}
+                onOptionSelected={handleOptionSelected}
+                currentIndex={currentIndex}
+                indexSection={index}
+              />
+            );
+          }
+          return null;
+        }
+      ),
+    [data?.content, currentIndex, handleOptionSelected]
+  );
 
   return (
     <View style={styles.container}>
@@ -38,21 +59,7 @@ const DrawerLateral = ({
               >
                 <EtendoLogo onPress={() => {}} />
                 <View style={styles.modalMargin} />
-                {data?.content?.map(
-                  (item: DrawerDataContentType, index: number) => {
-                    if (item.sectionType === 'sections') {
-                      return (
-                        <DrawerSectionsContainer
-                          key={'drawerSection' + index}
-                          data={item}
-                          onOptionSelected={handleOptionSelected}
-                          currentIndex={currentIndex}
-                          indexSection={index}
-                        />
-                      );
-                    }
-                  },
-                )}
+                {drawerContent}
               </ScrollView>
             </View>
           </View>

@@ -28,16 +28,17 @@ const DrawerLateralSubMenu = ({
     indexSubSectionItem: -1,
   });
 
+  const handleOnPress = (route?: string, index?: DrawerCurrentIndexType) => {
+    onSelectOption(route, index);
+    setShowSubMenu(!showSubMenu);
+  };
   const removeMarginBottom = (isRemove: boolean) => {
     if (isRemove) {
       return {marginBottom: 0};
     }
   };
 
-  const handleOnPress = (route?: string, index?: DrawerCurrentIndexType) => {
-    onSelectOption(route, index);
-    setShowSubMenu(!showSubMenu);
-  };
+  const {image, label, subMenu} = data || {};
 
   return (
     <>
@@ -60,14 +61,15 @@ const DrawerLateralSubMenu = ({
           styles.modalSectionItemContainer,
           getStyleSelected(indexHover, indexSection, indexSubSection, -1),
           removeMarginBottom(showSubMenu),
+          showSubMenu && {marginBottom: 0},
         ]}
         onPress={() => {
           setShowSubMenu(!showSubMenu);
         }}
       >
-        {data?.image &&
-          React.cloneElement(data.image, {
-            ...data.image.props,
+        {image &&
+          React.cloneElement(image, {
+            ...image.props,
             fill: getStyleImageSelectedSubSection(
               currentIndex,
               indexSection,
@@ -80,13 +82,13 @@ const DrawerLateralSubMenu = ({
           ellipsizeMode="tail"
           style={styles.modalSectionItemText}
         >
-          {data?.label}
+          {label}
         </Text>
         <ArrowDown style={styles.modalSectionMenuDropdownImage} fill={WHITE} />
       </Pressable>
       {showSubMenu && (
         <View style={styles.modalSectionSubMenuContainer}>
-          {data?.subMenu?.map((item: DrawerDataSubMenuType, index) => {
+          {subMenu?.map((item: DrawerDataSubMenuType, index) => {
             return (
               <Pressable
                 onHoverIn={() => {
@@ -112,9 +114,7 @@ const DrawerLateralSubMenu = ({
                 }
                 style={[
                   styles.modalSectionSubItemContainer,
-                  removeMarginBottom(
-                    data?.subMenu ? data.subMenu.length - 1 === index : false,
-                  ),
+                  subMenu && subMenu.length - 1 === index && {marginBottom: 0},
                   getStyleSelected(
                     currentIndex,
                     indexSection,
