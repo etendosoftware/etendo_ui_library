@@ -1,15 +1,16 @@
 import React from 'react';
 import {Story, Meta} from '@storybook/react';
-
-import {Navbar} from './Navbar';
-
 import {View} from 'react-native';
-import {NavbarV} from './typeOfNavbars/NavbarV';
 import {styles} from './Navbar.styles';
 import addMarginContainer from '../../helpers/addMargin';
-import {WayIcon} from '../../assets/images/icons/WayIcon';
-import {TracingIcon} from '../../assets/images/icons/TracingIcon';
-import {ReportsIcon} from '../../assets/images/icons/ReportsIcon';
+import {DrawerLateral, Navbar, Notification} from './index';
+import {
+  DrawerCurrentIndexType,
+  NavbarProps,
+  OptionNotificationItem,
+} from './Navbar.types';
+import {drawerData, notificationData, profileData} from './Navbar.data';
+import {useState} from '@storybook/addons';
 
 export default {
   title: 'Etendo/Navbar',
@@ -17,56 +18,81 @@ export default {
   argTypes: {},
 } as Meta<typeof Navbar>;
 
-const datasetNavbarV = [
-  {
-    routeImage: (
-      <WayIcon fill="white" style={{width: 40, height: 40, marginTop: 40}} />
-    ),
-    routeNav: '',
-    key: 'dataset0',
-    name: 'Routes',
-  },
-  {
-    routeImage: (
-      <TracingIcon
-        fill="white"
-        style={{width: 40, height: 40, marginTop: 45}}
-      />
-    ),
-    routeNav: '',
-    key: 'dataset1',
-    name: 'Tracing',
-  },
-  {
-    routeImage: (
-      <ReportsIcon
-        fill="white"
-        style={{width: 40, height: 40, marginTop: 45}}
-      />
-    ),
-    routeNav: '',
-    key: 'dataset2',
-    name: 'Reports',
-  },
-];
-
 /* Templates */
-const Template1: Story<any> = args => (
-  <View style={[styles.storiesContainer, addMarginContainer()]}>
-    <NavbarV
-      data={datasetNavbarV}
-      onChangeSelected={() => {}}
-      typeOfNavbar="vertical"
-      pathname={'./login'}
-    />
-  </View>
-);
+const TemplateDefault: Story<NavbarProps> = ({...args}) => {
+  return (
+    <View style={[styles.storiesContainer, addMarginContainer()]}>
+      <Navbar {...args} />
+    </View>
+  );
+};
+
+const TemplateVariant: Story<NavbarProps> = ({...args}) => {
+  const [visibleDrawer, setVisibleDrawer] = useState<boolean>(false);
+  const [currentIndex, setCurrentIndex] = useState<
+    DrawerCurrentIndexType | undefined
+  >({indexSection: -1, indexSubSection: -1, indexSubSectionItem: -1});
+  const [dataNotification, setDataNotification] = useState<
+    OptionNotificationItem[]
+  >(notificationData);
+
+  const OnOptionSelectedotification = (item: any, index: number) => {
+    setDataNotification(dataNotification.filter((item, i) => i !== index));
+  };
+  return (
+    <View style={[styles.storiesContainer, addMarginContainer()]}>
+      <Navbar
+        name="Dana"
+        email="dana.scott@etendo.es"
+        leftComponent={<></>}
+        rightComponent={
+          <>
+            <Notification
+              data={dataNotification}
+              onOptionSelected={OnOptionSelectedotification}
+              onViewAllNotifications={() => {}}
+              onMarkAllAsReadNotifications={() => setDataNotification([])}
+              anyNotification={dataNotification.length > 0}
+            />
+          </>
+        }
+        optionsProfile={profileData}
+        onOptionSelectedProfile={() => {}}
+        onPressLogo={() => {}}
+        onPressMenuBurger={() => {
+          setVisibleDrawer(true);
+        }}
+      />
+      <DrawerLateral
+        data={drawerData}
+        currentIndex={currentIndex}
+        copyright="Copyright @ 2023 Etendo"
+        version="1.1.0"
+        onOptionSelected={(route, index) => {
+          setCurrentIndex(index);
+        }}
+        showDrawer={visibleDrawer}
+        onCloseDrawer={() => {
+          setVisibleDrawer(false);
+        }}
+      />
+    </View>
+  );
+};
 
 /* Stories exports */
-export const NavbarVerticalDefault = Template1.bind({});
+export const NavbarVerticalDefault = TemplateDefault.bind({});
+export const NavbarVerticalVariant = TemplateVariant.bind({});
+
 NavbarVerticalDefault.args = {
-  data: datasetNavbarV,
-  onChangeSelected: () => {},
-  typeOfNavbar: 'vertical',
-  pathname: './login',
+  name: 'Dana',
+  email: 'dana.scott@etendo.es',
+  leftComponent: <></>,
+  rightComponent: <></>,
+  optionsProfile: profileData,
+  onOptionSelectedProfile: () => {},
+  onPressMenuBurger: ()=> {},
+  onPressLogo: () => {},
 };
+
+NavbarVerticalVariant.args = {};
