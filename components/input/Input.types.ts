@@ -70,11 +70,14 @@ export interface InputProps {
   fontSize?: number;
   height?: number | string;
   password?: boolean;
-  onPress?: (event: GestureResponderEvent) => void;
-  onSubmit?: (event: GestureResponderEvent) => void;
+  dataPicker?: any;
+  displayKey?: string;
+  onPress?: (event?: GestureResponderEvent) => void;
+  onSubmit?: (event?: GestureResponderEvent) => void;
   onChangeText?: (text: string) => void;
-  onFocus?: (event: NativeSyntheticEvent<TextInputFocusEventData>) => void;
-  onBlur?: (event: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+  onFocus?: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+  onBlur?: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+  onOptionSelected?: any;
 }
 
 export interface InputTitleProps {
@@ -101,20 +104,40 @@ export interface InputFieldProps {
     textDefault: TextStyle | TextStyle[];
     textPlaceholder: TextStyle | TextStyle[];
   };
+  type: InputFieldVariants;
   maxLength?: number;
   centerText?: boolean;
   numberOfLines?: number;
   fontSize?: number;
   height?: number | string;
   password?: boolean;
-  onPress?: (event: GestureResponderEvent) => void;
-  onSubmit?: (event: GestureResponderEvent) => void;
+  dataPicker?: any;
+  displayKey?: string;
+  onOptionSelected?: any;
+  onPress?: (event?: GestureResponderEvent) => void;
+  onSubmit?: (event?: GestureResponderEvent) => void;
   onChangeText?: (text: string) => void;
-  onFocus: (event: NativeSyntheticEvent<TextInputFocusEventData>) => void;
-  onBlur: (event: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+  onFocus: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+  onBlur: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
 }
 
 export interface InputHelperProps {
   styleHelper: TextStyle | TextStyle[];
   label?: string;
+}
+
+export interface InputOptionsProps {
+  data: any;
+  displayKey?: string;
+  onOptionSelected: (item: any, index: number) => void;
+  showOptions: boolean;
+  positionModal: {
+    top: number;
+    left: number;
+    width: number;
+    height: number;
+  };
+  onClose: (event?: GestureResponderEvent) => void;
+  onChangeFilterText: (text: string) => void;
+  filterValue: string;
 }

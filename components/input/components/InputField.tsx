@@ -1,22 +1,24 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
-  Image,
   Text,
   TextInput,
   TextStyle,
   TouchableOpacity,
   KeyboardType,
   View,
+  GestureResponderEvent,
+  Dimensions,
 } from 'react-native';
-import addImageStyle from '../../../helpers/image_utils';
 import {styles} from '../Input.style';
 import {InputFieldProps, KeyboardTypes} from '../Input.types';
 
 import {BLACK} from '../../../styles/colors';
-import {ShowPassword} from '../../../assets/images/icons/ShowPassword';
-import {HidePassword} from '../../../assets/images/icons/HidePassword';
+import InputOptions from './InputOptions';
+import { ShowPassword } from '../../../assets/images/icons/ShowPassword';
+import { HidePassword } from '../../../assets/images/icons/HidePassword';
 
 const InputField = ({
+  type,
   configField,
   styleField,
   value,
@@ -24,9 +26,12 @@ const InputField = ({
   placeholder,
   maxLength,
   keyboardType,
+  dataPicker,
+  displayKey,
   onPress,
   onSubmit,
   onChangeText,
+  onOptionSelected,
   onFocus,
   onBlur,
   fontSize,
@@ -34,6 +39,18 @@ const InputField = ({
   password,
 }: InputFieldProps) => {
   const [showImg, setShowImg] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState(password);
+  const [showOptions, setShowOptions] = useState<boolean>(false);
+  const [dataOptionsFilter, setDataOptionsFilter] = useState<any>([]);
+  const [filterValue, setFilterValue] = useState<string>('');
+  const [positionModal, setpositionModal] = useState<any>({
+    top: 0,
+    left: 0,
+    width: 0,
+    height: 0,
+  });
+  const windowHeight = Dimensions.get('window').height;
+  const refComponente = useRef<TouchableOpacity>(null);
   const regex = /^[0-9.,]+$/g;
 
   const getStyleText = (text: string | undefined, password?: boolean) => {
@@ -57,11 +74,52 @@ const InputField = ({
 
     return style;
   };
+
   useEffect(() => {
-    if (!password) {
-      setShowPassword(false);
+    if (showOptions){ 
+      getTopLeft();
     }
-  }, [password]);
+  });
+
+  const getTopLeft = () => {
+    if (refComponente.current) {
+      refComponente.current.measure(
+        (
+          x: number,
+          y: number,
+          width: number,
+          height: number,
+          pageX: number,
+          pageY: number,
+        ) => {
+          let dropdownHeight = pageY + height + 188;
+          if (dropdownHeight > windowHeight) {
+            setpositionModal({
+              top: pageY - height - 150,
+              left: pageX,
+              width,
+              height,
+            });
+          } else {
+            setpositionModal({top: pageY + height, left: pageX, width, height});
+          }
+        },
+      );
+    }
+  };
+
+  const handleOnChangeFilterText = (filterText: string) => {
+    setFilterValue(filterText);
+    setDataOptionsFilter(
+      dataPicker.filter((item: any) => item.label.toLocaleLowerCase().includes(filterText.toLocaleLowerCase())),
+    );
+  };
+
+  const handleOnClose = () => {
+    setShowOptions(false);
+    setDataOptionsFilter(dataPicker);
+    setFilterValue('');
+  };
 
   const getKeyboardType = (
     keyboardType: KeyboardTypes | undefined,
@@ -88,37 +146,61 @@ const InputField = ({
     configField?.image ? setShowImg(true) : setShowImg(false);
   }, [configField?.image]);
 
-  const [showPassword, setShowPassword] = useState(password);
+  useEffect(() => {
+    if (!password) {
+      setShowPassword(false);
+    }
+  }, [password]);
 
+  useEffect(() => {
+    if (dataPicker) setDataOptionsFilter(dataPicker);
+  }, [dataPicker]);
+
+  useEffect(() => {
+    if (filterValue) setFilterValue('');
+  }, [showOptions]);
+
+  const handleOnPress = (event?: GestureResponderEvent) => {
+    if (type === 'picker') {
+      getTopLeft();
+      setShowOptions(true);
+    }
+
+    if (onPress) {
+      onPress(event);
+    }
+  };
   return (
-    <TouchableOpacity
-      style={styleField.field}
-      onPress={onPress}
-      disabled={disabled || configField.disabledField}
-    >
-      {(() => {
-        if (configField?.type === 'textInput') {
-          return (
-            <View
-              style={{
-                flexDirection: 'row',
-                width: '100%',
-              }}
-            >
-              <TextInput
-                editable={!disabled || !configField.disabledField}
-                focusable={!disabled || !configField.disabledField}
-                onBlur={onBlur}
-                onFocus={onFocus}
-                value={value}
-                keyboardType={getKeyboardType(keyboardType)}
-                onChangeText={getOnChangeText}
-                style={[getStyleText(value, password)]}
-                placeholder={placeholder}
-                maxLength={maxLength}
-                secureTextEntry={showPassword}
-              />
-              {password && (
+    <>
+      <TouchableOpacity
+        ref={refComponente}
+        style={styleField.field}
+        onPress={handleOnPress}
+        disabled={disabled || configField.disabledField}
+      >
+        {(() => {
+          if (configField?.type === 'textInput') {
+            return (
+              <View
+                style={{
+                  flexDirection: 'row',
+                  width: '100%',
+                }}
+              >
+                <TextInput
+                  editable={!disabled || !configField.disabledField}
+                  focusable={!disabled || !configField.disabledField}
+                  onBlur={onBlur}
+                  onFocus={onFocus}
+                  value={value}
+                  keyboardType={getKeyboardType(keyboardType)}
+                  onChangeText={getOnChangeText}
+                  style={[getStyleText(value, password)]}
+                  placeholder={placeholder}
+                  maxLength={maxLength}
+                  secureTextEntry={showPassword}
+                />
+                 {password && (
                 <TouchableOpacity
                   onPress={() => setShowPassword(!showPassword)}
                   style={styles.passwordContainer}
@@ -130,21 +212,21 @@ const InputField = ({
                   )}
                 </TouchableOpacity>
               )}
-            </View>
-          );
-        }
-        if (configField?.type === 'text') {
-          return (
-            <Text ellipsizeMode="tail" style={getStyleText(value, password)}>
-              {value ? value : placeholder}
-            </Text>
-          );
-        }
-      })()}
-      {(() => {
-        if (showImg) {
-          return (
-            <View style={styles.showImgContainer}>
+              </View>
+            );
+          }
+          if (configField?.type === 'text') {
+            return (
+              <Text ellipsizeMode="tail" style={getStyleText(value, password)}>
+                {value ? value : placeholder}
+              </Text>
+            );
+          }
+        })()}
+        {(() => {
+          if (showImg) {
+            return (
+              <View style={styles.showImgContainer}>
               <TouchableOpacity
                 onPress={onSubmit}
                 style={styles.buttonContainerInputField}
@@ -153,10 +235,21 @@ const InputField = ({
                 {configField?.image && configField?.image}
               </TouchableOpacity>
             </View>
-          );
-        }
-      })()}
-    </TouchableOpacity>
+            );
+          }
+        })()}
+        <InputOptions
+          onOptionSelected={onOptionSelected}
+          showOptions={showOptions}
+          positionModal={positionModal}
+          data={dataOptionsFilter}
+          onClose={handleOnClose}
+          onChangeFilterText={handleOnChangeFilterText}
+          filterValue={filterValue}
+          displayKey={displayKey}
+        />
+      </TouchableOpacity>
+    </>
   );
 };
 
