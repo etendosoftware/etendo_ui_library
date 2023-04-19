@@ -1,7 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {
   BLACK,
-  BLACK_TRANSPARENT,
   BLUE,
   GREY_10,
   GREY_40,

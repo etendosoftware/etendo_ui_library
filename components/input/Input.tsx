@@ -3,6 +3,7 @@ import {View} from 'react-native';
 import {inputStyleVariants, inputVariants, styles} from './Input.style';
 import {InputProps} from './Input.types';
 import {InputTitle, InputField, InputHelperText} from './index';
+import { type } from 'os';
 
 const Input = ({
   value,
@@ -12,23 +13,22 @@ const Input = ({
   placeholder,
   disabled,
   maxLength,
-  numberOfLines,
   centerText,
   keyboardType,
+  displayKey,
+  dataPicker,
   onPress,
   onSubmit,
   onFocus,
   onBlur,
   onChangeText,
+  onOptionSelected,
   typeField,
   isError,
-  fontSize,
-  height,
-  password,
 }: InputProps) => {
   const stateStyle = () => {
-    if (typeField === 'onlyRead') {
-      return inputStyleVariants.onlyRead;
+    if (typeField === 'readOnly') {
+      return inputStyleVariants.readOnly;
     } else if (disabled) {
       return inputStyleVariants.disabled;
     } else if (isError) {
@@ -42,12 +42,13 @@ const Input = ({
     <View style={styles.inputContainer}>
       <InputTitle
         disabled={disabled}
-        title={titleLabel}
-        image={titleImage}
+        titleLabel={titleLabel}
+        titleImage={titleImage}
         styleTitle={stateStyle().titleStyle}
       />
       <InputField
         disabled={disabled}
+        type={typeField}
         configField={inputVariants[typeField].field}
         styleField={stateStyle().fieldStyle}
         placeholder={placeholder}
@@ -57,13 +58,12 @@ const Input = ({
         onFocus={onFocus ? onFocus : () => {}}
         onBlur={onBlur ? onBlur : () => {}}
         onChangeText={onChangeText}
+        onOptionSelected={onOptionSelected}
         keyboardType={keyboardType}
         maxLength={maxLength}
-        numberOfLines={numberOfLines}
         centerText={centerText}
-        fontSize={fontSize}
-        height={height}
-        password={password}
+        dataPicker={dataPicker}
+        displayKey={displayKey}
       />
       <InputHelperText
         label={helperText}

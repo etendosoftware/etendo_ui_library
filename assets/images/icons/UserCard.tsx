@@ -1,9 +1,9 @@
-import React, {CSSProperties} from 'react';
-import {ViewStyle} from 'react-native';
+import React from 'react';
+import {ImageStyle} from 'react-native';
 import {Svg, Path} from 'react-native-svg';
 
 export interface SvgImageProps {
-  style?: CSSProperties;
+  style?: ImageStyle;
   fill?: string;
 }
 
@@ -14,7 +14,7 @@ export const UserCard = ({style, fill}: SvgImageProps) => {
       height={style?.height || 32}
       viewBox="0 0 28 32"
       fill="none"
-      style={style as ViewStyle}
+      style={style}
     >
       <Path
         d="M10.673 0C10.9596 0.191079 11.2227 0.323172 11.4255 0.510097C14.8704 3.67646 18.3108 6.84699 21.7467 10.0217L26.7788 14.6599C27.4097 15.2414 27.4097 15.5264 26.7698 16.1179L17.5706 24.6043C16.9163 25.2074 16.6099 25.2058 15.9548 24.6043C10.8553 19.9032 5.75765 15.2024 0.661782 10.5019C0.021945 9.912 0.0174391 9.62206 0.644659 9.04301C3.7333 6.19455 6.82374 3.34775 9.91599 0.50262C10.1197 0.316526 10.3855 0.187756 10.673 0ZM25.3063 15.4117L10.6414 1.88919L2.09556 9.76495L16.7595 23.29C19.6037 20.6681 22.4685 18.0279 25.3063 15.4117Z"
