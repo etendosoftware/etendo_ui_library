@@ -14,12 +14,7 @@ export const NavbarHTablet = ({
   return (
     <View style={NavbarHStyleVariant.tablet.container}>
       <TouchableOpacity onPress={() => onChangeSelected}>
-        <Image
-          style={NavbarHStyleVariant.tablet.tinyLogo}
-          source={data[0].routeImage}
-        />
       </TouchableOpacity>
-
       <View style={NavbarHStyleVariant.tablet.containerImages}>
         {data.map((image: Info, i: number) => {
           if (i >= 2) {
@@ -27,10 +22,6 @@ export const NavbarHTablet = ({
               <TouchableOpacity
                 onPress={() => onChangeSelected}
                 key={image.key}>
-                <Image
-                  style={NavbarHStyleVariant.tablet.navIcons}
-                  source={image.routeImage}
-                />
               </TouchableOpacity>
             );
           }

@@ -1,9 +1,9 @@
-import React, {CSSProperties} from 'react';
-import {ViewStyle} from 'react-native';
-import {Svg, Path, Rect} from 'react-native-svg';
+import React from 'react';
+import {ImageStyle} from 'react-native';
+import {Svg, Rect} from 'react-native-svg';
 
 export interface SvgImageProps {
-  style?: CSSProperties;
+  style?: ImageStyle;
   fill?: string;
   stroke?: string;
 }
@@ -15,7 +15,7 @@ export const CheckFalse = ({style, fill, stroke}: SvgImageProps) => {
       height={style?.height || 25}
       viewBox="0 0 25 25"
       fill="none"
-      style={style as ViewStyle}
+      style={style}
     >
       <Rect
         x="0.75"

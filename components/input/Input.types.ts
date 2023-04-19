@@ -3,6 +3,7 @@ import {
   GestureResponderEvent,
   NativeSyntheticEvent,
   TargetedEvent,
+  TextInputFocusEventData,
   TextStyle,
   ViewStyle,
 } from 'react-native';
@@ -67,11 +68,16 @@ export interface InputProps {
   centerText?: boolean;
   typeField: InputFieldVariants;
   keyboardType?: KeyboardTypes;
-  onPress?: (event: GestureResponderEvent) => void;
-  onSubmit?: (event: GestureResponderEvent) => void;
+  fontSize?: number;
+  height?: number | string;
+  dataPicker?: any;
+  displayKey?: string;
+  onPress?: (event?: GestureResponderEvent) => void;
+  onSubmit?: (event?: GestureResponderEvent) => void;
   onChangeText?: (text: string) => void;
-  onFocus?: (event: NativeSyntheticEvent<TargetedEvent>) => void;
-  onBlur?: (event: NativeSyntheticEvent<TargetedEvent>) => void;
+  onFocus?: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+  onBlur?: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+  onOptionSelected?: any;
 }
 
 export interface InputTitleProps {
@@ -101,14 +107,36 @@ export interface InputFieldProps {
   type: InputFieldVariants;
   maxLength?: number;
   centerText?: boolean;
-  onPress?: (event: GestureResponderEvent) => void;
-  onSubmit?: (event: GestureResponderEvent) => void;
+  numberOfLines?: number;
+  fontSize?: number;
+  height?: number | string;
+  dataPicker?: any;
+  displayKey?: string;
+  onOptionSelected?: any;
+  onPress?: (event?: GestureResponderEvent) => void;
+  onSubmit?: (event?: GestureResponderEvent) => void;
   onChangeText?: (text: string) => void;
-  onFocus: (event: NativeSyntheticEvent<TargetedEvent>) => void;
-  onBlur: (event: NativeSyntheticEvent<TargetedEvent>) => void;
+  onFocus: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+  onBlur: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
 }
 
 export interface InputHelperProps {
   styleHelper: TextStyle | TextStyle[];
   label?: string;
+}
+
+export interface InputOptionsProps {
+  data: any;
+  displayKey?: string;
+  onOptionSelected: (item: any, index: number) => void;
+  showOptions: boolean;
+  positionModal: {
+    top: number;
+    left: number;
+    width: number;
+    height: number;
+  };
+  onClose: (event?: GestureResponderEvent) => void;
+  onChangeFilterText: (text: string) => void;
+  filterValue: string;
 }

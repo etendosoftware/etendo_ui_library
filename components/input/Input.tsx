@@ -3,6 +3,7 @@ import {View} from 'react-native';
 import {inputStyleVariants, inputVariants, styles} from './Input.style';
 import {InputProps} from './Input.types';
 import {InputTitle, InputField, InputHelperText} from './index';
+import { type } from 'os';
 
 const Input = ({
   value,
@@ -14,11 +15,14 @@ const Input = ({
   maxLength,
   centerText,
   keyboardType,
+  displayKey,
+  dataPicker,
   onPress,
   onSubmit,
   onFocus,
   onBlur,
   onChangeText,
+  onOptionSelected,
   typeField,
   isError,
 }: InputProps) => {
@@ -44,6 +48,7 @@ const Input = ({
       />
       <InputField
         disabled={disabled}
+        type={typeField}
         configField={inputVariants[typeField].field}
         styleField={stateStyle().fieldStyle}
         placeholder={placeholder}
@@ -53,10 +58,12 @@ const Input = ({
         onFocus={onFocus ? onFocus : () => {}}
         onBlur={onBlur ? onBlur : () => {}}
         onChangeText={onChangeText}
+        onOptionSelected={onOptionSelected}
         keyboardType={keyboardType}
         maxLength={maxLength}
         centerText={centerText}
-        type={typeField}
+        dataPicker={dataPicker}
+        displayKey={displayKey}
       />
       <InputHelperText
         label={helperText}

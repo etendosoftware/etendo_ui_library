@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   Text,
   TextInput,
@@ -10,13 +10,18 @@ import {
   TextInputFocusEventData,
   ViewStyle,
   Platform,
+  Dimensions,
+  GestureResponderEvent,
 } from 'react-native';
+
 import {styles} from '../Input.style';
 import {InputFieldProps, KeyboardTypes} from '../Input.types';
 import {ShowPassword} from '../../../assets/images/icons/ShowPassword';
 import {HidePassword} from '../../../assets/images/icons/HidePassword';
+import InputOptions from './InputOptions';
 
 const InputField = ({
+  type,
   configField,
   styleField,
   value,
@@ -24,16 +29,28 @@ const InputField = ({
   placeholder,
   maxLength,
   keyboardType,
-  type,
+  dataPicker,
+  displayKey,
   onPress,
   onSubmit,
   onChangeText,
+  onOptionSelected,
   onFocus,
   onBlur,
 }: InputFieldProps) => {
   const [isFocus, setIsFocus] = useState<boolean>(false);
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-
+  const [showPassword, setShowPassword] = useState(false);
+  const [showOptions, setShowOptions] = useState<boolean>(false);
+  const [dataOptionsFilter, setDataOptionsFilter] = useState<any>([]);
+  const [filterValue, setFilterValue] = useState<string>('');
+  const [positionModal, setpositionModal] = useState<any>({
+    top: 0,
+    left: 0,
+    width: 0,
+    height: 0,
+  });
+  const windowHeight = Dimensions.get('window').height;
+  const refComponente = useRef<TouchableOpacity>(null);
   const regex = /^[0-9.,]+$/g;
   const isWeb = Platform.OS === 'web';
 
@@ -54,6 +71,60 @@ const InputField = ({
     }
 
     return style as TextStyle;
+  };
+
+  useEffect(() => {
+    if (dataPicker) {
+      setDataOptionsFilter(dataPicker);
+    }
+  }, [dataPicker]);
+
+  useEffect(() => {
+    if (showOptions) {
+      getTopLeft();
+    }
+  });
+
+  const getTopLeft = () => {
+    if (refComponente.current) {
+      refComponente.current.measure(
+        (
+          x: number,
+          y: number,
+          width: number,
+          height: number,
+          pageX: number,
+          pageY: number,
+        ) => {
+          let dropdownHeight = pageY + height + 188;
+          if (dropdownHeight > windowHeight) {
+            setpositionModal({
+              top: pageY - height - 136,
+              left: pageX,
+              width,
+              height,
+            });
+          } else {
+            setpositionModal({top: pageY + height, left: pageX, width, height});
+          }
+        },
+      );
+    }
+  };
+
+  const handleOnChangeFilterText = (filterText: string) => {
+    setFilterValue(filterText);
+    setDataOptionsFilter(
+      dataPicker.filter((item: any) =>
+        item.label.toLocaleLowerCase().includes(filterText.toLocaleLowerCase()),
+      ),
+    );
+  };
+
+  const handleOnClose = () => {
+    setShowOptions(false);
+    setDataOptionsFilter(dataPicker);
+    setFilterValue('');
   };
 
   const getKeyboardType = (
@@ -124,12 +195,25 @@ const InputField = ({
       onSubmit;
     }
   };
+
+  const handleOnPress = (event?: GestureResponderEvent) => {
+    if (type === 'picker') {
+      getTopLeft();
+      setShowOptions(true);
+    }
+
+    if (onPress) {
+      onPress(event);
+    }
+  };
+
   return (
     <View style={[styleField.focus, getFocusStyle()]}>
       <TouchableOpacity
+        ref={refComponente}
         style={[styleField.field, removePaddingField()]}
         disabled={disabled || configField.disabledField}
-        onPress={onPress}
+        onPress={handleOnPress}
       >
         {configField?.type === 'textInput' && (
           <TextInput
@@ -164,6 +248,16 @@ const InputField = ({
             {getImage(configField.image)}
           </TouchableOpacity>
         )}
+        <InputOptions
+          onOptionSelected={onOptionSelected}
+          showOptions={showOptions}
+          positionModal={positionModal}
+          data={dataOptionsFilter}
+          onClose={handleOnClose}
+          onChangeFilterText={handleOnChangeFilterText}
+          filterValue={filterValue}
+          displayKey={displayKey}
+        />
       </TouchableOpacity>
     </View>
   );

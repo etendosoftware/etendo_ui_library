@@ -6,6 +6,7 @@ import {View} from 'react-native';
 import {styles} from './Button.styles';
 import addMarginContainer from '../../helpers/addMargin';
 import {CheckIcon} from '../../assets/images/icons/CheckIcon';
+import {WHITE} from '../../styles/colors';
 
 const meta: Meta = {
   title: 'Etendo/Button',
@@ -28,7 +29,7 @@ const Template1: Story<ButtonProps> = args => (
         onPress={() => {}}
         image={
           <CheckIcon
-            fill={'white'}
+            fill={WHITE}
             style={{
               marginRight: 10,
               width: 12,
@@ -38,9 +39,7 @@ const Template1: Story<ButtonProps> = args => (
         }
         text={'Primary'}
         typeStyle={'primary'}
-        typeSize={'medium'}
-        width={150}
-        height={50}
+        width={'full'}
       />
     </View>
     <View style={styles.storiesButtonContainer}>
@@ -57,9 +56,7 @@ const Template1: Story<ButtonProps> = args => (
         }
         text={'Secondary'}
         typeStyle={'secondary'}
-        typeSize={'medium'}
-        width={150}
-        height={50}
+        width={'full'}
       />
     </View>
     <View style={styles.storiesButtonContainer}>
@@ -76,9 +73,7 @@ const Template1: Story<ButtonProps> = args => (
         }
         text={'Terciary'}
         typeStyle={'terciary'}
-        typeSize={'medium'}
-        width={150}
-        height={50}
+        width={'full'}
       />
     </View>
     <View style={styles.storiesButtonContainer}>
@@ -95,9 +90,7 @@ const Template1: Story<ButtonProps> = args => (
         }
         text={'White'}
         typeStyle={'white'}
-        typeSize={'medium'}
-        width={150}
-        height={50}
+        width={'full'}
       />
     </View>
     <View style={styles.storiesButtonContainer}>
@@ -114,9 +107,7 @@ const Template1: Story<ButtonProps> = args => (
         }
         text={'WhiteBorder'}
         typeStyle={'whiteBorder'}
-        typeSize={'medium'}
-        width={150}
-        height={50}
+        width={'full'}
       />
     </View>
   </View>
@@ -129,7 +120,6 @@ ButtonDefault.args = {
   text: 'Button',
   typeStyle: 'primary',
   disabled: false,
-  typeSize: 'medium',
   width: 150,
   height: 50,
 };

@@ -8,7 +8,7 @@ import {
   YELLOW,
   YELLOW_30,
 } from '../../styles/colors';
-import {buttonSizeVariant, buttonStyleVariant} from './Button.types';
+import {buttonStyleVariant} from './Button.types';
 
 export const ButtonStyleVariant: buttonStyleVariant = {
   primary: {
@@ -17,14 +17,13 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       borderRadius: 5,
       flexDirection: 'row',
       justifyContent: 'center',
-      width: '100%',
       height: '100%',
       alignItems: 'center',
+      padding: 24,
     },
     text: {
       color: WHITE,
       fontWeight: '600',
-      fontSize: 16,
     },
     containerDisabled: {
       backgroundColor: GREY_BLUE_50,
@@ -37,9 +36,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       color: WHITE,
       fontWeight: 'bold',
     },
-    imageColor: {
-      tintColor: WHITE,
-    },
+    imageColor: WHITE,
   },
   secondary: {
     container: {
@@ -48,6 +45,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
+      padding: 24,
     },
     text: {
       color: BLUE,
@@ -64,9 +62,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       color: GREY_BLUE_50,
       fontWeight: 'bold',
     },
-    imageColor: {
-      tintColor: BLUE,
-    },
+    imageColor: BLUE,
   },
   terciary: {
     container: {
@@ -75,6 +71,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
+      padding: 24,
     },
     text: {
       color: BLUE,
@@ -91,9 +88,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       color: GREY_BLUE_50,
       fontWeight: 'bold',
     },
-    imageColor: {
-      tintColor: BLUE,
-    },
+    imageColor: BLUE,
   },
   whiteBorder: {
     container: {
@@ -104,6 +99,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       borderColor: BLUE,
       justifyContent: 'center',
       alignItems: 'center',
+      padding: 24,
     },
     text: {
       color: BLUE,
@@ -122,9 +118,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       color: GREY_BLUE_50,
       fontWeight: 'bold',
     },
-    imageColor: {
-      tintColor: BLUE,
-    },
+    imageColor: BLUE,
   },
   white: {
     container: {
@@ -133,6 +127,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
+      padding: 24,
     },
     text: {
       color: BLUE,
@@ -149,39 +144,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       color: GREY_BLUE_50,
       fontWeight: 'bold',
     },
-    imageColor: {
-      tintColor: BLUE,
-    },
-  },
-};
-
-export const ButtonSizeVariant: buttonSizeVariant = {
-  small: {
-    containerSize: {
-      paddingVertical: 4,
-      paddingHorizontal: 8,
-    },
-    buttonSize: {
-      fontSize: 14,
-    },
-  },
-  medium: {
-    containerSize: {
-      paddingVertical: 10,
-      paddingHorizontal: 12,
-    },
-    buttonSize: {
-      fontSize: 18,
-    },
-  },
-  large: {
-    containerSize: {
-      paddingVertical: 14,
-      paddingHorizontal: 18,
-    },
-    buttonSize: {
-      fontSize: 20,
-    },
+    imageColor: BLUE,
   },
 };
 
@@ -192,6 +155,7 @@ export const styles = StyleSheet.create({
     alignItems: 'flex-start',
     flex: 1,
     width: '100%',
+
     justifyContent: 'space-between',
   },
   storiesButtonContainer: {

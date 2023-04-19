@@ -14,16 +14,7 @@ export const NavbarHMobile = ({
   return (
     <View style={NavbarHStyleVariant.mobile.container}>
       <TouchableOpacity onPress={() => onChangeSelected}>
-        <Image
-          style={NavbarHStyleVariant.mobile.tinyLogoImage}
-          source={data[0].routeImage}
-        />
       </TouchableOpacity>
-
-      <Image
-        style={NavbarHStyleVariant.mobile.more}
-        source={data[1].routeImage}
-      />
     </View>
   );
 };

@@ -6,8 +6,6 @@ import {InputProps} from './Input.types';
 import {View} from 'react-native';
 import {styles} from './Input.style';
 import addMarginContainer from '../../helpers/addMargin';
-import {GoIcon} from '../../assets/images/icons/GoIcon';
-import {DocumentIcon} from '../../assets/images/icons/DocumentIcon';
 import {PencilIcon} from '../../assets/images/icons/PencilIcon';
 
 const meta: Meta = {
@@ -16,7 +14,11 @@ const meta: Meta = {
   argTypes: {},
 };
 
-const Template0: Story<InputProps> = ({value = '', onChangeText, ...args}) => {
+const TemplateDefault: Story<InputProps> = ({
+  value = '',
+  onChangeText,
+  ...args
+}) => {
   const [text, setText] = useState(value);
   return (
     <View style={[styles.storiesInputContainer, addMarginContainer()]}>
@@ -25,10 +27,12 @@ const Template0: Story<InputProps> = ({value = '', onChangeText, ...args}) => {
   );
 };
 
-const Template1: Story<InputProps> = args => {
+const TemplateVariant: Story<InputProps> = ({}) => {
   const [textInputSearch, setTextInputSearch] = useState<string>('');
   const [textInput, setTextInput] = useState<string>('');
   const [textInputPassword, setTextInputPassword] = useState<string>('');
+  const [optionSelected, setOptionSelected] = useState({label: ''});
+
   return (
     <View style={[styles.storiesContainer, addMarginContainer()]}>
       <View style={styles.storiesInputContainer}>
@@ -49,10 +53,24 @@ const Template1: Story<InputProps> = args => {
           helperText="Cars"
           placeholder="Chevrolet"
           disabled={false}
-          value=""
+          value={optionSelected.label}
           typeField="picker"
           isError={false}
           keyboardType="text"
+          onOptionSelected={(item: any, index: number) => {
+            setOptionSelected(item);
+          }}
+          displayKey="label"
+          dataPicker={[
+            {label: 'Option 1', id: '1'},
+            {label: 'Option 2', id: '2'},
+            {label: 'Option 3', id: '3'},
+            {label: 'Option 4', id: '4'},
+            {label: 'Option 5', id: '5'},
+            {label: 'Option 6', id: '6'},
+            {label: 'Option 7', id: '7'},
+            {label: 'Option 8', id: '8'},
+          ]}
         />
       </View>
       <View style={styles.storiesInputContainer}>
@@ -123,8 +141,8 @@ const Template1: Story<InputProps> = args => {
 };
 
 export default meta;
-export const InputDefault = Template0.bind({});
-export const InputVariant = Template1.bind({});
+export const InputDefault = TemplateDefault.bind({});
+export const InputVariant = TemplateVariant.bind({});
 
 InputDefault.args = {
   titleImage: <PencilIcon style={styles.inputImageSize} />,

@@ -3,6 +3,7 @@ import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
 import {InputVariantsType, TypeInputStyleVariant} from './Input.types';
 import {
   BLUE,
+  GREY_10,
   GREY_5,
   GREY_60,
   GREY_BLUE,
@@ -10,6 +11,7 @@ import {
   PURPLE_50,
   RED,
   RED_10,
+  WHITE,
 } from '../../styles/colors';
 import {ArrowDown} from '../../assets/images/icons/ArrowDown';
 import {SearchIcon} from '../../assets/images/icons/SearchIcon';
@@ -236,5 +238,53 @@ export const styles = StyleSheet.create({
   storiesInputContainer: {
     height: 115,
     width: 300,
+  },
+  optionContainer: {
+    paddingHorizontal: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 35,
+  },
+  optionText: {
+    color: BLUE,
+    fontSize: 16,
+  },
+  optionFilterText: {
+    color: BLUE,
+    fontSize: 16,
+    height: 35,
+    padding: 0,
+    width: '100%',
+    paddingLeft: 10,
+  },
+  optionOverlay: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  optionsContainer: {
+    position: 'absolute',
+    backgroundColor: WHITE,
+    borderRadius: 5,
+    borderWidth: 1.5,
+    borderColor: GREY_10,
+    zIndex: 2,
+  },
+  optionsItemsContainer: {
+    maxHeight: 140,
+  },
+  optionFilterContainer: {
+    height: 35,
+    borderBottomWidth: 1,
+    borderBottomColor: GREY_10,
+    marginHorizontal: 9,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 9,
+  },
+  optionFilterImg: {
+    width: 12,
+    height: 12,
   },
 });
