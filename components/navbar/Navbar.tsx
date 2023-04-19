@@ -16,7 +16,9 @@ export const Navbar = ({data, onChangeSelected, typeOfNavbar}: NavbarProps) => {
     return (
       <ScrollView>
         {width >= 768 && (
-          <NavbarHDesktop data={data} onChangeSelected={onChangeSelected} />
+          <NavbarHDesktop data={data} onChangeSelected={onChangeSelected} title={''} navigationLogin={function () {
+            throw new Error('Function not implemented.');
+          } } />
         )}
       </ScrollView>
     );

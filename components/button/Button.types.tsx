@@ -1,4 +1,4 @@
-import {ImageStyle, TextStyle, ViewStyle} from 'react-native';
+import {ColorValue, TextStyle, ViewStyle} from 'react-native';
 
 export type ButtonStyleType =
   | 'primary'
@@ -7,8 +7,6 @@ export type ButtonStyleType =
   | 'whiteBorder'
   | 'white';
 
-export type ButtonSizeType = 'small' | 'medium' | 'large';
-
 export type buttonStyleVariant = Record<
   ButtonStyleType,
   {
@@ -16,15 +14,7 @@ export type buttonStyleVariant = Record<
     text: TextStyle;
     containerDisabled: ViewStyle;
     textDisabled: TextStyle;
-    imageColor: ImageStyle;
-  }
->;
-
-export type buttonSizeVariant = Record<
-  ButtonSizeType,
-  {
-    buttonSize: TextStyle;
-    containerSize: ViewStyle;
+    imageColor: ColorValue;
   }
 >;
 
@@ -34,7 +24,6 @@ export interface ButtonProps {
   typeStyle: ButtonStyleType;
   image?: React.ReactNode;
   disabled?: boolean;
-  typeSize: ButtonSizeType;
-  width?: number | string;
+  width?: number | string | 'full';
   height?: number | string;
 }
