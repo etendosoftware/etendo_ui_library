@@ -1,47 +1,38 @@
-export const BLUE_30 = '#8689AA';
-export const BLUE_40 = '#606380';
-export const BLUE_50 = '#575A72';
-export const BLUE_60 = '#4B539D';
-export const BLUE_80 = '#303775';
-export const BLUE = '#202452';
+export const PRIMARY_30 = '#8689AA';
+export const PRIMARY_40 = '#606380';
+export const PRIMARY_50 = '#575A72';
+export const PRIMARY_60 = '#4B539D';
+export const PRIMARY_80 = '#303775';
+export const PRIMARY_100 = '#202452';
 
-export const YELLOW = '#FAD614';
-export const YELLOW_50 = '#FFEB7A';
-export const YELLOW_30 = '#FEF7D0';
+export const SECONDARY_30 = '#FAD614';
+export const SECONDARY_50 = '#FFEB7A';
+export const SECONDARY_100 = '#FEF7D0';
 
-export const GREY_BLUE = '#808695';
-export const GREY_BLUE_50 = '#D3D6E1';
-export const GREY_BLUE_30 = '#EFF1F7';
-export const GREY_BLUE_10 = '#F2F5F9';
+export const TERTIARY_10 = '#F2F5F9';
+export const TERTIARY_30 = '#EFF1F7';
+export const TERTIARY_50 = '#D3D6E1';
+export const TERTIARY_100 = '#808695';
 
-export const PURPLE = '#7182FF';
-export const PURPLE_60 = '#564BC7';
-export const LIGHT_PURPLE_60 = '#EBECFA';
+export const QUATERNARY_10 = '#F5F5FC';
+export const QUATERNARY_50 = '#DDDFF6';
+export const QUATERNARY_100 = '#7182FF';
 
-export const PURPLE_50 = '#DDDFF6';
-export const PURPLE_10 = '#F5F5FC';
+export const NEUTRALS_0 = '#FFFFFF';
+export const NEUTRALS_5 = '#F2F2F2';
+export const NEUTRALS_10 = '#E5E5E5';
+export const NEUTRALS_40 = '#999999';
+export const NEUTRALS_60 = '#808080';
+export const NEUTRALS_100 = '#000000';
 
-export const WHITE = '#FFFFFF';
+export const INITIAL_10 = '#ECF5FF';
+export const INITIAL_100 = '#3E97FF';
 
-export const GREY_60 = '#808080';
-export const GREY_40 = '#999999';
-export const GREY_10 = '#E5E5E5';
-export const GREY_5 = '#F2F2F2';
+export const PROCESS_10 = '#FFF6EC';
+export const PROCESS_100 = '#FBA643';
 
-export const BLACK_TRANSPARENT = 'rgba(0, 0, 0, 0.5)';
-export const LIGHT_BLACK = '#4A4F62';
-export const BLACK = '#000000';
+export const SUCCESS_10 = '#E5F7ED';
+export const SUCCESS_100 = '#00B34C';
 
-export const LIGHT_BLUE = '#3E97FF';
-export const LIGHT_BLUE_10 = '#ECF5FF';
-
-export const ORANGE = '#FBA643';
-export const ORANGE_10 = '#FFF6EC';
-
-export const GREEN = '#00B34C';
-export const GREEN_10 = '#E5F7ED';
-
-export const RED = '#F36A62';
-export const RED_10 = '#FEF0EF';
-
-export const DEFAULT_COLOR_THEME = BLUE;
+export const DESTRUCTIVE_10 = '#FEF0EF';
+export const DESTRUCTIVE_100 = '#F36A62';

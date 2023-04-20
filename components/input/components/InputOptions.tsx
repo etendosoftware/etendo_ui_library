@@ -10,10 +10,9 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {styles} from '../Input.style';
-
-import {GREY_40, PURPLE_10} from '../../../styles/colors';
 import {InputOptionsProps} from '../Input.types';
 import {SearchIcon} from '../../../assets/images/icons/SearchIcon';
+import { NEUTRALS_40, QUATERNARY_10 } from '../../../styles/colors';
 
 const InputOptions = ({
   data,
@@ -53,7 +52,7 @@ const InputOptions = ({
 
   const getBackground = (index: number): ViewStyle | undefined => {
     if (indexHover === index) {
-      return {backgroundColor: PURPLE_10};
+      return {backgroundColor: QUATERNARY_10};
     }
   };
 
@@ -103,7 +102,7 @@ const InputOptions = ({
               value={filterValue}
               onChangeText={onChangeFilterText}
               placeholder={placeholderText}
-              placeholderTextColor={GREY_40}
+              placeholderTextColor={NEUTRALS_40}
             />
           </View>
           <ScrollView

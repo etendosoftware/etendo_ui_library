@@ -2,13 +2,13 @@ import {TouchableOpacity} from 'react-native';
 import React from 'react';
 import {MenuBurgerProps} from '../../Navbar.types';
 import {MenuburgerIcon} from '../../../../assets/images/icons/MenuburgerIcon';
-import {WHITE} from '../../../../styles/colors';
+import {NEUTRALS_100} from '../../../../styles/colors';
 import {styles} from './MenuBurger.styles';
 
 const MenuBurger = ({onPress}: MenuBurgerProps) => {
   return (
     <TouchableOpacity onPress={onPress}>
-      <MenuburgerIcon fill={WHITE} style={styles.menuBurgerImage} />
+      <MenuburgerIcon fill={NEUTRALS_100} style={styles.menuBurgerImage} />
     </TouchableOpacity>
   );
 };

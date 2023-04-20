@@ -1,10 +1,10 @@
 import {StyleSheet} from 'react-native';
 import {
-  BLUE,
-  BLUE_80,
-  GREY_60,
-  PURPLE_10,
-  WHITE,
+  NEUTRALS_100,
+  NEUTRALS_60,
+  PRIMARY_100,
+  PRIMARY_80,
+  QUATERNARY_10,
 } from '../../../../styles/colors';
 
 export const styles = StyleSheet.create({
@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   openButton: {
-    color: BLUE,
+    color: PRIMARY_100,
     fontWeight: 'bold',
   },
   modalMargin: {
@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
   },
   modalContainer: {
     position: 'absolute',
-    backgroundColor: BLUE,
+    backgroundColor: PRIMARY_100,
     top: 0,
     bottom: 0,
     width: 280,
@@ -42,10 +42,10 @@ export const styles = StyleSheet.create({
     marginHorizontal: 24,
     paddingTop: 16,
     borderTopWidth: 1,
-    borderTopColor: BLUE_80,
+    borderTopColor: PRIMARY_80,
   },
   modalContent: {
-    backgroundColor: BLUE,
+    backgroundColor: PRIMARY_100,
     zIndex: 3,
     paddingTop: 50,
     paddingHorizontal: 25,
@@ -53,7 +53,7 @@ export const styles = StyleSheet.create({
   },
   modalCurrentContainer: {
     marginVertical: 30,
-    backgroundColor: PURPLE_10,
+    backgroundColor: QUATERNARY_10,
     height: 40,
     alignItems: 'center',
     display: 'flex',
@@ -67,13 +67,13 @@ export const styles = StyleSheet.create({
     marginRight: 12,
   },
   modalCurrentLabel: {
-    color: WHITE,
+    color: NEUTRALS_100,
     fontSize: 16,
   },
   modalSectionsContainer: {},
   modalSection: {},
   modalSectionTitle: {
-    color: GREY_60,
+    color: NEUTRALS_60,
     fontSize: 16,
   },
   modalSectionContentContainer: {
@@ -103,7 +103,7 @@ export const styles = StyleSheet.create({
     marginRight: 12,
   },
   modalSectionItemText: {
-    color: WHITE,
+    color: NEUTRALS_100,
     fontSize: 16,
     width: 150,
   },
@@ -119,8 +119,8 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
     marginTop: 5,
     borderLeftWidth: 1,
-    borderColor: GREY_60,
+    borderColor: NEUTRALS_60,
   },
-  copyright: {color: GREY_60},
-  version: {color: GREY_60},
+  copyright: {color: NEUTRALS_60},
+  version: {color: NEUTRALS_60},
 });
