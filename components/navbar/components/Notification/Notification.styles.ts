@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {
+  INITIAL_100,
   NEUTRALS_0,
   NEUTRALS_10,
   NEUTRALS_100,
@@ -62,7 +63,7 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     color: NEUTRALS_40,
   },
-  optionMarkAllText: {color: TERTIARY_100, fontSize: 12},
+  optionMarkAllText: {color: INITIAL_100, fontSize: 12},
   optionNotificationText: {color: PRIMARY_100, fontWeight: '600', fontSize: 14},
   optionImage: {
     height: 8,
@@ -75,7 +76,7 @@ export const styles = StyleSheet.create({
     height: 8,
     width: 8,
   },
-  optionViewAllText: {color: TERTIARY_100, fontSize: 12},
+  optionViewAllText: {color: INITIAL_100, fontSize: 12},
   optionViewAllTextContainer: {padding: 15},
   modalBackground: {
     flex: 1,

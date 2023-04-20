@@ -1,13 +1,7 @@
 // Imports
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, Pressable} from 'react-native';
-import {
-  BLUE,
-  GREY_BLUE_30,
-  GREY_BLUE_50,
-  WHITE,
-  YELLOW,
-} from '../../styles/colors';
+import { NEUTRALS_100, PRIMARY_100, SECONDARY_100, TERTIARY_30, TERTIARY_50 } from '../../styles/colors';
 import {TabProps} from './Tab.types';
 
 const Tab = ({
@@ -39,12 +33,12 @@ const Tab = ({
               flex: 1 / tabInformation.length,
               backgroundColor:
                 index === selectedTab
-                  ? BLUE
+                  ? PRIMARY_100
                   : index === hoveredTab
-                  ? GREY_BLUE_30
-                  : GREY_BLUE_50,
+                  ? TERTIARY_30
+                  : TERTIARY_50,
               height: height,
-              borderTopColor: index === selectedTab ? YELLOW : 'transparent',
+              borderTopColor: index === selectedTab ? SECONDARY_100 : 'transparent',
             },
           ]}
           onPress={() => (setSelectedTab ? setSelectedTab(index) : {})}
@@ -53,7 +47,7 @@ const Tab = ({
         >
           <Text
             style={{
-              color: index === selectedTab ? WHITE : BLUE,
+              color: index === selectedTab ? NEUTRALS_100 : PRIMARY_100,
               fontFamily: fontFamily,
               fontWeight: fontWeight,
             }}
@@ -75,7 +69,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderBottomWidth: 3,
-    borderBottomColor: BLUE,
+    borderBottomColor: PRIMARY_100,
     borderTopWidth: 4,
   },
 });

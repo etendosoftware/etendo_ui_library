@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import {spaceBetween, styles, widthOptions} from './Profile.styles';
 import ProfileImage from './ProfileImage';
 import {ProfileOptionsProps} from '../../Navbar.types';
-import {BLUE, PURPLE_10} from '../../../../styles/colors';
+import {PRIMARY_100, QUATERNARY_10} from '../../../../styles/colors';
 
 const ProfileOptions = ({
   profileImage,
@@ -32,7 +32,7 @@ const ProfileOptions = ({
 
   const getBackground = (index: number): ViewStyle | undefined => {
     if (indexHover === index) {
-      return {backgroundColor: PURPLE_10};
+      return {backgroundColor: QUATERNARY_10};
     }
   };
 
@@ -84,7 +84,7 @@ const ProfileOptions = ({
             <View style={styles.optionItemImage}>
               {item?.image &&
                 React.cloneElement(item.image, {
-                  fill: BLUE,
+                  fill: PRIMARY_100,
                   style: styles.optionItemImageSize,
                 })}
             </View>
@@ -105,7 +105,7 @@ const ProfileOptions = ({
         onHoverOut={() => {
           setLogOutHover(false);
         }}
-        style={[styles.optionLogOut, logOutHover && {backgroundColor: PURPLE_10}]}
+        style={[styles.optionLogOut, logOutHover && {backgroundColor: QUATERNARY_10}]}
         onPress={() => {
           handleOptionSelected('logout', 0);
         }}

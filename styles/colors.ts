@@ -5,9 +5,9 @@ export const PRIMARY_60 = '#4B539D';
 export const PRIMARY_80 = '#303775';
 export const PRIMARY_100 = '#202452';
 
-export const SECONDARY_30 = '#FAD614';
+export const SECONDARY_30 = '#FEF7D0';
 export const SECONDARY_50 = '#FFEB7A';
-export const SECONDARY_100 = '#FEF7D0';
+export const SECONDARY_100 = '#FAD614';
 
 export const TERTIARY_10 = '#F2F5F9';
 export const TERTIARY_30 = '#EFF1F7';
@@ -18,12 +18,12 @@ export const QUATERNARY_10 = '#F5F5FC';
 export const QUATERNARY_50 = '#DDDFF6';
 export const QUATERNARY_100 = '#7182FF';
 
-export const NEUTRALS_0 = '#FFFFFF';
+export const NEUTRALS_0 = '#000000';
 export const NEUTRALS_5 = '#F2F2F2';
 export const NEUTRALS_10 = '#E5E5E5';
 export const NEUTRALS_40 = '#999999';
 export const NEUTRALS_60 = '#808080';
-export const NEUTRALS_100 = '#000000';
+export const NEUTRALS_100 = '#FFFFFF';
 
 export const INITIAL_10 = '#ECF5FF';
 export const INITIAL_100 = '#3E97FF';

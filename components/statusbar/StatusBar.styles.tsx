@@ -1,7 +1,7 @@
 /* Imports */
 import { StyleSheet } from 'react-native';
-import {BLUE, YELLOW, WHITE} from '../../styles/colors';
 import {StatusBarStyleRecord} from './StatusBar.types';
+import { NEUTRALS_100, PRIMARY_100, SECONDARY_100 } from '../../styles/colors';
 
 /* Export of different styles */
 export const StatusBarStyleVariant: StatusBarStyleRecord = {
@@ -12,7 +12,7 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
       flex: 1,
       width: '100%',
       height: 45,
-      backgroundColor: BLUE,
+      backgroundColor: PRIMARY_100,
       flexDirection: 'row',
       justifyContent: 'flex-end',
       position: 'relative',
@@ -21,13 +21,13 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
     rectangleTopLeftYellow: {
       width: 25,
       height: '50%',
-      backgroundColor: YELLOW,
+      backgroundColor: SECONDARY_100,
     },
 
     rectangleTopLeftBlue: {
       width: 25,
       height: '100%',
-      backgroundColor: BLUE,
+      backgroundColor: PRIMARY_100,
       borderTopEndRadius: 40,
       borderTopRightRadius: 40,
     },
@@ -35,7 +35,7 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
     activeStepContainer: {
       flex: 0.4,
       flexDirection: 'row',
-      backgroundColor: YELLOW,
+      backgroundColor: SECONDARY_100,
       borderBottomStartRadius: 31,
       borderBottomLeftRadius: 29,
       borderTopEndRadius: 31,
@@ -53,7 +53,7 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
     },
 
     disabledStep: {
-      color: WHITE,
+      color: NEUTRALS_100,
       fontWeight: '600',
       fontSize: 16,
       alignSelf: 'center',
@@ -65,14 +65,14 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
     disabledStepContainer: {
       flex: 0.15,
       flexDirection: 'row',
-      backgroundColor: BLUE,
+      backgroundColor: PRIMARY_100,
       borderBottomStartRadius: 20,
       borderBottomLeftRadius: 20,
       borderTopRightRadius: 20,
     },
 
     activeStep: {
-      color: BLUE,
+      color: PRIMARY_100,
       fontWeight: '600',
       fontSize: 16,
       alignSelf: 'center',
@@ -85,28 +85,28 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
       width: 25,
       alignSelf: 'flex-end',
       height: '100%',
-      backgroundColor: YELLOW,
+      backgroundColor: SECONDARY_100,
       transform: [{rotate: '180deg'}],
     },
 
     rectangleBottomRightYellow: {
       width: 25,
       height: '100%',
-      backgroundColor: BLUE,
+      backgroundColor: PRIMARY_100,
       borderTopEndRadius: 20,
       borderBottomLeftRadius: 19,
-      borderColor: BLUE,
+      borderColor: PRIMARY_100,
     },
 
     textTopActiveStepContent: {
       fontSize: 14,
-      color: BLUE,
+      color: PRIMARY_100,
       fontWeight: '600',
     },
 
     textBottomActiveStepContent: {
       fontSize: 11,
-      color: BLUE,
+      color: PRIMARY_100,
       fontWeight: '500',
       marginTop: '2%',
     },

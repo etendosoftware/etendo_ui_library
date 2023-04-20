@@ -14,13 +14,7 @@ import {
   OptionNotificationType,
   OptionNotificationItem,
 } from '../../Navbar.types';
-import {
-  GREEN,
-  LIGHT_BLUE,
-  PURPLE_10,
-  RED,
-  YELLOW,
-} from '../../../../styles/colors';
+import { DESTRUCTIVE_100, INITIAL_100, QUATERNARY_10, SECONDARY_100, SUCCESS_100 } from '../../../../styles/colors';
 
 const NotificationsOptions = ({
   optionsNotifications,
@@ -34,19 +28,19 @@ const NotificationsOptions = ({
   const getOptionImageType = (type: OptionNotificationType): string => {
     switch (type) {
       case 'warning':
-        return YELLOW;
+        return SECONDARY_100;
       case 'success':
-        return GREEN;
+        return SUCCESS_100;
       case 'error':
-        return RED;
+        return DESTRUCTIVE_100;
       default:
-        return LIGHT_BLUE;
+        return INITIAL_100;
     }
   };
 
   const getBackground = (index: number): ViewStyle | undefined => {
     if (indexHover === index) {
-      return {backgroundColor: PURPLE_10};
+      return {backgroundColor: QUATERNARY_10};
     }
   };
 

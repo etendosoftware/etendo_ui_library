@@ -1,35 +1,41 @@
 import {StyleSheet} from 'react-native';
-import {BLUE, GREY_10, GREY_40, GREY_BLUE_30} from '../../styles/colors';
+import {
+  NEUTRALS_10,
+  NEUTRALS_40,
+  PRIMARY_100,
+  TERTIARY_10,
+  TERTIARY_30,
+} from '../../styles/colors';
 
 export const styles = StyleSheet.create({
   container: {
     width: '100%',
     borderWidth: 1,
-    borderColor: GREY_10,
+    borderColor: NEUTRALS_10,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     borderRightWidth: 0,
   },
   titleContainer: {
-    backgroundColor: GREY_BLUE_30,
-    borderColor: GREY_10,
+    backgroundColor: TERTIARY_30,
+    borderColor: NEUTRALS_10,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
   titleText: {
     fontSize: 14,
-    color: BLUE,
+    color: PRIMARY_100,
     textAlign: 'center',
   },
   headerContainer: {
-    backgroundColor: GREY_BLUE_30,
+    backgroundColor: TERTIARY_30,
     flexDirection: 'row',
   },
   headerCell: {
     borderTopWidth: 1,
     borderBottomWidth: 1,
     borderRightWidth: 1,
-    borderColor: GREY_10,
+    borderColor: NEUTRALS_10,
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 5,
@@ -40,12 +46,12 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 5,
     borderRightWidth: 1,
     borderTopWidth: 1,
-    borderColor: GREY_10,
+    borderColor: NEUTRALS_10,
   },
   cellText: {
     fontSize: 14,
 
-    color: BLUE,
+    color: PRIMARY_100,
     textAlign: 'center',
     textAlignVertical: 'center',
     paddingVertical: 22.5,
@@ -54,13 +60,13 @@ export const styles = StyleSheet.create({
     fontSize: 14,
 
     fontWeight: '400',
-    color: BLUE,
+    color: PRIMARY_100,
     textAlign: 'center',
     textAlignVertical: 'center',
   },
   cellTextTitle: {
     fontSize: 14,
-    color: BLUE,
+    color: PRIMARY_100,
     textAlign: 'center',
     paddingVertical: 10,
     fontWeight: '600',
@@ -83,7 +89,7 @@ export const styles = StyleSheet.create({
   placeholderContainer: {
     borderWidth: 1,
     borderTopWidth: 0,
-    borderColor: GREY_40,
+    borderColor: NEUTRALS_40,
     alignItems: 'center',
     justifyContent: 'center',
   },

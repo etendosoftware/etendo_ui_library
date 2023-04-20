@@ -1,4 +1,4 @@
-import {GREY_BLUE_30, WHITE} from '../styles/colors';
+import {NEUTRALS_100, TERTIARY_30} from '../styles/colors';
 
 export const removeHeaderBorder = (header: any) => {
   return (
@@ -11,6 +11,6 @@ export const removeHeaderBorder = (header: any) => {
 };
 export const paintOddRows = (index: number) => {
   return index % 2 !== 0
-    ? {backgroundColor: GREY_BLUE_30}
-    : {backgroundColor: WHITE};
+    ? {backgroundColor: TERTIARY_30}
+    : {backgroundColor: NEUTRALS_100};
 };
