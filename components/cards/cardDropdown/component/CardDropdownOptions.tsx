@@ -9,12 +9,12 @@ import {
 import React, {useState} from 'react';
 import {CardVariant, styles} from '../CardDropdown.styles';
 import CardDropdownSkeleton from './CardDropdownSkeleton';
-import {PURPLE_10, WHITE, YELLOW, BLUE_60} from '../../../../styles/colors';
 import {ArrowDown} from '../../../../assets/images/icons/ArrowDown';
 import {
   CardDropdownData,
   CardDropdownOptionsProps,
 } from '../CardDropdown.types';
+import { NEUTRALS_0, PRIMARY_60, QUATERNARY_10, SECONDARY_100 } from '../../../../styles/colors';
 
 const CardDropdownOptions = ({
   data,
@@ -30,7 +30,7 @@ const CardDropdownOptions = ({
   const [indexHover, setIndexHover] = useState<number>(-1);
   const newImage = image ? (
     React.cloneElement(image, {
-      fill: YELLOW,
+      fill: SECONDARY_100,
       style: styles.cardOptionHeaderImagenSize,
     })
   ) : (
@@ -48,10 +48,10 @@ const CardDropdownOptions = ({
     }
     if (indexCurrent === indexHover) {
       if (styleType === 'primary') {
-        styleFinal.push({backgroundColor: PURPLE_10});
+        styleFinal.push({backgroundColor: QUATERNARY_10});
       }
       if (styleType === 'secondary') {
-        styleFinal.push({backgroundColor: BLUE_60});
+        styleFinal.push({backgroundColor: PRIMARY_60});
       }
     }
     styleFinal.push([CardVariant[styleType].colorCardItemContainer]);
@@ -99,7 +99,7 @@ const CardDropdownOptions = ({
                   {title}
                 </Text>
                 <View style={styles.cardOptionArrowContainer}>
-                  <ArrowDown style={styles.cardOptionArrowImage} fill={WHITE} />
+                  <ArrowDown style={styles.cardOptionArrowImage} fill={NEUTRALS_0} />
                 </View>
               </View>
             </TouchableOpacity>

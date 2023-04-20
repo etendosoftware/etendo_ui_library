@@ -1,11 +1,11 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
-import { Modal, TouchableOpacity, StyleSheet } from 'react-native';
+import { Modal, TouchableOpacity } from 'react-native';
 import { BellActiveIcon } from '../../../../assets/images/icons/BellActiveIcon';
 import { BellIcon } from '../../../../assets/images/icons/BellIcon';
-import { WHITE } from '../../../../styles/colors';
 import { NotificationProps, OptionNotificationItem, PosicionModalType } from '../../Navbar.types';
 import NotificationsOptions from './NotificationsOptions';
 import { styles } from './Notification.styles';
+import { NEUTRALS_0 } from '../../../../styles/colors';
 
 const Notification = ({
   anyNotification,
@@ -65,9 +65,9 @@ const Notification = ({
         }}
       >
         {anyNotification ? (
-          <BellActiveIcon style={styles.imageNotification} fill={WHITE} />
+          <BellActiveIcon style={styles.imageNotification} fill={NEUTRALS_0} />
         ) : (
-          <BellIcon style={styles.imageNotification} fill={WHITE} />
+          <BellIcon style={styles.imageNotification} fill={NEUTRALS_0} />
         )}
       </TouchableOpacity>
       <Modal transparent={true} visible={showOptions} animationType="fade">

@@ -18,7 +18,7 @@ exports[`Running Test for Input Check Button disabled 1`] = `
     Array [
       Object {
         "alignItems": "center",
-        "backgroundColor": "#D3D6E1",
+        "backgroundColor": "#DDDFF6",
         "borderRadius": 5,
         "flexDirection": "row",
         "justifyContent": "center",

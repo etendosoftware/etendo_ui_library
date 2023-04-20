@@ -1,13 +1,12 @@
 import {StyleSheet} from 'react-native';
 import {
-  BLACK,
-  BLACK_TRANSPARENT,
-  BLUE,
-  GREY_10,
-  GREY_40,
-  GREY_5,
-  LIGHT_BLUE,
-  WHITE,
+  INITIAL_100,
+  NEUTRALS_0,
+  NEUTRALS_10,
+  NEUTRALS_100,
+  NEUTRALS_40,
+  NEUTRALS_5,
+  PRIMARY_100,
 } from '../../../../styles/colors';
 
 export const styles = StyleSheet.create({
@@ -25,7 +24,7 @@ export const styles = StyleSheet.create({
   },
   selectedOptionContainer: {
     padding: 10,
-    backgroundColor: GREY_40,
+    backgroundColor: NEUTRALS_40,
     borderRadius: 5,
   },
   selectedOption: {
@@ -33,7 +32,7 @@ export const styles = StyleSheet.create({
   },
   optionsContainer: {
     position: 'absolute',
-    backgroundColor: WHITE,
+    backgroundColor: NEUTRALS_0,
     borderRadius: 5,
     zIndex: 2,
     width: 350,
@@ -42,29 +41,29 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderBottomWidth: 1,
-    borderBottomColor: GREY_10,
+    borderBottomColor: NEUTRALS_10,
     padding: 15,
   },
   option: {
     paddingVertical: 12,
     paddingHorizontal: 16,
     borderBottomWidth: 1,
-    borderBottomColor: GREY_5,
+    borderBottomColor: NEUTRALS_5,
     flexDirection: 'row',
     alignItems: 'center',
   },
   optionText: {
     fontSize: 12,
-    color: BLACK,
+    color: NEUTRALS_100,
     marginBottom: 5,
     width: 300,
   },
   optionTimeText: {
     fontSize: 12,
-    color: GREY_40,
+    color: NEUTRALS_40,
   },
-  optionMarkAllText: {color: LIGHT_BLUE, fontSize: 12},
-  optionNotificationText: {color: BLUE, fontWeight: '600', fontSize: 14},
+  optionMarkAllText: {color: INITIAL_100, fontSize: 12},
+  optionNotificationText: {color: PRIMARY_100, fontWeight: '600', fontSize: 14},
   optionImage: {
     height: 8,
     width: 8,
@@ -76,7 +75,7 @@ export const styles = StyleSheet.create({
     height: 8,
     width: 8,
   },
-  optionViewAllText: {color: LIGHT_BLUE, fontSize: 12},
+  optionViewAllText: {color: INITIAL_100, fontSize: 12},
   optionViewAllTextContainer: {padding: 15},
   modalBackground: {
     flex: 1,

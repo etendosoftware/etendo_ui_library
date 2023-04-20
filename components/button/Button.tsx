@@ -1,13 +1,6 @@
 import React, {useState} from 'react';
 import {Pressable, Text, View} from 'react-native';
-import {
-  BLUE,
-  BLUE_80,
-  LIGHT_PURPLE_60,
-  PURPLE,
-  WHITE,
-  YELLOW_50,
-} from '../../styles/colors';
+import { NEUTRALS_100, PRIMARY_100, PRIMARY_80, QUATERNARY_100, QUATERNARY_50, SECONDARY_50 } from '../../styles/colors';
 import {ButtonStyleVariant} from './Button.styles';
 import {ButtonProps, ButtonStyleType} from './Button.types';
 
@@ -25,25 +18,25 @@ const Button = ({
   const getHoveredBackgroundColor = (backgroundColor: ButtonStyleType) => {
     switch (backgroundColor) {
       case 'primary':
-        return BLUE_80;
+        return PRIMARY_80;
       case 'secondary':
-        return YELLOW_50;
+        return SECONDARY_50;
       case 'terciary':
-        return LIGHT_PURPLE_60;
+        return QUATERNARY_50;
       case 'whiteBorder':
-        return BLUE;
+        return PRIMARY_100;
     }
   };
   const getHoveredTextColorAndViewColor = (typeStyle: ButtonStyleType) => {
     switch (typeStyle) {
       case 'white':
-        return PURPLE;
+        return QUATERNARY_100;
       case 'whiteBorder':
-        return WHITE;
+        return NEUTRALS_100;
       case 'primary':
-        return WHITE;
+        return NEUTRALS_100;
       default:
-        return BLUE;
+        return PRIMARY_100;
     }
   };
 

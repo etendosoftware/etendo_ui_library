@@ -1,19 +1,11 @@
 import {StyleSheet} from 'react-native';
-import {
-  BLUE,
-  GREY_BLUE_50,
-  PURPLE_10,
-  PURPLE_50,
-  WHITE,
-  YELLOW,
-  YELLOW_30,
-} from '../../styles/colors';
+import { NEUTRALS_0, PRIMARY_100, QUATERNARY_10, QUATERNARY_50, SECONDARY_100, SECONDARY_30, TERTIARY_50 } from '../../styles/colors';
 import {buttonStyleVariant} from './Button.types';
 
 export const ButtonStyleVariant: buttonStyleVariant = {
   primary: {
     container: {
-      backgroundColor: BLUE,
+      backgroundColor: PRIMARY_100,
       borderRadius: 5,
       flexDirection: 'row',
       justifyContent: 'center',
@@ -22,25 +14,25 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       padding: 24,
     },
     text: {
-      color: WHITE,
+      color: NEUTRALS_0,
       fontWeight: '600',
     },
     containerDisabled: {
-      backgroundColor: GREY_BLUE_50,
+      backgroundColor: QUATERNARY_50,
       borderRadius: 5,
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
     },
     textDisabled: {
-      color: WHITE,
+      color: NEUTRALS_0,
       fontWeight: 'bold',
     },
-    imageColor: WHITE,
+    imageColor: NEUTRALS_0,
   },
   secondary: {
     container: {
-      backgroundColor: YELLOW,
+      backgroundColor: SECONDARY_100,
       borderRadius: 5,
       flexDirection: 'row',
       alignItems: 'center',
@@ -48,25 +40,25 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       padding: 24,
     },
     text: {
-      color: BLUE,
+      color: PRIMARY_100,
       fontWeight: 'bold',
     },
     containerDisabled: {
-      backgroundColor: YELLOW_30,
+      backgroundColor: SECONDARY_30,
       borderRadius: 5,
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
     },
     textDisabled: {
-      color: GREY_BLUE_50,
+      color: QUATERNARY_50,
       fontWeight: 'bold',
     },
-    imageColor: BLUE,
+    imageColor: PRIMARY_100,
   },
   terciary: {
     container: {
-      backgroundColor: PURPLE_50,
+      backgroundColor: QUATERNARY_50,
       borderRadius: 5,
       flexDirection: 'row',
       justifyContent: 'center',
@@ -74,55 +66,55 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       padding: 24,
     },
     text: {
-      color: BLUE,
+      color: PRIMARY_100,
       fontWeight: 'bold',
     },
     containerDisabled: {
-      backgroundColor: PURPLE_10,
+      backgroundColor: QUATERNARY_10,
       borderRadius: 5,
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
     },
     textDisabled: {
-      color: GREY_BLUE_50,
+      color: TERTIARY_50,
       fontWeight: 'bold',
     },
-    imageColor: BLUE,
+    imageColor: PRIMARY_100,
   },
   whiteBorder: {
     container: {
-      backgroundColor: WHITE,
+      backgroundColor: NEUTRALS_0,
       borderRadius: 5,
       flexDirection: 'row',
       borderWidth: 2,
-      borderColor: BLUE,
+      borderColor: PRIMARY_100,
       justifyContent: 'center',
       alignItems: 'center',
       padding: 24,
     },
     text: {
-      color: BLUE,
+      color: PRIMARY_100,
       fontWeight: 'bold',
     },
     containerDisabled: {
-      backgroundColor: WHITE,
+      backgroundColor: NEUTRALS_0,
       borderRadius: 5,
       flexDirection: 'row',
       borderWidth: 2,
-      borderColor: GREY_BLUE_50,
+      borderColor: TERTIARY_50,
       justifyContent: 'center',
       alignItems: 'center',
     },
     textDisabled: {
-      color: GREY_BLUE_50,
+      color: TERTIARY_50,
       fontWeight: 'bold',
     },
-    imageColor: BLUE,
+    imageColor: PRIMARY_100,
   },
   white: {
     container: {
-      backgroundColor: WHITE,
+      backgroundColor: NEUTRALS_0,
       borderRadius: 5,
       flexDirection: 'row',
       justifyContent: 'center',
@@ -130,21 +122,21 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       padding: 24,
     },
     text: {
-      color: BLUE,
+      color: PRIMARY_100,
       fontWeight: 'bold',
     },
     containerDisabled: {
-      backgroundColor: WHITE,
+      backgroundColor: NEUTRALS_0,
       borderRadius: 5,
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
     },
     textDisabled: {
-      color: GREY_BLUE_50,
+      color: TERTIARY_50,
       fontWeight: 'bold',
     },
-    imageColor: BLUE,
+    imageColor: PRIMARY_100,
   },
 };
 

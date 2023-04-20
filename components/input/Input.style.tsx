@@ -1,21 +1,21 @@
 import React from 'react';
 import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
 import {InputVariantsType, TypeInputStyleVariant} from './Input.types';
-import {
-  BLUE,
-  GREY_10,
-  GREY_5,
-  GREY_60,
-  GREY_BLUE,
-  GREY_BLUE_50,
-  PURPLE_50,
-  RED,
-  RED_10,
-  WHITE,
-} from '../../styles/colors';
+
 import {ArrowDown} from '../../assets/images/icons/ArrowDown';
 import {SearchIcon} from '../../assets/images/icons/SearchIcon';
 import {ShowPassword} from '../../assets/images/icons/ShowPassword';
+import {
+  DESTRUCTIVE_10,
+  DESTRUCTIVE_100,
+  NEUTRALS_0,
+  NEUTRALS_10,
+  NEUTRALS_5,
+  NEUTRALS_60,
+  PRIMARY_100,
+  QUATERNARY_50,
+  TERTIARY_100,
+} from '../../styles/colors';
 
 export const inputVariants: InputVariantsType = {
   readOnly: {
@@ -74,7 +74,7 @@ export const inputVariants: InputVariantsType = {
 };
 
 const defaultTitle: TextStyle = {
-  color: BLUE,
+  color: PRIMARY_100,
   fontSize: 16,
 };
 
@@ -82,7 +82,7 @@ const defaultField: ViewStyle = {
   overflow: 'hidden',
   height: 50,
   borderWidth: 2,
-  borderColor: BLUE,
+  borderColor: PRIMARY_100,
   borderRadius: 5,
   flexDirection: 'row',
   display: 'flex',
@@ -97,7 +97,7 @@ const defaultFocus: ViewStyle = {
 };
 
 const defaultText: TextStyle = {
-  color: BLUE,
+  color: PRIMARY_100,
   fontSize: 14,
   fontWeight: '500',
   flex: 1,
@@ -109,7 +109,7 @@ const defaultText: TextStyle = {
   textAlignVertical: 'center',
 };
 const defaultTextPlaceholder: TextStyle = {
-  color: GREY_BLUE,
+  color: TERTIARY_100,
   fontSize: 14,
   fontWeight: '500',
   flex: 1,
@@ -122,7 +122,7 @@ const defaultTextPlaceholder: TextStyle = {
 };
 
 const defaultHelperText: TextStyle = {
-  color: GREY_60,
+  color: NEUTRALS_60,
   fontSize: 14,
 };
 
@@ -134,7 +134,7 @@ export const inputStyleVariants: TypeInputStyleVariant = {
       focus: [
         defaultFocus,
         {
-          borderColor: PURPLE_50,
+          borderColor: QUATERNARY_50,
         },
       ],
       textDefault: defaultText,
@@ -148,29 +148,29 @@ export const inputStyleVariants: TypeInputStyleVariant = {
       focus: [
         defaultFocus,
         {
-          borderColor: RED_10,
+          borderColor: DESTRUCTIVE_10,
         },
       ],
-      field: [defaultField, {borderColor: RED}],
+      field: [defaultField, {borderColor: DESTRUCTIVE_100}],
       textDefault: defaultText,
       textPlaceholder: defaultTextPlaceholder,
     },
-    helperStyle: [defaultHelperText, {color: RED}],
+    helperStyle: [defaultHelperText, {color: DESTRUCTIVE_100}],
   },
   disabled: {
-    titleStyle: [defaultTitle, {color: GREY_BLUE_50}],
+    titleStyle: [defaultTitle, {color: QUATERNARY_50}],
     fieldStyle: {
       focus: defaultFocus,
-      field: [defaultField, {borderColor: GREY_BLUE_50}],
-      textDefault: [defaultText, {color: GREY_BLUE_50}],
-      textPlaceholder: [defaultTextPlaceholder, {color: GREY_BLUE_50}],
+      field: [defaultField, {borderColor: QUATERNARY_50}],
+      textDefault: [defaultText, {color: QUATERNARY_50}],
+      textPlaceholder: [defaultTextPlaceholder, {color: QUATERNARY_50}],
     },
-    helperStyle: [defaultHelperText, {color: GREY_BLUE_50}],
+    helperStyle: [defaultHelperText, {color: QUATERNARY_50}],
   },
   readOnly: {
     titleStyle: defaultTitle,
     fieldStyle: {
-      field: [defaultField, {backgroundColor: GREY_5}],
+      field: [defaultField, {backgroundColor: NEUTRALS_5}],
       focus: defaultFocus,
       textDefault: defaultText,
       textPlaceholder: defaultTextPlaceholder,
@@ -200,7 +200,7 @@ export const styles = StyleSheet.create({
   },
   rowInputTitleText: {
     fontSize: 16,
-    color: BLUE,
+    color: PRIMARY_100,
   },
   rowHelperText: {
     height: 25,
@@ -246,11 +246,11 @@ export const styles = StyleSheet.create({
     height: 35,
   },
   optionText: {
-    color: BLUE,
+    color: PRIMARY_100,
     fontSize: 16,
   },
   optionFilterText: {
-    color: BLUE,
+    color: PRIMARY_100,
     fontSize: 16,
     height: 35,
     padding: 0,
@@ -264,10 +264,10 @@ export const styles = StyleSheet.create({
   },
   optionsContainer: {
     position: 'absolute',
-    backgroundColor: WHITE,
+    backgroundColor: NEUTRALS_0,
     borderRadius: 5,
     borderWidth: 1.5,
-    borderColor: GREY_10,
+    borderColor: NEUTRALS_10,
     zIndex: 2,
   },
   optionsItemsContainer: {
@@ -276,7 +276,7 @@ export const styles = StyleSheet.create({
   optionFilterContainer: {
     height: 35,
     borderBottomWidth: 1,
-    borderBottomColor: GREY_10,
+    borderBottomColor: NEUTRALS_10,
     marginHorizontal: 9,
     display: 'flex',
     flexDirection: 'row',

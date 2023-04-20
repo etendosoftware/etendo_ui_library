@@ -6,13 +6,13 @@ import {
   DrawerDataSubMenuType,
   DrawerLatertalMenuProps,
 } from '../../Navbar.types';
-import {WHITE} from '../../../../styles/colors';
 import {ArrowDown} from '../../../../assets/images/icons/ArrowDown';
 import {
   getCurrentSelectIndex,
   getStyleImageSelectedSubSection,
   getStyleSelected,
 } from './DrawerLateralHelper';
+import { NEUTRALS_0 } from '../../../../styles/colors';
 
 const DrawerLateralSubMenu = ({
   data,
@@ -84,7 +84,7 @@ const DrawerLateralSubMenu = ({
         >
           {label}
         </Text>
-        <ArrowDown style={styles.modalSectionMenuDropdownImage} fill={WHITE} />
+        <ArrowDown style={styles.modalSectionMenuDropdownImage} fill={NEUTRALS_0} />
       </Pressable>
       {showSubMenu && (
         <View style={styles.modalSectionSubMenuContainer}>

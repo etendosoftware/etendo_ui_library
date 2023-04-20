@@ -3,10 +3,9 @@ import {Story, Meta} from '@storybook/react';
 
 import {StatusBar} from './StatusBar';
 import {StatusBarProps} from './StatusBar.types';
-import {Image, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import {StatusBarStyleVariant, styles} from './StatusBar.styles';
 import addMarginContainer from '../../helpers/addMargin';
-import {calendarSecundaryIcon} from '../../assets/images/icons';
 import {CalendarSecundary} from '../../assets/images/icons/CalendarSecundary';
 
 const meta: Meta = {
@@ -25,10 +24,10 @@ const Component = () => {
   return (
     <View style={styles.storiesComponentContainer}>
       <CalendarSecundary
-        width={44}
-        height={44}
         style={{
           alignSelf: 'center',
+          width: 44,
+          height: 44,
         }}
       />
       <View style={StatusBarStyleVariant.primary.activeStepContentRightSection}>

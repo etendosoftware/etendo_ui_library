@@ -1,6 +1,7 @@
 /* Imports */
+import { QUATERNARY_50 } from '../../styles/colors';
 import {PaginationStyleRecord} from './Pagination.types';
-import {PURPLE_50} from '../../styles/colors';
+
 import { StyleSheet } from 'react-native';
 
 /* Export of different styles */
@@ -21,7 +22,7 @@ export const PaginationStyleVariant: PaginationStyleRecord = {
       marginRight: 17,
     },
     pageNumberContainer: {
-      backgroundColor: PURPLE_50,
+      backgroundColor: QUATERNARY_50,
       width: 25,
       height: 25,
       borderRadius: 3,
