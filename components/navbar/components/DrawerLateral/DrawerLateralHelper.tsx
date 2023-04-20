@@ -1,6 +1,6 @@
 import {ColorValue, ViewStyle} from 'react-native';
 import {DrawerCurrentIndexType} from '../../Navbar.types';
-import { NEUTRALS_100, PRIMARY_80, SECONDARY_100 } from '../../../../styles/colors';
+import { NEUTRALS_0, PRIMARY_80, SECONDARY_100 } from '../../../../styles/colors';
 
 export const getCurrentSelectIndex = (
   indexSection: number,
@@ -42,7 +42,7 @@ export const getStyleImageSelected = (
   ) {
     return SECONDARY_100;
   }
-  return NEUTRALS_100;
+  return NEUTRALS_0;
 };
 
 export const getStyleImageSelectedSubSection = (
@@ -56,5 +56,5 @@ export const getStyleImageSelectedSubSection = (
   ) {
     return SECONDARY_100;
   }
-  return NEUTRALS_100;
+  return NEUTRALS_0;
 };

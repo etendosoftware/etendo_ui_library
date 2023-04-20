@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     top: 40,
     right: 60,
-    backgroundColor: NEUTRALS_100,
+    backgroundColor: NEUTRALS_0,
     borderRadius: 5,
     zIndex: 2,
     width: 350,
@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
   },
   optionText: {
     fontSize: 12,
-    color: NEUTRALS_0,
+    color: NEUTRALS_100,
     marginBottom: 5,
   },
   optionTimeText: {

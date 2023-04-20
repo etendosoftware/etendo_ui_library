@@ -6,7 +6,7 @@ import {View} from 'react-native';
 import {styles} from './Button.styles';
 import addMarginContainer from '../../helpers/addMargin';
 import {CheckIcon} from '../../assets/images/icons/CheckIcon';
-import { NEUTRALS_0, NEUTRALS_100 } from '../../styles/colors';
+import { NEUTRALS_0 } from '../../styles/colors';
 
 const meta: Meta = {
   title: 'Etendo/Button',
@@ -29,7 +29,7 @@ const Template1: Story<ButtonProps> = args => (
         onPress={() => {}}
         image={
           <CheckIcon
-            fill={NEUTRALS_100}
+            fill={NEUTRALS_0}
             style={{
               marginRight: 10,
               width: 12,

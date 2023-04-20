@@ -7,7 +7,6 @@ import {
   NEUTRALS_40,
   NEUTRALS_5,
   PRIMARY_100,
-  TERTIARY_100,
 } from '../../../../styles/colors';
 
 export const styles = StyleSheet.create({
@@ -33,7 +32,7 @@ export const styles = StyleSheet.create({
   },
   optionsContainer: {
     position: 'absolute',
-    backgroundColor: NEUTRALS_100,
+    backgroundColor: NEUTRALS_0,
     borderRadius: 5,
     zIndex: 2,
     width: 350,
@@ -55,7 +54,7 @@ export const styles = StyleSheet.create({
   },
   optionText: {
     fontSize: 12,
-    color: NEUTRALS_0,
+    color: NEUTRALS_100,
     marginBottom: 5,
     width: 300,
   },

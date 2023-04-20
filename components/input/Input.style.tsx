@@ -5,7 +5,17 @@ import {InputVariantsType, TypeInputStyleVariant} from './Input.types';
 import {ArrowDown} from '../../assets/images/icons/ArrowDown';
 import {SearchIcon} from '../../assets/images/icons/SearchIcon';
 import {ShowPassword} from '../../assets/images/icons/ShowPassword';
-import { DESTRUCTIVE_10, DESTRUCTIVE_100, NEUTRALS_10, NEUTRALS_100, NEUTRALS_5, NEUTRALS_60, PRIMARY_100, QUATERNARY_50, TERTIARY_100 } from '../../styles/colors';
+import {
+  DESTRUCTIVE_10,
+  DESTRUCTIVE_100,
+  NEUTRALS_0,
+  NEUTRALS_10,
+  NEUTRALS_5,
+  NEUTRALS_60,
+  PRIMARY_100,
+  QUATERNARY_50,
+  TERTIARY_100,
+} from '../../styles/colors';
 
 export const inputVariants: InputVariantsType = {
   readOnly: {
@@ -254,7 +264,7 @@ export const styles = StyleSheet.create({
   },
   optionsContainer: {
     position: 'absolute',
-    backgroundColor: NEUTRALS_100,
+    backgroundColor: NEUTRALS_0,
     borderRadius: 5,
     borderWidth: 1.5,
     borderColor: NEUTRALS_10,

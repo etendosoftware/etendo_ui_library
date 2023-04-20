@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {
-  NEUTRALS_100,
+  NEUTRALS_0,
   NEUTRALS_60,
   PRIMARY_100,
   PRIMARY_80,
@@ -67,7 +67,7 @@ export const styles = StyleSheet.create({
     marginRight: 12,
   },
   modalCurrentLabel: {
-    color: NEUTRALS_100,
+    color: NEUTRALS_0,
     fontSize: 16,
   },
   modalSectionsContainer: {},
@@ -103,7 +103,7 @@ export const styles = StyleSheet.create({
     marginRight: 12,
   },
   modalSectionItemText: {
-    color: NEUTRALS_100,
+    color: NEUTRALS_0,
     fontSize: 16,
     width: 150,
   },

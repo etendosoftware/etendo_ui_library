@@ -1,7 +1,7 @@
 // Imports
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, Pressable} from 'react-native';
-import { NEUTRALS_100, PRIMARY_100, SECONDARY_100, TERTIARY_30, TERTIARY_50 } from '../../styles/colors';
+import { NEUTRALS_0, PRIMARY_100, SECONDARY_100, TERTIARY_30, TERTIARY_50 } from '../../styles/colors';
 import {TabProps} from './Tab.types';
 
 const Tab = ({
@@ -47,7 +47,7 @@ const Tab = ({
         >
           <Text
             style={{
-              color: index === selectedTab ? NEUTRALS_100 : PRIMARY_100,
+              color: index === selectedTab ? NEUTRALS_0 : PRIMARY_100,
               fontFamily: fontFamily,
               fontWeight: fontWeight,
             }}

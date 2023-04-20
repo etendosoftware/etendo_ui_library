@@ -3,7 +3,6 @@ import {
   NEUTRALS_10,
   NEUTRALS_40,
   PRIMARY_100,
-  TERTIARY_10,
   TERTIARY_30,
 } from '../../styles/colors';
 

@@ -18,12 +18,12 @@ export const QUATERNARY_10 = '#F5F5FC';
 export const QUATERNARY_50 = '#DDDFF6';
 export const QUATERNARY_100 = '#7182FF';
 
-export const NEUTRALS_0 = '#000000';
+export const NEUTRALS_0 = '#FFFFFF';
 export const NEUTRALS_5 = '#F2F2F2';
 export const NEUTRALS_10 = '#E5E5E5';
 export const NEUTRALS_40 = '#999999';
 export const NEUTRALS_60 = '#808080';
-export const NEUTRALS_100 = '#FFFFFF';
+export const NEUTRALS_100 = '#000000';
 
 export const INITIAL_10 = '#ECF5FF';
 export const INITIAL_100 = '#3E97FF';
