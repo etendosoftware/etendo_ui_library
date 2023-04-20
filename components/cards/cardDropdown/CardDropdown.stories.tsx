@@ -1,6 +1,6 @@
 import React from 'react';
 import {Story, Meta} from '@storybook/react';
-import {View,ScrollView} from 'react-native';
+import {View,ScrollView, Text} from 'react-native';
 import addMarginContainer from '../../../helpers/addMargin';
 import CardDropdown from './CardDropdown';
 import {DeliveryBox} from '../../../assets/images/icons/DeliveryBox';
@@ -8,9 +8,8 @@ import {UsersIcon} from '../../../assets/images/icons/UsersIcon';
 import {Binoculars} from '../../../assets/images/icons/Binoculars';
 import {DocumentIcon} from '../../../assets/images/icons/DocumentIcon';
 import {CardDrpopdownProps} from './CardDropdown.types';
-import CardDropdownSkeleton from './component/CardDropdownSkeleton';
-import CardSkeleton from './component/CardSkeleton';
 import {styles} from './CardDropdown.styles';
+import {styles as stylesTitle} from '../../docs/screens/changelog/ChangeLogScreen.style';
 import { cardDataDropdown } from './CardDropdown.data';
 
 const meta: Meta = {
@@ -26,7 +25,9 @@ const TemplateDefault: Story<CardDrpopdownProps> = args => (
 );
 
 const TemplateVariants: Story<CardDrpopdownProps> = args => (
-  <ScrollView style={[addMarginContainer()]}>
+  <ScrollView  horizontal={true}  style={[addMarginContainer()]}>
+    <ScrollView>
+    <Text style={stylesTitle.title}>Dropdown</Text>
     <View style={styles.cardDropdownStoriesRow}>
       <View style={styles.cardDropdownStoriesContainer}>
         <CardDropdown
@@ -77,12 +78,9 @@ const TemplateVariants: Story<CardDrpopdownProps> = args => (
         />
       </View>
     </View>
+    <Text style={stylesTitle.title}>Card</Text>
     <View
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-      }}
+      style={styles.cardDropdownStoriesRow}
     >
       <View style={styles.cardDropdownStoriesContainer}>
         <CardDropdown
@@ -133,29 +131,57 @@ const TemplateVariants: Story<CardDrpopdownProps> = args => (
         />
       </View>
     </View>
-  </ScrollView>
-);
-const TemplatePlaceholder: Story<CardDrpopdownProps> = args => (
-  <ScrollView style={[styles.cardDropdownStoriesRow,addMarginContainer()]}> 
-    <View style={styles.cardDropdownStoriesSkeletonContainer}>
-      <CardSkeleton styleType={'primary'} />
+    <Text style={stylesTitle.title}>Placeholder</Text>
+    <View
+      style={styles.cardDropdownStoriesRow}
+    >
+      <View style={styles.cardDropdownStoriesContainer}>
+        <CardDropdown
+          title={'Physical inventory'}
+          image={<DeliveryBox />}
+          route="/home"
+          onPress={route => {}}
+          styleType={'primary'}
+          disabled={false}
+          isDropdown={true}
+        />
+      </View>
+      <View style={styles.cardDropdownStoriesContainer}>
+        <CardDropdown
+          title={'Physical inventory'}
+          image={<DeliveryBox />}
+          route="/home"
+          onPress={route => {}}
+          styleType={'secondary'}
+          disabled={false}
+          isDropdown={true}
+        />
+      </View>
+      <View style={styles.cardDropdownStoriesContainer}>
+        <CardDropdown
+          route="/home"
+          onPress={route => {}}
+          styleType={'primary'}
+          isDropdown={false}
+        />
+      </View>
+      <View style={styles.cardDropdownStoriesContainer}>
+        <CardDropdown
+          route="/home"
+          onPress={route => {}}
+          dataOptions={cardDataDropdown}
+          styleType={'secondary'}
+          isDropdown={false}
+        />
+      </View>
     </View>
-    <View style={styles.cardDropdownStoriesSkeletonOptionContainer}>
-      <CardDropdownSkeleton onClose={() => {}} styleType={'primary'} />
-    </View>
-    <View style={styles.cardDropdownStoriesSkeletonContainerBlue}>
-      <CardSkeleton styleType={'secondary'} />
-    </View>
-    <View style={styles.cardDropdownStoriesSkeletonOptionContainerBlue}>
-      <CardDropdownSkeleton onClose={() => {}} styleType={'secondary'} />
-    </View>
+    </ScrollView>
   </ScrollView>
 );
 
 export default meta;
 export const CardDropdownDefault = TemplateDefault.bind({});
 export const CardDropdownVariants = TemplateVariants.bind({});
-export const CardDropdownPlaceholder = TemplatePlaceholder.bind({});
 
 CardDropdownDefault.args = {
   title: 'Physical inventory',
