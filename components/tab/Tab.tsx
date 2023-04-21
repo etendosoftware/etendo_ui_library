@@ -2,7 +2,7 @@
 import React, {useState} from 'react';
 import {View, Text, Pressable} from 'react-native';
 import {
-  NEUTRALS_0,
+  NEUTRAL_0,
   PRIMARY_100,
   SECONDARY_100,
   TERTIARY_30,
@@ -48,7 +48,7 @@ const Tab = ({data, currentIndex, onPressTab}: TabProps) => {
           ellipsizeMode='tail'
           numberOfLines={1}
             style={{
-              color: index === currentIndex ? NEUTRALS_0 : PRIMARY_100,
+              color: index === currentIndex ? NEUTRAL_0 : PRIMARY_100,
             }}
           >
             {item.name}

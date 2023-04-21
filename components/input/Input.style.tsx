@@ -8,10 +8,10 @@ import {ShowPassword} from '../../assets/images/icons/ShowPassword';
 import {
   DESTRUCTIVE_10,
   DESTRUCTIVE_100,
-  NEUTRALS_0,
-  NEUTRALS_10,
-  NEUTRALS_5,
-  NEUTRALS_60,
+  NEUTRAL_0,
+  NEUTRAL_10,
+  NEUTRAL_5,
+  NEUTRAL_60,
   PRIMARY_100,
   QUATERNARY_50,
   TERTIARY_100,
@@ -122,7 +122,7 @@ const defaultTextPlaceholder: TextStyle = {
 };
 
 const defaultHelperText: TextStyle = {
-  color: NEUTRALS_60,
+  color: NEUTRAL_60,
   fontSize: 14,
 };
 
@@ -170,7 +170,7 @@ export const inputStyleVariants: TypeInputStyleVariant = {
   readOnly: {
     titleStyle: defaultTitle,
     fieldStyle: {
-      field: [defaultField, {backgroundColor: NEUTRALS_5}],
+      field: [defaultField, {backgroundColor: NEUTRAL_5}],
       focus: defaultFocus,
       textDefault: defaultText,
       textPlaceholder: defaultTextPlaceholder,
@@ -264,10 +264,10 @@ export const styles = StyleSheet.create({
   },
   optionsContainer: {
     position: 'absolute',
-    backgroundColor: NEUTRALS_0,
+    backgroundColor: NEUTRAL_0,
     borderRadius: 5,
     borderWidth: 1.5,
-    borderColor: NEUTRALS_10,
+    borderColor: NEUTRAL_10,
     zIndex: 2,
   },
   optionsItemsContainer: {
@@ -276,7 +276,7 @@ export const styles = StyleSheet.create({
   optionFilterContainer: {
     height: 35,
     borderBottomWidth: 1,
-    borderBottomColor: NEUTRALS_10,
+    borderBottomColor: NEUTRAL_10,
     marginHorizontal: 9,
     display: 'flex',
     flexDirection: 'row',

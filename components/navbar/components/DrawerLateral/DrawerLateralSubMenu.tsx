@@ -12,7 +12,7 @@ import {
   getStyleImageSelectedSubSection,
   getStyleSelected,
 } from './DrawerLateralHelper';
-import { NEUTRALS_0 } from '../../../../styles/colors';
+import { NEUTRAL_0 } from '../../../../styles/colors';
 
 const DrawerLateralSubMenu = ({
   data,
@@ -84,7 +84,7 @@ const DrawerLateralSubMenu = ({
         >
           {label}
         </Text>
-        <ArrowDown style={styles.modalSectionMenuDropdownImage} fill={NEUTRALS_0} />
+        <ArrowDown style={styles.modalSectionMenuDropdownImage} fill={NEUTRAL_0} />
       </Pressable>
       {showSubMenu && (
         <View style={styles.modalSectionSubMenuContainer}>

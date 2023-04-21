@@ -1,12 +1,12 @@
 import {StyleSheet} from 'react-native';
 import {
   INITIAL_100,
-  NEUTRALS_0,
-  NEUTRALS_10,
-  NEUTRALS_100,
-  NEUTRALS_40,
-  NEUTRALS_5,
-  NEUTRALS_60,
+  NEUTRAL_0,
+  NEUTRAL_10,
+  NEUTRAL_100,
+  NEUTRAL_40,
+  NEUTRAL_5,
+  NEUTRAL_60,
   PRIMARY_100,
   QUATERNARY_50,
 } from '../../../../styles/colors';
@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     top: 40,
     right: 60,
-    backgroundColor: NEUTRALS_0,
+    backgroundColor: NEUTRAL_0,
     borderRadius: 5,
     zIndex: 2,
     width: 350,
@@ -40,7 +40,7 @@ export const styles = StyleSheet.create({
   option: {
     padding: 10,
     borderBottomWidth: 1,
-    borderBottomColor: NEUTRALS_5,
+    borderBottomColor: NEUTRAL_5,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -51,12 +51,12 @@ export const styles = StyleSheet.create({
   },
   optionText: {
     fontSize: 12,
-    color: NEUTRALS_100,
+    color: NEUTRAL_100,
     marginBottom: 5,
   },
   optionTimeText: {
     fontSize: 12,
-    color: NEUTRALS_40,
+    color: NEUTRAL_40,
   },
   modalBackground: {
     flex: 1,
@@ -81,7 +81,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderBottomColor: NEUTRALS_10,
+    borderBottomColor: NEUTRAL_10,
     padding: 10,
   },
   optionsHeaderTextContainer: {
@@ -94,7 +94,7 @@ export const styles = StyleSheet.create({
     width: 180,
   },
   optionsHeaderTextEmail: {
-    color: NEUTRALS_60,
+    color: NEUTRAL_60,
     fontWeight: '500',
     fontSize: 12,
     width: 180,

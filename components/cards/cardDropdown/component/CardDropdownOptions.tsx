@@ -14,7 +14,7 @@ import {
   CardDropdownData,
   CardDropdownOptionsProps,
 } from '../CardDropdown.types';
-import { NEUTRALS_0, PRIMARY_60, QUATERNARY_10, SECONDARY_100 } from '../../../../styles/colors';
+import { NEUTRAL_0, PRIMARY_60, QUATERNARY_10, SECONDARY_100 } from '../../../../styles/colors';
 
 const CardDropdownOptions = ({
   data,
@@ -99,7 +99,7 @@ const CardDropdownOptions = ({
                   {title}
                 </Text>
                 <View style={styles.cardOptionArrowContainer}>
-                  <ArrowDown style={styles.cardOptionArrowImage} fill={NEUTRALS_0} />
+                  <ArrowDown style={styles.cardOptionArrowImage} fill={NEUTRAL_0} />
                 </View>
               </View>
             </TouchableOpacity>

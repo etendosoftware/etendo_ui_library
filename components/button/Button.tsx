@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Pressable, Text, View} from 'react-native';
-import { NEUTRALS_100, PRIMARY_100, PRIMARY_80, QUATERNARY_100, QUATERNARY_50, SECONDARY_50 } from '../../styles/colors';
+import { NEUTRAL_100, PRIMARY_100, PRIMARY_80, QUATERNARY_100, QUATERNARY_50, SECONDARY_50 } from '../../styles/colors';
 import {ButtonStyleVariant} from './Button.styles';
 import {ButtonProps, ButtonStyleType} from './Button.types';
 
@@ -32,9 +32,9 @@ const Button = ({
       case 'white':
         return QUATERNARY_100;
       case 'whiteBorder':
-        return NEUTRALS_100;
+        return NEUTRAL_100;
       case 'primary':
-        return NEUTRALS_100;
+        return NEUTRAL_100;
       default:
         return PRIMARY_100;
     }
