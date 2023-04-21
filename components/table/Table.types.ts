@@ -6,7 +6,7 @@ export interface TableProps {
   onRowPress: (primary: string) => void;
 }
 export interface TableCellProps {
-  isWeb: boolean | undefined;
+  label?: string;
 }
 
 export interface TableHeaderProps {
@@ -25,6 +25,6 @@ export type Columns = {
 };
 
 export type Actions = {
-  component: JSX.Element | any;
+  component: JSX.Element;
   onAction: (id: string) => void;
 };

@@ -1,11 +1,12 @@
 /* Imports */
 
+export type TabItemType = {
+  name: string;
+  route: string;
+};
+
 export interface TabProps {
-  tabInformation: any[];
-  selectedTab: number;
-  setSelectedTab?: (any: any | undefined) => any | Array<any>;
-  height?: number | string;
-  renderItem?: JSX.Element | Array<JSX.Element>;
-  fontFamily?: string | number | any;
-  fontWeight?: string | number | any;
+  data?: TabItemType[];
+  currentIndex: number;
+  onPressTab?: (route: string, index: number) => void;
 }

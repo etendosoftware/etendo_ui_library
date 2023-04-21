@@ -1,6 +1,6 @@
-import {NEUTRALS_0, TERTIARY_30} from '../styles/colors';
+import {NEUTRAL_0, TERTIARY_30} from '../styles/colors';
 
-export const removeHeaderBorder = (header: any) => {
+export const removeHeaderBorder = (header?: string) => {
   return (
     !header && {
       borderTopWidth: 0,
@@ -12,5 +12,5 @@ export const removeHeaderBorder = (header: any) => {
 export const paintOddRows = (index: number) => {
   return index % 2 !== 0
     ? {backgroundColor: TERTIARY_30}
-    : {backgroundColor: NEUTRALS_0};
+    : {backgroundColor: NEUTRAL_0};
 };

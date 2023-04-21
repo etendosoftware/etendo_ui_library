@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import { NEUTRALS_0, PRIMARY_100, QUATERNARY_10, QUATERNARY_50, SECONDARY_100, SECONDARY_30, TERTIARY_50 } from '../../styles/colors';
+import { NEUTRAL_0, PRIMARY_100, QUATERNARY_10, QUATERNARY_50, SECONDARY_100, SECONDARY_30, TERTIARY_50 } from '../../styles/colors';
 import {buttonStyleVariant} from './Button.types';
 
 export const ButtonStyleVariant: buttonStyleVariant = {
@@ -14,7 +14,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       padding: 24,
     },
     text: {
-      color: NEUTRALS_0,
+      color: NEUTRAL_0,
       fontWeight: '600',
     },
     containerDisabled: {
@@ -25,10 +25,10 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       alignItems: 'center',
     },
     textDisabled: {
-      color: NEUTRALS_0,
+      color: NEUTRAL_0,
       fontWeight: 'bold',
     },
-    imageColor: NEUTRALS_0,
+    imageColor: NEUTRAL_0,
   },
   secondary: {
     container: {
@@ -84,7 +84,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
   },
   whiteBorder: {
     container: {
-      backgroundColor: NEUTRALS_0,
+      backgroundColor: NEUTRAL_0,
       borderRadius: 5,
       flexDirection: 'row',
       borderWidth: 2,
@@ -98,7 +98,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       fontWeight: 'bold',
     },
     containerDisabled: {
-      backgroundColor: NEUTRALS_0,
+      backgroundColor: NEUTRAL_0,
       borderRadius: 5,
       flexDirection: 'row',
       borderWidth: 2,
@@ -114,7 +114,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
   },
   white: {
     container: {
-      backgroundColor: NEUTRALS_0,
+      backgroundColor: NEUTRAL_0,
       borderRadius: 5,
       flexDirection: 'row',
       justifyContent: 'center',
@@ -126,7 +126,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       fontWeight: 'bold',
     },
     containerDisabled: {
-      backgroundColor: NEUTRALS_0,
+      backgroundColor: NEUTRAL_0,
       borderRadius: 5,
       flexDirection: 'row',
       justifyContent: 'center',

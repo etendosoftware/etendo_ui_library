@@ -5,7 +5,7 @@ import { BellIcon } from '../../../../assets/images/icons/BellIcon';
 import { NotificationProps, OptionNotificationItem, PosicionModalType } from '../../Navbar.types';
 import NotificationsOptions from './NotificationsOptions';
 import { styles } from './Notification.styles';
-import { NEUTRALS_0 } from '../../../../styles/colors';
+import { NEUTRAL_0 } from '../../../../styles/colors';
 
 const Notification = ({
   anyNotification,
@@ -65,9 +65,9 @@ const Notification = ({
         }}
       >
         {anyNotification ? (
-          <BellActiveIcon style={styles.imageNotification} fill={NEUTRALS_0} />
+          <BellActiveIcon style={styles.imageNotification} fill={NEUTRAL_0} />
         ) : (
-          <BellIcon style={styles.imageNotification} fill={NEUTRALS_0} />
+          <BellIcon style={styles.imageNotification} fill={NEUTRAL_0} />
         )}
       </TouchableOpacity>
       <Modal transparent={true} visible={showOptions} animationType="fade">

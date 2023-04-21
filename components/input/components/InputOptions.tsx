@@ -12,7 +12,7 @@ import React, {useState} from 'react';
 import {styles} from '../Input.style';
 import {InputOptionsProps} from '../Input.types';
 import {SearchIcon} from '../../../assets/images/icons/SearchIcon';
-import { NEUTRALS_40, QUATERNARY_10 } from '../../../styles/colors';
+import { NEUTRAL_40, QUATERNARY_10 } from '../../../styles/colors';
 
 const InputOptions = ({
   data,
@@ -29,7 +29,9 @@ const InputOptions = ({
   const [indexHover, setIndexHover] = useState<number>(-1);
 
   const handleOptionSelected = (item: any, index: number) => {
-    onOptionSelected(item, index);
+    if(onOptionSelected){
+      onOptionSelected(item, index);
+    }
     onClose();
   };
 
@@ -102,7 +104,7 @@ const InputOptions = ({
               value={filterValue}
               onChangeText={onChangeFilterText}
               placeholder={placeholderText}
-              placeholderTextColor={NEUTRALS_40}
+              placeholderTextColor={NEUTRAL_40}
             />
           </View>
           <ScrollView

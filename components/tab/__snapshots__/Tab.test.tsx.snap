@@ -6,6 +6,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
     Object {
       "alignItems": "center",
       "flexDirection": "row",
+      "height": 40,
     }
   }
 >
@@ -29,23 +30,24 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
           "borderBottomColor": "#202452",
           "borderBottomWidth": 3,
           "borderTopWidth": 4,
+          "flex": 1,
+          "height": 40,
           "justifyContent": "center",
+          "paddingHorizontal": 10,
         },
         Object {
           "backgroundColor": "#D3D6E1",
           "borderTopColor": "transparent",
-          "flex": 0.2,
-          "height": 40,
         },
       ]
     }
   >
     <Text
+      ellipsizeMode="tail"
+      numberOfLines={1}
       style={
         Object {
           "color": "#202452",
-          "fontFamily": undefined,
-          "fontWeight": undefined,
         }
       }
     >
@@ -72,23 +74,24 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
           "borderBottomColor": "#202452",
           "borderBottomWidth": 3,
           "borderTopWidth": 4,
+          "flex": 1,
+          "height": 40,
           "justifyContent": "center",
+          "paddingHorizontal": 10,
         },
         Object {
-          "backgroundColor": "#202452",
-          "borderTopColor": "#FAD614",
-          "flex": 0.2,
-          "height": 40,
+          "backgroundColor": "#D3D6E1",
+          "borderTopColor": "transparent",
         },
       ]
     }
   >
     <Text
+      ellipsizeMode="tail"
+      numberOfLines={1}
       style={
         Object {
-          "color": "#FFFFFF",
-          "fontFamily": undefined,
-          "fontWeight": undefined,
+          "color": "#202452",
         }
       }
     >
@@ -115,23 +118,24 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
           "borderBottomColor": "#202452",
           "borderBottomWidth": 3,
           "borderTopWidth": 4,
+          "flex": 1,
+          "height": 40,
           "justifyContent": "center",
+          "paddingHorizontal": 10,
         },
         Object {
           "backgroundColor": "#D3D6E1",
           "borderTopColor": "transparent",
-          "flex": 0.2,
-          "height": 40,
         },
       ]
     }
   >
     <Text
+      ellipsizeMode="tail"
+      numberOfLines={1}
       style={
         Object {
           "color": "#202452",
-          "fontFamily": undefined,
-          "fontWeight": undefined,
         }
       }
     >
@@ -158,23 +162,24 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
           "borderBottomColor": "#202452",
           "borderBottomWidth": 3,
           "borderTopWidth": 4,
+          "flex": 1,
+          "height": 40,
           "justifyContent": "center",
+          "paddingHorizontal": 10,
         },
         Object {
           "backgroundColor": "#D3D6E1",
           "borderTopColor": "transparent",
-          "flex": 0.2,
-          "height": 40,
         },
       ]
     }
   >
     <Text
+      ellipsizeMode="tail"
+      numberOfLines={1}
       style={
         Object {
           "color": "#202452",
-          "fontFamily": undefined,
-          "fontWeight": undefined,
         }
       }
     >
@@ -201,23 +206,24 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
           "borderBottomColor": "#202452",
           "borderBottomWidth": 3,
           "borderTopWidth": 4,
+          "flex": 1,
+          "height": 40,
           "justifyContent": "center",
+          "paddingHorizontal": 10,
         },
         Object {
           "backgroundColor": "#D3D6E1",
           "borderTopColor": "transparent",
-          "flex": 0.2,
-          "height": 40,
         },
       ]
     }
   >
     <Text
+      ellipsizeMode="tail"
+      numberOfLines={1}
       style={
         Object {
           "color": "#202452",
-          "fontFamily": undefined,
-          "fontWeight": undefined,
         }
       }
     >

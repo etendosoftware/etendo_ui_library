@@ -1,17 +1,17 @@
 // Imports
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, Pressable} from 'react-native';
-import { NEUTRALS_0, PRIMARY_100, SECONDARY_100, TERTIARY_30, TERTIARY_50 } from '../../styles/colors';
-import {TabProps} from './Tab.types';
+import {View, Text, Pressable} from 'react-native';
+import {
+  NEUTRAL_0,
+  PRIMARY_100,
+  SECONDARY_100,
+  TERTIARY_30,
+  TERTIARY_50,
+} from '../../styles/colors';
+import {TabItemType, TabProps} from './Tab.types';
+import {styles} from './Tab.styles';
 
-const Tab = ({
-  tabInformation,
-  selectedTab,
-  setSelectedTab,
-  height,
-  fontFamily,
-  fontWeight,
-}: TabProps) => {
+const Tab = ({data, currentIndex, onPressTab}: TabProps) => {
   const [hoveredTab, setHoveredTab] = useState<number | null>(null);
 
   const handleHoverIn = (index: number) => {
@@ -24,54 +24,39 @@ const Tab = ({
 
   return (
     <View style={styles.container}>
-      {tabInformation.map((tabItem: any, index: number) => (
+      {data?.map((item: TabItemType, index: number) => (
         <Pressable
           key={index}
           style={[
             styles.tab,
             {
-              flex: 1 / tabInformation.length,
               backgroundColor:
-                index === selectedTab
+                index === currentIndex
                   ? PRIMARY_100
                   : index === hoveredTab
                   ? TERTIARY_30
                   : TERTIARY_50,
-              height: height,
-              borderTopColor: index === selectedTab ? SECONDARY_100 : 'transparent',
+              borderTopColor:
+                index === currentIndex ? SECONDARY_100 : 'transparent',
             },
           ]}
-          onPress={() => (setSelectedTab ? setSelectedTab(index) : {})}
+          onPress={() => onPressTab && onPressTab(item.route, index)}
           onHoverIn={() => handleHoverIn(index)}
           onHoverOut={handleHoverOut}
         >
           <Text
+          ellipsizeMode='tail'
+          numberOfLines={1}
             style={{
-              color: index === selectedTab ? NEUTRALS_0 : PRIMARY_100,
-              fontFamily: fontFamily,
-              fontWeight: fontWeight,
+              color: index === currentIndex ? NEUTRAL_0 : PRIMARY_100,
             }}
           >
-            {tabItem.name}
+            {item.name}
           </Text>
         </Pressable>
       ))}
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  tab: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderBottomWidth: 3,
-    borderBottomColor: PRIMARY_100,
-    borderTopWidth: 4,
-  },
-});
 
 export default Tab;

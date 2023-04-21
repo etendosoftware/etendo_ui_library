@@ -5,6 +5,8 @@ import {TableProps} from './Table.types';
 import data from './TableData.json';
 import {View} from 'react-native';
 import addMarginContainer from '../../helpers/addMargin';
+import TableCell from './components/TableCell';
+import TableCellEdit from './components/TableCellEdit';
 
 const meta: Meta = {
   title: 'Etendo/Tables',

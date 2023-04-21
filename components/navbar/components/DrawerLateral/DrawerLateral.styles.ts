@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {
-  NEUTRALS_0,
-  NEUTRALS_60,
+  NEUTRAL_0,
+  NEUTRAL_60,
   PRIMARY_100,
   PRIMARY_80,
   QUATERNARY_10,
@@ -67,13 +67,13 @@ export const styles = StyleSheet.create({
     marginRight: 12,
   },
   modalCurrentLabel: {
-    color: NEUTRALS_0,
+    color: NEUTRAL_0,
     fontSize: 16,
   },
   modalSectionsContainer: {},
   modalSection: {},
   modalSectionTitle: {
-    color: NEUTRALS_60,
+    color: NEUTRAL_60,
     fontSize: 16,
   },
   modalSectionContentContainer: {
@@ -103,7 +103,7 @@ export const styles = StyleSheet.create({
     marginRight: 12,
   },
   modalSectionItemText: {
-    color: NEUTRALS_0,
+    color: NEUTRAL_0,
     fontSize: 16,
     width: 150,
   },
@@ -119,8 +119,8 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
     marginTop: 5,
     borderLeftWidth: 1,
-    borderColor: NEUTRALS_60,
+    borderColor: NEUTRAL_60,
   },
-  copyright: {color: NEUTRALS_60},
-  version: {color: NEUTRALS_60},
+  copyright: {color: NEUTRAL_60},
+  version: {color: NEUTRAL_60},
 });

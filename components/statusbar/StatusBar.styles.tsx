@@ -1,7 +1,7 @@
 /* Imports */
 import { StyleSheet } from 'react-native';
 import {StatusBarStyleRecord} from './StatusBar.types';
-import { NEUTRALS_0, PRIMARY_100, SECONDARY_100 } from '../../styles/colors';
+import { NEUTRAL_0, PRIMARY_100, SECONDARY_100 } from '../../styles/colors';
 
 /* Export of different styles */
 export const StatusBarStyleVariant: StatusBarStyleRecord = {
@@ -53,7 +53,7 @@ export const StatusBarStyleVariant: StatusBarStyleRecord = {
     },
 
     disabledStep: {
-      color: NEUTRALS_0,
+      color: NEUTRAL_0,
       fontWeight: '600',
       fontSize: 16,
       alignSelf: 'center',

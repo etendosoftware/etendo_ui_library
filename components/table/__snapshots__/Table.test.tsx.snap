@@ -38,7 +38,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
         Array [
           Object {
             "alignItems": "center",
-            "borderBottomWidth": 1,
             "borderColor": "#E5E5E5",
             "borderRightWidth": 1,
             "borderTopWidth": 1,
@@ -54,6 +53,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
     >
       <Text
         ellipsizeMode="tail"
+        numberOfLines={2}
         style={
           Array [
             Object {
@@ -74,7 +74,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
         Array [
           Object {
             "alignItems": "center",
-            "borderBottomWidth": 1,
             "borderColor": "#E5E5E5",
             "borderRightWidth": 1,
             "borderTopWidth": 1,
@@ -90,6 +89,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
     >
       <Text
         ellipsizeMode="tail"
+        numberOfLines={2}
         style={
           Array [
             Object {
@@ -110,7 +110,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
         Array [
           Object {
             "alignItems": "center",
-            "borderBottomWidth": 1,
             "borderColor": "#E5E5E5",
             "borderRightWidth": 1,
             "borderTopWidth": 1,
@@ -126,6 +125,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
     >
       <Text
         ellipsizeMode="tail"
+        numberOfLines={2}
         style={
           Array [
             Object {
@@ -146,7 +146,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
         Array [
           Object {
             "alignItems": "center",
-            "borderBottomWidth": 1,
             "borderColor": "#E5E5E5",
             "borderRightWidth": 1,
             "borderTopWidth": 1,
@@ -162,6 +161,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
     >
       <Text
         ellipsizeMode="tail"
+        numberOfLines={2}
         style={
           Array [
             Object {
@@ -477,7 +477,18 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
         style={null}
       >
         <View
-          onPress={[Function]}
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Array [
               Object {
@@ -506,7 +517,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -537,7 +547,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -568,7 +577,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -599,7 +607,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -621,7 +628,18 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
         style={null}
       >
         <View
-          onPress={[Function]}
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Array [
               Object {
@@ -650,7 +668,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -681,7 +698,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -712,7 +728,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -743,7 +758,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -765,7 +779,18 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
         style={null}
       >
         <View
-          onPress={[Function]}
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Array [
               Object {
@@ -794,7 +819,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -825,7 +849,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -856,7 +879,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -887,7 +909,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -909,7 +930,18 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
         style={null}
       >
         <View
-          onPress={[Function]}
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Array [
               Object {
@@ -938,7 +970,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -969,7 +1000,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1000,7 +1030,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1031,7 +1060,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1053,7 +1081,18 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
         style={null}
       >
         <View
-          onPress={[Function]}
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Array [
               Object {
@@ -1082,7 +1121,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1113,7 +1151,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1144,7 +1181,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1175,7 +1211,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1197,7 +1232,18 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
         style={null}
       >
         <View
-          onPress={[Function]}
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Array [
               Object {
@@ -1226,7 +1272,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1257,7 +1302,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1288,7 +1332,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1319,7 +1362,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1341,7 +1383,18 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
         style={null}
       >
         <View
-          onPress={[Function]}
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Array [
               Object {
@@ -1370,7 +1423,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1401,7 +1453,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1432,7 +1483,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1463,7 +1513,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1485,7 +1534,18 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
         style={null}
       >
         <View
-          onPress={[Function]}
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Array [
               Object {
@@ -1514,7 +1574,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1545,7 +1604,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1576,7 +1634,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1607,7 +1664,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1629,7 +1685,18 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
         style={null}
       >
         <View
-          onPress={[Function]}
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Array [
               Object {
@@ -1658,7 +1725,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1689,7 +1755,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1720,7 +1785,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1751,7 +1815,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1773,7 +1836,18 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
         style={null}
       >
         <View
-          onPress={[Function]}
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Array [
               Object {
@@ -1802,7 +1876,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1833,7 +1906,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1864,7 +1936,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1895,7 +1966,6 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
-              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",

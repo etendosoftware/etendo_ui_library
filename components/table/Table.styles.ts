@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {
-  NEUTRALS_10,
-  NEUTRALS_40,
+  NEUTRAL_10,
+  NEUTRAL_40,
   PRIMARY_100,
   TERTIARY_30,
 } from '../../styles/colors';
@@ -10,14 +10,14 @@ export const styles = StyleSheet.create({
   container: {
     width: '100%',
     borderWidth: 1,
-    borderColor: NEUTRALS_10,
+    borderColor: NEUTRAL_10,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     borderRightWidth: 0,
   },
   titleContainer: {
     backgroundColor: TERTIARY_30,
-    borderColor: NEUTRALS_10,
+    borderColor: NEUTRAL_10,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
@@ -25,6 +25,8 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     color: PRIMARY_100,
     textAlign: 'center',
+    paddingVertical: 10,
+    fontWeight: '600',
   },
   headerContainer: {
     backgroundColor: TERTIARY_30,
@@ -32,9 +34,8 @@ export const styles = StyleSheet.create({
   },
   headerCell: {
     borderTopWidth: 1,
-    borderBottomWidth: 1,
     borderRightWidth: 1,
-    borderColor: NEUTRALS_10,
+    borderColor: NEUTRAL_10,
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 5,
@@ -45,11 +46,10 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 5,
     borderRightWidth: 1,
     borderTopWidth: 1,
-    borderColor: NEUTRALS_10,
+    borderColor: NEUTRAL_10,
   },
   cellText: {
     fontSize: 14,
-
     color: PRIMARY_100,
     textAlign: 'center',
     textAlignVertical: 'center',
@@ -57,7 +57,6 @@ export const styles = StyleSheet.create({
   },
   cellTextEdit: {
     fontSize: 14,
-
     fontWeight: '400',
     color: PRIMARY_100,
     textAlign: 'center',
@@ -88,7 +87,7 @@ export const styles = StyleSheet.create({
   placeholderContainer: {
     borderWidth: 1,
     borderTopWidth: 0,
-    borderColor: NEUTRALS_40,
+    borderColor: NEUTRAL_40,
     alignItems: 'center',
     justifyContent: 'center',
   },
