@@ -29,7 +29,9 @@ const InputOptions = ({
   const [indexHover, setIndexHover] = useState<number>(-1);
 
   const handleOptionSelected = (item: any, index: number) => {
-    onOptionSelected(item, index);
+    if(onOptionSelected){
+      onOptionSelected(item, index);
+    }
     onClose();
   };
 

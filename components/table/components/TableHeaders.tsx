@@ -8,7 +8,7 @@ const TableHeaders = ({title, columns}: TableHeaderProps) => {
     <>
       {title && (
         <View style={styles.titleContainer}>
-          <Text style={styles.titleText}>{title}</Text>
+          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.titleText}>{title}</Text>
         </View>
       )}
       <View style={[styles.headerContainer]}>
@@ -18,7 +18,7 @@ const TableHeaders = ({title, columns}: TableHeaderProps) => {
               <View
                 style={[styles.headerCell, {width: item.width}]}
                 key={'HeaderTable' + colIndex}>
-                <Text ellipsizeMode="tail" style={[styles.cellTextTitle]}>
+                <Text numberOfLines={2} ellipsizeMode="tail" style={[styles.cellTextTitle]}>
                   {item.label}
                 </Text>
               </View>

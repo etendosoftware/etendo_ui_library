@@ -25,6 +25,8 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     color: PRIMARY_100,
     textAlign: 'center',
+    paddingVertical: 10,
+    fontWeight: '600',
   },
   headerContainer: {
     backgroundColor: TERTIARY_30,
@@ -32,7 +34,6 @@ export const styles = StyleSheet.create({
   },
   headerCell: {
     borderTopWidth: 1,
-    borderBottomWidth: 1,
     borderRightWidth: 1,
     borderColor: NEUTRALS_10,
     alignItems: 'center',
@@ -49,7 +50,6 @@ export const styles = StyleSheet.create({
   },
   cellText: {
     fontSize: 14,
-
     color: PRIMARY_100,
     textAlign: 'center',
     textAlignVertical: 'center',
@@ -57,7 +57,6 @@ export const styles = StyleSheet.create({
   },
   cellTextEdit: {
     fontSize: 14,
-
     fontWeight: '400',
     color: PRIMARY_100,
     textAlign: 'center',

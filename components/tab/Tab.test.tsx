@@ -15,10 +15,9 @@ describe('Running Test for Tab', () => {
     const tree = renderer
       .create(
         <Tab
-          tabInformation={datasetTab}
+          data={datasetTab}
           selectedTab={1}
           setSelectedTab={() => {}}
-          height={40}
         />,
       )
       .toJSON();

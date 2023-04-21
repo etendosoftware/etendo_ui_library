@@ -39,7 +39,7 @@ const getStories = () => {
     require('../components/pagination/Pagination.stories.tsx'),
     require('../components/states/States.stories.tsx'),
     require('../components/statusbar/StatusBar.stories.tsx'),
-    require('../components/tab/Tabs.stories.tsx'),
+    require('../components/tab/Tab.stories'),
     require('../components/table/Table.stories.tsx'),
   ];
 };

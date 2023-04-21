@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, TouchableOpacity, View} from 'react-native';
+import {FlatList, Pressable, TouchableOpacity, View} from 'react-native';
 import {Actions, Columns, TableProps} from './Table.types';
 import {styles} from './Table.styles';
 import TableHeaders from './components/TableHeaders';
@@ -23,7 +23,7 @@ const Table = ({data, columns, title, onRowPress, tableHeight}: TableProps) => {
   };
   const renderItem = (item: any, index: number) => {
     return (
-      <View
+      <Pressable
         onPress={() => {
           onRowPress(findPrimaryId(columns, index));
         }}
@@ -57,7 +57,7 @@ const Table = ({data, columns, title, onRowPress, tableHeight}: TableProps) => {
             )
           );
         })}
-      </View>
+      </Pressable>
     );
   };
   return (

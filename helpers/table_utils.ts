@@ -1,6 +1,6 @@
 import {NEUTRALS_0, TERTIARY_30} from '../styles/colors';
 
-export const removeHeaderBorder = (header: any) => {
+export const removeHeaderBorder = (header?: string) => {
   return (
     !header && {
       borderTopWidth: 0,

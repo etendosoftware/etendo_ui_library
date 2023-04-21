@@ -276,7 +276,7 @@ export const CardVariant: CardStyleVariant = {
     colorCardItemContainer: {borderBottomColor: NEUTRALS_100},
     colorCardItemTitle: {color: NEUTRALS_0},
     colorCardItemDescription: {color: TERTIARY_50},
-    colorCardOptionSkeletonContainer: {borderBottomColor: NEUTRALS_0},
+    colorCardOptionSkeletonContainer: {borderBottomColor: NEUTRALS_100},
     colorCardItemImageContainer: {backgroundColor: PRIMARY_80},
     colorCardOptionSkeletonItem: PRIMARY_80,
     colorCardOptionSkeletonHeaderItem: PRIMARY_80,

@@ -68,6 +68,12 @@ const CardDropdown = ({
     }
     setVisibleOptions(false);
   };
+  const handleTopLeft = (pageY:number, height:number) => {
+    if(windowHeight - heightDropdown - heightExtra > pageY - height){
+      return windowHeight - heightDropdown - heightExtra
+    }
+    return pageY + height - heightDropdown
+  }
 
   useEffect(() => {
     if (visibleOptions){ 
@@ -87,10 +93,9 @@ const CardDropdown = ({
           pageY: number,
         ) => {
           let dropdownHeight = pageY + heightDropdown;
-
           if (dropdownHeight > windowHeight) {
             setpositionModal({
-              top: windowHeight - heightDropdown - heightExtra,
+              top: handleTopLeft(pageY,height),
               left: pageX,
               width,
               height,
