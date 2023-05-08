@@ -1,11 +1,10 @@
-import {StyleSheet} from 'react-native';
-import {NEUTRAL_10, NEUTRAL_100} from '../../../../styles/colors';
+import { StyleSheet } from 'react-native';
+import { NEUTRAL_10, NEUTRAL_100 } from '../../../../styles/colors';
 
 export const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     fontWeight: '600',
-    marginBottom: 20,
     color: NEUTRAL_100,
   },
   version: {
@@ -22,5 +21,5 @@ export const styles = StyleSheet.create({
     color: NEUTRAL_100,
     marginBottom: 10,
   },
-  items: {color: NEUTRAL_100, fontSize: 15, marginLeft: 20, marginBottom: 10},
-});
+  items: { color: NEUTRAL_100, fontSize: 15, marginLeft: 20, marginBottom: 10 },
+})

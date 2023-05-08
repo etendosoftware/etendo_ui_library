@@ -6,7 +6,7 @@ import {View} from 'react-native';
 import {styles} from './Button.styles';
 import addMarginContainer from '../../helpers/addMargin';
 import {CheckIcon} from '../../assets/images/icons/CheckIcon';
-import { NEUTRAL_0 } from '../../styles/colors';
+import {NEUTRAL_0} from '../../styles/colors';
 
 const meta: Meta = {
   title: 'Etendo/Button',
@@ -15,12 +15,6 @@ const meta: Meta = {
 };
 
 export default meta;
-
-const Template0: Story<ButtonProps> = args => (
-  <View style={[styles.storiesContainer, addMarginContainer()]}>
-    <Button {...args} />
-  </View>
-);
 
 const Template1: Story<ButtonProps> = args => (
   <View style={[styles.storiesContainer, addMarginContainer()]}>
@@ -39,7 +33,7 @@ const Template1: Story<ButtonProps> = args => (
         }
         text={'Primary'}
         typeStyle={'primary'}
-        width={'full'}
+        width={200}
       />
     </View>
     <View style={styles.storiesButtonContainer}>
@@ -56,7 +50,7 @@ const Template1: Story<ButtonProps> = args => (
         }
         text={'Secondary'}
         typeStyle={'secondary'}
-        width={'full'}
+        width={200}
       />
     </View>
     <View style={styles.storiesButtonContainer}>
@@ -73,7 +67,7 @@ const Template1: Story<ButtonProps> = args => (
         }
         text={'Terciary'}
         typeStyle={'terciary'}
-        width={'full'}
+        width={200}
       />
     </View>
     <View style={styles.storiesButtonContainer}>
@@ -90,7 +84,7 @@ const Template1: Story<ButtonProps> = args => (
         }
         text={'White'}
         typeStyle={'white'}
-        width={'full'}
+        width={200}
       />
     </View>
     <View style={styles.storiesButtonContainer}>
@@ -107,19 +101,10 @@ const Template1: Story<ButtonProps> = args => (
         }
         text={'WhiteBorder'}
         typeStyle={'whiteBorder'}
-        width={'full'}
+        width={200}
       />
     </View>
   </View>
 );
 
-export const ButtonDefault = Template0.bind({});
 export const ButtonVariants = Template1.bind({});
-
-ButtonDefault.args = {
-  text: 'Button',
-  typeStyle: 'primary',
-  disabled: false,
-  width: 150,
-  height: 50,
-};

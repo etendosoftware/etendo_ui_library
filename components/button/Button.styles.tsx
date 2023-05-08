@@ -1,5 +1,13 @@
 import {StyleSheet} from 'react-native';
-import { NEUTRAL_0, PRIMARY_100, QUATERNARY_10, QUATERNARY_50, SECONDARY_100, SECONDARY_30, TERTIARY_50 } from '../../styles/colors';
+import {
+  NEUTRAL_0,
+  PRIMARY_100,
+  QUATERNARY_10,
+  QUATERNARY_50,
+  SECONDARY_100,
+  SECONDARY_30,
+  TERTIARY_50,
+} from '../../styles/colors';
 import {buttonStyleVariant} from './Button.types';
 
 export const ButtonStyleVariant: buttonStyleVariant = {
@@ -23,6 +31,8 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
+      height: '100%',
+      padding: 24,
     },
     textDisabled: {
       color: NEUTRAL_0,
@@ -49,6 +59,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
+      padding: 24,
     },
     textDisabled: {
       color: QUATERNARY_50,
@@ -75,6 +86,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
+      padding: 24,
     },
     textDisabled: {
       color: TERTIARY_50,
@@ -105,6 +117,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       borderColor: TERTIARY_50,
       justifyContent: 'center',
       alignItems: 'center',
+      padding: 24,
     },
     textDisabled: {
       color: TERTIARY_50,
@@ -131,6 +144,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
+      padding: 24,
     },
     textDisabled: {
       color: TERTIARY_50,
@@ -146,12 +160,12 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     flex: 1,
-    width: '100%',
+    width: 100,
 
     justifyContent: 'space-between',
   },
   storiesButtonContainer: {
     height: 100,
-    width: '30%',
+    width: 150,
   },
 });

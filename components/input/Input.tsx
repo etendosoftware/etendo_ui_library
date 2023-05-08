@@ -3,7 +3,6 @@ import {View} from 'react-native';
 import {inputStyleVariants, inputVariants, styles} from './Input.style';
 import {InputProps} from './Input.types';
 import {InputTitle, InputField, InputHelperText} from './index';
-import { type } from 'os';
 
 const Input = ({
   value,
@@ -17,6 +16,7 @@ const Input = ({
   keyboardType,
   displayKey,
   dataPicker,
+  backgroundColor,
   onPress,
   onSubmit,
   onFocus,
@@ -64,6 +64,7 @@ const Input = ({
         centerText={centerText}
         dataPicker={dataPicker}
         displayKey={displayKey}
+        backgroundColor={backgroundColor}
       />
       <InputHelperText
         label={helperText}

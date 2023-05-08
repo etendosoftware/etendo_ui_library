@@ -1,6 +1,15 @@
 import React, {useState} from 'react';
-import {Pressable, Text, View} from 'react-native';
-import { NEUTRAL_100, PRIMARY_100, PRIMARY_80, QUATERNARY_100, QUATERNARY_50, SECONDARY_50 } from '../../styles/colors';
+import {Pressable, Text, TouchableOpacity, View} from 'react-native';
+import {
+  NEUTRAL_0,
+  NEUTRAL_100,
+  PRIMARY_100,
+  PRIMARY_80,
+  QUATERNARY_10,
+  QUATERNARY_100,
+  QUATERNARY_50,
+  SECONDARY_50,
+} from '../../styles/colors';
 import {ButtonStyleVariant} from './Button.styles';
 import {ButtonProps, ButtonStyleType} from './Button.types';
 
@@ -22,7 +31,7 @@ const Button = ({
       case 'secondary':
         return SECONDARY_50;
       case 'terciary':
-        return QUATERNARY_50;
+        return QUATERNARY_10;
       case 'whiteBorder':
         return PRIMARY_100;
     }
@@ -32,24 +41,32 @@ const Button = ({
       case 'white':
         return QUATERNARY_100;
       case 'whiteBorder':
-        return NEUTRAL_100;
+        return NEUTRAL_0;
       case 'primary':
-        return NEUTRAL_100;
+        return NEUTRAL_0;
       default:
         return PRIMARY_100;
     }
   };
 
-  const stateStyleContainer = () => {
+  const stateStyleContainer = (pressed: boolean) => {
     if (disabled) {
       return ButtonStyleVariant[typeStyle].containerDisabled;
+    }
+    if (pressed) {
+      return {
+        ...ButtonStyleVariant[typeStyle].container,
+
+        opacity: 0.7,
+        width: width === '100%' ? '100%' : width,
+      };
     }
     if (isHovered) {
       const hoveredBackgroundColor = getHoveredBackgroundColor(typeStyle);
       return {
         ...ButtonStyleVariant[typeStyle].container,
         backgroundColor: hoveredBackgroundColor,
-        width: width === 'full' ? '100%' : width,
+        width: width === '100%' ? '100%' : width,
       };
     }
     return ButtonStyleVariant[typeStyle].container;
@@ -78,24 +95,28 @@ const Button = ({
     return ButtonStyleVariant[typeStyle].text;
   };
 
-  const newImage =
-    image &&
-    React.cloneElement(image, {
-      fill: isHovered
-        ? getHoveredTextColorAndViewColor(typeStyle)
-        : ButtonStyleVariant[typeStyle].imageColor,
-    });
-
   return (
-    <Pressable
-      onHoverIn={handleHoverIn}
-      onHoverOut={handleHoverOut}
-      style={[stateStyleContainer(), {height: height, width: width}]}
-      onPress={onPress}
-    >
-      <View>{image && newImage}</View>
-      <Text style={[stateStyleText()]}>{text}</Text>
-    </Pressable>
+    <TouchableOpacity>
+      <Pressable
+        onHoverIn={handleHoverIn}
+        onHoverOut={handleHoverOut}
+        style={({pressed}) => [
+          stateStyleContainer(pressed),
+          {height: height, width: width},
+        ]}
+        onPress={onPress}
+      >
+        <View>
+          {image &&
+            React.cloneElement(image, {
+              fill: isHovered
+                ? getHoveredTextColorAndViewColor(typeStyle)
+                : ButtonStyleVariant[typeStyle].imageColor,
+            })}
+        </View>
+        <Text style={[stateStyleText()]}>{text}</Text>
+      </Pressable>
+    </TouchableOpacity>
   );
 };
 

@@ -1,9 +1,9 @@
 import {
   View,
-  Text,
   TouchableOpacity,
   Dimensions,
   LayoutChangeEvent,
+  Text,
 } from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import {CardVariant, styles} from './CardDropdown.styles';
@@ -68,15 +68,15 @@ const CardDropdown = ({
     }
     setVisibleOptions(false);
   };
-  const handleTopLeft = (pageY:number, height:number) => {
-    if(windowHeight - heightDropdown - heightExtra > pageY - height){
-      return windowHeight - heightDropdown - heightExtra
+  const handleTopLeft = (pageY: number, height: number) => {
+    if (windowHeight - heightDropdown - heightExtra > pageY - height) {
+      return windowHeight - heightDropdown - heightExtra;
     }
-    return pageY + height - heightDropdown
-  }
+    return pageY + height - heightDropdown;
+  };
 
   useEffect(() => {
-    if (visibleOptions){ 
+    if (visibleOptions) {
       getTopLeft();
     }
   });
@@ -95,7 +95,7 @@ const CardDropdown = ({
           let dropdownHeight = pageY + heightDropdown;
           if (dropdownHeight > windowHeight) {
             setpositionModal({
-              top: handleTopLeft(pageY,height),
+              top: handleTopLeft(pageY, height),
               left: pageX,
               width,
               height,
@@ -107,7 +107,7 @@ const CardDropdown = ({
       );
     }
   };
-  
+
   const newImage =
     image &&
     React.cloneElement(image, {
@@ -117,7 +117,7 @@ const CardDropdown = ({
 
   const windowHeight = Dimensions.get('window').height;
   const refComponente = useRef<TouchableOpacity>(null);
-  const heightExtra = 20
+  const heightExtra = 20;
 
   return title && image ? (
     <TouchableOpacity

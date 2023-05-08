@@ -1,6 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {
-  Text,
   TextInput,
   TextStyle,
   TouchableOpacity,
@@ -12,13 +11,14 @@ import {
   Platform,
   Dimensions,
   GestureResponderEvent,
+  Text,
 } from 'react-native';
-
 import {styles} from '../Input.style';
 import {InputFieldProps, KeyboardTypes} from '../Input.types';
 import {ShowPassword} from '../../../assets/images/icons/ShowPassword';
 import {HidePassword} from '../../../assets/images/icons/HidePassword';
 import InputOptions from './InputOptions';
+import {NEUTRAL_0} from '../../../styles/colors';
 
 const InputField = ({
   type,
@@ -31,6 +31,7 @@ const InputField = ({
   keyboardType,
   dataPicker,
   displayKey,
+  backgroundColor = NEUTRAL_0,
   onPress,
   onSubmit,
   onChangeText,
@@ -211,7 +212,7 @@ const InputField = ({
     <View style={[styleField.focus, getFocusStyle()]}>
       <TouchableOpacity
         ref={refComponente}
-        style={[styleField.field, removePaddingField()]}
+        style={[styleField.field, removePaddingField(), {backgroundColor}]}
         disabled={disabled || configField.disabledField}
         onPress={handleOnPress}
       >
@@ -224,7 +225,11 @@ const InputField = ({
             value={value}
             keyboardType={getKeyboardType(keyboardType)}
             onChangeText={getOnChangeText}
-            style={[getStyleText(value), disableOutline()]}
+            style={[
+              getStyleText(value),
+              disableOutline(),
+              configField.placeholderStyle,
+            ]}
             placeholder={placeholder}
             maxLength={maxLength}
             secureTextEntry={showPassword}

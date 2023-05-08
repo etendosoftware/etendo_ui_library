@@ -517,6 +517,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -547,6 +548,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -577,6 +579,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -607,6 +610,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -668,6 +672,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -698,6 +703,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -728,6 +734,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -758,6 +765,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -819,6 +827,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -849,6 +858,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -879,6 +889,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -909,6 +920,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -970,6 +982,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1000,6 +1013,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1030,6 +1044,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1060,6 +1075,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1121,6 +1137,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1151,6 +1168,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1181,6 +1199,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1211,6 +1230,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1272,6 +1292,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1302,6 +1323,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1332,6 +1354,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1362,6 +1385,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1423,6 +1447,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1453,6 +1478,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1483,6 +1509,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1513,6 +1540,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1574,6 +1602,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1604,6 +1633,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1634,6 +1664,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1664,6 +1695,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1725,6 +1757,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1755,6 +1788,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1785,6 +1819,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1815,6 +1850,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1876,6 +1912,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1906,6 +1943,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1936,6 +1974,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1966,6 +2005,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",

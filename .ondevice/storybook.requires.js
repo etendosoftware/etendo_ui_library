@@ -29,15 +29,17 @@ try {
   argsEnhancers.forEach(enhancer => addArgsEnhancer(enhancer));
 } catch {}
 
+// TODO: add the status component in the return section.
 const getStories = () => {
   return [
+    require('../components/button/ButtonDefault.stories.tsx'),
     require('../components/button/Button.stories.tsx'),
     require('../components/cards/cardDropdown/CardDropdown.stories.tsx'),
     require('../components/docs/Docs.stories.tsx'),
     require('../components/input/Input.stories.tsx'),
     require('../components/navbar/Navbar.stories.tsx'),
     require('../components/pagination/Pagination.stories.tsx'),
-    require('../components/states/States.stories.tsx'),
+    require('../components/statusbar/StatusBar.stories.tsx'),
     require('../components/tab/Tab.stories.tsx'),
     require('../components/table/Table.stories.tsx'),
   ];

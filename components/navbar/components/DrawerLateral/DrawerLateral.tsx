@@ -1,12 +1,12 @@
-import React, { useMemo } from 'react';
-import { View, Modal, TouchableOpacity, Text, ScrollView } from 'react-native';
+import React, {useMemo} from 'react';
+import {View, Modal, TouchableOpacity, ScrollView, Text} from 'react-native';
 import {
   DrawerCurrentIndexType,
   DrawerDataContentType,
   DrawerLateralProps,
 } from '../../Navbar.types';
 import EtendoLogo from '../EtendoLogo/EtendoLogo';
-import { styles } from './DrawerLateral.styles';
+import {styles} from './DrawerLateral.styles';
 import DrawerSectionsContainer from './DrawerSectionsContainer';
 
 const DrawerLateral = ({
@@ -23,28 +23,26 @@ const DrawerLateral = ({
       onOptionSelected(route, index);
       onCloseDrawer();
     },
-    [onOptionSelected, onCloseDrawer]
+    [onOptionSelected, onCloseDrawer],
   );
 
   const drawerContent = useMemo(
     () =>
-      data?.content?.map(
-        (item: DrawerDataContentType, index: number) => {
-          if (item.sectionType === 'sections') {
-            return (
-              <DrawerSectionsContainer
-                key={'drawerSection' + index}
-                data={item}
-                onOptionSelected={handleOptionSelected}
-                currentIndex={currentIndex}
-                indexSection={index}
-              />
-            );
-          }
-          return null;
+      data?.content?.map((item: DrawerDataContentType, index: number) => {
+        if (item.sectionType === 'sections') {
+          return (
+            <DrawerSectionsContainer
+              key={'drawerSection' + index}
+              data={item}
+              onOptionSelected={handleOptionSelected}
+              currentIndex={currentIndex}
+              indexSection={index}
+            />
+          );
         }
-      ),
-    [data?.content, currentIndex, handleOptionSelected]
+        return null;
+      }),
+    [data?.content, currentIndex, handleOptionSelected],
   );
 
   return (
