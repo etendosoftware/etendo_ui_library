@@ -5,9 +5,11 @@ import {styles} from './GetStartedScreen.style';
 import addMarginContainer from '../../../../helpers/addMargin';
 
 const GetStartedScreen = () => {
+  // Copies the yarn command to the clipboard
   const copyToClipboardYarn = () => {
     Clipboard.setString('yarn add etendo-ui-library');
   };
+  // Copies the npm command to the clipboard
   const copyToClipboardNpm = () => {
     Clipboard.setString('npm install etendo-ui-library');
   };

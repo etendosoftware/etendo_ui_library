@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, ViewStyle} from 'react-native';
 import {
   NEUTRAL_0,
   PRIMARY_100,
@@ -10,16 +10,20 @@ import {
 } from '../../styles/colors';
 import {buttonStyleVariant} from './Button.types';
 
+const commonButtonStyles: ViewStyle = {
+  flexDirection: 'row',
+  justifyContent: 'center',
+  alignItems: 'center',
+  padding: 24,
+};
+
 export const ButtonStyleVariant: buttonStyleVariant = {
   primary: {
     container: {
       backgroundColor: PRIMARY_100,
       borderRadius: 5,
-      flexDirection: 'row',
-      justifyContent: 'center',
+      ...commonButtonStyles,
       height: '100%',
-      alignItems: 'center',
-      padding: 24,
     },
     text: {
       color: NEUTRAL_0,
@@ -28,11 +32,8 @@ export const ButtonStyleVariant: buttonStyleVariant = {
     containerDisabled: {
       backgroundColor: QUATERNARY_50,
       borderRadius: 5,
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
+      ...commonButtonStyles,
       height: '100%',
-      padding: 24,
     },
     textDisabled: {
       color: NEUTRAL_0,
@@ -44,10 +45,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
     container: {
       backgroundColor: SECONDARY_100,
       borderRadius: 5,
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: 24,
+      ...commonButtonStyles,
     },
     text: {
       color: PRIMARY_100,
@@ -56,10 +54,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
     containerDisabled: {
       backgroundColor: SECONDARY_30,
       borderRadius: 5,
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: 24,
+      ...commonButtonStyles,
     },
     textDisabled: {
       color: QUATERNARY_50,
@@ -71,10 +66,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
     container: {
       backgroundColor: QUATERNARY_50,
       borderRadius: 5,
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: 24,
+      ...commonButtonStyles,
     },
     text: {
       color: PRIMARY_100,
@@ -83,10 +75,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
     containerDisabled: {
       backgroundColor: QUATERNARY_10,
       borderRadius: 5,
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: 24,
+      ...commonButtonStyles,
     },
     textDisabled: {
       color: TERTIARY_50,
@@ -98,12 +87,9 @@ export const ButtonStyleVariant: buttonStyleVariant = {
     container: {
       backgroundColor: NEUTRAL_0,
       borderRadius: 5,
-      flexDirection: 'row',
       borderWidth: 2,
       borderColor: PRIMARY_100,
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: 24,
+      ...commonButtonStyles,
     },
     text: {
       color: PRIMARY_100,
@@ -112,12 +98,9 @@ export const ButtonStyleVariant: buttonStyleVariant = {
     containerDisabled: {
       backgroundColor: NEUTRAL_0,
       borderRadius: 5,
-      flexDirection: 'row',
       borderWidth: 2,
       borderColor: TERTIARY_50,
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: 24,
+      ...commonButtonStyles,
     },
     textDisabled: {
       color: TERTIARY_50,
@@ -129,10 +112,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
     container: {
       backgroundColor: NEUTRAL_0,
       borderRadius: 5,
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: 24,
+      ...commonButtonStyles,
     },
     text: {
       color: PRIMARY_100,
@@ -141,10 +121,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
     containerDisabled: {
       backgroundColor: NEUTRAL_0,
       borderRadius: 5,
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: 24,
+      ...commonButtonStyles,
     },
     textDisabled: {
       color: TERTIARY_50,

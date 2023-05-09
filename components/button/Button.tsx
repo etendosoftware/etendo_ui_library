@@ -2,12 +2,10 @@ import React, {useState} from 'react';
 import {Pressable, Text, TouchableOpacity, View} from 'react-native';
 import {
   NEUTRAL_0,
-  NEUTRAL_100,
   PRIMARY_100,
   PRIMARY_80,
   QUATERNARY_10,
   QUATERNARY_100,
-  QUATERNARY_50,
   SECONDARY_50,
 } from '../../styles/colors';
 import {ButtonStyleVariant} from './Button.styles';

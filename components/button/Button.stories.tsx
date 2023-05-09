@@ -16,6 +16,8 @@ const meta: Meta = {
 
 export default meta;
 
+const BUTTON_WIDTH = 200;
+
 const Template1: Story<ButtonProps> = args => (
   <View style={[styles.storiesContainer, addMarginContainer()]}>
     <View style={styles.storiesButtonContainer}>
@@ -33,7 +35,7 @@ const Template1: Story<ButtonProps> = args => (
         }
         text={'Primary'}
         typeStyle={'primary'}
-        width={200}
+        width={BUTTON_WIDTH}
       />
     </View>
     <View style={styles.storiesButtonContainer}>
@@ -50,7 +52,7 @@ const Template1: Story<ButtonProps> = args => (
         }
         text={'Secondary'}
         typeStyle={'secondary'}
-        width={200}
+        width={BUTTON_WIDTH}
       />
     </View>
     <View style={styles.storiesButtonContainer}>
@@ -67,7 +69,7 @@ const Template1: Story<ButtonProps> = args => (
         }
         text={'Terciary'}
         typeStyle={'terciary'}
-        width={200}
+        width={BUTTON_WIDTH}
       />
     </View>
     <View style={styles.storiesButtonContainer}>
@@ -84,7 +86,7 @@ const Template1: Story<ButtonProps> = args => (
         }
         text={'White'}
         typeStyle={'white'}
-        width={200}
+        width={BUTTON_WIDTH}
       />
     </View>
     <View style={styles.storiesButtonContainer}>
@@ -101,7 +103,7 @@ const Template1: Story<ButtonProps> = args => (
         }
         text={'WhiteBorder'}
         typeStyle={'whiteBorder'}
-        width={200}
+        width={BUTTON_WIDTH}
       />
     </View>
   </View>

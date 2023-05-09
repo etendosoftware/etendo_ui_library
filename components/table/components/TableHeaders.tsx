@@ -13,7 +13,7 @@ const TableHeaders = ({title, columns}: TableHeaderProps) => {
           </Text>
         </View>
       )}
-      <View style={[styles.headerContainer]}>
+      <View style={styles.headerContainer}>
         {columns.map((item: Columns, colIndex: number) => {
           return (
             item.visible && (

@@ -8,7 +8,7 @@ module.exports = {
     '@storybook/addon-actions',
   ],
   framework: '@storybook/react',
-  staticDirs: ['../assets'],
+  staticDir: path.join(__dirname, 'assets'),
   webpackFinal: async (config, {configType}) => {
     // Exclude react-native-linear-gradient from being bundled in Storybook
     config.resolve.alias = {

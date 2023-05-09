@@ -29,7 +29,7 @@ try {
   argsEnhancers.forEach(enhancer => addArgsEnhancer(enhancer));
 } catch {}
 
-// TODO: add the status component in the return section.
+// TO DO: add the status component in the return section.
 const getStories = () => {
   return [
     require('../components/button/ButtonDefault.stories.tsx'),

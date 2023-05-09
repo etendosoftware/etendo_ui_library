@@ -23,11 +23,6 @@ export const inputVariants: InputVariantsType = {
       type: 'text',
       disabledField: true,
       disabledSubmit: true,
-      placeholderStyle: {
-        fontSize: 14,
-        lineHeight: 22,
-        letterSpacing: -1,
-      },
     },
   },
   picker: {
@@ -36,11 +31,6 @@ export const inputVariants: InputVariantsType = {
       disabledField: false,
       disabledSubmit: true,
       image: <ArrowDown style={{height: 10, width: 10}} />,
-      placeholderStyle: {
-        fontSize: 14,
-        lineHeight: 22,
-        letterSpacing: -1,
-      },
     },
   },
   textInput: {
@@ -48,11 +38,6 @@ export const inputVariants: InputVariantsType = {
       type: 'textInput',
       disabledField: true,
       disabledSubmit: false,
-      placeholderStyle: {
-        fontSize: 14,
-        lineHeight: 22,
-        letterSpacing: -1,
-      },
     },
   },
   pressableText: {
@@ -60,11 +45,6 @@ export const inputVariants: InputVariantsType = {
       type: 'text',
       disabledField: false,
       disabledSubmit: false,
-      placeholderStyle: {
-        fontSize: 14,
-        lineHeight: 22,
-        letterSpacing: -1,
-      },
     },
   },
   textInputSearch: {
@@ -73,11 +53,6 @@ export const inputVariants: InputVariantsType = {
       disabledField: true,
       disabledSubmit: false,
       image: <SearchIcon style={{height: 15, width: 15}} />,
-      placeholderStyle: {
-        fontSize: 14,
-        lineHeight: 22,
-        letterSpacing: -1,
-      },
     },
   },
   pressableSearch: {
@@ -86,11 +61,6 @@ export const inputVariants: InputVariantsType = {
       disabledField: false,
       disabledSubmit: false,
       image: <SearchIcon style={{height: 15, width: 15}} />,
-      placeholderStyle: {
-        fontSize: 14,
-        lineHeight: 22,
-        letterSpacing: -1,
-      },
     },
   },
   textInputPassword: {
@@ -99,11 +69,6 @@ export const inputVariants: InputVariantsType = {
       image: <ShowPassword style={{height: 15, width: 15}} />,
       disabledField: true,
       disabledSubmit: false,
-      placeholderStyle: {
-        fontSize: 14,
-        lineHeight: 22,
-        letterSpacing: -1,
-      },
     },
   },
 };
