@@ -53,4 +53,8 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 10,
     color: NEUTRAL_100,
   },
+  descriptionInstall: {
+    marginTop: 30,
+    marginBottom: 10
+  }
 });

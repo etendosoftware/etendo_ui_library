@@ -27,6 +27,21 @@ const GetStartedScreen = () => {
       </Text>
       <Text style={styles.subTitle}>Installation</Text>
       <View style={styles.clipboardContainer}>
+        <Text style={styles.clipboardTitle}>NPM</Text>
+        <View style={styles.clipboardContent}>
+          <Text style={styles.clipboardText}>
+            $ npm install etendo-ui-library
+          </Text>
+          <TouchableOpacity
+            style={styles.clipboardCopyContainer}
+            onPress={copyToClipboardNpm}
+          >
+            <Text style={styles.clipboardCopyText}>Copy</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <Text style={styles.descriptionInstall}>Or</Text>
+      <View style={styles.clipboardContainer}>
         <Text style={styles.clipboardTitle}>Yarn</Text>
         <View style={styles.clipboardContent}>
           <Text style={styles.clipboardText}>$ yarn add etendo-ui-library</Text>
@@ -37,12 +52,75 @@ const GetStartedScreen = () => {
             <Text style={styles.clipboardCopyText}>Copy</Text>
           </TouchableOpacity>
         </View>
-      </View>
-      <View style={styles.clipboardContainer}>
-        <Text style={styles.clipboardTitle}>NPM</Text>
+        <Text style={styles.descriptionInstall}>
+          When creating a new React Native project the following must be added
+          in the metro.config.js file:
+        </Text>
         <View style={styles.clipboardContent}>
           <Text style={styles.clipboardText}>
-            $ npm install etendo-ui-library
+            {`const {getDefaultConfig} = require('metro-config');
+
+              module.exports = (async () => {
+                const {
+                  resolver: {sourceExts, assetExts},
+                } = await getDefaultConfig();
+                return {
+                  transformer: {
+                    getTransformOptions: async () => ({
+                      transform: {
+                        experimentalImportSupport: false,
+                        inlineRequires: true,
+                      },
+                    }),
+                    babelTransformerPath: require.resolve('react-native-svg-transformer'),
+                  },
+                  resolver: {
+                    assetExts: assetExts.filter(ext => ext !== 'svg'),
+                    sourceExts: [...sourceExts, 'svg'],
+                  },
+                };
+              })();`}
+          </Text>
+          <TouchableOpacity
+            style={styles.clipboardCopyContainer}
+            onPress={copyToClipboardYarn}
+          >
+            <Text style={styles.clipboardCopyText}>Copy</Text>
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.descriptionInstall}>
+          And the version of react native should be: <b>"0.68.1"</b> <br />{' '}
+          <br />
+          Using the next command:
+        </Text>
+        <View style={styles.clipboardContent}>
+          <Text style={styles.clipboardText}>
+            {' '}
+            npx react-native init appName --version 0.68.1
+          </Text>
+          <TouchableOpacity
+            style={styles.clipboardCopyContainer}
+            onPress={copyToClipboardYarn}
+          >
+            <Text style={styles.clipboardCopyText}>Copy</Text>
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.descriptionInstall}>
+          and install the next dependencies whit the follow commands:
+        </Text>
+        <View style={styles.clipboardContent}>
+          <Text style={styles.clipboardText}>yarn add react-native-svg</Text>
+          <TouchableOpacity
+            style={styles.clipboardCopyContainer}
+            onPress={copyToClipboardNpm}
+          >
+            <Text style={styles.clipboardCopyText}>Copy</Text>
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.descriptionInstall}>And</Text>
+        <View style={styles.clipboardContent}>
+          <Text style={styles.clipboardText}>
+            yarn add react-native-svg-tranformer
           </Text>
           <TouchableOpacity
             style={styles.clipboardCopyContainer}
