@@ -20,7 +20,6 @@ module.exports = async ({config}) => {
   });
   config.module.rules.push({
     test: /\.(woff|woff2|eot|ttf|otf)$/,
-    type: 'asset/resource',
     use: [
       {
         loader: 'file-loader',
