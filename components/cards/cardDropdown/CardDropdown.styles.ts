@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import {
   NEUTRAL_0,
   NEUTRAL_10,
@@ -16,7 +16,7 @@ import {
   TERTIARY_30,
   TERTIARY_50,
 } from '../../../styles/colors';
-import {CardStyleVariant} from './CardDropdown.types';
+import { CardStyleVariant } from './CardDropdown.types';
 
 export const styles = StyleSheet.create({
   cardContainer: {
@@ -44,6 +44,10 @@ export const styles = StyleSheet.create({
     height: 12,
     width: 12,
     marginRight: 10,
+  },
+  arrowContainer: {
+    height: 20,
+    width: 20
   },
   cardTitle: {
     fontSize: 22,
@@ -190,7 +194,7 @@ export const styles = StyleSheet.create({
   cardOptionArrowImage: {
     height: 12,
     width: 12,
-    transform: [{rotate: '180deg'}],
+    transform: [{ rotate: '180deg' }],
   },
   cardItemTextContainer: {
     flex: 1,
@@ -238,25 +242,25 @@ export const styles = StyleSheet.create({
     overflow: 'hidden',
     backgroundColor: PRIMARY_100,
   },
-  cardDropdownStoriesContainer: {marginBottom: 20, marginRight: 20},
+  cardDropdownStoriesContainer: { marginBottom: 20, marginRight: 20 },
 });
 
 export const CardVariant: CardStyleVariant = {
   primary: {
-    colorCardContainer: {backgroundColor: NEUTRAL_0},
-    colorCardImageContainer: {backgroundColor: QUATERNARY_50},
-    colorCardTitle: {color: PRIMARY_100},
-    colorCardOptionContainer: {backgroundColor: NEUTRAL_0},
+    colorCardContainer: { backgroundColor: NEUTRAL_0 },
+    colorCardImageContainer: { backgroundColor: QUATERNARY_50 },
+    colorCardTitle: { color: PRIMARY_100 },
+    colorCardOptionContainer: { backgroundColor: NEUTRAL_0 },
     colorCardOptionHeader: {
       backgroundColor: PRIMARY_100,
       borderBottomColor: NEUTRAL_0,
     },
-    colorCardOptionHeaderTitle: {color: NEUTRAL_0},
-    colorCardItemContainer: {borderBottomColor: NEUTRAL_10},
-    colorCardItemTitle: {color: PRIMARY_100},
-    colorCardItemDescription: {color: TERTIARY_100},
-    colorCardOptionSkeletonContainer: {borderBottomColor: NEUTRAL_10},
-    colorCardItemImageContainer: {backgroundColor: QUATERNARY_50},
+    colorCardOptionHeaderTitle: { color: NEUTRAL_0 },
+    colorCardItemContainer: { borderBottomColor: NEUTRAL_10 },
+    colorCardItemTitle: { color: PRIMARY_100 },
+    colorCardItemDescription: { color: TERTIARY_100 },
+    colorCardOptionSkeletonContainer: { borderBottomColor: NEUTRAL_10 },
+    colorCardItemImageContainer: { backgroundColor: QUATERNARY_50 },
     colorCardOptionSkeletonItem: TERTIARY_30,
     colorCardOptionSkeletonHeaderItem: PRIMARY_80,
     colorCardArrowImageFill: PRIMARY_100,
@@ -264,20 +268,20 @@ export const CardVariant: CardStyleVariant = {
     colorCardImageOptionFill: PRIMARY_100,
   },
   secondary: {
-    colorCardContainer: {backgroundColor: PRIMARY_100},
-    colorCardImageContainer: {backgroundColor: PRIMARY_80},
-    colorCardTitle: {color: NEUTRAL_0},
-    colorCardOptionContainer: {backgroundColor: PRIMARY_100},
+    colorCardContainer: { backgroundColor: PRIMARY_100 },
+    colorCardImageContainer: { backgroundColor: PRIMARY_80 },
+    colorCardTitle: { color: NEUTRAL_0 },
+    colorCardOptionContainer: { backgroundColor: PRIMARY_100 },
     colorCardOptionHeader: {
       backgroundColor: PRIMARY_100,
       borderBottomColor: NEUTRAL_100,
     },
-    colorCardOptionHeaderTitle: {color: NEUTRAL_0},
-    colorCardItemContainer: {borderBottomColor: NEUTRAL_100},
-    colorCardItemTitle: {color: NEUTRAL_0},
-    colorCardItemDescription: {color: TERTIARY_50},
-    colorCardOptionSkeletonContainer: {borderBottomColor: NEUTRAL_100},
-    colorCardItemImageContainer: {backgroundColor: PRIMARY_80},
+    colorCardOptionHeaderTitle: { color: NEUTRAL_0 },
+    colorCardItemContainer: { borderBottomColor: NEUTRAL_100 },
+    colorCardItemTitle: { color: NEUTRAL_0 },
+    colorCardItemDescription: { color: TERTIARY_50 },
+    colorCardOptionSkeletonContainer: { borderBottomColor: NEUTRAL_100 },
+    colorCardItemImageContainer: { backgroundColor: PRIMARY_80 },
     colorCardOptionSkeletonItem: PRIMARY_80,
     colorCardOptionSkeletonHeaderItem: PRIMARY_80,
     colorCardArrowImageFill: NEUTRAL_0,
@@ -285,9 +289,9 @@ export const CardVariant: CardStyleVariant = {
     colorCardImageOptionFill: NEUTRAL_0,
   },
   disabledPrimary: {
-    colorCardContainer: {backgroundColor: NEUTRAL_5},
-    colorCardImageContainer: {backgroundColor: NEUTRAL_10},
-    colorCardTitle: {color: NEUTRAL_40},
+    colorCardContainer: { backgroundColor: NEUTRAL_5 },
+    colorCardImageContainer: { backgroundColor: NEUTRAL_10 },
+    colorCardTitle: { color: NEUTRAL_40 },
     colorCardOptionContainer: {},
     colorCardOptionHeader: {},
     colorCardOptionHeaderTitle: {},
@@ -303,9 +307,9 @@ export const CardVariant: CardStyleVariant = {
     colorCardImageOptionFill: '',
   },
   disabledSecondary: {
-    colorCardContainer: {backgroundColor: PRIMARY_40},
-    colorCardImageContainer: {backgroundColor: PRIMARY_50},
-    colorCardTitle: {color: PRIMARY_30},
+    colorCardContainer: { backgroundColor: PRIMARY_40 },
+    colorCardImageContainer: { backgroundColor: PRIMARY_50 },
+    colorCardTitle: { color: PRIMARY_30 },
     colorCardOptionContainer: {},
     colorCardOptionHeader: {},
     colorCardOptionHeaderTitle: {},

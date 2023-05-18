@@ -185,6 +185,15 @@ export const styles = StyleSheet.create({
     height: 22,
     width: 22,
   },
+  hideContainer: {
+    height: 22,
+    width: 22,
+  },
+  showContainer: {
+    height: 15,
+    width: 15,
+    marginRight: 6,
+  },
   rowInputTitleImg: {
     height: 10,
     width: 10,
@@ -210,7 +219,7 @@ export const styles = StyleSheet.create({
   },
   buttonContainerInputField: {
     alignSelf: 'flex-start',
-    width: 35,
+    width: 49,
     height: '100%',
     justifyContent: 'center',
     display: 'flex',
@@ -287,4 +296,5 @@ export const styles = StyleSheet.create({
     width: 12,
     height: 12,
   },
+  searchContainer: {height: 15, width: 15, marginRight: 5},
 });

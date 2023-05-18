@@ -94,7 +94,9 @@ const InputOptions = ({
             ]}
           >
             {!filterValue && showSearchImg && (
-              <SearchIcon style={styles.optionFilterImg} />
+              <View style={styles.searchContainer}>
+                <SearchIcon style={styles.optionFilterImg} />
+              </View>
             )}
             <TextInput
               onFocus={handleOnFocus}

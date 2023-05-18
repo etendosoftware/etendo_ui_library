@@ -182,9 +182,17 @@ const InputField = ({
   const getImage = (image: React.ReactElement): React.ReactElement => {
     if (type === 'textInputPassword') {
       if (showPassword) {
-        return <HidePassword style={styles.inputImageSize} />;
+        return (
+          <View style={styles.hideContainer}>
+            <HidePassword style={styles.inputImageSize} />
+          </View>
+        );
       }
-      return <ShowPassword style={styles.inputImageSize} />;
+      return (
+        <View style={styles.showContainer}>
+          <ShowPassword style={styles.inputImageSize} />
+        </View>
+      );
     }
     return image;
   };
