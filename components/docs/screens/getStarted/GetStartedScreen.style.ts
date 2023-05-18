@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import {
   NEUTRAL_0,
   NEUTRAL_10,
@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
     color: NEUTRAL_100,
   },
-  description: {color: NEUTRAL_100, marginBottom: 20},
+  description: { color: NEUTRAL_100, marginBottom: 20 },
   subTitle: {
     fontSize: 26,
     fontWeight: '600',
@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     borderBottomColor: NEUTRAL_10,
     color: NEUTRAL_100,
   },
-  clipboardContainer: {alignItems: 'flex-start'},
+  clipboardContainer: { alignItems: 'flex-start' },
   clipboardTitle: {
     fontSize: 22,
     fontWeight: '600',
@@ -53,4 +53,8 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 10,
     color: NEUTRAL_100,
   },
+  descriptionInstall: {
+    marginTop: 30,
+    marginBottom: 10
+  }
 });

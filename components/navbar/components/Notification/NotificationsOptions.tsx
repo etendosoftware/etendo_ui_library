@@ -1,12 +1,5 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Pressable,
-  ViewStyle,
-  ColorValue,
-} from 'react-native';
+import {View, Text, TouchableOpacity, Pressable, ViewStyle} from 'react-native';
 import {spaceBetween, styles, widthOptions} from './Notification.styles';
 import {PointIcon} from '../../../../assets/images/icons/PointIcon';
 import {
@@ -14,7 +7,13 @@ import {
   OptionNotificationType,
   OptionNotificationItem,
 } from '../../Navbar.types';
-import { DESTRUCTIVE_100, INITIAL_100, QUATERNARY_10, SECONDARY_100, SUCCESS_100 } from '../../../../styles/colors';
+import {
+  DESTRUCTIVE_100,
+  INITIAL_100,
+  QUATERNARY_10,
+  SECONDARY_100,
+  SUCCESS_100,
+} from '../../../../styles/colors';
 
 const NotificationsOptions = ({
   optionsNotifications,

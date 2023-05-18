@@ -182,8 +182,8 @@ export const inputStyleVariants: TypeInputStyleVariant = {
 export const styles = StyleSheet.create({
   inputContainer: {},
   inputImageSize: {
-    height: 15,
-    width: 15,
+    height: 22,
+    width: 22,
   },
   rowInputTitleImg: {
     height: 10,

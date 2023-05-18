@@ -1,5 +1,5 @@
 // Imports
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, Pressable} from 'react-native';
 import {
   NEUTRAL_0,
@@ -13,6 +13,11 @@ import {styles} from './Tab.styles';
 
 const Tab = ({data, currentIndex, onPressTab}: TabProps) => {
   const [hoveredTab, setHoveredTab] = useState<number | null>(null);
+  const [currentIndexSelected, setCurrentIndexSelected] = useState<number>(0);
+
+  useEffect(() => {
+    setCurrentIndexSelected(currentIndex);
+  }, [currentIndex]);
 
   const handleHoverIn = (index: number) => {
     setHoveredTab(index);
@@ -20,6 +25,13 @@ const Tab = ({data, currentIndex, onPressTab}: TabProps) => {
 
   const handleHoverOut = () => {
     setHoveredTab(null);
+  };
+
+  const handleOnPress = (item: TabItemType, index: number) => {
+    if (onPressTab) {
+      onPressTab(item.route, index);
+    }
+    setCurrentIndexSelected(index);
   };
 
   return (
@@ -31,24 +43,24 @@ const Tab = ({data, currentIndex, onPressTab}: TabProps) => {
             styles.tab,
             {
               backgroundColor:
-                index === currentIndex
+                index === currentIndexSelected
                   ? PRIMARY_100
                   : index === hoveredTab
                   ? TERTIARY_30
                   : TERTIARY_50,
               borderTopColor:
-                index === currentIndex ? SECONDARY_100 : 'transparent',
+                index === currentIndexSelected ? SECONDARY_100 : 'transparent',
             },
           ]}
-          onPress={() => onPressTab && onPressTab(item.route, index)}
+          onPress={() => handleOnPress(item, index)}
           onHoverIn={() => handleHoverIn(index)}
           onHoverOut={handleHoverOut}
         >
           <Text
-          ellipsizeMode='tail'
-          numberOfLines={1}
+            ellipsizeMode="tail"
+            numberOfLines={1}
             style={{
-              color: index === currentIndex ? NEUTRAL_0 : PRIMARY_100,
+              color: index === currentIndexSelected ? NEUTRAL_0 : PRIMARY_100,
             }}
           >
             {item.name}

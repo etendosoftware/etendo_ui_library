@@ -36,8 +36,8 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
           "paddingHorizontal": 10,
         },
         Object {
-          "backgroundColor": "#D3D6E1",
-          "borderTopColor": "transparent",
+          "backgroundColor": "#202452",
+          "borderTopColor": "#FAD614",
         },
       ]
     }
@@ -47,7 +47,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
       numberOfLines={1}
       style={
         Object {
-          "color": "#202452",
+          "color": "#FFFFFF",
         }
       }
     >

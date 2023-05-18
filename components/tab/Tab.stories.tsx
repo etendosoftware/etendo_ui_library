@@ -24,14 +24,18 @@ const datasetTab: TabItemType[] = [
 
 /* Templates */
 
-const TemplateDefault: Story<TabProps> = ({onPressTab, ...args}) => {
+const TemplateDefault: Story<TabProps> = ({
+  onPressTab,
+  currentIndex,
+  ...args
+}) => {
   const [selectedTab, setSelectedTab] = useState<number>(0);
 
   return (
     <View style={addMarginContainer()}>
       <Tab
         {...args}
-        currentIndex={selectedTab}
+        currentIndex={currentIndex}
         onPressTab={(route, index) => {
           setSelectedTab(index);
         }}
@@ -44,4 +48,5 @@ const TemplateDefault: Story<TabProps> = ({onPressTab, ...args}) => {
 export const TabDefault = TemplateDefault.bind({});
 TabDefault.args = {
   data: datasetTab,
+  currentIndex: 0,
 };

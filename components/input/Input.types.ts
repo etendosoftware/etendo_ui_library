@@ -2,7 +2,6 @@ import {
   ColorValue,
   GestureResponderEvent,
   NativeSyntheticEvent,
-  TargetedEvent,
   TextInputFocusEventData,
   TextStyle,
   ViewStyle,
@@ -35,11 +34,12 @@ export type InputFieldConfigType = {
   disabledField?: boolean;
   disabledSubmit?: boolean;
   backgroundColor?: ColorValue;
+  placeholderStyle?: TextStyle;
 };
 
 export type InputVariantsType = Record<
   InputFieldVariants,
-  {field: InputFieldConfigType}
+  { field: InputFieldConfigType }
 >;
 
 export type TypeInputStyleVariant = Record<
@@ -78,6 +78,7 @@ export interface InputProps {
   onFocus?: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   onBlur?: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   onOptionSelected?: any;
+  backgroundColor?: ColorValue;
 }
 
 export interface InputTitleProps {
@@ -112,6 +113,7 @@ export interface InputFieldProps {
   height?: number | string;
   dataPicker?: any;
   displayKey?: string;
+  backgroundColor?: ColorValue;
   onOptionSelected?: any;
   onPress?: (event?: GestureResponderEvent) => void;
   onSubmit?: (event?: GestureResponderEvent) => void;

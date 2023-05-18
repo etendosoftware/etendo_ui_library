@@ -22,8 +22,8 @@ export interface ButtonProps {
   onPress: () => void;
   text: string;
   typeStyle: ButtonStyleType;
-  image?: React.ReactNode;
+  image?: React.ReactElement;
   disabled?: boolean;
-  width?: number | string | 'full';
+  width?: number | string;
   height?: number | string;
 }

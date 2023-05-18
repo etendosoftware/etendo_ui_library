@@ -25,12 +25,10 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
 >
   <View
     style={
-      Array [
-        Object {
-          "backgroundColor": "#EFF1F7",
-          "flexDirection": "row",
-        },
-      ]
+      Object {
+        "backgroundColor": "#EFF1F7",
+        "flexDirection": "row",
+      }
     }
   >
     <View
@@ -517,6 +515,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -547,6 +546,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -577,6 +577,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -607,6 +608,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -668,6 +670,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -698,6 +701,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -728,6 +732,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -758,6 +763,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -819,6 +825,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -849,6 +856,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -879,6 +887,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -909,6 +918,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -970,6 +980,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1000,6 +1011,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1030,6 +1042,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1060,6 +1073,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1121,6 +1135,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1151,6 +1166,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1181,6 +1197,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1211,6 +1228,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1272,6 +1290,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1302,6 +1321,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1332,6 +1352,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1362,6 +1383,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1423,6 +1445,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1453,6 +1476,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1483,6 +1507,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1513,6 +1538,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1574,6 +1600,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1604,6 +1631,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1634,6 +1662,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1664,6 +1693,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1725,6 +1755,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1755,6 +1786,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1785,6 +1817,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1815,6 +1848,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1876,6 +1910,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1906,6 +1941,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1936,6 +1972,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",
@@ -1966,6 +2003,7 @@ exports[`Running Test for Tab Check Tab Disabled 1`] = `
             }
           >
             <Text
+              adjustsFontSizeToFit={true}
               style={
                 Object {
                   "color": "#202452",

@@ -5,7 +5,7 @@ import {TableCellProps} from '../Table.types';
 
 const TableCell = ({label}: TableCellProps) => {
   return (
-    <Text style={styles.cellText}>
+    <Text adjustsFontSizeToFit={true} style={styles.cellText}>
       {label}
     </Text>
   );

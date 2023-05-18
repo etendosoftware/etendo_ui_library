@@ -9,7 +9,8 @@ export const StepActive = ({item, step}: ItemProp) => {
     <>
       <View
         style={StatusBarStyleVariant.primary.rectangleTopLeftYellow}
-        key={item.key}>
+        key={item.key}
+      >
         <View style={StatusBarStyleVariant.primary.rectangleTopLeftBlue} />
       </View>
 

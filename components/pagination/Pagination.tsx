@@ -1,7 +1,7 @@
 /* Imports */
 import React, {useState} from 'react';
 
-import {Text, View, TouchableOpacity, Image} from 'react-native';
+import {View, TouchableOpacity, Text} from 'react-native';
 import {PaginationStyleVariant} from './Pagination.styles';
 import {PaginationProps} from './Pagination.types';
 import {ArrowLeft} from '../../assets/images/icons/ArrowLeft';

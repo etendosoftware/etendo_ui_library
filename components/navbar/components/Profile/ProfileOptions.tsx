@@ -105,7 +105,10 @@ const ProfileOptions = ({
         onHoverOut={() => {
           setLogOutHover(false);
         }}
-        style={[styles.optionLogOut, logOutHover && {backgroundColor: QUATERNARY_10}]}
+        style={[
+          styles.optionLogOut,
+          logOutHover && {backgroundColor: QUATERNARY_10},
+        ]}
         onPress={() => {
           handleOptionSelected('logout', 0);
         }}
@@ -118,4 +121,4 @@ const ProfileOptions = ({
   );
 };
 
-export default ProfileOptions
+export default ProfileOptions;
