@@ -206,14 +206,25 @@ const GetStartedScreen = () => {
           </TouchableOpacity>
         </View>
         <Text style={styles.descriptionInstall}>
-          And the version of react native should be: <b>"0.68.1"</b> <br />{' '}
-          <br />
-          Using the next command:
+          <b>
+            Next, install the following dependencies using the commands below:
+          </b>
         </Text>
         <View style={styles.clipboardContent}>
           <Text style={styles.clipboardText}>
-            {' '}
-            npx react-native init appName --version 0.68.1
+            yarn add react-native-web
+            <br />
+            yarn add next-transpile-modules
+            <br />
+            yarn add -D ts-loader
+            <br />
+            yarn add babel-loader --dev
+            <br />
+            yarn add react-native-svg-transformer
+            <br />
+            yarn add react-native-svg
+            <br />
+            yarn add --dev babel-plugin-module-resolver
           </Text>
           <TouchableOpacity
             style={styles.clipboardCopyContainer}
@@ -223,29 +234,38 @@ const GetStartedScreen = () => {
           </TouchableOpacity>
         </View>
         <Text style={styles.descriptionInstall}>
-          and install the next dependencies whit the follow commands:
+          Usage To use a component from the etendo-ui-library, import it and use
+          it in your JSX code. Below is an example of how to use the Input
+          component.
         </Text>
         <View style={styles.clipboardContent}>
-          <Text style={styles.clipboardText}>yarn add react-native-svg</Text>
-          <TouchableOpacity
-            style={styles.clipboardCopyContainer}
-            onPress={copyToClipboardNpm}
-          >
-            <Text style={styles.clipboardCopyText}>Copy</Text>
-          </TouchableOpacity>
-        </View>
-        <Text style={styles.descriptionInstall}>And</Text>
-        <View style={styles.clipboardContent}>
           <Text style={styles.clipboardText}>
-            yarn add react-native-svg-tranformer
+            {`//import
+              import Input from 'etendo-ui-library/components/input/Input';
+
+              //usage
+              <Input
+                titleLabel="ReadOnly"
+                helperText="Start Date"
+                placeholder="Write a text"
+                disabled={false}
+                value="password"
+                typeField="textInputPassword"
+                isError={true}
+                keyboardType="text"
+              />;`}
           </Text>
-          <TouchableOpacity
-            style={styles.clipboardCopyContainer}
-            onPress={copyToClipboardNpm}
-          >
-            <Text style={styles.clipboardCopyText}>Copy</Text>
-          </TouchableOpacity>
         </View>
+        <Text style={styles.descriptionInstall}>
+          <b>
+            Remember to replace the attribute values with your desired ones!!
+          </b>
+        </Text>
+        <Text style={styles.descriptionInstall}>
+          That's it! You are now ready to use the etendo-ui-library in your
+          React Web application. Please refer to the detailed documentation on
+          Storybook and NPM for more examples and use cases.
+        </Text>
       </View>
     </View>
   );
