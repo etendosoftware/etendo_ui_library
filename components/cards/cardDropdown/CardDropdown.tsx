@@ -143,10 +143,12 @@ const CardDropdown = ({
           {title}
         </Text>
         {isDropdown && (
-          <ArrowDown
-            style={styles.cardArrowImage}
-            fill={getStyle().colorCardArrowImageFill}
-          />
+          <View style={styles.cardArrowImage}>
+            <ArrowDown
+              style={styles.cardArrowImage}
+              fill={getStyle().colorCardArrowImageFill}
+            />
+          </View>
         )}
       </View>
       <CardDropdownOptions
