@@ -1,6 +1,6 @@
 #
 
-# `etendo-ui-library`
+# etendo-ui-library
 
 ![Etendo Logo](https://etendo.software/wp-content/uploads/2021/04/etendo-logo-footer-min-1.png 'Etendo Logo')
 
@@ -92,7 +92,7 @@ export default function Home() {
 }
 ```
 
-Remember to replace the attribute values with your desired ones.
+**Remember to replace the attribute values with your desired ones!**
 
 And that's it! You are now ready to use the etendo-ui-library in your React Native or React Web application. Please refer to the detailed documentation on Storybook and NPM for more examples and use cases.
 
@@ -191,6 +191,6 @@ import Input from 'etendo-ui-library/components/input/Input';
 />;
 ```
 
-**Remember to replace the attribute values with your desired ones!!**
+**Remember to replace the attribute values with your desired ones!**
 
 That's it! You are now ready to use the etendo-ui-library in your React Web application. Please refer to the detailed documentation on Storybook and NPM for more examples and use cases.
