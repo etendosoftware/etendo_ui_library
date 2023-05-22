@@ -16,6 +16,8 @@ const GetStartedScreen = () => {
   return (
     <View style={addMarginContainer()}>
       <Text style={styles.title}>Etendo UI</Text>
+
+      <Text style={styles.title}></Text>
       <Text style={styles.description}>
         Etendo UI Library is a versatile and easy-to-use collection of user
         interface components, specifically designed for React Native projects
@@ -46,12 +48,13 @@ const GetStartedScreen = () => {
         <View style={styles.clipboardContent}>
           <Text style={styles.clipboardText}>$ yarn add etendo-ui-library</Text>
           <TouchableOpacity
-            style={styles.clipboardCopyContainer}
+            style={[styles.clipboardCopyContainer]}
             onPress={copyToClipboardYarn}
           >
             <Text style={styles.clipboardCopyText}>Copy</Text>
           </TouchableOpacity>
         </View>
+        <Text style={styles.titleSetup}>Android Project Setup</Text>
         <Text style={styles.descriptionInstall}>
           When creating a new React Native project the following must be added
           in the metro.config.js file:
@@ -80,6 +83,120 @@ const GetStartedScreen = () => {
                   },
                 };
               })();`}
+          </Text>
+          <TouchableOpacity
+            style={styles.clipboardCopyContainer}
+            onPress={copyToClipboardYarn}
+          >
+            <Text style={styles.clipboardCopyText}>Copy</Text>
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.descriptionInstall}>
+          And the version of react native should be: <b>"0.68.1"</b> <br />{' '}
+          <br />
+          Using the next command:
+        </Text>
+        <View style={styles.clipboardContent}>
+          <Text style={styles.clipboardText}>
+            {' '}
+            npx react-native init appName --version 0.68.1
+          </Text>
+          <TouchableOpacity
+            style={styles.clipboardCopyContainer}
+            onPress={copyToClipboardYarn}
+          >
+            <Text style={styles.clipboardCopyText}>Copy</Text>
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.descriptionInstall}>
+          and install the next dependencies whit the follow commands:
+        </Text>
+        <View style={styles.clipboardContent}>
+          <Text style={styles.clipboardText}>yarn add react-native-svg</Text>
+          <TouchableOpacity
+            style={styles.clipboardCopyContainer}
+            onPress={copyToClipboardNpm}
+          >
+            <Text style={styles.clipboardCopyText}>Copy</Text>
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.descriptionInstall}>And</Text>
+        <View style={styles.clipboardContent}>
+          <Text style={styles.clipboardText}>
+            yarn add react-native-svg-tranformer
+          </Text>
+          <TouchableOpacity
+            style={styles.clipboardCopyContainer}
+            onPress={copyToClipboardNpm}
+          >
+            <Text style={styles.clipboardCopyText}>Copy</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <Text style={styles.titleSetup}>Web Project Setup (React Web)</Text>
+      <View style={styles.clipboardContainer}>
+        <Text style={styles.descriptionInstall}>
+          To create a new Next.js project:
+        </Text>
+        <View style={styles.clipboardContent}>
+          <Text style={styles.clipboardText}>npx create-next-app </Text>
+          <TouchableOpacity
+            style={styles.clipboardCopyContainer}
+            onPress={copyToClipboardNpm}
+          >
+            <Text style={styles.clipboardCopyText}>Copy</Text>
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.descriptionInstall}>
+          After initializing the Next.js project, modify your next.config.js
+          file to include the following configuration:
+        </Text>
+        <View style={styles.clipboardContent}>
+          <Text style={styles.clipboardText}>
+            {`const path = require('path');
+            const withTM = require('next-transpile-modules')(['etendo-ui-library']);
+
+            module.exports = withTM({
+              webpack: (config, {defaultLoaders}) => {
+                config.resolve.alias = {
+                  ...(config.resolve.alias || {}),
+                  'react-native$': 'react-native-web',
+                  'react-native-svg$': 'react-native-svg-web',
+                };
+
+                config.module.rules.push({
+                  test: /\.tsx?$/,
+                  use: [
+                    defaultLoaders.babel,
+                    {
+                      loader: 'ts-loader',
+                      options: {
+                        transpileOnly: true,
+                        experimentalWatchApi: true,
+                      },
+                    },
+                  ],
+                });
+
+                config.module.rules.push({
+                  test: /\.css$/,
+                  use: [
+                    defaultLoaders.babel,
+                    {
+                      loader: 'etendo-ui-library/dist/webpack/css-loader.js',
+                      options: {
+                        importLoaders: 1,
+                        modules: {
+                          localIdentName: '[name]__[local]__[hash:base64:5]',
+                        },
+                      },
+                    },
+                    'postcss-loader',
+                  ],
+                });
+                return config;
+              },
+            });`}
           </Text>
           <TouchableOpacity
             style={styles.clipboardCopyContainer}
