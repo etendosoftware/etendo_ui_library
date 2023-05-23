@@ -16,6 +16,8 @@ const GetStartedScreen = () => {
   return (
     <View style={addMarginContainer()}>
       <Text style={styles.title}>Etendo UI</Text>
+
+      <Text style={styles.title}></Text>
       <Text style={styles.description}>
         Etendo UI Library is a versatile and easy-to-use collection of user
         interface components, specifically designed for React Native projects
@@ -46,12 +48,13 @@ const GetStartedScreen = () => {
         <View style={styles.clipboardContent}>
           <Text style={styles.clipboardText}>$ yarn add etendo-ui-library</Text>
           <TouchableOpacity
-            style={styles.clipboardCopyContainer}
+            style={[styles.clipboardCopyContainer]}
             onPress={copyToClipboardYarn}
           >
             <Text style={styles.clipboardCopyText}>Copy</Text>
           </TouchableOpacity>
         </View>
+        <Text style={styles.titleSetup}>Android Project Setup</Text>
         <Text style={styles.descriptionInstall}>
           When creating a new React Native project the following must be added
           in the metro.config.js file:
@@ -129,6 +132,140 @@ const GetStartedScreen = () => {
             <Text style={styles.clipboardCopyText}>Copy</Text>
           </TouchableOpacity>
         </View>
+      </View>
+      <Text style={styles.titleSetup}>Web Project Setup (React Web)</Text>
+      <View style={styles.clipboardContainer}>
+        <Text style={styles.descriptionInstall}>
+          To create a new Next.js project:
+        </Text>
+        <View style={styles.clipboardContent}>
+          <Text style={styles.clipboardText}>npx create-next-app </Text>
+          <TouchableOpacity
+            style={styles.clipboardCopyContainer}
+            onPress={copyToClipboardNpm}
+          >
+            <Text style={styles.clipboardCopyText}>Copy</Text>
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.descriptionInstall}>
+          After initializing the Next.js project, modify your next.config.js
+          file to include the following configuration:
+        </Text>
+        <View style={styles.clipboardContent}>
+          <Text style={styles.clipboardText}>
+            {`const path = require('path');
+            const withTM = require('next-transpile-modules')(['etendo-ui-library']);
+
+            module.exports = withTM({
+              webpack: (config, {defaultLoaders}) => {
+                config.resolve.alias = {
+                  ...(config.resolve.alias || {}),
+                  'react-native$': 'react-native-web',
+                  'react-native-svg$': 'react-native-svg-web',
+                };
+
+                config.module.rules.push({
+                  test: /\.tsx?$/,
+                  use: [
+                    defaultLoaders.babel,
+                    {
+                      loader: 'ts-loader',
+                      options: {
+                        transpileOnly: true,
+                        experimentalWatchApi: true,
+                      },
+                    },
+                  ],
+                });
+
+                config.module.rules.push({
+                  test: /\.css$/,
+                  use: [
+                    defaultLoaders.babel,
+                    {
+                      loader: 'etendo-ui-library/dist/webpack/css-loader.js',
+                      options: {
+                        importLoaders: 1,
+                        modules: {
+                          localIdentName: '[name]__[local]__[hash:base64:5]',
+                        },
+                      },
+                    },
+                    'postcss-loader',
+                  ],
+                });
+                return config;
+              },
+            });`}
+          </Text>
+          <TouchableOpacity
+            style={styles.clipboardCopyContainer}
+            onPress={copyToClipboardYarn}
+          >
+            <Text style={styles.clipboardCopyText}>Copy</Text>
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.descriptionInstall}>
+          <b>
+            Next, install the following dependencies using the commands below:
+          </b>
+        </Text>
+        <View style={styles.clipboardContent}>
+          <Text style={styles.clipboardText}>
+            yarn add react-native-web
+            <br />
+            yarn add next-transpile-modules
+            <br />
+            yarn add -D ts-loader
+            <br />
+            yarn add babel-loader --dev
+            <br />
+            yarn add react-native-svg-transformer
+            <br />
+            yarn add react-native-svg
+            <br />
+            yarn add --dev babel-plugin-module-resolver
+          </Text>
+          <TouchableOpacity
+            style={styles.clipboardCopyContainer}
+            onPress={copyToClipboardYarn}
+          >
+            <Text style={styles.clipboardCopyText}>Copy</Text>
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.descriptionInstall}>
+          Usage To use a component from the etendo-ui-library, import it and use
+          it in your JSX code. Below is an example of how to use the Input
+          component.
+        </Text>
+        <View style={styles.clipboardContent}>
+          <Text style={styles.clipboardText}>
+            {`//import
+              import Input from 'etendo-ui-library/components/input/Input';
+
+              //usage
+              <Input
+                titleLabel="ReadOnly"
+                helperText="Start Date"
+                placeholder="Write a text"
+                disabled={false}
+                value="password"
+                typeField="textInputPassword"
+                isError={true}
+                keyboardType="text"
+              />;`}
+          </Text>
+        </View>
+        <Text style={styles.descriptionInstall}>
+          <b>
+            Remember to replace the attribute values with your desired ones!!
+          </b>
+        </Text>
+        <Text style={styles.descriptionInstall}>
+          That's it! You are now ready to use the etendo-ui-library in your
+          React Web application. Please refer to the detailed documentation on
+          Storybook and NPM for more examples and use cases.
+        </Text>
       </View>
     </View>
   );

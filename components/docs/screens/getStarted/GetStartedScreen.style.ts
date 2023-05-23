@@ -13,6 +13,16 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
     color: NEUTRAL_100,
   },
+  titleSetup: {
+    fontSize: 30,
+    fontWeight: '600',
+    marginBottom: 20,
+    color: NEUTRAL_100,
+    marginTop: 20,
+    borderBottomWidth: 1,
+    width: '100%',
+    borderBottomColor: NEUTRAL_10,
+  },
   description: { color: NEUTRAL_100, marginBottom: 20 },
   subTitle: {
     fontSize: 26,
@@ -20,6 +30,7 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: NEUTRAL_10,
     color: NEUTRAL_100,
+
   },
   clipboardContainer: { alignItems: 'flex-start' },
   clipboardTitle: {
