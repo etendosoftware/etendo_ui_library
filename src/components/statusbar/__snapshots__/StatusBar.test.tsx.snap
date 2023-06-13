@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Running Test for StatusBar Check StatusBar Disabled 1`] = `
-<View
+<div
   style={
-    Object {
+    {
       "backgroundColor": "#202452",
       "display": "flex",
       "flex": 1,
@@ -15,9 +15,9 @@ exports[`Running Test for StatusBar Check StatusBar Disabled 1`] = `
     }
   }
 >
-  <View
+  <div
     style={
-      Object {
+      {
         "backgroundColor": "#202452",
         "borderBottomLeftRadius": 20,
         "borderBottomStartRadius": 20,
@@ -28,13 +28,15 @@ exports[`Running Test for StatusBar Check StatusBar Disabled 1`] = `
       }
     }
   >
-    <Text
+    <div
+      className="css-text-146c3p1"
+      dir="auto"
       style={
-        Object {
+        {
           "alignSelf": "center",
-          "color": "#FFFFFF",
+          "color": "rgba(255,255,255,1.00)",
           "flex": 1,
-          "fontSize": 16,
+          "fontSize": "16px",
           "fontWeight": "600",
           "justifyContent": "center",
           "textAlign": "center",
@@ -42,11 +44,11 @@ exports[`Running Test for StatusBar Check StatusBar Disabled 1`] = `
       }
     >
       1. Vehicles
-    </Text>
-  </View>
-  <View
+    </div>
+  </div>
+  <div
     style={
-      Object {
+      {
         "backgroundColor": "#202452",
         "borderBottomLeftRadius": 20,
         "borderBottomStartRadius": 20,
@@ -57,13 +59,15 @@ exports[`Running Test for StatusBar Check StatusBar Disabled 1`] = `
       }
     }
   >
-    <Text
+    <div
+      className="css-text-146c3p1"
+      dir="auto"
       style={
-        Object {
+        {
           "alignSelf": "center",
-          "color": "#FFFFFF",
+          "color": "rgba(255,255,255,1.00)",
           "flex": 1,
-          "fontSize": 16,
+          "fontSize": "16px",
           "fontWeight": "600",
           "justifyContent": "center",
           "textAlign": "center",
@@ -71,11 +75,11 @@ exports[`Running Test for StatusBar Check StatusBar Disabled 1`] = `
       }
     >
       2. Visits
-    </Text>
-  </View>
-  <View
+    </div>
+  </div>
+  <div
     style={
-      Object {
+      {
         "backgroundColor": "#202452",
         "borderBottomLeftRadius": 20,
         "borderBottomStartRadius": 20,
@@ -86,13 +90,15 @@ exports[`Running Test for StatusBar Check StatusBar Disabled 1`] = `
       }
     }
   >
-    <Text
+    <div
+      className="css-text-146c3p1"
+      dir="auto"
       style={
-        Object {
+        {
           "alignSelf": "center",
-          "color": "#FFFFFF",
+          "color": "rgba(255,255,255,1.00)",
           "flex": 1,
-          "fontSize": 16,
+          "fontSize": "16px",
           "fontWeight": "600",
           "justifyContent": "center",
           "textAlign": "center",
@@ -100,11 +106,11 @@ exports[`Running Test for StatusBar Check StatusBar Disabled 1`] = `
       }
     >
       3. Routes
-    </Text>
-  </View>
-  <View
+    </div>
+  </div>
+  <div
     style={
-      Object {
+      {
         "backgroundColor": "#202452",
         "borderBottomLeftRadius": 20,
         "borderBottomStartRadius": 20,
@@ -115,13 +121,15 @@ exports[`Running Test for StatusBar Check StatusBar Disabled 1`] = `
       }
     }
   >
-    <Text
+    <div
+      className="css-text-146c3p1"
+      dir="auto"
       style={
-        Object {
+        {
           "alignSelf": "center",
-          "color": "#FFFFFF",
+          "color": "rgba(255,255,255,1.00)",
           "flex": 1,
-          "fontSize": 16,
+          "fontSize": "16px",
           "fontWeight": "600",
           "justifyContent": "center",
           "textAlign": "center",
@@ -129,11 +137,11 @@ exports[`Running Test for StatusBar Check StatusBar Disabled 1`] = `
       }
     >
       4. Capacity
-    </Text>
-  </View>
-  <View
+    </div>
+  </div>
+  <div
     style={
-      Object {
+      {
         "backgroundColor": "#202452",
         "borderBottomLeftRadius": 20,
         "borderBottomStartRadius": 20,
@@ -144,13 +152,15 @@ exports[`Running Test for StatusBar Check StatusBar Disabled 1`] = `
       }
     }
   >
-    <Text
+    <div
+      className="css-text-146c3p1"
+      dir="auto"
       style={
-        Object {
+        {
           "alignSelf": "center",
-          "color": "#FFFFFF",
+          "color": "rgba(255,255,255,1.00)",
           "flex": 1,
-          "fontSize": 16,
+          "fontSize": "16px",
           "fontWeight": "600",
           "justifyContent": "center",
           "textAlign": "center",
@@ -158,7 +168,7 @@ exports[`Running Test for StatusBar Check StatusBar Disabled 1`] = `
       }
     >
       5. Settings
-    </Text>
-  </View>
-</View>
+    </div>
+  </div>
+</div>
 `;

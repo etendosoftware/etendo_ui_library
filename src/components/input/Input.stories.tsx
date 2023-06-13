@@ -1,7 +1,7 @@
 import React from 'react';
 import {useState} from '@storybook/addons';
 import {Story, Meta} from '@storybook/react';
-import Input from '../input/Input';
+import Input from './Input';
 import {InputProps} from './Input.types';
 import {View} from 'react-native';
 import {styles} from './Input.style';
