@@ -23,9 +23,10 @@ module.exports = function (api) {
       },
     ],
   ];
-
+  const ignore = ['**/*.stories.tsx', '**/*.test.tsx', '**/__snapshots__/*'];
   return {
     presets,
     plugins,
+    ignore,
   };
 };

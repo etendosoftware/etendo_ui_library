@@ -33,6 +33,7 @@ pipeline {
                         sh 'npm config set registry "https//registry.npmjs.org/"'
                         sh 'npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN'
                         sh "yarn install"
+                        sh "yarn build"
                         sh 'echo Build Succesful'
                     } catch (Exception e) {
                         echo 'BUILD FAILED'

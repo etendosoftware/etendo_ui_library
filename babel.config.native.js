@@ -6,8 +6,9 @@ module.exports = function (api) {
     '@babel/preset-typescript',
     '@babel/preset-react',
   ];
-
+  const ignore = ['**/*.stories.tsx', '**/*.test.tsx', '**/__snapshots__/*'];
   return {
     presets,
+    ignore,
   };
 };

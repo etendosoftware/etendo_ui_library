@@ -36,3 +36,5 @@ export const SUCCESS_100 = '#00B34C';
 
 export const DESTRUCTIVE_10 = '#FEF0EF';
 export const DESTRUCTIVE_100 = '#F36A62';
+
+export const DEFAULT_COLOR_THEME = PRIMARY_100;
