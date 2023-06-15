@@ -22,7 +22,6 @@ describe('Running Test for Input', () => {
             />
           }
           disabled={true}
-          typeSize={'large'}
         />,
       )
       .toJSON();

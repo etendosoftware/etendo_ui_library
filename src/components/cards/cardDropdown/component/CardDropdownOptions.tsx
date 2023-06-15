@@ -75,8 +75,7 @@ const CardDropdownOptions = ({
             top: positionModal.top,
             left: positionModal.left,
           },
-        ]}
-      >
+        ]}>
         {!data?.length ? (
           <CardDropdownSkeleton onClose={onClose} styleType={styleType} />
         ) : (
@@ -87,8 +86,7 @@ const CardDropdownOptions = ({
                 CardVariant[styleType].colorCardOptionHeader,
               ]}
               activeOpacity={0.7}
-              onPress={onClose}
-            >
+              onPress={onClose}>
               <View style={styles.cardHeaderLeftPart}>
                 <View style={styles.cardOptionHeaderImg}>
                   {image && newImage}
@@ -99,8 +97,7 @@ const CardDropdownOptions = ({
                   style={[
                     styles.cardOptionHeaderTitle,
                     CardVariant[styleType].colorCardOptionHeaderTitle,
-                  ]}
-                >
+                  ]}>
                   {title}
                 </Text>
                 <View style={styles.cardOptionArrowContainer}>
@@ -113,7 +110,7 @@ const CardDropdownOptions = ({
             </TouchableOpacity>
             <ScrollView showsVerticalScrollIndicator={false}>
               {data.map((item: CardDropdownData, index: number) => {
-                let newImageMap: HTMLElement = <></>;
+                let newImageMap = <></>;
                 if (item?.image) {
                   newImageMap = React.cloneElement(item.image, {
                     fill: CardVariant[styleType].colorCardImageOptionFill,
@@ -132,14 +129,12 @@ const CardDropdownOptions = ({
                     key={index}
                     onPress={() => {
                       onPressOption(item?.route);
-                    }}
-                  >
+                    }}>
                     <View
                       style={[
                         styles.cardItemImageContainer,
                         CardVariant[styleType].colorCardItemImageContainer,
-                      ]}
-                    >
+                      ]}>
                       {newImageMap}
                     </View>
                     <View style={styles.cardItemTextContainer}>
@@ -147,16 +142,14 @@ const CardDropdownOptions = ({
                         style={[
                           styles.cardItemTitle,
                           CardVariant[styleType].colorCardItemTitle,
-                        ]}
-                      >
+                        ]}>
                         {item?.title}
                       </Text>
                       <Text
                         style={[
                           styles.cardItemDescription,
                           CardVariant[styleType].colorCardItemDescription,
-                        ]}
-                      >
+                        ]}>
                         {item?.description}
                       </Text>
                     </View>

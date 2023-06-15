@@ -13,13 +13,7 @@ const datasetTab = [
 describe('Running Test for Tab', () => {
   it('Check Tab Disabled', () => {
     const tree = renderer
-      .create(
-        <Tab
-          data={datasetTab}
-          selectedTab={1}
-          setSelectedTab={() => {}}
-        />,
-      )
+      .create(<Tab data={datasetTab} currentIndex={0} />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });

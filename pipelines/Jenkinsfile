@@ -6,7 +6,6 @@ pipeline {
 
     environment {
         NPM_TOKEN           = credentials('npmjs-access-token')
-        CHROMATIC_TOKEN     = credentials('chromatic-access-token')
         EMAIL_ADDRESS       = credentials('email_builds')
         URL_REPO            = 'https://bitbucket.org/koodu_software/etendo_ui_library'
         COMMIT_AUTHOR_NAME  = sh(returnStdout: true, script: "git log -1 --pretty=format:'%an'").trim()
@@ -29,49 +28,25 @@ pipeline {
                     try {
                         env.STATUSBUILD = "1"
                         sh 'echo Building Environment'
-                        sh "npm install -g yarn"
-                        sh 'npm config set registry "https//registry.npmjs.org/"'
+                        sh """
+                        echo "deb http://deb.debian.org/debian/ oldoldstable main" > /etc/apt/sources.list
+                        echo "deb http://security.debian.org/debian-security/ oldoldstable/updates main" >> /etc/apt/sources.list
+                        echo "deb http://deb.debian.org/debian/ oldoldstable-updates main" >> /etc/apt/sources.list
+                        apt-get update
+                        """
+                        sh 'curl -sL https://deb.nodesource.com/setup_16.x | bash -'
+                        sh 'apt-get install -y nodejs'
+                        sh 'npm install -g yarn'
+                        sh 'npm config set registry "https://registry.npmjs.org/"'
                         sh 'npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN'
-                        sh "yarn install"
+                        sh 'yarn install'
+                        sh 'yarn build'
                         sh 'echo Build Succesful'
                     } catch (Exception e) {
                         echo 'BUILD FAILED'
                         currentBuild.result = 'FAILED'
                         error('BUILD FAILED')
                         env.STATUSBUILD = "0"
-                    }
-                }
-            }
-        }
-
-        stage('Build Storybook') {
-            when {
-                expression {
-                    ISUPGRADECOMMIT != 0
-                    env.STATUSBUILD == "1"
-                }
-            }
-            steps {
-                script {
-                    try {
-                        sh 'echo Build Storybook'
-                        sh 'yarn build-storybook'
-                        publishHTML([
-                            allowMissing: true,
-                            alwaysLinkToLastBuild: false,
-                            keepAll: true,
-                            reportDir: 'storybook-static/',
-                            reportFiles: '*',
-                            reportName: 'STORYBOOK',
-                            reportTitles: ''
-                        ])
-                        sh 'echo Published Storybook'
-                        env.BUILDSTORYBOOK = "1"
-                    } catch (Exception e) {
-                        echo 'BUILD STORYBOOK FAILED'
-                        currentBuild.result = 'UNSTABLE'
-                        unstable('BUILD STORYBOOK FAILED')
-                        env.BUILDSTORYBOOK = "0"
                     }
                 }
             }
@@ -108,7 +83,6 @@ pipeline {
                     expression {
                         ISUPGRADECOMMIT != 0
                         env.STATUSTEST == "1"
-                        env.BUILDSTORYBOOK == "1"
                     }
                 }
             }
@@ -127,8 +101,6 @@ pipeline {
                         sh 'GIT_SSH_COMMAND=\"ssh -i ${keyfile}\" git push $GIT_URL'
                     }
                 }
-                echo 'Publishing Storybook in Chromatic'
-                sh 'yes | npx chromatic --project-token=$CHROMATIC_TOKEN --auto-accept-changes'
             }
         }
     }
