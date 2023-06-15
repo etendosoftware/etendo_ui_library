@@ -65,3 +65,4 @@ build-storybook.log
 version
 version.txt
 package-lock.json
+src/components/**/__snapshots__/
