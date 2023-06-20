@@ -1,16 +1,16 @@
 /* Imports */
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
-import {View, TouchableOpacity, Text} from 'react-native';
-import {PaginationStyleVariant} from './Pagination.styles';
-import {PaginationProps} from './Pagination.types';
-import {ArrowLeft} from '../../assets/images/icons/ArrowLeft';
-import {ArrowFirst} from '../../assets/images/icons/ArrowFirst';
-import {ArrowRight} from '../../assets/images/icons/ArrowRight';
-import {ArrowLast} from '../../assets/images/icons/ArrowLast';
+import { View, TouchableOpacity, Text } from 'react-native';
+import { PaginationStyleVariant } from './Pagination.styles';
+import { PaginationProps } from './Pagination.types';
+import { ArrowLeft } from '../../assets/images/icons/ArrowLeft';
+import { ArrowFirst } from '../../assets/images/icons/ArrowFirst';
+import { ArrowRight } from '../../assets/images/icons/ArrowRight';
+import { ArrowLast } from '../../assets/images/icons/ArrowLast';
 
 /* Pagination component */
-export const Pagination = ({
+const Pagination = ({
   currentPage,
   onChangeSelected,
   totalData,
@@ -130,3 +130,5 @@ export const Pagination = ({
     </View>
   );
 };
+
+export default Pagination;
