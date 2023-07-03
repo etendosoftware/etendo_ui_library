@@ -1,6 +1,6 @@
 import { View, Text, Pressable, ScrollView } from 'react-native';
 import React, { useState } from 'react';
-import { spaceBetween, styles } from '../Profile/Profile.styles';
+import { styles } from '../Profile/Profile.styles';
 import ProfileImage from '../Profile/ProfileImage';
 import { ProfileOptionsProps } from '../../Navbar.types';
 import { PRIMARY_100, QUATERNARY_10 } from '../../../../styles/colors';
@@ -62,7 +62,7 @@ const ProfileOptions = ({
       style={[
         styles.optionsContainer,
         {
-          top: posicionModal.top + spaceBetween,
+          top: posicionModal.top,
           left:
             posicionModal.left -
             styles.optionsContainer.width +

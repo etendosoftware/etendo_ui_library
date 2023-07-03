@@ -148,5 +148,3 @@ export const styles = StyleSheet.create({
     marginHorizontal: 8,
   },
 });
-
-export const spaceBetween = 5;
