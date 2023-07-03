@@ -1,30 +1,33 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import {
-  INITIAL_100,
   NEUTRAL_0,
-  NEUTRAL_10,
   NEUTRAL_100,
   NEUTRAL_40,
   NEUTRAL_5,
   NEUTRAL_60,
+  OVERLAY,
   PRIMARY_100,
+  QUATERNARY_100,
   QUATERNARY_50,
 } from '../../../../styles/colors';
 
 export const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    marginLeft: 32,
+    width: 28,
+    marginRight: 32,
+    height: 52,
+    display: 'flex',
+    justifyContent: 'center',
   },
   imageProfile: {
-    height: 40,
-    width: 40,
+    height: 52,
+    width: 52,
   },
   nameText: {
     position: 'absolute',
     fontSize: 25,
     fontWeight: '600',
-    color: INITIAL_100,
+    color: QUATERNARY_100,
     zIndex: 3,
   },
   optionsContainer: {
@@ -32,22 +35,31 @@ export const styles = StyleSheet.create({
     top: 40,
     right: 60,
     backgroundColor: NEUTRAL_0,
-    borderRadius: 5,
+    borderRadius: 8,
     zIndex: 2,
-    width: 350,
+    width: 256,
     overflow: 'hidden',
   },
   option: {
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: NEUTRAL_5,
+    height: 40,
+    paddingHorizontal: 16,
     flexDirection: 'row',
     alignItems: 'center',
+    marginVertical: 8,
+    borderRadius: 8,
   },
   optionLogOut: {
-    padding: 20,
+    height: 40,
+    paddingHorizontal: 16,
     flexDirection: 'row',
     alignItems: 'center',
+    margin: 8,
+    borderRadius: 8,
+  },
+  separatorLogout: {
+    marginHorizontal: 8,
+    height: 1,
+    backgroundColor: NEUTRAL_5,
   },
   optionText: {
     fontSize: 12,
@@ -62,6 +74,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: OVERLAY,
   },
   profileImageSize: {
     width: 40,
@@ -80,12 +93,13 @@ export const styles = StyleSheet.create({
   optionsHeaderContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    height: 64,
+    paddingLeft: 16,
+    borderBottomColor: NEUTRAL_5,
     borderBottomWidth: 1,
-    borderBottomColor: NEUTRAL_10,
-    padding: 10,
   },
   optionsHeaderTextContainer: {
-    marginLeft: 10,
+    marginLeft: 8,
   },
   optionsHeaderTextName: {
     color: PRIMARY_100,
@@ -103,26 +117,36 @@ export const styles = StyleSheet.create({
     color: PRIMARY_100,
     fontWeight: '500',
     fontSize: 14,
-    textAlignVertical: 'center',
+    lineHeight: 22,
+    verticalAlign: 'middle',
     width: 180,
   },
   optionItemContainer: {
     flexDirection: 'row',
-    padding: 10,
     display: 'flex',
     alignItems: 'center',
   },
   optionItemImageSize: {
-    height: 20,
-    width: 20,
+    height: 16,
+    width: 16,
   },
   optionItemImage: {
     marginRight: 10,
-    height: 20,
-    width: 20,
+    height: 16,
+    width: 16,
   },
-  optionLogOutContainer: {padding: 10},
+  optionsMapContainer: {
+    borderBottomColor: NEUTRAL_5,
+    borderBottomWidth: 1,
+  },
+  aplicationIcon: {
+    width: 28,
+    height: 28,
+  },
+  scroll: {
+    maxHeight: 282,
+    marginHorizontal: 8,
+  },
 });
 
-export const widthOptions = 256;
 export const spaceBetween = 5;

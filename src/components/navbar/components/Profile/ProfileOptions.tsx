@@ -1,121 +1,180 @@
-import {View, Text, Dimensions, Pressable, ViewStyle} from 'react-native';
-import React, {useState} from 'react';
-import {spaceBetween, styles, widthOptions} from './Profile.styles';
-import ProfileImage from './ProfileImage';
-import {ProfileOptionsProps} from '../../Navbar.types';
-import {PRIMARY_100, QUATERNARY_10} from '../../../../styles/colors';
+import { View, Text, Pressable, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { spaceBetween, styles } from '../Profile/Profile.styles';
+import ProfileImage from '../Profile/ProfileImage';
+import { ProfileOptionsProps } from '../../Navbar.types';
+import { PRIMARY_100, QUATERNARY_10 } from '../../../../styles/colors';
 
 const ProfileOptions = ({
   profileImage,
   name,
   email,
   posicionModal,
-  data,
+  profileOptions,
+  otherOptions,
   onOptionSelected,
 }: ProfileOptionsProps) => {
-  const [indexHover, setIndexHover] = useState(-1);
-  const [logOutHover, setLogOutHover] = useState(false);
+  const defaultNameValue = 'User';
+  const scrollRef = React.useRef<ScrollView>(null);
+  const [isScrollable, setIsScrollable] = useState(false);
 
-  const screenWidth = Dimensions.get('window').width;
-  const isMobile = screenWidth < 320;
+  const [logoutOption, setLogoutOption] = useState<boolean>(false);
+  const [profileOptionIndex, setProfileOptionIndex] = useState<
+    number | undefined
+  >(-1);
+  const [otherOptionIndex, setOtherOptionIndex] = useState<number | undefined>(
+    -1,
+  );
 
-  const handleOptionSelected = (item: string, index: number) => {
-    onOptionSelected(item, index);
+  const handleProfileOptionSelected = (item?: string, index?: number) => {
+    setProfileOptionIndex(index);
+    setTimeout(() => {
+      if (onOptionSelected) {
+        onOptionSelected(item, index);
+      }
+    }, 100);
+  };
+  const handleOtherOptionsSelected = (item?: string, index?: number) => {
+    setOtherOptionIndex(index);
+    setTimeout(() => {
+      if (onOptionSelected) {
+        onOptionSelected(item, index);
+      }
+    }, 100);
   };
 
-  const getTopLeft = () => {
-    if (isMobile) {
-      return {right: 20};
-    }
-    return {left: posicionModal.left - widthOptions + posicionModal.width};
+  const handleLogoutOptionsSelected = () => {
+    setLogoutOption(true);
+    setTimeout(() => {
+      if (onOptionSelected) {
+        onOptionSelected('logout', 0);
+      }
+    }, 100);
   };
 
-  const getBackground = (index: number): ViewStyle | undefined => {
-    if (indexHover === index) {
-      return {backgroundColor: QUATERNARY_10};
-    }
+  const onContentSizeChange = (contentWidth: number, contentHeight: number) => {
+    const containerHeight = styles.scroll.maxHeight;
+    setIsScrollable(contentHeight > containerHeight);
   };
-
-  const defaultNameValue = 'A';
 
   return (
     <View
       style={[
         styles.optionsContainer,
-        {width: widthOptions},
         {
           top: posicionModal.top + spaceBetween,
+          left:
+            posicionModal.left -
+            styles.optionsContainer.width +
+            (otherOptions?.length
+              ? styles.aplicationIcon.width
+              : styles.profileImageSize.width),
         },
-        getTopLeft(),
-      ]}
-    >
+      ]}>
       <View style={styles.optionsHeaderContainer}>
         <ProfileImage image={profileImage} name={name} />
         <View style={styles.optionsHeaderTextContainer}>
           <Text
             numberOfLines={1}
             ellipsizeMode="tail"
-            style={styles.optionsHeaderTextName}
-          >
-            {name || defaultNameValue}
+            style={styles.optionsHeaderTextName}>
+            {name ?? defaultNameValue}
           </Text>
-          <Text
-            numberOfLines={1}
-            ellipsizeMode="tail"
-            style={styles.optionsHeaderTextEmail}
-          >
-            {email || ''}
-          </Text>
+          {email && (
+            <Text
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              style={styles.optionsHeaderTextEmail}>
+              {email}
+            </Text>
+          )}
         </View>
       </View>
-      {data?.map((item, index) => (
-        <Pressable
-          key={index}
-          style={[styles.option, getBackground(index)]}
-          onPress={() => handleOptionSelected(item.route, index)}
-          onHoverIn={() => {
-            setIndexHover(index);
-          }}
-          onHoverOut={() => {
-            setIndexHover(-1);
-          }}
-        >
-          <View style={styles.optionItemContainer}>
-            <View style={styles.optionItemImage}>
-              {item?.image &&
-                React.cloneElement(item.image, {
-                  fill: PRIMARY_100,
-                  style: styles.optionItemImageSize,
-                })}
-            </View>
-            <Text
-              numberOfLines={2}
-              ellipsizeMode="tail"
-              style={styles.optionsItemsText}
+      <ScrollView
+        style={[
+          styles.scroll,
+          isScrollable && { marginRight: 6, paddingRight: 9 },
+        ]}
+        onContentSizeChange={onContentSizeChange}
+        ref={scrollRef}>
+        <View style={styles.optionsMapContainer}>
+          {profileOptions?.map((item, index) => (
+            <Pressable
+              key={index}
+              style={[
+                styles.option,
+                { marginRight: isScrollable ? 0 : 8 },
+                profileOptionIndex === index && {
+                  backgroundColor: QUATERNARY_10,
+                },
+              ]}
+              onPress={() => handleProfileOptionSelected(item?.route, index)}
+              onHoverIn={() => setProfileOptionIndex(index)} // Simula el evento de hover en dispositivos móviles
+              onHoverOut={() => setProfileOptionIndex(-1)} // Simula el evento de hover en dispositivos móviles
             >
-              {item?.title}
-            </Text>
-          </View>
-        </Pressable>
-      ))}
+              <View style={styles.optionItemContainer}>
+                <View style={styles.optionItemImage}>
+                  {item?.image &&
+                    React.cloneElement(item.image, {
+                      fill: PRIMARY_100,
+                      style: styles.optionItemImageSize,
+                    })}
+                </View>
+                <Text
+                  numberOfLines={1}
+                  ellipsizeMode="tail"
+                  style={styles.optionsItemsText}>
+                  {item?.title}
+                </Text>
+              </View>
+            </Pressable>
+          ))}
+        </View>
+        <View>
+          {otherOptions?.map((item, index) => (
+            <Pressable
+              key={index}
+              style={[
+                styles.option,
+                { marginRight: isScrollable ? 0 : 8 },
+                otherOptionIndex === index && {
+                  backgroundColor: QUATERNARY_10,
+                },
+              ]}
+              onPress={() => handleOtherOptionsSelected(item?.route, index)}
+              onHoverIn={() => setOtherOptionIndex(index)} // Simula el evento de hover en dispositivos móviles
+              onHoverOut={() => setOtherOptionIndex(-1)} // Simula el evento de hover en dispositivos móviles
+            >
+              <View style={styles.optionItemContainer}>
+                {item?.image && (
+                  <View style={styles.optionItemImage}>
+                    {React.cloneElement(item.image, {
+                      fill: PRIMARY_100,
+                      style: styles.optionItemImageSize,
+                    })}
+                  </View>
+                )}
+                <Text
+                  numberOfLines={1}
+                  ellipsizeMode="tail"
+                  style={styles.optionsItemsText}>
+                  {item?.title}
+                </Text>
+              </View>
+            </Pressable>
+          ))}
+        </View>
+      </ScrollView>
+      <View style={styles.separatorLogout}></View>
       <Pressable
-        onHoverIn={() => {
-          setLogOutHover(true);
-        }}
-        onHoverOut={() => {
-          setLogOutHover(false);
-        }}
+        onPress={() => handleLogoutOptionsSelected()}
+        onHoverIn={() => setLogoutOption(true)} // Simula el evento de hover en dispositivos móviles
+        onHoverOut={() => setLogoutOption(false)} // Simula el evento de hover en dispositivos móviles
         style={[
           styles.optionLogOut,
-          logOutHover && {backgroundColor: QUATERNARY_10},
-        ]}
-        onPress={() => {
-          handleOptionSelected('logout', 0);
-        }}
-      >
-        <View>
-          <Text style={styles.optionsItemsText}>Log Out</Text>
-        </View>
+          logoutOption && { backgroundColor: QUATERNARY_10 },
+        ]}>
+        <Text style={styles.optionsItemsText}>Log Out</Text>
       </Pressable>
     </View>
   );

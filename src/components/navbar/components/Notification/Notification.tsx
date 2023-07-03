@@ -1,11 +1,15 @@
-import React, { useState, useMemo, useEffect, useRef } from 'react';
-import { Modal, TouchableOpacity } from 'react-native';
-import { BellActiveIcon } from '../../../../assets/images/icons/BellActiveIcon';
-import { BellIcon } from '../../../../assets/images/icons/BellIcon';
-import { NotificationProps, OptionNotificationItem, PosicionModalType } from '../../Navbar.types';
+import React, {useState, useMemo, useEffect, useRef} from 'react';
+import {Modal, TouchableOpacity} from 'react-native';
+import {BellActiveIcon} from '../../../../assets/images/icons/BellActiveIcon';
+import {BellIcon} from '../../../../assets/images/icons/BellIcon';
+import {
+  NotificationProps,
+  OptionNotificationItem,
+  PosicionModalType,
+} from '../../Navbar.types';
 import NotificationsOptions from './NotificationsOptions';
-import { styles } from './Notification.styles';
-import { NEUTRAL_0 } from '../../../../styles/colors';
+import {styles} from './Notification.styles';
+import {NEUTRAL_0} from '../../../../styles/colors';
 
 const Notification = ({
   anyNotification,
@@ -13,6 +17,7 @@ const Notification = ({
   onOptionSelected,
   onViewAllNotifications,
   onMarkAllAsReadNotifications,
+  onLayout,
 }: NotificationProps) => {
   const [showOptions, setShowOptions] = useState(false);
   const [posicionModal, setPosicionModal] = useState<PosicionModalType>({
@@ -28,7 +33,7 @@ const Notification = ({
       onOptionSelected(item, index);
       setShowOptions(false);
     },
-    [onOptionSelected]
+    [onOptionSelected],
   );
 
   const getTopLeft = () => {
@@ -42,7 +47,7 @@ const Notification = ({
           pageX: number,
           pageY: number,
         ) => {
-          setPosicionModal({ top: pageY + height, left: pageX, width, height });
+          setPosicionModal({top: pageY + height, left: pageX, width, height});
         },
       );
     }
@@ -57,25 +62,24 @@ const Notification = ({
   return (
     <>
       <TouchableOpacity
+        onLayout={onLayout}
         ref={refComponente}
         style={styles.container}
         onPress={() => {
           setShowOptions(true);
           getTopLeft();
-        }}
-      >
+        }}>
         {anyNotification ? (
           <BellActiveIcon style={styles.imageNotification} fill={NEUTRAL_0} />
         ) : (
           <BellIcon style={styles.imageNotification} fill={NEUTRAL_0} />
         )}
       </TouchableOpacity>
-      <Modal transparent={true} visible={showOptions} animationType="fade">
+      <Modal transparent visible={showOptions} animationType="fade">
         <TouchableOpacity
           style={styles.modalBackground}
           onPress={() => setShowOptions(false)}
-          activeOpacity={1}
-        >
+          activeOpacity={1}>
           <NotificationsOptions
             optionsNotifications={data}
             onOptionSelected={handleOptionSelected}
@@ -88,6 +92,5 @@ const Notification = ({
     </>
   );
 };
-
 
 export default Notification;

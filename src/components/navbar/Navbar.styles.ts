@@ -4,9 +4,10 @@ import {PRIMARY_100} from '../../styles/colors';
 export const styles = StyleSheet.create({
   container: {
     backgroundColor: PRIMARY_100,
-    height: 60,
+    height: 80,
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'space-between',
     flexDirection: 'row',
   },
   leftContainer: {
@@ -14,16 +15,19 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     display: 'flex',
-    width: '50%',
-    paddingHorizontal: 32,
+    paddingLeft: 32,
+    width: 390,
   },
   rightContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end',
     display: 'flex',
-    width: '50%',
-    paddingHorizontal: 32,
   },
   storiesContainer: {},
+  itemMapContainer: {
+    marginRight: 28,
+    flexDirection: 'row',
+  },
 });
+export const marginIncomponents = 28;

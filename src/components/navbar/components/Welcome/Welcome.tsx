@@ -15,7 +15,7 @@ const Welcome = ({name}: WelcomeProps) => {
       <View>
         <Text style={styles.titleWelcome}>Welcome to Etendo,</Text>
         <Text numberOfLines={1} ellipsizeMode="tail" style={styles.titleName}>
-          {name ? name : 'Admin'}
+          {name ? name + '!' : 'User!'}
         </Text>
       </View>
     </View>

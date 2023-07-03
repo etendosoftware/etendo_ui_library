@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   TextInput,
   TextStyle,
@@ -13,12 +13,12 @@ import {
   GestureResponderEvent,
   Text,
 } from 'react-native';
-import {styles} from '../Input.style';
-import {InputFieldProps, KeyboardTypes} from '../Input.types';
-import {ShowPassword} from '../../../assets/images/icons/ShowPassword';
-import {HidePassword} from '../../../assets/images/icons/HidePassword';
+import { styles } from '../Input.style';
+import { InputFieldProps, KeyboardTypes } from '../Input.types';
+import { ShowPassword } from '../../../assets/images/icons/ShowPassword';
+import { HidePassword } from '../../../assets/images/icons/HidePassword';
 import InputOptions from './InputOptions';
-import {NEUTRAL_0} from '../../../styles/colors';
+import { NEUTRAL_0 } from '../../../styles/colors';
 
 const InputField = ({
   type,
@@ -40,7 +40,7 @@ const InputField = ({
   onBlur,
 }: InputFieldProps) => {
   const [isFocus, setIsFocus] = useState<boolean>(false);
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState<boolean>(true);
   const [showOptions, setShowOptions] = useState<boolean>(false);
   const [dataOptionsFilter, setDataOptionsFilter] = useState<any>([]);
   const [filterValue, setFilterValue] = useState<string>('');
@@ -58,7 +58,7 @@ const InputField = ({
   const disableOutline = () => {
     let outline = {};
     if (isWeb) {
-      return (outline = {outline: 'none'});
+      return (outline = { outline: 'none' });
     }
     return outline;
   };
@@ -106,7 +106,12 @@ const InputField = ({
               height,
             });
           } else {
-            setpositionModal({top: pageY + height, left: pageX, width, height});
+            setpositionModal({
+              top: pageY + height,
+              left: pageX,
+              width,
+              height,
+            });
           }
         },
       );
@@ -152,7 +157,7 @@ const InputField = ({
   const getFocusStyle = (): ViewStyle[] => {
     let style: ViewStyle[] = [];
     if (!isFocus) {
-      style.push({borderColor: 'transparent'});
+      style.push({ borderColor: 'transparent' });
     }
     return style;
   };
@@ -160,7 +165,7 @@ const InputField = ({
   const removePaddingField = (): ViewStyle => {
     let style: ViewStyle = {};
     if (configField?.image) {
-      style = {paddingRight: 0};
+      style = { paddingRight: 0 };
     }
     return style;
   };
@@ -220,10 +225,9 @@ const InputField = ({
     <View style={[styleField.focus, getFocusStyle()]}>
       <TouchableOpacity
         ref={refComponente}
-        style={[styleField.field, removePaddingField(), {backgroundColor}]}
+        style={[styleField.field, removePaddingField(), { backgroundColor }]}
         disabled={disabled || configField.disabledField}
-        onPress={handleOnPress}
-      >
+        onPress={handleOnPress}>
         {configField?.type === 'textInput' && (
           <TextInput
             editable={!disabled || !configField.disabledField}
@@ -247,8 +251,7 @@ const InputField = ({
           <Text
             numberOfLines={1}
             ellipsizeMode="tail"
-            style={[getStyleText(value), disableOutline()]}
-          >
+            style={[getStyleText(value), disableOutline()]}>
             {value ? value : placeholder}
           </Text>
         )}
@@ -256,8 +259,7 @@ const InputField = ({
           <TouchableOpacity
             onPress={handlePressImage}
             style={styles.buttonContainerInputField}
-            disabled={configField?.disabledSubmit || disabled}
-          >
+            disabled={configField?.disabledSubmit || disabled}>
             {getImage(configField.image)}
           </TouchableOpacity>
         )}
