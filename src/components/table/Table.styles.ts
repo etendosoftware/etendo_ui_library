@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import {
   NEUTRAL_10,
   NEUTRAL_40,
@@ -52,7 +52,7 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     color: PRIMARY_100,
     textAlign: 'center',
-    textAlignVertical: 'center',
+    verticalAlign: 'middle',
     paddingVertical: 22.5,
   },
   cellTextEdit: {
@@ -60,7 +60,7 @@ export const styles = StyleSheet.create({
     fontWeight: '400',
     color: PRIMARY_100,
     textAlign: 'center',
-    textAlignVertical: 'center',
+    verticalAlign: 'middle',
   },
   cellTextTitle: {
     fontSize: 14,

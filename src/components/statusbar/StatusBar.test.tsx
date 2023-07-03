@@ -1,10 +1,10 @@
 import React from 'react';
-import {View} from 'react-native';
+import { View } from 'react-native';
 import renderer from 'react-test-renderer';
-import {StatusBar} from './StatusBar';
+import { StatusBar } from '../statusbar/StatusBar';
 
 const Component = () => {
-  return <View style={{height: 100}}></View>;
+  return <View style={{ height: 100 }}></View>;
 };
 
 describe('Running Test for StatusBar', () => {

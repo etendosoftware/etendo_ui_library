@@ -52,8 +52,7 @@ const NotificationsOptions = ({
             top: posicionModal.top + spaceBetween,
             left: posicionModal.left - widthOptions,
           },
-        ]}
-      >
+        ]}>
         <>
           <View style={styles.optionsContainerTop}>
             <Text style={styles.optionNotificationText}>Notifications</Text>
@@ -75,8 +74,7 @@ const NotificationsOptions = ({
                   style={[styles.option, getBackground(index)]}
                   onPress={() =>
                     onOptionSelected(optionNotificationItem, index)
-                  }
-                >
+                  }>
                   <View style={styles.optionImage}>
                     <PointIcon
                       fill={getOptionImageType(optionNotificationItem?.type)}
@@ -87,8 +85,7 @@ const NotificationsOptions = ({
                     <Text
                       numberOfLines={2}
                       ellipsizeMode="tail"
-                      style={styles.optionText}
-                    >
+                      style={styles.optionText}>
                       {optionNotificationItem?.title}
                     </Text>
                     <Text style={styles.optionTimeText}>

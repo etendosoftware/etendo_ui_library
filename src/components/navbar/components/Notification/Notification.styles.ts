@@ -6,6 +6,7 @@ import {
   NEUTRAL_100,
   NEUTRAL_40,
   NEUTRAL_5,
+  OVERLAY,
   PRIMARY_100,
 } from '../../../../styles/colors';
 
@@ -15,8 +16,8 @@ export const styles = StyleSheet.create({
     zIndex: 2,
   },
   imageNotification: {
-    height: 25,
-    width: 25,
+    height: 28,
+    width: 28,
   },
   dropDowncontainer: {
     position: 'absolute',
@@ -81,6 +82,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: OVERLAY,
   },
 });
 
