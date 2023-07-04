@@ -1,19 +1,23 @@
-import {GestureResponderEvent} from 'react-native';
+import { GestureResponderEvent, LayoutChangeEvent } from 'react-native';
+
+export type RightComponent = {
+  component: React.ReactElement;
+  inOptions?: OptionProfileItem;
+};
 
 export interface NavbarProps {
   name?: string;
   email?: string;
-  leftComponent?: React.ReactElement;
-  rightComponent?: React.ReactElement;
+  rightComponent?: RightComponent[];
   optionsProfile?: OptionProfileItem[];
   profileImage?: React.ReactElement;
-  onOptionSelectedProfile: (item: string, index: number) => void;
-  onPressLogo: () => void;
-  onPressMenuBurger: () => void;
+  onOptionSelectedProfile?: (item?: string, index?: number) => void;
+  onPressLogo?: () => void;
+  onPressMenuBurger?: () => void;
 }
 
 export interface EtendoLogoProps {
-  onPress: (event: GestureResponderEvent) => void;
+  onPress?: (event: GestureResponderEvent) => void;
 }
 
 export type OptionNotificationType = 'warning' | 'success' | 'error' | 'new';
@@ -27,6 +31,7 @@ export type OptionNotificationItem = {
 export interface NotificationProps {
   anyNotification?: boolean;
   data?: OptionNotificationItem[];
+  onLayout?: (event: LayoutChangeEvent) => void;
   onOptionSelected: (item: OptionNotificationItem, index: number) => void;
   onViewAllNotifications: (event: GestureResponderEvent) => void;
   onMarkAllAsReadNotifications: (event: GestureResponderEvent) => void;
@@ -49,16 +54,17 @@ export interface NotificationOptionProps {
 
 export type OptionProfileItem = {
   title: string;
-  image: React.ReactElement;
-  route: string;
+  image?: React.ReactElement;
+  route?: string;
 };
 
 export interface ProfileProps {
   profileImage?: React.ReactElement;
   name?: string;
   email?: string;
-  data?: OptionProfileItem[];
-  onOptionSelected: (item: string, index: number) => void;
+  profileOptions?: OptionProfileItem[];
+  otherOptions?: (OptionProfileItem | undefined)[];
+  onOptionSelected?: (item?: string, index?: number) => void;
 }
 
 export interface ProfileImageProps {
@@ -71,8 +77,9 @@ export interface ProfileOptionsProps {
   name?: string;
   email?: string;
   posicionModal: PosicionModalType;
-  data?: OptionProfileItem[];
-  onOptionSelected: (item: string, index: number) => void;
+  profileOptions?: OptionProfileItem[];
+  otherOptions?: (OptionProfileItem | undefined)[];
+  onOptionSelected?: (item?: string, index?: number) => void;
 }
 
 export type DrawerCurrentPageType = {
@@ -136,7 +143,7 @@ export interface DrawerLatertalMenuProps {
 }
 
 export interface MenuBurgerProps {
-  onPress: (event: GestureResponderEvent) => void;
+  onPress?: (event: GestureResponderEvent) => void;
 }
 
 export type DrawerCurrentIndexType = {
@@ -144,3 +151,5 @@ export type DrawerCurrentIndexType = {
   indexSubSection: number;
   indexSubSectionItem: number;
 };
+
+export type OptionArrayType = (OptionProfileItem | undefined)[];

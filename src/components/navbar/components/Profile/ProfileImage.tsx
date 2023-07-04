@@ -14,7 +14,7 @@ const ProfileImage = ({image, name}: ProfileImageProps) => {
   return (
     <View style={styles.roundImage}>
       <Text style={styles.nameText}>
-        {name?.charAt(0)?.toUpperCase() ?? 'A'}
+        {name?.charAt(0)?.toUpperCase() ?? 'U'}
       </Text>
     </View>
   );
