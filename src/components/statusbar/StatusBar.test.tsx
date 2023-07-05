@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import renderer from 'react-test-renderer';
-import { StatusBar } from '../statusbar/StatusBar';
+import StatusBar from './StatusBar';
 
 const Component = () => {
   return <View style={{ height: 100 }}></View>;

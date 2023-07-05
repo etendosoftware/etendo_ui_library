@@ -52,8 +52,7 @@ const Pagination = ({
             /* Allows to detect the selected item */
             backToFirstPage();
             onChangeSelected(1, 0);
-          }}
-        >
+          }}>
           <ArrowFirst
             style={{
               width: 10,
@@ -70,8 +69,7 @@ const Pagination = ({
             if (page !== 1) {
               onChangeSelected(page - 1, pagination - amountDataPerPage);
             }
-          }}
-        >
+          }}>
           <ArrowLeft
             style={{
               height: 10,
@@ -95,8 +93,7 @@ const Pagination = ({
             if (page !== Math.ceil(totalData / 8)) {
               onChangeSelected(page + 1, pagination + amountDataPerPage);
             }
-          }}
-        >
+          }}>
           <ArrowRight
             style={{
               height: 10,
@@ -116,8 +113,7 @@ const Pagination = ({
                 totalData - (totalData % amountDataPerPage) - 8,
               );
             }
-          }}
-        >
+          }}>
           <ArrowLast
             style={{
               height: 10,

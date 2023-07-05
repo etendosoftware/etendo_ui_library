@@ -1,7 +1,7 @@
 import { View, Text, Pressable, ScrollView } from 'react-native';
 import React, { useState } from 'react';
-import { styles } from '../Profile/Profile.styles';
-import ProfileImage from '../Profile/ProfileImage';
+import { separatorPopUp, styles } from './Profile.styles';
+import ProfileImage from './ProfileImage';
 import { ProfileOptionsProps } from '../../Navbar.types';
 import { PRIMARY_100, QUATERNARY_10 } from '../../../../styles/colors';
 
@@ -17,7 +17,6 @@ const ProfileOptions = ({
   const defaultNameValue = 'User';
   const scrollRef = React.useRef<ScrollView>(null);
   const [isScrollable, setIsScrollable] = useState(false);
-
   const [logoutOption, setLogoutOption] = useState<boolean>(false);
   const [profileOptionIndex, setProfileOptionIndex] = useState<
     number | undefined
@@ -62,7 +61,7 @@ const ProfileOptions = ({
       style={[
         styles.optionsContainer,
         {
-          top: posicionModal.top,
+          top: separatorPopUp + posicionModal.top,
           left:
             posicionModal.left -
             styles.optionsContainer.width +
@@ -91,6 +90,8 @@ const ProfileOptions = ({
         </View>
       </View>
       <ScrollView
+        showsVerticalScrollIndicator
+        persistentScrollbar={true}
         style={[
           styles.scroll,
           isScrollable && { marginRight: 6, paddingRight: 9 },
@@ -109,17 +110,17 @@ const ProfileOptions = ({
                 },
               ]}
               onPress={() => handleProfileOptionSelected(item?.route, index)}
-              onHoverIn={() => setProfileOptionIndex(index)} // Simula el evento de hover en dispositivos móviles
-              onHoverOut={() => setProfileOptionIndex(-1)} // Simula el evento de hover en dispositivos móviles
-            >
+              onHoverIn={() => setProfileOptionIndex(index)}
+              onHoverOut={() => setProfileOptionIndex(-1)}>
               <View style={styles.optionItemContainer}>
-                <View style={styles.optionItemImage}>
-                  {item?.image &&
-                    React.cloneElement(item.image, {
+                {item?.image && (
+                  <View style={styles.optionItemImage}>
+                    {React.cloneElement(item.image, {
                       fill: PRIMARY_100,
                       style: styles.optionItemImageSize,
                     })}
-                </View>
+                  </View>
+                )}
                 <Text
                   numberOfLines={1}
                   ellipsizeMode="tail"
@@ -142,9 +143,8 @@ const ProfileOptions = ({
                 },
               ]}
               onPress={() => handleOtherOptionsSelected(item?.route, index)}
-              onHoverIn={() => setOtherOptionIndex(index)} // Simula el evento de hover en dispositivos móviles
-              onHoverOut={() => setOtherOptionIndex(-1)} // Simula el evento de hover en dispositivos móviles
-            >
+              onHoverIn={() => setOtherOptionIndex(index)}
+              onHoverOut={() => setOtherOptionIndex(-1)}>
               <View style={styles.optionItemContainer}>
                 {item?.image && (
                   <View style={styles.optionItemImage}>
@@ -165,11 +165,14 @@ const ProfileOptions = ({
           ))}
         </View>
       </ScrollView>
-      <View style={styles.separatorLogout}></View>
+      {Boolean(profileOptions?.length) ||
+        (Boolean(otherOptions?.length) && (
+          <View style={styles.separatorLogout}></View>
+        ))}
       <Pressable
         onPress={() => handleLogoutOptionsSelected()}
-        onHoverIn={() => setLogoutOption(true)} // Simula el evento de hover en dispositivos móviles
-        onHoverOut={() => setLogoutOption(false)} // Simula el evento de hover en dispositivos móviles
+        onHoverIn={() => setLogoutOption(true)}
+        onHoverOut={() => setLogoutOption(false)}
         style={[
           styles.optionLogOut,
           logoutOption && { backgroundColor: QUATERNARY_10 },
