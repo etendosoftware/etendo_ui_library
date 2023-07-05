@@ -1,9 +1,9 @@
-import {View, Text, Pressable, ScrollView} from 'react-native';
-import React, {useState} from 'react';
-import {separatorPopUp, styles} from './Profile.styles';
+import { View, Text, Pressable, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { separatorPopUp, styles } from './Profile.styles';
 import ProfileImage from './ProfileImage';
-import {ProfileOptionsProps} from '../../Navbar.types';
-import {PRIMARY_100, QUATERNARY_10} from '../../../../styles/colors';
+import { ProfileOptionsProps } from '../../Navbar.types';
+import { PRIMARY_100, QUATERNARY_10 } from '../../../../styles/colors';
 
 const ProfileOptions = ({
   profileImage,
@@ -94,7 +94,7 @@ const ProfileOptions = ({
         persistentScrollbar={true}
         style={[
           styles.scroll,
-          isScrollable && {marginRight: 6, paddingRight: 9},
+          isScrollable && { marginRight: 6, paddingRight: 9 },
         ]}
         onContentSizeChange={onContentSizeChange}
         ref={scrollRef}>
@@ -104,15 +104,14 @@ const ProfileOptions = ({
               key={index}
               style={[
                 styles.option,
-                {marginRight: isScrollable ? 0 : 8},
+                { marginRight: isScrollable ? 0 : 8 },
                 profileOptionIndex === index && {
                   backgroundColor: QUATERNARY_10,
                 },
               ]}
               onPress={() => handleProfileOptionSelected(item?.route, index)}
-              onHoverIn={() => setProfileOptionIndex(index)} // Simula el evento de hover en dispositivos móviles
-              onHoverOut={() => setProfileOptionIndex(-1)} // Simula el evento de hover en dispositivos móviles
-            >
+              onHoverIn={() => setProfileOptionIndex(index)}
+              onHoverOut={() => setProfileOptionIndex(-1)}>
               <View style={styles.optionItemContainer}>
                 {item?.image && (
                   <View style={styles.optionItemImage}>
@@ -138,15 +137,14 @@ const ProfileOptions = ({
               key={index}
               style={[
                 styles.option,
-                {marginRight: isScrollable ? 0 : 8},
+                { marginRight: isScrollable ? 0 : 8 },
                 otherOptionIndex === index && {
                   backgroundColor: QUATERNARY_10,
                 },
               ]}
               onPress={() => handleOtherOptionsSelected(item?.route, index)}
-              onHoverIn={() => setOtherOptionIndex(index)} // Simula el evento de hover en dispositivos móviles
-              onHoverOut={() => setOtherOptionIndex(-1)} // Simula el evento de hover en dispositivos móviles
-            >
+              onHoverIn={() => setOtherOptionIndex(index)}
+              onHoverOut={() => setOtherOptionIndex(-1)}>
               <View style={styles.optionItemContainer}>
                 {item?.image && (
                   <View style={styles.optionItemImage}>
@@ -173,11 +171,11 @@ const ProfileOptions = ({
         ))}
       <Pressable
         onPress={() => handleLogoutOptionsSelected()}
-        onHoverIn={() => setLogoutOption(true)} // Simula el evento de hover en dispositivos móviles
-        onHoverOut={() => setLogoutOption(false)} // Simula el evento de hover en dispositivos móviles
+        onHoverIn={() => setLogoutOption(true)}
+        onHoverOut={() => setLogoutOption(false)}
         style={[
           styles.optionLogOut,
-          logoutOption && {backgroundColor: QUATERNARY_10},
+          logoutOption && { backgroundColor: QUATERNARY_10 },
         ]}>
         <Text style={styles.optionsItemsText}>Log Out</Text>
       </Pressable>
