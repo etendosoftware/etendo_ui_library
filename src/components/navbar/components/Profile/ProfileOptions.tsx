@@ -1,9 +1,9 @@
-import { View, Text, Pressable, ScrollView } from 'react-native';
-import React, { useState } from 'react';
-import { styles } from '../Profile/Profile.styles';
-import ProfileImage from '../Profile/ProfileImage';
-import { ProfileOptionsProps } from '../../Navbar.types';
-import { PRIMARY_100, QUATERNARY_10 } from '../../../../styles/colors';
+import {View, Text, Pressable, ScrollView} from 'react-native';
+import React, {useState} from 'react';
+import {separatorPopUp, styles} from './Profile.styles';
+import ProfileImage from './ProfileImage';
+import {ProfileOptionsProps} from '../../Navbar.types';
+import {PRIMARY_100, QUATERNARY_10} from '../../../../styles/colors';
 
 const ProfileOptions = ({
   profileImage,
@@ -17,7 +17,6 @@ const ProfileOptions = ({
   const defaultNameValue = 'User';
   const scrollRef = React.useRef<ScrollView>(null);
   const [isScrollable, setIsScrollable] = useState(false);
-
   const [logoutOption, setLogoutOption] = useState<boolean>(false);
   const [profileOptionIndex, setProfileOptionIndex] = useState<
     number | undefined
@@ -62,7 +61,7 @@ const ProfileOptions = ({
       style={[
         styles.optionsContainer,
         {
-          top: posicionModal.top,
+          top: separatorPopUp + posicionModal.top,
           left:
             posicionModal.left -
             styles.optionsContainer.width +
@@ -91,9 +90,11 @@ const ProfileOptions = ({
         </View>
       </View>
       <ScrollView
+        showsVerticalScrollIndicator
+        persistentScrollbar={true}
         style={[
           styles.scroll,
-          isScrollable && { marginRight: 6, paddingRight: 9 },
+          isScrollable && {marginRight: 6, paddingRight: 9},
         ]}
         onContentSizeChange={onContentSizeChange}
         ref={scrollRef}>
@@ -103,7 +104,7 @@ const ProfileOptions = ({
               key={index}
               style={[
                 styles.option,
-                { marginRight: isScrollable ? 0 : 8 },
+                {marginRight: isScrollable ? 0 : 8},
                 profileOptionIndex === index && {
                   backgroundColor: QUATERNARY_10,
                 },
@@ -113,13 +114,14 @@ const ProfileOptions = ({
               onHoverOut={() => setProfileOptionIndex(-1)} // Simula el evento de hover en dispositivos móviles
             >
               <View style={styles.optionItemContainer}>
-                <View style={styles.optionItemImage}>
-                  {item?.image &&
-                    React.cloneElement(item.image, {
+                {item?.image && (
+                  <View style={styles.optionItemImage}>
+                    {React.cloneElement(item.image, {
                       fill: PRIMARY_100,
                       style: styles.optionItemImageSize,
                     })}
-                </View>
+                  </View>
+                )}
                 <Text
                   numberOfLines={1}
                   ellipsizeMode="tail"
@@ -136,7 +138,7 @@ const ProfileOptions = ({
               key={index}
               style={[
                 styles.option,
-                { marginRight: isScrollable ? 0 : 8 },
+                {marginRight: isScrollable ? 0 : 8},
                 otherOptionIndex === index && {
                   backgroundColor: QUATERNARY_10,
                 },
@@ -165,14 +167,17 @@ const ProfileOptions = ({
           ))}
         </View>
       </ScrollView>
-      <View style={styles.separatorLogout}></View>
+      {Boolean(profileOptions?.length) ||
+        (Boolean(otherOptions?.length) && (
+          <View style={styles.separatorLogout}></View>
+        ))}
       <Pressable
         onPress={() => handleLogoutOptionsSelected()}
         onHoverIn={() => setLogoutOption(true)} // Simula el evento de hover en dispositivos móviles
         onHoverOut={() => setLogoutOption(false)} // Simula el evento de hover en dispositivos móviles
         style={[
           styles.optionLogOut,
-          logoutOption && { backgroundColor: QUATERNARY_10 },
+          logoutOption && {backgroundColor: QUATERNARY_10},
         ]}>
         <Text style={styles.optionsItemsText}>Log Out</Text>
       </Pressable>

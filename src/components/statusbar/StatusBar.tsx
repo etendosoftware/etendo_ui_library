@@ -1,12 +1,12 @@
 /* Imports */
 import React from 'react';
-import {ViewEtendo} from '../viewEtendo/ViewEtendo';
-import {StatusBarStyleVariant} from './StatusBar.styles';
-import {StatusBarProps} from './StatusBar.types';
-import {StepActive} from './StepActive';
-import {StepDisabled} from './StepDisabled';
+import { ViewEtendo } from '../viewEtendo/ViewEtendo';
+import { StatusBarStyleVariant } from './StatusBar.styles';
+import { StatusBarProps } from './StatusBar.types';
+import { StepActive } from './StepActive';
+import { StepDisabled } from './StepDisabled';
 
-export const StatusBar = ({data, step}: StatusBarProps) => {
+const StatusBar = ({ data, step }: StatusBarProps) => {
   return (
     <ViewEtendo style={StatusBarStyleVariant.primary.statusBarContainer}>
       {data.map((item, idx) => {
@@ -19,3 +19,5 @@ export const StatusBar = ({data, step}: StatusBarProps) => {
     </ViewEtendo>
   );
 };
+
+export default StatusBar;

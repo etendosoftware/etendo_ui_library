@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 import {
   NEUTRAL_0,
   NEUTRAL_100,
@@ -10,18 +10,19 @@ import {
   QUATERNARY_100,
   QUATERNARY_50,
 } from '../../../../styles/colors';
+import {isTablet} from '../../../../helpers/table_utils';
 
 export const styles = StyleSheet.create({
   container: {
-    width: 28,
-    marginRight: 32,
-    height: 52,
+    marginRight: isTablet() ? 32 : 24,
+
     display: 'flex',
+    alignItems: 'center',
     justifyContent: 'center',
   },
   imageProfile: {
-    height: 52,
-    width: 52,
+    height: 48,
+    width: 48,
   },
   nameText: {
     position: 'absolute',
@@ -42,7 +43,7 @@ export const styles = StyleSheet.create({
   },
   option: {
     height: 40,
-    paddingHorizontal: 16,
+    paddingHorizontal: 8,
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 8,
@@ -50,7 +51,7 @@ export const styles = StyleSheet.create({
   },
   optionLogOut: {
     height: 40,
-    paddingHorizontal: 16,
+    paddingHorizontal: 8,
     flexDirection: 'row',
     alignItems: 'center',
     margin: 8,
@@ -77,12 +78,12 @@ export const styles = StyleSheet.create({
     backgroundColor: OVERLAY,
   },
   profileImageSize: {
-    width: 40,
-    height: 40,
+    width: isTablet() ? 52 : 48,
+    height: isTablet() ? 52 : 48,
   },
   roundImage: {
-    width: 40,
-    height: 40,
+    width: isTablet() ? 52 : 48,
+    height: isTablet() ? 52 : 48,
     borderRadius: 50,
     backgroundColor: QUATERNARY_50,
     alignItems: 'center',
@@ -93,7 +94,7 @@ export const styles = StyleSheet.create({
   optionsHeaderContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: 64,
+    height: 74,
     paddingLeft: 16,
     borderBottomColor: NEUTRAL_5,
     borderBottomWidth: 1,
@@ -140,11 +141,13 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   aplicationIcon: {
-    width: 28,
-    height: 28,
+    width: isTablet() ? 32 : 28,
+    height: isTablet() ? 32 : 28,
   },
   scroll: {
     maxHeight: 282,
     marginHorizontal: 8,
   },
 });
+
+export const separatorPopUp = 5;

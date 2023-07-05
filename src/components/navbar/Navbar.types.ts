@@ -7,6 +7,7 @@ export type RightComponent = {
 
 export interface NavbarProps {
   name?: string;
+  title?: string;
   email?: string;
   rightComponent?: RightComponent[];
   optionsProfile?: OptionProfileItem[];

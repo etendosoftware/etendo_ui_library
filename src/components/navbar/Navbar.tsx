@@ -9,10 +9,11 @@ import {
 } from './Navbar.types';
 import { Welcome, Profile, EtendoLogo } from './index';
 import MenuBurger from './components/MenuBurger/MenuBurger';
-import { styles as styleProfile } from './components/Profile/Profile.styles';
+import { isTablet } from '../../helpers/table_utils';
 
 const Navbar = ({
   name,
+  title,
   email,
   rightComponent,
   optionsProfile,
@@ -21,15 +22,9 @@ const Navbar = ({
   onPressMenuBurger,
   onPressLogo,
 }: NavbarProps) => {
-  const screenWidth = Dimensions.get('window').width;
-  const isTablet = screenWidth > 700;
   const width = Dimensions.get('window').width;
-  const widthLeft =
-    styles.leftContainer.width +
-    styles.leftContainer.paddingLeft +
-    (isTablet ? 68 : 80);
-  const profileWidth =
-    styleProfile.container.width + styleProfile.container.marginRight || 0;
+  const widthLeft = styles.leftContainer.width;
+  const profileWidth = isTablet() ? 84 : 72;
 
   const componentWidths = useRef<number[]>(
     new Array(rightComponent?.length).fill(0),
@@ -93,10 +88,10 @@ const Navbar = ({
   return (
     <View style={styles.container}>
       <View style={[styles.leftContainer]}>
-        {isTablet ? (
+        {isTablet() ? (
           <>
             <EtendoLogo onPress={onPressLogo} />
-            <Welcome name={name} />
+            <Welcome name={name} title={title} />
           </>
         ) : (
           <MenuBurger onPress={onPressMenuBurger} />

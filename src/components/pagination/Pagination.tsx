@@ -1,16 +1,16 @@
 /* Imports */
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
-import {View, TouchableOpacity, Text} from 'react-native';
-import {PaginationStyleVariant} from './Pagination.styles';
-import {PaginationProps} from './Pagination.types';
-import {ArrowLeft} from '../../assets/images/icons/ArrowLeft';
-import {ArrowFirst} from '../../assets/images/icons/ArrowFirst';
-import {ArrowRight} from '../../assets/images/icons/ArrowRight';
-import {ArrowLast} from '../../assets/images/icons/ArrowLast';
+import { View, TouchableOpacity, Text } from 'react-native';
+import { PaginationStyleVariant } from './Pagination.styles';
+import { PaginationProps } from './Pagination.types';
+import { ArrowLeft } from '../../assets/images/icons/ArrowLeft';
+import { ArrowFirst } from '../../assets/images/icons/ArrowFirst';
+import { ArrowRight } from '../../assets/images/icons/ArrowRight';
+import { ArrowLast } from '../../assets/images/icons/ArrowLast';
 
 /* Pagination component */
-export const Pagination = ({
+const Pagination = ({
   currentPage,
   onChangeSelected,
   totalData,
@@ -52,8 +52,7 @@ export const Pagination = ({
             /* Allows to detect the selected item */
             backToFirstPage();
             onChangeSelected(1, 0);
-          }}
-        >
+          }}>
           <ArrowFirst
             style={{
               width: 10,
@@ -70,8 +69,7 @@ export const Pagination = ({
             if (page !== 1) {
               onChangeSelected(page - 1, pagination - amountDataPerPage);
             }
-          }}
-        >
+          }}>
           <ArrowLeft
             style={{
               height: 10,
@@ -95,8 +93,7 @@ export const Pagination = ({
             if (page !== Math.ceil(totalData / 8)) {
               onChangeSelected(page + 1, pagination + amountDataPerPage);
             }
-          }}
-        >
+          }}>
           <ArrowRight
             style={{
               height: 10,
@@ -116,8 +113,7 @@ export const Pagination = ({
                 totalData - (totalData % amountDataPerPage) - 8,
               );
             }
-          }}
-        >
+          }}>
           <ArrowLast
             style={{
               height: 10,
@@ -130,3 +126,5 @@ export const Pagination = ({
     </View>
   );
 };
+
+export default Pagination;
