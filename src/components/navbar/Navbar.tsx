@@ -54,7 +54,7 @@ const Navbar = ({
       0,
     );
 
-    while (
+    if (
       totalWidth + widthLeft + profileWidth > width &&
       newRenderedComponents.length > 1
     ) {
