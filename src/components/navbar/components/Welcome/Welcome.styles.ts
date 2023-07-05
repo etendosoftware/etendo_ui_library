@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {NEUTRAL_0} from '../../../../styles/colors';
+import { StyleSheet } from 'react-native';
+import { NEUTRAL_0 } from '../../../../styles/colors';
 
 export const styles = StyleSheet.create({
   container: {
@@ -18,11 +18,13 @@ export const styles = StyleSheet.create({
     color: NEUTRAL_0,
     lineHeight: 22,
     fontSize: 16,
+    width: 151,
   },
   titleName: {
     fontSize: 22,
     color: NEUTRAL_0,
     lineHeight: 28,
     fontWeight: '800',
+    width: 151,
   },
 });

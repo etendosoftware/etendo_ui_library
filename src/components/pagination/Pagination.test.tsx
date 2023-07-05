@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import { Pagination } from '../pagination/Pagination';
+import Pagination from './Pagination';
 
 const dataset = [
   { name: 'User', route: '', key: 'user' },

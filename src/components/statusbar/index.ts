@@ -1,3 +1,3 @@
-import { StatusBar } from './StatusBar';
+import StatusBar from './StatusBar';
 
 export { StatusBar };

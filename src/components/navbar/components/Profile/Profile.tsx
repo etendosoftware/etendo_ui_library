@@ -1,11 +1,11 @@
-import { TouchableOpacity, Modal } from 'react-native';
-import React, { useEffect, useRef, useState } from 'react';
-import { styles } from './Profile.styles';
+import {TouchableOpacity, Modal} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {styles} from './Profile.styles';
 import ProfileOptions from './ProfileOptions';
 import ProfileImage from './ProfileImage';
-import { PosicionModalType, ProfileProps } from '../../Navbar.types';
-import { AplicationsIcon } from '../../../../assets/images/icons/AplicationsIcon';
-import { NEUTRAL_0 } from '../../../../styles/colors';
+import {PosicionModalType, ProfileProps} from '../../Navbar.types';
+import {AplicationsIcon} from '../../../../assets/images/icons/AplicationsIcon';
+import {NEUTRAL_0} from '../../../../styles/colors';
 
 const Profile = ({
   profileImage,
@@ -42,7 +42,7 @@ const Profile = ({
           pageX: number,
           pageY: number,
         ) => {
-          setPosicionModal({ top: pageY + height, left: pageX, width, height });
+          setPosicionModal({top: pageY + height, left: pageX, width, height});
         },
       );
     }
