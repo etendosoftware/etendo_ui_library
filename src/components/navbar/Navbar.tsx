@@ -1,12 +1,7 @@
 import { Dimensions, View } from 'react-native';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { marginIncomponents, styles } from './Navbar.styles';
-import {
-  NavbarProps,
-  OptionArrayType,
-  OptionProfileItem,
-  RightComponent,
-} from './Navbar.types';
+import { NavbarProps, OptionProfileItem, RightComponent } from './Navbar.types';
 import { Welcome, Profile, EtendoLogo } from './index';
 import MenuBurger from './components/MenuBurger/MenuBurger';
 import { isTablet } from '../../helpers/table_utils';
@@ -18,6 +13,7 @@ const Navbar = ({
   rightComponent,
   optionsProfile,
   profileImage,
+  endOptions,
   onOptionSelectedProfile,
   onPressMenuBurger,
   onPressLogo,
@@ -26,64 +22,55 @@ const Navbar = ({
   const widthLeft = styles.leftContainer.width;
   const profileWidth = isTablet() ? 84 : 72;
 
-  const componentWidths = useRef<number[]>(
-    new Array(rightComponent?.length).fill(0),
-  );
-
   const [renderedComponents, setRenderedComponents] = useState<
-    | { component: React.ReactElement; inOptions?: OptionProfileItem }[]
-    | undefined
+    RightComponent[] | undefined
   >(rightComponent);
 
-  const [removedComponents, setRemovedComponents] = useState<RightComponent[]>(
-    [],
-  );
+  const [removedComponents, setRemovedComponents] = useState<
+    OptionProfileItem[] | undefined
+  >([]);
 
-  const [inOptionsArray, setInOptionsArray] = useState<OptionArrayType>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  let componentWidths = new Array(rightComponent?.length).fill(0);
 
   const calculateRenderedComponents = (index: number, newWidth: number) => {
-    componentWidths.current[index] = newWidth;
+    componentWidths[index] = newWidth;
+    if (rightComponent) {
+      if (index === rightComponent?.length - 1) {
+        let totalWidth = componentWidths.reduce(
+          (total, width) => total + width,
+          0,
+        );
 
-    let newRenderedComponents: {
-      component: React.ReactElement;
-      inOptions?: OptionProfileItem;
-    }[] = [...(renderedComponents ?? [])];
+        while (
+          totalWidth + widthLeft + profileWidth - marginIncomponents >
+          width
+        ) {
+          const lastComponentIndex = componentWidths.length - 1;
 
-    let totalWidth = componentWidths.current.reduce(
-      (total, width) => total + width,
-      0,
-    );
+          if (renderedComponents?.[lastComponentIndex]?.inOptions) {
+            setRemovedComponents(prevRemovedComponent => {
+              const updatedRemovedComponent = [
+                renderedComponents[lastComponentIndex].inOptions,
+                ...(prevRemovedComponent ?? []),
+              ];
+              return updatedRemovedComponent as OptionProfileItem[];
+            });
+          }
 
-    if (
-      totalWidth + widthLeft + profileWidth > width &&
-      newRenderedComponents.length > 1
-    ) {
-      const lastComponentIndex = newRenderedComponents.length - 1;
+          totalWidth -= componentWidths[lastComponentIndex];
+          componentWidths.splice(lastComponentIndex, 1);
+        }
 
-      const removedComponent: RightComponent = {
-        component: newRenderedComponents[lastComponentIndex].component,
-        inOptions: newRenderedComponents[lastComponentIndex].inOptions,
-      };
-
-      newRenderedComponents.splice(lastComponentIndex, 1);
-      setRemovedComponents(prevRemovedComponents => [
-        ...prevRemovedComponents,
-        removedComponent,
-      ]);
-
-      totalWidth -= componentWidths.current[lastComponentIndex];
-      componentWidths.current.splice(lastComponentIndex, 1);
+        setRenderedComponents(prev => {
+          const slicedComponents = prev?.slice(0, componentWidths.length);
+          return slicedComponents?.reverse();
+        });
+        setIsLoading(false);
+      }
     }
-
-    setRenderedComponents(newRenderedComponents);
   };
-
-  useEffect(() => {
-    const removedInOptions = removedComponents
-      .filter(component => component?.inOptions !== undefined)
-      .map(component => component?.inOptions);
-    setInOptionsArray(removedInOptions);
-  }, [removedComponents]);
 
   return (
     <View style={styles.container}>
@@ -97,34 +84,29 @@ const Navbar = ({
           <MenuBurger onPress={onPressMenuBurger} />
         )}
       </View>
-      <View style={styles.rightContainer}>
+      <View style={[styles.rightContainer]}>
         <>
-          {renderedComponents
-            ?.slice(0)
-            .reverse()
-            .map((item, index) => (
-              <View
-                key={index}
-                onLayout={event => {
-                  const { width } = event.nativeEvent.layout;
-                  calculateRenderedComponents(
-                    index,
-                    width + marginIncomponents,
-                  );
-                }}
-                style={styles.itemMapContainer}>
-                {item.component}
-              </View>
-            ))}
+          {renderedComponents?.map((item, index) => (
+            <View
+              key={index}
+              onLayout={event => {
+                const { width } = event.nativeEvent.layout;
+                calculateRenderedComponents(index, width + marginIncomponents);
+              }}
+              style={[styles.itemMapContainer, isLoading && { opacity: 0 }]}>
+              {item.component}
+            </View>
+          ))}
         </>
         <View>
           <Profile
             profileOptions={optionsProfile}
-            otherOptions={inOptionsArray}
+            otherOptions={removedComponents}
             name={name}
             email={email}
             onOptionSelected={onOptionSelectedProfile}
             profileImage={profileImage}
+            endOptions={endOptions}
           />
         </View>
       </View>

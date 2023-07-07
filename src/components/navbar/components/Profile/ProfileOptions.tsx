@@ -12,19 +12,19 @@ const ProfileOptions = ({
   posicionModal,
   profileOptions,
   otherOptions,
+  endOptions,
   onOptionSelected,
 }: ProfileOptionsProps) => {
   const defaultNameValue = 'User';
   const scrollRef = React.useRef<ScrollView>(null);
   const [isScrollable, setIsScrollable] = useState(false);
-  const [logoutOption, setLogoutOption] = useState<boolean>(false);
   const [profileOptionIndex, setProfileOptionIndex] = useState<
     number | undefined
   >(-1);
   const [otherOptionIndex, setOtherOptionIndex] = useState<number | undefined>(
     -1,
   );
-
+  const [endOptionIndex, setEndOptionIndex] = useState<number | undefined>(-1);
   const handleProfileOptionSelected = (item?: string, index?: number) => {
     setProfileOptionIndex(index);
     setTimeout(() => {
@@ -42,11 +42,11 @@ const ProfileOptions = ({
     }, 100);
   };
 
-  const handleLogoutOptionsSelected = () => {
-    setLogoutOption(true);
+  const handleEndOptionsSelected = (item?: string, index?: number) => {
+    setEndOptionIndex(index);
     setTimeout(() => {
       if (onOptionSelected) {
-        onOptionSelected('logout', 0);
+        onOptionSelected(item, index);
       }
     }, 100);
   };
@@ -54,6 +54,13 @@ const ProfileOptions = ({
   const onContentSizeChange = (contentWidth: number, contentHeight: number) => {
     const containerHeight = styles.scroll.maxHeight;
     setIsScrollable(contentHeight > containerHeight);
+  };
+  const isSeparator = (length?: number, isBottom?: boolean) => {
+    if (length) {
+      return (
+        <View style={isBottom ? styles.separatorBottom : styles.separator} />
+      );
+    }
   };
 
   return (
@@ -71,7 +78,7 @@ const ProfileOptions = ({
         },
       ]}>
       <View style={styles.optionsHeaderContainer}>
-        <ProfileImage image={profileImage} name={name} />
+        <ProfileImage image={profileImage} name={name} inOptions />
         <View style={styles.optionsHeaderTextContainer}>
           <Text
             numberOfLines={1}
@@ -89,6 +96,7 @@ const ProfileOptions = ({
           )}
         </View>
       </View>
+      {isSeparator(profileOptions?.length)}
       <ScrollView
         showsVerticalScrollIndicator
         persistentScrollbar={true}
@@ -98,7 +106,7 @@ const ProfileOptions = ({
         ]}
         onContentSizeChange={onContentSizeChange}
         ref={scrollRef}>
-        <View style={styles.optionsMapContainer}>
+        <View>
           {profileOptions?.map((item, index) => (
             <Pressable
               key={index}
@@ -131,6 +139,7 @@ const ProfileOptions = ({
             </Pressable>
           ))}
         </View>
+        {isSeparator(otherOptions?.length)}
         <View>
           {otherOptions?.map((item, index) => (
             <Pressable
@@ -165,20 +174,39 @@ const ProfileOptions = ({
           ))}
         </View>
       </ScrollView>
-      {Boolean(profileOptions?.length) ||
-        (Boolean(otherOptions?.length) && (
-          <View style={styles.separatorLogout}></View>
+      {isSeparator(endOptions?.length, true)}
+      <ScrollView style={styles.scrollBottom}>
+        {endOptions?.map((item, index) => (
+          <Pressable
+            key={index}
+            style={[
+              styles.option,
+              endOptionIndex === index && {
+                backgroundColor: QUATERNARY_10,
+              },
+            ]}
+            onPress={() => handleEndOptionsSelected(item?.route, index)}
+            onHoverIn={() => setEndOptionIndex(index)}
+            onHoverOut={() => setEndOptionIndex(-1)}>
+            <View style={styles.optionItemContainer}>
+              {item?.image && (
+                <View style={styles.optionItemImage}>
+                  {React.cloneElement(item.image, {
+                    fill: PRIMARY_100,
+                    style: styles.optionItemImageSize,
+                  })}
+                </View>
+              )}
+              <Text
+                numberOfLines={1}
+                ellipsizeMode="tail"
+                style={styles.optionsItemsText}>
+                {item?.title}
+              </Text>
+            </View>
+          </Pressable>
         ))}
-      <Pressable
-        onPress={() => handleLogoutOptionsSelected()}
-        onHoverIn={() => setLogoutOption(true)}
-        onHoverOut={() => setLogoutOption(false)}
-        style={[
-          styles.optionLogOut,
-          logoutOption && { backgroundColor: QUATERNARY_10 },
-        ]}>
-        <Text style={styles.optionsItemsText}>Log Out</Text>
-      </Pressable>
+      </ScrollView>
     </View>
   );
 };

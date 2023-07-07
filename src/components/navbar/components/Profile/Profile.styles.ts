@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import {
   NEUTRAL_0,
   NEUTRAL_100,
@@ -10,12 +10,11 @@ import {
   QUATERNARY_100,
   QUATERNARY_50,
 } from '../../../../styles/colors';
-import {isTablet} from '../../../../helpers/table_utils';
+import { isTablet } from '../../../../helpers/table_utils';
 
 export const styles = StyleSheet.create({
   container: {
     marginRight: isTablet() ? 32 : 24,
-
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -57,10 +56,14 @@ export const styles = StyleSheet.create({
     margin: 8,
     borderRadius: 8,
   },
-  separatorLogout: {
-    marginHorizontal: 8,
+  separator: {
     height: 1,
     backgroundColor: NEUTRAL_5,
+  },
+  separatorBottom: {
+    height: 1,
+    backgroundColor: NEUTRAL_5,
+    marginHorizontal: 8,
   },
   optionText: {
     fontSize: 12,
@@ -94,10 +97,9 @@ export const styles = StyleSheet.create({
   optionsHeaderContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: 74,
+    justifyContent: 'flex-start',
+    height: 64,
     paddingLeft: 16,
-    borderBottomColor: NEUTRAL_5,
-    borderBottomWidth: 1,
   },
   optionsHeaderTextContainer: {
     marginLeft: 8,
@@ -136,15 +138,16 @@ export const styles = StyleSheet.create({
     height: 16,
     width: 16,
   },
-  optionsMapContainer: {
-    borderBottomColor: NEUTRAL_5,
-    borderBottomWidth: 1,
-  },
+  optionsMapContainer: {},
   aplicationIcon: {
     width: isTablet() ? 32 : 28,
     height: isTablet() ? 32 : 28,
   },
   scroll: {
+    maxHeight: 282,
+    marginHorizontal: 8,
+  },
+  scrollBottom: {
     maxHeight: 282,
     marginHorizontal: 8,
   },

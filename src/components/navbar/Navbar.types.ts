@@ -12,6 +12,7 @@ export interface NavbarProps {
   rightComponent?: RightComponent[];
   optionsProfile?: OptionProfileItem[];
   profileImage?: React.ReactElement;
+  endOptions?: OptionProfileItem[];
   onOptionSelectedProfile?: (item?: string, index?: number) => void;
   onPressLogo?: () => void;
   onPressMenuBurger?: () => void;
@@ -64,6 +65,7 @@ export interface ProfileProps {
   name?: string;
   email?: string;
   profileOptions?: OptionProfileItem[];
+  endOptions?: OptionProfileItem[];
   otherOptions?: (OptionProfileItem | undefined)[];
   onOptionSelected?: (item?: string, index?: number) => void;
 }
@@ -71,6 +73,7 @@ export interface ProfileProps {
 export interface ProfileImageProps {
   image?: React.ReactElement;
   name?: string;
+  inOptions?: boolean;
 }
 
 export interface ProfileOptionsProps {
@@ -79,6 +82,7 @@ export interface ProfileOptionsProps {
   email?: string;
   posicionModal: PosicionModalType;
   profileOptions?: OptionProfileItem[];
+  endOptions?: OptionProfileItem[];
   otherOptions?: (OptionProfileItem | undefined)[];
   onOptionSelected?: (item?: string, index?: number) => void;
 }
