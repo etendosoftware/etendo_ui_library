@@ -18,13 +18,13 @@ export const styles = StyleSheet.create({
     color: NEUTRAL_0,
     lineHeight: 22,
     fontSize: 16,
-    width: 151,
+    width: 187,
   },
   titleName: {
     fontSize: 22,
     color: NEUTRAL_0,
     lineHeight: 28,
     fontWeight: '800',
-    width: 151,
+    width: 187,
   },
 });

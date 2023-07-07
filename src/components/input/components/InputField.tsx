@@ -244,7 +244,7 @@ const InputField = ({
             ]}
             placeholder={placeholder}
             maxLength={maxLength}
-            secureTextEntry={showPassword}
+            secureTextEntry={type === 'textInputPassword' && showPassword}
           />
         )}
         {configField?.type === 'text' && (
