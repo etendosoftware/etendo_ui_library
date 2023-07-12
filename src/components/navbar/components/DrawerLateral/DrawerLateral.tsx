@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from 'react';
-import {View, Modal, TouchableOpacity, ScrollView, Text} from 'react-native';
+import React, { useState } from 'react';
+import { View, Modal, TouchableOpacity, ScrollView, Text } from 'react-native';
 import {
   DrawerCurrentIndexType,
   DrawerDataContentType,
   DrawerLateralProps,
 } from '../../Navbar.types';
-import {styles} from './DrawerLateral.styles';
+import { styles } from './DrawerLateral.styles';
 import DrawerSectionsContainer from './DrawerSectionsContainer';
-import {EtendoLogo} from '../..';
+import { EtendoLogo } from '../..';
 
 const DrawerLateral = ({
   data,
@@ -42,7 +42,7 @@ const DrawerLateral = ({
               <View style={styles.image}>
                 <EtendoLogo onPress={() => {}} />
               </View>
-              <ScrollView style={{paddingRight: 12}}>
+              <ScrollView style={{ paddingRight: 12 }}>
                 {data?.map((item: DrawerDataContentType, index: number) => {
                   if (item.sectionType === 'sections') {
                     return (

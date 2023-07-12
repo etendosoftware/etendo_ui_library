@@ -1,18 +1,18 @@
-import {Pressable, ScrollView, Text, View} from 'react-native';
-import React, {useState} from 'react';
-import {styles} from './DrawerLateral.styles';
+import { Pressable, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { styles } from './DrawerLateral.styles';
 import {
   DrawerCurrentIndexType,
   DrawerDataSubMenuType,
   DrawerLatertalMenuProps,
 } from '../../Navbar.types';
-import {ArrowDown} from '../../../../assets/images/icons/ArrowDown';
+import { ArrowDown } from '../../../../assets/images/icons/ArrowDown';
 import {
   getCurrentSelectIndex,
   getStyleImageSelectedSubSection,
   getStyleSelected,
 } from './DrawerLateralHelper';
-import {NEUTRAL_0} from '../../../../styles/colors';
+import { NEUTRAL_0 } from '../../../../styles/colors';
 
 const DrawerLateralSubMenu = ({
   data,
@@ -36,11 +36,11 @@ const DrawerLateralSubMenu = ({
   };
   const removeMarginBottom = (isRemove: boolean) => {
     if (isRemove) {
-      return {marginBottom: 0};
+      return { marginBottom: 0 };
     }
   };
 
-  const {image, label, subMenu} = data || {};
+  const { image, label, subMenu } = data || {};
 
   return (
     <>
@@ -63,7 +63,7 @@ const DrawerLateralSubMenu = ({
           styles.modalSectionItemContainer,
           getStyleSelected(indexHover, indexSection, indexSubSection, -1),
           removeMarginBottom(showSubMenu),
-          showSubMenu && {marginBottom: 0},
+          showSubMenu && { marginBottom: 0 },
         ]}
         onPress={() => {
           setShowSubMenu(!showSubMenu);
@@ -117,7 +117,8 @@ const DrawerLateralSubMenu = ({
                 }
                 style={[
                   styles.modalSectionSubItemContainer,
-                  subMenu && subMenu.length - 1 === index && {marginBottom: 0},
+                  subMenu &&
+                    subMenu.length - 1 === index && { marginBottom: 0 },
                   getStyleSelected(
                     currentIndex,
                     indexSection,
