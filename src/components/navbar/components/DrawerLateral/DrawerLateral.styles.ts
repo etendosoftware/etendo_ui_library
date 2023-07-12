@@ -1,16 +1,12 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import {
   NEUTRAL_0,
   NEUTRAL_400,
-  NEUTRAL_60,
   OVERLAY,
   PRIMARY_100,
-  PRIMARY_30,
-  PRIMARY_40,
-  PRIMARY_50,
+  PRIMARY_400,
   PRIMARY_60,
   PRIMARY_80,
-  PRIMARY_800,
   QUATERNARY_10,
 } from '../../../../styles/colors';
 
@@ -82,7 +78,7 @@ export const styles = StyleSheet.create({
     lineHeight: 18,
     marginBottom: 12,
   },
-  modalSectionContentContainer: {marginBottom: 20},
+  modalSectionContentContainer: { marginBottom: 20 },
   modalSectionItemContainer: {
     flexDirection: 'row',
     height: 40,
@@ -118,13 +114,13 @@ export const styles = StyleSheet.create({
   },
   modalSectionSubMenuContainer: {
     display: 'flex',
-    paddingLeft: 15,
-    marginLeft: 20,
+    paddingLeft: 16,
+    marginLeft: 24,
     marginBottom: 20,
-    marginTop: 5,
+    marginTop: 12,
     borderLeftWidth: 1,
-    borderColor: PRIMARY_60,
+    borderColor: PRIMARY_400,
   },
-  copyright: {color: NEUTRAL_400},
-  version: {color: NEUTRAL_400},
+  copyright: { color: NEUTRAL_400 },
+  version: { color: NEUTRAL_400 },
 });

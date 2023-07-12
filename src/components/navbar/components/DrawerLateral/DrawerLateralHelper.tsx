@@ -1,8 +1,7 @@
-import {ColorValue, ViewStyle} from 'react-native';
-import {DrawerCurrentIndexType} from '../../Navbar.types';
+import { ColorValue, ViewStyle } from 'react-native';
+import { DrawerCurrentIndexType } from '../../Navbar.types';
 import {
   NEUTRAL_0,
-  PRIMARY_80,
   PRIMARY_800,
   SECONDARY_100,
 } from '../../../../styles/colors';
@@ -30,7 +29,7 @@ export const getStyleSelected = (
     currentPageIndex?.indexSubSection === indexSubSection &&
     currentPageIndex?.indexSubSectionItem === indexSubSectionItem
   ) {
-    return {backgroundColor: PRIMARY_800};
+    return { backgroundColor: PRIMARY_800 };
   }
 };
 
