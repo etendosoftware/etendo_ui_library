@@ -1,13 +1,13 @@
-import React, {useMemo} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Modal, TouchableOpacity, ScrollView, Text} from 'react-native';
 import {
   DrawerCurrentIndexType,
   DrawerDataContentType,
   DrawerLateralProps,
 } from '../../Navbar.types';
-import EtendoLogo from '../EtendoLogo/EtendoLogo';
 import {styles} from './DrawerLateral.styles';
 import DrawerSectionsContainer from './DrawerSectionsContainer';
+import {EtendoLogo} from '../..';
 
 const DrawerLateral = ({
   data,
@@ -18,32 +18,20 @@ const DrawerLateral = ({
   onOptionSelected,
   onCloseDrawer,
 }: DrawerLateralProps) => {
-  const handleOptionSelected = useMemo(
-    () => (route?: string, index?: DrawerCurrentIndexType) => {
-      onOptionSelected(route, index);
-      onCloseDrawer();
-    },
-    [onOptionSelected, onCloseDrawer],
-  );
+  const [currentIndexHandler, setCurrentIndexHandler] =
+    useState<any>(currentIndex);
 
-  const drawerContent = useMemo(
-    () =>
-      data?.content?.map((item: DrawerDataContentType, index: number) => {
-        if (item.sectionType === 'sections') {
-          return (
-            <DrawerSectionsContainer
-              key={'drawerSection' + index}
-              data={item}
-              onOptionSelected={handleOptionSelected}
-              currentIndex={currentIndex}
-              indexSection={index}
-            />
-          );
-        }
-        return null;
-      }),
-    [data?.content, currentIndex, handleOptionSelected],
-  );
+  const handleOptionSelected = (
+    route?: string,
+    index?: DrawerCurrentIndexType,
+  ) => {
+    if (onOptionSelected) {
+      setCurrentIndexHandler(index);
+      setTimeout(() => {
+        onOptionSelected(route, index);
+      }, 100);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -51,25 +39,35 @@ const DrawerLateral = ({
         <View style={styles.modalContainer}>
           <View style={styles.modalContainerUp}>
             <View style={styles.modalContent}>
-              <ScrollView
-                showsVerticalScrollIndicator={false}
-                style={styles.modalSectionsContainer}
-              >
+              <View style={styles.image}>
                 <EtendoLogo onPress={() => {}} />
-                <View style={styles.modalMargin} />
-                {drawerContent}
+              </View>
+              <ScrollView style={{paddingRight: 12}}>
+                {data?.map((item: DrawerDataContentType, index: number) => {
+                  if (item.sectionType === 'sections') {
+                    return (
+                      <DrawerSectionsContainer
+                        key={'drawerSection' + index}
+                        data={item}
+                        onOptionSelected={handleOptionSelected}
+                        currentIndex={currentIndexHandler}
+                        indexSection={index}
+                      />
+                    );
+                  }
+                  return null;
+                })}
               </ScrollView>
             </View>
           </View>
           <View style={styles.modalContainerDown}>
             <Text numberOfLines={1} ellipsizeMode="tail" style={styles.version}>
-              {'V ' + version}
+              {version && 'V ' + version}
             </Text>
             <Text
-              numberOfLines={2}
+              numberOfLines={1}
               ellipsizeMode="tail"
-              style={styles.copyright}
-            >
+              style={styles.copyright}>
               {copyright}
             </Text>
           </View>

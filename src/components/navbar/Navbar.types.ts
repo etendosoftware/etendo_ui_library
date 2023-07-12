@@ -1,4 +1,4 @@
-import { GestureResponderEvent, LayoutChangeEvent } from 'react-native';
+import {GestureResponderEvent, LayoutChangeEvent} from 'react-native';
 
 export type RightComponent = {
   component: React.ReactElement;
@@ -20,6 +20,7 @@ export interface NavbarProps {
 
 export interface EtendoLogoProps {
   onPress?: (event: GestureResponderEvent) => void;
+  pressable?: boolean;
 }
 
 export type OptionNotificationType = 'warning' | 'success' | 'error' | 'new';
@@ -110,21 +111,17 @@ export type DrawerDataContentType = {
   dataSection?: DrawerDataSectionType[];
 };
 
-export type DrawerDataType = {
-  content: DrawerDataContentType[];
-};
-
 export interface DrawerLateralProps {
-  data: DrawerDataType;
+  data: DrawerDataContentType[];
   version?: string;
   copyright?: string;
   showDrawer: boolean;
   currentIndex?: DrawerCurrentIndexType;
-  onOptionSelected: (
+  onOptionSelected?: (
     route?: string,
     currentIndex?: DrawerCurrentIndexType,
   ) => void;
-  onCloseDrawer: (event?: GestureResponderEvent) => void;
+  onCloseDrawer?: (event?: GestureResponderEvent) => void;
 }
 export interface DrawerSectionsContainerType {
   data?: DrawerDataContentType;

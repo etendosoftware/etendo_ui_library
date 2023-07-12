@@ -26,14 +26,15 @@ const DrawerSectionsContainer = ({
   });
   return (
     <>
-      <View style={styles.modalSection}>
-        <Text
-          numberOfLines={2}
-          ellipsizeMode="tail"
-          style={styles.modalSectionTitle}
-        >
-          {data?.titleSection}
-        </Text>
+      <View>
+        {data?.titleSection && (
+          <Text
+            numberOfLines={1}
+            ellipsizeMode="tail"
+            style={styles.modalSectionTitle}>
+            {data.titleSection}
+          </Text>
+        )}
         <View style={styles.modalSectionContentContainer}>
           {data?.dataSection?.map(
             (item: DrawerDataSectionType, index: number) => {
@@ -81,8 +82,7 @@ const DrawerSectionsContainer = ({
                         item?.route,
                         getCurrentSelectIndex(indexSection, index, 0),
                       )
-                    }
-                  >
+                    }>
                     {item?.image &&
                       React.cloneElement(item.image, {
                         fill: getStyleImageSelected(
@@ -94,10 +94,9 @@ const DrawerSectionsContainer = ({
                         style: styles.modalSectionItemImage,
                       })}
                     <Text
-                      numberOfLines={2}
+                      numberOfLines={1}
                       ellipsizeMode="tail"
-                      style={styles.modalSectionItemText}
-                    >
+                      style={styles.modalSectionItemText}>
                       {item?.label}
                     </Text>
                   </Pressable>

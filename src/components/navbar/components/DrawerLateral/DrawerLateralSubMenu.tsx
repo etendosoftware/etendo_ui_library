@@ -1,4 +1,4 @@
-import {Pressable, Text, View} from 'react-native';
+import {Pressable, ScrollView, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import {styles} from './DrawerLateral.styles';
 import {
@@ -30,7 +30,9 @@ const DrawerLateralSubMenu = ({
 
   const handleOnPress = (route?: string, index?: DrawerCurrentIndexType) => {
     onSelectOption(route, index);
-    setShowSubMenu(!showSubMenu);
+    setTimeout(() => {
+      setShowSubMenu(!showSubMenu);
+    }, 100);
   };
   const removeMarginBottom = (isRemove: boolean) => {
     if (isRemove) {
@@ -65,8 +67,7 @@ const DrawerLateralSubMenu = ({
         ]}
         onPress={() => {
           setShowSubMenu(!showSubMenu);
-        }}
-      >
+        }}>
         {image &&
           React.cloneElement(image, {
             ...image.props,
@@ -78,10 +79,9 @@ const DrawerLateralSubMenu = ({
             style: styles.modalSectionItemImage,
           })}
         <Text
-          numberOfLines={2}
+          numberOfLines={1}
           ellipsizeMode="tail"
-          style={styles.modalSectionItemText}
-        >
+          style={styles.modalSectionItemText}>
           {label}
         </Text>
         <ArrowDown
@@ -130,13 +130,11 @@ const DrawerLateralSubMenu = ({
                     indexSubSection,
                     index,
                   ),
-                ]}
-              >
+                ]}>
                 <Text
-                  numberOfLines={2}
+                  numberOfLines={1}
                   ellipsizeMode="tail"
-                  style={styles.modalSectionItemText}
-                >
+                  style={styles.modalSectionItemText}>
                   {item?.label}
                 </Text>
               </Pressable>

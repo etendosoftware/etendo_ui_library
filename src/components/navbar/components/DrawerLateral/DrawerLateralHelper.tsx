@@ -1,6 +1,11 @@
 import {ColorValue, ViewStyle} from 'react-native';
 import {DrawerCurrentIndexType} from '../../Navbar.types';
-import { NEUTRAL_0, PRIMARY_80, SECONDARY_100 } from '../../../../styles/colors';
+import {
+  NEUTRAL_0,
+  PRIMARY_80,
+  PRIMARY_800,
+  SECONDARY_100,
+} from '../../../../styles/colors';
 
 export const getCurrentSelectIndex = (
   indexSection: number,
@@ -25,7 +30,7 @@ export const getStyleSelected = (
     currentPageIndex?.indexSubSection === indexSubSection &&
     currentPageIndex?.indexSubSectionItem === indexSubSectionItem
   ) {
-    return {backgroundColor: PRIMARY_80};
+    return {backgroundColor: PRIMARY_800};
   }
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  DrawerDataType,
+  DrawerDataContentType,
   OptionNotificationItem,
   OptionProfileItem,
 } from './Navbar.types';
@@ -8,6 +8,7 @@ import {DeliveryBox} from '../../assets/images/icons/DeliveryBox';
 import {ShoppingBagIcon} from '../../assets/images/icons/ShoppingBagIcon';
 import {MoneyIcon} from '../../assets/images/icons/MoneyIcon';
 import {ConfigurationIcon} from '../../assets/images/icons/ConfigurationIcon';
+import {HomeIcon} from '../../assets/images/icons/HomeIcon';
 
 export const notificationData: OptionNotificationItem[] = [
   {
@@ -36,68 +37,78 @@ export const profileData: OptionProfileItem[] = [
   },
 ];
 
-export const drawerData: DrawerDataType = {
-  content: [
-    {
-      sectionType: 'sections',
-      titleSection: 'WAREHOUSE',
-      dataSection: [
-        {
-          image: <DeliveryBox />,
-          label: 'Physical inventory',
-          subMenu: [
-            {label: 'Sub menu', route: '/menu1'},
-            {label: 'Sub menu', route: '/menu2'},
-            {label: 'Sub menu', route: '/menu3'},
-          ],
-        },
-        {image: <ShoppingBagIcon />, label: 'Product', route: '/product'},
-        {image: <MoneyIcon />, label: 'Sales order', route: '/salesOrder'},
-      ],
-    },
-    {
-      sectionType: 'sections',
-      titleSection: 'CUSTOMIZATION',
-      dataSection: [
-        {
-          image: <ConfigurationIcon />,
-          label: 'Profile and settings',
-          route: '/profile',
-        },
-        {
-          image: <ConfigurationIcon />,
-          label: 'Profile and settings',
-          route: '/profile',
-        },
-      ],
-    },
-    {
-      sectionType: 'sections',
-      titleSection: 'CUSTOMIZATION',
-      dataSection: [
-        {
-          image: <ConfigurationIcon />,
-          label: 'Profile and settings',
-          route: '/profile',
-        },
-      ],
-    },
-    {
-      sectionType: 'sections',
-      titleSection: 'WAREHOUSE',
-      dataSection: [
-        {
-          image: <DeliveryBox />,
-          label: 'Physical inventory',
-          subMenu: [
-            {label: 'Sub menu', route: '/menu1'},
-            {label: 'Sub menu', route: '/menu2'},
-            {label: 'Sub menu', route: '/menu3'},
-          ],
-        },
-        {image: <ShoppingBagIcon />, label: 'Product', route: '/product'},
-        {image: <MoneyIcon />, label: 'Sales order', route: '/salesOrder'},
-      ],
-    },
-  ],
-};
+export const drawerData: DrawerDataContentType[] = [
+  {
+    sectionType: 'sections',
+    dataSection: [
+      {
+        image: <HomeIcon />,
+        label: 'Physical inventorTTTTTTSASSSSSSSSSSSSy',
+      },
+    ],
+  },
+  {
+    sectionType: 'sections',
+    titleSection: 'WAREHOUSE',
+    dataSection: [
+      {
+        image: <DeliveryBox />,
+        label: 'Physical inventoryYYYYYYYYY',
+        subMenu: [
+          {label: 'Sub AAAAAAAAAAAAAAAAAAAAAAAAa', route: '/menu1'},
+          {label: 'Sub menu', route: '/menu2'},
+          {label: 'Sub menu', route: '/menu3'},
+          {label: 'Sub a', route: '/menu1'},
+          {label: 'Sub menu', route: '/menu2'},
+          {label: 'Sub menu', route: '/menu3'},
+        ],
+      },
+      {image: <ShoppingBagIcon />, label: 'Product', route: '/product'},
+      {image: <MoneyIcon />, label: 'Sales order', route: '/salesOrder'},
+    ],
+  },
+  {
+    sectionType: 'sections',
+    titleSection: 'CUSTOMIZATION',
+    dataSection: [
+      {
+        image: <ConfigurationIcon />,
+        label: 'Profile and settings',
+        route: '/profile',
+      },
+      {
+        image: <ConfigurationIcon />,
+        label: 'Profile and settings',
+        route: '/profile',
+      },
+    ],
+  },
+  {
+    sectionType: 'sections',
+    titleSection: 'CUSTOMIZATION',
+    dataSection: [
+      {
+        image: <ConfigurationIcon />,
+        label: 'Profile and settings',
+        route: '/profile',
+      },
+    ],
+  },
+  {
+    sectionType: 'sections',
+    titleSection: 'WAREHOUSE',
+    dataSection: [
+      {
+        image: <DeliveryBox />,
+        label: 'Physical inventory',
+        subMenu: [
+          {label: 'Sub menu', route: '/menu1'},
+          {label: 'Sub menu', route: '/menu2'},
+          {label: 'Sub menu', route: '/menu3'},
+        ],
+      },
+      {image: <ShoppingBagIcon />, label: 'Product', route: '/product'},
+      {image: <MoneyIcon />, label: 'Sales order', route: '/salesOrder'},
+    ],
+  },
+];

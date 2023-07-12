@@ -1,10 +1,10 @@
-import { Dimensions, View } from 'react-native';
-import React, { useState } from 'react';
-import { marginIncomponents, styles } from './Navbar.styles';
-import { NavbarProps, OptionProfileItem, RightComponent } from './Navbar.types';
-import { Welcome, Profile, EtendoLogo } from './index';
+import {Dimensions, View} from 'react-native';
+import React, {useState} from 'react';
+import {marginIncomponents, styles} from './Navbar.styles';
+import {NavbarProps, OptionProfileItem, RightComponent} from './Navbar.types';
+import {Welcome, Profile, EtendoLogo} from './index';
 import MenuBurger from './components/MenuBurger/MenuBurger';
-import { isTablet } from '../../helpers/table_utils';
+import {isTablet} from '../../helpers/table_utils';
 
 const Navbar = ({
   name,
@@ -77,7 +77,7 @@ const Navbar = ({
       <View style={[styles.leftContainer]}>
         {isTablet() ? (
           <>
-            <EtendoLogo onPress={onPressLogo} />
+            <EtendoLogo onPress={onPressLogo} pressable />
             <Welcome name={name} title={title} />
           </>
         ) : (
@@ -90,10 +90,10 @@ const Navbar = ({
             <View
               key={index}
               onLayout={event => {
-                const { width } = event.nativeEvent.layout;
+                const {width} = event.nativeEvent.layout;
                 calculateRenderedComponents(index, width + marginIncomponents);
               }}
-              style={[styles.itemMapContainer, isLoading && { opacity: 0 }]}>
+              style={[styles.itemMapContainer, isLoading && {opacity: 0}]}>
               {item.component}
             </View>
           ))}
