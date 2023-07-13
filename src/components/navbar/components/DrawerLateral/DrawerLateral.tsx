@@ -7,7 +7,7 @@ import {
 } from '../../Navbar.types';
 import { styles } from './DrawerLateral.styles';
 import DrawerSectionsContainer from './DrawerSectionsContainer';
-import { EtendoLogo } from '../..';
+import EtendoLogo from '../../components/EtendoLogo/EtendoLogo';
 
 const DrawerLateral = ({
   data,
@@ -40,7 +40,7 @@ const DrawerLateral = ({
           <View style={styles.modalContainerUp}>
             <View style={styles.modalContent}>
               <View style={styles.image}>
-                <EtendoLogo onPress={() => {}} />
+                <EtendoLogo />
               </View>
               <ScrollView style={{ paddingRight: 12 }}>
                 {data?.map((item: DrawerDataContentType, index: number) => {
