@@ -77,7 +77,7 @@ const Navbar = ({
       <View style={[styles.leftContainer]}>
         {isTablet() ? (
           <>
-            <EtendoLogo onPress={onPressLogo} />
+            <EtendoLogo onPress={onPressLogo} pressable />
             <Welcome name={name} title={title} />
           </>
         ) : (

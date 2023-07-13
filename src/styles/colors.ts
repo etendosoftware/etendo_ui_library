@@ -4,6 +4,8 @@ export const PRIMARY_50 = '#575A72';
 export const PRIMARY_60 = '#4B539D';
 export const PRIMARY_80 = '#303775';
 export const PRIMARY_100 = '#202452';
+export const PRIMARY_400 = '#525897';
+export const PRIMARY_800 = '#242D93';
 
 export const SECONDARY_30 = '#FEF7D0';
 export const SECONDARY_50 = '#FFEB7A';
@@ -24,6 +26,7 @@ export const NEUTRAL_10 = '#E5E5E5';
 export const NEUTRAL_40 = '#999999';
 export const NEUTRAL_60 = '#808080';
 export const NEUTRAL_100 = '#000000';
+export const NEUTRAL_400 = '#BDBDBD';
 
 export const INITIAL_10 = '#ECF5FF';
 export const INITIAL_100 = '#3E97FF';
