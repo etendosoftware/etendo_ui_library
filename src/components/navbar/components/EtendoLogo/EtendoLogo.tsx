@@ -1,11 +1,11 @@
-import {TouchableOpacity} from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import React from 'react';
-import {styles} from './EtendoLogo.styles';
-import {EtendoLogoProps} from '../../Navbar.types';
-import {EtendoWhiteLogo} from '../../../../assets/images/logo/EtendoWhiteLogo';
-import {NEUTRAL_0} from '../../../../styles/colors';
+import { styles } from './EtendoLogo.styles';
+import { EtendoLogoProps } from '../../Navbar.types';
+import { EtendoWhiteLogo } from '../../../../assets/images/logo/EtendoWhiteLogo';
+import { NEUTRAL_0 } from '../../../../styles/colors';
 
-const EtendoLogo = ({onPress, pressable}: EtendoLogoProps) => {
+const EtendoLogo = ({ onPress, pressable }: EtendoLogoProps) => {
   return (
     <TouchableOpacity
       onPress={onPress}

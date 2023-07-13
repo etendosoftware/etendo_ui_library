@@ -1,4 +1,4 @@
-import {GestureResponderEvent, LayoutChangeEvent} from 'react-native';
+import { GestureResponderEvent, LayoutChangeEvent } from 'react-native';
 
 export type RightComponent = {
   component: React.ReactElement;
