@@ -7,7 +7,7 @@ import {
 } from '../../Navbar.types';
 import { styles } from './DrawerLateral.styles';
 import DrawerSectionsContainer from './DrawerSectionsContainer';
-import EtendoLogo from '../../components/EtendoLogo/EtendoLogo';
+import EtendoLogo from '../EtendoLogo/EtendoLogo';
 
 const DrawerLateral = ({
   data,
