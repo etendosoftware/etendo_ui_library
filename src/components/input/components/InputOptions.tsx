@@ -8,7 +8,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {styles} from '../Input.style';
 import {InputOptionsProps} from '../Input.types';
 import {SearchIcon} from '../../../assets/images/icons/SearchIcon';
@@ -19,11 +19,15 @@ const InputOptions = ({
   onOptionSelected,
   showOptions,
   positionModal,
+  showOptionsAmount = 4,
   onClose,
   filterValue,
   onChangeFilterText,
   displayKey,
+  isScroll,
 }: InputOptionsProps) => {
+  const calculatedMaxHeight = 8 + 48 * showOptionsAmount;
+
   const [showSearchImg, setShowSearchImg] = useState<boolean>(true);
   const [placeholderText, setPlaceholderText] = useState<string>('Search');
   const [indexHover, setIndexHover] = useState<number>(-1);
@@ -57,18 +61,20 @@ const InputOptions = ({
     }
   };
 
-  const addRadius = (add: boolean): ViewStyle => {
+  const addRadius = (add: boolean): ViewStyle | undefined => {
     if (add) {
       return {borderBottomLeftRadius: 5, borderBottomRightRadius: 5};
     }
-    return {};
   };
-  const removePadding = (remove: boolean) => {
-    if (remove) {
-      return {};
+  const removePadding = (remove: boolean): ViewStyle | undefined => {
+    if (!remove) {
+      return {paddingHorizontal: 0};
     }
-    return {paddingHorizontal: 0};
   };
+  useEffect(() => {
+    console.log(data.length, showOptionsAmount);
+  }, [data.length, showOptionsAmount]);
+
   return (
     <>
       <Modal transparent={true} visible={showOptions} animationType="fade">
@@ -77,6 +83,7 @@ const InputOptions = ({
           onPress={handlePressOverlay}
           activeOpacity={1}
         />
+
         <View
           style={[
             styles.optionsContainer,
@@ -85,33 +92,32 @@ const InputOptions = ({
               top: positionModal.top + 5,
               left: positionModal.left,
             },
-          ]}
-        >
-          <View
-            style={[
-              styles.optionFilterContainer,
-              removePadding(!filterValue && showSearchImg),
-            ]}
-          >
-            {!filterValue && showSearchImg && (
-              <View style={styles.searchContainer}>
-                <SearchIcon style={styles.optionFilterImg} />
-              </View>
-            )}
-            <TextInput
-              onFocus={handleOnFocus}
-              onBlur={handleOnBlur}
-              style={styles.optionFilterText}
-              value={filterValue}
-              onChangeText={onChangeFilterText}
-              placeholder={placeholderText}
-              placeholderTextColor={NEUTRAL_40}
-            />
-          </View>
+          ]}>
+          {isScroll && (
+            <View
+              style={[
+                styles.optionFilterContainer,
+                removePadding(!filterValue && showSearchImg),
+              ]}>
+              {!filterValue && showSearchImg && (
+                <View style={styles.searchContainer}>
+                  <SearchIcon style={styles.optionFilterImg} />
+                </View>
+              )}
+              <TextInput
+                onFocus={handleOnFocus}
+                onBlur={handleOnBlur}
+                style={styles.optionFilterText}
+                value={filterValue}
+                onChangeText={onChangeFilterText}
+                placeholder={placeholderText}
+                placeholderTextColor={NEUTRAL_40}
+              />
+            </View>
+          )}
           <ScrollView
-            style={styles.optionsItemsContainer}
-            showsVerticalScrollIndicator={false}
-          >
+            style={{maxHeight: calculatedMaxHeight}}
+            showsVerticalScrollIndicator={false}>
             {data?.map((item: any, index: number) => {
               return (
                 <Pressable
@@ -127,8 +133,7 @@ const InputOptions = ({
                     getBackground(index),
                     addRadius(index === data.length - 1),
                   ]}
-                  onPress={() => handleOptionSelected(item, index)}
-                >
+                  onPress={() => handleOptionSelected(item, index)}>
                   {displayKey && (
                     <Text style={styles.optionText}>{item[displayKey]}</Text>
                   )}
