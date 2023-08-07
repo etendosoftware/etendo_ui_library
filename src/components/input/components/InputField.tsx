@@ -32,6 +32,7 @@ const InputField = ({
   dataPicker,
   displayKey,
   backgroundColor = NEUTRAL_0,
+  showOptionsAmount = 4,
   onPress,
   onSubmit,
   onChangeText,
@@ -54,13 +55,12 @@ const InputField = ({
   const refComponente = useRef<TouchableOpacity>(null);
   const regex = /^[0-9.,]+$/g;
   const isWeb = Platform.OS === 'web';
+  const isScroll = showOptionsAmount < dataPicker.length;
 
-  const disableOutline = () => {
-    let outline = {};
+  const disableOutline = (): ViewStyle | undefined => {
     if (isWeb) {
-      return (outline = { outline: 'none' });
+      return { outline: 'none' } as ViewStyle;
     }
-    return outline;
   };
   const getStyleText = (text?: string): TextStyle | TextStyle[] => {
     let style: Array<TextStyle | TextStyle[]> = [];
@@ -86,6 +86,48 @@ const InputField = ({
     }
   });
 
+  const calculateDropdownHeight = (
+    pageY: number,
+    height: number,
+    showOptionsAmount: number,
+    dataPicker: any[],
+  ) => {
+    const baseHeight =
+      pageY +
+      height +
+      (isScroll ? styles.optionFilterContainer.height : 0) +
+      styles.offSet.height;
+    const additionalHeight =
+      styles.optionContainer.height *
+      (showOptionsAmount > dataPicker.length
+        ? dataPicker.length
+        : showOptionsAmount);
+
+    return baseHeight + additionalHeight;
+  };
+
+  const calculateTopPosition = (
+    pageY: number,
+    height: number,
+    showOptionsAmount: number,
+    dataPicker: any[],
+  ) => {
+    const baseTop =
+      pageY -
+      height -
+      (isScroll
+        ? styles.optionFilterContainer.height + styles.optionContainer.marginTop
+        : 0) +
+      styles.offSetUp.height;
+    const additionalTop =
+      styles.optionContainer.height *
+      (showOptionsAmount > dataPicker.length
+        ? dataPicker.length
+        : showOptionsAmount);
+
+    return baseTop - additionalTop;
+  };
+
   const getTopLeft = () => {
     if (refComponente.current) {
       refComponente.current.measure(
@@ -97,22 +139,31 @@ const InputField = ({
           pageX: number,
           pageY: number,
         ) => {
-          let dropdownHeight = pageY + height + 188;
+          const dropdownHeight = calculateDropdownHeight(
+            pageY,
+            height,
+            showOptionsAmount,
+            dataPicker,
+          );
+
+          let topPosition;
           if (dropdownHeight > windowHeight) {
-            setpositionModal({
-              top: pageY - height - 136,
-              left: pageX,
-              width,
+            topPosition = calculateTopPosition(
+              pageY,
               height,
-            });
+              showOptionsAmount,
+              dataPicker,
+            );
           } else {
-            setpositionModal({
-              top: pageY + height,
-              left: pageX,
-              width,
-              height,
-            });
+            topPosition = pageY + height;
           }
+
+          setpositionModal({
+            top: topPosition,
+            left: pageX,
+            width,
+            height,
+          });
         },
       );
     }
@@ -120,11 +171,14 @@ const InputField = ({
 
   const handleOnChangeFilterText = (filterText: string) => {
     setFilterValue(filterText);
-    setDataOptionsFilter(
-      dataPicker.filter((item: any) =>
-        item.label.toLocaleLowerCase().includes(filterText.toLocaleLowerCase()),
-      ),
-    );
+    if (displayKey)
+      setDataOptionsFilter(
+        dataPicker.filter((item: any) =>
+          item[displayKey]
+            .toLocaleLowerCase()
+            .includes(filterText.toLocaleLowerCase()),
+        ),
+      );
   };
 
   const handleOnClose = () => {
@@ -206,7 +260,7 @@ const InputField = ({
     if (type === 'textInputPassword') {
       setShowPassword(prevState => !prevState);
     } else {
-      onSubmit;
+      onSubmit?.();
     }
   };
 
@@ -226,7 +280,7 @@ const InputField = ({
       <TouchableOpacity
         ref={refComponente}
         style={[styleField.field, removePaddingField(), { backgroundColor }]}
-        disabled={disabled || configField.disabledField}
+        disabled={disabled ?? configField.disabledField}
         onPress={handleOnPress}>
         {configField?.type === 'textInput' && (
           <TextInput
@@ -252,18 +306,19 @@ const InputField = ({
             numberOfLines={1}
             ellipsizeMode="tail"
             style={[getStyleText(value), disableOutline()]}>
-            {value ? value : placeholder}
+            {value ?? placeholder}
           </Text>
         )}
         {configField?.image && (
           <TouchableOpacity
             onPress={handlePressImage}
             style={styles.buttonContainerInputField}
-            disabled={configField?.disabledSubmit || disabled}>
+            disabled={configField?.disabledSubmit ?? disabled}>
             {getImage(configField.image)}
           </TouchableOpacity>
         )}
         <InputOptions
+          showOptionsAmount={showOptionsAmount}
           onOptionSelected={onOptionSelected}
           showOptions={showOptions}
           positionModal={positionModal}
@@ -272,6 +327,7 @@ const InputField = ({
           onChangeFilterText={handleOnChangeFilterText}
           filterValue={filterValue}
           displayKey={displayKey}
+          isScroll={isScroll}
         />
       </TouchableOpacity>
     </View>

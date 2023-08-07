@@ -72,6 +72,7 @@ export interface InputProps {
   height?: number | string;
   dataPicker?: any;
   displayKey?: string;
+  showOptionsAmount?: number;
   onPress?: (event?: GestureResponderEvent) => void;
   onSubmit?: (event?: GestureResponderEvent) => void;
   onChangeText?: (text: string) => void;
@@ -115,6 +116,7 @@ export interface InputFieldProps {
   displayKey?: string;
   backgroundColor?: ColorValue;
   onOptionSelected?: any;
+  showOptionsAmount?: number;
   onPress?: (event?: GestureResponderEvent) => void;
   onSubmit?: (event?: GestureResponderEvent) => void;
   onChangeText?: (text: string) => void;
@@ -130,8 +132,10 @@ export interface InputHelperProps {
 export interface InputOptionsProps {
   data: any;
   displayKey?: string;
+  isScroll?: boolean;
   onOptionSelected: (item: any, index: number) => void;
   showOptions: boolean;
+  showOptionsAmount?: number;
   positionModal: {
     top: number;
     left: number;

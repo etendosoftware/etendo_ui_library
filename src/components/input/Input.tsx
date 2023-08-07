@@ -1,8 +1,8 @@
 import React from 'react';
-import {View} from 'react-native';
-import {inputStyleVariants, inputVariants, styles} from './Input.style';
-import {InputProps} from './Input.types';
-import {InputTitle, InputField, InputHelperText} from './index';
+import { View } from 'react-native';
+import { inputStyleVariants, inputVariants, styles } from './Input.style';
+import { InputProps } from './Input.types';
+import { InputTitle, InputField, InputHelperText } from './index';
 
 const Input = ({
   value,
@@ -17,10 +17,11 @@ const Input = ({
   displayKey,
   dataPicker,
   backgroundColor,
+  showOptionsAmount,
   onPress,
   onSubmit,
-  onFocus,
-  onBlur,
+  onFocus = () => {},
+  onBlur = () => {},
   onChangeText,
   onOptionSelected,
   typeField,
@@ -55,10 +56,11 @@ const Input = ({
         value={value}
         onPress={onPress}
         onSubmit={onSubmit}
-        onFocus={onFocus ? onFocus : () => {}}
-        onBlur={onBlur ? onBlur : () => {}}
+        onFocus={onFocus}
+        onBlur={onBlur}
         onChangeText={onChangeText}
         onOptionSelected={onOptionSelected}
+        showOptionsAmount={showOptionsAmount}
         keyboardType={keyboardType}
         maxLength={maxLength}
         centerText={centerText}
