@@ -8,11 +8,11 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import React, { useState } from 'react';
-import { styles } from '../Input.style';
-import { InputOptionsProps } from '../Input.types';
-import { SearchIcon } from '../../../assets/images/icons/SearchIcon';
-import { NEUTRAL_40, QUATERNARY_10 } from '../../../styles/colors';
+import React, {useState} from 'react';
+import {styles} from '../Input.style';
+import {InputOptionsProps} from '../Input.types';
+import {SearchIcon} from '../../../assets/images/icons/SearchIcon';
+import {NEUTRAL_40, QUATERNARY_10} from '../../../styles/colors';
 
 const InputOptions = ({
   data,
@@ -57,18 +57,18 @@ const InputOptions = ({
 
   const getBackground = (index: number): ViewStyle | undefined => {
     if (indexHover === index) {
-      return { backgroundColor: QUATERNARY_10 };
+      return {backgroundColor: QUATERNARY_10};
     }
   };
 
   const addRadius = (add: boolean): ViewStyle | undefined => {
     if (add) {
-      return { borderBottomLeftRadius: 5, borderBottomRightRadius: 5 };
+      return {borderBottomLeftRadius: 5, borderBottomRightRadius: 5};
     }
   };
   const removePadding = (remove: boolean): ViewStyle | undefined => {
     if (!remove) {
-      return { paddingHorizontal: 0 };
+      return {paddingHorizontal: 0};
     }
   };
 
@@ -113,7 +113,7 @@ const InputOptions = ({
             </View>
           )}
           <ScrollView
-            style={{ maxHeight: calculatedMaxHeight }}
+            style={{maxHeight: calculatedMaxHeight}}
             showsVerticalScrollIndicator={false}>
             {data?.map((item: any, index: number) => {
               return (
@@ -128,7 +128,7 @@ const InputOptions = ({
                   style={[
                     styles.optionContainer,
                     getBackground(index),
-                    addRadius(index === data.length - 1),
+                    addRadius(index === data?.length - 1),
                   ]}
                   onPress={() => handleOptionSelected(item, index)}>
                   {displayKey && (
