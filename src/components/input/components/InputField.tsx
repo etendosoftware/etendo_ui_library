@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   TextInput,
   TextStyle,
@@ -13,12 +13,12 @@ import {
   GestureResponderEvent,
   Text,
 } from 'react-native';
-import {styles} from '../Input.style';
-import {InputFieldProps, KeyboardTypes} from '../Input.types';
-import {ShowPassword} from '../../../assets/images/icons/ShowPassword';
-import {HidePassword} from '../../../assets/images/icons/HidePassword';
+import { styles } from '../Input.style';
+import { InputFieldProps, KeyboardTypes } from '../Input.types';
+import { ShowPassword } from '../../../assets/images/icons/ShowPassword';
+import { HidePassword } from '../../../assets/images/icons/HidePassword';
 import InputOptions from './InputOptions';
-import {NEUTRAL_0} from '../../../styles/colors';
+import { NEUTRAL_0 } from '../../../styles/colors';
 
 const InputField = ({
   type,
@@ -59,7 +59,7 @@ const InputField = ({
 
   const disableOutline = (): ViewStyle | undefined => {
     if (isWeb) {
-      return {outline: 'none'} as ViewStyle;
+      return { outline: 'none' } as ViewStyle;
     }
   };
   const getStyleText = (text?: string): TextStyle | TextStyle[] => {
@@ -211,7 +211,7 @@ const InputField = ({
   const getFocusStyle = (): ViewStyle[] => {
     let style: ViewStyle[] = [];
     if (!isFocus) {
-      style.push({borderColor: 'transparent'});
+      style.push({ borderColor: 'transparent' });
     }
     return style;
   };
@@ -219,7 +219,7 @@ const InputField = ({
   const removePaddingField = (): ViewStyle => {
     let style: ViewStyle = {};
     if (configField?.image) {
-      style = {paddingRight: 0};
+      style = { paddingRight: 0 };
     }
     return style;
   };
@@ -279,7 +279,7 @@ const InputField = ({
     <View style={[styleField.focus, getFocusStyle()]}>
       <TouchableOpacity
         ref={refComponente}
-        style={[styleField.field, removePaddingField(), {backgroundColor}]}
+        style={[styleField.field, removePaddingField(), { backgroundColor }]}
         disabled={disabled ?? configField.disabledField}
         onPress={handleOnPress}>
         {configField?.type === 'textInput' && (
