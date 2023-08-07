@@ -55,7 +55,7 @@ const InputField = ({
   const refComponente = useRef<TouchableOpacity>(null);
   const regex = /^[0-9.,]+$/g;
   const isWeb = Platform.OS === 'web';
-  const isScroll = showOptionsAmount < dataPicker.length;
+  const isScroll = showOptionsAmount < dataPicker?.length;
 
   const disableOutline = (): ViewStyle | undefined => {
     if (isWeb) {
@@ -99,8 +99,8 @@ const InputField = ({
       styles.offSet.height;
     const additionalHeight =
       styles.optionContainer.height *
-      (showOptionsAmount > dataPicker.length
-        ? dataPicker.length
+      (showOptionsAmount > dataPicker?.length
+        ? dataPicker?.length
         : showOptionsAmount);
 
     return baseHeight + additionalHeight;
@@ -121,8 +121,8 @@ const InputField = ({
       styles.offSetUp.height;
     const additionalTop =
       styles.optionContainer.height *
-      (showOptionsAmount > dataPicker.length
-        ? dataPicker.length
+      (showOptionsAmount > dataPicker?.length
+        ? dataPicker?.length
         : showOptionsAmount);
 
     return baseTop - additionalTop;
@@ -199,7 +199,7 @@ const InputField = ({
   const getOnChangeText = (text: string) => {
     if (onChangeText) {
       if (keyboardType === 'number') {
-        if (text.match(regex) || text.length === 0) {
+        if (text.match(regex) || text?.length === 0) {
           onChangeText(text);
         }
         return;

@@ -128,7 +128,7 @@ const InputOptions = ({
                   style={[
                     styles.optionContainer,
                     getBackground(index),
-                    addRadius(index === data.length - 1),
+                    addRadius(index === data?.length - 1),
                   ]}
                   onPress={() => handleOptionSelected(item, index)}>
                   {displayKey && (

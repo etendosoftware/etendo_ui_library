@@ -11,6 +11,7 @@ import {
   NEUTRAL_0,
   NEUTRAL_10,
   NEUTRAL_5,
+  NEUTRAL_500,
   NEUTRAL_60,
   PRIMARY_100,
   QUATERNARY_50,
@@ -275,7 +276,7 @@ export const styles = StyleSheet.create({
     backgroundColor: NEUTRAL_0,
     borderRadius: 5,
     borderWidth: 1.5,
-    borderColor: NEUTRAL_10,
+    borderColor: NEUTRAL_500,
     zIndex: 2,
   },
   optionsItemsContainer: {
@@ -288,7 +289,7 @@ export const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    marginHorizontal: 8,
+    marginHorizontal: 16,
   },
   optionFilterImg: {
     width: 12,
