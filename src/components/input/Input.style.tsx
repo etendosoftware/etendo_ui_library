@@ -1,10 +1,10 @@
 import React from 'react';
-import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
-import {InputVariantsType, TypeInputStyleVariant} from './Input.types';
+import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
+import { InputVariantsType, TypeInputStyleVariant } from './Input.types';
 
-import {ArrowDown} from '../../assets/images/icons/ArrowDown';
-import {SearchIcon} from '../../assets/images/icons/SearchIcon';
-import {ShowPassword} from '../../assets/images/icons/ShowPassword';
+import { ArrowDown } from '../../assets/images/icons/ArrowDown';
+import { SearchIcon } from '../../assets/images/icons/SearchIcon';
+import { ShowPassword } from '../../assets/images/icons/ShowPassword';
 import {
   DESTRUCTIVE_10,
   DESTRUCTIVE_100,
@@ -30,7 +30,7 @@ export const inputVariants: InputVariantsType = {
       type: 'text',
       disabledField: false,
       disabledSubmit: true,
-      image: <ArrowDown style={{height: 10, width: 10}} />,
+      image: <ArrowDown style={{ height: 10, width: 10 }} />,
     },
   },
   textInput: {
@@ -52,7 +52,7 @@ export const inputVariants: InputVariantsType = {
       type: 'textInput',
       disabledField: true,
       disabledSubmit: false,
-      image: <SearchIcon style={{height: 15, width: 15}} />,
+      image: <SearchIcon style={{ height: 15, width: 15 }} />,
     },
   },
   pressableSearch: {
@@ -60,13 +60,13 @@ export const inputVariants: InputVariantsType = {
       type: 'text',
       disabledField: false,
       disabledSubmit: false,
-      image: <SearchIcon style={{height: 15, width: 15}} />,
+      image: <SearchIcon style={{ height: 15, width: 15 }} />,
     },
   },
   textInputPassword: {
     field: {
       type: 'textInput',
-      image: <ShowPassword style={{height: 15, width: 15}} />,
+      image: <ShowPassword style={{ height: 15, width: 15 }} />,
       disabledField: true,
       disabledSubmit: false,
     },
@@ -151,26 +151,26 @@ export const inputStyleVariants: TypeInputStyleVariant = {
           borderColor: DESTRUCTIVE_10,
         },
       ],
-      field: [defaultField, {borderColor: DESTRUCTIVE_100}],
+      field: [defaultField, { borderColor: DESTRUCTIVE_100 }],
       textDefault: defaultText,
       textPlaceholder: defaultTextPlaceholder,
     },
-    helperStyle: [defaultHelperText, {color: DESTRUCTIVE_100}],
+    helperStyle: [defaultHelperText, { color: DESTRUCTIVE_100 }],
   },
   disabled: {
-    titleStyle: [defaultTitle, {color: QUATERNARY_50}],
+    titleStyle: [defaultTitle, { color: QUATERNARY_50 }],
     fieldStyle: {
       focus: defaultFocus,
-      field: [defaultField, {borderColor: QUATERNARY_50}],
-      textDefault: [defaultText, {color: QUATERNARY_50}],
-      textPlaceholder: [defaultTextPlaceholder, {color: QUATERNARY_50}],
+      field: [defaultField, { borderColor: QUATERNARY_50 }],
+      textDefault: [defaultText, { color: QUATERNARY_50 }],
+      textPlaceholder: [defaultTextPlaceholder, { color: QUATERNARY_50 }],
     },
-    helperStyle: [defaultHelperText, {color: QUATERNARY_50}],
+    helperStyle: [defaultHelperText, { color: QUATERNARY_50 }],
   },
   readOnly: {
     titleStyle: defaultTitle,
     fieldStyle: {
-      field: [defaultField, {backgroundColor: NEUTRAL_5}],
+      field: [defaultField, { backgroundColor: NEUTRAL_5 }],
       focus: defaultFocus,
       textDefault: defaultText,
       textPlaceholder: defaultTextPlaceholder,
@@ -294,7 +294,7 @@ export const styles = StyleSheet.create({
     width: 12,
     height: 12,
   },
-  searchContainer: {marginHorizontal: 8},
-  offSet: {height: 48},
-  offSetUp: {height: 20},
+  searchContainer: { marginHorizontal: 8 },
+  offSet: { height: 48 },
+  offSetUp: { height: 20 },
 });

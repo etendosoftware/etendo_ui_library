@@ -39,7 +39,7 @@ export type InputFieldConfigType = {
 
 export type InputVariantsType = Record<
   InputFieldVariants,
-  {field: InputFieldConfigType}
+  { field: InputFieldConfigType }
 >;
 
 export type TypeInputStyleVariant = Record<
