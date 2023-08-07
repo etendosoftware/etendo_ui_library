@@ -8,7 +8,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { styles } from '../Input.style';
 import { InputOptionsProps } from '../Input.types';
 import { SearchIcon } from '../../../assets/images/icons/SearchIcon';
