@@ -115,7 +115,9 @@ const InputField = ({
     const baseTop =
       pageY -
       height -
-      (isScroll ? styles.optionFilterContainer.height : 0) +
+      (isScroll
+        ? styles.optionFilterContainer.height + styles.optionContainer.marginTop
+        : 0) +
       styles.offSetUp.height;
     const additionalTop =
       styles.optionContainer.height *
