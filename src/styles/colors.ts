@@ -24,6 +24,7 @@ export const NEUTRAL_0 = '#FFFFFF';
 export const NEUTRAL_5 = '#F2F2F2';
 export const NEUTRAL_10 = '#E5E5E5';
 export const NEUTRAL_40 = '#999999';
+export const NEUTRAL_50 = '#FAFAFA';
 export const NEUTRAL_60 = '#808080';
 export const NEUTRAL_100 = '#000000';
 export const NEUTRAL_400 = '#BDBDBD';

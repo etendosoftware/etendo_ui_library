@@ -2,10 +2,10 @@ import { StyleSheet } from 'react-native';
 import {
   NEUTRAL_0,
   NEUTRAL_400,
+  NEUTRAL_50,
   OVERLAY,
   PRIMARY_100,
   PRIMARY_400,
-  PRIMARY_60,
   PRIMARY_80,
   QUATERNARY_10,
 } from '../../../../styles/colors';
@@ -121,6 +121,6 @@ export const styles = StyleSheet.create({
     borderLeftWidth: 1,
     borderColor: PRIMARY_400,
   },
-  copyright: { color: NEUTRAL_400 },
-  version: { color: NEUTRAL_400 },
+  copyright: { color: NEUTRAL_50 },
+  version: { color: NEUTRAL_50 },
 });

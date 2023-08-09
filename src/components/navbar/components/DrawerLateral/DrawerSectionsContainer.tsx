@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { Pressable, Text, View } from 'react-native';
+import React, {useState} from 'react';
+import {Pressable, Text, View} from 'react-native';
 import {
   DrawerCurrentIndexType,
   DrawerDataSectionType,
   DrawerSectionsContainerType,
 } from '../../Navbar.types';
-import { styles } from './DrawerLateral.styles';
+import {styles} from './DrawerLateral.styles';
 import DrawerLateralSubMenu from './DrawerLateralSubMenu';
 import {
   getCurrentSelectIndex,
@@ -65,6 +65,20 @@ const DrawerSectionsContainer = ({
                       });
                     }}
                     onHoverOut={() => {
+                      setIndexHover({
+                        indexSection: -1,
+                        indexSubSection: -1,
+                        indexSubSectionItem: -1,
+                      });
+                    }}
+                    onPressIn={() => {
+                      setIndexHover({
+                        indexSection: indexSection,
+                        indexSubSection: index,
+                        indexSubSectionItem: 0,
+                      });
+                    }}
+                    onPressOut={() => {
                       setIndexHover({
                         indexSection: -1,
                         indexSubSection: -1,
