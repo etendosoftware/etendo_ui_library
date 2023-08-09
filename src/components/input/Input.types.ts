@@ -62,6 +62,7 @@ export interface InputProps {
   value: string;
   helperText?: string;
   placeholder?: string;
+  placeholderSearch?: string;
   disabled?: boolean;
   isError?: boolean;
   maxLength?: number;
@@ -73,6 +74,7 @@ export interface InputProps {
   dataPicker?: any;
   displayKey?: string;
   showOptionsAmount?: number;
+  showSearchInPicker?: boolean;
   onPress?: (event?: GestureResponderEvent) => void;
   onSubmit?: (event?: GestureResponderEvent) => void;
   onChangeText?: (text: string) => void;
@@ -98,6 +100,7 @@ export interface InputFieldProps {
   disabled?: boolean;
   value?: string;
   placeholder?: string;
+  placeholderSearch?: string;
   configField: InputFieldConfigType;
   keyboardType?: KeyboardTypes;
   styleField: {
@@ -117,6 +120,7 @@ export interface InputFieldProps {
   backgroundColor?: ColorValue;
   onOptionSelected?: any;
   showOptionsAmount?: number;
+  showSearchInPicker?: boolean;
   onPress?: (event?: GestureResponderEvent) => void;
   onSubmit?: (event?: GestureResponderEvent) => void;
   onChangeText?: (text: string) => void;
@@ -132,7 +136,7 @@ export interface InputHelperProps {
 export interface InputOptionsProps {
   data: any;
   displayKey?: string;
-  isScroll?: boolean;
+  showSearchInPicker?: boolean;
   onOptionSelected: (item: any, index: number) => void;
   showOptions: boolean;
   showOptionsAmount?: number;
@@ -145,4 +149,5 @@ export interface InputOptionsProps {
   onClose: (event?: GestureResponderEvent) => void;
   onChangeFilterText: (text: string) => void;
   filterValue: string;
+  placeholderSearch?: string;
 }

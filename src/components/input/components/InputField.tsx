@@ -18,7 +18,7 @@ import { InputFieldProps, KeyboardTypes } from '../Input.types';
 import { ShowPassword } from '../../../assets/images/icons/ShowPassword';
 import { HidePassword } from '../../../assets/images/icons/HidePassword';
 import InputOptions from './InputOptions';
-import { NEUTRAL_0 } from '../../../styles/colors';
+import { NEUTRAL_0, NEUTRAL_600 } from '../../../styles/colors';
 
 const InputField = ({
   type,
@@ -27,12 +27,15 @@ const InputField = ({
   value,
   disabled,
   placeholder,
+  placeholderSearch,
   maxLength,
   keyboardType,
   dataPicker,
   displayKey,
+  showSearchInPicker,
   backgroundColor = NEUTRAL_0,
   showOptionsAmount = 4,
+  height = 40,
   onPress,
   onSubmit,
   onChangeText,
@@ -55,17 +58,15 @@ const InputField = ({
   const refComponente = useRef<TouchableOpacity>(null);
   const regex = /^[0-9.,]+$/g;
   const isWeb = Platform.OS === 'web';
-  const isScroll = showOptionsAmount < dataPicker?.length;
 
   const disableOutline = (): ViewStyle | undefined => {
     if (isWeb) {
       return { outline: 'none' } as ViewStyle;
     }
   };
-  const getStyleText = (text?: string): TextStyle | TextStyle[] => {
+  const getStyleText = (): TextStyle | TextStyle[] => {
     let style: Array<TextStyle | TextStyle[]> = [];
-
-    if (text) {
+    if (value?.length) {
       style.push(styleField.textDefault);
     } else {
       style.push(styleField.textPlaceholder);
@@ -86,48 +87,6 @@ const InputField = ({
     }
   });
 
-  const calculateDropdownHeight = (
-    pageY: number,
-    height: number,
-    showOptionsAmount: number,
-    dataPicker: any[],
-  ) => {
-    const baseHeight =
-      pageY +
-      height +
-      (isScroll ? styles.optionFilterContainer.height : 0) +
-      styles.offSet.height;
-    const additionalHeight =
-      styles.optionContainer.height *
-      (showOptionsAmount > dataPicker?.length
-        ? dataPicker?.length
-        : showOptionsAmount);
-
-    return baseHeight + additionalHeight;
-  };
-
-  const calculateTopPosition = (
-    pageY: number,
-    height: number,
-    showOptionsAmount: number,
-    dataPicker: any[],
-  ) => {
-    const baseTop =
-      pageY -
-      height -
-      (isScroll
-        ? styles.optionFilterContainer.height + styles.optionContainer.marginTop
-        : 0) +
-      styles.offSetUp.height;
-    const additionalTop =
-      styles.optionContainer.height *
-      (showOptionsAmount > dataPicker?.length
-        ? dataPicker?.length
-        : showOptionsAmount);
-
-    return baseTop - additionalTop;
-  };
-
   const getTopLeft = () => {
     if (refComponente.current) {
       refComponente.current.measure(
@@ -139,23 +98,34 @@ const InputField = ({
           pageX: number,
           pageY: number,
         ) => {
-          const dropdownHeight = calculateDropdownHeight(
-            pageY,
-            height,
-            showOptionsAmount,
-            dataPicker,
-          );
+          const calcDropdownTopLeft =
+            pageY + height + styles.spaceInOptionsAndInput.height;
+
+          const showFilterHeight = showSearchInPicker
+            ? styles.optionFilterContainer.height
+            : 0;
+
+          const countOptions =
+            showOptionsAmount > dataPicker?.length
+              ? dataPicker?.length
+              : showOptionsAmount;
+
+          const optionsHeight =
+            (styles.optionContainer.height + styles.optionContainer.marginTop) *
+              countOptions +
+            showFilterHeight +
+            styles.optionContainer.marginTop +
+            styles.optionsContainer.borderWidth * 2;
 
           let topPosition;
-          if (dropdownHeight > windowHeight) {
-            topPosition = calculateTopPosition(
-              pageY,
-              height,
-              showOptionsAmount,
-              dataPicker,
-            );
+          if (
+            optionsHeight + calcDropdownTopLeft + styles.offSet.height >
+            windowHeight
+          ) {
+            topPosition =
+              pageY - styles.spaceInOptionsAndInput.height - optionsHeight;
           } else {
-            topPosition = pageY + height;
+            topPosition = calcDropdownTopLeft;
           }
 
           setpositionModal({
@@ -275,11 +245,23 @@ const InputField = ({
     }
   };
 
+  const getText = (): string | undefined => {
+    if (value) {
+      return value;
+    }
+    return placeholder;
+  };
+
   return (
     <View style={[styleField.focus, getFocusStyle()]}>
       <TouchableOpacity
         ref={refComponente}
-        style={[styleField.field, removePaddingField(), { backgroundColor }]}
+        style={[
+          styleField.field,
+          removePaddingField(),
+          { backgroundColor },
+          { height },
+        ]}
         disabled={disabled ?? configField.disabledField}
         onPress={handleOnPress}>
         {configField?.type === 'textInput' && (
@@ -291,12 +273,9 @@ const InputField = ({
             value={value}
             keyboardType={getKeyboardType(keyboardType)}
             onChangeText={getOnChangeText}
-            style={[
-              getStyleText(value),
-              disableOutline(),
-              configField.placeholderStyle,
-            ]}
+            style={[getStyleText(), disableOutline(), styleField.textDefault]}
             placeholder={placeholder}
+            placeholderTextColor={NEUTRAL_600}
             maxLength={maxLength}
             secureTextEntry={type === 'textInputPassword' && showPassword}
           />
@@ -305,8 +284,8 @@ const InputField = ({
           <Text
             numberOfLines={1}
             ellipsizeMode="tail"
-            style={[getStyleText(value), disableOutline()]}>
-            {value ?? placeholder}
+            style={[getStyleText(), disableOutline()]}>
+            {getText()}
           </Text>
         )}
         {configField?.image && (
@@ -327,7 +306,8 @@ const InputField = ({
           onChangeFilterText={handleOnChangeFilterText}
           filterValue={filterValue}
           displayKey={displayKey}
-          isScroll={isScroll}
+          showSearchInPicker={showSearchInPicker}
+          placeholderSearch={placeholderSearch}
         />
       </TouchableOpacity>
     </View>
