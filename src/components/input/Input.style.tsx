@@ -308,6 +308,9 @@ export const styles = StyleSheet.create({
   cancelContainer: {
     marginRight: 4,
   },
+  scrollOptions: {
+    marginVertical: 8,
+  },
   searchContainer: { marginHorizontal: 8 },
   spaceInOptionsAndInput: { height: 5 },
   offSet: { height: 26 },

@@ -31,6 +31,8 @@ const InputOptions = ({
   const calculatedMaxHeight = 8 + 48 * showOptionsAmount;
 
   const [showSearchImg, setShowSearchImg] = useState<boolean>(true);
+  const [showScroll, setShowScroll] = useState<boolean>(true);
+
   const [placeholderText, setPlaceholderText] = useState<string>(
     placeholderSearch ?? '',
   );
@@ -91,6 +93,11 @@ const InputOptions = ({
     onChangeFilterText('');
   };
 
+  const onContentSizeChange = (contentWidth: number, contentHeight: number) => {
+    const containerHeight = calculatedMaxHeight;
+    setShowScroll(contentHeight > containerHeight);
+  };
+
   return (
     <>
       <Modal transparent={true} visible={showOptions} animationType="fade">
@@ -117,7 +124,10 @@ const InputOptions = ({
               ]}>
               {filterValue === '' && showSearchImg && (
                 <View style={styles.searchContainer}>
-                  <SearchIcon style={styles.optionFilterImg} />
+                  <SearchIcon
+                    style={styles.optionFilterImg}
+                    fill={NEUTRAL_600}
+                  />
                 </View>
               )}
               <TextInput
@@ -143,8 +153,13 @@ const InputOptions = ({
             </Pressable>
           )}
           <ScrollView
-            style={{ maxHeight: calculatedMaxHeight }}
-            showsVerticalScrollIndicator={false}>
+            style={[
+              showScroll && { marginRight: 8 },
+              { maxHeight: calculatedMaxHeight },
+              styles.scrollOptions,
+            ]}
+            showsVerticalScrollIndicator
+            onContentSizeChange={onContentSizeChange}>
             {data?.map((item: any, index: number) => {
               return (
                 <Pressable
@@ -163,7 +178,7 @@ const InputOptions = ({
                   key={index}
                   style={[
                     styles.optionContainer,
-                    data.length - 1 === index && { marginBottom: 8 },
+                    0 === index && { marginTop: 0 },
                     getBackground(index),
                     addRadius(index === data?.length - 1),
                   ]}
