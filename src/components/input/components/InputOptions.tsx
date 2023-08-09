@@ -8,11 +8,12 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { styles } from '../Input.style';
 import { InputOptionsProps } from '../Input.types';
 import { SearchIcon } from '../../../assets/images/icons/SearchIcon';
-import { NEUTRAL_40, QUATERNARY_10 } from '../../../styles/colors';
+import { NEUTRAL_600, QUATERNARY_10 } from '../../../styles/colors';
+import { CancelIcon } from '../../../assets/images/icons/CancelIcon';
 
 const InputOptions = ({
   data,
@@ -24,13 +25,17 @@ const InputOptions = ({
   filterValue,
   onChangeFilterText,
   displayKey,
-  isScroll,
+  showSearchInPicker,
+  placeholderSearch,
 }: InputOptionsProps) => {
   const calculatedMaxHeight = 8 + 48 * showOptionsAmount;
 
   const [showSearchImg, setShowSearchImg] = useState<boolean>(true);
-  const [placeholderText, setPlaceholderText] = useState<string>('Search');
+  const [placeholderText, setPlaceholderText] = useState<string>(
+    placeholderSearch ?? '',
+  );
   const [indexHover, setIndexHover] = useState<number>(-1);
+  const textInputRef = useRef<TextInput>(null);
 
   const handleOptionSelected = (item: any, index: number) => {
     if (onOptionSelected) {
@@ -41,17 +46,22 @@ const InputOptions = ({
 
   const handleOnBlur = () => {
     setShowSearchImg(true);
-    setPlaceholderText('Search');
+    if (placeholderSearch) {
+      setPlaceholderText(placeholderSearch);
+    }
   };
 
   const handleOnFocus = () => {
     setShowSearchImg(false);
+    textInputRef?.current?.focus();
     setPlaceholderText('');
   };
 
   const handlePressOverlay = () => {
     onClose();
-    setPlaceholderText('Search');
+    if (placeholderSearch) {
+      setPlaceholderText(placeholderSearch);
+    }
     setShowSearchImg(true);
   };
 
@@ -71,6 +81,15 @@ const InputOptions = ({
       return { paddingHorizontal: 0 };
     }
   };
+  const addPadding = (add: boolean): ViewStyle | undefined => {
+    if (!add) {
+      return { paddingHorizontal: 8 };
+    }
+  };
+
+  const handleCancelFilter = () => {
+    onChangeFilterText('');
+  };
 
   return (
     <>
@@ -80,37 +99,48 @@ const InputOptions = ({
           onPress={handlePressOverlay}
           activeOpacity={1}
         />
-
         <View
           style={[
             styles.optionsContainer,
             {
               width: positionModal.width,
-              top: positionModal.top + 5,
+              top: positionModal.top,
               left: positionModal.left,
             },
           ]}>
-          {isScroll && (
-            <View
+          {showSearchInPicker && (
+            <Pressable
+              onPress={handleOnFocus}
               style={[
                 styles.optionFilterContainer,
                 removePadding(!filterValue && showSearchImg),
               ]}>
-              {!filterValue && showSearchImg && (
+              {filterValue === '' && showSearchImg && (
                 <View style={styles.searchContainer}>
                   <SearchIcon style={styles.optionFilterImg} />
                 </View>
               )}
               <TextInput
+                ref={textInputRef}
                 onFocus={handleOnFocus}
                 onBlur={handleOnBlur}
-                style={styles.optionFilterText}
+                style={[
+                  styles.optionFilterText,
+                  addPadding(!filterValue && showSearchImg),
+                ]}
                 value={filterValue}
                 onChangeText={onChangeFilterText}
                 placeholder={placeholderText}
-                placeholderTextColor={NEUTRAL_40}
+                placeholderTextColor={NEUTRAL_600}
               />
-            </View>
+              {filterValue !== '' && (
+                <TouchableOpacity
+                  style={styles.cancelContainer}
+                  onPress={handleCancelFilter}>
+                  <CancelIcon style={styles.cancelFilterImg} />
+                </TouchableOpacity>
+              )}
+            </Pressable>
           )}
           <ScrollView
             style={{ maxHeight: calculatedMaxHeight }}
@@ -124,9 +154,16 @@ const InputOptions = ({
                   onHoverOut={() => {
                     setIndexHover(-1);
                   }}
+                  onPressIn={() => {
+                    setIndexHover(index);
+                  }}
+                  onPressOut={() => {
+                    setIndexHover(-1);
+                  }}
                   key={index}
                   style={[
                     styles.optionContainer,
+                    data.length - 1 === index && { marginBottom: 8 },
                     getBackground(index),
                     addRadius(index === data?.length - 1),
                   ]}

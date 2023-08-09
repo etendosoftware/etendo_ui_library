@@ -10,6 +10,7 @@ const Input = ({
   titleImage,
   helperText,
   placeholder,
+  placeholderSearch,
   disabled,
   maxLength,
   centerText,
@@ -18,6 +19,8 @@ const Input = ({
   dataPicker,
   backgroundColor,
   showOptionsAmount,
+  showSearchInPicker,
+  height,
   onPress,
   onSubmit,
   onFocus = () => {},
@@ -39,6 +42,8 @@ const Input = ({
     }
   };
 
+  const showFilterSearch = showSearchInPicker ?? dataPicker?.length > 16;
+
   return (
     <View style={styles.inputContainer}>
       <InputTitle
@@ -53,6 +58,7 @@ const Input = ({
         configField={inputVariants[typeField].field}
         styleField={stateStyle().fieldStyle}
         placeholder={placeholder}
+        placeholderSearch={placeholderSearch}
         value={value}
         onPress={onPress}
         onSubmit={onSubmit}
@@ -61,12 +67,14 @@ const Input = ({
         onChangeText={onChangeText}
         onOptionSelected={onOptionSelected}
         showOptionsAmount={showOptionsAmount}
+        showSearchInPicker={showFilterSearch}
         keyboardType={keyboardType}
         maxLength={maxLength}
         centerText={centerText}
         dataPicker={dataPicker}
         displayKey={displayKey}
         backgroundColor={backgroundColor}
+        height={height}
       />
       <InputHelperText
         label={helperText}

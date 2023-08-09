@@ -13,9 +13,9 @@ import {
   NEUTRAL_5,
   NEUTRAL_500,
   NEUTRAL_60,
+  NEUTRAL_600,
   PRIMARY_100,
   QUATERNARY_50,
-  TERTIARY_100,
 } from '../../styles/colors';
 
 export const inputVariants: InputVariantsType = {
@@ -76,7 +76,8 @@ export const inputVariants: InputVariantsType = {
 
 const defaultTitle: TextStyle = {
   color: PRIMARY_100,
-  fontSize: 16,
+  fontSize: 18,
+  fontWeight: '600',
 };
 
 const defaultField: ViewStyle = {
@@ -99,7 +100,7 @@ const defaultFocus: ViewStyle = {
 
 const defaultText: TextStyle = {
   color: PRIMARY_100,
-  fontSize: 14,
+  fontSize: 18,
   fontWeight: '500',
   flex: 1,
   alignItems: 'center',
@@ -110,8 +111,8 @@ const defaultText: TextStyle = {
   textAlignVertical: 'center',
 };
 const defaultTextPlaceholder: TextStyle = {
-  color: TERTIARY_100,
-  fontSize: 14,
+  color: NEUTRAL_600,
+  fontSize: 18,
   fontWeight: '500',
   flex: 1,
   alignItems: 'center',
@@ -124,7 +125,8 @@ const defaultTextPlaceholder: TextStyle = {
 
 const defaultHelperText: TextStyle = {
   color: NEUTRAL_60,
-  fontSize: 14,
+  fontSize: 16,
+  fontWeight: '500',
 };
 
 export const inputStyleVariants: TypeInputStyleVariant = {
@@ -249,7 +251,8 @@ export const styles = StyleSheet.create({
     width: 300,
   },
   optionContainer: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 8,
+    marginHorizontal: 8,
     flexDirection: 'row',
     alignItems: 'center',
     height: 40,
@@ -257,14 +260,17 @@ export const styles = StyleSheet.create({
   },
   optionText: {
     color: PRIMARY_100,
-    fontSize: 12,
+    fontSize: 18,
   },
   optionFilterText: {
     color: PRIMARY_100,
-    fontSize: 12,
+    fontSize: 18,
     height: 40,
     padding: 0,
-    width: '100%',
+    flex: 1,
+    fontWeight: '500',
+    alignItems: 'center',
+    display: 'flex',
   },
   optionOverlay: {
     flex: 1,
@@ -283,19 +289,26 @@ export const styles = StyleSheet.create({
     maxHeight: 392,
   },
   optionFilterContainer: {
-    height: 40,
+    height: 50,
     borderBottomWidth: 1,
     borderBottomColor: NEUTRAL_10,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    marginHorizontal: 16,
+    marginHorizontal: 13,
   },
   optionFilterImg: {
+    width: 15,
+    height: 15,
+  },
+  cancelFilterImg: {
     width: 12,
     height: 12,
   },
+  cancelContainer: {
+    marginRight: 4,
+  },
   searchContainer: { marginHorizontal: 8 },
-  offSet: { height: 48 },
-  offSetUp: { height: 20 },
+  spaceInOptionsAndInput: { height: 5 },
+  offSet: { height: 26 },
 });
