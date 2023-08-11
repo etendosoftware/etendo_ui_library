@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { styles } from '../Input.style';
 import { InputTitleProps } from '../Input.types';
-import { PRIMARY_100, TERTIARY_50 } from '../../../styles/colors';
+import { NEUTRAL_400, PRIMARY_100, TERTIARY_50 } from '../../../styles/colors';
 
 const InputTitle = ({
   titleLabel,
@@ -14,7 +14,7 @@ const InputTitle = ({
     if (image) {
       return React.cloneElement(image, {
         style: styles.rowInputTitleImg,
-        fill: disabled ? TERTIARY_50 : PRIMARY_100,
+        fill: disabled ? NEUTRAL_400 : PRIMARY_100,
       });
     }
   };
