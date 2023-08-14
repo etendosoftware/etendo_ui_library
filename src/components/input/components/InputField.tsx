@@ -1,4 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+  ReactComponentElement,
+  ReactElement,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import {
   TextInput,
   TextStyle,
@@ -210,18 +216,12 @@ const InputField = ({
 
   const getImage = (image: React.ReactElement): React.ReactElement => {
     const fillValue = disabled ? NEUTRAL_400 : undefined;
+
     if (type === 'textInputPassword') {
-      if (showPassword) {
-        return (
-          <View style={styles.hideContainer}>
-            <HidePassword style={styles.inputImageSize} fill={fillValue} />
-          </View>
-        );
-      }
+      const PasswordComponent = showPassword ? HidePassword : ShowPassword;
+
       return (
-        <View style={styles.showContainer}>
-          <ShowPassword style={styles.inputImageSize} fill={fillValue} />
-        </View>
+        <PasswordComponent style={styles.inputImageSize} fill={fillValue} />
       );
     }
     return React.cloneElement(image, { fill: fillValue });
