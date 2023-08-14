@@ -18,7 +18,7 @@ import { InputFieldProps, KeyboardTypes } from '../Input.types';
 import { ShowPassword } from '../../../assets/images/icons/ShowPassword';
 import { HidePassword } from '../../../assets/images/icons/HidePassword';
 import InputOptions from './InputOptions';
-import { NEUTRAL_0, NEUTRAL_600 } from '../../../styles/colors';
+import { NEUTRAL_0, NEUTRAL_400, NEUTRAL_600 } from '../../../styles/colors';
 
 const InputField = ({
   type,
@@ -66,7 +66,7 @@ const InputField = ({
   };
   const getStyleText = (): TextStyle | TextStyle[] => {
     let style: Array<TextStyle | TextStyle[]> = [];
-    if (value?.length) {
+    if (value) {
       style.push(styleField.textDefault);
     } else {
       style.push(styleField.textPlaceholder);
@@ -209,21 +209,16 @@ const InputField = ({
   };
 
   const getImage = (image: React.ReactElement): React.ReactElement => {
+    const fillValue = disabled ? NEUTRAL_400 : undefined;
+
     if (type === 'textInputPassword') {
-      if (showPassword) {
-        return (
-          <View style={styles.hideContainer}>
-            <HidePassword style={styles.inputImageSize} />
-          </View>
-        );
-      }
+      const PasswordComponent = showPassword ? HidePassword : ShowPassword;
+
       return (
-        <View style={styles.showContainer}>
-          <ShowPassword style={styles.inputImageSize} />
-        </View>
+        <PasswordComponent style={styles.inputImageSize} fill={fillValue} />
       );
     }
-    return image;
+    return React.cloneElement(image, { fill: fillValue });
   };
 
   const handlePressImage = () => {
@@ -262,7 +257,7 @@ const InputField = ({
           { backgroundColor },
           { height },
         ]}
-        disabled={disabled ?? configField.disabledField}
+        disabled={disabled || configField.disabledField}
         onPress={handleOnPress}>
         {configField?.type === 'textInput' && (
           <TextInput
@@ -284,7 +279,7 @@ const InputField = ({
           <Text
             numberOfLines={1}
             ellipsizeMode="tail"
-            style={[getStyleText(), disableOutline()]}>
+            style={[getStyleText(), disableOutline(), styleField.textDefault]}>
             {getText()}
           </Text>
         )}
@@ -292,7 +287,7 @@ const InputField = ({
           <TouchableOpacity
             onPress={handlePressImage}
             style={styles.buttonContainerInputField}
-            disabled={configField?.disabledSubmit ?? disabled}>
+            disabled={disabled || configField.disabledSubmit}>
             {getImage(configField.image)}
           </TouchableOpacity>
         )}

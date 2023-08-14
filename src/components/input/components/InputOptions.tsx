@@ -158,7 +158,9 @@ const InputOptions = ({
               { maxHeight: calculatedMaxHeight },
               styles.scrollOptions,
             ]}
+            persistentScrollbar
             showsVerticalScrollIndicator
+            indicatorStyle={'black'}
             onContentSizeChange={onContentSizeChange}>
             {data?.map((item: any, index: number) => {
               return (
@@ -184,7 +186,12 @@ const InputOptions = ({
                   ]}
                   onPress={() => handleOptionSelected(item, index)}>
                   {displayKey && (
-                    <Text style={styles.optionText}>{item[displayKey]}</Text>
+                    <Text
+                      numberOfLines={1}
+                      ellipsizeMode="tail"
+                      style={styles.optionText}>
+                      {item[displayKey]}
+                    </Text>
                   )}
                 </Pressable>
               );

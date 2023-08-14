@@ -11,7 +11,7 @@ const Input = ({
   helperText,
   placeholder,
   placeholderSearch,
-  disabled,
+  disabled = false,
   maxLength,
   centerText,
   keyboardType,
@@ -33,7 +33,7 @@ const Input = ({
   const stateStyle = () => {
     if (typeField === 'readOnly') {
       return inputStyleVariants.readOnly;
-    } else if (disabled) {
+    } else if (getDisabled()) {
       return inputStyleVariants.disabled;
     } else if (isError) {
       return inputStyleVariants.destructive;
@@ -42,18 +42,28 @@ const Input = ({
     }
   };
 
+  const getDisabled = (): boolean => {
+    if (typeField === 'picker') {
+      return !dataPicker.length || disabled;
+    }
+    if (typeField === 'readOnly') {
+      return false;
+    }
+    return disabled;
+  };
+
   const showFilterSearch = showSearchInPicker ?? dataPicker?.length > 16;
 
   return (
     <View style={styles.inputContainer}>
       <InputTitle
-        disabled={disabled}
+        disabled={getDisabled()}
         titleLabel={titleLabel}
         titleImage={titleImage}
         styleTitle={stateStyle().titleStyle}
       />
       <InputField
-        disabled={disabled}
+        disabled={getDisabled()}
         type={typeField}
         configField={inputVariants[typeField].field}
         styleField={stateStyle().fieldStyle}

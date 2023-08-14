@@ -10,6 +10,7 @@ import {
   DESTRUCTIVE_100,
   NEUTRAL_0,
   NEUTRAL_10,
+  NEUTRAL_400,
   NEUTRAL_5,
   NEUTRAL_500,
   NEUTRAL_60,
@@ -38,7 +39,7 @@ export const inputVariants: InputVariantsType = {
     field: {
       type: 'textInput',
       disabledField: true,
-      disabledSubmit: false,
+      disabledSubmit: true,
     },
   },
   pressableText: {
@@ -52,7 +53,7 @@ export const inputVariants: InputVariantsType = {
     field: {
       type: 'textInput',
       disabledField: true,
-      disabledSubmit: false,
+      disabledSubmit: true,
       image: <SearchIcon style={{ height: 15, width: 15 }} />,
     },
   },
@@ -60,7 +61,7 @@ export const inputVariants: InputVariantsType = {
     field: {
       type: 'text',
       disabledField: false,
-      disabledSubmit: false,
+      disabledSubmit: true,
       image: <SearchIcon style={{ height: 15, width: 15 }} />,
     },
   },
@@ -106,6 +107,7 @@ const defaultText: TextStyle = {
   alignItems: 'center',
   paddingLeft: 15,
   minWidth: 0,
+  height: 50,
   display: 'flex',
   textAlignVertical: 'center',
 };
@@ -117,6 +119,7 @@ const defaultTextPlaceholder: TextStyle = {
   alignItems: 'center',
   paddingLeft: 15,
   minWidth: 0,
+  height: 50,
   display: 'flex',
   textAlignVertical: 'center',
 };
@@ -159,14 +162,14 @@ export const inputStyleVariants: TypeInputStyleVariant = {
     helperStyle: [defaultHelperText, { color: DESTRUCTIVE_100 }],
   },
   disabled: {
-    titleStyle: [defaultTitle, { color: QUATERNARY_50 }],
+    titleStyle: [defaultTitle, { color: NEUTRAL_400 }],
     fieldStyle: {
       focus: defaultFocus,
-      field: [defaultField, { borderColor: QUATERNARY_50 }],
-      textDefault: [defaultText, { color: QUATERNARY_50 }],
-      textPlaceholder: [defaultTextPlaceholder, { color: QUATERNARY_50 }],
+      field: [defaultField, { borderColor: NEUTRAL_400 }],
+      textDefault: [defaultText, { color: NEUTRAL_400 }],
+      textPlaceholder: [defaultTextPlaceholder, { color: NEUTRAL_400 }],
     },
-    helperStyle: [defaultHelperText, { color: QUATERNARY_50 }],
+    helperStyle: [defaultHelperText, { color: NEUTRAL_400 }],
   },
   readOnly: {
     titleStyle: defaultTitle,
