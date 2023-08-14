@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { styles } from '../Input.style';
 import { InputTitleProps } from '../Input.types';
-import { NEUTRAL_400, PRIMARY_100, TERTIARY_50 } from '../../../styles/colors';
+import { NEUTRAL_400, PRIMARY_100 } from '../../../styles/colors';
 
 const InputTitle = ({
   titleLabel,

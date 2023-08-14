@@ -107,6 +107,7 @@ const defaultText: TextStyle = {
   alignItems: 'center',
   paddingLeft: 15,
   minWidth: 0,
+  height: 50,
   display: 'flex',
   textAlignVertical: 'center',
 };
@@ -118,6 +119,7 @@ const defaultTextPlaceholder: TextStyle = {
   alignItems: 'center',
   paddingLeft: 15,
   minWidth: 0,
+  height: 50,
   display: 'flex',
   textAlignVertical: 'center',
 };
