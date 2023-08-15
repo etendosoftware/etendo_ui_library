@@ -8,7 +8,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { styles } from '../Input.style';
 import { InputOptionsProps } from '../Input.types';
 import { SearchIcon } from '../../../assets/images/icons/SearchIcon';
@@ -97,6 +97,12 @@ const InputOptions = ({
     const containerHeight = calculatedMaxHeight;
     setShowScroll(contentHeight > containerHeight);
   };
+
+  useEffect(() => {
+    if (placeholderSearch) {
+      setPlaceholderText(placeholderSearch);
+    }
+  }, [placeholderSearch]);
 
   return (
     <>
