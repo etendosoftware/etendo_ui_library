@@ -107,7 +107,6 @@ const defaultText: TextStyle = {
   alignItems: 'center',
   paddingLeft: 15,
   minWidth: 0,
-  height: 50,
   display: 'flex',
   textAlignVertical: 'center',
 };
@@ -119,7 +118,6 @@ const defaultTextPlaceholder: TextStyle = {
   alignItems: 'center',
   paddingLeft: 15,
   minWidth: 0,
-  height: 50,
   display: 'flex',
   textAlignVertical: 'center',
 };
@@ -262,6 +260,8 @@ export const styles = StyleSheet.create({
   optionText: {
     color: PRIMARY_100,
     fontSize: 18,
+    flex: 1,
+    display: 'flex',
   },
   optionFilterText: {
     color: PRIMARY_100,
