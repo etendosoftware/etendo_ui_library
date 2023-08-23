@@ -1,8 +1,10 @@
-import {NEUTRAL_0, TERTIARY_30} from '../styles/colors';
-import {Dimensions, PixelRatio} from 'react-native';
+import { NEUTRAL_0, TERTIARY_30 } from '../styles/colors';
+import { Dimensions, PixelRatio, Platform, ViewStyle } from 'react-native';
 // getting screen width and height
 const width = Dimensions.get('screen').width;
 const height = Dimensions.get('screen').height;
+
+const isWeb = Platform.OS === 'web';
 
 export const removeHeaderBorder = (header?: string) => {
   return (
@@ -15,8 +17,8 @@ export const removeHeaderBorder = (header?: string) => {
 };
 export const paintOddRows = (index: number) => {
   return index % 2 !== 0
-    ? {backgroundColor: TERTIARY_30}
-    : {backgroundColor: NEUTRAL_0};
+    ? { backgroundColor: TERTIARY_30 }
+    : { backgroundColor: NEUTRAL_0 };
 };
 
 // function that allows to know if the screen of the device is a cell phone or a tablet
@@ -36,3 +38,9 @@ export const isTablet = () => {
 };
 
 export const isDeviceTablet = isTablet();
+
+export const disableOutline = (): ViewStyle | undefined => {
+  if (isWeb) {
+    return { outline: 'none' } as ViewStyle;
+  }
+};

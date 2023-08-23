@@ -14,6 +14,7 @@ import { InputOptionsProps } from '../Input.types';
 import { SearchIcon } from '../../../assets/images/icons/SearchIcon';
 import { NEUTRAL_600, QUATERNARY_10 } from '../../../styles/colors';
 import { CancelIcon } from '../../../assets/images/icons/CancelIcon';
+import { disableOutline } from '../../../helpers/table_utils';
 
 const InputOptions = ({
   data,
@@ -143,6 +144,7 @@ const InputOptions = ({
                 style={[
                   styles.optionFilterText,
                   addPadding(!filterValue && showSearchImg),
+                  disableOutline(),
                 ]}
                 value={filterValue}
                 onChangeText={onChangeFilterText}
