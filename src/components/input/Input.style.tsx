@@ -272,6 +272,7 @@ export const styles = StyleSheet.create({
     fontWeight: '500',
     alignItems: 'center',
     display: 'flex',
+    width: '100%',
   },
   optionOverlay: {
     flex: 1,
