@@ -32,44 +32,48 @@ const Navbar = ({
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  let componentWidths = new Array(rightComponent?.length).fill(0);
+  let componentWidths: number[] = [];
+  for (let i = 0; i < (rightComponent?.length || 0); i++) {
+    componentWidths[i] = 0;
+  }
 
   const calculateRenderedComponents = (index: number, newWidth: number) => {
     componentWidths[index] = newWidth;
     if (rightComponent) {
       if (index === rightComponent?.length - 1) {
-        let totalWidth = componentWidths.reduce(
-          (total, width) => total + width,
-          0,
-        );
-
-        while (
-          totalWidth + widthLeft + profileWidth - marginIncomponents >
-          width
-        ) {
-          const lastComponentIndex = componentWidths.length - 1;
-
-          if (renderedComponents?.[lastComponentIndex]?.inOptions) {
-            setRemovedComponents(prevRemovedComponent => {
-              const updatedRemovedComponent = [
-                renderedComponents[lastComponentIndex].inOptions,
-                ...(prevRemovedComponent ?? []),
-              ];
-              return updatedRemovedComponent as OptionProfileItem[];
-            });
-          }
-
-          totalWidth -= componentWidths[lastComponentIndex];
-          componentWidths.splice(lastComponentIndex, 1);
-        }
-
-        setRenderedComponents(prev => {
-          const slicedComponents = prev?.slice(0, componentWidths.length);
-          return slicedComponents?.reverse();
-        });
-        setIsLoading(false);
+        removeAditionalComponents();
       }
     }
+  };
+
+  const removeAditionalComponents = () => {
+    let totalWidth = 0;
+    for (const element of componentWidths) {
+      totalWidth += element;
+    }
+
+    while (totalWidth + widthLeft + profileWidth - marginIncomponents > width) {
+      const lastComponentIndex = componentWidths.length - 1;
+
+      if (renderedComponents?.[lastComponentIndex]?.inOptions) {
+        setRemovedComponents(prevRemovedComponent => {
+          const updatedRemovedComponent = [
+            renderedComponents[lastComponentIndex].inOptions,
+            ...(prevRemovedComponent ?? []),
+          ];
+          return updatedRemovedComponent as OptionProfileItem[];
+        });
+      }
+
+      totalWidth -= componentWidths[lastComponentIndex];
+      componentWidths.splice(lastComponentIndex, 1);
+    }
+
+    setRenderedComponents(prev => {
+      const slicedComponents = prev?.slice(0, componentWidths.length);
+      return slicedComponents?.reverse();
+    });
+    setIsLoading(false);
   };
 
   return (
@@ -90,8 +94,10 @@ const Navbar = ({
             <View
               key={index}
               onLayout={event => {
-                const { width } = event.nativeEvent.layout;
-                calculateRenderedComponents(index, width + marginIncomponents);
+                calculateRenderedComponents(
+                  index,
+                  event.nativeEvent.layout.width + marginIncomponents,
+                );
               }}
               style={[styles.itemMapContainer, isLoading && { opacity: 0 }]}>
               {item.component}
