@@ -1,7 +1,11 @@
-import { Dimensions, View } from 'react-native';
-import React, { useState } from 'react';
+import { View } from 'react-native';
+import React, { useRef, useState } from 'react';
 import { marginIncomponents, styles } from './Navbar.styles';
-import { NavbarProps, OptionProfileItem, RightComponent } from './Navbar.types';
+import {
+  NavbarComponents,
+  NavbarProps,
+  OptionProfileItem,
+} from './Navbar.types';
 import { Welcome, Profile, EtendoLogo } from './index';
 import MenuBurger from './components/MenuBurger/MenuBurger';
 import { isTablet } from '../../helpers/table_utils';
@@ -10,38 +14,39 @@ const Navbar = ({
   name,
   title,
   email,
-  rightComponent,
-  optionsProfile,
+  navbarComponents,
+  profileOptions,
   profileImage,
   endOptions,
   onOptionSelectedProfile,
   onPressMenuBurger,
   onPressLogo,
 }: NavbarProps) => {
-  const width = Dimensions.get('window').width;
   const widthLeft = styles.leftContainer.width;
   const profileWidth = isTablet() ? 84 : 72;
 
   const [renderedComponents, setRenderedComponents] = useState<
-    RightComponent[] | undefined
-  >(rightComponent);
+    NavbarComponents[] | undefined
+  >(navbarComponents);
 
   const [removedComponents, setRemovedComponents] = useState<
     OptionProfileItem[] | undefined
   >([]);
 
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [widthContainer, setWidthContainer] = useState<number>(0);
+  const hasCalculated = useRef(false);
 
   let componentWidths: number[] = [];
-  for (let i = 0; i < (rightComponent?.length || 0); i++) {
+  for (let i = 0; i < (navbarComponents?.length || 0); i++) {
     componentWidths[i] = 0;
   }
 
   const calculateRenderedComponents = (index: number, newWidth: number) => {
     componentWidths[index] = newWidth;
-    if (rightComponent) {
-      if (index === rightComponent?.length - 1) {
+    if (navbarComponents) {
+      if (!hasCalculated.current && index === navbarComponents?.length - 1) {
         removeAditionalComponents();
+        hasCalculated.current = true;
       }
     }
   };
@@ -52,7 +57,10 @@ const Navbar = ({
       totalWidth += element;
     }
 
-    while (totalWidth + widthLeft + profileWidth - marginIncomponents > width) {
+    while (
+      totalWidth + widthLeft + profileWidth - marginIncomponents >
+      widthContainer
+    ) {
       const lastComponentIndex = componentWidths.length - 1;
 
       if (renderedComponents?.[lastComponentIndex]?.inOptions) {
@@ -61,7 +69,7 @@ const Navbar = ({
             renderedComponents[lastComponentIndex].inOptions,
             ...(prevRemovedComponent ?? []),
           ];
-          return updatedRemovedComponent as OptionProfileItem[];
+          return updatedRemovedComponent;
         });
       }
 
@@ -73,11 +81,14 @@ const Navbar = ({
       const slicedComponents = prev?.slice(0, componentWidths.length);
       return slicedComponents?.reverse();
     });
-    setIsLoading(false);
   };
 
   return (
-    <View style={styles.container}>
+    <View
+      style={styles.container}
+      onLayout={event => {
+        setWidthContainer(event.nativeEvent.layout.width);
+      }}>
       <View style={[styles.leftContainer]}>
         {isTablet() ? (
           <>
@@ -90,23 +101,27 @@ const Navbar = ({
       </View>
       <View style={[styles.rightContainer]}>
         <>
-          {renderedComponents?.map((item, index) => (
-            <View
-              key={index}
-              onLayout={event => {
-                calculateRenderedComponents(
-                  index,
-                  event.nativeEvent.layout.width + marginIncomponents,
-                );
-              }}
-              style={[styles.itemMapContainer, isLoading && { opacity: 0 }]}>
-              {item.component}
-            </View>
-          ))}
+          {widthContainer !== 0 &&
+            renderedComponents?.map((item, index) => (
+              <View
+                key={index}
+                onLayout={event => {
+                  calculateRenderedComponents(
+                    index,
+                    event.nativeEvent.layout.width + marginIncomponents,
+                  );
+                }}
+                style={[
+                  styles.itemMapContainer,
+                  hasCalculated.current && { opacity: 0 },
+                ]}>
+                {item.component}
+              </View>
+            ))}
         </>
         <View>
           <Profile
-            profileOptions={optionsProfile}
+            profileOptions={profileOptions}
             otherOptions={removedComponents}
             name={name}
             email={email}
