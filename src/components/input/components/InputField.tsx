@@ -8,7 +8,6 @@ import {
   NativeSyntheticEvent,
   TextInputFocusEventData,
   ViewStyle,
-  Platform,
   Dimensions,
   GestureResponderEvent,
   Text,
@@ -19,6 +18,7 @@ import { ShowPassword } from '../../../assets/images/icons/ShowPassword';
 import { HidePassword } from '../../../assets/images/icons/HidePassword';
 import InputOptions from './InputOptions';
 import { NEUTRAL_0, NEUTRAL_400, NEUTRAL_600 } from '../../../styles/colors';
+import { disableOutline } from '../../../helpers/table_utils';
 
 const InputField = ({
   type,
@@ -57,13 +57,7 @@ const InputField = ({
   const windowHeight = Dimensions.get('window').height;
   const refComponente = useRef<TouchableOpacity>(null);
   const regex = /^[0-9.,]+$/g;
-  const isWeb = Platform.OS === 'web';
 
-  const disableOutline = (): ViewStyle | undefined => {
-    if (isWeb) {
-      return { outline: 'none' } as ViewStyle;
-    }
-  };
   const getStyleText = (): TextStyle | TextStyle[] => {
     let style: Array<TextStyle | TextStyle[]> = [];
     if (value) {
