@@ -1,16 +1,16 @@
 import { GestureResponderEvent, LayoutChangeEvent } from 'react-native';
 
-export type RightComponent = {
+export type NavbarComponents = {
   component: React.ReactElement;
-  inOptions?: OptionProfileItem;
+  inOptions: OptionProfileItem;
 };
 
 export interface NavbarProps {
   name?: string;
   title?: string;
   email?: string;
-  rightComponent?: RightComponent[];
-  optionsProfile?: OptionProfileItem[];
+  navbarComponents?: NavbarComponents[];
+  profileOptions?: OptionProfileItem[];
   profileImage?: React.ReactElement;
   endOptions?: OptionProfileItem[];
   onOptionSelectedProfile?: (item?: string, index?: number) => void;
