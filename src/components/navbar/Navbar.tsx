@@ -113,7 +113,7 @@ const Navbar = ({
                 }}
                 style={[
                   styles.itemMapContainer,
-                  hasCalculated.current && { opacity: 0 },
+                  !hasCalculated.current && { opacity: 0 },
                 ]}>
                 {item.component}
               </View>
