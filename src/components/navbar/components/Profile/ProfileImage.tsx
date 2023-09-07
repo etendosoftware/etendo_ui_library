@@ -3,11 +3,18 @@ import React from 'react';
 import { styles } from './Profile.styles';
 import { ProfileImageProps } from '../../Navbar.types';
 
-const ProfileImage = ({ image, name, inOptions }: ProfileImageProps) => {
+const ProfileImage = ({
+  image,
+  name,
+  inOptions,
+  isTablet,
+}: ProfileImageProps) => {
   if (image) {
     return (
       <View style={[styles.roundImage, inOptions && { height: 40, width: 40 }]}>
-        {React.cloneElement(image, { style: styles.profileImageSize })}
+        {React.cloneElement(image, {
+          style: { width: isTablet ? 52 : 48, height: isTablet ? 52 : 48 },
+        })}
       </View>
     );
   }

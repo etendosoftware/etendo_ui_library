@@ -1,15 +1,15 @@
-import React, {useState, useMemo, useEffect, useRef} from 'react';
-import {Modal, TouchableOpacity} from 'react-native';
-import {BellActiveIcon} from '../../../../assets/images/icons/BellActiveIcon';
-import {BellIcon} from '../../../../assets/images/icons/BellIcon';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
+import { Modal, TouchableOpacity } from 'react-native';
+import { BellActiveIcon } from '../../../../assets/images/icons/BellActiveIcon';
+import { BellIcon } from '../../../../assets/images/icons/BellIcon';
 import {
   NotificationProps,
   OptionNotificationItem,
   PosicionModalType,
 } from '../../Navbar.types';
 import NotificationsOptions from './NotificationsOptions';
-import {styles} from './Notification.styles';
-import {NEUTRAL_0} from '../../../../styles/colors';
+import { styles } from './Notification.styles';
+import { NEUTRAL_0 } from '../../../../styles/colors';
 
 const Notification = ({
   anyNotification,
@@ -47,7 +47,7 @@ const Notification = ({
           pageX: number,
           pageY: number,
         ) => {
-          setPosicionModal({top: pageY + height, left: pageX, width, height});
+          setPosicionModal({ top: pageY + height, left: pageX, width, height });
         },
       );
     }

@@ -1,6 +1,6 @@
 import { View } from 'react-native';
-import React, { useRef, useState } from 'react';
-import { marginIncomponents, styles } from './Navbar.styles';
+import React, { useEffect, useRef, useState } from 'react';
+import { styles } from './Navbar.styles';
 import {
   NavbarComponents,
   NavbarProps,
@@ -8,7 +8,6 @@ import {
 } from './Navbar.types';
 import { Welcome, Profile, EtendoLogo } from './index';
 import MenuBurger from './components/MenuBurger/MenuBurger';
-import { isTablet } from '../../helpers/table_utils';
 
 const Navbar = ({
   name,
@@ -22,9 +21,6 @@ const Navbar = ({
   onPressMenuBurger,
   onPressLogo,
 }: NavbarProps) => {
-  const widthLeft = styles.leftContainer.width;
-  const profileWidth = isTablet() ? 84 : 72;
-
   const [renderedComponents, setRenderedComponents] = useState<
     NavbarComponents[] | undefined
   >(navbarComponents);
@@ -34,7 +30,10 @@ const Navbar = ({
   >([]);
 
   const [widthContainer, setWidthContainer] = useState<number>(0);
+  const [isTablet, setIsTablet] = useState<boolean>(false);
   const hasCalculated = useRef(false);
+  const profileWidth = isTablet ? 84 : 72;
+  const widthLeft = isTablet ? 463 : 124;
 
   let componentWidths: number[] = [];
   for (let i = 0; i < (navbarComponents?.length || 0); i++) {
@@ -58,7 +57,7 @@ const Navbar = ({
     }
 
     while (
-      totalWidth + widthLeft + profileWidth - marginIncomponents >
+      totalWidth + widthLeft + profileWidth - (isTablet ? 32 : 24) >
       widthContainer
     ) {
       const lastComponentIndex = componentWidths.length - 1;
@@ -83,14 +82,22 @@ const Navbar = ({
     });
   };
 
+  useEffect(() => {
+    setIsTablet(widthContainer > 1080);
+  }, [widthContainer]);
+
   return (
     <View
-      style={styles.container}
+      style={[styles.container, { height: isTablet ? 80 : 72 }]}
       onLayout={event => {
         setWidthContainer(event.nativeEvent.layout.width);
       }}>
-      <View style={[styles.leftContainer]}>
-        {isTablet() ? (
+      <View
+        style={[
+          styles.leftContainer,
+          { paddingLeft: isTablet ? 32 : 24, width: isTablet ? 463 : 124 },
+        ]}>
+        {isTablet ? (
           <>
             <EtendoLogo onPress={onPressLogo} pressable />
             <Welcome name={name} title={title} />
@@ -99,7 +106,7 @@ const Navbar = ({
           <MenuBurger onPress={onPressMenuBurger} />
         )}
       </View>
-      <View style={[styles.rightContainer]}>
+      <View style={[styles.rightContainer, { width: isTablet ? 84 : 72 }]}>
         <>
           {widthContainer !== 0 &&
             renderedComponents?.map((item, index) => (
@@ -108,7 +115,7 @@ const Navbar = ({
                 onLayout={event => {
                   calculateRenderedComponents(
                     index,
-                    event.nativeEvent.layout.width + marginIncomponents,
+                    event.nativeEvent.layout.width + (isTablet ? 32 : 24),
                   );
                 }}
                 style={[

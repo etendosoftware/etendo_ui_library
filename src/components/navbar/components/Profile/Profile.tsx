@@ -15,6 +15,7 @@ const Profile = ({
   otherOptions,
   endOptions,
   onOptionSelected,
+  isTablet,
 }: ProfileProps) => {
   const [showOptions, setShowOptions] = useState<boolean>(false);
   const [posicionModal, setPosicionModal] = useState<PosicionModalType>({
@@ -59,16 +60,19 @@ const Profile = ({
   return (
     <>
       <TouchableOpacity
-        style={styles.container}
+        style={[styles.container, { marginRight: isTablet ? 32 : 24 }]}
         ref={refComponente}
         onPress={() => {
           getTopLeft();
           setShowOptions(true);
         }}>
         {otherOptions?.length ? (
-          <AplicationsIcon style={styles.aplicationIcon} fill={NEUTRAL_0} />
+          <AplicationsIcon
+            style={{ width: isTablet ? 32 : 28, height: isTablet ? 32 : 28 }}
+            fill={NEUTRAL_0}
+          />
         ) : (
-          <ProfileImage image={profileImage} name={name} />
+          <ProfileImage image={profileImage} name={name} isTablet={isTablet} />
         )}
       </TouchableOpacity>
       <Modal visible={showOptions} animationType="fade" transparent>
@@ -85,6 +89,7 @@ const Profile = ({
             email={email}
             onOptionSelected={handleOptionSelected}
             endOptions={endOptions}
+            isTablet={isTablet}
           />
         </TouchableOpacity>
       </Modal>

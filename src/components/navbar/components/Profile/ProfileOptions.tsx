@@ -13,6 +13,7 @@ const ProfileOptions = ({
   profileOptions,
   otherOptions,
   endOptions,
+  isTablet,
   onOptionSelected,
 }: ProfileOptionsProps) => {
   const defaultNameValue = 'User';
@@ -72,9 +73,7 @@ const ProfileOptions = ({
           left:
             posicionModal.left -
             styles.optionsContainer.width +
-            (otherOptions?.length
-              ? styles.aplicationIcon.width
-              : styles.profileImageSize.width),
+            (otherOptions?.length ? (isTablet ? 32 : 28) : isTablet ? 52 : 48),
         },
       ]}>
       <View style={styles.optionsHeaderContainer}>
