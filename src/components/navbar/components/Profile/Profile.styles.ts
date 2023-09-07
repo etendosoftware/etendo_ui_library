@@ -14,7 +14,6 @@ import { isTablet } from '../../../../helpers/table_utils';
 
 export const styles = StyleSheet.create({
   container: {
-    marginRight: isTablet() ? 32 : 24,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -80,13 +79,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: OVERLAY,
   },
-  profileImageSize: {
-    width: isTablet() ? 52 : 48,
-    height: isTablet() ? 52 : 48,
-  },
   roundImage: {
-    width: isTablet() ? 52 : 48,
-    height: isTablet() ? 52 : 48,
     borderRadius: 50,
     backgroundColor: QUATERNARY_50,
     alignItems: 'center',
@@ -139,10 +132,7 @@ export const styles = StyleSheet.create({
     width: 16,
   },
   optionsMapContainer: {},
-  aplicationIcon: {
-    width: isTablet() ? 32 : 28,
-    height: isTablet() ? 32 : 28,
-  },
+
   scroll: {
     maxHeight: 282,
     marginHorizontal: 8,

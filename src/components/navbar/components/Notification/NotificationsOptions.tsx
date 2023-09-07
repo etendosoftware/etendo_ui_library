@@ -1,7 +1,13 @@
-import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, Pressable, ViewStyle} from 'react-native';
-import {spaceBetween, styles, widthOptions} from './Notification.styles';
-import {PointIcon} from '../../../../assets/images/icons/PointIcon';
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Pressable,
+  ViewStyle,
+} from 'react-native';
+import { spaceBetween, styles, widthOptions } from './Notification.styles';
+import { PointIcon } from '../../../../assets/images/icons/PointIcon';
 import {
   NotificationOptionProps,
   OptionNotificationType,
@@ -39,7 +45,7 @@ const NotificationsOptions = ({
 
   const getBackground = (index: number): ViewStyle | undefined => {
     if (indexHover === index) {
-      return {backgroundColor: QUATERNARY_10};
+      return { backgroundColor: QUATERNARY_10 };
     }
   };
 

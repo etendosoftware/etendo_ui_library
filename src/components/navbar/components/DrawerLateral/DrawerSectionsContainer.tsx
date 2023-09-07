@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
-import {Pressable, Text, View} from 'react-native';
+import React, { useState } from 'react';
+import { Pressable, Text, View } from 'react-native';
 import {
   DrawerCurrentIndexType,
   DrawerDataSectionType,
   DrawerSectionsContainerType,
 } from '../../Navbar.types';
-import {styles} from './DrawerLateral.styles';
+import { styles } from './DrawerLateral.styles';
 import DrawerLateralSubMenu from './DrawerLateralSubMenu';
 import {
   getCurrentSelectIndex,

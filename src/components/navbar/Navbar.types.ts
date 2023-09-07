@@ -68,6 +68,7 @@ export interface ProfileProps {
   profileOptions?: OptionProfileItem[];
   endOptions?: OptionProfileItem[];
   otherOptions?: (OptionProfileItem | undefined)[];
+  isTablet?: boolean;
   onOptionSelected?: (item?: string, index?: number) => void;
 }
 
@@ -75,6 +76,7 @@ export interface ProfileImageProps {
   image?: React.ReactElement;
   name?: string;
   inOptions?: boolean;
+  isTablet?: boolean;
 }
 
 export interface ProfileOptionsProps {
@@ -85,6 +87,7 @@ export interface ProfileOptionsProps {
   profileOptions?: OptionProfileItem[];
   endOptions?: OptionProfileItem[];
   otherOptions?: (OptionProfileItem | undefined)[];
+  isTablet?: boolean;
   onOptionSelected?: (item?: string, index?: number) => void;
 }
 
