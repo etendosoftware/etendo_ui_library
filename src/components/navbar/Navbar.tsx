@@ -109,6 +109,7 @@ const Navbar = ({
       <View style={[styles.rightContainer, { width: isTablet ? 84 : 72 }]}>
         <>
           {widthContainer !== 0 &&
+            isTablet &&
             renderedComponents?.map((item, index) => (
               <View
                 key={index}
