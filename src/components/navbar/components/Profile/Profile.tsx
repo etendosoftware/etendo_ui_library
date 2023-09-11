@@ -72,7 +72,12 @@ const Profile = ({
             fill={NEUTRAL_0}
           />
         ) : (
-          <ProfileImage image={profileImage} name={name} isTablet={isTablet} />
+          <ProfileImage
+            image={profileImage}
+            name={name}
+            isTablet={isTablet}
+            inOptions={false}
+          />
         )}
       </TouchableOpacity>
       <Modal visible={showOptions} animationType="fade" transparent>

@@ -19,7 +19,13 @@ const ProfileImage = ({
     );
   }
   return (
-    <View style={[styles.roundImage, inOptions && { height: 40, width: 40 }]}>
+    <View
+      style={[
+        styles.roundImage,
+        inOptions
+          ? { height: 40, width: 40 }
+          : { width: isTablet ? 52 : 48, height: isTablet ? 52 : 48 },
+      ]}>
       <Text style={styles.nameText}>
         {name?.charAt(0)?.toUpperCase() ?? 'U'}
       </Text>
