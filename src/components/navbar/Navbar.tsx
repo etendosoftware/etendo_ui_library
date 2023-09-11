@@ -136,6 +136,7 @@ const Navbar = ({
             onOptionSelected={onOptionSelectedProfile}
             profileImage={profileImage}
             endOptions={endOptions}
+            isTablet={isTablet}
           />
         </View>
       </View>
