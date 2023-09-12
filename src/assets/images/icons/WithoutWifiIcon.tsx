@@ -8,7 +8,7 @@ export interface SvgImageProps {
   fill?: string;
 }
 
-export const WithoutWifi = ({
+export const WithoutWifiIcon = ({
   style,
   fill = DEFAULT_COLOR_THEME,
 }: SvgImageProps) => {

@@ -8,7 +8,7 @@ export interface SvgImageProps {
   fill?: string;
 }
 
-export const SlideShow = ({
+export const SlideShowIcon = ({
   style,
   fill = DEFAULT_COLOR_THEME,
 }: SvgImageProps) => {

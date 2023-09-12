@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import { styles } from '../Input.style';
 import { InputFieldProps, KeyboardTypes } from '../Input.types';
-import { ShowPassword } from '../../../assets/images/icons/ShowPassword';
+import { ShowPassword } from '../../../assets/images/icons/ShowPasswordIcon';
 import { HidePassword } from '../../../assets/images/icons/HidePassword';
 import InputOptions from './InputOptions';
 import { NEUTRAL_0, NEUTRAL_400, NEUTRAL_600 } from '../../../styles/colors';

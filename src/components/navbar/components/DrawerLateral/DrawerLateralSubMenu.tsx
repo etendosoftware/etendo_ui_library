@@ -6,7 +6,7 @@ import {
   DrawerDataSubMenuType,
   DrawerLatertalMenuProps,
 } from '../../Navbar.types';
-import { ArrowDown } from '../../../../assets/images/icons/ArrowDown';
+import { ArrowDown } from '../../../../assets/images/icons/ArrowDownIcon';
 import {
   getCurrentSelectIndex,
   getStyleImageSelectedSubSection,

@@ -8,7 +8,7 @@ export interface SvgImageProps {
   fill?: string;
 }
 
-export const CalendarSecundary = ({
+export const CalendarSecundaryIcon = ({
   style,
   fill = DEFAULT_COLOR_THEME,
 }: SvgImageProps) => {

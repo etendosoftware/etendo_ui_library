@@ -8,7 +8,7 @@ export interface SvgImageProps {
   fill?: string;
 }
 
-export const VNoteCard = ({
+export const VNoteCardIcon = ({
   style,
   fill = DEFAULT_COLOR_THEME,
 }: SvgImageProps) => {

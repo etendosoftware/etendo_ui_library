@@ -2,9 +2,9 @@ import React from 'react';
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { InputVariantsType, TypeInputStyleVariant } from './Input.types';
 
-import { ArrowDown } from '../../assets/images/icons/ArrowDown';
+import { ArrowDown } from '../../assets/images/icons/ArrowDownIcon';
 import { SearchIcon } from '../../assets/images/icons/SearchIcon';
-import { ShowPassword } from '../../assets/images/icons/ShowPassword';
+import { ShowPassword } from '../../assets/images/icons/ShowPasswordIcon';
 import {
   DESTRUCTIVE_10,
   DESTRUCTIVE_100,

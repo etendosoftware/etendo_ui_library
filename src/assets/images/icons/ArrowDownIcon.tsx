@@ -8,7 +8,7 @@ export interface SvgImageProps {
   fill?: ColorValue;
 }
 
-export const ArrowDown = ({
+export const ArrowDownIcon = ({
   style,
   fill = DEFAULT_COLOR_THEME,
 }: SvgImageProps) => {

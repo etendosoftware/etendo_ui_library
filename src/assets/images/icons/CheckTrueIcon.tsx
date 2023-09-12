@@ -9,7 +9,7 @@ export interface SvgImageProps {
   stroke?: string;
 }
 
-export const CheckTrue = ({
+export const CheckTrueIcon = ({
   style,
   fill = DEFAULT_COLOR_THEME,
   stroke,

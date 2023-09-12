@@ -8,7 +8,10 @@ export interface SvgImageProps {
   fill?: string;
 }
 
-export const Trash = ({ style, fill = DEFAULT_COLOR_THEME }: SvgImageProps) => {
+export const TrashIcon = ({
+  style,
+  fill = DEFAULT_COLOR_THEME,
+}: SvgImageProps) => {
   return (
     <Svg
       width={style?.width ?? 20}

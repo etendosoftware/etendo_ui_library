@@ -7,7 +7,7 @@ export interface SvgImageProps {
   style?: ImageStyle;
   fill?: string;
 }
-export const MoreUser = ({
+export const MoreUserIcon = ({
   style,
   fill = DEFAULT_COLOR_THEME,
 }: SvgImageProps) => {
