@@ -1,3 +1,5 @@
+import { ViewStyle } from 'react-native';
+
 export interface TableProps {
   data: Array<any>;
   columns: Columns[];
@@ -22,6 +24,7 @@ export type Columns = {
   key?: string;
   width?: string | number;
   actions?: Actions[];
+  cellStyle?: ViewStyle;
 };
 
 export type Actions = {
