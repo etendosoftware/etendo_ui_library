@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
 import { CardVariant, styles } from './CardDropdown.styles';
-import { ArrowDown } from '../../../assets/images/icons/ArrowDownIcon';
+import { ArrowDownIcon } from '../../../assets/images/icons/ArrowDownIcon';
 import CardSkeleton from './component/CardSkeleton';
 import { CardDrpopdownProps, PositionModalType } from './CardDropdown.types';
 import CardDropdownOptions from './component/CardDropdownOptions';
@@ -141,7 +141,7 @@ const CardDropdown = ({
         </Text>
         {isDropdown && (
           <View style={styles.cardArrowImage}>
-            <ArrowDown
+            <ArrowDownIcon
               style={styles.cardArrowImage}
               fill={getStyle().colorCardArrowImageFill}
             />

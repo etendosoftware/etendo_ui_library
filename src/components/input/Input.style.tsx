@@ -2,9 +2,9 @@ import React from 'react';
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { InputVariantsType, TypeInputStyleVariant } from './Input.types';
 
-import { ArrowDown } from '../../assets/images/icons/ArrowDownIcon';
+import { ArrowDownIcon } from '../../assets/images/icons/ArrowDownIcon';
 import { SearchIcon } from '../../assets/images/icons/SearchIcon';
-import { ShowPassword } from '../../assets/images/icons/ShowPasswordIcon';
+import { ShowPasswordIcon } from '../../assets/images/icons/ShowPasswordIcon';
 import {
   DESTRUCTIVE_10,
   DESTRUCTIVE_100,
@@ -32,7 +32,7 @@ export const inputVariants: InputVariantsType = {
       type: 'text',
       disabledField: false,
       disabledSubmit: true,
-      image: <ArrowDown style={{ height: 10, width: 10 }} />,
+      image: <ArrowDownIcon style={{ height: 10, width: 10 }} />,
     },
   },
   textInput: {
@@ -68,7 +68,7 @@ export const inputVariants: InputVariantsType = {
   textInputPassword: {
     field: {
       type: 'textInput',
-      image: <ShowPassword style={{ height: 15, width: 15 }} />,
+      image: <ShowPasswordIcon style={{ height: 15, width: 15 }} />,
       disabledField: true,
       disabledSubmit: false,
     },

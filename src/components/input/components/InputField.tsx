@@ -14,8 +14,8 @@ import {
 } from 'react-native';
 import { styles } from '../Input.style';
 import { InputFieldProps, KeyboardTypes } from '../Input.types';
-import { ShowPassword } from '../../../assets/images/icons/ShowPasswordIcon';
-import { HidePassword } from '../../../assets/images/icons/HidePassword';
+import { ShowPasswordIcon } from '../../../assets/images/icons/ShowPasswordIcon';
+import { HidePasswordIcon } from '../../../assets/images/icons/HidePasswordIcon';
 import InputOptions from './InputOptions';
 import { NEUTRAL_0, NEUTRAL_400, NEUTRAL_600 } from '../../../styles/colors';
 import { disableOutline } from '../../../helpers/table_utils';
@@ -206,7 +206,9 @@ const InputField = ({
     const fillValue = disabled ? NEUTRAL_400 : undefined;
 
     if (type === 'textInputPassword') {
-      const PasswordComponent = showPassword ? HidePassword : ShowPassword;
+      const PasswordComponent = showPassword
+        ? HidePasswordIcon
+        : ShowPasswordIcon;
 
       return (
         <PasswordComponent style={styles.inputImageSize} fill={fillValue} />
