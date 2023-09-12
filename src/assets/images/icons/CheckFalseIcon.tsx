@@ -1,6 +1,7 @@
 import React from 'react';
-import {ImageStyle} from 'react-native';
-import {Svg, Rect} from 'react-native-svg';
+import { ImageStyle } from 'react-native';
+import { Svg, Rect } from 'react-native-svg';
+import { DEFAULT_COLOR_THEME } from '../../../styles/colors';
 
 export interface SvgImageProps {
   style?: ImageStyle;
@@ -8,22 +9,25 @@ export interface SvgImageProps {
   stroke?: string;
 }
 
-export const CheckFalse = ({style, fill, stroke}: SvgImageProps) => {
+export const CheckFalseIcon = ({
+  style,
+  fill = DEFAULT_COLOR_THEME,
+  stroke,
+}: SvgImageProps) => {
   return (
     <Svg
-      width={style?.width || 25}
-      height={style?.height || 25}
+      width={style?.width ?? 25}
+      height={style?.height ?? 25}
       viewBox="0 0 25 25"
       fill="none"
-      style={style}
-    >
+      style={style}>
       <Rect
         x="0.75"
         y="0.75"
         width="23.5"
         height="23.5"
         rx="4.25"
-        fill={fill ? fill : '#F2F2F2'}
+        fill={fill}
       />
       <Rect
         x="0.75"
@@ -31,7 +35,7 @@ export const CheckFalse = ({style, fill, stroke}: SvgImageProps) => {
         width="23.5"
         height="23.5"
         rx="4.25"
-        stroke={stroke ? stroke : '#D3D6E1'}
+        stroke={stroke}
         stroke-width="1.5"
       />
     </Svg>

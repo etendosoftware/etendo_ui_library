@@ -5,11 +5,11 @@ import {
   LayoutChangeEvent,
   Text,
 } from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
-import {CardVariant, styles} from './CardDropdown.styles';
-import {ArrowDown} from '../../../assets/images/icons/ArrowDown';
+import React, { useEffect, useRef, useState } from 'react';
+import { CardVariant, styles } from './CardDropdown.styles';
+import { ArrowDownIcon } from '../../../assets/images/icons/ArrowDownIcon';
 import CardSkeleton from './component/CardSkeleton';
-import {CardDrpopdownProps, PositionModalType} from './CardDropdown.types';
+import { CardDrpopdownProps, PositionModalType } from './CardDropdown.types';
 import CardDropdownOptions from './component/CardDropdownOptions';
 
 const CardDropdown = ({
@@ -44,7 +44,7 @@ const CardDropdown = ({
   };
 
   const onLayout = (event: LayoutChangeEvent) => {
-    const {height} = event.nativeEvent.layout;
+    const { height } = event.nativeEvent.layout;
     setHeightDropdown(height);
   };
 
@@ -101,7 +101,7 @@ const CardDropdown = ({
               height,
             });
           } else {
-            setpositionModal({top: pageY, left: pageX, width, height});
+            setpositionModal({ top: pageY, left: pageX, width, height });
           }
         },
       );
@@ -127,24 +127,21 @@ const CardDropdown = ({
       onPress={() => {
         handleOnPressDropdown();
       }}
-      disabled={disabled}
-    >
+      disabled={disabled}>
       <View
-        style={[styles.cardImageContainer, getStyle().colorCardImageContainer]}
-      >
+        style={[styles.cardImageContainer, getStyle().colorCardImageContainer]}>
         {image && newImage}
       </View>
       <View style={styles.cardDropdownContainer}>
         <Text
           ellipsizeMode={'tail'}
           numberOfLines={1}
-          style={[styles.cardTitle, getStyle().colorCardTitle]}
-        >
+          style={[styles.cardTitle, getStyle().colorCardTitle]}>
           {title}
         </Text>
         {isDropdown && (
           <View style={styles.cardArrowImage}>
-            <ArrowDown
+            <ArrowDownIcon
               style={styles.cardArrowImage}
               fill={getStyle().colorCardArrowImageFill}
             />
