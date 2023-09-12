@@ -1,12 +1,18 @@
 import React from 'react';
-import {FlatList, Pressable, TouchableOpacity, View} from 'react-native';
-import {Actions, Columns, TableProps} from './Table.types';
-import {styles} from './Table.styles';
+import { FlatList, Pressable, TouchableOpacity, View } from 'react-native';
+import { Actions, Columns, TableProps } from './Table.types';
+import { styles } from './Table.styles';
 import TableHeaders from './components/TableHeaders';
-import {paintOddRows, removeHeaderBorder} from '../../helpers/table_utils';
+import { paintOddRows, removeHeaderBorder } from '../../helpers/table_utils';
 import TableCell from './components/TableCell';
 
-const Table = ({data, columns, title, onRowPress, tableHeight}: TableProps) => {
+const Table = ({
+  data,
+  columns,
+  title,
+  onRowPress,
+  tableHeight,
+}: TableProps) => {
   const findPrimaryId = (col: Columns[], indexRow: number) => {
     let primary: string = '';
     if (indexRow >= 0) {
@@ -32,7 +38,7 @@ const Table = ({data, columns, title, onRowPress, tableHeight}: TableProps) => {
           return (
             col.visible && (
               <View
-                style={[styles.cell, {width: col.width}]}
+                style={[styles.cell, col.cellStyle, { width: col.width }]}
                 key={'movementTable' + colIndex}>
                 {col.actions ? (
                   col.actions?.map((itemAction: Actions, index: number) => {
@@ -66,7 +72,7 @@ const Table = ({data, columns, title, onRowPress, tableHeight}: TableProps) => {
         style={[
           styles.container,
           removeHeaderBorder(title),
-          {height: tableHeight},
+          { height: tableHeight },
         ]}>
         <TableHeaders title={title} columns={columns} />
         <FlatList
