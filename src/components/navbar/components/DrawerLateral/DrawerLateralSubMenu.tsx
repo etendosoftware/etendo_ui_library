@@ -6,7 +6,7 @@ import {
   DrawerDataSubMenuType,
   DrawerLatertalMenuProps,
 } from '../../Navbar.types';
-import { ArrowDown } from '../../../../assets/images/icons/ArrowDown';
+import { ArrowDownIcon } from '../../../../assets/images/icons/ArrowDownIcon';
 import {
   getCurrentSelectIndex,
   getStyleImageSelectedSubSection,
@@ -84,7 +84,7 @@ const DrawerLateralSubMenu = ({
           style={styles.modalSectionItemText}>
           {label}
         </Text>
-        <ArrowDown
+        <ArrowDownIcon
           style={styles.modalSectionMenuDropdownImage}
           fill={NEUTRAL_0}
         />

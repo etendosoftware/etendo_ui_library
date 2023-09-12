@@ -4,10 +4,10 @@ import React, { useState } from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import { PaginationStyleVariant } from './Pagination.styles';
 import { PaginationProps } from './Pagination.types';
-import { ArrowLeft } from '../../assets/images/icons/ArrowLeft';
-import { ArrowFirst } from '../../assets/images/icons/ArrowFirst';
-import { ArrowRight } from '../../assets/images/icons/ArrowRight';
-import { ArrowLast } from '../../assets/images/icons/ArrowLast';
+import { ArrowLeftIcon } from '../../assets/images/icons/ArrowLeftIcon';
+import { ArrowFirstIcon } from '../../assets/images/icons/ArrowFirstIcon';
+import { ArrowRightIcon } from '../../assets/images/icons/ArrowRightIcon';
+import { ArrowLastIcon } from '../../assets/images/icons/ArrowLastIcon';
 
 /* Pagination component */
 const Pagination = ({
@@ -53,7 +53,7 @@ const Pagination = ({
             backToFirstPage();
             onChangeSelected(1, 0);
           }}>
-          <ArrowFirst
+          <ArrowFirstIcon
             style={{
               width: 10,
               height: 10,
@@ -70,7 +70,7 @@ const Pagination = ({
               onChangeSelected(page - 1, pagination - amountDataPerPage);
             }
           }}>
-          <ArrowLeft
+          <ArrowLeftIcon
             style={{
               height: 10,
               width: 10,
@@ -94,7 +94,7 @@ const Pagination = ({
               onChangeSelected(page + 1, pagination + amountDataPerPage);
             }
           }}>
-          <ArrowRight
+          <ArrowRightIcon
             style={{
               height: 10,
               width: 10,
@@ -114,7 +114,7 @@ const Pagination = ({
               );
             }
           }}>
-          <ArrowLast
+          <ArrowLastIcon
             style={{
               height: 10,
               width: 10,

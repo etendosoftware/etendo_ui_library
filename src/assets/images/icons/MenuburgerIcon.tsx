@@ -1,7 +1,7 @@
 import React from 'react';
-import {ImageStyle} from 'react-native';
-import {Svg, Path} from 'react-native-svg';
-import {DEFAULT_COLOR_THEME} from '../../../styles/colors';
+import { ImageStyle } from 'react-native';
+import { Svg, Path } from 'react-native-svg';
+import { DEFAULT_COLOR_THEME } from '../../../styles/colors';
 
 export interface SvgImageProps {
   style?: ImageStyle;
@@ -13,7 +13,12 @@ export const MenuburgerIcon = ({
   fill = DEFAULT_COLOR_THEME,
 }: SvgImageProps) => {
   return (
-    <Svg width="20" height="20" viewBox="0 0 20 20" fill="none" style={style}>
+    <Svg
+      width={style?.width ?? 20}
+      height={style?.height ?? 20}
+      viewBox="0 0 20 20"
+      fill="none"
+      style={style}>
       <Path
         d="M10.0292 8.15935C12.7964 8.15935 15.5636 8.15935 18.3308 8.15935C19.1528 8.15935 19.7529 8.57711 19.9401 9.26613C20.187 10.1752 19.6491 11.0306 18.7181 11.1982C18.5599 11.223 18.3999 11.2337 18.2398 11.2302C12.7477 11.2302 7.25511 11.2315 1.76212 11.234C1.17354 11.234 0.659331 11.0888 0.302208 10.5943C-0.0363223 10.1234 -0.0908202 9.60136 0.140637 9.07804C0.385558 8.52657 0.834367 8.22332 1.43898 8.1683C1.57682 8.15487 1.7166 8.15935 1.85509 8.15935C4.57999 8.15935 7.30469 8.15935 10.0292 8.15935Z"
         fill={fill}
