@@ -46,7 +46,7 @@ const Table = ({
                       <TouchableOpacity
                         style={styles.cellEditContainer}
                         onPress={() =>
-                          col.key ? itemAction.onAction(item[col.key]) : {}
+                          itemAction.onAction(findPrimaryId(columns, index))
                         }
                         key={'tableCellCustom' + index}>
                         {itemAction.component}
