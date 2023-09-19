@@ -1,8 +1,8 @@
-import {Text, View} from 'react-native';
+import { Text, View } from 'react-native';
 import React from 'react';
-import {Table} from '../../table';
+import { Table } from '../../table';
 import TableData from './TableComponentsStatesData.json';
-import {styles} from './ComponentsStatesScreen.style';
+import { styles } from './ComponentsStatesScreen.style';
 import addMarginContainer from '../../../helpers/addMargin';
 
 const ComponentsStatesScreen = () => {
@@ -20,21 +20,18 @@ const ComponentsStatesScreen = () => {
         data={TableData}
         columns={[
           {
-            displayKey: 'name',
             visible: true,
             key: 'name',
             width: '33.3%',
             label: 'Name',
           },
           {
-            displayKey: 'category',
             visible: true,
             key: 'category',
             width: '33.3%',
             label: 'Category',
           },
           {
-            displayKey: 'state',
             visible: true,
             key: 'state',
             width: '33.3%',
