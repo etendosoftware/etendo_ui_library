@@ -18,7 +18,6 @@ export interface TableHeaderProps {
 
 export type Columns = {
   primary?: boolean;
-  displayKey?: string;
   visible?: boolean;
   label?: string;
   key?: string;

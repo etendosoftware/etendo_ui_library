@@ -55,7 +55,7 @@ const Table = ({
                   })
                 ) : (
                   <TableCell
-                    label={col.displayKey ? item[col.displayKey] : ''}
+                    label={col.key ? item[col.key] : ''}
                     key={'tableCell' + index}
                   />
                 )}
