@@ -13,9 +13,10 @@ export interface NavbarProps {
   profileOptions?: OptionProfileItem[];
   profileImage?: React.ReactElement;
   endOptions?: OptionProfileItem[];
+  isVisibleMenu?: boolean;
   onOptionSelectedProfile?: (item?: string, index?: number) => void;
   onPressLogo?: () => void;
-  onPressMenuBurger?: () => void;
+  onPressMenu?: () => void;
 }
 
 export interface EtendoLogoProps {
@@ -147,7 +148,7 @@ export interface DrawerLatertalMenuProps {
   ) => void;
 }
 
-export interface MenuBurgerProps {
+export interface MenuProps {
   onPress?: (event: GestureResponderEvent) => void;
 }
 

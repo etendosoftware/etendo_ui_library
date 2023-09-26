@@ -1,5 +1,5 @@
 export const styles = {
-  menuBurgerImage: {
+  menuImage: {
     width: 20,
     height: 20,
   },

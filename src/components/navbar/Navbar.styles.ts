@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
 import { PRIMARY_100 } from '../../styles/colors';
-import { isTablet } from '../../helpers/table_utils';
 
 export const styles = StyleSheet.create({
   container: {

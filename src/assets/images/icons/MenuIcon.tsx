@@ -8,7 +8,7 @@ export interface SvgImageProps {
   fill?: string;
 }
 
-export const MenuburgerIcon = ({
+export const MenuIcon = ({
   style,
   fill = DEFAULT_COLOR_THEME,
 }: SvgImageProps) => {

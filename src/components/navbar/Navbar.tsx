@@ -7,7 +7,7 @@ import {
   OptionProfileItem,
 } from './Navbar.types';
 import { Welcome, Profile, EtendoLogo } from './index';
-import MenuBurger from './components/MenuBurger/MenuBurger';
+import Menu from './components/Menu/Menu';
 
 const Navbar = ({
   name,
@@ -17,8 +17,9 @@ const Navbar = ({
   profileOptions,
   profileImage,
   endOptions,
+  isVisibleMenu,
   onOptionSelectedProfile,
-  onPressMenuBurger,
+  onPressMenu,
   onPressLogo,
 }: NavbarProps) => {
   const [renderedComponents, setRenderedComponents] = useState<
@@ -103,7 +104,7 @@ const Navbar = ({
             <Welcome name={name} title={title} />
           </>
         ) : (
-          <MenuBurger onPress={onPressMenuBurger} />
+          isVisibleMenu && <Menu onPress={onPressMenu} />
         )}
       </View>
       <View style={[styles.rightContainer, { width: isTablet ? 84 : 72 }]}>
