@@ -13,6 +13,7 @@ export interface NavbarProps {
   profileOptions?: OptionProfileItem[];
   profileImage?: React.ReactElement;
   endOptions?: OptionProfileItem[];
+  isVisibleMenu?: boolean;
   onOptionSelectedProfile?: (item?: string, index?: number) => void;
   onPressLogo?: () => void;
   onPressMenuBurger?: () => void;

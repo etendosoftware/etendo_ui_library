@@ -17,6 +17,7 @@ const Navbar = ({
   profileOptions,
   profileImage,
   endOptions,
+  isVisibleMenu,
   onOptionSelectedProfile,
   onPressMenuBurger,
   onPressLogo,
@@ -103,7 +104,7 @@ const Navbar = ({
             <Welcome name={name} title={title} />
           </>
         ) : (
-          <MenuBurger onPress={onPressMenuBurger} />
+          isVisibleMenu && <MenuBurger onPress={onPressMenuBurger} />
         )}
       </View>
       <View style={[styles.rightContainer, { width: isTablet ? 84 : 72 }]}>
