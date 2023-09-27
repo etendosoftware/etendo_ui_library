@@ -1,4 +1,4 @@
-import {ColorValue, TextStyle, ViewStyle} from 'react-native';
+import { ColorValue, TextStyle, ViewStyle } from 'react-native';
 
 export type ButtonStyleType =
   | 'primary'
@@ -15,15 +15,18 @@ export type buttonStyleVariant = Record<
     containerDisabled: ViewStyle;
     textDisabled: TextStyle;
     imageColor: ColorValue;
+    imageDisabled: ColorValue;
   }
 >;
 
 export interface ButtonProps {
   onPress: () => void;
-  text: string;
+  text?: string;
   typeStyle: ButtonStyleType;
-  image?: React.ReactElement;
+  iconLeft?: React.ReactElement;
+  iconRight?: React.ReactElement;
   disabled?: boolean;
   width?: number | string;
   height?: number | string;
+  fontSize?: number;
 }
