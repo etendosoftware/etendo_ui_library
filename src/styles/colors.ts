@@ -10,11 +10,13 @@ export const PRIMARY_800 = '#242D93';
 export const SECONDARY_30 = '#FEF7D0';
 export const SECONDARY_50 = '#FFEB7A';
 export const SECONDARY_100 = '#FAD614';
+export const SECONDARY_300 = '#FDEC71';
 
 export const TERTIARY_10 = '#F2F5F9';
 export const TERTIARY_30 = '#EFF1F7';
-export const TERTIARY_50 = '#D3D6E1';
+export const TERTIARY_50 = '#EDF1FF';
 export const TERTIARY_100 = '#808695';
+export const TERTIARY_800 = '#151C7A';
 
 export const QUATERNARY_10 = '#F5F5FC';
 export const QUATERNARY_50 = '#DDDFF6';

@@ -20,7 +20,7 @@ export type buttonStyleVariant = Record<
 >;
 
 export interface ButtonProps {
-  onPress: () => void;
+  onPress?: () => void;
   text?: string;
   typeStyle: ButtonStyleType;
   iconLeft?: React.ReactElement;

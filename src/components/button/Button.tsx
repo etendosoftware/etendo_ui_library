@@ -3,10 +3,9 @@ import { Pressable, Text, TouchableOpacity } from 'react-native';
 import {
   NEUTRAL_50,
   PRIMARY_100,
-  PRIMARY_80,
-  QUATERNARY_10,
-  QUATERNARY_100,
-  SECONDARY_50,
+  SECONDARY_300,
+  TERTIARY_50,
+  TERTIARY_800,
 } from '../../styles/colors';
 import { ButtonStyleVariant } from './Button.styles';
 import { ButtonProps, ButtonStyleType } from './Button.types';
@@ -27,19 +26,19 @@ const Button = ({
   const getHoveredBackgroundColor = (backgroundColor: ButtonStyleType) => {
     switch (backgroundColor) {
       case 'primary':
-        return PRIMARY_80;
+        return TERTIARY_800;
       case 'secondary':
-        return SECONDARY_50;
+        return SECONDARY_300;
       case 'terciary':
-        return QUATERNARY_10;
+        return TERTIARY_50;
       case 'whiteBorder':
-        return 'transparent';
+        return PRIMARY_100;
     }
   };
   const getHoveredTextColorAndViewColor = (typeStyle: ButtonStyleType) => {
     switch (typeStyle) {
       case 'white':
-        return QUATERNARY_100;
+        return TERTIARY_800;
       case 'whiteBorder':
         return NEUTRAL_50;
       case 'primary':
@@ -106,6 +105,11 @@ const Button = ({
     }
     return ButtonStyleVariant[typeStyle].imageColor;
   };
+  const handleOnPress = () => {
+    if (onPress) {
+      onPress();
+    }
+  };
   return (
     <TouchableOpacity>
       <Pressable
@@ -115,7 +119,7 @@ const Button = ({
           stateStyleContainer(pressed),
           { height: height, width: width },
         ]}
-        onPress={onPress}>
+        onPress={handleOnPress}>
         {iconLeft &&
           React.cloneElement(iconLeft, {
             style: {
