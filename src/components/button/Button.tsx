@@ -125,7 +125,7 @@ const Button = ({
             style: {
               width: iconLeft?.props?.style?.width || 16,
               height: iconLeft?.props?.style?.height || 16,
-              marginRight: iconLeft?.props?.style?.marginRight || 8,
+              marginRight: iconLeft?.props?.style?.marginRight || text ? 8 : 0,
             },
             fill: stateStyleIcon(),
           })}
@@ -135,7 +135,7 @@ const Button = ({
             style: {
               width: iconRight?.props?.style?.width || 16,
               height: iconRight?.props?.style?.height || 16,
-              marginLeft: iconRight?.props?.style?.marginLeft || 8,
+              marginLeft: iconRight?.props?.style?.marginLeft || text ? 8 : 0,
             },
             fill: stateStyleIcon(),
           })}
