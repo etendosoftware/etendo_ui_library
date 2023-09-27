@@ -33,26 +33,31 @@ const Table = ({
         onPress={() => {
           onRowPress(findPrimaryId(columns, index));
         }}
-        style={[styles.row, paintOddRows(index)]}>
+        style={[styles.row, paintOddRows(index)]}
+      >
         {columns.map((col: Columns, colIndex: number) => {
           return (
             col.visible && (
               <View
                 style={[styles.cell, col.cellStyle, { width: col.width }]}
-                key={'movementTable' + colIndex}>
+                key={'movementTable' + colIndex}
+              >
                 {col.actions ? (
-                  col.actions?.map((itemAction: Actions, index: number) => {
-                    return (
-                      <TouchableOpacity
-                        style={styles.cellEditContainer}
-                        onPress={() =>
-                          itemAction.onAction(findPrimaryId(columns, index))
-                        }
-                        key={'tableCellCustom' + index}>
-                        {itemAction.component}
-                      </TouchableOpacity>
-                    );
-                  })
+                  col.actions?.map(
+                    (itemAction: Actions, actionIndex: number) => {
+                      return (
+                        <TouchableOpacity
+                          style={styles.cellEditContainer}
+                          onPress={() =>
+                            itemAction.onAction(findPrimaryId(columns, index))
+                          }
+                          key={'tableCellCustom' + actionIndex}
+                        >
+                          {itemAction.component}
+                        </TouchableOpacity>
+                      );
+                    },
+                  )
                 ) : (
                   <TableCell
                     label={col.key ? item[col.key] : ''}
@@ -73,7 +78,8 @@ const Table = ({
           styles.container,
           removeHeaderBorder(title),
           { height: tableHeight },
-        ]}>
+        ]}
+      >
         <TableHeaders title={title} columns={columns} />
         <FlatList
           data={data}
