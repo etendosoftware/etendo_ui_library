@@ -57,7 +57,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       ...commonButtonStyles,
     },
     textDisabled: {
-      color: QUATERNARY_50,
+      color: NEUTRAL_300,
       fontWeight: 'bold',
     },
     imageColor: PRIMARY_100,
@@ -77,7 +77,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       ...commonButtonStyles,
     },
     textDisabled: {
-      color: TERTIARY_50,
+      color: NEUTRAL_300,
       fontWeight: 'bold',
     },
     imageColor: PRIMARY_100,
@@ -95,13 +95,13 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       fontWeight: 'bold',
     },
     containerDisabled: {
-      backgroundColor: NEUTRAL_50,
+      backgroundColor: 'transparent',
       borderWidth: 2,
       borderColor: TERTIARY_50,
       ...commonButtonStyles,
     },
     textDisabled: {
-      color: TERTIARY_50,
+      color: NEUTRAL_300,
       fontWeight: 'bold',
     },
     imageColor: PRIMARY_100,
@@ -117,11 +117,11 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       fontWeight: 'bold',
     },
     containerDisabled: {
-      backgroundColor: NEUTRAL_50,
+      backgroundColor: 'transparent',
       ...commonButtonStyles,
     },
     textDisabled: {
-      color: TERTIARY_50,
+      color: NEUTRAL_300,
       fontWeight: 'bold',
     },
     imageColor: PRIMARY_100,
