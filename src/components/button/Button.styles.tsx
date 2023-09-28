@@ -15,8 +15,6 @@ const commonButtonStyles: ViewStyle = {
   flexDirection: 'row',
   justifyContent: 'center',
   alignItems: 'center',
-  paddingHorizontal: 12,
-  paddingVertical: 12,
   borderRadius: 8,
 };
 

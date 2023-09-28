@@ -20,8 +20,8 @@ const Button = ({
   height,
   iconLeft,
   iconRight,
-  paddingHorizontal,
-  paddingVertical,
+  paddingHorizontal = 12,
+  paddingVertical = 12,
 }: ButtonProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
