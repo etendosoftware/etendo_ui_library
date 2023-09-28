@@ -53,11 +53,11 @@ const Button = ({
       return ButtonStyleVariant[typeStyle].containerDisabled;
     }
     if (pressed) {
+      const hoveredBackgroundColor = getHoveredBackgroundColor(typeStyle);
       return {
         ...ButtonStyleVariant[typeStyle].container,
-
         opacity: 0.7,
-        width: width === '100%' ? '100%' : width,
+        backgroundColor: hoveredBackgroundColor,
       };
     }
     if (isHovered) {
@@ -65,7 +65,6 @@ const Button = ({
       return {
         ...ButtonStyleVariant[typeStyle].container,
         backgroundColor: hoveredBackgroundColor,
-        width: width === '100%' ? '100%' : width,
       };
     }
     return ButtonStyleVariant[typeStyle].container;
