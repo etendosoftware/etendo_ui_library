@@ -20,6 +20,8 @@ const Button = ({
   height,
   iconLeft,
   iconRight,
+  paddingHorizontal = 12,
+  paddingVertical = 12,
 }: ButtonProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -116,7 +118,7 @@ const Button = ({
         onHoverOut={handleHoverOut}
         style={({ pressed }) => [
           stateStyleContainer(pressed),
-          { height: height, width: width },
+          { height, width, paddingHorizontal, paddingVertical },
         ]}
         onPress={handleOnPress}>
         {iconLeft &&

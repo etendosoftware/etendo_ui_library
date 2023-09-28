@@ -29,4 +29,6 @@ export interface ButtonProps {
   width?: number | string;
   height?: number | string;
   fontSize?: number;
+  paddingHorizontal?: number | string;
+  paddingVertical?: number | string;
 }
