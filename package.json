@@ -24,7 +24,8 @@
     "dist-web/**/*.js",
     "dist-web/**/*.d.ts",
     "dist-native/**/*.js",
-    "dist-native/**/*.d.ts"
+    "dist-native/**/*.d.ts",
+    "index.d.ts"
   ],
   "peerDependencies": {
     "react": "*",
