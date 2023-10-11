@@ -1,6 +1,7 @@
 export const Button: any;
 export const Card: any;
 export const Input: any;
+export const Navbar: any;
 export const Pagination: any;
 export const SkeletonItem: any;
 export const StatusBar: any;
