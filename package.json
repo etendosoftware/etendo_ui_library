@@ -18,6 +18,7 @@
     "build:native": "tsc --emitDeclarationOnly --outDir dist-native && babel src --out-dir dist-native --extensions '.ts,.tsx' --config-file ./babel.config.native.js"
   },
   "main": "index.js",
+  "types": "index.d.ts",
   "license": "MIT",
   "files": [
     "dist-web/**/*.js",

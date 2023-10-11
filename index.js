@@ -10,7 +10,7 @@ import WebTable from './dist-web/components/table/Table';
 import NativeButton from './dist-native/components/button/Button';
 import NativeCard from './dist-native/components/cards/cardDropdown';
 import NativeInput from './dist-native/components/input/Input';
-import NativePagination from '.dist-native/components/pagination/Pagination';
+import NativePagination from './dist-native/components/pagination/Pagination';
 import NativeSkeletonItem from './dist-native/components/secondaryComponents/SkeletonItem';
 import NativeStatusBar from './dist-native/components/statusbar/StatusBar';
 import NativeTab from './dist-native/components/tab/Tab';
