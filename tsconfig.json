@@ -16,7 +16,7 @@
     "resolveJsonModule": true
   },
 
-  "include": ["src", "src/assets"],
+  "include": ["src", "src/assets", "index.js"],
   "exclude": [
     "node_modules",
     "**/*.stories.tsx",
