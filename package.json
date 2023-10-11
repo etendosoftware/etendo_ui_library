@@ -13,7 +13,7 @@
     "storybook-watcher": "sb-rn-watcher --config-path .ondevice",
     "storybook": "start-storybook -p 6006 -c .storybook watch-css -s ./",
     "build-storybook": "build-storybook",
-    "build": "yarn build:web && yarn build:native && yarn build:root",
+    "build": "yarn build:web && yarn build:native",
     "build:web": "tsc --emitDeclarationOnly --outDir dist-web && babel src --out-dir dist-web --extensions '.ts,.tsx' --config-file ./babel.config.web.js",
     "build:native": "tsc --emitDeclarationOnly --outDir dist-native && babel src --out-dir dist-native --extensions '.ts,.tsx' --config-file ./babel.config.native.js"
   },
