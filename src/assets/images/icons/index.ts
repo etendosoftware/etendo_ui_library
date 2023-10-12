@@ -44,6 +44,7 @@ import { StatisticsIcon } from './StatisticsIcon';
 import { TimeIcon } from './TimeIcon';
 import { TouchIcon } from './TouchIcon';
 import { TracingIcon } from './TracingIcon';
+import { TrashIcon } from './TrashIcon';
 import { UserCardIcon } from './UserCardIcon';
 import { UserIcon } from './UserIcon';
 import { UserNoBorderIcon } from './UserNoBorderIcon';
@@ -101,6 +102,7 @@ export {
   TimeIcon,
   TouchIcon,
   TracingIcon,
+  TrashIcon,
   UserCardIcon,
   UserIcon,
   UserNoBorderIcon,

@@ -10,7 +10,7 @@ const isNativeEnvironment = Platform.OS === 'ios' || Platform.OS === 'android';
 
 const {
   Button,
-  Card,
+  CardDropdown,
   Input,
   Navbar,
   Pagination,
@@ -81,7 +81,7 @@ const {
 
 export {
   Button,
-  Card,
+  CardDropdown,
   Input,
   Navbar,
   Pagination,

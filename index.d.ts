@@ -1,5 +1,5 @@
 export const Button: any;
-export const Card: any;
+export const CardDropdown: any;
 export const Input: any;
 export const Navbar: any;
 export const Pagination: any;
