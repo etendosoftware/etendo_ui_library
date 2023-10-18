@@ -114,11 +114,9 @@ const defaultTextPlaceholder: TextStyle = {
   color: NEUTRAL_600,
   fontSize: 18,
   fontWeight: '500',
-  flex: 1,
   alignItems: 'center',
   paddingLeft: 15,
   minWidth: 0,
-  display: 'flex',
   textAlignVertical: 'center',
 };
 
