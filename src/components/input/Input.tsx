@@ -44,7 +44,7 @@ const Input = ({
 
   const getDisabled = (): boolean => {
     if (typeField === 'picker') {
-      return !dataPicker.length || disabled;
+      return !dataPicker?.length || disabled;
     }
     if (typeField === 'readOnly') {
       return false;
@@ -52,7 +52,7 @@ const Input = ({
     return disabled;
   };
 
-  const showFilterSearch = showSearchInPicker ?? dataPicker?.length > 16;
+  const showFilterSearch = dataPicker && (showSearchInPicker ?? dataPicker?.length > 16);
 
   return (
     <View style={styles.inputContainer}>
