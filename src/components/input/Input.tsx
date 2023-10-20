@@ -10,7 +10,7 @@ const Input = ({
   titleImage,
   helperText,
   placeholder,
-  placeholderSearch,
+  placeholderPickerSearch,
   disabled = false,
   maxLength,
   centerText,
@@ -68,7 +68,7 @@ const Input = ({
         configField={inputVariants[typeField].field}
         styleField={stateStyle().fieldStyle}
         placeholder={placeholder}
-        placeholderSearch={placeholderSearch}
+        placeholderPickerSearch={placeholderPickerSearch}
         value={value}
         onPress={onPress}
         onSubmit={onSubmit}
