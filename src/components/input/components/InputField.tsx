@@ -27,7 +27,7 @@ const InputField = ({
   value,
   disabled,
   placeholder,
-  placeholderSearch,
+  placeholderPickerSearch,
   maxLength,
   keyboardType,
   dataPicker,
@@ -314,7 +314,7 @@ const InputField = ({
           filterValue={filterValue}
           displayKey={displayKey}
           showSearchInPicker={showSearchInPicker}
-          placeholderSearch={placeholderSearch}
+          placeholderPickerSearch={placeholderPickerSearch}
         />
       </TouchableOpacity>
     </View>

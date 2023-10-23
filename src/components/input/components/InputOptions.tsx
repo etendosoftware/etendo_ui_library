@@ -27,7 +27,7 @@ const InputOptions = ({
   onChangeFilterText,
   displayKey,
   showSearchInPicker,
-  placeholderSearch,
+  placeholderPickerSearch,
 }: InputOptionsProps) => {
   const calculatedMaxHeight = 8 + 48 * showOptionsAmount;
 
@@ -35,7 +35,7 @@ const InputOptions = ({
   const [showScroll, setShowScroll] = useState<boolean>(true);
 
   const [placeholderText, setPlaceholderText] = useState<string>(
-    placeholderSearch ?? '',
+    placeholderPickerSearch ?? '',
   );
   const [indexHover, setIndexHover] = useState<number>(-1);
   const textInputRef = useRef<TextInput>(null);
@@ -49,8 +49,8 @@ const InputOptions = ({
 
   const handleOnBlur = () => {
     setShowSearchImg(true);
-    if (placeholderSearch) {
-      setPlaceholderText(placeholderSearch);
+    if (placeholderPickerSearch) {
+      setPlaceholderText(placeholderPickerSearch);
     }
   };
 
@@ -62,8 +62,8 @@ const InputOptions = ({
 
   const handlePressOverlay = () => {
     onClose();
-    if (placeholderSearch) {
-      setPlaceholderText(placeholderSearch);
+    if (placeholderPickerSearch) {
+      setPlaceholderText(placeholderPickerSearch);
     }
     setShowSearchImg(true);
   };
@@ -100,10 +100,10 @@ const InputOptions = ({
   };
 
   useEffect(() => {
-    if (placeholderSearch) {
-      setPlaceholderText(placeholderSearch);
+    if (placeholderPickerSearch) {
+      setPlaceholderText(placeholderPickerSearch);
     }
-  }, [placeholderSearch]);
+  }, [placeholderPickerSearch]);
 
   return (
     <>
@@ -121,14 +121,16 @@ const InputOptions = ({
               top: positionModal.top,
               left: positionModal.left,
             },
-          ]}>
+          ]}
+        >
           {showSearchInPicker && (
             <Pressable
               onPress={handleOnFocus}
               style={[
                 styles.optionFilterContainer,
                 removePadding(!filterValue && showSearchImg),
-              ]}>
+              ]}
+            >
               {filterValue === '' && showSearchImg && (
                 <View style={styles.searchContainer}>
                   <SearchIcon
@@ -154,7 +156,8 @@ const InputOptions = ({
               {filterValue !== '' && (
                 <TouchableOpacity
                   style={styles.cancelContainer}
-                  onPress={handleCancelFilter}>
+                  onPress={handleCancelFilter}
+                >
                   <CancelIcon style={styles.cancelFilterImg} />
                 </TouchableOpacity>
               )}
@@ -169,7 +172,8 @@ const InputOptions = ({
             persistentScrollbar
             showsVerticalScrollIndicator
             indicatorStyle={'black'}
-            onContentSizeChange={onContentSizeChange}>
+            onContentSizeChange={onContentSizeChange}
+          >
             {data?.map((item: any, index: number) => {
               return (
                 <Pressable
@@ -192,12 +196,14 @@ const InputOptions = ({
                     getBackground(index),
                     addRadius(index === data?.length - 1),
                   ]}
-                  onPress={() => handleOptionSelected(item, index)}>
+                  onPress={() => handleOptionSelected(item, index)}
+                >
                   {displayKey && (
                     <Text
                       numberOfLines={1}
                       ellipsizeMode="tail"
-                      style={styles.optionText}>
+                      style={styles.optionText}
+                    >
                       {item[displayKey]}
                     </Text>
                   )}

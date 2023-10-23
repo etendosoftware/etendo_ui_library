@@ -62,7 +62,7 @@ export interface InputProps {
   value: string;
   helperText?: string;
   placeholder?: string;
-  placeholderSearch?: string;
+  placeholderPickerSearch?: string;
   disabled?: boolean;
   isError?: boolean;
   maxLength?: number;
@@ -71,7 +71,7 @@ export interface InputProps {
   keyboardType?: KeyboardTypes;
   fontSize?: number;
   height?: number | string;
-  dataPicker?: any;
+  dataPicker?: Array<Record<string, any>>;
   displayKey?: string;
   showOptionsAmount?: number;
   showSearchInPicker?: boolean;
@@ -80,7 +80,7 @@ export interface InputProps {
   onChangeText?: (text: string) => void;
   onFocus?: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   onBlur?: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
-  onOptionSelected?: any;
+  onOptionSelected?: (selectedItem: Array<Record<string, any>>) => void;
   backgroundColor?: ColorValue;
 }
 
@@ -100,7 +100,7 @@ export interface InputFieldProps {
   disabled?: boolean;
   value?: string;
   placeholder?: string;
-  placeholderSearch?: string;
+  placeholderPickerSearch?: string;
   configField: InputFieldConfigType;
   keyboardType?: KeyboardTypes;
   styleField: {
@@ -149,5 +149,5 @@ export interface InputOptionsProps {
   onClose: (event?: GestureResponderEvent) => void;
   onChangeFilterText: (text: string) => void;
   filterValue: string;
-  placeholderSearch?: string;
+  placeholderPickerSearch?: string;
 }
