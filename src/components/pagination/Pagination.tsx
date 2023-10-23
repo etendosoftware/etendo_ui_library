@@ -1,8 +1,7 @@
 /* Imports */
-import React, { useState } from 'react';
-
+import React, { useEffect, useState } from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
-import { PaginationStyleVariant } from './Pagination.styles';
+import { paginationStyleVariant } from './Pagination.styles';
 import { PaginationProps } from './Pagination.types';
 import { ArrowLeftIcon } from '../../assets/images/icons/ArrowLeftIcon';
 import { ArrowFirstIcon } from '../../assets/images/icons/ArrowFirstIcon';
@@ -15,7 +14,6 @@ const Pagination = ({
   onChangeSelected,
   totalData,
   amountDataPerPage,
-  pagination,
 }: PaginationProps) => {
   // Will serve to set the page number where the user is
   const [page, setPage] = useState<number>(currentPage);
@@ -32,31 +30,37 @@ const Pagination = ({
     setPage(1);
   };
 
-  const backPage = (page: number) => {
-    setPage(page - 1);
+  const backPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
   };
 
-  const nextPage = (page: number) => {
-    setPage(page + 1);
+  const nextPage = () => {
+    if (page < Math.ceil(totalData / amountDataPerPage)) {
+      setPage(page + 1);
+    }
   };
 
   const nextLastPage = (pageNumbers: Array<number>) => {
     setPage(pageNumbers.length);
   };
+
+  useEffect(() => {
+    onChangeSelected(page, (page - 1) * amountDataPerPage);
+  }, [page, amountDataPerPage, onChangeSelected]);
+
   return (
-    <View style={PaginationStyleVariant.primary.container}>
-      <View style={PaginationStyleVariant.primary.container}>
+    <View style={paginationStyleVariant.primary.container}>
+      <View style={paginationStyleVariant.primary.container}>
         <TouchableOpacity
           disabled={page <= 1 || totalData === 0}
-          onPress={() => {
-            /* Allows to detect the selected item */
-            backToFirstPage();
-            onChangeSelected(1, 0);
-          }}>
+          onPress={backToFirstPage}
+        >
           <ArrowFirstIcon
             style={{
-              width: 10,
               height: 10,
+              width: 10,
               marginRight: 10,
             }}
           />
@@ -64,12 +68,8 @@ const Pagination = ({
 
         <TouchableOpacity
           disabled={page <= 1 || totalData === 0}
-          onPress={() => {
-            backPage(page);
-            if (page !== 1) {
-              onChangeSelected(page - 1, pagination - amountDataPerPage);
-            }
-          }}>
+          onPress={backPage}
+        >
           <ArrowLeftIcon
             style={{
               height: 10,
@@ -80,8 +80,8 @@ const Pagination = ({
         </TouchableOpacity>
 
         {/* Text with layout to display the page number the user is on */}
-        <View style={PaginationStyleVariant.primary.pageNumberContainer}>
-          <Text style={PaginationStyleVariant.primary.pageNumberText}>
+        <View style={paginationStyleVariant.primary.pageNumberContainer}>
+          <Text style={paginationStyleVariant.primary.pageNumberText}>
             {page}
           </Text>
         </View>
@@ -89,11 +89,9 @@ const Pagination = ({
         <TouchableOpacity
           disabled={page === pageNumbers.length || totalData === 0}
           onPress={() => {
-            nextPage(page);
-            if (page !== Math.ceil(totalData / 8)) {
-              onChangeSelected(page + 1, pagination + amountDataPerPage);
-            }
-          }}>
+            nextPage();
+          }}
+        >
           <ArrowRightIcon
             style={{
               height: 10,
@@ -113,7 +111,8 @@ const Pagination = ({
                 totalData - (totalData % amountDataPerPage) - 8,
               );
             }
-          }}>
+          }}
+        >
           <ArrowLastIcon
             style={{
               height: 10,

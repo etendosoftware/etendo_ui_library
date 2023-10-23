@@ -1,19 +1,14 @@
-/* Imports */
 import { QUATERNARY_50 } from '../../styles/colors';
-import {PaginationStyleRecord} from './Pagination.types';
-
+import { PaginationStyleVariant } from './Pagination.types';
 import { StyleSheet } from 'react-native';
 
-/* Export of different styles */
-export const PaginationStyleVariant: PaginationStyleRecord = {
-  /* Primary style */
+export const paginationStyleVariant: PaginationStyleVariant = {
   primary: {
     container: {
       flex: 1,
       width: 120,
       height: 22,
       flexDirection: 'row',
-      justifyContent: 'flex-end',
       alignItems: 'center',
     },
     icon: {
@@ -41,5 +36,5 @@ export const PaginationStyleVariant: PaginationStyleRecord = {
 export const styles = StyleSheet.create({
   storiesContainer: {
     height: 50,
-  }
+  },
 });
