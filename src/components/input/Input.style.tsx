@@ -117,8 +117,10 @@ const defaultTextPlaceholder: TextStyle = {
   alignItems: 'center',
   paddingLeft: 15,
   minWidth: 0,
+  flex: 1,
   textAlignVertical: 'center',
 };
+
 
 const defaultHelperText: TextStyle = {
   color: NEUTRAL_60,
