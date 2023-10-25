@@ -1,18 +1,19 @@
 // Imports
-import React, {useEffect, useState} from 'react';
-import {View, Text, Pressable} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, Pressable, ScrollView } from 'react-native';
 import {
-  NEUTRAL_0,
+  NEUTRAL_200,
+  NEUTRAL_500,
   PRIMARY_100,
   SECONDARY_100,
-  TERTIARY_30,
   TERTIARY_50,
+  TERTIARY_80,
 } from '../../styles/colors';
-import {TabItemType, TabProps} from './Tab.types';
-import {styles} from './Tab.styles';
+import { TabItemType, TabProps } from './Tab.types';
+import { TabStyleVariants } from './Tab.styles';
 
-const Tab = ({data, currentIndex, onPressTab}: TabProps) => {
-  const [hoveredTab, setHoveredTab] = useState<number | null>(null);
+const Tab = ({ data, currentIndex, onPressTab, typeStyle }: TabProps) => {
+  const [hoveredTab, setHoveredTab] = useState<number | null>();
   const [currentIndexSelected, setCurrentIndexSelected] = useState<number>(0);
 
   useEffect(() => {
@@ -33,40 +34,67 @@ const Tab = ({data, currentIndex, onPressTab}: TabProps) => {
     }
     setCurrentIndexSelected(index);
   };
+  const hoveredStyle = (index: number) => {
+    let HoveredColor;
+    if (index === hoveredTab) {
+      HoveredColor = TERTIARY_80;
+      return HoveredColor;
+    } else {
+      HoveredColor = TERTIARY_50;
+      return HoveredColor;
+    }
+  };
 
+  const getTabStyle = (index: number) => {
+    switch (typeStyle) {
+      case 'primary':
+        return {
+          borderTopColor:
+            index === currentIndexSelected ? SECONDARY_100 : 'transparent',
+          borderBottomColor:
+            index === currentIndexSelected ? PRIMARY_100 : NEUTRAL_500,
+          borderBottomWidth: index === currentIndexSelected ? 2 : 1,
+        };
+      case 'secondary':
+        return {
+          backgroundColor:
+            index === currentIndexSelected ? SECONDARY_100 : NEUTRAL_200,
+        };
+      case 'terciary':
+        return {
+          backgroundColor:
+            index === currentIndexSelected ? PRIMARY_100 : hoveredStyle(index),
+          borderTopColor:
+            index === currentIndexSelected ? SECONDARY_100 : 'transparent',
+        };
+    }
+  };
   return (
-    <View style={styles.container}>
-      {data?.map((item: TabItemType, index: number) => (
-        <Pressable
-          key={index}
-          style={[
-            styles.tab,
-            {
-              backgroundColor:
-                index === currentIndexSelected
-                  ? PRIMARY_100
-                  : index === hoveredTab
-                  ? TERTIARY_30
-                  : TERTIARY_50,
-              borderTopColor:
-                index === currentIndexSelected ? SECONDARY_100 : 'transparent',
-            },
-          ]}
-          onPress={() => handleOnPress(item, index)}
-          onHoverIn={() => handleHoverIn(index)}
-          onHoverOut={handleHoverOut}
-        >
-          <Text
-            ellipsizeMode="tail"
-            numberOfLines={1}
-            style={{
-              color: index === currentIndexSelected ? NEUTRAL_0 : PRIMARY_100,
-            }}
+    <View style={[TabStyleVariants[typeStyle].container]}>
+      <ScrollView horizontal>
+        {data?.map((item: TabItemType, index: number) => (
+          <Pressable
+            key={item.route}
+            style={({ pressed }) => [
+              TabStyleVariants[typeStyle].tab,
+              getTabStyle(index),
+            ]}
+            onPress={() => handleOnPress(item, index)}
+            onHoverIn={() => handleHoverIn(index)}
+            onHoverOut={handleHoverOut}
           >
-            {item.name}
-          </Text>
-        </Pressable>
-      ))}
+            <Text
+              style={[
+                index === currentIndexSelected
+                  ? TabStyleVariants[typeStyle].text
+                  : TabStyleVariants[typeStyle].textDisabled,
+              ]}
+            >
+              {item.name}
+            </Text>
+          </Pressable>
+        ))}
+      </ScrollView>
     </View>
   );
 };
