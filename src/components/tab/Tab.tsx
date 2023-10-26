@@ -10,7 +10,7 @@ import {
   TERTIARY_80,
 } from '../../styles/colors';
 import { TabItemType, TabProps } from './Tab.types';
-import { TabStyleVariants } from './Tab.styles';
+import { TabStyleVariants, mapContainerViewStyle } from './Tab.styles';
 
 const Tab = ({ data, currentIndex, onPressTab, typeStyle }: TabProps) => {
   const [hoveredTab, setHoveredTab] = useState<number | null>();
@@ -34,6 +34,7 @@ const Tab = ({ data, currentIndex, onPressTab, typeStyle }: TabProps) => {
     }
     setCurrentIndexSelected(index);
   };
+
   const hoveredStyle = (index: number) => {
     let HoveredColor;
     if (index === hoveredTab) {
@@ -69,9 +70,42 @@ const Tab = ({ data, currentIndex, onPressTab, typeStyle }: TabProps) => {
         };
     }
   };
+
+  const [hasScroll, setHasScroll] = useState(false);
+
+  const [containerWidth, setContainerWidth] = useState(0);
+  const [mapContainer, setMapContainer] = useState(0);
+
+  const handleContainerLayout = (event: any) => {
+    const width = event.nativeEvent.layout.width;
+    setContainerWidth(width);
+  };
+  const handleMapContainerLayout = (event: any) => {
+    const width = event.nativeEvent.layout.width;
+    setMapContainer(width);
+  };
+
+  useEffect(() => {
+    if (mapContainer > containerWidth) {
+      setHasScroll(true);
+    } else {
+      setHasScroll(false);
+    }
+  }, [containerWidth]);
+
   return (
-    <View style={[TabStyleVariants[typeStyle].container]}>
-      <ScrollView horizontal>
+    <ScrollView
+      onLayout={handleContainerLayout}
+      horizontal
+      contentContainerStyle={[
+        TabStyleVariants[typeStyle].container,
+        !hasScroll && { flex: 1 },
+      ]}
+    >
+      <View
+        onLayout={handleMapContainerLayout}
+        style={{ ...mapContainerViewStyle }}
+      >
         {data?.map((item: TabItemType, index: number) => (
           <Pressable
             key={item.route}
@@ -94,8 +128,8 @@ const Tab = ({ data, currentIndex, onPressTab, typeStyle }: TabProps) => {
             </Text>
           </Pressable>
         ))}
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 };
 

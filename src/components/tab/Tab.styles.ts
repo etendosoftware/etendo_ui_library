@@ -9,11 +9,16 @@ import { tabStyleVariant } from './Tab.types';
 import { ViewStyle } from 'react-native';
 
 const commonTabStyles: ViewStyle = {
-  flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
-  flexShrink: 1,
 };
+
+export const mapContainerViewStyle: ViewStyle = {
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'center',
+}; 
+
 
 export const TabStyleVariants: tabStyleVariant = {
   primary: {
@@ -45,14 +50,13 @@ export const TabStyleVariants: tabStyleVariant = {
       paddingVertical: 12,
     },
     tab: {
-      flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
+      flex: 1,
       height: 40,
       borderRadius: 6,
       marginHorizontal: 8,
       paddingHorizontal: 8,
-      paddingVertical: 4,
     },
     text: {
       color: PRIMARY_100,
@@ -73,7 +77,6 @@ export const TabStyleVariants: tabStyleVariant = {
       borderBottomWidth: 3,
       borderBottomColor: PRIMARY_100,
       borderTopWidth: 4,
-      flex: 1,
       height: 40,
       paddingHorizontal: 10,
     },
