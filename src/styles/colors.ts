@@ -16,7 +16,7 @@ export const SECONDARY_300 = '#FDEC71';
 export const TERTIARY_10 = '#F2F5F9';
 export const TERTIARY_30 = '#EFF1F7';
 export const TERTIARY_50 = '#EDF1FF';
-export const TERTIARY_80 = '#e0e7ff';
+export const TERTIARY_80 = '#E0E7FF';
 export const TERTIARY_100 = '#808695';
 export const TERTIARY_800 = '#151C7A';
 
