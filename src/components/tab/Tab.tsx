@@ -4,6 +4,7 @@ import { View, Text, Pressable, ScrollView } from 'react-native';
 import {
   NEUTRAL_200,
   NEUTRAL_500,
+  NEUTRAL_700,
   PRIMARY_100,
   SECONDARY_100,
   TERTIARY_50,
@@ -50,16 +51,22 @@ const Tab = ({ data, currentIndex, onPressTab, typeStyle }: TabProps) => {
     switch (typeStyle) {
       case 'primary':
         return {
-          borderTopColor:
-            index === currentIndexSelected ? SECONDARY_100 : 'transparent',
           borderBottomColor:
-            index === currentIndexSelected ? PRIMARY_100 : NEUTRAL_500,
+            index === currentIndexSelected
+              ? PRIMARY_100
+              : index === hoveredTab
+              ? NEUTRAL_700
+              : NEUTRAL_500,
           borderBottomWidth: index === currentIndexSelected ? 2 : 1,
         };
       case 'secondary':
         return {
           backgroundColor:
-            index === currentIndexSelected ? SECONDARY_100 : NEUTRAL_200,
+            index === currentIndexSelected
+              ? SECONDARY_100
+              : index === hoveredTab
+              ? TERTIARY_50
+              : NEUTRAL_200,
         };
       case 'terciary':
         return {
@@ -100,12 +107,10 @@ const Tab = ({ data, currentIndex, onPressTab, typeStyle }: TabProps) => {
       contentContainerStyle={[
         TabStyleVariants[typeStyle].container,
         !hasScroll && { flex: 1 },
-      ]}
-    >
+      ]}>
       <View
         onLayout={handleMapContainerLayout}
-        style={{ ...mapContainerViewStyle }}
-      >
+        style={{ ...mapContainerViewStyle }}>
         {data?.map((item: TabItemType, index: number) => (
           <Pressable
             key={item.route}
@@ -115,15 +120,15 @@ const Tab = ({ data, currentIndex, onPressTab, typeStyle }: TabProps) => {
             ]}
             onPress={() => handleOnPress(item, index)}
             onHoverIn={() => handleHoverIn(index)}
-            onHoverOut={handleHoverOut}
-          >
+            onHoverOut={handleHoverOut}>
             <Text
               style={[
                 index === currentIndexSelected
                   ? TabStyleVariants[typeStyle].text
+                  : index === hoveredTab
+                  ? TabStyleVariants[typeStyle].hoveredColor
                   : TabStyleVariants[typeStyle].textDisabled,
-              ]}
-            >
+              ]}>
               {item.name}
             </Text>
           </Pressable>

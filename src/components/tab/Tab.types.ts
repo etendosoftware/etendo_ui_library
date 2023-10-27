@@ -15,6 +15,7 @@ export type tabStyleVariant = Record<
     tab: ViewStyle;
     text: StyleProp<TextStyle>;
     textDisabled: TextStyle;
+    hoveredColor: StyleProp<TextStyle>;
   }
 >;
 

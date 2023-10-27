@@ -3,6 +3,7 @@ import {
   NEUTRAL_50,
   NEUTRAL_500,
   NEUTRAL_600,
+  NEUTRAL_700,
   PRIMARY_100,
 } from '../../styles/colors';
 import { tabStyleVariant } from './Tab.types';
@@ -17,8 +18,7 @@ export const mapContainerViewStyle: ViewStyle = {
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'center',
-}; 
-
+};
 
 export const TabStyleVariants: tabStyleVariant = {
   primary: {
@@ -29,7 +29,6 @@ export const TabStyleVariants: tabStyleVariant = {
       justifyContent: 'center',
       alignItems: 'center',
       borderBottomWidth: 3,
-      flex: 1,
       height: 40,
       paddingHorizontal: 8,
     },
@@ -39,6 +38,10 @@ export const TabStyleVariants: tabStyleVariant = {
     },
     textDisabled: {
       color: NEUTRAL_500,
+      fontWeight: 'bold',
+    },
+    hoveredColor: {
+      color: NEUTRAL_700,
       fontWeight: 'bold',
     },
   },
@@ -52,7 +55,6 @@ export const TabStyleVariants: tabStyleVariant = {
     tab: {
       justifyContent: 'center',
       alignItems: 'center',
-      flex: 1,
       height: 40,
       borderRadius: 6,
       marginHorizontal: 8,
@@ -64,6 +66,10 @@ export const TabStyleVariants: tabStyleVariant = {
     },
     textDisabled: {
       color: NEUTRAL_600,
+      fontWeight: 'bold',
+    },
+    hoveredColor: {
+      color: PRIMARY_100,
       fontWeight: 'bold',
     },
   },
@@ -86,5 +92,6 @@ export const TabStyleVariants: tabStyleVariant = {
     textDisabled: {
       color: PRIMARY_100,
     },
+    hoveredColor: {},
   },
 };
