@@ -47,26 +47,46 @@ const Tab = ({ data, currentIndex, onPressTab, typeStyle }: TabProps) => {
     }
   };
 
+  const getPrimaryBorderColor = (index: number) => {
+    if (index === currentIndexSelected) {
+      return PRIMARY_100;
+    } else if (index === hoveredTab) {
+      return NEUTRAL_700;
+    } else {
+      return NEUTRAL_500;
+    }
+  };
+
+  const getSecondaryBackgroundColor = (index: number) => {
+    if (index === currentIndexSelected) {
+      return SECONDARY_100;
+    } else if (index === hoveredTab) {
+      return TERTIARY_50;
+    } else {
+      return NEUTRAL_200;
+    }
+  };
+
+  const getTabTextStyle = (index: number) => {
+    if (index === currentIndexSelected) {
+      return TabStyleVariants[typeStyle].text;
+    } else if (index === hoveredTab) {
+      return TabStyleVariants[typeStyle].hoveredColor;
+    } else {
+      return TabStyleVariants[typeStyle].textDisabled;
+    }
+  };
+
   const getTabStyle = (index: number) => {
     switch (typeStyle) {
       case 'primary':
         return {
-          borderBottomColor:
-            index === currentIndexSelected
-              ? PRIMARY_100
-              : index === hoveredTab
-              ? NEUTRAL_700
-              : NEUTRAL_500,
+          borderBottomColor: getPrimaryBorderColor(index),
           borderBottomWidth: index === currentIndexSelected ? 2 : 1,
         };
       case 'secondary':
         return {
-          backgroundColor:
-            index === currentIndexSelected
-              ? SECONDARY_100
-              : index === hoveredTab
-              ? TERTIARY_50
-              : NEUTRAL_200,
+          backgroundColor: getSecondaryBackgroundColor(index),
         };
       case 'terciary':
         return {
@@ -121,16 +141,7 @@ const Tab = ({ data, currentIndex, onPressTab, typeStyle }: TabProps) => {
             onPress={() => handleOnPress(item, index)}
             onHoverIn={() => handleHoverIn(index)}
             onHoverOut={handleHoverOut}>
-            <Text
-              style={[
-                index === currentIndexSelected
-                  ? TabStyleVariants[typeStyle].text
-                  : index === hoveredTab
-                  ? TabStyleVariants[typeStyle].hoveredColor
-                  : TabStyleVariants[typeStyle].textDisabled,
-              ]}>
-              {item.name}
-            </Text>
+            <Text style={getTabTextStyle(index)}>{item.name}</Text>
           </Pressable>
         ))}
       </View>
