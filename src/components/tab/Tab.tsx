@@ -4,6 +4,7 @@ import { View, Text, Pressable, ScrollView } from 'react-native';
 import {
   NEUTRAL_200,
   NEUTRAL_500,
+  NEUTRAL_700,
   PRIMARY_100,
   SECONDARY_100,
   TERTIARY_50,
@@ -46,20 +47,46 @@ const Tab = ({ data, currentIndex, onPressTab, typeStyle }: TabProps) => {
     }
   };
 
+  const getPrimaryBorderColor = (index: number) => {
+    if (index === currentIndexSelected) {
+      return PRIMARY_100;
+    } else if (index === hoveredTab) {
+      return NEUTRAL_700;
+    } else {
+      return NEUTRAL_500;
+    }
+  };
+
+  const getSecondaryBackgroundColor = (index: number) => {
+    if (index === currentIndexSelected) {
+      return SECONDARY_100;
+    } else if (index === hoveredTab) {
+      return TERTIARY_50;
+    } else {
+      return NEUTRAL_200;
+    }
+  };
+
+  const getTabTextStyle = (index: number) => {
+    if (index === currentIndexSelected) {
+      return TabStyleVariants[typeStyle].text;
+    } else if (index === hoveredTab) {
+      return TabStyleVariants[typeStyle].hoveredColor;
+    } else {
+      return TabStyleVariants[typeStyle].textDisabled;
+    }
+  };
+
   const getTabStyle = (index: number) => {
     switch (typeStyle) {
       case 'primary':
         return {
-          borderTopColor:
-            index === currentIndexSelected ? SECONDARY_100 : 'transparent',
-          borderBottomColor:
-            index === currentIndexSelected ? PRIMARY_100 : NEUTRAL_500,
+          borderBottomColor: getPrimaryBorderColor(index),
           borderBottomWidth: index === currentIndexSelected ? 2 : 1,
         };
       case 'secondary':
         return {
-          backgroundColor:
-            index === currentIndexSelected ? SECONDARY_100 : NEUTRAL_200,
+          backgroundColor: getSecondaryBackgroundColor(index),
         };
       case 'terciary':
         return {
@@ -100,12 +127,10 @@ const Tab = ({ data, currentIndex, onPressTab, typeStyle }: TabProps) => {
       contentContainerStyle={[
         TabStyleVariants[typeStyle].container,
         !hasScroll && { flex: 1 },
-      ]}
-    >
+      ]}>
       <View
         onLayout={handleMapContainerLayout}
-        style={{ ...mapContainerViewStyle }}
-      >
+        style={{ ...mapContainerViewStyle }}>
         {data?.map((item: TabItemType, index: number) => (
           <Pressable
             key={item.route}
@@ -115,17 +140,8 @@ const Tab = ({ data, currentIndex, onPressTab, typeStyle }: TabProps) => {
             ]}
             onPress={() => handleOnPress(item, index)}
             onHoverIn={() => handleHoverIn(index)}
-            onHoverOut={handleHoverOut}
-          >
-            <Text
-              style={[
-                index === currentIndexSelected
-                  ? TabStyleVariants[typeStyle].text
-                  : TabStyleVariants[typeStyle].textDisabled,
-              ]}
-            >
-              {item.name}
-            </Text>
+            onHoverOut={handleHoverOut}>
+            <Text style={getTabTextStyle(index)}>{item.name}</Text>
           </Pressable>
         ))}
       </View>
