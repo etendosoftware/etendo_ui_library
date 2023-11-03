@@ -88,7 +88,7 @@ const InputField = ({
         const calcDropdownTopLeft =
           pageY + height + styles.spaceInOptionsAndInput.height;
 
-        const showFilterHeight = showSearchInPicker
+        const showFilterHeight: any = showSearchInPicker
           ? styles.optionFilterContainer.height
           : 0;
         const optionsHeight =
