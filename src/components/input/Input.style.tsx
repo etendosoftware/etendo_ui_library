@@ -121,11 +121,20 @@ const defaultTextPlaceholder: TextStyle = {
   textAlignVertical: 'center',
 };
 
-
 const defaultHelperText: TextStyle = {
   color: NEUTRAL_60,
   fontSize: 16,
   fontWeight: '500',
+};
+
+const defaultFilterContainer: ViewStyle = {
+  height: 50,
+  borderTopWidth: 1,
+  borderTopColor: NEUTRAL_10,
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  marginHorizontal: 13,
 };
 
 export const inputStyleVariants: TypeInputStyleVariant = {
@@ -285,19 +294,15 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 1.5,
     borderColor: NEUTRAL_500,
-    zIndex: 2,
   },
   optionsItemsContainer: {
     maxHeight: 392,
   },
   optionFilterContainer: {
-    height: 50,
-    borderBottomWidth: 1,
-    borderBottomColor: NEUTRAL_10,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginHorizontal: 13,
+    ...defaultFilterContainer,
+  },
+  optionTopFilterContainer: {
+    ...defaultFilterContainer,
   },
   optionFilterImg: {
     width: 15,

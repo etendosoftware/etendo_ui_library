@@ -7,6 +7,10 @@ import {
   TouchableOpacity,
   View,
   ViewStyle,
+  Platform,
+  Keyboard,
+  KeyboardEvent,
+  Dimensions,
 } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
 import { styles } from '../Input.style';
@@ -21,16 +25,15 @@ const InputOptions = ({
   onOptionSelected,
   showOptions,
   positionModal,
-  showOptionsAmount = 4,
+  showOptionsAmount,
   onClose,
   filterValue,
   onChangeFilterText,
   displayKey,
   showSearchInPicker,
   placeholderPickerSearch,
+  optionsTop,
 }: InputOptionsProps) => {
-  const calculatedMaxHeight = 8 + 48 * showOptionsAmount;
-
   const [showSearchImg, setShowSearchImg] = useState<boolean>(true);
   const [showScroll, setShowScroll] = useState<boolean>(true);
 
@@ -93,7 +96,39 @@ const InputOptions = ({
   const handleCancelFilter = () => {
     onChangeFilterText('');
   };
+  const useKeyboard = () => {
+    const [keyboardHeight, setKeyboardHeight] = useState(0);
 
+    useEffect(() => {
+      function onKeyboardDidShow(e: KeyboardEvent) {
+        setKeyboardHeight(e.endCoordinates.height);
+      }
+
+      function onKeyboardDidHide() {
+        setKeyboardHeight(0);
+      }
+
+      const showSubscription = Keyboard.addListener(
+        'keyboardDidShow',
+        onKeyboardDidShow,
+      );
+      const hideSubscription = Keyboard.addListener(
+        'keyboardDidHide',
+        onKeyboardDidHide,
+      );
+      return () => {
+        showSubscription.remove();
+        hideSubscription.remove();
+      };
+    }, []);
+
+    return keyboardHeight;
+  };
+
+  const screenHeight = Dimensions.get('screen').height - useKeyboard();
+  const calculatedMaxHeight = showOptionsAmount
+    ? 8 + 48 * showOptionsAmount
+    : screenHeight;
   const onContentSizeChange = (contentWidth: number, contentHeight: number) => {
     const containerHeight = calculatedMaxHeight;
     setShowScroll(contentHeight > containerHeight);
@@ -105,24 +140,133 @@ const InputOptions = ({
     }
   }, [placeholderPickerSearch]);
 
+  const keyboardHeight = useKeyboard();
+  const bottomValue = positionModal.bottom || 0;
+  const heightValue = positionModal.height || 0;
+
+  const bottomDevices = () => {
+    if (Platform.OS === 'web') {
+      return bottomValue;
+    } else if (keyboardHeight !== 0) {
+      return 0;
+    } else {
+      return bottomValue - heightValue * 2 - keyboardHeight;
+    }
+  };
+
   return (
-    <>
-      <Modal transparent={true} visible={showOptions} animationType="fade">
-        <TouchableOpacity
-          style={styles.optionOverlay}
-          onPress={handlePressOverlay}
-          activeOpacity={1}
-        />
+    <Modal transparent={true} visible={showOptions} animationType="fade">
+      <TouchableOpacity
+        style={styles.optionOverlay}
+        onPress={handlePressOverlay}
+        activeOpacity={1}
+      />
+      {optionsTop ? (
         <View
           style={[
             styles.optionsContainer,
             {
               width: positionModal.width,
-              top: positionModal.top,
               left: positionModal.left,
+              bottom: bottomDevices(),
+              top: keyboardHeight !== 0 || !showOptionsAmount ? 0 : undefined,
             },
-          ]}
-        >
+          ]}>
+          <ScrollView
+            style={[
+              showScroll && { marginRight: 8 },
+              { maxHeight: calculatedMaxHeight },
+              styles.scrollOptions,
+            ]}
+            keyboardShouldPersistTaps="always"
+            persistentScrollbar
+            showsVerticalScrollIndicator
+            indicatorStyle={'black'}
+            onContentSizeChange={onContentSizeChange}>
+            {data?.map((item: any, index: number) => {
+              return (
+                <Pressable
+                  onHoverIn={() => {
+                    setIndexHover(index);
+                  }}
+                  onHoverOut={() => {
+                    setIndexHover(-1);
+                  }}
+                  onPressIn={() => {
+                    setIndexHover(index);
+                  }}
+                  onPressOut={() => {
+                    setIndexHover(-1);
+                  }}
+                  key={index}
+                  style={[
+                    styles.optionContainer,
+                    0 === index && { marginTop: 0 },
+                    getBackground(index),
+                    addRadius(index === data?.length - 1),
+                  ]}
+                  onPress={() => handleOptionSelected(item, index)}>
+                  {displayKey && (
+                    <Text
+                      numberOfLines={1}
+                      ellipsizeMode="tail"
+                      style={styles.optionText}>
+                      {item[displayKey]}
+                    </Text>
+                  )}
+                </Pressable>
+              );
+            })}
+          </ScrollView>
+          {showSearchInPicker && (
+            <Pressable
+              onPress={handleOnFocus}
+              style={[
+                styles.optionTopFilterContainer,
+                removePadding(!filterValue && showSearchImg),
+              ]}>
+              {filterValue === '' && showSearchImg && (
+                <View style={styles.searchContainer}>
+                  <SearchIcon
+                    style={styles.optionFilterImg}
+                    fill={NEUTRAL_600}
+                  />
+                </View>
+              )}
+              <TextInput
+                ref={textInputRef}
+                onFocus={handleOnFocus}
+                onBlur={handleOnBlur}
+                style={[
+                  styles.optionFilterText,
+                  addPadding(!filterValue && showSearchImg),
+                  disableOutline(),
+                ]}
+                value={filterValue}
+                onChangeText={onChangeFilterText}
+                placeholder={placeholderText}
+                placeholderTextColor={NEUTRAL_600}
+              />
+              {filterValue !== '' && (
+                <TouchableOpacity
+                  style={styles.cancelContainer}
+                  onPress={handleCancelFilter}>
+                  <CancelIcon style={styles.cancelFilterImg} />
+                </TouchableOpacity>
+              )}
+            </Pressable>
+          )}
+        </View>
+      ) : (
+        <View
+          style={[
+            styles.optionsContainer,
+            {
+              width: positionModal.width,
+              left: positionModal.left,
+              top: positionModal.top,
+            },
+          ]}>
           {showSearchInPicker && (
             <Pressable
               onPress={handleOnFocus}
@@ -169,6 +313,7 @@ const InputOptions = ({
               { maxHeight: calculatedMaxHeight },
               styles.scrollOptions,
             ]}
+            keyboardShouldPersistTaps="always"
             persistentScrollbar
             showsVerticalScrollIndicator
             indicatorStyle={'black'}
@@ -212,8 +357,8 @@ const InputOptions = ({
             })}
           </ScrollView>
         </View>
-      </Modal>
-    </>
+      )}
+    </Modal>
   );
 };
 
