@@ -247,34 +247,21 @@ const InputField = ({
         onPress={handleOnPress}
       >
         {configField?.type === 'textInput' &&
-          (value ? (
-            <TextInput
-              editable={!disabled || !configField.disabledField}
-              focusable={!disabled || !configField.disabledField}
-              onBlur={onPressBlur}
-              onFocus={onPressFocus}
-              value={value}
-              keyboardType={getKeyboardType(keyboardType)}
-              onChangeText={getOnChangeText}
-              style={[getStyleText(), disableOutline(), styleField.textDefault]}
-              placeholder={placeholder}
-              placeholderTextColor={NEUTRAL_600}
-              maxLength={maxLength}
-              secureTextEntry={type === 'textInputPassword' && showPassword}
-            />
-          ) : (
-            <Text
-              numberOfLines={1}
-              ellipsizeMode="tail"
-              style={[
-                getStyleText(),
-                disableOutline(),
-                styleField.textPlaceholder,
-              ]}
-            >
-              {placeholder}
-            </Text>
-          ))}
+          (
+          <TextInput
+            editable={!disabled || !configField.disabledField}
+            focusable={!disabled || !configField.disabledField}
+            onBlur={onPressBlur}
+            onFocus={onPressFocus}
+            value={value}
+            keyboardType={getKeyboardType(keyboardType)}
+            onChangeText={getOnChangeText}
+            style={[getStyleText(), disableOutline(), styleField.textDefault]}
+            placeholder={placeholder}
+            placeholderTextColor={NEUTRAL_600}
+            maxLength={maxLength}
+            secureTextEntry={type === 'textInputPassword' && showPassword}
+          />)}
         {configField?.type === 'text' && (
           <Text
             numberOfLines={1}
