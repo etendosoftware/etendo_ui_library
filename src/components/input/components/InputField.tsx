@@ -56,7 +56,7 @@ const InputField = ({
     height: 0,
   });
   const windowHeight = Dimensions.get('window').height;
-  const refComponente = useRef<TouchableOpacity>(null);
+  const refComponent = useRef<TouchableOpacity>(null);
   const regex = /^[0-9.,]+$/g;
 
   const getStyleText = (): TextStyle | TextStyle[] => {
@@ -83,8 +83,8 @@ const InputField = ({
   });
 
   const getTopLeft = () => {
-    if (refComponente.current) {
-      refComponente.current.measure((x, y, width, height, pageX, pageY) => {
+    if (refComponent.current) {
+      refComponent.current.measure((x, y, width, height, pageX, pageY) => {
         const calcDropdownTopLeft =
           pageY + height + styles.spaceInOptionsAndInput.height;
 
@@ -236,7 +236,7 @@ const InputField = ({
   return (
     <View style={[styleField.focus, getFocusStyle()]}>
       <TouchableOpacity
-        ref={refComponente}
+        ref={refComponent}
         style={[
           styleField.field,
           removePaddingField(),

@@ -100,8 +100,8 @@ const InputOptions = ({
     const [keyboardHeight, setKeyboardHeight] = useState(0);
 
     useEffect(() => {
-      function onKeyboardDidShow(e: KeyboardEvent) {
-        setKeyboardHeight(e.endCoordinates.height);
+      function onKeyboardDidShow(event: KeyboardEvent) {
+        setKeyboardHeight(event.endCoordinates.height);
       }
 
       function onKeyboardDidHide() {
