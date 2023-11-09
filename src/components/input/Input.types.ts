@@ -142,6 +142,7 @@ export interface InputOptionsProps {
   showOptionsAmount?: number;
   positionModal: {
     top: number;
+    bottom: number;
     left: number;
     width: number;
     height: number;
@@ -150,4 +151,6 @@ export interface InputOptionsProps {
   onChangeFilterText: (text: string) => void;
   filterValue: string;
   placeholderPickerSearch?: string;
+  optionsTop: boolean;
+  dataPicker: any;
 }
