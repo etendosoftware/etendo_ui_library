@@ -246,8 +246,7 @@ const InputField = ({
         disabled={disabled || configField.disabledField}
         onPress={handleOnPress}
       >
-        {configField?.type === 'textInput' &&
-          (
+        {configField?.type === 'textInput' && (
           <TextInput
             editable={!disabled || !configField.disabledField}
             focusable={!disabled || !configField.disabledField}
@@ -261,7 +260,9 @@ const InputField = ({
             placeholderTextColor={NEUTRAL_600}
             maxLength={maxLength}
             secureTextEntry={type === 'textInputPassword' && showPassword}
-          />)}
+            onSubmitEditing={() => onSubmit?.()}
+          />
+        )}
         {configField?.type === 'text' && (
           <Text
             numberOfLines={1}
@@ -275,7 +276,7 @@ const InputField = ({
           <TouchableOpacity
             onPress={handlePressImage}
             style={styles.buttonContainerInputField}
-            disabled={disabled || configField.disabledSubmit}
+            disabled={disabled || configField.disabledSubmit || !!onSubmit}
           >
             {getImage(configField.image)}
           </TouchableOpacity>
