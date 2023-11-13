@@ -49,7 +49,7 @@ const InputField = ({
   const [dataOptionsFilter, setDataOptionsFilter] = useState<any>([]);
   const [filterValue, setFilterValue] = useState<string>('');
   const [optionsTop, setOptionsTop] = useState<boolean>(false);
-  const [positionModal, setpositionModal] = useState<any>({
+  const [positionModal, setPositionModal] = useState<any>({
     top: 0,
     left: 0,
     width: 0,
@@ -80,7 +80,7 @@ const InputField = ({
     if (showOptions) {
       getTopLeft();
     }
-  });
+  }, []);
 
   const getTopLeft = () => {
     if (refComponent.current) {
@@ -92,8 +92,9 @@ const InputField = ({
           ? styles.optionFilterContainer.height
           : 0;
         const optionsHeight =
-          (styles.optionContainer.height + styles.optionContainer.marginTop) *
-            showFilterHeight +
+          styles.optionContainer.height +
+          styles.optionContainer.marginTop +
+          showFilterHeight +
           styles.optionContainer.marginTop +
           styles.optionsContainer.borderWidth * 2;
 
@@ -112,7 +113,7 @@ const InputField = ({
 
         bottomPosition = windowHeight - (topPosition + optionsHeight);
 
-        setpositionModal({
+        setPositionModal({
           top: topPosition,
           bottom: bottomPosition,
           left: pageX,
