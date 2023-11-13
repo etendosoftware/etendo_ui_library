@@ -53,7 +53,7 @@ export const inputVariants: InputVariantsType = {
     field: {
       type: 'textInput',
       disabledField: true,
-      disabledSubmit: true,
+      disabledSubmit: false,
       image: <SearchIcon style={{ height: 15, width: 15 }} />,
     },
   },
