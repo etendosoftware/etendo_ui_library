@@ -276,7 +276,7 @@ const InputField = ({
           <TouchableOpacity
             onPress={handlePressImage}
             style={styles.buttonContainerInputField}
-            disabled={disabled || configField.disabledSubmit || !!onSubmit}
+            disabled={disabled || configField.disabledSubmit || !onSubmit}
           >
             {getImage(configField.image)}
           </TouchableOpacity>
