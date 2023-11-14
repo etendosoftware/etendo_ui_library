@@ -22,7 +22,7 @@ export type Columns = {
   label?: string;
   key?: string;
   width?: string | number;
-  actions?: Actions[];
+  components?: Actions[];
   cellStyle?: ViewStyle;
 };
 
