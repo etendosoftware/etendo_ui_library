@@ -1,4 +1,4 @@
-import {ColorValue, DimensionValue, TextStyle, ViewStyle} from 'react-native';
+import { ColorValue, DimensionValue, TextStyle, ViewStyle } from 'react-native';
 
 export type ButtonStyleType =
   | 'primary'
@@ -35,5 +35,5 @@ export interface ButtonProps {
   paddingHorizontal?: DimensionValue;
   paddingVertical?: DimensionValue;
   isLoading?: boolean;
-  sizeIndicator?: number | 'small' | 'large';
+  sizeLoadingIndicator?: number | 'small' | 'large';
 }

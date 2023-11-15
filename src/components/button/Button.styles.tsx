@@ -1,4 +1,4 @@
-import {StyleSheet, ViewStyle} from 'react-native';
+import { StyleSheet, ViewStyle } from 'react-native';
 import {
   NEUTRAL_300,
   NEUTRAL_50,
@@ -9,7 +9,7 @@ import {
   SECONDARY_30,
   TERTIARY_50,
 } from '../../styles/colors';
-import {buttonStyleVariant} from './Button.types';
+import { buttonStyleVariant } from './Button.types';
 
 const commonButtonStyles: ViewStyle = {
   flexDirection: 'row',

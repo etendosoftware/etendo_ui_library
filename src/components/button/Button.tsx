@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   ActivityIndicator,
   Pressable,
@@ -12,8 +12,8 @@ import {
   TERTIARY_50,
   TERTIARY_800,
 } from '../../styles/colors';
-import {ButtonProps, ButtonStyleType, IconStyleProps} from './Button.types';
-import {ButtonStyleVariant, styles} from './Button.styles';
+import { ButtonProps, ButtonStyleType, IconStyleProps } from './Button.types';
+import { ButtonStyleVariant, styles } from './Button.styles';
 
 const Button = ({
   text,
@@ -28,7 +28,7 @@ const Button = ({
   paddingHorizontal = 12,
   paddingVertical = 12,
   isLoading = false,
-  sizeIndicator = 16,
+  sizeLoadingIndicator = 16,
 }: ButtonProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -88,7 +88,7 @@ const Button = ({
 
   const stateStyleText = () => {
     if (isLoading && !iconLeft && !iconRight) {
-      return {color: 'transparent'};
+      return { color: 'transparent' };
     }
     if (disabled) {
       return ButtonStyleVariant[typeStyle].textDisabled;
@@ -124,12 +124,12 @@ const Button = ({
     if (iconComponent?.props?.style?.width) {
       return iconComponent?.props?.style?.width;
     }
-    return sizeIndicator;
+    return sizeLoadingIndicator;
   };
 
   const renderIcon = (
     icon?: React.ReactElement,
-    {marginRight = 0, marginLeft = 0}: IconStyleProps = {},
+    { marginRight = 0, marginLeft = 0 }: IconStyleProps = {},
   ) => {
     if (!icon) return null;
 
@@ -141,7 +141,7 @@ const Button = ({
         <ActivityIndicator
           size={iconSize}
           color={iconColor}
-          style={{marginRight, marginLeft}}
+          style={{ marginRight, marginLeft }}
         />
       );
     }
@@ -167,9 +167,9 @@ const Button = ({
       <Pressable
         onHoverIn={handleHoverIn}
         onHoverOut={handleHoverOut}
-        style={({pressed}) => [
+        style={({ pressed }) => [
           stateStyleContainer(pressed),
-          {height, width, paddingHorizontal, paddingVertical},
+          { height, width, paddingHorizontal, paddingVertical },
         ]}
         onPress={handleOnPress}>
         {renderIcon(iconLeft, {
@@ -177,12 +177,12 @@ const Button = ({
         })}
         {isLoading && !iconLeft && !iconRight && (
           <ActivityIndicator
-            size={sizeIndicator}
+            size={sizeLoadingIndicator}
             color={stateStyleIcon()}
             style={styles.indicatorCenterStyle}
           />
         )}
-        <Text style={[stateStyleText(), {fontSize}]}>{text}</Text>
+        <Text style={[stateStyleText(), { fontSize }]}>{text}</Text>
         {renderIcon(iconRight, {
           marginLeft: iconRight && text ? 8 : 0,
         })}
