@@ -2,6 +2,7 @@ import React from 'react';
 import { ImageStyle } from 'react-native';
 import { Svg, Path } from 'react-native-svg';
 import { DEFAULT_COLOR_THEME } from '../../../styles/colors';
+import { sizeSvg } from '../../../helpers/svg_utils';
 
 export interface SvgImageProps {
   style?: ImageStyle;
@@ -12,14 +13,8 @@ export const BinocularsIcon = ({
   style,
   fill = DEFAULT_COLOR_THEME,
 }: SvgImageProps) => {
-  const width =
-    typeof style?.width === 'number' || typeof style?.width === 'string'
-      ? style.width
-      : 41;
-  const height =
-    typeof style?.height === 'number' || typeof style?.height === 'string'
-      ? style.height
-      : 31;
+  const width = sizeSvg(style?.width, 41);
+  const height = sizeSvg(style?.height, 31);
   return (
     <Svg
       width={width}
