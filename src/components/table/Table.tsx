@@ -42,8 +42,8 @@ const Table = ({
                 style={[styles.cell, col.cellStyle, { width: col.width }]}
                 key={'movementTable' + colIndex}
               >
-                {col.actions ? (
-                  col.actions?.map(
+                {col.components ? (
+                  col.components?.map(
                     (itemAction: Actions, actionIndex: number) => {
                       return (
                         <TouchableOpacity
@@ -72,7 +72,6 @@ const Table = ({
     );
   };
   return (
-    <>
       <View
         style={[
           styles.container,
@@ -89,7 +88,6 @@ const Table = ({
           keyExtractor={(item: any, index: number) => 'Table: ' + index}
         />
       </View>
-    </>
   );
 };
 
