@@ -24,6 +24,16 @@ export type InputFieldVariants =
   | 'pressableText'
   | 'pressableSearch';
 
+export enum InputFieldVariant {
+  ReadOnly = 'readOnly',
+  Picker = 'picker',
+  TextInput = 'textInput',
+  TextInputSearch = 'textInputSearch',
+  TextInputPassword = 'textInputPassword',
+  PressableText = 'pressableText',
+  PressableSearch = 'pressableSearch',
+}
+
 export type KeyboardTypes = 'text' | 'number';
 
 export type InputFieldConfigType = {

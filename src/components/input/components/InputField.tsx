@@ -13,7 +13,11 @@ import {
   Text,
 } from 'react-native';
 import { styles } from '../Input.style';
-import { InputFieldProps, KeyboardTypes } from '../Input.types';
+import {
+  InputFieldProps,
+  InputFieldVariant,
+  KeyboardTypes,
+} from '../Input.types';
 import { ShowPasswordIcon } from '../../../assets/images/icons/ShowPasswordIcon';
 import { HidePasswordIcon } from '../../../assets/images/icons/HidePasswordIcon';
 import InputOptions from './InputOptions';
@@ -196,7 +200,7 @@ const InputField = ({
   const getImage = (image: React.ReactElement): React.ReactElement => {
     const fillValue = disabled ? NEUTRAL_400 : undefined;
 
-    if (type === 'textInputPassword') {
+    if (type === InputFieldVariant.TextInputPassword) {
       const PasswordComponent = showPassword
         ? HidePasswordIcon
         : ShowPasswordIcon;
@@ -209,7 +213,7 @@ const InputField = ({
   };
 
   const handlePressImage = () => {
-    if (type === 'textInputPassword') {
+    if (type === InputFieldVariant.TextInputPassword) {
       setShowPassword(prevState => !prevState);
     } else {
       onSubmit?.();
@@ -217,7 +221,7 @@ const InputField = ({
   };
 
   const handleOnPress = (event?: GestureResponderEvent) => {
-    if (type === 'picker') {
+    if (type === InputFieldVariant.Picker) {
       getTopLeft();
       setShowOptions(true);
     }
@@ -234,6 +238,13 @@ const InputField = ({
     return placeholder;
   };
 
+  const isAreaDisabled = (): boolean => {
+    return (
+      disabled ||
+      configField.disabledSubmit ||
+      (!onSubmit && type !== InputFieldVariant.TextInputPassword)
+    );
+  };
   return (
     <View style={[styleField.focus, getFocusStyle()]}>
       <TouchableOpacity
@@ -247,7 +258,7 @@ const InputField = ({
         disabled={disabled || configField.disabledField}
         onPress={handleOnPress}
       >
-        {configField?.type === 'textInput' && (
+        {configField?.type === InputFieldVariant.TextInput && (
           <TextInput
             editable={!disabled || !configField.disabledField}
             focusable={!disabled || !configField.disabledField}
@@ -260,7 +271,9 @@ const InputField = ({
             placeholder={placeholder}
             placeholderTextColor={NEUTRAL_600}
             maxLength={maxLength}
-            secureTextEntry={type === 'textInputPassword' && showPassword}
+            secureTextEntry={
+              type === InputFieldVariant.TextInputPassword && showPassword
+            }
             onSubmitEditing={() => onSubmit?.()}
           />
         )}
@@ -277,7 +290,7 @@ const InputField = ({
           <TouchableOpacity
             onPress={handlePressImage}
             style={styles.buttonContainerInputField}
-            disabled={disabled || configField.disabledSubmit || !onSubmit}
+            disabled={isAreaDisabled()}
           >
             {getImage(configField.image)}
           </TouchableOpacity>
