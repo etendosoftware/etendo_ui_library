@@ -34,6 +34,6 @@ export interface ButtonProps {
   fontSize?: number;
   paddingHorizontal?: DimensionValue;
   paddingVertical?: DimensionValue;
-  isLoading?: boolean;
+  loading?: boolean;
   sizeLoadingIndicator?: number | 'small' | 'large';
 }

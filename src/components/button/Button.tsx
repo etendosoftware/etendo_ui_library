@@ -27,7 +27,7 @@ const Button = ({
   iconRight,
   paddingHorizontal = 12,
   paddingVertical = 12,
-  isLoading = false,
+  loading = false,
   sizeLoadingIndicator = 16,
 }: ButtonProps) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -61,7 +61,7 @@ const Button = ({
     if (disabled) {
       return ButtonStyleVariant[typeStyle].containerDisabled;
     }
-    if (pressed && !isLoading) {
+    if (pressed && !loading) {
       const hoveredBackgroundColor = getHoveredBackgroundColor(typeStyle);
       return {
         ...ButtonStyleVariant[typeStyle].container,
@@ -69,7 +69,7 @@ const Button = ({
         backgroundColor: hoveredBackgroundColor,
       };
     }
-    if (isHovered && !isLoading) {
+    if (isHovered && !loading) {
       const hoveredBackgroundColor = getHoveredBackgroundColor(typeStyle);
       return {
         ...ButtonStyleVariant[typeStyle].container,
@@ -87,13 +87,13 @@ const Button = ({
   };
 
   const stateStyleText = () => {
-    if (isLoading && !iconLeft && !iconRight) {
+    if (loading && !iconLeft && !iconRight) {
       return { color: 'transparent' };
     }
     if (disabled) {
       return ButtonStyleVariant[typeStyle].textDisabled;
     }
-    if (isHovered && !isLoading) {
+    if (isHovered && !loading) {
       const hoveredTextColor = getHoveredTextColorAndViewColor(typeStyle);
       if (hoveredTextColor) {
         return {
@@ -109,7 +109,7 @@ const Button = ({
     if (disabled) {
       return ButtonStyleVariant[typeStyle].imageDisabled;
     }
-    if (isHovered && !isLoading) {
+    if (isHovered && !loading) {
       return isHovered
         ? getHoveredTextColorAndViewColor(typeStyle)
         : ButtonStyleVariant[typeStyle].imageColor;
@@ -136,7 +136,7 @@ const Button = ({
     const iconSize = stateSizeIndicator(icon);
     const iconColor = stateStyleIcon();
 
-    if (isLoading) {
+    if (loading) {
       return (
         <ActivityIndicator
           size={iconSize}
@@ -175,7 +175,7 @@ const Button = ({
         {renderIcon(iconLeft, {
           marginRight: iconLeft && text ? 8 : 0,
         })}
-        {isLoading && !iconLeft && !iconRight && (
+        {loading && !iconLeft && !iconRight && (
           <ActivityIndicator
             size={sizeLoadingIndicator}
             color={stateStyleIcon()}
