@@ -1,5 +1,6 @@
 import {
   ColorValue,
+  DimensionValue,
   GestureResponderEvent,
   NativeSyntheticEvent,
   TextInputFocusEventData,
@@ -39,8 +40,8 @@ export type KeyboardTypes = 'text' | 'number';
 export type InputFieldConfigType = {
   type: InputFieldType;
   image?: React.ReactElement;
-  width?: string | number;
-  height?: string | number;
+  width?: DimensionValue;
+  height?: DimensionValue;
   disabledField?: boolean;
   disabledSubmit?: boolean;
   backgroundColor?: ColorValue;
@@ -80,7 +81,7 @@ export interface InputProps {
   typeField: InputFieldVariants;
   keyboardType?: KeyboardTypes;
   fontSize?: number;
-  height?: number | string;
+  height?: DimensionValue;
   dataPicker?: Array<Record<string, any>>;
   displayKey?: string;
   showOptionsAmount?: number;
@@ -124,7 +125,7 @@ export interface InputFieldProps {
   centerText?: boolean;
   numberOfLines?: number;
   fontSize?: number;
-  height?: number | string;
+  height?: DimensionValue;
   dataPicker?: any;
   displayKey?: string;
   backgroundColor?: ColorValue;

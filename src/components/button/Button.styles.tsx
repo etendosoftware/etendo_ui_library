@@ -128,17 +128,7 @@ export const ButtonStyleVariant: buttonStyleVariant = {
 };
 
 export const styles = StyleSheet.create({
-  storiesContainer: {
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    flex: 1,
-    width: 100,
-
-    justifyContent: 'space-between',
-  },
-  storiesButtonContainer: {
-    height: 100,
-    width: 150,
+  indicatorCenterStyle: {
+    position: 'absolute',
   },
 });

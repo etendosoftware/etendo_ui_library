@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { Pressable, Text, TouchableOpacity } from 'react-native';
+import {
+  ActivityIndicator,
+  Pressable,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import {
   NEUTRAL_50,
   PRIMARY_100,
@@ -7,8 +12,8 @@ import {
   TERTIARY_50,
   TERTIARY_800,
 } from '../../styles/colors';
-import { ButtonStyleVariant } from './Button.styles';
-import { ButtonProps, ButtonStyleType } from './Button.types';
+import { ButtonProps, ButtonStyleType, IconStyleProps } from './Button.types';
+import { ButtonStyleVariant, styles } from './Button.styles';
 
 const Button = ({
   text,
@@ -22,6 +27,8 @@ const Button = ({
   iconRight,
   paddingHorizontal = 12,
   paddingVertical = 12,
+  loading = false,
+  sizeLoadingIndicator = 16,
 }: ButtonProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -54,7 +61,7 @@ const Button = ({
     if (disabled) {
       return ButtonStyleVariant[typeStyle].containerDisabled;
     }
-    if (pressed) {
+    if (pressed && !loading) {
       const hoveredBackgroundColor = getHoveredBackgroundColor(typeStyle);
       return {
         ...ButtonStyleVariant[typeStyle].container,
@@ -62,7 +69,7 @@ const Button = ({
         backgroundColor: hoveredBackgroundColor,
       };
     }
-    if (isHovered) {
+    if (isHovered && !loading) {
       const hoveredBackgroundColor = getHoveredBackgroundColor(typeStyle);
       return {
         ...ButtonStyleVariant[typeStyle].container,
@@ -80,10 +87,13 @@ const Button = ({
   };
 
   const stateStyleText = () => {
+    if (loading && !iconLeft && !iconRight) {
+      return { color: 'transparent' };
+    }
     if (disabled) {
       return ButtonStyleVariant[typeStyle].textDisabled;
     }
-    if (isHovered) {
+    if (isHovered && !loading) {
       const hoveredTextColor = getHoveredTextColorAndViewColor(typeStyle);
       if (hoveredTextColor) {
         return {
@@ -99,13 +109,54 @@ const Button = ({
     if (disabled) {
       return ButtonStyleVariant[typeStyle].imageDisabled;
     }
-    if (isHovered) {
+    if (isHovered && !loading) {
       return isHovered
         ? getHoveredTextColorAndViewColor(typeStyle)
         : ButtonStyleVariant[typeStyle].imageColor;
     }
     return ButtonStyleVariant[typeStyle].imageColor;
   };
+
+  const stateSizeIndicator = (iconComponent: React.ReactElement) => {
+    if (iconComponent?.props?.style?.height) {
+      return iconComponent?.props?.style?.height;
+    }
+    if (iconComponent?.props?.style?.width) {
+      return iconComponent?.props?.style?.width;
+    }
+    return sizeLoadingIndicator;
+  };
+
+  const renderIcon = (
+    icon?: React.ReactElement,
+    { marginRight = 0, marginLeft = 0 }: IconStyleProps = {},
+  ) => {
+    if (!icon) return null;
+
+    const iconSize = stateSizeIndicator(icon);
+    const iconColor = stateStyleIcon();
+
+    if (loading) {
+      return (
+        <ActivityIndicator
+          size={iconSize}
+          color={iconColor}
+          style={{ marginRight, marginLeft }}
+        />
+      );
+    }
+
+    return React.cloneElement(icon, {
+      style: {
+        width: icon?.props?.style?.width || 16,
+        height: icon?.props?.style?.height || 16,
+        marginRight,
+        marginLeft,
+      },
+      fill: iconColor,
+    });
+  };
+
   const handleOnPress = () => {
     if (onPress) {
       onPress();
@@ -121,25 +172,20 @@ const Button = ({
           { height, width, paddingHorizontal, paddingVertical },
         ]}
         onPress={handleOnPress}>
-        {iconLeft &&
-          React.cloneElement(iconLeft, {
-            style: {
-              width: iconLeft?.props?.style?.width || 16,
-              height: iconLeft?.props?.style?.height || 16,
-              marginRight: iconLeft?.props?.style?.marginRight || text ? 8 : 0,
-            },
-            fill: stateStyleIcon(),
-          })}
+        {renderIcon(iconLeft, {
+          marginRight: iconLeft && text ? 8 : 0,
+        })}
+        {loading && !iconLeft && !iconRight && (
+          <ActivityIndicator
+            size={sizeLoadingIndicator}
+            color={stateStyleIcon()}
+            style={styles.indicatorCenterStyle}
+          />
+        )}
         <Text style={[stateStyleText(), { fontSize }]}>{text}</Text>
-        {iconRight &&
-          React.cloneElement(iconRight, {
-            style: {
-              width: iconRight?.props?.style?.width || 16,
-              height: iconRight?.props?.style?.height || 16,
-              marginLeft: iconRight?.props?.style?.marginLeft || text ? 8 : 0,
-            },
-            fill: stateStyleIcon(),
-          })}
+        {renderIcon(iconRight, {
+          marginLeft: iconRight && text ? 8 : 0,
+        })}
       </Pressable>
     </TouchableOpacity>
   );

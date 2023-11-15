@@ -1,10 +1,10 @@
-import { ViewStyle } from 'react-native';
+import { DimensionValue, ViewStyle } from 'react-native';
 
 export interface TableProps {
   data: Array<any>;
   columns: Columns[];
   title?: string;
-  tableHeight?: number | string;
+  tableHeight?: DimensionValue;
   onRowPress: (primary: string) => void;
 }
 export interface TableCellProps {
@@ -21,7 +21,7 @@ export type Columns = {
   visible?: boolean;
   label?: string;
   key?: string;
-  width?: string | number;
+  width?: DimensionValue;
   components?: Actions[];
   cellStyle?: ViewStyle;
 };
