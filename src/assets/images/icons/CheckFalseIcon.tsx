@@ -2,6 +2,7 @@ import React from 'react';
 import { ImageStyle } from 'react-native';
 import { Svg, Path } from 'react-native-svg';
 import { DEFAULT_COLOR_THEME, NEUTRAL_0 } from '../../../styles/colors';
+import { sizeSvg } from '../../../helpers/svg_utils';
 
 export interface SvgImageProps {
   style?: ImageStyle;
@@ -12,14 +13,16 @@ export const CheckFalseIcon = ({
   style,
   fill = DEFAULT_COLOR_THEME,
 }: SvgImageProps) => {
+  const width = sizeSvg(style?.width, 25);
+  const height = sizeSvg(style?.height, 25);
   return (
     <Svg
       x="0px"
       y="0px"
       viewBox="0 0 25 25"
       style={style}
-      width={style?.width ?? 25}
-      height={style?.height ?? 25}>
+      width={width}
+      height={height}>
       <Path
         fill={NEUTRAL_0}
         d="M5,0.8h15c2.3,0,4.2,1.9,4.2,4.2v15c0,2.3-1.9,4.2-4.2,4.2H5c-2.3,0-4.2-1.9-4.2-4.2V5C0.8,2.7,2.7,0.8,5,0.8z"

@@ -12,10 +12,18 @@ export const ChatIcon = ({
   style,
   fill = DEFAULT_COLOR_THEME,
 }: SvgImageProps) => {
+  const width =
+    typeof style?.width === 'number' || typeof style?.width === 'string'
+      ? style.width
+      : 41;
+  const height =
+    typeof style?.height === 'number' || typeof style?.height === 'string'
+      ? style.height
+      : 40;
   return (
     <Svg
-      width={style?.width ?? 41}
-      height={style?.height ?? 40}
+      width={width}
+      height={height}
       viewBox="0 0 41 40"
       fill="none"
       style={style}>

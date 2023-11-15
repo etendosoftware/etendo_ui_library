@@ -12,10 +12,12 @@ export const EditIcon = ({
   style,
   fill = DEFAULT_COLOR_THEME,
 }: SvgImageProps) => {
+  const width = typeof style?.width === 'number' ? style.width : 32;
+  const height = typeof style?.height === 'number' ? style.height : 32;
   return (
     <Svg
-      width={style?.width ?? 32}
-      height={style?.height ?? 32}
+      width={width}
+      height={height}
       viewBox="0 0 32 32"
       fill="none"
       style={style}>
