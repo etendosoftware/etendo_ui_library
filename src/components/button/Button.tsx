@@ -61,6 +61,13 @@ const Button = ({
     if (disabled) {
       return ButtonStyleVariant[typeStyle].containerDisabled;
     }
+    if (pressed && !isHovered && !loading && typeStyle === 'whiteBorder') {
+      return {
+        ...ButtonStyleVariant[typeStyle].container,
+        opacity: 0.7,
+        backgroundColor: 'transparent',
+      };
+    }
     if (pressed && !loading) {
       const hoveredBackgroundColor = getHoveredBackgroundColor(typeStyle);
       return {
