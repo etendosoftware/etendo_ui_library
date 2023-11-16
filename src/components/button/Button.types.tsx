@@ -35,5 +35,4 @@ export interface ButtonProps {
   paddingHorizontal?: DimensionValue;
   paddingVertical?: DimensionValue;
   loading?: boolean;
-  sizeLoadingIndicator?: number | 'small' | 'large';
 }

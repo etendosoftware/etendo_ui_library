@@ -28,7 +28,6 @@ const Button = ({
   paddingHorizontal = 12,
   paddingVertical = 12,
   loading = false,
-  sizeLoadingIndicator = 16,
 }: ButtonProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -131,7 +130,7 @@ const Button = ({
     if (iconComponent?.props?.style?.width) {
       return iconComponent?.props?.style?.width;
     }
-    return sizeLoadingIndicator;
+    return 16;
   };
 
   const renderIcon = (
@@ -184,7 +183,7 @@ const Button = ({
         })}
         {loading && !iconLeft && !iconRight && (
           <ActivityIndicator
-            size={sizeLoadingIndicator}
+            size={fontSize}
             color={stateStyleIcon()}
             style={styles.indicatorCenterStyle}
           />
