@@ -9,7 +9,6 @@ export interface TableProps {
   isLoading?: boolean;
   textEmptyTable?: string;
   commentEmptyTable?: string;
-  pagination: number;
   pageSize: number;
   currentPage: number;
 }
