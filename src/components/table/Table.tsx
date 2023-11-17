@@ -1,10 +1,21 @@
 import React from 'react';
-import { FlatList, Pressable, TouchableOpacity, View } from 'react-native';
+import {
+  FlatList,
+  Image,
+  Pressable,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { Actions, Columns, TableProps } from './Table.types';
 import { styles } from './Table.styles';
 import TableHeaders from './components/TableHeaders';
-import { paintOddRows, removeHeaderBorder } from '../../helpers/table_utils';
 import TableCell from './components/TableCell';
+import {
+  isDeviceTablet,
+  paintOddRows,
+  removeHeaderBorder,
+} from '../../helpers/table_utils';
 import { SkeletonRowTable } from '../secondaryComponents';
 import { NEUTRAL_300 } from '../../styles/colors';
 
@@ -14,7 +25,10 @@ const Table = ({
   title,
   onRowPress,
   tableHeight,
-  isLoading = true,
+  isLoading,
+  pageSize,
+  textEmptyTable,
+  commentEmptyTable,
 }: TableProps) => {
   const findPrimaryId = (col: Columns[], indexRow: number) => {
     let primary: string = '';
@@ -31,7 +45,7 @@ const Table = ({
     return primary;
   };
 
-  const renderItem = (item: any, index: number) => {
+  const RenderItem = (item: any, index: number) => {
     return (
       <Pressable
         onPress={() => {
@@ -73,7 +87,7 @@ const Table = ({
     );
   };
 
-  const renderSkeleton = (item: any, index: number) => {
+  const RenderSkeleton = (item: any, index: number) => {
     return (
       <Pressable
         onPress={() => {
@@ -97,6 +111,24 @@ const Table = ({
     );
   };
 
+  const EmptyState = () => {
+    return (
+      <View style={styles.emptyStateConteiner}>
+        <Image
+          style={
+            isDeviceTablet
+              ? { width: '50%', height: '70%' }
+              : { width: '100%', height: '50%' }
+          }
+          source={require('./empty-state-table.png')}
+          resizeMode="stretch"
+        />
+        <Text style={styles.emptyTextTitle}>{textEmptyTable}</Text>
+        <Text style={styles.emptyTextSubtitle}>{commentEmptyTable}</Text>
+      </View>
+    );
+  };
+
   return (
     <>
       <View
@@ -106,16 +138,18 @@ const Table = ({
           { height: tableHeight },
         ]}>
         <TableHeaders title={title} columns={columns} isLoading={!isLoading} />
+
         <FlatList
-          data={data}
+          data={!isLoading ? data : Array(pageSize).fill({})}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
           renderItem={item =>
-            !isLoading
-              ? renderItem(item.item, item.index)
-              : renderSkeleton(item.item, item.index)
+            isLoading
+              ? RenderSkeleton(item.item, item.index)
+              : RenderItem(item.item, item.index)
           }
-          keyExtractor={(item: any, index: number) => 'Table: ' + index}
+          ListEmptyComponent={EmptyState}
+          keyExtractor={(_item: any, index: number) => 'Table: ' + index}
         />
       </View>
     </>

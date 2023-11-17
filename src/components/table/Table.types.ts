@@ -7,6 +7,11 @@ export interface TableProps {
   tableHeight?: DimensionValue | undefined;
   onRowPress: (primary: string) => void;
   isLoading?: boolean;
+  textEmptyTable?: string;
+  commentEmptyTable?: string;
+  pagination: number;
+  pageSize: number;
+  currentPage: number;
 }
 export interface TableCellProps {
   label?: string;
