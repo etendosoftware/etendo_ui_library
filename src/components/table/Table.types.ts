@@ -4,8 +4,14 @@ export interface TableProps {
   data: Array<any>;
   columns: Columns[];
   title?: string;
-  tableHeight?: DimensionValue;
+  tableHeight?: DimensionValue | undefined;
   onRowPress: (primary: string) => void;
+  isLoading?: boolean;
+  textEmptyTable?: string;
+  commentEmptyTable?: string;
+  pagination: number;
+  pageSize: number;
+  currentPage: number;
 }
 export interface TableCellProps {
   label?: string;
@@ -14,6 +20,7 @@ export interface TableCellProps {
 export interface TableHeaderProps {
   title?: string;
   columns: Columns[];
+  isLoading?: boolean;
 }
 
 export type Columns = {
@@ -21,7 +28,7 @@ export type Columns = {
   visible?: boolean;
   label?: string;
   key?: string;
-  width?: DimensionValue;
+  width?: DimensionValue | undefined;
   components?: Actions[];
   cellStyle?: ViewStyle;
 };

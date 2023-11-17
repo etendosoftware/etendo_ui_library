@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 import {
   NEUTRAL_10,
   NEUTRAL_40,
+  NEUTRAL_700,
   PRIMARY_100,
   TERTIARY_30,
 } from '../../styles/colors';
@@ -98,5 +99,27 @@ export const styles = StyleSheet.create({
   },
   cellEditContainer: {
     height: '100%',
+  },
+  emptyStateConteiner: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FAFAFA',
+    height: 400,
+    width: '100%',
+  },
+  emptyTextTitle: {
+    color: NEUTRAL_700,
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: '500',
+    lineHeight: 28,
+  },
+  emptyTextSubtitle: {
+    color: PRIMARY_100,
+    textAlign: 'center',
+    fontSize: 14,
+    fontWeight: '600',
+    lineHeight: 28,
   },
 });

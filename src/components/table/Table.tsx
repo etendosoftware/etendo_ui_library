@@ -1,10 +1,23 @@
 import React from 'react';
-import { FlatList, Pressable, TouchableOpacity, View } from 'react-native';
+import {
+  FlatList,
+  Image,
+  Pressable,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { Actions, Columns, TableProps } from './Table.types';
 import { styles } from './Table.styles';
 import TableHeaders from './components/TableHeaders';
-import { paintOddRows, removeHeaderBorder } from '../../helpers/table_utils';
 import TableCell from './components/TableCell';
+import {
+  isDeviceTablet,
+  paintOddRows,
+  removeHeaderBorder,
+} from '../../helpers/table_utils';
+import { SkeletonRowTable } from '../secondaryComponents';
+import { NEUTRAL_300 } from '../../styles/colors';
 
 const Table = ({
   data,
@@ -12,6 +25,10 @@ const Table = ({
   title,
   onRowPress,
   tableHeight,
+  isLoading,
+  pageSize,
+  textEmptyTable,
+  commentEmptyTable,
 }: TableProps) => {
   const findPrimaryId = (col: Columns[], indexRow: number) => {
     let primary: string = '';
@@ -27,21 +44,20 @@ const Table = ({
     }
     return primary;
   };
-  const renderItem = (item: any, index: number) => {
+
+  const RenderItem = (item: any, index: number) => {
     return (
       <Pressable
         onPress={() => {
           onRowPress(findPrimaryId(columns, index));
         }}
-        style={[styles.row, paintOddRows(index)]}
-      >
+        style={[styles.row, paintOddRows(index)]}>
         {columns.map((col: Columns, colIndex: number) => {
           return (
             col.visible && (
               <View
                 style={[styles.cell, col.cellStyle, { width: col.width }]}
-                key={'movementTable' + colIndex}
-              >
+                key={'movementTable' + colIndex}>
                 {col.components ? (
                   col.components?.map(
                     (itemAction: Actions, actionIndex: number) => {
@@ -51,8 +67,7 @@ const Table = ({
                           onPress={() =>
                             itemAction.onAction(findPrimaryId(columns, index))
                           }
-                          key={'tableCellCustom' + actionIndex}
-                        >
+                          key={'tableCellCustom' + actionIndex}>
                           {itemAction.component}
                         </TouchableOpacity>
                       );
@@ -71,23 +86,73 @@ const Table = ({
       </Pressable>
     );
   };
+
+  const RenderSkeleton = (item: any, index: number) => {
+    return (
+      <Pressable
+        onPress={() => {
+          onRowPress(findPrimaryId(columns, index));
+        }}
+        style={[styles.row, paintOddRows(index)]}>
+        {columns.map((col: Columns, colIndex: number) => {
+          return (
+            col.visible && (
+              <SkeletonRowTable
+                key={colIndex}
+                width={col.width!}
+                color={NEUTRAL_300}
+                indexRow={index}
+                indexColumn={colIndex}
+              />
+            )
+          );
+        })}
+      </Pressable>
+    );
+  };
+
+  const EmptyState = () => {
+    return (
+      <View style={styles.emptyStateConteiner}>
+        <Image
+          style={
+            isDeviceTablet
+              ? { width: '50%', height: '70%' }
+              : { width: '100%', height: '50%' }
+          }
+          source={require('./empty-state-table.png')}
+          resizeMode="stretch"
+        />
+        <Text style={styles.emptyTextTitle}>{textEmptyTable}</Text>
+        <Text style={styles.emptyTextSubtitle}>{commentEmptyTable}</Text>
+      </View>
+    );
+  };
+
   return (
+    <>
       <View
         style={[
           styles.container,
           removeHeaderBorder(title),
           { height: tableHeight },
-        ]}
-      >
-        <TableHeaders title={title} columns={columns} />
+        ]}>
+        <TableHeaders title={title} columns={columns} isLoading={!isLoading} />
+
         <FlatList
-          data={data}
+          data={!isLoading ? data : Array(pageSize).fill({})}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
-          renderItem={item => renderItem(item.item, item.index)}
-          keyExtractor={(item: any, index: number) => 'Table: ' + index}
+          renderItem={item =>
+            isLoading
+              ? RenderSkeleton(item.item, item.index)
+              : RenderItem(item.item, item.index)
+          }
+          ListEmptyComponent={EmptyState}
+          keyExtractor={(_item: any, index: number) => 'Table: ' + index}
         />
       </View>
+    </>
   );
 };
 

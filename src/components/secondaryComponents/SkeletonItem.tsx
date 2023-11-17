@@ -1,10 +1,10 @@
-import { View, Animated, ColorValue } from 'react-native';
+import { View, Animated, ColorValue, DimensionValue } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
 import { NEUTRAL_10 } from '../../styles/colors';
 
 interface SkeletonItemProps {
-  width: number;
-  height: number;
+  width: DimensionValue;
+  height: DimensionValue;
   color?: ColorValue;
   borderRadius?: number;
   delay?: number;
