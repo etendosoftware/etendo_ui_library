@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   FlatList,
-  Image,
   Pressable,
   Text,
   TouchableOpacity,
@@ -18,6 +17,7 @@ import {
 } from '../../helpers/table_utils';
 import { SkeletonRowTable } from '../secondaryComponents';
 import { NEUTRAL_300 } from '../../styles/colors';
+import { SvgUri } from 'react-native-svg';
 
 const Table = ({
   data,
@@ -112,10 +112,9 @@ const Table = ({
   };
 
   const EmptyState = () => {
-    const image = require('./image/empty-state-table.png');
     return (
       <View style={styles.emptyStateConteiner}>
-        <Image
+        {/* <Image
           style={
             isDeviceTablet
               ? { width: '50%', height: '70%' }
@@ -123,7 +122,13 @@ const Table = ({
           }
           source={image}
           resizeMode="stretch"
+        /> */}
+        <SvgUri
+          width={isDeviceTablet ? '50%' : '70%'}
+          height={isDeviceTablet ? '100%' : '50%'}
+          uri={require('./image/empty-state-tabla.svg')}
         />
+
         <Text style={styles.emptyTextTitle}>{textEmptyTable}</Text>
         <Text style={styles.emptyTextSubtitle}>{commentEmptyTable}</Text>
       </View>
