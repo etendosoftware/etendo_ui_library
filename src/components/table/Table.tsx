@@ -112,7 +112,7 @@ const Table = ({
   };
 
   const EmptyState = () => {
-    const image = require('../../assets/images/components/empty-state-table.png');
+    const image = require('./image/empty-state-table.png');
     return (
       <View style={styles.emptyStateConteiner}>
         <Image
