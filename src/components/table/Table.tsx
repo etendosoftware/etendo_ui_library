@@ -112,6 +112,7 @@ const Table = ({
   };
 
   const EmptyState = () => {
+    const image = require('../../assets/images/components/empty-state-table.png');
     return (
       <View style={styles.emptyStateConteiner}>
         <Image
@@ -120,7 +121,7 @@ const Table = ({
               ? { width: '50%', height: '70%' }
               : { width: '100%', height: '50%' }
           }
-          source={require('./empty-state-table.png')}
+          source={image}
           resizeMode="stretch"
         />
         <Text style={styles.emptyTextTitle}>{textEmptyTable}</Text>
