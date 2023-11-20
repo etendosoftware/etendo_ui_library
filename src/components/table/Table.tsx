@@ -114,19 +114,10 @@ const Table = ({
   const EmptyState = () => {
     return (
       <View style={styles.emptyStateConteiner}>
-        {/* <Image
-          style={
-            isDeviceTablet
-              ? { width: '50%', height: '70%' }
-              : { width: '100%', height: '50%' }
-          }
-          source={image}
-          resizeMode="stretch"
-        /> */}
         <SvgUri
           width={isDeviceTablet ? '50%' : '70%'}
           height={isDeviceTablet ? '100%' : '50%'}
-          uri={require('./image/empty-state-tabla.svg')}
+          uri={require('../../assets/images/components/empty-state-tabla.svg')}
         />
 
         <Text style={styles.emptyTextTitle}>{textEmptyTable}</Text>
