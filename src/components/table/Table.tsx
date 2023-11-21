@@ -10,14 +10,10 @@ import { Actions, Columns, TableProps } from './Table.types';
 import { styles } from './Table.styles';
 import TableHeaders from './components/TableHeaders';
 import TableCell from './components/TableCell';
-import {
-  isDeviceTablet,
-  paintOddRows,
-  removeHeaderBorder,
-} from '../../helpers/table_utils';
+import { paintOddRows, removeHeaderBorder } from '../../helpers/table_utils';
 import { SkeletonRowTable } from '../secondaryComponents';
 import { NEUTRAL_300 } from '../../styles/colors';
-import { SvgUri } from 'react-native-svg';
+import EmptyTableState from '../../assets/images/components/EmptyTableState';
 
 const Table = ({
   data,
@@ -114,12 +110,12 @@ const Table = ({
   const EmptyState = () => {
     return (
       <View style={styles.emptyStateConteiner}>
-        <SvgUri
+        {/* <SvgUri
           width={isDeviceTablet ? '50%' : '70%'}
           height={isDeviceTablet ? '100%' : '50%'}
           uri={require('../../assets/images/components/empty-state-tabla.svg')}
-        />
-
+        /> */}
+        <EmptyTableState />
         <Text style={styles.emptyTextTitle}>{textEmptyTable}</Text>
         <Text style={styles.emptyTextSubtitle}>{commentEmptyTable}</Text>
       </View>
