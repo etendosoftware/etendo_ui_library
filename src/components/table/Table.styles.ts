@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 import {
   NEUTRAL_10,
   NEUTRAL_40,
