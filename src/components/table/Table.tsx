@@ -110,14 +110,11 @@ const Table = ({
   const EmptyState = () => {
     return (
       <View style={styles.emptyStateConteiner}>
-        {/* <SvgUri
-          width={isDeviceTablet ? '50%' : '70%'}
-          height={isDeviceTablet ? '100%' : '50%'}
-          uri={require('../../assets/images/components/empty-state-tabla.svg')}
-        /> */}
         <EmptyTableState />
-        <Text style={styles.emptyTextTitle}>{textEmptyTable}</Text>
-        <Text style={styles.emptyTextSubtitle}>{commentEmptyTable}</Text>
+        <View>
+          <Text style={styles.emptyTextTitle}>{textEmptyTable}</Text>
+          <Text style={styles.emptyTextSubtitle}>{commentEmptyTable}</Text>
+        </View>
       </View>
     );
   };
@@ -141,7 +138,7 @@ const Table = ({
               ? RenderSkeleton(item.item, item.index)
               : RenderItem(item.item, item.index)
           }
-          ListEmptyComponent={EmptyState}
+          ListEmptyComponent={<EmptyState />}
           keyExtractor={(_item: any, index: number) => 'Table: ' + index}
         />
       </View>
