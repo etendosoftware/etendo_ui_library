@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   FlatList,
   Pressable,
@@ -22,10 +22,22 @@ const Table = ({
   onRowPress,
   tableHeight,
   isLoading,
-  pageSize,
   textEmptyTable,
   commentEmptyTable,
+  loadMoreData,
+  isLoadMoreData = true,
 }: TableProps) => {
+  const [currentPage, setCurrentPage] = useState<number>(0);
+
+  const handleLoadMore = () => {
+    if (isLoadMoreData && !isLoading && loadMoreData) {
+      console.log('handleLoadMore called');
+      loadMoreData(currentPage + 1, () => {
+        setCurrentPage(currentPage + 1);
+      });
+    }
+  };
+
   const findPrimaryId = (col: Columns[], indexRow: number) => {
     let primary: string = '';
     if (indexRow >= 0) {
@@ -45,7 +57,9 @@ const Table = ({
     return (
       <Pressable
         onPress={() => {
-          onRowPress(findPrimaryId(columns, index));
+          if (onRowPress) {
+            onRowPress(findPrimaryId(columns, index));
+          }
         }}
         style={[styles.row, paintOddRows(index)]}>
         {columns.map((col: Columns, colIndex: number) => {
@@ -85,11 +99,7 @@ const Table = ({
 
   const RenderSkeleton = (item: any, index: number) => {
     return (
-      <Pressable
-        onPress={() => {
-          onRowPress(findPrimaryId(columns, index));
-        }}
-        style={[styles.row, paintOddRows(index)]}>
+      <View style={[styles.row, paintOddRows(index)]}>
         {columns.map((col: Columns, colIndex: number) => {
           return (
             col.visible && (
@@ -103,7 +113,7 @@ const Table = ({
             )
           );
         })}
-      </Pressable>
+      </View>
     );
   };
 
@@ -120,29 +130,38 @@ const Table = ({
   };
 
   return (
-    <>
-      <View
-        style={[
-          styles.container,
-          removeHeaderBorder(title),
-          { height: tableHeight },
-        ]}>
-        <TableHeaders title={title} columns={columns} isLoading={!isLoading} />
+    <View
+      style={[
+        styles.container,
+        removeHeaderBorder(title),
+        { height: tableHeight },
+      ]}>
+      <TableHeaders
+        title={title}
+        columns={columns}
+        isLoading={!(isLoading && !data.length)}
+      />
 
-        <FlatList
-          data={!isLoading ? data : Array(pageSize).fill({})}
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          renderItem={item =>
-            isLoading
-              ? RenderSkeleton(item.item, item.index)
-              : RenderItem(item.item, item.index)
-          }
-          ListEmptyComponent={<EmptyState />}
-          keyExtractor={(_item: any, index: number) => 'Table: ' + index}
-        />
-      </View>
-    </>
+      <FlatList
+        data={isLoading && !data.length ? Array(5).fill({}) : data}
+        renderItem={item =>
+          isLoading && !data.length && loadMoreData
+            ? RenderSkeleton(item.item, item.index)
+            : RenderItem(item.item, item.index)
+        }
+        ListEmptyComponent={<EmptyState />}
+        keyExtractor={(_item: any, index: number) => 'Table: ' + index}
+        ListFooterComponent={() =>
+          loadMoreData &&
+          isLoadMoreData &&
+          isLoading &&
+          Boolean(data.length) &&
+          RenderSkeleton(null, data.length)
+        }
+        onEndReached={() => handleLoadMore()}
+        onEndReachedThreshold={0.2}
+      />
+    </View>
   );
 };
 
