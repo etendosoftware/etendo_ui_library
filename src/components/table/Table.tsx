@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   FlatList,
   Pressable,
@@ -26,15 +26,13 @@ const Table = ({
   commentEmptyTable,
   loadMoreData,
   isLoadMoreData = true,
+  pageSize = 20,
+  currentPage = 0,
+  isLoadingMoreData = true,
 }: TableProps) => {
-  const [currentPage, setCurrentPage] = useState<number>(0);
-
   const handleLoadMore = () => {
-    if (isLoadMoreData && !isLoading && loadMoreData) {
-      console.log('handleLoadMore called');
-      loadMoreData(currentPage + 1, () => {
-        setCurrentPage(currentPage + 1);
-      });
+    if (isLoadingMoreData && isLoadMoreData && !isLoading && loadMoreData) {
+      loadMoreData(currentPage + 1, pageSize);
     }
   };
 
@@ -143,15 +141,20 @@ const Table = ({
       />
 
       <FlatList
-        data={isLoading && !data.length ? Array(5).fill({}) : data}
+        data={
+          isLoadingMoreData && isLoading && !data.length
+            ? Array(pageSize).fill({})
+            : data
+        }
         renderItem={item =>
-          isLoading && !data.length && loadMoreData
+          isLoadingMoreData && isLoading && !data.length && loadMoreData
             ? RenderSkeleton(item.item, item.index)
             : RenderItem(item.item, item.index)
         }
         ListEmptyComponent={<EmptyState />}
         keyExtractor={(_item: any, index: number) => 'Table: ' + index}
         ListFooterComponent={() =>
+          isLoadingMoreData &&
           loadMoreData &&
           isLoadMoreData &&
           isLoading &&
