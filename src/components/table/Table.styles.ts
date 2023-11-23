@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 import {
   NEUTRAL_10,
   NEUTRAL_40,
@@ -109,14 +109,16 @@ export const styles = StyleSheet.create({
     width: '100%',
   },
   emptyTextTitle: {
-    color: NEUTRAL_700,
+    color: PRIMARY_100,
     textAlign: 'center',
     fontSize: 20,
     fontWeight: '500',
     lineHeight: 28,
+    marginTop: 25,
+    maxWidth: '80%',
   },
   emptyTextSubtitle: {
-    color: PRIMARY_100,
+    color: NEUTRAL_700,
     textAlign: 'center',
     fontSize: 14,
     fontWeight: '600',
