@@ -1,14 +1,28 @@
-"use client";
+'use client';
 
-import { Button } from "ui";
-
-import styles from "../styles/index.module.css";
+import { useState } from 'react';
+import Button from './components/button/Button';
+import Input from './components/input/Input';
+import { CardDropdown } from './components/cards/cardDropdown';
 
 export default function Web() {
+  const [value, setValue] = useState('');
+
   return (
-    <div className={styles.container}>
-      <h1>Web</h1>
-      <Button onClick={() => console.log("Pressed!")} text="Boop" />
+    <div>
+      <h1>Etendo UI Library</h1>
+      <Button typeStyle={'primary'} text="Button" />
+      <Input
+        value={value}
+        onChangeText={(text: string) => setValue(text)}
+        typeField={'textInput'}
+      />
+      <Input
+        value={value}
+        onChangeText={(text: string) => setValue(text)}
+        typeField={'pressableSearch'}
+      />
+      <CardDropdown />
     </div>
   );
 }
