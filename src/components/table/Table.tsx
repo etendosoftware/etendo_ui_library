@@ -24,15 +24,14 @@ const Table = ({
   isLoading,
   textEmptyTable,
   commentEmptyTable,
-  loadMoreData,
-  isLoadMoreData = true,
+  onLoadMoreData,
+  isLoadingMoreData = true,
   pageSize = 20,
   currentPage = 0,
-  isLoadingMoreData = true,
 }: TableProps) => {
   const handleLoadMore = () => {
-    if (isLoadingMoreData && isLoadMoreData && !isLoading && loadMoreData) {
-      loadMoreData(currentPage + 1, pageSize);
+    if (isLoadingMoreData && !isLoading && onLoadMoreData) {
+      onLoadMoreData(currentPage + 1, pageSize);
     }
   };
 
@@ -147,7 +146,7 @@ const Table = ({
             : data
         }
         renderItem={item =>
-          isLoadingMoreData && isLoading && !data.length && loadMoreData
+          isLoadingMoreData && isLoading && !data.length && onLoadMoreData
             ? RenderSkeleton(item.item, item.index)
             : RenderItem(item.item, item.index)
         }
@@ -155,8 +154,7 @@ const Table = ({
         keyExtractor={(_item: any, index: number) => 'Table: ' + index}
         ListFooterComponent={() =>
           isLoadingMoreData &&
-          loadMoreData &&
-          isLoadMoreData &&
+          onLoadMoreData &&
           isLoading &&
           Boolean(data.length) &&
           RenderSkeleton(null, data.length)

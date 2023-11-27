@@ -10,7 +10,7 @@ const EmptyTableState = () => {
     <Svg
       viewBox="0 0 268.5 92.8"
       style={{
-        width: isDeviceTablet ? '100%' : '100%',
+        width: '100%',
         aspectRatio,
         height: isDeviceTablet ? '35%' : '25%',
       }}>
