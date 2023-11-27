@@ -9,8 +9,11 @@ export interface TableProps {
   isLoading?: boolean;
   textEmptyTable?: string;
   commentEmptyTable?: string;
-  loadMoreData?: (page: number, updateNewPageInTable: () => void) => void;
+  loadMoreData?: (currentPage: number, pageSize: number) => void;
   isLoadMoreData?: boolean;
+  pageSize?: number;
+  currentPage?: number;
+  isLoadingMoreData?: boolean;
 }
 export interface TableCellProps {
   label?: string;
