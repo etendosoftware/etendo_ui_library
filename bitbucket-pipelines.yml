@@ -33,7 +33,7 @@ definitions:
             variables:
               SONAR_HOST_URL: ${SONAR_HOST_URL} # Get the value from the repository/workspace variable.
               SONAR_TOKEN: ${SONAR_TOKEN} # Get the value from the repository/workspace variable. You shouldn't set secret in clear text here.
-              SONAR_EXCLUDE: node_modules, android, ios
+              EXTRA_ARGS: '-Dsonar.exclusions=node_modules/**,android/**,ios/**,examples/**'
   caches:
     sonar: ~/.sonar
 
