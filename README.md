@@ -1,196 +1,58 @@
-#
+# Etendo UI Installation Guide
 
-# etendo-ui-library
+## How to Install Etendo UI
 
-![Etendo Logo](https://etendo.software/wp-content/uploads/2021/04/etendo-logo-footer-min-1.png 'Etendo Logo')
+To get started with Etendo UI, follow these steps to install the library and its required dependencies.
 
-### This library provides you with a set of React and React Native UI components to fast-track your application development process.
+### How To Install Components
 
-#
+#### 🚀 Step 1: Install Etendo UI library using Yarn
 
-# Installation
+Install the Etendo UI library by running the following command:
 
-The etendo-ui-library can be installed using either npm or yarn.
-
-## Npm:
-
-```
-npm install etendo-ui-library
-```
-
-## Yarn:
-
-```
+```bash
 yarn add etendo-ui-library
 ```
 
-#
+#### 📦 Step 2: Installation for Mobile or Web
 
-# Android Project Setup
+- **For a Mobile installation**, install these dependencies using Yarn:
 
-### To create a new Android project:
+  ```bash
+  yarn add react-native-web react-native-svg react-native-svg-transformer react-native-svg-web react-dom
+  ```
 
-```
-npx react-native init appName --version 0.68.1
-```
+- **For a Web installation**, use the following command:
 
-After initializing the Android project, modify your metro.config.js file to include the following configuration:
+  ```bash
+  yarn add react-native react-native-web react-native-svg react-native-svg-transformer react-native-svg-web
+  ```
 
-```javascript
-const {getDefaultConfig} = require('metro-config');
+### After Installation
 
-module.exports = (async () => {
-  const {
-    resolver: {sourceExts, assetExts},
-  } = await getDefaultConfig();
-  return {
-    transformer: {
-      getTransformOptions: async () => ({
-        transform: {
-          experimentalImportSupport: false,
-          inlineRequires: true,
-        },
-      }),
-      babelTransformerPath: require.resolve('react-native-svg-transformer'),
-    },
-    resolver: {
-      assetExts: assetExts.filter(ext => ext !== 'svg'),
-      sourceExts: [...sourceExts, 'svg'],
-    },
-  };
-})();
-```
+Once you have completed these steps, you are ready to start using Etendo UI components in your project!
 
-### Finally, install the following dependencies:
+> **Note:** Make sure to adjust the versions of the dependencies based on your project's requirements.
 
-```
-yarn add react-native-svg && yarn add react-native-svg-transformer
-```
+If you encounter any issues during the installation process or have any questions, please refer to the Etendo UI documentation or reach out to our support team.
 
-## Usage
+## Using the Playground to Test Components
 
-To use a component from the etendo-ui-library, import it and use it in your JSX code. Below is an example of how to use the Input component.
+To use the Playground for testing Etendo UI components, follow these steps:
 
-```javascript
-//import
-import Input from 'etendo-ui-library/components/input/Input';
+1. **General Setup**:
+   - Run `yarn install` in the `etendo_ui_library` directory.
 
-export default function Home() {
-  return (
-    //usage
-    <Input
-      titleLabel="ReadOnly"
-      helperText="Start Date"
-      placeholder="Write a text"
-      disabled={false}
-      value="27/04/2022"
-      typeField="readOnly"
-      isError={true}
-      keyboardType="text"
-    />
-  );
-}
-```
+2. **For Mobile Testing**:
+   - Navigate to `examples/ReactNative`.
+   - Run `yarn install` to install necessary dependencies.
+   - To test on iOS, execute `yarn run ios`.
+   - For Android, use `yarn run android`.
 
-**Remember to replace the attribute values with your desired ones!**
+3. **For Web Testing**:
+   - Change directory to `examples/nextjs`.
+   - Ensure that you have Node.js version **18.17.0 or later** installed. It is worth mentioning that this is only required for this web playground, to develop the **Etendo UI** Node.js **16.10.0 or higher** is required.
+   - Run `yarn install` to install dependencies.
+   - Start the development server with `yarn run dev`.
 
-And that's it! You are now ready to use the etendo-ui-library in your React Native or React Web application. Please refer to the detailed documentation on Storybook and NPM for more examples and use cases.
-
-#
-
-# Web Project Setup (React Web)
-
-To create a new Next.js project:
-
-`npx create-next-app`
-
-After initializing the Next.js project, modify your next.config.js file to include the following configuration:
-
-```javascript
-const path = require('path');
-const withTM = require('next-transpile-modules')(['etendo-ui-library']);
-
-module.exports = withTM({
-  webpack: (config, {defaultLoaders}) => {
-    config.resolve.alias = {
-      ...(config.resolve.alias || {}),
-      'react-native$': 'react-native-web',
-      'react-native-svg$': 'react-native-svg-web',
-    };
-
-    config.module.rules.push({
-      test: /\.tsx?$/,
-      use: [
-        defaultLoaders.babel,
-        {
-          loader: 'ts-loader',
-          options: {
-            transpileOnly: true,
-            experimentalWatchApi: true,
-          },
-        },
-      ],
-    });
-
-    config.module.rules.push({
-      test: /\.css$/,
-      use: [
-        defaultLoaders.babel,
-        {
-          loader: 'etendo-ui-library/dist/webpack/css-loader.js',
-          options: {
-            importLoaders: 1,
-            modules: {
-              localIdentName: '[name]__[local]__[hash:base64:5]',
-            },
-          },
-        },
-        'postcss-loader',
-      ],
-    });
-    return config;
-  },
-});
-```
-
-### Next, install the following dependencies using the commands below:
-
-```bash
-yarn add react-native-web
-
-yarn add next-transpile-modules
-
-yarn add -D ts-loader
-
-yarn add babel-loader --dev
-
-yarn add react-native-svg-transformer
-
-yarn add react-native-svg
-
-yarn add --dev babel-plugin-module-resolver
-```
-
-Usage
-To use a component from the etendo-ui-library, import it and use it in your JSX code. Below is an example of how to use the Input component.
-
-```javascript
-//import
-import Input from 'etendo-ui-library/components/input/Input';
-
-//usage
-<Input
-  titleLabel="ReadOnly"
-  helperText="Start Date"
-  placeholder="Write a text"
-  disabled={false}
-  value="password"
-  typeField="textInputPassword"
-  isError={true}
-  keyboardType="text"
-/>;
-```
-
-**Remember to replace the attribute values with your desired ones!**
-
-That's it! You are now ready to use the etendo-ui-library in your React Web application. Please refer to the detailed documentation on Storybook and NPM for more examples and use cases.
+Happy coding with Etendo UI! 🚀🎉
