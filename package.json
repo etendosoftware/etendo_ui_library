@@ -1,6 +1,6 @@
 {
   "name": "etendo-ui-library",
-  "version": "1.2.65",
+  "version": "1.2.66",
   "private": false,
   "scripts": {
     "android": "react-native run-android",
@@ -79,7 +79,9 @@
   },
   "jest": {
     "preset": "react-native",
-    "testPathIgnorePatterns": ["examples/"],
+    "testPathIgnorePatterns": [
+      "examples/"
+    ],
     "moduleFileExtensions": [
       "ts",
       "tsx",
