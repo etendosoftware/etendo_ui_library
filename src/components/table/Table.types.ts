@@ -9,8 +9,7 @@ export interface TableProps {
   isLoading?: boolean;
   textEmptyTable?: string;
   commentEmptyTable?: string;
-  loadMoreData?: (currentPage: number, pageSize: number) => void;
-  isLoadMoreData?: boolean;
+  onLoadMoreData?: (currentPage: number, pageSize: number) => void;
   pageSize?: number;
   currentPage?: number;
   isLoadingMoreData?: boolean;

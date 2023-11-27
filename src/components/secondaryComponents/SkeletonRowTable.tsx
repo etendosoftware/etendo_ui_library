@@ -26,7 +26,7 @@ const SkeletonRowTable: React.FC<SkeletonRowTableProps> = ({
         height: 50,
         display: 'flex',
         justifyContent: 'center',
-        alignItems: indexColumn == 1 ? 'flex-start' : 'center',
+        alignItems: 'center',
         paddingLeft: indexColumn == 1 ? 36 : 0,
       }}>
       <SkeletonItem
