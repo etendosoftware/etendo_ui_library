@@ -79,6 +79,7 @@
   },
   "jest": {
     "preset": "react-native",
+    "testPathIgnorePatterns": ["examples/"],
     "moduleFileExtensions": [
       "ts",
       "tsx",
