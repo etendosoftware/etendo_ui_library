@@ -23,7 +23,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   inputWrapper: {
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -31,10 +30,10 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   datePickerInput: {
-    flex: 1,
     textAlign: 'left',
     fontSize: 18,
     outlineStyle: 'none',
+    height: 20,
   },
   calendarIcon: {
     width: 24,

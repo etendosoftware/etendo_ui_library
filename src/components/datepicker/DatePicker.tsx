@@ -18,11 +18,12 @@ import {
   CalendarIcon,
 } from '../../assets/images/icons';
 
-import { DayItem } from './DatePicker.types';
+import { PRIMARY_400 } from '../../styles/colors';
+import { styles } from './DatePicker.styles';
 
 import { translations } from './DatePicker.translations';
-import { formatDate } from './DatePicker.utils';
-import { styles } from './DatePicker.styles';
+import { DatePickerProps, DayItem } from './DatePicker.types';
+import { generateYearList, parseLocalDateString } from './DatePicker.utils';
 
 const DatePicker = ({
   language,
@@ -31,13 +32,13 @@ const DatePicker = ({
   formatDate,
   timeZone,
   value,
-}: any) => {
+}: DatePickerProps) => {
   // states for the date picker
-  const [isPickerShow, setIsPickerShow] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [isPickerShow, setIsPickerShow] = useState<boolean>(false);
+  const [selectedDate, setSelectedDate] = useState<any>(new Date());
+  const [isYearSelection, setIsYearSelection] = useState<boolean>(false);
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
-  const [isYearSelection, setIsYearSelection] = useState(false);
 
   // Toggle year selection
   const showYearSelection = () => setIsYearSelection(!isYearSelection);
@@ -47,10 +48,6 @@ const DatePicker = ({
     setCurrentYear(year);
     setIsYearSelection(false);
   };
-
-  // Generate a list of years for selection
-  const generateYearList = () =>
-    Array.from({ length: 200 }, (_, i) => 1900 + i);
 
   // Render item for year selection
   const renderYearItem = ({ item }: { item: number }) => (
@@ -95,12 +92,22 @@ const DatePicker = ({
   const monthNames = translations[language].monthNames;
 
   // Toggle date picker display
-  const showPicker = () => setIsPickerShow(!isPickerShow);
+  const showPicker = () => {
+    setIsPickerShow(!isPickerShow);
+
+    // If date is selected, set current month and year to selected date
+    if (!isPickerShow && selectedDate) {
+      setCurrentMonth(selectedDate.getMonth());
+      setCurrentYear(selectedDate.getFullYear());
+    }
+  };
 
   // Handle date selection
   const onDateSelected = (date: Date) => {
-    setSelectedDate(formatDate(date, language));
-    onChange(date);
+    setSelectedDate(date);
+    onChange(formatDate(date, language, timeZone));
+    setCurrentMonth(date.getMonth());
+    setCurrentYear(date.getFullYear());
     setIsPickerShow(false);
   };
 
@@ -115,11 +122,28 @@ const DatePicker = ({
     return days;
   };
 
-  const handleTextInputChange = (text: any) => {
-    // Suponiendo que convertiste el texto a un objeto Date válido:
-    const newDate = formatDate(text, language);
-    setSelectedDate(newDate);
-    onChange(newDate); // Notifica al componente padre sobre el cambio.
+  // Handle text input change and format the date
+  const handleTextInputChange = (text: string) => {
+    // Just allow numbers and limit the length to 8
+    let processedText = text.replace(/[^0-9]/g, '').slice(0, 8);
+
+    // Format the date
+    if (processedText.length > 2) {
+      processedText = processedText.slice(0, 2) + '/' + processedText.slice(2);
+    }
+    if (processedText.length > 5) {
+      processedText = processedText.slice(0, 5) + '/' + processedText.slice(5);
+    }
+
+    // Convert to date object if the date is complete
+    if (processedText.length === 10) {
+      const dateObject = parseLocalDateString(processedText, language);
+      setSelectedDate(dateObject);
+      onChange(formatDate(dateObject, language, timeZone));
+    } else {
+      setSelectedDate(undefined);
+      onChange(processedText);
+    }
   };
 
   // Render individual day item
@@ -161,7 +185,7 @@ const DatePicker = ({
     return (
       <View style={styles.calendarContainer}>
         <View style={styles.dayHeader}>
-          {daysShort.map((day: any) => (
+          {daysShort.map((day: string) => (
             <Text key={day} style={styles.dayHeaderText}>
               {day}
             </Text>
@@ -183,18 +207,20 @@ const DatePicker = ({
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        onPress={showPicker}
-        style={[styleField.field, styles.inputWrapper]}>
+      <View style={[styleField.field, styles.inputWrapper]}>
         <TextInput
           style={styles.datePickerInput}
-          value={value}
+          value={formatDate(selectedDate, language, timeZone)}
           placeholder={language === 'en' ? 'MM/DD/YYYY' : 'DD/MM/YYYY'}
+          placeholderTextColor={PRIMARY_400}
           editable={true}
           onChangeText={handleTextInputChange}
         />
-        <CalendarIcon style={styles.calendarIcon} />
-      </TouchableOpacity>
+
+        <TouchableOpacity onPress={showPicker}>
+          <CalendarIcon style={styles.calendarIcon} />
+        </TouchableOpacity>
+      </View>
 
       <PlatformComponent
         {...(Platform.OS === 'web'

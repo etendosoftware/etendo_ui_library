@@ -5,7 +5,7 @@ import {Input} from './components';
 import {formatDate} from './components/datepicker/DatePicker.utils';
 
 function App(): JSX.Element {
-  const [dateValue, setDateValue] = useState('');
+  const [dateValue, setDateValue] = useState<string | undefined>(undefined);
 
   return (
     <SafeAreaView>
@@ -14,12 +14,9 @@ function App(): JSX.Element {
       <View style={{width: '50%', marginTop: 20}}>
         <Input
           typeField="datePicker"
-          language="es"
+          language="en"
           value={dateValue}
-          onChange={newDate => {
-            console.log('newDate', newDate),
-              setDateValue(formatDate(newDate, 'es'));
-          }}
+          onChange={newDate => setDateValue(newDate)}
           formatDate={formatDate}
           timeZone="UTC"
         />

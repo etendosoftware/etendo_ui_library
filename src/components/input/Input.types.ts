@@ -72,7 +72,7 @@ export type TypeInputStyleVariant = Record<
 export interface InputProps {
   titleLabel?: string;
   titleImage?: React.ReactElement;
-  value: string;
+  value: string | number | Date | undefined;
   helperText?: string;
   placeholder?: string;
   placeholderPickerSearch?: string;

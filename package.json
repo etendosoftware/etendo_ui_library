@@ -17,8 +17,8 @@
     "build:web": "tsc --emitDeclarationOnly --outDir dist-web && babel src --out-dir dist-web --extensions '.ts,.tsx' --config-file ./babel.config.web.js",
     "build:native": "tsc --emitDeclarationOnly --outDir dist-native && babel src --out-dir dist-native --extensions '.ts,.tsx' --config-file ./babel.config.native.js",
     "nextjs": "cd examples/nextjs && yarn install && yarn dev",
-    "copy-to-reactnative": "cp -R src/* ./examples/ReactNative",
-    "copy-to-nextjs": "cp -R src/* ./examples/nextjs/apps/web/app",
+    "copy-to-reactnative": "rsync -av --exclude='__tests__' --exclude='__snapshots__' --exclude='*.test.*' src/ ./examples/ReactNative",
+    "copy-to-nextjs": "rsync -av --exclude='__tests__' --exclude='__snapshots__' --exclude='*.test.*' src/ ./examples/nextjs/apps/web/app",
     "watch": "nodemon --watch src -e js,jsx,ts,tsx --exec \"concurrently 'yarn copy-to-reactnative' 'yarn copy-to-nextjs'\""
   },
   "main": "index.js",
