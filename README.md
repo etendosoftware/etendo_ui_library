@@ -45,6 +45,8 @@ To use the Playground for testing Etendo UI components, follow these steps:
    - Run `yarn install` in the `etendo_ui_library` directory.
    - Additionally, execute `yarn watch` in the root directory. This is crucial as it copies the components into the **nextjs** and **React Native** folders for a seamless integration.
 
+     **⚠️ Warning:** When making changes to the Etendo UI library, always modify the components in the `src/components` directory. Avoid making changes in the `examples` folder components, as they are only copies and your changes won't be reflected in the library.
+
 2. **For Mobile Testing**:
 
    - Navigate to `examples/ReactNative`.
