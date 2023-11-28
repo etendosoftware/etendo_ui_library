@@ -7,13 +7,74 @@ pipeline {
     environment {
         NPM_TOKEN           = credentials('npmjs-access-token')
         EMAIL_ADDRESS       = credentials('email_builds')
-        URL_REPO            = 'https://bitbucket.org/koodu_software/etendo_ui_library'
+        URL_REPO            = "https://bitbucket.org/koodu_software/etendo_ui_library"
+        URL_REPO_GIT        = "git@bitbucket.org:koodu_software/etendo_ui_library.git"
         COMMIT_AUTHOR_NAME  = sh(returnStdout: true, script: "git log -1 --pretty=format:'%an'").trim()
         COMMIT_AUTHOR_EMAIL = sh(returnStdout: true, script: "git log -1 --pretty=format:'%ae'").trim()
+        SUCCESS             = "SUCCESS"
+        FAILED              = "FAILED"
+        UNSTABLE            = "UNSTABLE"
 
     }
 
-    agent { label 'jenkins-jenkins-agent' }
+    agent {
+    kubernetes {
+      inheritFrom 'jenkins-node-library'
+      defaultContainer 'jnlp'
+      yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jenkins-node-library
+  namespace: jenkins
+  labels:
+    app.kubernetes.io/name: jenkins-node-library
+spec:
+  volumes:
+    - name: rsa-keys
+      configMap:
+        name: rsa-keys
+        defaultMode: 384
+    - name: docker-sock
+      hostPath:
+        path: /var/run/docker.sock
+        type: ''
+  containers:
+    - name: compiler
+      image: etendo/compiler_jenkins:1.0.6
+      ports:
+        - name: ssh
+          containerPort: 22
+          protocol: TCP
+        - name: visualvm
+          containerPort: 8000
+          protocol: TCP
+      resources:
+        limits:
+          cpu: 1048m
+          memory: 2000Mi
+        requests:
+          cpu: 1048m
+          memory: 2000Mi
+      volumeMounts:
+        - name: rsa-keys
+          mountPath: /root/.ssh/
+        - name: docker-sock
+          mountPath: /var/run/docker.sock
+      securityContext:
+        readOnlyRootFilesystem: false
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      imagePullPolicy: IfNotPresent
+  restartPolicy: Always
+  terminationGracePeriodSeconds: 30
+  dnsPolicy: ClusterFirst
+  serviceAccountName: default
+  serviceAccount: default
+  securityContext: {}
+  """
+    }
+  }
 
     stages {
         stage('Build Environment') {
@@ -24,29 +85,31 @@ pipeline {
                 }
             }
             steps {
-                script {
-                    try {
-                        env.STATUSBUILD = "1"
-                        sh 'echo Building Environment'
-                        sh """
-                        echo "deb http://deb.debian.org/debian/ oldoldstable main" > /etc/apt/sources.list
-                        echo "deb http://security.debian.org/debian-security/ oldoldstable/updates main" >> /etc/apt/sources.list
-                        echo "deb http://deb.debian.org/debian/ oldoldstable-updates main" >> /etc/apt/sources.list
-                        apt-get update
-                        """
-                        sh 'curl -sL https://deb.nodesource.com/setup_16.x | bash -'
-                        sh 'apt-get install -y nodejs'
-                        sh 'npm install -g yarn'
-                        sh 'npm config set registry "https://registry.npmjs.org/"'
-                        sh 'npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN'
-                        sh 'yarn install'
-                        sh 'yarn build'
-                        sh 'echo Build Succesful'
-                    } catch (Exception e) {
-                        echo 'BUILD FAILED'
-                        currentBuild.result = 'FAILED'
-                        error('BUILD FAILED')
-                        env.STATUSBUILD = "0"
+                container('compiler') {
+                    script {
+                        try {
+                            env.STATUSBUILD = "1"
+                            withCredentials([sshUserPrivateKey(credentialsId: 'my-credentials', keyFileVariable: 'keyfile')]) {
+                                sh 'GIT_SSH_COMMAND=\"ssh -i ${keyfile} -o \"UserKnownHostsFile=/dev/null\" -o \"StrictHostKeyChecking=no\"\" git clone --branch ${GIT_BRANCH} ${URL_REPO_GIT} etendo_ui_library'
+                                dir("etendo_ui_library") {
+                                    echo "....Building Environment...."
+                                    sh "curl -sL https://deb.nodesource.com/setup_16.x | bash -"
+                                    sh "apt-get install -y nodejs"
+                                    sh 'npm install -g yarn'
+                                    sh 'npm config set registry "https://registry.npmjs.org/"'
+                                    sh 'npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN'
+                                    sh 'yarn install'
+                                    sh 'yarn build'
+                                    echo "....Build Succesful...."
+                                }
+                            }
+                        } catch (Exception e) {
+                            echo "Exception occurred: " + e.toString()
+                            echo "....FAILED Build...."
+                            currentBuild.result = FAILED
+                            error('BUILD FAILED')
+                            env.STATUSBUILD = "0"
+                        }
                     }
                 }
             }
@@ -60,17 +123,22 @@ pipeline {
                 }
             }
             steps {
-                script {
-                    try {
-                        env.STATUSTEST = "1"
-                        sh 'echo Running tests'
-                        sh 'yarn test'
-                        sh 'echo Tests Succesful'
-                    } catch (Exception e) {
-                        echo 'TEST FAILED'
-                        currentBuild.result = 'UNSTABLE'
-                        unstable('TEST FAILED')
-                        env.STATUSTEST = "0"
+                container('compiler') {
+                    script {
+                        dir("etendo_ui_library") {
+                            try {
+                                env.STATUSTEST = "1"
+                                echo "....Running Tests...."
+                                sh "yarn test"
+                                echo "....Tests Succesful...."
+                            } catch (Exception e) {
+                                echo "Exception occurred: " + e.toString()
+                                echo "....FAILED Tests...."
+                                currentBuild.result = UNSTABLE
+                                unstable('TEST FAILED')
+                                env.STATUSTEST = "0"
+                            }
+                        }
                     }
                 }
             }
@@ -87,18 +155,32 @@ pipeline {
                 }
             }
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 'my-credentials', keyFileVariable: 'keyfile')]) {
-                    withCredentials([usernamePassword(credentialsId: "etendo-bot-bitbucket", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                        sh """
-                        git config user.name "Etendo Bot"
-                        git config user.email "$GIT_USERNAME"
-                        """
-                        echo 'Publishing Next Version'
-                        sh 'git checkout $GIT_BRANCH'
-                        sh 'yarn config set version-git-message "Upgrade version to %s :zap:"'
-                        sh 'yarn version --patch'
-                        sh 'npm publish --tag next --access public'
-                        sh 'GIT_SSH_COMMAND=\"ssh -i ${keyfile}\" git push $GIT_URL'
+                container('compiler') {
+                    script {
+                        dir("etendo_ui_library") {
+                            try {
+                                withCredentials([sshUserPrivateKey(credentialsId: 'my-credentials', keyFileVariable: 'keyfile')]) {
+                                    withCredentials([usernamePassword(credentialsId: "etendo-bot-bitbucket", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                                        sh """
+                                        git config user.name "Etendo Bot"
+                                        git config user.email "$GIT_USERNAME"
+                                        """
+                                        echo "....Publishing Next Version...."
+                                        sh "git checkout $GIT_BRANCH"
+                                        sh 'yarn config set version-git-message "Upgrade version to %s :zap:"'
+                                        sh 'yarn version --patch'
+                                        sh "npm publish --tag next --access public"
+                                        sh 'GIT_SSH_COMMAND=\"ssh -i ${keyfile} -o \"UserKnownHostsFile=/dev/null\" -o \"StrictHostKeyChecking=no\"\" git push $GIT_URL'
+                                    }
+                                }
+                            } catch (Exception e) {
+                              echo "Exception occurred: " + e.toString()
+                              echo "....FAILED Publish Version...."
+                              currentBuild.result = FAILED
+                              error('BUILD FAILED')
+                              env.STATUSBUILD = "0"
+                            }
+                        }
                     }
                 }
             }
@@ -106,17 +188,6 @@ pipeline {
     }
     
     post {
-        always {
-            sh 'chmod a+x ./pipelines/build-update.sh'
-        }
-        success {
-            withCredentials([usernamePassword(credentialsId: "koodu_credentials", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                script {
-                    sh './pipelines/build-update.sh etendo_ui_library SUCCESSFUL "Successful" $GIT_USERNAME $GIT_PASSWORD'
-                }
-            }
-            cleanWs deleteDirs: true
-        }
         fixed {
             mail to: EMAIL_ADDRESS,
             subject: "✅ FIXED - ${currentBuild.fullDisplayName}",
@@ -136,12 +207,6 @@ __________________________________________________________
             """
         }
         unstable {
-            withCredentials([usernamePassword(credentialsId: "koodu_credentials", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                script {
-                    sh './pipelines/build-update.sh etendo_ui_library FAILED "Failed Tests" $GIT_USERNAME $GIT_PASSWORD'
-                }
-            }
-            cleanWs deleteDirs: true
             mail to: EMAIL_ADDRESS,
             subject: "🚨 TESTS FAILED - ${currentBuild.fullDisplayName}",
             body: """
@@ -160,12 +225,6 @@ __________________________________________________________
             """
         }
         failure {
-            withCredentials([usernamePassword(credentialsId: "koodu_credentials", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                script {
-                    sh './pipelines/build-update.sh etendo_ui_library FAILED "Build Failed" $GIT_USERNAME $GIT_PASSWORD'
-                }
-            }
-            cleanWs deleteDirs: true
             mail to: EMAIL_ADDRESS,
             subject: "🚫 ERROR - ${currentBuild.fullDisplayName}",
             body:  """
