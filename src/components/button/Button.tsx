@@ -169,7 +169,7 @@ const Button = ({
     }
   };
   return (
-    <TouchableOpacity>
+    <TouchableOpacity disabled={disabled ?? loading}>
       <Pressable
         onHoverIn={handleHoverIn}
         onHoverOut={handleHoverOut}
@@ -177,6 +177,7 @@ const Button = ({
           stateStyleContainer(pressed),
           { height, width, paddingHorizontal, paddingVertical },
         ]}
+        disabled={disabled ?? loading}
         onPress={handleOnPress}>
         {renderIcon(iconLeft, {
           marginRight: iconLeft && text ? 8 : 0,

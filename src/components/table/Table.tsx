@@ -118,10 +118,8 @@ const Table = ({
     return (
       <View style={styles.emptyStateConteiner}>
         <EmptyTableState />
-        <View>
-          <Text style={styles.emptyTextTitle}>{textEmptyTable}</Text>
-          <Text style={styles.emptyTextSubtitle}>{commentEmptyTable}</Text>
-        </View>
+        <Text style={styles.emptyTextTitle}>{textEmptyTable}</Text>
+        <Text style={styles.emptyTextSubtitle}>{commentEmptyTable}</Text>
       </View>
     );
   };
