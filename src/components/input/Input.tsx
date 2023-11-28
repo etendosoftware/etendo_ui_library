@@ -29,6 +29,10 @@ const Input = ({
   onOptionSelected,
   typeField,
   isError,
+  language,
+  formatDate,
+  timeZone,
+  onChange,
 }: InputProps) => {
   const stateStyle = () => {
     if (typeField === 'readOnly') {
@@ -52,7 +56,8 @@ const Input = ({
     return disabled;
   };
 
-  const showFilterSearch = dataPicker && (showSearchInPicker ?? dataPicker?.length > 16);
+  const showFilterSearch =
+    dataPicker && (showSearchInPicker ?? dataPicker?.length > 16);
 
   return (
     <View style={styles.inputContainer}>
@@ -85,6 +90,10 @@ const Input = ({
         displayKey={displayKey}
         backgroundColor={backgroundColor}
         height={height}
+        language={language}
+        formatDate={formatDate}
+        timeZone={timeZone}
+        onChange={onChange}
       />
       <InputHelperText
         label={helperText}

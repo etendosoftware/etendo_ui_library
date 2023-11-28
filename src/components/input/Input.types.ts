@@ -23,7 +23,8 @@ export type InputFieldVariants =
   | 'textInputSearch'
   | 'textInputPassword'
   | 'pressableText'
-  | 'pressableSearch';
+  | 'pressableSearch'
+  | 'datePicker';
 
 export enum InputFieldVariant {
   ReadOnly = 'readOnly',
@@ -46,6 +47,7 @@ export type InputFieldConfigType = {
   disabledSubmit?: boolean;
   backgroundColor?: ColorValue;
   placeholderStyle?: TextStyle;
+  isDatePicker?: boolean;
 };
 
 export type InputVariantsType = Record<
@@ -93,6 +95,10 @@ export interface InputProps {
   onBlur?: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   onOptionSelected?: (selectedItem: Array<Record<string, any>>) => void;
   backgroundColor?: ColorValue;
+  language?: string;
+  formatDate?: any;
+  timeZone?: string;
+  onChange?: (event: any) => void;
 }
 
 export interface InputTitleProps {
@@ -127,6 +133,7 @@ export interface InputFieldProps {
   fontSize?: number;
   height?: DimensionValue;
   dataPicker?: any;
+  language?: string;
   displayKey?: string;
   backgroundColor?: ColorValue;
   onOptionSelected?: any;
@@ -137,6 +144,9 @@ export interface InputFieldProps {
   onChangeText?: (text: string) => void;
   onFocus: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   onBlur: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+  formatDate?: any;
+  timeZone?: string;
+  onChange?: (event: any) => void;
 }
 
 export interface InputHelperProps {

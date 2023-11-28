@@ -21,6 +21,7 @@ import {
 import { ShowPasswordIcon } from '../../../assets/images/icons/ShowPasswordIcon';
 import { HidePasswordIcon } from '../../../assets/images/icons/HidePasswordIcon';
 import InputOptions from './InputOptions';
+import DatePicker from '../../datepicker/DatePicker';
 import { NEUTRAL_0, NEUTRAL_400, NEUTRAL_600 } from '../../../styles/colors';
 import { disableOutline } from '../../../helpers/table_utils';
 
@@ -46,6 +47,10 @@ const InputField = ({
   onOptionSelected,
   onFocus,
   onBlur,
+  language,
+  formatDate,
+  timeZone,
+  onChange,
 }: InputFieldProps) => {
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(true);
@@ -62,6 +67,19 @@ const InputField = ({
   const windowHeight = Dimensions.get('window').height;
   const refComponent = useRef<TouchableOpacity>(null);
   const regex = /^[0-9.,]+$/g;
+
+  if (configField?.isDatePicker) {
+    return (
+      <DatePicker
+        formatDate={formatDate}
+        language={language}
+        styleField={styleField}
+        onChange={onChange}
+        value={value}
+        timeZone={timeZone}
+      />
+    );
+  }
 
   const getStyleText = (): TextStyle | TextStyle[] => {
     let style: Array<TextStyle | TextStyle[]> = [];
@@ -256,8 +274,7 @@ const InputField = ({
           { height },
         ]}
         disabled={disabled || configField.disabledField}
-        onPress={handleOnPress}
-      >
+        onPress={handleOnPress}>
         {configField?.type === InputFieldVariant.TextInput && (
           <TextInput
             editable={!disabled || !configField.disabledField}
@@ -281,8 +298,7 @@ const InputField = ({
           <Text
             numberOfLines={1}
             ellipsizeMode="tail"
-            style={[getStyleText(), disableOutline(), styleField.textDefault]}
-          >
+            style={[getStyleText(), disableOutline(), styleField.textDefault]}>
             {getText()}
           </Text>
         )}
@@ -290,8 +306,7 @@ const InputField = ({
           <TouchableOpacity
             onPress={handlePressImage}
             style={styles.buttonContainerInputField}
-            disabled={isAreaDisabled()}
-          >
+            disabled={isAreaDisabled()}>
             {getImage(configField.image)}
           </TouchableOpacity>
         )}
