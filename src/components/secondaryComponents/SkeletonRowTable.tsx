@@ -1,6 +1,5 @@
-import { View, Animated, ColorValue, DimensionValue } from 'react-native';
-import React, { useEffect, useRef, useState } from 'react';
-import { NEUTRAL_10 } from '../../styles/colors';
+import { View, DimensionValue } from 'react-native';
+import React from 'react';
 import SkeletonItem from './SkeletonItem';
 import { isOdd } from '../../helpers/table_utils';
 
@@ -38,7 +37,7 @@ const SkeletonRowTable: React.FC<SkeletonRowTableProps> = ({
         width={
           widthSkeleton
             ? widthSkeleton
-            : indexColumn == 1 && isOdd(indexRow)
+            : indexColumn === 1 && isOdd(indexRow)
             ? '80%'
             : '60%'
         }
