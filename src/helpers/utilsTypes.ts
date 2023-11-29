@@ -1,4 +1,4 @@
-import {ImageSourcePropType} from 'react-native';
+import { ImageSourcePropType } from 'react-native';
 
 export type ImageType = {
   imgRoute?: ImageSourcePropType;
@@ -6,3 +6,5 @@ export type ImageType = {
   imgHeight?: string | number;
   imgMarginRight?: string | number;
 };
+
+export type DeviceType = 'tablet' | 'mobile' | 'web';
