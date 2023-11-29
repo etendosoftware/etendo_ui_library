@@ -18,10 +18,10 @@ pipeline {
     }
 
     agent {
-    kubernetes {
-      inheritFrom 'jenkins-node-library'
-      defaultContainer 'jnlp'
-      yaml """
+        kubernetes {
+            inheritFrom 'jenkins-node-library'
+            defaultContainer 'jnlp'
+            yaml """
 apiVersion: v1
 kind: Pod
 metadata:
@@ -72,9 +72,9 @@ spec:
   serviceAccountName: default
   serviceAccount: default
   securityContext: {}
-  """
+    """
+        }
     }
-  }
 
     stages {
         stage('Build Environment') {
