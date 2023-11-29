@@ -1,9 +1,9 @@
 import { Platform, StyleSheet } from 'react-native';
 import {
   NEUTRAL_400,
-  NEUTRAL_600,
   PRIMARY_100,
   TERTIARY_100,
+  TERTIARY_70,
 } from '../../styles/colors';
 
 // StyleSheet for DatePicker
@@ -58,9 +58,8 @@ export const styles = StyleSheet.create({
     padding: 10,
   },
   monthText: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: NEUTRAL_600,
+    fontSize: 16,
+    color: PRIMARY_100,
   },
   arrow: {
     fontSize: 24,
@@ -76,15 +75,9 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     color: TERTIARY_100,
   },
-  daysContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    paddingVertical: 8,
-  },
   calendarContainer: {
     backgroundColor: 'white',
-    height: 250,
+    height: 255,
   },
   dayItem: {
     width: '14.28%',
@@ -94,6 +87,7 @@ export const styles = StyleSheet.create({
   },
   dayItemText: {
     padding: 8,
+    marginVertical: 2,
     borderRadius: 15,
     textAlign: 'center',
     backgroundColor: 'transparent',
@@ -102,8 +96,8 @@ export const styles = StyleSheet.create({
     backgroundColor: PRIMARY_100,
     borderRadius: 100,
     padding: 8,
-    height: 32,
-    width: 32,
+    height: 34,
+    width: 34,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -115,15 +109,15 @@ export const styles = StyleSheet.create({
   },
   currentDayBorder: {
     borderWidth: 1,
-    borderColor: NEUTRAL_400,
+    borderColor: PRIMARY_100,
     borderRadius: 100,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  yearList: {
-    height: 250,
+  list: {
+    height: 255,
   },
-  yearItem: {
+  item: {
     flex: 1,
     justifyContent: 'center',
     padding: 10,
@@ -131,5 +125,9 @@ export const styles = StyleSheet.create({
   },
   yearText: {
     fontSize: 16,
+  },
+  selectedItem: {
+    backgroundColor: TERTIARY_70,
+    borderRadius: 8,
   },
 });

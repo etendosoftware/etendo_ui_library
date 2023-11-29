@@ -48,9 +48,8 @@ const InputField = ({
   onFocus,
   onBlur,
   language,
-  formatDate,
-  timeZone,
   onChange,
+  dateFormat,
 }: InputFieldProps) => {
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(true);
@@ -71,12 +70,11 @@ const InputField = ({
   if (configField?.isDatePicker) {
     return (
       <DatePicker
-        formatDate={formatDate}
+        dateFormat={dateFormat}
         language={language}
         styleField={styleField}
         onChange={onChange}
         value={value}
-        timeZone={timeZone}
       />
     );
   }

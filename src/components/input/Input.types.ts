@@ -37,6 +37,7 @@ export enum InputFieldVariant {
 }
 
 export type KeyboardTypes = 'text' | 'number';
+export type DateFormat = 'DD/MM/YYYY' | 'MM/DD/YYYY';
 
 export type InputFieldConfigType = {
   type: InputFieldType;
@@ -96,8 +97,7 @@ export interface InputProps {
   onOptionSelected?: (selectedItem: Array<Record<string, any>>) => void;
   backgroundColor?: ColorValue;
   language?: string;
-  formatDate?: any;
-  timeZone?: string;
+  dateFormat?: DateFormat;
   onChange?: (event: any) => void;
 }
 
@@ -115,7 +115,7 @@ export interface InputHelperProps {
 
 export interface InputFieldProps {
   disabled?: boolean;
-  value?: string;
+  value?: string | number | Date | undefined | any;
   placeholder?: string;
   placeholderPickerSearch?: string;
   configField: InputFieldConfigType;
@@ -144,8 +144,7 @@ export interface InputFieldProps {
   onChangeText?: (text: string) => void;
   onFocus: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   onBlur: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
-  formatDate?: any;
-  timeZone?: string;
+  dateFormat?: any;
   onChange?: (event: any) => void;
 }
 

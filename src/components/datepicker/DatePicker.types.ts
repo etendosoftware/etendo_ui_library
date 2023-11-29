@@ -4,11 +4,12 @@ export type DayItem = {
   isCurrentMonth: boolean;
 };
 
+export type DateFormat = 'DD/MM/YYYY' | 'MM/DD/YYYY';
+
 export interface DatePickerProps {
-  language: string;
+  language: string | undefined;
   styleField: any;
-  onChange: (date: Date | string) => void;
-  formatDate: (date: Date, language: string, timeZone: string) => string;
-  timeZone: string;
-  value: Date | string | undefined;
+  onChange: any;
+  dateFormat: DateFormat;
+  value: Date | string | undefined | any;
 }

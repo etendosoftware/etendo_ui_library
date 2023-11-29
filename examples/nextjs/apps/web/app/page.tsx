@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Button from './components/button/Button';
-import { formatDate } from './components/datepicker/DatePicker.utils';
 import Input from './components/input/Input';
 
 export default function Web() {
@@ -18,8 +17,7 @@ export default function Web() {
           language="es"
           value={dateValue}
           onChange={newDate => setDateValue(newDate)}
-          formatDate={formatDate}
-          timeZone="UTC"
+          dateFormat="DD/MM/YYYY"
         />
       </div>
     </div>

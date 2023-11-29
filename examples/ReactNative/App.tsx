@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import Button from './components/button/Button';
 import {Input} from './components';
-import {formatDate} from './components/datepicker/DatePicker.utils';
 
 function App(): JSX.Element {
   const [dateValue, setDateValue] = useState<string | undefined>(undefined);
@@ -14,11 +13,11 @@ function App(): JSX.Element {
       <View style={{width: '50%', marginTop: 20}}>
         <Input
           typeField="datePicker"
-          language="en"
+          language="es"
           value={dateValue}
           onChange={newDate => setDateValue(newDate)}
-          formatDate={formatDate}
-          timeZone="UTC"
+          dateFormat="MM/DD/YYYY"
+          titleLabel="Date"
         />
       </View>
     </SafeAreaView>

@@ -1,18 +1,34 @@
 /* Utils for DatePicker component */
 // Format date based on language
-export const formatDate = (date: Date, language: string, timeZone: string) => {
+export const formatterDate = (date: Date, format: string) => {
   if (date !== undefined) {
     const day = date.getDate().toString().padStart(2, '0');
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const year = date.getFullYear();
-    return language === 'es'
-      ? `${day}/${month}/${year}`
-      : `${month}/${day}/${year}`;
+
+    // Format date based on date format
+    if (format === 'MM/DD/YYYY') {
+      return `${month}/${day}/${year}`;
+    } else if (format === 'DD/MM/YYYY') {
+      return `${day}/${month}/${year}`;
+    } else {
+      // Default format - // MM/DD/YYYY
+      return `${month}/${day}/${year}`;
+    }
   }
+  return '';
+};
+
+// Get placeholder text based on date format
+export const getPlaceholderDateFormat = (dateFormat: string) => {
+  return dateFormat === 'MM/DD/YYYY' ? 'MM/DD/YYYY' : 'DD/MM/YYYY';
 };
 
 // Parse local date string to Date object
-export const parseLocalDateString = (localDate: string, language: string) => {
+export const parseLocalDateString = (
+  localDate: string,
+  language: string | undefined,
+) => {
   const parts: any = localDate.split('/');
   const year = parts[2];
   const month = language === 'en' ? parts[0] - 1 : parts[1] - 1;

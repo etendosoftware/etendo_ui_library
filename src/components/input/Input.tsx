@@ -30,8 +30,7 @@ const Input = ({
   typeField,
   isError,
   language,
-  formatDate,
-  timeZone,
+  dateFormat,
   onChange,
 }: InputProps) => {
   const stateStyle = () => {
@@ -91,8 +90,7 @@ const Input = ({
         backgroundColor={backgroundColor}
         height={height}
         language={language}
-        formatDate={formatDate}
-        timeZone={timeZone}
+        dateFormat={dateFormat}
         onChange={onChange}
       />
       <InputHelperText

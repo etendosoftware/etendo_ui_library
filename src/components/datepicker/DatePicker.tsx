@@ -1,5 +1,5 @@
 /* Imports */
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import {
   Modal,
@@ -23,49 +23,155 @@ import { styles } from './DatePicker.styles';
 
 import { translations } from './DatePicker.translations';
 import { DatePickerProps, DayItem } from './DatePicker.types';
-import { generateYearList, parseLocalDateString } from './DatePicker.utils';
+import {
+  formatterDate,
+  generateYearList,
+  getPlaceholderDateFormat,
+  parseLocalDateString,
+} from './DatePicker.utils';
+import { Button } from '../button';
 
 const DatePicker = ({
   language,
   styleField,
   onChange,
-  formatDate,
-  timeZone,
+  dateFormat,
   value,
 }: DatePickerProps) => {
   // states for the date picker
+  const [isMonthSelection, setIsMonthSelection] = useState(false);
   const [isPickerShow, setIsPickerShow] = useState<boolean>(false);
   const [selectedDate, setSelectedDate] = useState<any>(new Date());
   const [isYearSelection, setIsYearSelection] = useState<boolean>(false);
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+  const [currentSelectedDate, setTempSelectedDate] = useState<Date>(
+    new Date(selectedDate),
+  );
+
+  // Ref for month list
+  const monthListRef: any = useRef(null);
+  // Toggle month selection
+  const showMonthSelection = () => {
+    setIsMonthSelection(!isMonthSelection);
+
+    if (!isMonthSelection) {
+      if (monthListRef.current) {
+        monthListRef.current.scrollToIndex({
+          animated: true,
+          index: currentMonth,
+        });
+      }
+    }
+  };
+
+  // Use effect for month selection
+  useEffect(() => {
+    if (isMonthSelection && monthListRef.current) {
+      monthListRef.current.scrollToIndex({
+        animated: true,
+        index: currentMonth,
+      });
+    }
+  }, [isMonthSelection, currentMonth]);
 
   // Toggle year selection
-  const showYearSelection = () => setIsYearSelection(!isYearSelection);
+  const showYearSelection = () => {
+    setIsYearSelection(!isYearSelection);
 
-  // Set current year and close year selection
+    if (!isYearSelection) {
+      const index = generateYearList().indexOf(currentYear);
+      if (index !== -1 && yearListRef.current) {
+        yearListRef.current.scrollToIndex({ animated: true, index });
+      }
+    }
+  };
+
+  // Set current month and update the selected date
+  const selectMonth = (monthIndex: number) => {
+    setCurrentMonth(monthIndex);
+    setIsMonthSelection(false);
+
+    const newSelectedDate = selectedDate ? new Date(selectedDate) : new Date();
+    newSelectedDate.setMonth(monthIndex);
+    setSelectedDate(newSelectedDate);
+
+    if (onChange) {
+      onChange(formatterDate(newSelectedDate, dateFormat));
+    }
+  };
+
+  // Set current year and update the selected date
   const selectYear = (year: number) => {
     setCurrentYear(year);
     setIsYearSelection(false);
+
+    const newSelectedDate = selectedDate ? new Date(selectedDate) : new Date();
+    newSelectedDate.setFullYear(year);
+    setSelectedDate(newSelectedDate);
+
+    if (onChange) {
+      onChange(formatterDate(newSelectedDate, dateFormat));
+    }
   };
+
+  // Render item for month selection
+  const renderMonthItem = ({ item, index }: any) => (
+    <TouchableOpacity
+      style={[styles.item, index === currentMonth ? styles.selectedItem : null]}
+      onPress={() => selectMonth(index)}>
+      <Text style={styles.monthText}>{item}</Text>
+    </TouchableOpacity>
+  );
 
   // Render item for year selection
   const renderYearItem = ({ item }: { item: number }) => (
-    <TouchableOpacity style={styles.yearItem} onPress={() => selectYear(item)}>
+    <TouchableOpacity
+      style={[styles.item, item === currentYear ? styles.selectedItem : null]}
+      onPress={() => selectYear(item)}>
       <Text style={styles.yearText}>{item}</Text>
     </TouchableOpacity>
   );
 
-  // Render year selection list
-  const renderYearSelection = () => (
+  // Render month selection list
+  const renderMonthSelection = () => (
     <FlatList
-      data={generateYearList()}
-      renderItem={renderYearItem}
-      keyExtractor={item => item.toString()}
-      numColumns={4}
-      style={styles.yearList}
+      ref={monthListRef}
+      data={monthsShort}
+      renderItem={renderMonthItem}
+      keyExtractor={(item, index) => index.toString()}
+      style={styles.list}
+      initialScrollIndex={currentMonth}
+      getItemLayout={(_, index) => ({
+        length: 20,
+        offset: 42 * index,
+        index,
+      })}
     />
   );
+
+  // Reference for year selection list
+  const yearListRef: any = useRef(null);
+  // Render year selection list
+  const renderYearSelection = () => {
+    const yearList = generateYearList();
+
+    return (
+      <FlatList
+        ref={yearListRef}
+        data={yearList}
+        renderItem={renderYearItem}
+        keyExtractor={item => item.toString()}
+        style={styles.list}
+        initialScrollIndex={yearList.indexOf(currentYear)}
+        getItemLayout={(_, index) => ({
+          length: 40,
+          offset: Platform.OS === 'web' ? 40 * index : 43.5 * index,
+          index,
+        })}
+      />
+    );
+  };
 
   // Change current month and year
   const changeMonthAndYear = (newMonth: number, newYear: number) => {
@@ -89,6 +195,7 @@ const DatePicker = ({
 
   // Get short day names and month names based on language
   const daysShort = translations[language].daysShort;
+  const monthsShort = translations[language].monthsShort;
   const monthNames = translations[language].monthNames;
 
   // Toggle date picker display
@@ -104,10 +211,21 @@ const DatePicker = ({
 
   // Handle date selection
   const onDateSelected = (date: Date) => {
+    setTempSelectedDate(selectedDate);
     setSelectedDate(date);
-    onChange(formatDate(date, language, timeZone));
-    setCurrentMonth(date.getMonth());
-    setCurrentYear(date.getFullYear());
+  };
+
+  // Function for the botón 'Accept'
+  const onAccept = () => {
+    if (selectedDate) {
+      onChange(formatterDate(selectedDate, dateFormat));
+    }
+    setIsPickerShow(false);
+  };
+
+  // Function for the botón 'Cancel'
+  const onCancel = () => {
+    setSelectedDate(currentSelectedDate);
     setIsPickerShow(false);
   };
 
@@ -139,7 +257,7 @@ const DatePicker = ({
     if (processedText.length === 10) {
       const dateObject = parseLocalDateString(processedText, language);
       setSelectedDate(dateObject);
-      onChange(formatDate(dateObject, language, timeZone));
+      onChange(formatterDate(dateObject, dateFormat));
     } else {
       setSelectedDate(undefined);
       onChange(processedText);
@@ -210,8 +328,8 @@ const DatePicker = ({
       <View style={[styleField.field, styles.inputWrapper]}>
         <TextInput
           style={styles.datePickerInput}
-          value={formatDate(selectedDate, language, timeZone)}
-          placeholder={language === 'en' ? 'MM/DD/YYYY' : 'DD/MM/YYYY'}
+          value={value}
+          placeholder={getPlaceholderDateFormat(dateFormat)}
           placeholderTextColor={PRIMARY_400}
           editable={true}
           onChangeText={handleTextInputChange}
@@ -242,31 +360,82 @@ const DatePicker = ({
           <View style={styles.modalContent}>
             <View style={styles.header}>
               <TouchableOpacity
-                style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}
-                onPress={showYearSelection}>
-                <Text style={styles.monthText}>
-                  {monthNames[currentMonth]} {currentYear}
-                </Text>
-                <ArrowDownIcon
-                  style={{
-                    width: 10,
-                    transform: [
-                      { rotate: isYearSelection ? '180deg' : '0deg' },
-                    ],
-                  }}
-                />
-              </TouchableOpacity>
-
-              <View style={{ flexDirection: 'row', gap: 16 }}>
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  gap: 8,
+                }}
+                onPress={showMonthSelection}>
                 <TouchableOpacity onPress={goToPreviousMonth}>
                   <ArrowLeftIcon style={{ width: 10 }} />
                 </TouchableOpacity>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    marginHorizontal: 12,
+                    alignItems: 'center',
+                    gap: 8,
+                  }}>
+                  <Text style={styles.monthText}>
+                    {monthsShort[currentMonth]}
+                  </Text>
+                  <ArrowDownIcon
+                    style={{
+                      width: 8,
+                      transform: [
+                        { rotate: isYearSelection ? '180deg' : '0deg' },
+                      ],
+                    }}
+                  />
+                </View>
                 <TouchableOpacity onPress={goToNextMonth}>
                   <ArrowRightIcon style={{ width: 10 }} />
                 </TouchableOpacity>
-              </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}
+                onPress={showYearSelection}>
+                <TouchableOpacity onPress={goToPreviousMonth}>
+                  <ArrowLeftIcon style={{ width: 10 }} />
+                </TouchableOpacity>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    marginHorizontal: 12,
+                    alignItems: 'center',
+                    gap: 8,
+                  }}>
+                  <Text style={styles.monthText}>{currentYear}</Text>
+                  <ArrowDownIcon
+                    style={{
+                      width: 8,
+                      transform: [
+                        { rotate: isYearSelection ? '180deg' : '0deg' },
+                      ],
+                    }}
+                  />
+                </View>
+                <TouchableOpacity onPress={goToNextMonth}>
+                  <ArrowRightIcon style={{ width: 10 }} />
+                </TouchableOpacity>
+              </TouchableOpacity>
             </View>
-            {isYearSelection ? renderYearSelection() : renderCalendar()}
+            {isYearSelection
+              ? renderYearSelection()
+              : isMonthSelection
+              ? renderMonthSelection()
+              : renderCalendar()}
+
+            <View
+              style={{
+                width: '100%',
+                flexDirection: 'row',
+                justifyContent: 'flex-end',
+              }}>
+              <Button typeStyle="white" text="Cancel" onPress={onCancel} />
+              <Button typeStyle="terciary" text="Accept" onPress={onAccept} />
+            </View>
           </View>
         </TouchableOpacity>
       </PlatformComponent>
