@@ -51,7 +51,7 @@ To use the Playground for testing Etendo UI components, follow these steps:
 
    - Navigate to `examples/ReactNative`.
    - Run `yarn install` to install necessary dependencies.
-   - To test on iOS, execute `yarn run ios`.
+   - To test on iOS, execute `cd ios && pod install && cd .. && yarn run ios`.
    - For Android, use `yarn run android`.
 
 3. **For Web Testing**:
