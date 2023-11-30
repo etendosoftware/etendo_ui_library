@@ -1,10 +1,18 @@
 import { Platform, StyleSheet } from 'react-native';
 import {
+  DESTRUCTIVE_10,
+  DESTRUCTIVE_100,
+  NEUTRAL_200,
+  NEUTRAL_300,
   NEUTRAL_400,
+  NEUTRAL_50,
   PRIMARY_100,
-  TERTIARY_100,
+  QUATERNARY_50,
   TERTIARY_70,
 } from '../../styles/colors';
+
+// Height of the calendar
+export const CALENDAR_HEIGHT = 260;
 
 // StyleSheet for DatePicker
 export const styles = StyleSheet.create({
@@ -28,12 +36,38 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: Platform.OS === 'web' ? 8 : 20,
     paddingHorizontal: 16,
+    backgroundColor: NEUTRAL_50,
+  },
+  invalidDateInputWrapper: {
+    borderColor: DESTRUCTIVE_100,
   },
   datePickerInput: {
     textAlign: 'left',
     fontSize: 18,
     outlineStyle: 'none',
     height: 20,
+  },
+  inputContainerWrapper: {
+    backgroundColor: 'transparent',
+    padding: Platform.OS === 'web' ? 6 : 0,
+    borderRadius: 8,
+  },
+  monthAndYearContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  monthAndYearContent: {
+    flexDirection: 'row',
+    marginHorizontal: 12,
+    alignItems: 'center',
+    gap: 8,
+  },
+  inputWrapperFocused: {
+    backgroundColor: QUATERNARY_50,
+  },
+  invalidDateWrapperFocused: {
+    backgroundColor: DESTRUCTIVE_10,
   },
   calendarIcon: {
     width: 24,
@@ -45,17 +79,20 @@ export const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.5)',
   },
   modalContent: {
-    backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 10,
+    backgroundColor: NEUTRAL_50,
+    borderRadius: 8,
     elevation: 5,
     width: Platform.OS === 'web' ? '100%' : '90%',
+    borderWidth: 1,
+    borderColor: NEUTRAL_300,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 10,
+    paddingHorizontal: 20,
+    paddingTop: 15,
+    paddingBottom: 10,
   },
   monthText: {
     fontSize: 16,
@@ -73,11 +110,14 @@ export const styles = StyleSheet.create({
   dayHeaderText: {
     width: '14.28%',
     textAlign: 'center',
-    color: TERTIARY_100,
+    color: 'NEUTRAL_800',
+  },
+  notCurrentMonthStyle: {
+    color: NEUTRAL_400,
   },
   calendarContainer: {
-    backgroundColor: 'white',
-    height: 255,
+    height: CALENDAR_HEIGHT,
+    paddingHorizontal: 10,
   },
   dayItem: {
     width: '14.28%',
@@ -88,9 +128,18 @@ export const styles = StyleSheet.create({
   dayItemText: {
     padding: 8,
     marginVertical: 2,
-    borderRadius: 15,
+    borderRadius: 100,
     textAlign: 'center',
-    backgroundColor: 'transparent',
+    width: 34,
+    height: 34,
+  },
+  dayItemTextHover: {
+    backgroundColor: NEUTRAL_200,
+  },
+  todayItemTextHover: {
+    backgroundColor: TERTIARY_70,
+    borderWidth: 1,
+    borderColor: PRIMARY_100,
   },
   selectedDayBackground: {
     backgroundColor: PRIMARY_100,
@@ -115,7 +164,9 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   list: {
-    height: 255,
+    height: CALENDAR_HEIGHT,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
   },
   item: {
     flex: 1,
@@ -129,5 +180,21 @@ export const styles = StyleSheet.create({
   selectedItem: {
     backgroundColor: TERTIARY_70,
     borderRadius: 8,
+  },
+  optionsContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    marginTop: 12,
+    gap: 4,
+    padding: 10,
+  },
+  modalContentUpwards: {
+    position: 'absolute',
+    bottom: 70,
+    boxShadow: '0px 0px 5px 0px rgba(0,0,0,0.2)',
+  },
+  disabledButtonStyle: {
+    opacity: 0.2,
   },
 });

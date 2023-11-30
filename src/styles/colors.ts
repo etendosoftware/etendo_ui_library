@@ -38,6 +38,7 @@ export const NEUTRAL_400 = '#BDBDBD';
 export const NEUTRAL_500 = '#9E9E9E';
 export const NEUTRAL_600 = '#757575';
 export const NEUTRAL_700 = '#616161';
+export const NEUTRAL_800 = '#424242';
 
 export const INITIAL_10 = '#ECF5FF';
 export const INITIAL_100 = '#3E97FF';

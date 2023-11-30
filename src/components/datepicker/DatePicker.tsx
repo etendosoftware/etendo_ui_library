@@ -9,6 +9,8 @@ import {
   TouchableOpacity,
   FlatList,
   Platform,
+  Dimensions,
+  Pressable,
 } from 'react-native';
 
 import {
@@ -18,17 +20,26 @@ import {
   CalendarIcon,
 } from '../../assets/images/icons';
 
-import { PRIMARY_400 } from '../../styles/colors';
-import { styles } from './DatePicker.styles';
+import {
+  NEUTRAL_300,
+  NEUTRAL_400,
+  PRIMARY_100,
+  PRIMARY_400,
+} from '../../styles/colors';
+import { CALENDAR_HEIGHT, styles } from './DatePicker.styles';
 
 import { translations } from './DatePicker.translations';
 import { DatePickerProps, DayItem } from './DatePicker.types';
 import {
+  buildMonth,
   formatterDate,
   generateYearList,
   getPlaceholderDateFormat,
   parseLocalDateString,
+  validateDate,
 } from './DatePicker.utils';
+
+// Button from the Etendo UI library
 import { Button } from '../button';
 
 const DatePicker = ({
@@ -39,29 +50,67 @@ const DatePicker = ({
   value,
 }: DatePickerProps) => {
   // states for the date picker
+  const [hoveredDay, setHoveredDay] = useState<any>(null);
+  const [isDateValid, setIsDateValid] = useState<boolean>(true);
   const [isMonthSelection, setIsMonthSelection] = useState(false);
   const [isPickerShow, setIsPickerShow] = useState<boolean>(false);
   const [selectedDate, setSelectedDate] = useState<any>(new Date());
+  const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
   const [isYearSelection, setIsYearSelection] = useState<boolean>(false);
+  const [calendarDirection, setCalendarDirection] = useState('downwards');
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+  const [disabledMonthSelection, setDisabledMonthSelection] =
+    useState<boolean>(false);
+  const [disabledYearSelection, setDisabledYearSelection] =
+    useState<boolean>(false);
   const [currentSelectedDate, setTempSelectedDate] = useState<Date>(
     new Date(selectedDate),
   );
+
+  // Reference for text input
+  const inputRef: any = useRef(null);
+
+  // Use effect for calendar direction
+  useEffect(() => {
+    if (isPickerShow && inputRef.current) {
+      inputRef.current.measure(
+        (
+          x: number,
+          y: number,
+          width: number,
+          height: number,
+          pageX: number,
+          pageY: number,
+        ) => {
+          const windowHeight = Dimensions.get('window').height;
+          // Calculate the space below the input
+          const spaceBelow = windowHeight - pageY - height;
+
+          // If the space below is less than the calendar height, show the calendar upwards, else downwards
+          if (spaceBelow < CALENDAR_HEIGHT) {
+            setCalendarDirection('upwards');
+          } else {
+            setCalendarDirection('downwards');
+          }
+        },
+      );
+    }
+  }, [isPickerShow]);
 
   // Ref for month list
   const monthListRef: any = useRef(null);
   // Toggle month selection
   const showMonthSelection = () => {
+    setDisabledYearSelection(!isMonthSelection);
+
     setIsMonthSelection(!isMonthSelection);
 
-    if (!isMonthSelection) {
-      if (monthListRef.current) {
-        monthListRef.current.scrollToIndex({
-          animated: true,
-          index: currentMonth,
-        });
-      }
+    if (!isMonthSelection && monthListRef.current) {
+      monthListRef.current.scrollToIndex({
+        animated: true,
+        index: currentMonth,
+      });
     }
   };
 
@@ -75,8 +124,24 @@ const DatePicker = ({
     }
   }, [isMonthSelection, currentMonth]);
 
+  // Adjust the selected date if the month has less days
+  const adjustDateForMonth = (
+    year: number,
+    month: number,
+    currentSelectedDate: Date,
+  ) => {
+    const lastDayOfMonth = new Date(year, month + 1, 0).getDate();
+    if (currentSelectedDate.getDate() > lastDayOfMonth) {
+      return new Date(year, month, lastDayOfMonth);
+    }
+    return new Date(year, month, currentSelectedDate.getDate());
+  };
+
   // Toggle year selection
   const showYearSelection = () => {
+    if (!isYearSelection) setDisabledMonthSelection(true);
+    else setDisabledMonthSelection(false);
+
     setIsYearSelection(!isYearSelection);
 
     if (!isYearSelection) {
@@ -92,12 +157,15 @@ const DatePicker = ({
     setCurrentMonth(monthIndex);
     setIsMonthSelection(false);
 
-    const newSelectedDate = selectedDate ? new Date(selectedDate) : new Date();
-    newSelectedDate.setMonth(monthIndex);
-    setSelectedDate(newSelectedDate);
+    const adjustedDate = adjustDateForMonth(
+      currentYear,
+      monthIndex,
+      selectedDate,
+    );
+    setSelectedDate(adjustedDate);
 
     if (onChange) {
-      onChange(formatterDate(newSelectedDate, dateFormat));
+      onChange(formatterDate(adjustedDate, dateFormat));
     }
   };
 
@@ -106,12 +174,11 @@ const DatePicker = ({
     setCurrentYear(year);
     setIsYearSelection(false);
 
-    const newSelectedDate = selectedDate ? new Date(selectedDate) : new Date();
-    newSelectedDate.setFullYear(year);
-    setSelectedDate(newSelectedDate);
+    const adjustedDate = adjustDateForMonth(year, currentMonth, selectedDate);
+    setSelectedDate(adjustedDate);
 
     if (onChange) {
-      onChange(formatterDate(newSelectedDate, dateFormat));
+      onChange(formatterDate(adjustedDate, dateFormat));
     }
   };
 
@@ -119,7 +186,10 @@ const DatePicker = ({
   const renderMonthItem = ({ item, index }: any) => (
     <TouchableOpacity
       style={[styles.item, index === currentMonth ? styles.selectedItem : null]}
-      onPress={() => selectMonth(index)}>
+      onPress={() => {
+        selectMonth(index);
+        setDisabledYearSelection(false);
+      }}>
       <Text style={styles.monthText}>{item}</Text>
     </TouchableOpacity>
   );
@@ -128,7 +198,10 @@ const DatePicker = ({
   const renderYearItem = ({ item }: { item: number }) => (
     <TouchableOpacity
       style={[styles.item, item === currentYear ? styles.selectedItem : null]}
-      onPress={() => selectYear(item)}>
+      onPress={() => {
+        selectYear(item);
+        setDisabledMonthSelection(false);
+      }}>
       <Text style={styles.yearText}>{item}</Text>
     </TouchableOpacity>
   );
@@ -139,12 +212,12 @@ const DatePicker = ({
       ref={monthListRef}
       data={monthsShort}
       renderItem={renderMonthItem}
-      keyExtractor={(item, index) => index.toString()}
+      keyExtractor={(_, index) => index.toString()}
       style={styles.list}
       initialScrollIndex={currentMonth}
       getItemLayout={(_, index) => ({
-        length: 20,
-        offset: 42 * index,
+        length: Platform.OS === 'web' ? 20 * index : 43.5,
+        offset: 43.5 * index,
         index,
       })}
     />
@@ -165,8 +238,8 @@ const DatePicker = ({
         style={styles.list}
         initialScrollIndex={yearList.indexOf(currentYear)}
         getItemLayout={(_, index) => ({
-          length: 40,
-          offset: Platform.OS === 'web' ? 40 * index : 43.5 * index,
+          length: 43,
+          offset: Platform.OS === 'web' ? 38 * index : 43.5 * index,
           index,
         })}
       />
@@ -179,18 +252,32 @@ const DatePicker = ({
     setCurrentYear(newYear);
   };
 
-  // Go to next month
-  const goToNextMonth = () => {
-    currentMonth === 11
-      ? changeMonthAndYear(0, currentYear + 1)
-      : changeMonthAndYear(currentMonth + 1, currentYear);
-  };
-
   // Go to previous month
   const goToPreviousMonth = () => {
-    currentMonth === 0
-      ? changeMonthAndYear(11, currentYear - 1)
-      : changeMonthAndYear(currentMonth - 1, currentYear);
+    if (!disabledMonthSelection) {
+      currentMonth === 0
+        ? changeMonthAndYear(11, currentYear - 1)
+        : changeMonthAndYear(currentMonth - 1, currentYear);
+    }
+  };
+
+  // Go to next month
+  const goToNextMonth = () => {
+    if (!disabledMonthSelection) {
+      currentMonth === 11
+        ? changeMonthAndYear(0, currentYear + 1)
+        : changeMonthAndYear(currentMonth + 1, currentYear);
+    }
+  };
+
+  // Go to previous year
+  const goToPreviousYear = () => {
+    if (!disabledYearSelection) setCurrentYear(currentYear - 1);
+  };
+
+  // Go to next year
+  const goToNextYear = () => {
+    if (!disabledYearSelection) setCurrentYear(currentYear + 1);
   };
 
   // Get short day names and month names based on language
@@ -200,6 +287,15 @@ const DatePicker = ({
 
   // Toggle date picker display
   const showPicker = () => {
+    // Close month and year selection if they are open
+    if (isMonthSelection) setIsMonthSelection(false);
+    if (isYearSelection) setIsYearSelection(false);
+
+    // Enable month and year selection
+    if (disabledMonthSelection) setDisabledMonthSelection(false);
+    if (disabledYearSelection) setDisabledYearSelection(false);
+
+    // Set picker visibility
     setIsPickerShow(!isPickerShow);
 
     // If date is selected, set current month and year to selected date
@@ -229,17 +325,6 @@ const DatePicker = ({
     setIsPickerShow(false);
   };
 
-  // Get all days in a month
-  const getDaysInMonth = (month: number, year: number): DayItem[] => {
-    const days: DayItem[] = [];
-    let date = new Date(year, month, 1);
-    while (date.getMonth() === month) {
-      days.push({ date: new Date(date), isCurrentMonth: true });
-      date.setDate(date.getDate() + 1);
-    }
-    return days;
-  };
-
   // Handle text input change and format the date
   const handleTextInputChange = (text: string) => {
     // Just allow numbers and limit the length to 8
@@ -253,14 +338,24 @@ const DatePicker = ({
       processedText = processedText.slice(0, 5) + '/' + processedText.slice(5);
     }
 
-    // Convert to date object if the date is complete
+    // Update the date value as user types
+    onChange(processedText);
+
+    // Convert to date object if the date is complete and verify if it's valid
     if (processedText.length === 10) {
-      const dateObject = parseLocalDateString(processedText, language);
-      setSelectedDate(dateObject);
-      onChange(formatterDate(dateObject, dateFormat));
+      const dateObject = parseLocalDateString(processedText, dateFormat);
+      const isValidDate = validateDate(dateObject, processedText, dateFormat);
+
+      if (isValidDate) {
+        setSelectedDate(dateObject);
+        setIsDateValid(true);
+      } else {
+        setIsDateValid(false);
+      }
     } else {
+      // Reset to valid as user is still typing
+      setIsDateValid(true);
       setSelectedDate(undefined);
-      onChange(processedText);
     }
   };
 
@@ -277,28 +372,54 @@ const DatePicker = ({
       date.getMonth() === new Date(selectedDate).getMonth() &&
       date.getFullYear() === new Date(selectedDate).getFullYear();
 
+    const notCurrentMonthStyle: any = {
+      color: NEUTRAL_400,
+    };
+
+    // Determine if the date is part of the current month
+    const isPartOfCurrentMonth = date.getMonth() === currentMonth;
+
+    // Determine if the date is part of the current month to apply hover styles
+    const dayKey = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+    const isHovered = hoveredDay === dayKey;
+    const isTodayHovered = isToday && isHovered; // Sólo aplicar si es 'hoy' y está en hover
+
     return (
-      <TouchableOpacity
-        style={styles.dayItem}
-        onPress={() => onDateSelected(date)}>
+      <Pressable
+        onPress={() => isPartOfCurrentMonth && onDateSelected(date)}
+        onHoverIn={() => setHoveredDay(dayKey)}
+        onHoverOut={() => setHoveredDay(null)}
+        style={[
+          styles.dayItem,
+          isPartOfCurrentMonth ? null : notCurrentMonthStyle,
+        ]}>
         <View
           style={[
             styles.dayItemText,
             isSelectedDate ? styles.selectedDayBackground : {},
             isToday && !isSelectedDate ? styles.currentDayBorder : {},
+            !isCurrentMonth ? notCurrentMonthStyle : {},
+            isHovered ? styles.dayItemTextHover : {},
+            isTodayHovered ? styles.todayItemTextHover : {},
           ]}>
           <Text
-            style={isSelectedDate ? styles.selectedDayText : styles.dayText}>
+            style={[
+              styles.dayText,
+              isSelectedDate ? styles.selectedDayText : {},
+              !isCurrentMonth ? notCurrentMonthStyle : {},
+              isPartOfCurrentMonth ? null : notCurrentMonthStyle,
+              isTodayHovered && { color: PRIMARY_100 },
+            ]}>
             {date.getDate()}
           </Text>
         </View>
-      </TouchableOpacity>
+      </Pressable>
     );
   };
 
   // Render calendar view
   const renderCalendar = () => {
-    const daysInMonth = getDaysInMonth(currentMonth, currentYear);
+    const daysInMonth = buildMonth(currentYear, currentMonth);
 
     return (
       <View style={styles.calendarContainer}>
@@ -312,7 +433,9 @@ const DatePicker = ({
         <FlatList
           data={daysInMonth}
           numColumns={7}
-          renderItem={({ item }) => renderDayItem(item)}
+          renderItem={({ item }) =>
+            item && renderDayItem({ date: item, isCurrentMonth: true })
+          }
           keyExtractor={(_, index) => index.toString()}
           showsVerticalScrollIndicator={false}
         />
@@ -325,19 +448,35 @@ const DatePicker = ({
 
   return (
     <View style={styles.container}>
-      <View style={[styleField.field, styles.inputWrapper]}>
-        <TextInput
-          style={styles.datePickerInput}
-          value={value}
-          placeholder={getPlaceholderDateFormat(dateFormat)}
-          placeholderTextColor={PRIMARY_400}
-          editable={true}
-          onChangeText={handleTextInputChange}
-        />
+      <View
+        style={[
+          styles.inputContainerWrapper,
+          (isPickerShow || isInputFocused) && styles.inputWrapperFocused,
+          !isDateValid && styles.invalidDateWrapperFocused,
+        ]}>
+        <View
+          ref={inputRef}
+          style={[
+            styleField.field,
+            styles.inputWrapper,
+            !isDateValid && styles.invalidDateInputWrapper,
+          ]}>
+          <TextInput
+            style={styles.datePickerInput}
+            value={value}
+            placeholder={getPlaceholderDateFormat(dateFormat)}
+            placeholderTextColor={PRIMARY_400}
+            editable={true}
+            onChangeText={handleTextInputChange}
+            focusable
+            onFocus={() => setIsInputFocused(true)}
+            onBlur={() => setIsInputFocused(false)}
+          />
 
-        <TouchableOpacity onPress={showPicker}>
-          <CalendarIcon style={styles.calendarIcon} />
-        </TouchableOpacity>
+          <TouchableOpacity onPress={showPicker}>
+            <CalendarIcon style={styles.calendarIcon} />
+          </TouchableOpacity>
+        </View>
       </View>
 
       <PlatformComponent
@@ -346,6 +485,8 @@ const DatePicker = ({
               style: {
                 display: isPickerShow ? 'flex' : 'none',
                 boxShadow: '0px 1px 1.41px rgba(0, 0, 0, 0.20)',
+                borderRadius: 8,
+                marginTop: 8,
               },
             }
           : {
@@ -357,25 +498,31 @@ const DatePicker = ({
           style={!(Platform.OS === 'web') && styles.modalContainer}
           activeOpacity={1}
           onPressOut={showPicker}>
-          <View style={styles.modalContent}>
-            <View style={styles.header}>
+          <View
+            style={
+              calendarDirection === 'downwards'
+                ? [styles.modalContent]
+                : [styles.modalContentUpwards, styles.modalContent]
+            }>
+            <View
+              style={[
+                styles.header,
+                (isMonthSelection || isYearSelection) && {
+                  borderBottomWidth: 1,
+                  borderBottomColor: NEUTRAL_300,
+                },
+              ]}>
               <TouchableOpacity
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  gap: 8,
-                }}
+                style={[
+                  styles.monthAndYearContainer,
+                  disabledMonthSelection && styles.disabledButtonStyle,
+                ]}
+                disabled={disabledMonthSelection}
                 onPress={showMonthSelection}>
                 <TouchableOpacity onPress={goToPreviousMonth}>
                   <ArrowLeftIcon style={{ width: 10 }} />
                 </TouchableOpacity>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    marginHorizontal: 12,
-                    alignItems: 'center',
-                    gap: 8,
-                  }}>
+                <View style={styles.monthAndYearContent}>
                   <Text style={styles.monthText}>
                     {monthsShort[currentMonth]}
                   </Text>
@@ -394,18 +541,16 @@ const DatePicker = ({
               </TouchableOpacity>
 
               <TouchableOpacity
-                style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}
+                style={[
+                  styles.monthAndYearContainer,
+                  disabledYearSelection && styles.disabledButtonStyle,
+                ]}
+                disabled={disabledYearSelection}
                 onPress={showYearSelection}>
-                <TouchableOpacity onPress={goToPreviousMonth}>
+                <TouchableOpacity onPress={goToPreviousYear}>
                   <ArrowLeftIcon style={{ width: 10 }} />
                 </TouchableOpacity>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    marginHorizontal: 12,
-                    alignItems: 'center',
-                    gap: 8,
-                  }}>
+                <View style={styles.monthAndYearContent}>
                   <Text style={styles.monthText}>{currentYear}</Text>
                   <ArrowDownIcon
                     style={{
@@ -416,7 +561,7 @@ const DatePicker = ({
                     }}
                   />
                 </View>
-                <TouchableOpacity onPress={goToNextMonth}>
+                <TouchableOpacity onPress={goToNextYear}>
                   <ArrowRightIcon style={{ width: 10 }} />
                 </TouchableOpacity>
               </TouchableOpacity>
@@ -427,14 +572,19 @@ const DatePicker = ({
               ? renderMonthSelection()
               : renderCalendar()}
 
-            <View
-              style={{
-                width: '100%',
-                flexDirection: 'row',
-                justifyContent: 'flex-end',
-              }}>
-              <Button typeStyle="white" text="Cancel" onPress={onCancel} />
-              <Button typeStyle="terciary" text="Accept" onPress={onAccept} />
+            <View style={styles.optionsContainer}>
+              <Button
+                typeStyle="white"
+                text="Cancel"
+                onPress={onCancel}
+                paddingVertical={10}
+              />
+              <Button
+                typeStyle="terciary"
+                text="Accept"
+                onPress={onAccept}
+                paddingVertical={10}
+              />
             </View>
           </View>
         </TouchableOpacity>

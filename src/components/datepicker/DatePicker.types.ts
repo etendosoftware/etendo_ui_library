@@ -7,7 +7,7 @@ export type DayItem = {
 export type DateFormat = 'DD/MM/YYYY' | 'MM/DD/YYYY';
 
 export interface DatePickerProps {
-  language: string | undefined;
+  language: string;
   styleField: any;
   onChange: any;
   dateFormat: DateFormat;

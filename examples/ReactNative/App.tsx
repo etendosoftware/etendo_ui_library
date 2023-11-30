@@ -10,7 +10,7 @@ function App(): JSX.Element {
     <SafeAreaView>
       <Text style={[styles.sectionTitle]}>Etendo UI Library</Text>
       <Button typeStyle={'primary'} text="Button" />
-      <View style={{width: '50%', marginTop: 20}}>
+      <View style={{width: '50%', marginTop: 20, marginLeft: 20}}>
         <Input
           typeField="datePicker"
           language="es"
