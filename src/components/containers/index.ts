@@ -1,4 +1,4 @@
-import Layout from './layout/Layout';
-import ButtonContainer from './buttonContainer/ButtonContainer';
+import { Layout } from './layout';
+import { ButtonContainer } from './buttonContainer';
 
 export { Layout, ButtonContainer };
