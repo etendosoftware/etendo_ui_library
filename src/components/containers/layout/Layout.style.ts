@@ -5,6 +5,6 @@ export const defaultStyle: ViewStyle = {
   ...paddingVerticalContainer(),
   display: 'flex',
   flex: 1,
-  justifyContent: 'center',
+  justifyContent: 'flex-start',
   alignItems: 'center',
 };
