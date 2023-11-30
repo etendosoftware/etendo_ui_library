@@ -23,8 +23,8 @@ import {
 import {
   NEUTRAL_300,
   NEUTRAL_400,
+  NEUTRAL_600,
   PRIMARY_100,
-  PRIMARY_400,
 } from '../../styles/colors';
 import { CALENDAR_HEIGHT, styles } from './DatePicker.styles';
 
@@ -102,7 +102,8 @@ const DatePicker = ({
   const monthListRef: any = useRef(null);
   // Toggle month selection
   const showMonthSelection = () => {
-    setDisabledYearSelection(!isMonthSelection);
+    if (!isMonthSelection) setDisabledYearSelection(true);
+    else setDisabledYearSelection(false);
 
     setIsMonthSelection(!isMonthSelection);
 
@@ -359,6 +360,40 @@ const DatePicker = ({
     }
   };
 
+  // Format the text input value
+  const formatInputText = (text: string) => {
+    // Remove all non-numeric characters
+    let processedText = text.replace(/[^0-9]/g, '');
+
+    // Limit the length to 8 characters
+    processedText = processedText.slice(0, 8);
+
+    // Format the date
+    if (processedText.length > 2) {
+      processedText = processedText.slice(0, 2) + '/' + processedText.slice(2);
+    }
+    if (processedText.length > 5) {
+      processedText = processedText.slice(0, 5) + '/' + processedText.slice(5);
+    }
+
+    return processedText;
+  };
+
+  // Handle blur event on text input
+  const handleBlur = () => {
+    const formattedText = formatInputText(value);
+    const dateObject = parseLocalDateString(formattedText, dateFormat);
+
+    const isValid = validateDate(dateObject, formattedText, dateFormat);
+    setIsDateValid(isValid);
+
+    if (isValid) {
+      setSelectedDate(dateObject);
+    } else {
+      setSelectedDate(undefined);
+    }
+  };
+
   // Render individual day item
   const renderDayItem = ({ date, isCurrentMonth }: DayItem) => {
     const isToday =
@@ -465,12 +500,14 @@ const DatePicker = ({
             style={styles.datePickerInput}
             value={value}
             placeholder={getPlaceholderDateFormat(dateFormat)}
-            placeholderTextColor={PRIMARY_400}
+            placeholderTextColor={NEUTRAL_600}
             editable={true}
             onChangeText={handleTextInputChange}
             focusable
             onFocus={() => setIsInputFocused(true)}
-            onBlur={() => setIsInputFocused(false)}
+            onBlur={() => {
+              setIsInputFocused(false), handleBlur();
+            }}
           />
 
           <TouchableOpacity onPress={showPicker}>
@@ -497,13 +534,14 @@ const DatePicker = ({
         <TouchableOpacity
           style={!(Platform.OS === 'web') && styles.modalContainer}
           activeOpacity={1}
-          onPressOut={showPicker}>
+          onPress={showPicker}>
           <View
             style={
               calendarDirection === 'downwards'
                 ? [styles.modalContent]
                 : [styles.modalContentUpwards, styles.modalContent]
-            }>
+            }
+            onStartShouldSetResponder={() => true}>
             <View
               style={[
                 styles.header,
@@ -520,7 +558,7 @@ const DatePicker = ({
                 disabled={disabledMonthSelection}
                 onPress={showMonthSelection}>
                 <TouchableOpacity onPress={goToPreviousMonth}>
-                  <ArrowLeftIcon style={{ width: 10 }} />
+                  <ArrowLeftIcon style={{ width: 10, padding: 5 }} />
                 </TouchableOpacity>
                 <View style={styles.monthAndYearContent}>
                   <Text style={styles.monthText}>
@@ -536,7 +574,7 @@ const DatePicker = ({
                   />
                 </View>
                 <TouchableOpacity onPress={goToNextMonth}>
-                  <ArrowRightIcon style={{ width: 10 }} />
+                  <ArrowRightIcon style={{ width: 10, padding: 5 }} />
                 </TouchableOpacity>
               </TouchableOpacity>
 
@@ -548,10 +586,10 @@ const DatePicker = ({
                 disabled={disabledYearSelection}
                 onPress={showYearSelection}>
                 <TouchableOpacity onPress={goToPreviousYear}>
-                  <ArrowLeftIcon style={{ width: 10 }} />
+                  <ArrowLeftIcon style={{ width: 10, padding: 5 }} />
                 </TouchableOpacity>
                 <View style={styles.monthAndYearContent}>
-                  <Text style={styles.monthText}>{currentYear}</Text>
+                  <Text style={styles.yearText}>{currentYear}</Text>
                   <ArrowDownIcon
                     style={{
                       width: 8,
@@ -562,7 +600,7 @@ const DatePicker = ({
                   />
                 </View>
                 <TouchableOpacity onPress={goToNextYear}>
-                  <ArrowRightIcon style={{ width: 10 }} />
+                  <ArrowRightIcon style={{ width: 10, padding: 5 }} />
                 </TouchableOpacity>
               </TouchableOpacity>
             </View>

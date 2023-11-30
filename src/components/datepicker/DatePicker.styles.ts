@@ -96,6 +96,7 @@ export const styles = StyleSheet.create({
   },
   monthText: {
     fontSize: 16,
+    width: 30,
     color: PRIMARY_100,
   },
   arrow: {
@@ -176,6 +177,7 @@ export const styles = StyleSheet.create({
   },
   yearText: {
     fontSize: 16,
+    width: 40,
   },
   selectedItem: {
     backgroundColor: TERTIARY_70,

@@ -133,7 +133,7 @@ export interface InputFieldProps {
   fontSize?: number;
   height?: DimensionValue;
   dataPicker?: any;
-  language?: string;
+  language?: any;
   displayKey?: string;
   backgroundColor?: ColorValue;
   onOptionSelected?: any;
