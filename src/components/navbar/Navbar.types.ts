@@ -1,24 +1,27 @@
 import { GestureResponderEvent, LayoutChangeEvent } from 'react-native';
 
-export type RightComponent = {
+export type NavbarComponents = {
   component: React.ReactElement;
-  inOptions?: OptionProfileItem;
+  inOptions: OptionProfileItem;
 };
 
 export interface NavbarProps {
   name?: string;
   title?: string;
   email?: string;
-  rightComponent?: RightComponent[];
-  optionsProfile?: OptionProfileItem[];
+  navbarComponents?: NavbarComponents[];
+  profileOptions?: OptionProfileItem[];
   profileImage?: React.ReactElement;
+  endOptions?: OptionProfileItem[];
+  isVisibleMenu?: boolean;
   onOptionSelectedProfile?: (item?: string, index?: number) => void;
   onPressLogo?: () => void;
-  onPressMenuBurger?: () => void;
+  onPressMenu?: () => void;
 }
 
 export interface EtendoLogoProps {
   onPress?: (event: GestureResponderEvent) => void;
+  pressable?: boolean;
 }
 
 export type OptionNotificationType = 'warning' | 'success' | 'error' | 'new';
@@ -64,13 +67,17 @@ export interface ProfileProps {
   name?: string;
   email?: string;
   profileOptions?: OptionProfileItem[];
+  endOptions?: OptionProfileItem[];
   otherOptions?: (OptionProfileItem | undefined)[];
+  isTablet?: boolean;
   onOptionSelected?: (item?: string, index?: number) => void;
 }
 
 export interface ProfileImageProps {
   image?: React.ReactElement;
   name?: string;
+  inOptions?: boolean;
+  isTablet?: boolean;
 }
 
 export interface ProfileOptionsProps {
@@ -79,7 +86,9 @@ export interface ProfileOptionsProps {
   email?: string;
   posicionModal: PosicionModalType;
   profileOptions?: OptionProfileItem[];
+  endOptions?: OptionProfileItem[];
   otherOptions?: (OptionProfileItem | undefined)[];
+  isTablet?: boolean;
   onOptionSelected?: (item?: string, index?: number) => void;
 }
 
@@ -106,21 +115,17 @@ export type DrawerDataContentType = {
   dataSection?: DrawerDataSectionType[];
 };
 
-export type DrawerDataType = {
-  content: DrawerDataContentType[];
-};
-
 export interface DrawerLateralProps {
-  data: DrawerDataType;
+  data: DrawerDataContentType[];
   version?: string;
   copyright?: string;
   showDrawer: boolean;
   currentIndex?: DrawerCurrentIndexType;
-  onOptionSelected: (
+  onOptionSelected?: (
     route?: string,
     currentIndex?: DrawerCurrentIndexType,
   ) => void;
-  onCloseDrawer: (event?: GestureResponderEvent) => void;
+  onCloseDrawer?: (event?: GestureResponderEvent) => void;
 }
 export interface DrawerSectionsContainerType {
   data?: DrawerDataContentType;
@@ -143,7 +148,7 @@ export interface DrawerLatertalMenuProps {
   ) => void;
 }
 
-export interface MenuBurgerProps {
+export interface MenuProps {
   onPress?: (event: GestureResponderEvent) => void;
 }
 

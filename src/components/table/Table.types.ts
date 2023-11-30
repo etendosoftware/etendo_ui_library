@@ -1,9 +1,18 @@
+import { DimensionValue, ViewStyle } from 'react-native';
+
 export interface TableProps {
   data: Array<any>;
   columns: Columns[];
   title?: string;
-  tableHeight?: number | string;
-  onRowPress: (primary: string) => void;
+  tableHeight?: DimensionValue;
+  onRowPress?: (primary: string) => void;
+  isLoading?: boolean;
+  textEmptyTable?: string;
+  commentEmptyTable?: string;
+  onLoadMoreData?: (currentPage: number, pageSize: number) => void;
+  pageSize?: number;
+  currentPage?: number;
+  isLoadingMoreData?: boolean;
 }
 export interface TableCellProps {
   label?: string;
@@ -12,16 +21,17 @@ export interface TableCellProps {
 export interface TableHeaderProps {
   title?: string;
   columns: Columns[];
+  isLoading?: boolean;
 }
 
 export type Columns = {
   primary?: boolean;
-  displayKey?: string;
   visible?: boolean;
   label?: string;
   key?: string;
-  width?: string | number;
-  actions?: Actions[];
+  width?: DimensionValue;
+  components?: Actions[];
+  cellStyle?: ViewStyle;
 };
 
 export type Actions = {

@@ -1,6 +1,7 @@
-import {StyleSheet, ViewStyle} from 'react-native';
+import { StyleSheet, ViewStyle } from 'react-native';
 import {
-  NEUTRAL_0,
+  NEUTRAL_300,
+  NEUTRAL_50,
   PRIMARY_100,
   QUATERNARY_10,
   QUATERNARY_50,
@@ -8,43 +9,41 @@ import {
   SECONDARY_30,
   TERTIARY_50,
 } from '../../styles/colors';
-import {buttonStyleVariant} from './Button.types';
+import { buttonStyleVariant } from './Button.types';
 
 const commonButtonStyles: ViewStyle = {
   flexDirection: 'row',
   justifyContent: 'center',
   alignItems: 'center',
-  padding: 0,
+  borderRadius: 8,
 };
 
 export const ButtonStyleVariant: buttonStyleVariant = {
   primary: {
     container: {
       backgroundColor: PRIMARY_100,
-      borderRadius: 5,
       ...commonButtonStyles,
       height: '100%',
     },
     text: {
-      color: NEUTRAL_0,
+      color: NEUTRAL_50,
       fontWeight: '600',
     },
     containerDisabled: {
-      backgroundColor: QUATERNARY_50,
-      borderRadius: 5,
+      backgroundColor: NEUTRAL_300,
       ...commonButtonStyles,
       height: '100%',
     },
     textDisabled: {
-      color: NEUTRAL_0,
+      color: NEUTRAL_50,
       fontWeight: 'bold',
     },
-    imageColor: NEUTRAL_0,
+    imageColor: NEUTRAL_50,
+    imageDisabled: NEUTRAL_50,
   },
   secondary: {
     container: {
       backgroundColor: SECONDARY_100,
-      borderRadius: 5,
       ...commonButtonStyles,
     },
     text: {
@@ -53,19 +52,18 @@ export const ButtonStyleVariant: buttonStyleVariant = {
     },
     containerDisabled: {
       backgroundColor: SECONDARY_30,
-      borderRadius: 5,
       ...commonButtonStyles,
     },
     textDisabled: {
-      color: QUATERNARY_50,
+      color: NEUTRAL_300,
       fontWeight: 'bold',
     },
     imageColor: PRIMARY_100,
+    imageDisabled: NEUTRAL_300,
   },
   terciary: {
     container: {
       backgroundColor: QUATERNARY_50,
-      borderRadius: 5,
       ...commonButtonStyles,
     },
     text: {
@@ -74,19 +72,18 @@ export const ButtonStyleVariant: buttonStyleVariant = {
     },
     containerDisabled: {
       backgroundColor: QUATERNARY_10,
-      borderRadius: 5,
       ...commonButtonStyles,
     },
     textDisabled: {
-      color: TERTIARY_50,
+      color: NEUTRAL_300,
       fontWeight: 'bold',
     },
     imageColor: PRIMARY_100,
+    imageDisabled: NEUTRAL_300,
   },
   whiteBorder: {
     container: {
-      backgroundColor: NEUTRAL_0,
-      borderRadius: 5,
+      backgroundColor: 'transparent',
       borderWidth: 2,
       borderColor: PRIMARY_100,
       ...commonButtonStyles,
@@ -96,22 +93,21 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       fontWeight: 'bold',
     },
     containerDisabled: {
-      backgroundColor: NEUTRAL_0,
-      borderRadius: 5,
+      backgroundColor: 'transparent',
       borderWidth: 2,
       borderColor: TERTIARY_50,
       ...commonButtonStyles,
     },
     textDisabled: {
-      color: TERTIARY_50,
+      color: NEUTRAL_300,
       fontWeight: 'bold',
     },
     imageColor: PRIMARY_100,
+    imageDisabled: NEUTRAL_300,
   },
   white: {
     container: {
-      backgroundColor: NEUTRAL_0,
-      borderRadius: 5,
+      backgroundColor: 'transparent',
       ...commonButtonStyles,
     },
     text: {
@@ -119,30 +115,20 @@ export const ButtonStyleVariant: buttonStyleVariant = {
       fontWeight: 'bold',
     },
     containerDisabled: {
-      backgroundColor: NEUTRAL_0,
-      borderRadius: 5,
+      backgroundColor: 'transparent',
       ...commonButtonStyles,
     },
     textDisabled: {
-      color: TERTIARY_50,
+      color: NEUTRAL_300,
       fontWeight: 'bold',
     },
     imageColor: PRIMARY_100,
+    imageDisabled: NEUTRAL_300,
   },
 };
 
 export const styles = StyleSheet.create({
-  storiesContainer: {
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    flex: 1,
-    width: 100,
-
-    justifyContent: 'space-between',
-  },
-  storiesButtonContainer: {
-    height: 100,
-    width: 150,
+  indicatorCenterStyle: {
+    position: 'absolute',
   },
 });

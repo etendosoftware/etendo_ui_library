@@ -1,5 +1,6 @@
 import {
   ColorValue,
+  DimensionValue,
   GestureResponderEvent,
   NativeSyntheticEvent,
   TextInputFocusEventData,
@@ -24,13 +25,23 @@ export type InputFieldVariants =
   | 'pressableText'
   | 'pressableSearch';
 
+export enum InputFieldVariant {
+  ReadOnly = 'readOnly',
+  Picker = 'picker',
+  TextInput = 'textInput',
+  TextInputSearch = 'textInputSearch',
+  TextInputPassword = 'textInputPassword',
+  PressableText = 'pressableText',
+  PressableSearch = 'pressableSearch',
+}
+
 export type KeyboardTypes = 'text' | 'number';
 
 export type InputFieldConfigType = {
   type: InputFieldType;
   image?: React.ReactElement;
-  width?: string | number;
-  height?: string | number;
+  width?: DimensionValue;
+  height?: DimensionValue;
   disabledField?: boolean;
   disabledSubmit?: boolean;
   backgroundColor?: ColorValue;
@@ -62,6 +73,7 @@ export interface InputProps {
   value: string;
   helperText?: string;
   placeholder?: string;
+  placeholderPickerSearch?: string;
   disabled?: boolean;
   isError?: boolean;
   maxLength?: number;
@@ -69,15 +81,17 @@ export interface InputProps {
   typeField: InputFieldVariants;
   keyboardType?: KeyboardTypes;
   fontSize?: number;
-  height?: number | string;
-  dataPicker?: any;
+  height?: DimensionValue;
+  dataPicker?: Array<Record<string, any>>;
   displayKey?: string;
+  showOptionsAmount?: number;
+  showSearchInPicker?: boolean;
   onPress?: (event?: GestureResponderEvent) => void;
   onSubmit?: (event?: GestureResponderEvent) => void;
   onChangeText?: (text: string) => void;
   onFocus?: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   onBlur?: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
-  onOptionSelected?: any;
+  onOptionSelected?: (selectedItem: Array<Record<string, any>>) => void;
   backgroundColor?: ColorValue;
 }
 
@@ -97,6 +111,7 @@ export interface InputFieldProps {
   disabled?: boolean;
   value?: string;
   placeholder?: string;
+  placeholderPickerSearch?: string;
   configField: InputFieldConfigType;
   keyboardType?: KeyboardTypes;
   styleField: {
@@ -110,11 +125,13 @@ export interface InputFieldProps {
   centerText?: boolean;
   numberOfLines?: number;
   fontSize?: number;
-  height?: number | string;
+  height?: DimensionValue;
   dataPicker?: any;
   displayKey?: string;
   backgroundColor?: ColorValue;
   onOptionSelected?: any;
+  showOptionsAmount?: number;
+  showSearchInPicker?: boolean;
   onPress?: (event?: GestureResponderEvent) => void;
   onSubmit?: (event?: GestureResponderEvent) => void;
   onChangeText?: (text: string) => void;
@@ -130,10 +147,13 @@ export interface InputHelperProps {
 export interface InputOptionsProps {
   data: any;
   displayKey?: string;
+  showSearchInPicker?: boolean;
   onOptionSelected: (item: any, index: number) => void;
   showOptions: boolean;
+  showOptionsAmount?: number;
   positionModal: {
     top: number;
+    bottom: number;
     left: number;
     width: number;
     height: number;
@@ -141,4 +161,7 @@ export interface InputOptionsProps {
   onClose: (event?: GestureResponderEvent) => void;
   onChangeFilterText: (text: string) => void;
   filterValue: string;
+  placeholderPickerSearch?: string;
+  optionsTop: boolean;
+  dataPicker: any;
 }

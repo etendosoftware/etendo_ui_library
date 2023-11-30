@@ -1,130 +1,143 @@
-import { Dimensions, View } from 'react-native';
+import { View } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
-import { marginIncomponents, styles } from './Navbar.styles';
+import { styles } from './Navbar.styles';
 import {
+  NavbarComponents,
   NavbarProps,
-  OptionArrayType,
   OptionProfileItem,
-  RightComponent,
 } from './Navbar.types';
 import { Welcome, Profile, EtendoLogo } from './index';
-import MenuBurger from './components/MenuBurger/MenuBurger';
-import { isTablet } from '../../helpers/table_utils';
+import Menu from './components/Menu/Menu';
 
 const Navbar = ({
   name,
   title,
   email,
-  rightComponent,
-  optionsProfile,
+  navbarComponents,
+  profileOptions,
   profileImage,
+  endOptions,
+  isVisibleMenu,
   onOptionSelectedProfile,
-  onPressMenuBurger,
+  onPressMenu,
   onPressLogo,
 }: NavbarProps) => {
-  const width = Dimensions.get('window').width;
-  const widthLeft = styles.leftContainer.width;
-  const profileWidth = isTablet() ? 84 : 72;
-
-  const componentWidths = useRef<number[]>(
-    new Array(rightComponent?.length).fill(0),
-  );
-
   const [renderedComponents, setRenderedComponents] = useState<
-    | { component: React.ReactElement; inOptions?: OptionProfileItem }[]
-    | undefined
-  >(rightComponent);
+    NavbarComponents[] | undefined
+  >(navbarComponents);
 
-  const [removedComponents, setRemovedComponents] = useState<RightComponent[]>(
-    [],
-  );
+  const [removedComponents, setRemovedComponents] = useState<
+    OptionProfileItem[] | undefined
+  >([]);
 
-  const [inOptionsArray, setInOptionsArray] = useState<OptionArrayType>([]);
+  const [widthContainer, setWidthContainer] = useState<number>(0);
+  const [isTablet, setIsTablet] = useState<boolean>(false);
+  const hasCalculated = useRef(false);
+  const profileWidth = isTablet ? 84 : 72;
+  const widthLeft = isTablet ? 463 : 124;
+
+  let componentWidths: number[] = [];
+  for (let i = 0; i < (navbarComponents?.length || 0); i++) {
+    componentWidths[i] = 0;
+  }
 
   const calculateRenderedComponents = (index: number, newWidth: number) => {
-    componentWidths.current[index] = newWidth;
+    componentWidths[index] = newWidth;
+    if (navbarComponents) {
+      if (!hasCalculated.current && index === navbarComponents?.length - 1) {
+        removeAditionalComponents();
+        hasCalculated.current = true;
+      }
+    }
+  };
 
-    let newRenderedComponents: {
-      component: React.ReactElement;
-      inOptions?: OptionProfileItem;
-    }[] = [...(renderedComponents ?? [])];
-
-    let totalWidth = componentWidths.current.reduce(
-      (total, width) => total + width,
-      0,
-    );
-
-    if (
-      totalWidth + widthLeft + profileWidth > width &&
-      newRenderedComponents.length > 1
-    ) {
-      const lastComponentIndex = newRenderedComponents.length - 1;
-
-      const removedComponent: RightComponent = {
-        component: newRenderedComponents[lastComponentIndex].component,
-        inOptions: newRenderedComponents[lastComponentIndex].inOptions,
-      };
-
-      newRenderedComponents.splice(lastComponentIndex, 1);
-      setRemovedComponents(prevRemovedComponents => [
-        ...prevRemovedComponents,
-        removedComponent,
-      ]);
-
-      totalWidth -= componentWidths.current[lastComponentIndex];
-      componentWidths.current.splice(lastComponentIndex, 1);
+  const removeAditionalComponents = () => {
+    let totalWidth = 0;
+    for (const element of componentWidths) {
+      totalWidth += element;
     }
 
-    setRenderedComponents(newRenderedComponents);
+    while (
+      totalWidth + widthLeft + profileWidth - (isTablet ? 32 : 24) >
+      widthContainer
+    ) {
+      const lastComponentIndex = componentWidths.length - 1;
+
+      if (renderedComponents?.[lastComponentIndex]?.inOptions) {
+        setRemovedComponents(prevRemovedComponent => {
+          const updatedRemovedComponent = [
+            renderedComponents[lastComponentIndex].inOptions,
+            ...(prevRemovedComponent ?? []),
+          ];
+          return updatedRemovedComponent;
+        });
+      }
+
+      totalWidth -= componentWidths[lastComponentIndex];
+      componentWidths.splice(lastComponentIndex, 1);
+    }
+
+    setRenderedComponents(prev => {
+      const slicedComponents = prev?.slice(0, componentWidths.length);
+      return slicedComponents?.reverse();
+    });
   };
 
   useEffect(() => {
-    const removedInOptions = removedComponents
-      .filter(component => component?.inOptions !== undefined)
-      .map(component => component?.inOptions);
-    setInOptionsArray(removedInOptions);
-  }, [removedComponents]);
+    setIsTablet(widthContainer > 1080);
+  }, [widthContainer]);
 
   return (
-    <View style={styles.container}>
-      <View style={[styles.leftContainer]}>
-        {isTablet() ? (
+    <View
+      style={[styles.container, { height: isTablet ? 80 : 72 }]}
+      onLayout={event => {
+        setWidthContainer(event.nativeEvent.layout.width);
+      }}>
+      <View
+        style={[
+          styles.leftContainer,
+          { paddingLeft: isTablet ? 32 : 24, width: isTablet ? 463 : 124 },
+        ]}>
+        {isTablet ? (
           <>
-            <EtendoLogo onPress={onPressLogo} />
+            <EtendoLogo onPress={onPressLogo} pressable />
             <Welcome name={name} title={title} />
           </>
         ) : (
-          <MenuBurger onPress={onPressMenuBurger} />
+          isVisibleMenu && <Menu onPress={onPressMenu} />
         )}
       </View>
-      <View style={styles.rightContainer}>
+      <View style={[styles.rightContainer, { width: isTablet ? 84 : 72 }]}>
         <>
-          {renderedComponents
-            ?.slice(0)
-            .reverse()
-            .map((item, index) => (
+          {widthContainer !== 0 &&
+            isTablet &&
+            renderedComponents?.map((item, index) => (
               <View
                 key={index}
                 onLayout={event => {
-                  const { width } = event.nativeEvent.layout;
                   calculateRenderedComponents(
                     index,
-                    width + marginIncomponents,
+                    event.nativeEvent.layout.width + (isTablet ? 32 : 24),
                   );
                 }}
-                style={styles.itemMapContainer}>
+                style={[
+                  styles.itemMapContainer,
+                  !hasCalculated.current && { opacity: 0 },
+                ]}>
                 {item.component}
               </View>
             ))}
         </>
         <View>
           <Profile
-            profileOptions={optionsProfile}
-            otherOptions={inOptionsArray}
+            profileOptions={profileOptions}
+            otherOptions={removedComponents}
             name={name}
             email={email}
             onOptionSelected={onOptionSelectedProfile}
             profileImage={profileImage}
+            endOptions={endOptions}
+            isTablet={isTablet}
           />
         </View>
       </View>

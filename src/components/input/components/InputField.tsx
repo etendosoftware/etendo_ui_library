@@ -8,17 +8,21 @@ import {
   NativeSyntheticEvent,
   TextInputFocusEventData,
   ViewStyle,
-  Platform,
   Dimensions,
   GestureResponderEvent,
   Text,
 } from 'react-native';
 import { styles } from '../Input.style';
-import { InputFieldProps, KeyboardTypes } from '../Input.types';
-import { ShowPassword } from '../../../assets/images/icons/ShowPassword';
-import { HidePassword } from '../../../assets/images/icons/HidePassword';
+import {
+  InputFieldProps,
+  InputFieldVariant,
+  KeyboardTypes,
+} from '../Input.types';
+import { ShowPasswordIcon } from '../../../assets/images/icons/ShowPasswordIcon';
+import { HidePasswordIcon } from '../../../assets/images/icons/HidePasswordIcon';
 import InputOptions from './InputOptions';
-import { NEUTRAL_0 } from '../../../styles/colors';
+import { NEUTRAL_0, NEUTRAL_400, NEUTRAL_600 } from '../../../styles/colors';
+import { disableOutline } from '../../../helpers/table_utils';
 
 const InputField = ({
   type,
@@ -27,11 +31,15 @@ const InputField = ({
   value,
   disabled,
   placeholder,
+  placeholderPickerSearch,
   maxLength,
   keyboardType,
   dataPicker,
   displayKey,
+  showSearchInPicker,
   backgroundColor = NEUTRAL_0,
+  showOptionsAmount,
+  height = 40,
   onPress,
   onSubmit,
   onChangeText,
@@ -44,28 +52,20 @@ const InputField = ({
   const [showOptions, setShowOptions] = useState<boolean>(false);
   const [dataOptionsFilter, setDataOptionsFilter] = useState<any>([]);
   const [filterValue, setFilterValue] = useState<string>('');
-  const [positionModal, setpositionModal] = useState<any>({
+  const [optionsTop, setOptionsTop] = useState<boolean>(false);
+  const [positionModal, setPositionModal] = useState<any>({
     top: 0,
     left: 0,
     width: 0,
     height: 0,
   });
   const windowHeight = Dimensions.get('window').height;
-  const refComponente = useRef<TouchableOpacity>(null);
+  const refComponent = useRef<TouchableOpacity>(null);
   const regex = /^[0-9.,]+$/g;
-  const isWeb = Platform.OS === 'web';
 
-  const disableOutline = () => {
-    let outline = {};
-    if (isWeb) {
-      return (outline = { outline: 'none' });
-    }
-    return outline;
-  };
-  const getStyleText = (text?: string): TextStyle | TextStyle[] => {
+  const getStyleText = (): TextStyle | TextStyle[] => {
     let style: Array<TextStyle | TextStyle[]> = [];
-
-    if (text) {
+    if (value) {
       style.push(styleField.textDefault);
     } else {
       style.push(styleField.textPlaceholder);
@@ -84,47 +84,60 @@ const InputField = ({
     if (showOptions) {
       getTopLeft();
     }
-  });
+  }, []);
 
   const getTopLeft = () => {
-    if (refComponente.current) {
-      refComponente.current.measure(
-        (
-          x: number,
-          y: number,
-          width: number,
-          height: number,
-          pageX: number,
-          pageY: number,
-        ) => {
-          let dropdownHeight = pageY + height + 188;
-          if (dropdownHeight > windowHeight) {
-            setpositionModal({
-              top: pageY - height - 136,
-              left: pageX,
-              width,
-              height,
-            });
-          } else {
-            setpositionModal({
-              top: pageY + height,
-              left: pageX,
-              width,
-              height,
-            });
-          }
-        },
-      );
+    if (refComponent.current) {
+      refComponent.current.measure((x, y, width, height, pageX, pageY) => {
+        const calcDropdownTopLeft =
+          pageY + height + styles.spaceInOptionsAndInput.height;
+
+        const showFilterHeight: any = showSearchInPicker
+          ? styles.optionFilterContainer.height
+          : 0;
+        const optionsHeight =
+          styles.optionContainer.height +
+          styles.optionContainer.marginTop +
+          showFilterHeight +
+          styles.optionContainer.marginTop +
+          styles.optionsContainer.borderWidth * 2;
+
+        let topPosition, bottomPosition;
+
+        if (
+          optionsHeight + calcDropdownTopLeft + styles.offSet.height >
+          windowHeight
+        ) {
+          topPosition = pageY - optionsHeight;
+          setOptionsTop(true);
+        } else {
+          topPosition = calcDropdownTopLeft;
+          setOptionsTop(false);
+        }
+
+        bottomPosition = windowHeight - (topPosition + optionsHeight);
+
+        setPositionModal({
+          top: topPosition,
+          bottom: bottomPosition,
+          left: pageX,
+          width,
+          height,
+        });
+      });
     }
   };
 
   const handleOnChangeFilterText = (filterText: string) => {
     setFilterValue(filterText);
-    setDataOptionsFilter(
-      dataPicker.filter((item: any) =>
-        item.label.toLocaleLowerCase().includes(filterText.toLocaleLowerCase()),
-      ),
-    );
+    if (displayKey)
+      setDataOptionsFilter(
+        dataPicker.filter((item: any) =>
+          item[displayKey]
+            .toLocaleLowerCase()
+            .includes(filterText.toLocaleLowerCase()),
+        ),
+      );
   };
 
   const handleOnClose = () => {
@@ -145,7 +158,7 @@ const InputField = ({
   const getOnChangeText = (text: string) => {
     if (onChangeText) {
       if (keyboardType === 'number') {
-        if (text.match(regex) || text.length === 0) {
+        if (text.match(regex) || text?.length === 0) {
           onChangeText(text);
         }
         return;
@@ -185,33 +198,30 @@ const InputField = ({
   };
 
   const getImage = (image: React.ReactElement): React.ReactElement => {
-    if (type === 'textInputPassword') {
-      if (showPassword) {
-        return (
-          <View style={styles.hideContainer}>
-            <HidePassword style={styles.inputImageSize} />
-          </View>
-        );
-      }
+    const fillValue = disabled ? NEUTRAL_400 : undefined;
+
+    if (type === InputFieldVariant.TextInputPassword) {
+      const PasswordComponent = showPassword
+        ? HidePasswordIcon
+        : ShowPasswordIcon;
+
       return (
-        <View style={styles.showContainer}>
-          <ShowPassword style={styles.inputImageSize} />
-        </View>
+        <PasswordComponent style={styles.inputImageSize} fill={fillValue} />
       );
     }
-    return image;
+    return React.cloneElement(image, { fill: fillValue });
   };
 
   const handlePressImage = () => {
-    if (type === 'textInputPassword') {
+    if (type === InputFieldVariant.TextInputPassword) {
       setShowPassword(prevState => !prevState);
     } else {
-      onSubmit;
+      onSubmit?.();
     }
   };
 
   const handleOnPress = (event?: GestureResponderEvent) => {
-    if (type === 'picker') {
+    if (type === InputFieldVariant.Picker) {
       getTopLeft();
       setShowOptions(true);
     }
@@ -221,14 +231,34 @@ const InputField = ({
     }
   };
 
+  const getText = (): string | undefined => {
+    if (value) {
+      return value;
+    }
+    return placeholder;
+  };
+
+  const isAreaDisabled = (): boolean => {
+    return (
+      disabled ||
+      configField.disabledSubmit ||
+      (!onSubmit && type !== InputFieldVariant.TextInputPassword)
+    );
+  };
   return (
     <View style={[styleField.focus, getFocusStyle()]}>
       <TouchableOpacity
-        ref={refComponente}
-        style={[styleField.field, removePaddingField(), { backgroundColor }]}
+        ref={refComponent}
+        style={[
+          styleField.field,
+          removePaddingField(),
+          { backgroundColor },
+          { height },
+        ]}
         disabled={disabled || configField.disabledField}
-        onPress={handleOnPress}>
-        {configField?.type === 'textInput' && (
+        onPress={handleOnPress}
+      >
+        {configField?.type === InputFieldVariant.TextInput && (
           <TextInput
             editable={!disabled || !configField.disabledField}
             focusable={!disabled || !configField.disabledField}
@@ -237,33 +267,37 @@ const InputField = ({
             value={value}
             keyboardType={getKeyboardType(keyboardType)}
             onChangeText={getOnChangeText}
-            style={[
-              getStyleText(value),
-              disableOutline(),
-              configField.placeholderStyle,
-            ]}
+            style={[getStyleText(), disableOutline(), styleField.textDefault]}
             placeholder={placeholder}
+            placeholderTextColor={NEUTRAL_600}
             maxLength={maxLength}
-            secureTextEntry={showPassword}
+            secureTextEntry={
+              type === InputFieldVariant.TextInputPassword && showPassword
+            }
+            onSubmitEditing={() => onSubmit?.()}
           />
         )}
         {configField?.type === 'text' && (
           <Text
             numberOfLines={1}
             ellipsizeMode="tail"
-            style={[getStyleText(value), disableOutline()]}>
-            {value ? value : placeholder}
+            style={[getStyleText(), disableOutline(), styleField.textDefault]}
+          >
+            {getText()}
           </Text>
         )}
         {configField?.image && (
           <TouchableOpacity
             onPress={handlePressImage}
             style={styles.buttonContainerInputField}
-            disabled={configField?.disabledSubmit || disabled}>
+            disabled={isAreaDisabled()}
+          >
             {getImage(configField.image)}
           </TouchableOpacity>
         )}
         <InputOptions
+          optionsTop={optionsTop}
+          showOptionsAmount={showOptionsAmount}
           onOptionSelected={onOptionSelected}
           showOptions={showOptions}
           positionModal={positionModal}
@@ -272,6 +306,9 @@ const InputField = ({
           onChangeFilterText={handleOnChangeFilterText}
           filterValue={filterValue}
           displayKey={displayKey}
+          showSearchInPicker={showSearchInPicker}
+          placeholderPickerSearch={placeholderPickerSearch}
+          dataPicker={dataPicker}
         />
       </TouchableOpacity>
     </View>

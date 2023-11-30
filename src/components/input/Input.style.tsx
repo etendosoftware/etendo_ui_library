@@ -1,20 +1,22 @@
 import React from 'react';
-import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
-import {InputVariantsType, TypeInputStyleVariant} from './Input.types';
+import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
+import { InputVariantsType, TypeInputStyleVariant } from './Input.types';
 
-import {ArrowDown} from '../../assets/images/icons/ArrowDown';
-import {SearchIcon} from '../../assets/images/icons/SearchIcon';
-import {ShowPassword} from '../../assets/images/icons/ShowPassword';
+import { ArrowDownIcon } from '../../assets/images/icons/ArrowDownIcon';
+import { SearchIcon } from '../../assets/images/icons/SearchIcon';
+import { ShowPasswordIcon } from '../../assets/images/icons/ShowPasswordIcon';
 import {
   DESTRUCTIVE_10,
   DESTRUCTIVE_100,
   NEUTRAL_0,
   NEUTRAL_10,
+  NEUTRAL_400,
   NEUTRAL_5,
+  NEUTRAL_500,
   NEUTRAL_60,
+  NEUTRAL_600,
   PRIMARY_100,
   QUATERNARY_50,
-  TERTIARY_100,
 } from '../../styles/colors';
 
 export const inputVariants: InputVariantsType = {
@@ -30,14 +32,14 @@ export const inputVariants: InputVariantsType = {
       type: 'text',
       disabledField: false,
       disabledSubmit: true,
-      image: <ArrowDown style={{height: 10, width: 10}} />,
+      image: <ArrowDownIcon style={{ height: 10, width: 10 }} />,
     },
   },
   textInput: {
     field: {
       type: 'textInput',
       disabledField: true,
-      disabledSubmit: false,
+      disabledSubmit: true,
     },
   },
   pressableText: {
@@ -52,21 +54,21 @@ export const inputVariants: InputVariantsType = {
       type: 'textInput',
       disabledField: true,
       disabledSubmit: false,
-      image: <SearchIcon style={{height: 15, width: 15}} />,
+      image: <SearchIcon style={{ height: 15, width: 15 }} />,
     },
   },
   pressableSearch: {
     field: {
       type: 'text',
       disabledField: false,
-      disabledSubmit: false,
-      image: <SearchIcon style={{height: 15, width: 15}} />,
+      disabledSubmit: true,
+      image: <SearchIcon style={{ height: 15, width: 15 }} />,
     },
   },
   textInputPassword: {
     field: {
       type: 'textInput',
-      image: <ShowPassword style={{height: 15, width: 15}} />,
+      image: <ShowPasswordIcon style={{ height: 15, width: 15 }} />,
       disabledField: true,
       disabledSubmit: false,
     },
@@ -75,7 +77,8 @@ export const inputVariants: InputVariantsType = {
 
 const defaultTitle: TextStyle = {
   color: PRIMARY_100,
-  fontSize: 16,
+  fontSize: 18,
+  fontWeight: '600',
 };
 
 const defaultField: ViewStyle = {
@@ -98,32 +101,40 @@ const defaultFocus: ViewStyle = {
 
 const defaultText: TextStyle = {
   color: PRIMARY_100,
-  fontSize: 14,
+  fontSize: 18,
   fontWeight: '500',
   flex: 1,
   alignItems: 'center',
   paddingLeft: 15,
   minWidth: 0,
-  height: 50,
   display: 'flex',
   textAlignVertical: 'center',
 };
 const defaultTextPlaceholder: TextStyle = {
-  color: TERTIARY_100,
-  fontSize: 14,
+  color: NEUTRAL_600,
+  fontSize: 18,
   fontWeight: '500',
-  flex: 1,
   alignItems: 'center',
   paddingLeft: 15,
   minWidth: 0,
-  height: 50,
-  display: 'flex',
+  flex: 1,
   textAlignVertical: 'center',
 };
 
 const defaultHelperText: TextStyle = {
   color: NEUTRAL_60,
-  fontSize: 14,
+  fontSize: 16,
+  fontWeight: '500',
+};
+
+const defaultFilterContainer: ViewStyle = {
+  height: 50,
+  borderTopWidth: 1,
+  borderTopColor: NEUTRAL_10,
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  marginHorizontal: 13,
 };
 
 export const inputStyleVariants: TypeInputStyleVariant = {
@@ -151,26 +162,26 @@ export const inputStyleVariants: TypeInputStyleVariant = {
           borderColor: DESTRUCTIVE_10,
         },
       ],
-      field: [defaultField, {borderColor: DESTRUCTIVE_100}],
+      field: [defaultField, { borderColor: DESTRUCTIVE_100 }],
       textDefault: defaultText,
       textPlaceholder: defaultTextPlaceholder,
     },
-    helperStyle: [defaultHelperText, {color: DESTRUCTIVE_100}],
+    helperStyle: [defaultHelperText, { color: DESTRUCTIVE_100 }],
   },
   disabled: {
-    titleStyle: [defaultTitle, {color: QUATERNARY_50}],
+    titleStyle: [defaultTitle, { color: NEUTRAL_400 }],
     fieldStyle: {
       focus: defaultFocus,
-      field: [defaultField, {borderColor: QUATERNARY_50}],
-      textDefault: [defaultText, {color: QUATERNARY_50}],
-      textPlaceholder: [defaultTextPlaceholder, {color: QUATERNARY_50}],
+      field: [defaultField, { borderColor: NEUTRAL_400 }],
+      textDefault: [defaultText, { color: NEUTRAL_400 }],
+      textPlaceholder: [defaultTextPlaceholder, { color: NEUTRAL_400 }],
     },
-    helperStyle: [defaultHelperText, {color: QUATERNARY_50}],
+    helperStyle: [defaultHelperText, { color: NEUTRAL_400 }],
   },
   readOnly: {
     titleStyle: defaultTitle,
     fieldStyle: {
-      field: [defaultField, {backgroundColor: NEUTRAL_5}],
+      field: [defaultField, { backgroundColor: NEUTRAL_5 }],
       focus: defaultFocus,
       textDefault: defaultText,
       textPlaceholder: defaultTextPlaceholder,
@@ -248,22 +259,29 @@ export const styles = StyleSheet.create({
     width: 300,
   },
   optionContainer: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 8,
+    marginHorizontal: 8,
     flexDirection: 'row',
     alignItems: 'center',
-    height: 35,
+    height: 40,
+    marginTop: 8,
   },
   optionText: {
     color: PRIMARY_100,
-    fontSize: 16,
+    fontSize: 18,
+    flex: 1,
+    display: 'flex',
   },
   optionFilterText: {
     color: PRIMARY_100,
-    fontSize: 16,
-    height: 35,
+    fontSize: 18,
+    height: 40,
     padding: 0,
+    flex: 1,
+    fontWeight: '500',
+    alignItems: 'center',
+    display: 'flex',
     width: '100%',
-    paddingLeft: 10,
   },
   optionOverlay: {
     flex: 1,
@@ -275,25 +293,32 @@ export const styles = StyleSheet.create({
     backgroundColor: NEUTRAL_0,
     borderRadius: 5,
     borderWidth: 1.5,
-    borderColor: NEUTRAL_10,
-    zIndex: 2,
+    borderColor: NEUTRAL_500,
   },
   optionsItemsContainer: {
-    maxHeight: 140,
+    maxHeight: 392,
   },
   optionFilterContainer: {
-    height: 35,
-    borderBottomWidth: 1,
-    borderBottomColor: NEUTRAL_10,
-    marginHorizontal: 9,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 9,
+    ...defaultFilterContainer,
+  },
+  optionTopFilterContainer: {
+    ...defaultFilterContainer,
   },
   optionFilterImg: {
+    width: 15,
+    height: 15,
+  },
+  cancelFilterImg: {
     width: 12,
     height: 12,
   },
-  searchContainer: {height: 15, width: 15, marginRight: 5},
+  cancelContainer: {
+    marginRight: 4,
+  },
+  scrollOptions: {
+    marginVertical: 8,
+  },
+  searchContainer: { marginHorizontal: 8 },
+  spaceInOptionsAndInput: { height: 5 },
+  offSet: { height: 26 },
 });

@@ -1,11 +1,11 @@
-import {TouchableOpacity, Modal} from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
-import {styles} from './Profile.styles';
+import { TouchableOpacity, Modal } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { styles } from './Profile.styles';
 import ProfileOptions from './ProfileOptions';
 import ProfileImage from './ProfileImage';
-import {PosicionModalType, ProfileProps} from '../../Navbar.types';
-import {AplicationsIcon} from '../../../../assets/images/icons/AplicationsIcon';
-import {NEUTRAL_0} from '../../../../styles/colors';
+import { PosicionModalType, ProfileProps } from '../../Navbar.types';
+import { AplicationsIcon } from '../../../../assets/images/icons/AplicationsIcon';
+import { NEUTRAL_0 } from '../../../../styles/colors';
 
 const Profile = ({
   profileImage,
@@ -13,7 +13,9 @@ const Profile = ({
   email,
   profileOptions,
   otherOptions,
+  endOptions,
   onOptionSelected,
+  isTablet,
 }: ProfileProps) => {
   const [showOptions, setShowOptions] = useState<boolean>(false);
   const [posicionModal, setPosicionModal] = useState<PosicionModalType>({
@@ -42,7 +44,7 @@ const Profile = ({
           pageX: number,
           pageY: number,
         ) => {
-          setPosicionModal({top: pageY + height, left: pageX, width, height});
+          setPosicionModal({ top: pageY + height, left: pageX, width, height });
         },
       );
     }
@@ -58,16 +60,24 @@ const Profile = ({
   return (
     <>
       <TouchableOpacity
-        style={styles.container}
+        style={[styles.container, { marginRight: isTablet ? 32 : 24 }]}
         ref={refComponente}
         onPress={() => {
           getTopLeft();
           setShowOptions(true);
         }}>
         {otherOptions?.length ? (
-          <AplicationsIcon style={styles.aplicationIcon} fill={NEUTRAL_0} />
+          <AplicationsIcon
+            style={{ width: isTablet ? 32 : 28, height: isTablet ? 32 : 28 }}
+            fill={NEUTRAL_0}
+          />
         ) : (
-          <ProfileImage image={profileImage} name={name} />
+          <ProfileImage
+            image={profileImage}
+            name={name}
+            isTablet={isTablet}
+            inOptions={false}
+          />
         )}
       </TouchableOpacity>
       <Modal visible={showOptions} animationType="fade" transparent>
@@ -83,6 +93,8 @@ const Profile = ({
             name={name}
             email={email}
             onOptionSelected={handleOptionSelected}
+            endOptions={endOptions}
+            isTablet={isTablet}
           />
         </TouchableOpacity>
       </Modal>

@@ -67,3 +67,13 @@ version
 version.txt
 package-lock.json
 src/components/**/__snapshots__/
+
+
+examples/ReactNative/components
+examples/ReactNative/styles
+examples/ReactNative/helpers
+examples/ReactNative/assets
+examples/nextjs/apps/web/app/components
+examples/nextjs/apps/web/app/styles
+examples/nextjs/apps/web/app/helpers
+examples/nextjs/apps/web/app/assets

@@ -1,7 +1,8 @@
 import React from 'react';
-import {ImageStyle} from 'react-native';
-import {Svg, Path} from 'react-native-svg';
-import {DEFAULT_COLOR_THEME} from '../../../styles/colors';
+import { ImageStyle } from 'react-native';
+import { Svg, Path } from 'react-native-svg';
+import { DEFAULT_COLOR_THEME } from '../../../styles/colors';
+import { sizeSvg } from '../../../helpers/svg_utils';
 
 export interface SvgImageProps {
   style?: ImageStyle;
@@ -12,8 +13,15 @@ export const BellIcon = ({
   style,
   fill = DEFAULT_COLOR_THEME,
 }: SvgImageProps) => {
+  const width = sizeSvg(style?.width, 28);
+  const height = sizeSvg(style?.height, 28);
   return (
-    <Svg width="28" height="28" viewBox="0 0 28 28" fill="none" style={style}>
+    <Svg
+      width={width}
+      height={height}
+      viewBox="0 0 28 28"
+      fill="none"
+      style={style}>
       <Path
         d="M16.6641 25.3198H11.3262C11.3262 25.3198 11.3262 25.3198 11.3262 25.3798C11.3275 25.5376 11.3443 25.695 11.3762 25.8496C11.4705 26.3759 11.7212 26.8615 12.0957 27.2431C12.4702 27.6247 12.951 27.8845 13.4754 27.9887C13.6483 28.0038 13.8222 28.0038 13.9952 27.9887C14.1729 27.9874 14.3501 27.9707 14.525 27.9387C15.0402 27.8349 15.5133 27.5813 15.885 27.2096C16.2566 26.838 16.5103 26.3648 16.6141 25.8496C16.6294 25.6933 16.6294 25.536 16.6141 25.3798C16.6141 25.3798 16.6641 25.3398 16.6641 25.3198Z"
         fill={fill}

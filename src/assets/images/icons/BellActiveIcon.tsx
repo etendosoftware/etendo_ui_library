@@ -1,7 +1,8 @@
 import React from 'react';
-import {ImageStyle} from 'react-native';
-import {Svg, Path} from 'react-native-svg';
-import {DEFAULT_COLOR_THEME} from '../../../styles/colors';
+import { ImageStyle } from 'react-native';
+import { Svg, Path } from 'react-native-svg';
+import { DEFAULT_COLOR_THEME } from '../../../styles/colors';
+import { sizeSvg } from '../../../helpers/svg_utils';
 
 export interface SvgImageProps {
   style?: ImageStyle;
@@ -12,8 +13,15 @@ export const BellActiveIcon = ({
   style,
   fill = DEFAULT_COLOR_THEME,
 }: SvgImageProps) => {
+  const width = sizeSvg(style?.width, 31);
+  const height = sizeSvg(style?.height, 36);
   return (
-    <Svg width="31" height="36" viewBox="0 0 31 36" fill="none" style={style}>
+    <Svg
+      width={width}
+      height={height}
+      viewBox="0 0 31 36"
+      fill="none"
+      style={style}>
       <Path
         fillRule="evenodd"
         clipRule="evenodd"

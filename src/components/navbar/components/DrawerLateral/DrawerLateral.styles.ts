@@ -1,8 +1,11 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import {
   NEUTRAL_0,
-  NEUTRAL_60,
+  NEUTRAL_400,
+  NEUTRAL_50,
+  OVERLAY,
   PRIMARY_100,
+  PRIMARY_400,
   PRIMARY_80,
   QUATERNARY_10,
 } from '../../../../styles/colors';
@@ -11,12 +14,14 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  image: {
+    height: 36,
+    width: 140.09,
+    marginBottom: 32,
+  },
   openButton: {
     color: PRIMARY_100,
     fontWeight: 'bold',
-  },
-  modalMargin: {
-    marginBottom: 32,
   },
   overlay: {
     position: 'absolute',
@@ -25,6 +30,7 @@ export const styles = StyleSheet.create({
     bottom: 0,
     width: '100%',
     height: '100%',
+    backgroundColor: OVERLAY,
   },
   modalContainer: {
     position: 'absolute',
@@ -38,7 +44,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   modalContainerDown: {
-    height: 80,
+    height: 104,
     marginHorizontal: 24,
     paddingTop: 16,
     borderTopWidth: 1,
@@ -47,8 +53,9 @@ export const styles = StyleSheet.create({
   modalContent: {
     backgroundColor: PRIMARY_100,
     zIndex: 3,
-    paddingTop: 50,
-    paddingHorizontal: 25,
+    paddingTop: 60,
+    paddingLeft: 24,
+    marginRight: 12,
     flex: 1,
   },
   modalCurrentContainer: {
@@ -61,24 +68,17 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     borderRadius: 10,
   },
-  modalCurrentImage: {
-    width: 20,
-    height: 20,
-    marginRight: 12,
-  },
   modalCurrentLabel: {
     color: NEUTRAL_0,
     fontSize: 16,
   },
-  modalSectionsContainer: {},
-  modalSection: {},
   modalSectionTitle: {
-    color: NEUTRAL_60,
-    fontSize: 16,
+    color: NEUTRAL_400,
+    fontSize: 12,
+    lineHeight: 18,
+    marginBottom: 12,
   },
-  modalSectionContentContainer: {
-    marginTop: 20,
-  },
+  modalSectionContentContainer: { marginBottom: 20 },
   modalSectionItemContainer: {
     flexDirection: 'row',
     height: 40,
@@ -98,8 +98,8 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
   },
   modalSectionItemImage: {
-    width: 20,
-    height: 20,
+    width: 24,
+    height: 24,
     marginRight: 12,
   },
   modalSectionItemText: {
@@ -114,13 +114,13 @@ export const styles = StyleSheet.create({
   },
   modalSectionSubMenuContainer: {
     display: 'flex',
-    paddingLeft: 15,
-    marginLeft: 20,
+    paddingLeft: 16,
+    marginLeft: 24,
     marginBottom: 20,
-    marginTop: 5,
+    marginTop: 12,
     borderLeftWidth: 1,
-    borderColor: NEUTRAL_60,
+    borderColor: PRIMARY_400,
   },
-  copyright: {color: NEUTRAL_60},
-  version: {color: NEUTRAL_60},
+  copyright: { color: NEUTRAL_50 },
+  version: { color: NEUTRAL_50 },
 });

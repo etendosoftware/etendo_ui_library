@@ -1,27 +1,28 @@
 /* Imports */
-import {ImageStyle, TextStyle, ViewStyle} from 'react-native';
-
-/* Type declaration */
-export type Info = {
-  name: string;
-  route: string;
-  key: string;
-};
+import { ImageStyle, TextStyle, ViewStyle } from 'react-native';
 
 export interface PaginationProps {
   currentPage: number;
-  onChangeSelected: ({type}: any, {type2}: any) => void;
+  onChangeSelected: (currentPage: number, offset: number) => void;
   totalData: number;
   amountDataPerPage: number;
-  pagination: number;
-  isWeb?: boolean;
 }
 
-/* Declaration of style types */
-export type TabStyleType = 'primary';
+export type PaginationStyleType = 'primary';
+
+export interface PaginationStyles {
+  container: ViewStyle;
+  icon?: ImageStyle;
+  pageNumberContainer: ViewStyle;
+  pageNumberText: TextStyle;
+}
+
+export type PaginationStyleVariant = {
+  primary: PaginationStyles;
+};
 
 export type PaginationStyleRecord = Record<
-  TabStyleType,
+  PaginationStyleType,
   {
     container: ViewStyle;
     icon?: ImageStyle;

@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {CheckIcon} from '../../assets/images/icons/CheckIcon';
+import { CheckIcon } from '../../assets/images/icons/CheckIcon';
 import Button from './Button';
 
 describe('Running Test for Input', () => {
@@ -11,7 +11,7 @@ describe('Running Test for Input', () => {
           text={'Button CTA'}
           onPress={() => {}}
           typeStyle={'primary'}
-          image={
+          iconLeft={
             <CheckIcon
               fill={'white'}
               style={{

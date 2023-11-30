@@ -1,12 +1,40 @@
 import React from 'react';
-import {FlatList, Pressable, TouchableOpacity, View} from 'react-native';
-import {Actions, Columns, TableProps} from './Table.types';
-import {styles} from './Table.styles';
+import {
+  FlatList,
+  Pressable,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import { Actions, Columns, TableProps } from './Table.types';
+import { styles } from './Table.styles';
 import TableHeaders from './components/TableHeaders';
-import {paintOddRows, removeHeaderBorder} from '../../helpers/table_utils';
 import TableCell from './components/TableCell';
+import { paintOddRows, removeHeaderBorder } from '../../helpers/table_utils';
+import { SkeletonRowTable } from '../secondaryComponents';
+import { NEUTRAL_300 } from '../../styles/colors';
+import EmptyTableState from '../../assets/images/components/EmptyTableState';
 
-const Table = ({data, columns, title, onRowPress, tableHeight}: TableProps) => {
+const Table = ({
+  data,
+  columns,
+  title,
+  onRowPress,
+  tableHeight,
+  isLoading,
+  textEmptyTable,
+  commentEmptyTable,
+  onLoadMoreData,
+  isLoadingMoreData = true,
+  pageSize = 20,
+  currentPage = 0,
+}: TableProps) => {
+  const handleLoadMore = () => {
+    if (isLoadingMoreData && !isLoading && onLoadMoreData) {
+      onLoadMoreData(currentPage + 1, pageSize);
+    }
+  };
+
   const findPrimaryId = (col: Columns[], indexRow: number) => {
     let primary: string = '';
     if (indexRow >= 0) {
@@ -21,35 +49,40 @@ const Table = ({data, columns, title, onRowPress, tableHeight}: TableProps) => {
     }
     return primary;
   };
-  const renderItem = (item: any, index: number) => {
+
+  const RenderItem = (item: any, index: number) => {
     return (
       <Pressable
         onPress={() => {
-          onRowPress(findPrimaryId(columns, index));
+          if (onRowPress) {
+            onRowPress(findPrimaryId(columns, index));
+          }
         }}
         style={[styles.row, paintOddRows(index)]}>
         {columns.map((col: Columns, colIndex: number) => {
           return (
             col.visible && (
               <View
-                style={[styles.cell, {width: col.width}]}
+                style={[styles.cell, col.cellStyle, { width: col.width }]}
                 key={'movementTable' + colIndex}>
-                {col.actions ? (
-                  col.actions?.map((itemAction: Actions, index: number) => {
-                    return (
-                      <TouchableOpacity
-                        style={styles.cellEditContainer}
-                        onPress={() =>
-                          col.key ? itemAction.onAction(item[col.key]) : {}
-                        }
-                        key={'tableCellCustom' + index}>
-                        {itemAction.component}
-                      </TouchableOpacity>
-                    );
-                  })
+                {col.components ? (
+                  col.components?.map(
+                    (itemAction: Actions, actionIndex: number) => {
+                      return (
+                        <TouchableOpacity
+                          style={styles.cellEditContainer}
+                          onPress={() =>
+                            itemAction.onAction(findPrimaryId(columns, index))
+                          }
+                          key={'tableCellCustom' + actionIndex}>
+                          {itemAction.component}
+                        </TouchableOpacity>
+                      );
+                    },
+                  )
                 ) : (
                   <TableCell
-                    label={col.displayKey ? item[col.displayKey] : ''}
+                    label={col.key ? item[col.key] : ''}
                     key={'tableCell' + index}
                   />
                 )}
@@ -60,24 +93,74 @@ const Table = ({data, columns, title, onRowPress, tableHeight}: TableProps) => {
       </Pressable>
     );
   };
-  return (
-    <>
-      <View
-        style={[
-          styles.container,
-          removeHeaderBorder(title),
-          {height: tableHeight},
-        ]}>
-        <TableHeaders title={title} columns={columns} />
-        <FlatList
-          data={data}
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          renderItem={item => renderItem(item.item, item.index)}
-          keyExtractor={(item: any, index: number) => 'Table: ' + index}
-        />
+
+  const RenderSkeleton = (item: any, index: number) => {
+    return (
+      <View style={[styles.row, paintOddRows(index)]}>
+        {columns.map((col: Columns, colIndex: number) => {
+          return (
+            col.visible && (
+              <SkeletonRowTable
+                key={colIndex}
+                width={col.width!}
+                color={NEUTRAL_300}
+                indexRow={index}
+                indexColumn={colIndex}
+              />
+            )
+          );
+        })}
       </View>
-    </>
+    );
+  };
+
+  const EmptyState = () => {
+    return (
+      <View style={styles.emptyStateConteiner}>
+        <EmptyTableState />
+        <Text style={styles.emptyTextTitle}>{textEmptyTable}</Text>
+        <Text style={styles.emptyTextSubtitle}>{commentEmptyTable}</Text>
+      </View>
+    );
+  };
+
+  return (
+    <View
+      style={[
+        styles.container,
+        removeHeaderBorder(title),
+        { height: tableHeight },
+      ]}>
+      <TableHeaders
+        title={title}
+        columns={columns}
+        isLoading={!(isLoading && !data.length)}
+      />
+
+      <FlatList
+        data={
+          isLoadingMoreData && isLoading && !data.length
+            ? Array(pageSize).fill({})
+            : data
+        }
+        renderItem={item =>
+          isLoadingMoreData && isLoading && !data.length && onLoadMoreData
+            ? RenderSkeleton(item.item, item.index)
+            : RenderItem(item.item, item.index)
+        }
+        ListEmptyComponent={<EmptyState />}
+        keyExtractor={(_item: any, index: number) => 'Table: ' + index}
+        ListFooterComponent={() =>
+          isLoadingMoreData &&
+          onLoadMoreData &&
+          isLoading &&
+          Boolean(data.length) &&
+          RenderSkeleton(null, data.length)
+        }
+        onEndReached={() => handleLoadMore()}
+        onEndReachedThreshold={0.2}
+      />
+    </View>
   );
 };
 
