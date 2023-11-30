@@ -8,7 +8,7 @@ import { Table } from './table';
 import { ViewEtendo } from './viewEtendo/ViewEtendo';
 import { CardDropdown } from './cards/cardDropdown';
 import { SkeletonItem } from './secondaryComponents';
-import { Layout } from './containers/layout';
+import { Layout, ButtonContainer } from './containers';
 
 export {
   Button,
@@ -22,4 +22,5 @@ export {
   Table,
   ViewEtendo,
   Layout,
+  ButtonContainer,
 };
