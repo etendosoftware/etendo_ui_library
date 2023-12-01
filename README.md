@@ -41,18 +41,23 @@ If you encounter any issues during the installation process or have any question
 To use the Playground for testing Etendo UI components, follow these steps:
 
 1. **General Setup**:
+
    - Run `yarn install` in the `etendo_ui_library` directory.
+   - Additionally, execute `yarn watch` in the root directory. This is crucial as it copies the components into the **nextjs** and **React Native** folders for a seamless integration.
+
+     **⚠️ Warning:** When making changes to the Etendo UI library, always modify the components in the `src/components` directory. Avoid making changes in the `examples` folder components, as they are only copies and your changes won't be reflected in the library.
 
 2. **For Mobile Testing**:
+
    - Navigate to `examples/ReactNative`.
    - Run `yarn install` to install necessary dependencies.
-   - To test on iOS, execute `yarn run ios`.
+   - To test on iOS, execute `cd ios && pod install && cd .. && yarn run ios`.
    - For Android, use `yarn run android`.
 
 3. **For Web Testing**:
-   - Change directory to `examples/nextjs`.
+   - Change directory to `examples/nextjs/apps/web`.
    - Ensure that you have Node.js version **18.17.0 or later** installed. It is worth mentioning that this is only required for this web playground, to develop the **Etendo UI** Node.js **16.10.0 or higher** is required.
    - Run `yarn install` to install dependencies.
-   - Start the development server with `yarn run dev`.
+   - Start the development server with `yarn dev`.
 
 Happy coding with Etendo UI! 🚀🎉
