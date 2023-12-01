@@ -38,6 +38,7 @@ export enum InputFieldVariant {
 
 export type KeyboardTypes = 'text' | 'number';
 export type DateFormat = 'DD/MM/YYYY' | 'MM/DD/YYYY';
+export type LanguageFormat = 'en-US' | 'es-ES';
 
 export type InputFieldConfigType = {
   type: InputFieldType;
@@ -96,9 +97,10 @@ export interface InputProps {
   onBlur?: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   onOptionSelected?: (selectedItem: Array<Record<string, any>>) => void;
   backgroundColor?: ColorValue;
-  language?: string;
+  language?: LanguageFormat;
   dateFormat?: DateFormat;
   onChange?: (event: any) => void;
+  showCalendar?: boolean;
 }
 
 export interface InputTitleProps {
@@ -146,6 +148,7 @@ export interface InputFieldProps {
   onBlur: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   dateFormat?: any;
   onChange?: (event: any) => void;
+  showCalendar?: boolean;
 }
 
 export interface InputHelperProps {

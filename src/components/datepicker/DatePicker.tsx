@@ -48,6 +48,8 @@ const DatePicker = ({
   onChange,
   dateFormat,
   value,
+  showCalendar = true,
+  disabled = false,
 }: DatePickerProps) => {
   // states for the date picker
   const [hoveredDay, setHoveredDay] = useState<any>(null);
@@ -186,7 +188,7 @@ const DatePicker = ({
   // Render item for month selection
   const renderMonthItem = ({ item, index }: any) => (
     <TouchableOpacity
-      style={[styles.item, index === currentMonth ? styles.selectedItem : null]}
+      style={[styles.item, index === currentMonth && styles.selectedItem]}
       onPress={() => {
         selectMonth(index);
         setDisabledYearSelection(false);
@@ -211,7 +213,7 @@ const DatePicker = ({
   const renderMonthSelection = () => (
     <FlatList
       ref={monthListRef}
-      data={monthsShort}
+      data={monthNames}
       renderItem={renderMonthItem}
       keyExtractor={(_, index) => index.toString()}
       style={styles.list}
@@ -288,21 +290,23 @@ const DatePicker = ({
 
   // Toggle date picker display
   const showPicker = () => {
-    // Close month and year selection if they are open
-    if (isMonthSelection) setIsMonthSelection(false);
-    if (isYearSelection) setIsYearSelection(false);
+    if (!disabled) {
+      // Close month and year selection if they are open
+      if (isMonthSelection) setIsMonthSelection(false);
+      if (isYearSelection) setIsYearSelection(false);
 
-    // Enable month and year selection
-    if (disabledMonthSelection) setDisabledMonthSelection(false);
-    if (disabledYearSelection) setDisabledYearSelection(false);
+      // Enable month and year selection
+      if (disabledMonthSelection) setDisabledMonthSelection(false);
+      if (disabledYearSelection) setDisabledYearSelection(false);
 
-    // Set picker visibility
-    setIsPickerShow(!isPickerShow);
+      // Set picker visibility
+      setIsPickerShow(!isPickerShow);
 
-    // If date is selected, set current month and year to selected date
-    if (!isPickerShow && selectedDate) {
-      setCurrentMonth(selectedDate.getMonth());
-      setCurrentYear(selectedDate.getFullYear());
+      // If date is selected, set current month and year to selected date
+      if (!isPickerShow && selectedDate) {
+        setCurrentMonth(selectedDate.getMonth());
+        setCurrentYear(selectedDate.getFullYear());
+      }
     }
   };
 
@@ -312,7 +316,7 @@ const DatePicker = ({
     setSelectedDate(date);
   };
 
-  // Function for the botón 'Accept'
+  // Function for the button 'Accept'
   const onAccept = () => {
     if (selectedDate) {
       onChange(formatterDate(selectedDate, dateFormat));
@@ -320,7 +324,7 @@ const DatePicker = ({
     setIsPickerShow(false);
   };
 
-  // Function for the botón 'Cancel'
+  // Function for the button 'Cancel'
   const onCancel = () => {
     setSelectedDate(currentSelectedDate);
     setIsPickerShow(false);
@@ -497,22 +501,27 @@ const DatePicker = ({
             !isDateValid && styles.invalidDateInputWrapper,
           ]}>
           <TextInput
-            style={styles.datePickerInput}
+            style={[styles.datePickerInput, disabled && styles.disabledInput]}
             value={value}
             placeholder={getPlaceholderDateFormat(dateFormat)}
             placeholderTextColor={NEUTRAL_600}
-            editable={true}
+            editable={!disabled}
             onChangeText={handleTextInputChange}
             focusable
-            onFocus={() => setIsInputFocused(true)}
+            onFocus={() => !disabled && setIsInputFocused(true)}
             onBlur={() => {
-              setIsInputFocused(false), handleBlur();
+              setIsInputFocused(false), !disabled && handleBlur();
             }}
           />
 
-          <TouchableOpacity onPress={showPicker}>
-            <CalendarIcon style={styles.calendarIcon} />
-          </TouchableOpacity>
+          {/* Show calendar icon if showCalendar is true */}
+          {showCalendar && (
+            <TouchableOpacity onPress={showPicker}>
+              <CalendarIcon
+                style={[styles.calendarIcon, disabled && { opacity: 0.2 }]}
+              />
+            </TouchableOpacity>
+          )}
         </View>
       </View>
 
@@ -613,13 +622,13 @@ const DatePicker = ({
             <View style={styles.optionsContainer}>
               <Button
                 typeStyle="white"
-                text="Cancel"
-                onPress={onCancel}
+                text={translations.cancel}
+                onPress={translations[language].cancel}
                 paddingVertical={10}
               />
               <Button
                 typeStyle="terciary"
-                text="Accept"
+                text={translations[language].accept}
                 onPress={onAccept}
                 paddingVertical={10}
               />

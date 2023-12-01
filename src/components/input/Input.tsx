@@ -32,6 +32,7 @@ const Input = ({
   language,
   dateFormat,
   onChange,
+  showCalendar,
 }: InputProps) => {
   const stateStyle = () => {
     if (typeField === 'readOnly') {
@@ -92,6 +93,7 @@ const Input = ({
         language={language}
         dateFormat={dateFormat}
         onChange={onChange}
+        showCalendar={showCalendar}
       />
       <InputHelperText
         label={helperText}

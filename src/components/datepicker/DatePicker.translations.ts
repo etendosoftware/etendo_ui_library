@@ -1,7 +1,7 @@
 // Translations for DatePicker component
 export const translations: any = {
-  en: {
-    daysShort: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+  'en-US': {
+    daysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
     monthsShort: [
       'Jan',
       'Feb',
@@ -30,9 +30,11 @@ export const translations: any = {
       'November',
       'December',
     ],
+    cancel: 'Cancel',
+    accept: 'Accept',
   },
-  es: {
-    daysShort: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+  'es-ES': {
+    daysShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
     monthsShort: [
       'Ene',
       'Feb',
@@ -61,5 +63,7 @@ export const translations: any = {
       'Noviembre',
       'Diciembre',
     ],
+    cancel: 'Cancelar',
+    accept: 'Aceptar',
   },
 };

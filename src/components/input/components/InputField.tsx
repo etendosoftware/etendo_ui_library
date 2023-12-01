@@ -50,6 +50,7 @@ const InputField = ({
   language,
   onChange,
   dateFormat,
+  showCalendar,
 }: InputFieldProps) => {
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(true);
@@ -75,6 +76,8 @@ const InputField = ({
         styleField={styleField}
         onChange={onChange}
         value={value}
+        showCalendar={showCalendar}
+        disabled={disabled}
       />
     );
   }

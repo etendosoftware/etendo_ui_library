@@ -41,6 +41,9 @@ export const styles = StyleSheet.create({
   invalidDateInputWrapper: {
     borderColor: DESTRUCTIVE_100,
   },
+  disabledInput: {
+    opacity: 0.2,
+  },
   datePickerInput: {
     textAlign: 'left',
     fontSize: 18,
@@ -96,7 +99,6 @@ export const styles = StyleSheet.create({
   },
   monthText: {
     fontSize: 16,
-    width: 30,
     color: PRIMARY_100,
   },
   arrow: {
@@ -170,7 +172,6 @@ export const styles = StyleSheet.create({
     paddingVertical: 5,
   },
   item: {
-    flex: 1,
     justifyContent: 'center',
     padding: 10,
     margin: 2,
