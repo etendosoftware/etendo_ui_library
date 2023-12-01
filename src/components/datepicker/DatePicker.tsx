@@ -622,8 +622,8 @@ const DatePicker = ({
             <View style={styles.optionsContainer}>
               <Button
                 typeStyle="white"
-                text={translations.cancel}
-                onPress={translations[language].cancel}
+                text={translations[language].cancel}
+                onPress={onCancel}
                 paddingVertical={10}
               />
               <Button
