@@ -8,3 +8,8 @@ export type ImageType = {
 };
 
 export type DeviceType = 'tablet' | 'mobile' | 'web';
+export enum AppPlatform {
+  ios = 'ios',
+  android = 'android',
+  web = 'web',
+}

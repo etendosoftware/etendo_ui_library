@@ -10,6 +10,7 @@ import {
   QUATERNARY_50,
   TERTIARY_70,
 } from '../../styles/colors';
+import { AppPlatform } from '../../helpers/utilsTypes';
 
 // Height of the calendar
 export const CALENDAR_HEIGHT = 260;
@@ -22,7 +23,7 @@ export const styles = StyleSheet.create({
   datePickerButton: {
     borderWidth: 1,
     borderColor: 'gray',
-    paddingVertical: Platform.OS === 'web' ? 8 : 20,
+    paddingVertical: Platform.OS === AppPlatform.web ? 8 : 20,
     paddingHorizontal: 12,
     borderRadius: 4,
     backgroundColor: 'white',
@@ -34,7 +35,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: Platform.OS === 'web' ? 8 : 20,
+    paddingVertical: Platform.OS === AppPlatform.web ? 8 : 20,
     paddingHorizontal: 16,
     backgroundColor: NEUTRAL_50,
   },
@@ -53,7 +54,7 @@ export const styles = StyleSheet.create({
   inputContainerWrapper: {
     backgroundColor: 'transparent',
     padding: 6,
-    height: Platform.OS !== 'web' ? 63 : undefined,
+    height: Platform.OS !== AppPlatform.web ? 63 : undefined,
     borderRadius: 8,
   },
   monthAndYearContainer: {
@@ -86,7 +87,7 @@ export const styles = StyleSheet.create({
     backgroundColor: NEUTRAL_50,
     borderRadius: 8,
     elevation: 5,
-    width: Platform.OS === 'web' ? '100%' : '90%',
+    width: Platform.OS === AppPlatform.web ? '100%' : '90%',
     borderWidth: 1,
     borderColor: NEUTRAL_300,
   },

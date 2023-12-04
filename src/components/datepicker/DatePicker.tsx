@@ -26,8 +26,9 @@ import {
   NEUTRAL_600,
   PRIMARY_100,
 } from '../../styles/colors';
-import { CALENDAR_HEIGHT, styles } from './DatePicker.styles';
+import { AppPlatform } from '../../helpers/utilsTypes';
 
+import { CALENDAR_HEIGHT, styles } from './DatePicker.styles';
 import { translations } from './DatePicker.translations';
 import { DatePickerProps, DayItem } from './DatePicker.types';
 import {
@@ -219,7 +220,7 @@ const DatePicker = ({
       style={styles.list}
       initialScrollIndex={currentMonth}
       getItemLayout={(_, index) => ({
-        length: Platform.OS === 'web' ? 20 * index : 43.5,
+        length: Platform.OS === AppPlatform.web ? 20 * index : 43.5,
         offset: 43.5 * index,
         index,
       })}
@@ -242,7 +243,7 @@ const DatePicker = ({
         initialScrollIndex={yearList.indexOf(currentYear)}
         getItemLayout={(_, index) => ({
           length: 43,
-          offset: Platform.OS === 'web' ? 38 * index : 43.5 * index,
+          offset: Platform.OS === AppPlatform.web ? 38 * index : 43.5 * index,
           index,
         })}
       />
@@ -483,7 +484,7 @@ const DatePicker = ({
   };
 
   // Conditional component based on platform
-  const PlatformComponent: any = Platform.OS === 'web' ? View : Modal;
+  const PlatformComponent: any = Platform.OS === AppPlatform.web ? View : Modal;
 
   return (
     <View style={styles.container}>
@@ -526,7 +527,7 @@ const DatePicker = ({
       </View>
 
       <PlatformComponent
-        {...(Platform.OS === 'web'
+        {...(Platform.OS === AppPlatform.web
           ? {
               style: {
                 display: isPickerShow ? 'flex' : 'none',
@@ -541,7 +542,7 @@ const DatePicker = ({
               onRequestClose: showPicker,
             })}>
         <TouchableOpacity
-          style={!(Platform.OS === 'web') && styles.modalContainer}
+          style={!(Platform.OS === AppPlatform.web) && styles.modalContainer}
           activeOpacity={1}
           onPress={showPicker}>
           <View
