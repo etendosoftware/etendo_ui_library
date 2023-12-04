@@ -1,5 +1,5 @@
 /* Imports */
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import {
   Modal,
@@ -74,33 +74,6 @@ const DatePicker = ({
   // Reference for text input
   const inputRef: any = useRef(null);
 
-  // Use effect for calendar direction
-  useEffect(() => {
-    if (isPickerShow && inputRef.current) {
-      inputRef.current.measure(
-        (
-          x: number,
-          y: number,
-          width: number,
-          height: number,
-          pageX: number,
-          pageY: number,
-        ) => {
-          const windowHeight = Dimensions.get('window').height;
-          // Calculate the space below the input
-          const spaceBelow = windowHeight - pageY - height;
-
-          // If the space below is less than the calendar height, show the calendar upwards, else downwards
-          if (spaceBelow < CALENDAR_HEIGHT) {
-            setCalendarDirection('upwards');
-          } else {
-            setCalendarDirection('downwards');
-          }
-        },
-      );
-    }
-  }, [isPickerShow]);
-
   // Ref for month list
   const monthListRef: any = useRef(null);
   // Toggle month selection
@@ -117,16 +90,6 @@ const DatePicker = ({
       });
     }
   };
-
-  // Use effect for month selection
-  useEffect(() => {
-    if (isMonthSelection && monthListRef.current) {
-      monthListRef.current.scrollToIndex({
-        animated: true,
-        index: currentMonth,
-      });
-    }
-  }, [isMonthSelection, currentMonth]);
 
   // Adjust the selected date if the month has less days
   const adjustDateForMonth = (
@@ -289,9 +252,35 @@ const DatePicker = ({
   const monthsShort = translations[language].monthsShort;
   const monthNames = translations[language].monthNames;
 
+  // Calculate calendar direction
+  const calculateCalendarDirection = () => {
+    if (inputRef.current) {
+      inputRef.current.measure(
+        (
+          x: number,
+          y: number,
+          width: number,
+          height: number,
+          pageX: number,
+          pageY: number,
+        ) => {
+          const windowHeight = Dimensions.get('window').height;
+          const spaceBelow = windowHeight - pageY - height;
+
+          if (spaceBelow < CALENDAR_HEIGHT) {
+            setCalendarDirection('upwards');
+          } else {
+            setCalendarDirection('downwards');
+          }
+        },
+      );
+    }
+  };
+
   // Toggle date picker display
   const showPicker = () => {
     if (!disabled) {
+      calculateCalendarDirection();
       // Close month and year selection if they are open
       if (isMonthSelection) setIsMonthSelection(false);
       if (isYearSelection) setIsYearSelection(false);
@@ -311,10 +300,18 @@ const DatePicker = ({
     }
   };
 
-  // Handle date selection
+  // Handle date selection from the calendar
   const onDateSelected = (date: Date) => {
-    setTempSelectedDate(selectedDate);
+    const formattedDate = formatterDate(date, dateFormat);
+    const isValidDate = validateDate(date, formattedDate, dateFormat);
+
+    setTempSelectedDate(date);
     setSelectedDate(date);
+    setIsDateValid(isValidDate);
+
+    if (isValidDate && onChangeText) {
+      onChangeText(formattedDate);
+    }
   };
 
   // Function for the button 'Accept'
@@ -419,10 +416,9 @@ const DatePicker = ({
     // Determine if the date is part of the current month
     const isPartOfCurrentMonth = date.getMonth() === currentMonth;
 
-    // Determine if the date is part of the current month to apply hover styles
     const dayKey = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
-    const isHovered = hoveredDay === dayKey;
-    const isTodayHovered = isToday && isHovered; // Sólo aplicar si es 'hoy' y está en hover
+    const isHovered = hoveredDay === dayKey && !isSelectedDate;
+    const isTodayHovered = isToday && isHovered;
 
     return (
       <Pressable
