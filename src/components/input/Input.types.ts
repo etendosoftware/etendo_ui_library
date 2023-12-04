@@ -23,7 +23,8 @@ export type InputFieldVariants =
   | 'textInputSearch'
   | 'textInputPassword'
   | 'pressableText'
-  | 'pressableSearch';
+  | 'pressableSearch'
+  | 'datePicker';
 
 export enum InputFieldVariant {
   ReadOnly = 'readOnly',
@@ -36,6 +37,8 @@ export enum InputFieldVariant {
 }
 
 export type KeyboardTypes = 'text' | 'number';
+export type DateFormat = 'DD/MM/YYYY' | 'MM/DD/YYYY';
+export type LanguageFormat = 'en-US' | 'es-ES';
 
 export type InputFieldConfigType = {
   type: InputFieldType;
@@ -46,6 +49,7 @@ export type InputFieldConfigType = {
   disabledSubmit?: boolean;
   backgroundColor?: ColorValue;
   placeholderStyle?: TextStyle;
+  isDatePicker?: boolean;
 };
 
 export type InputVariantsType = Record<
@@ -70,7 +74,7 @@ export type TypeInputStyleVariant = Record<
 export interface InputProps {
   titleLabel?: string;
   titleImage?: React.ReactElement;
-  value: string;
+  value: string | number | Date | undefined;
   helperText?: string;
   placeholder?: string;
   placeholderPickerSearch?: string;
@@ -93,6 +97,10 @@ export interface InputProps {
   onBlur?: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   onOptionSelected?: (selectedItem: Array<Record<string, any>>) => void;
   backgroundColor?: ColorValue;
+  language?: LanguageFormat;
+  dateFormat?: DateFormat;
+  onChange?: (event: any) => void;
+  showCalendar?: boolean;
 }
 
 export interface InputTitleProps {
@@ -109,7 +117,7 @@ export interface InputHelperProps {
 
 export interface InputFieldProps {
   disabled?: boolean;
-  value?: string;
+  value?: string | number | Date | undefined | any;
   placeholder?: string;
   placeholderPickerSearch?: string;
   configField: InputFieldConfigType;
@@ -127,6 +135,7 @@ export interface InputFieldProps {
   fontSize?: number;
   height?: DimensionValue;
   dataPicker?: any;
+  language?: any;
   displayKey?: string;
   backgroundColor?: ColorValue;
   onOptionSelected?: any;
@@ -137,6 +146,9 @@ export interface InputFieldProps {
   onChangeText?: (text: string) => void;
   onFocus: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   onBlur: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+  dateFormat?: any;
+  onChange?: (event: any) => void;
+  showCalendar?: boolean;
 }
 
 export interface InputHelperProps {
