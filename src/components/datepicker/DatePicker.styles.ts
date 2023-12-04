@@ -52,7 +52,8 @@ export const styles = StyleSheet.create({
   },
   inputContainerWrapper: {
     backgroundColor: 'transparent',
-    padding: Platform.OS === 'web' ? 6 : 0,
+    padding: 6,
+    height: Platform.OS !== 'web' ? 63 : undefined,
     borderRadius: 8,
   },
   monthAndYearContainer: {
