@@ -44,11 +44,11 @@ import {
 import { Button } from '../button';
 
 const DatePicker = ({
-  language,
   styleField,
   onChange,
-  dateFormat,
   value,
+  dateFormat = 'MM/DD/YYYY',
+  language = 'en-US',
   showCalendar = true,
   disabled = false,
 }: DatePickerProps) => {
