@@ -48,7 +48,6 @@ const InputField = ({
   onFocus,
   onBlur,
   language,
-  onChange,
   dateFormat,
   showCalendar,
 }: InputFieldProps) => {
@@ -74,7 +73,7 @@ const InputField = ({
         dateFormat={dateFormat}
         language={language}
         styleField={styleField}
-        onChange={onChange}
+        onChangeText={onChangeText}
         value={value}
         showCalendar={showCalendar}
         disabled={disabled}

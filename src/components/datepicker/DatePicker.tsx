@@ -45,7 +45,7 @@ import { Button } from '../button';
 
 const DatePicker = ({
   styleField,
-  onChange,
+  onChangeText,
   value,
   dateFormat = 'MM/DD/YYYY',
   language = 'en-US',
@@ -168,8 +168,8 @@ const DatePicker = ({
     );
     setSelectedDate(adjustedDate);
 
-    if (onChange) {
-      onChange(formatterDate(adjustedDate, dateFormat));
+    if (onChangeText) {
+      onChangeText(formatterDate(adjustedDate, dateFormat));
     }
   };
 
@@ -181,8 +181,8 @@ const DatePicker = ({
     const adjustedDate = adjustDateForMonth(year, currentMonth, selectedDate);
     setSelectedDate(adjustedDate);
 
-    if (onChange) {
-      onChange(formatterDate(adjustedDate, dateFormat));
+    if (onChangeText) {
+      onChangeText(formatterDate(adjustedDate, dateFormat));
     }
   };
 
@@ -320,7 +320,7 @@ const DatePicker = ({
   // Function for the button 'Accept'
   const onAccept = () => {
     if (selectedDate) {
-      onChange(formatterDate(selectedDate, dateFormat));
+      onChangeText(formatterDate(selectedDate, dateFormat));
     }
     setIsPickerShow(false);
   };
@@ -345,7 +345,7 @@ const DatePicker = ({
     }
 
     // Update the date value as user types
-    onChange(processedText);
+    onChangeText(processedText);
 
     // Convert to date object if the date is complete and verify if it's valid
     if (processedText.length === 10) {

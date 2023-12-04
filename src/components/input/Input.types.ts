@@ -99,7 +99,6 @@ export interface InputProps {
   backgroundColor?: ColorValue;
   language?: LanguageFormat;
   dateFormat?: DateFormat;
-  onChange?: (event: any) => void;
   showCalendar?: boolean;
 }
 
@@ -147,7 +146,6 @@ export interface InputFieldProps {
   onFocus: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   onBlur: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   dateFormat?: any;
-  onChange?: (event: any) => void;
   showCalendar?: boolean;
 }
 
