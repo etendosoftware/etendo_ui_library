@@ -10,7 +10,7 @@ export type LanguageFormat = 'en-US' | 'es-ES';
 export interface DatePickerProps {
   language: LanguageFormat;
   styleField: any;
-  onChange: any;
+  onChangeText: any;
   dateFormat: DateFormat;
   value: Date | string | undefined | any;
   showCalendar: boolean | undefined;

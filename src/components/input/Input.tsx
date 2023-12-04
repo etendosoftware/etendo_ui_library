@@ -31,7 +31,6 @@ const Input = ({
   isError,
   language,
   dateFormat,
-  onChange,
   showCalendar,
 }: InputProps) => {
   const stateStyle = () => {
@@ -92,7 +91,6 @@ const Input = ({
         height={height}
         language={language}
         dateFormat={dateFormat}
-        onChange={onChange}
         showCalendar={showCalendar}
       />
       <InputHelperText
