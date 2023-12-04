@@ -67,20 +67,6 @@ const InputField = ({
   const refComponent = useRef<TouchableOpacity>(null);
   const regex = /^[0-9.,]+$/g;
 
-  if (configField?.isDatePicker) {
-    return (
-      <DatePicker
-        dateFormat={dateFormat}
-        language={language}
-        styleField={styleField}
-        onChangeText={onChangeText}
-        value={value}
-        showCalendar={showCalendar}
-        disabled={disabled}
-      />
-    );
-  }
-
   const getStyleText = (): TextStyle | TextStyle[] => {
     let style: Array<TextStyle | TextStyle[]> = [];
     if (value) {
@@ -91,12 +77,6 @@ const InputField = ({
 
     return style as TextStyle;
   };
-
-  useEffect(() => {
-    if (dataPicker) {
-      setDataOptionsFilter(dataPicker);
-    }
-  }, [dataPicker]);
 
   useEffect(() => {
     if (showOptions) {
@@ -265,67 +245,83 @@ const InputField = ({
   };
   return (
     <View style={[styleField.focus, getFocusStyle()]}>
-      <TouchableOpacity
-        ref={refComponent}
-        style={[
-          styleField.field,
-          removePaddingField(),
-          { backgroundColor },
-          { height },
-        ]}
-        disabled={disabled || configField.disabledField}
-        onPress={handleOnPress}>
-        {configField?.type === InputFieldVariant.TextInput && (
-          <TextInput
-            editable={!disabled || !configField.disabledField}
-            focusable={!disabled || !configField.disabledField}
-            onBlur={onPressBlur}
-            onFocus={onPressFocus}
-            value={value}
-            keyboardType={getKeyboardType(keyboardType)}
-            onChangeText={getOnChangeText}
-            style={[getStyleText(), disableOutline(), styleField.textDefault]}
-            placeholder={placeholder}
-            placeholderTextColor={NEUTRAL_600}
-            maxLength={maxLength}
-            secureTextEntry={
-              type === InputFieldVariant.TextInputPassword && showPassword
-            }
-            onSubmitEditing={() => onSubmit?.()}
-          />
-        )}
-        {configField?.type === 'text' && (
-          <Text
-            numberOfLines={1}
-            ellipsizeMode="tail"
-            style={[getStyleText(), disableOutline(), styleField.textDefault]}>
-            {getText()}
-          </Text>
-        )}
-        {configField?.image && (
-          <TouchableOpacity
-            onPress={handlePressImage}
-            style={styles.buttonContainerInputField}
-            disabled={isAreaDisabled()}>
-            {getImage(configField.image)}
-          </TouchableOpacity>
-        )}
-        <InputOptions
-          optionsTop={optionsTop}
-          showOptionsAmount={showOptionsAmount}
-          onOptionSelected={onOptionSelected}
-          showOptions={showOptions}
-          positionModal={positionModal}
-          data={dataOptionsFilter}
-          onClose={handleOnClose}
-          onChangeFilterText={handleOnChangeFilterText}
-          filterValue={filterValue}
-          displayKey={displayKey}
-          showSearchInPicker={showSearchInPicker}
-          placeholderPickerSearch={placeholderPickerSearch}
-          dataPicker={dataPicker}
+      {configField?.isDatePicker ? (
+        <DatePicker
+          dateFormat={dateFormat}
+          language={language}
+          styleField={styleField}
+          onChangeText={onChangeText}
+          value={value}
+          showCalendar={showCalendar}
+          disabled={disabled}
         />
-      </TouchableOpacity>
+      ) : (
+        <TouchableOpacity
+          ref={refComponent}
+          style={[
+            styleField.field,
+            removePaddingField(),
+            { backgroundColor },
+            { height },
+          ]}
+          disabled={disabled || configField.disabledField}
+          onPress={handleOnPress}>
+          {configField?.type === InputFieldVariant.TextInput && (
+            <TextInput
+              editable={!disabled || !configField.disabledField}
+              focusable={!disabled || !configField.disabledField}
+              onBlur={onPressBlur}
+              onFocus={onPressFocus}
+              value={value}
+              keyboardType={getKeyboardType(keyboardType)}
+              onChangeText={getOnChangeText}
+              style={[getStyleText(), disableOutline(), styleField.textDefault]}
+              placeholder={placeholder}
+              placeholderTextColor={NEUTRAL_600}
+              maxLength={maxLength}
+              secureTextEntry={
+                type === InputFieldVariant.TextInputPassword && showPassword
+              }
+              onSubmitEditing={() => onSubmit?.()}
+            />
+          )}
+          {configField?.type === 'text' && (
+            <Text
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              style={[
+                getStyleText(),
+                disableOutline(),
+                styleField.textDefault,
+              ]}>
+              {getText()}
+            </Text>
+          )}
+          {configField?.image && (
+            <TouchableOpacity
+              onPress={handlePressImage}
+              style={styles.buttonContainerInputField}
+              disabled={isAreaDisabled()}>
+              {getImage(configField.image)}
+            </TouchableOpacity>
+          )}
+          <InputOptions
+            optionsTop={optionsTop}
+            showOptionsAmount={showOptionsAmount}
+            onOptionSelected={onOptionSelected}
+            showOptions={showOptions}
+            positionModal={positionModal}
+            data={dataOptionsFilter}
+            onClose={handleOnClose}
+            onChangeFilterText={handleOnChangeFilterText}
+            filterValue={filterValue}
+            displayKey={displayKey}
+            showSearchInPicker={showSearchInPicker}
+            placeholderPickerSearch={placeholderPickerSearch}
+            dataPicker={dataPicker}
+          />
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
