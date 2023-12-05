@@ -38,6 +38,7 @@ import {
   getPlaceholderDateFormat,
   parseLocalDateString,
   validateDate,
+  MODAL_CONTENT_WIDTH,
 } from './DatePicker.utils';
 
 // Button from the Etendo UI library
@@ -71,11 +72,10 @@ const DatePicker = ({
     new Date(selectedDate),
   );
 
-  // Reference for text input
+  // References for the date picker
   const inputRef: any = useRef(null);
-
-  // Ref for month list
   const monthListRef: any = useRef(null);
+
   // Toggle month selection
   const showMonthSelection = () => {
     if (!isMonthSelection) setDisabledYearSelection(true);
@@ -527,9 +527,6 @@ const DatePicker = ({
           ? {
               style: {
                 display: isPickerShow ? 'flex' : 'none',
-                boxShadow: '0px 1px 1.41px rgba(0, 0, 0, 0.20)',
-                borderRadius: 8,
-                marginTop: 8,
               },
             }
           : {
@@ -542,11 +539,13 @@ const DatePicker = ({
           activeOpacity={1}
           onPress={showPicker}>
           <View
-            style={
+            style={[
+              styles.modalContent,
+              { width: MODAL_CONTENT_WIDTH },
               calendarDirection === 'downwards'
-                ? [styles.modalContent]
-                : [styles.modalContentUpwards, styles.modalContent]
-            }
+                ? null
+                : styles.modalContentUpwards,
+            ]}
             onStartShouldSetResponder={() => true}>
             <View
               style={[

@@ -1,4 +1,7 @@
 /* Utils for DatePicker component */
+// Constants
+export const MODAL_CONTENT_WIDTH = 360;
+
 // Format date based on language
 export const formatterDate = (date: Date, format: string) => {
   if (date !== undefined) {
