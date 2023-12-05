@@ -80,7 +80,7 @@ export const buildMonth = (year: number, month: number) => {
 
   // Fill days from previous month
   for (let i = firstDayOfMonth; i > 0; i--) {
-    days.unshift(
+    days.push(
       new Date(previousMonthYear, previousMonth, previousMonthDays - i + 1),
     );
   }

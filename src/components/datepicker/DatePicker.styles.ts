@@ -50,6 +50,7 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     outlineStyle: 'none',
     height: 20,
+    flex: 1,
   },
   inputContainerWrapper: {
     backgroundColor: 'transparent',
