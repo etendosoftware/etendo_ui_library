@@ -37,7 +37,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 16,
-    backgroundColor: NEUTRAL_50,
     height: 40,
   },
   invalidDateInputWrapper: {
@@ -53,10 +52,11 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   inputContainerWrapper: {
-    backgroundColor: 'transparent',
-    padding: 5,
     borderRadius: 8,
     height: Platform.OS === AppPlatform.web ? undefined : 50,
+    borderWidth: 5,
+    margin: -5,
+    borderColor: 'transparent',
   },
   monthAndYearContainer: {
     flexDirection: 'row',
@@ -79,18 +79,15 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor:
+      Platform.OS === AppPlatform.web ? 'rgba(0,0,0,0)' : 'rgba(0,0,0,0.5)',
   },
   modalContent: {
     backgroundColor: NEUTRAL_50,
     borderRadius: 8,
-    elevation: 5,
-    borderWidth: 1,
     borderColor: NEUTRAL_300,
-    alignSelf: Platform.OS === AppPlatform.web ? 'flex-end' : 'center',
+    alignSelf: Platform.OS === AppPlatform.web ? undefined : 'center',
     width: Platform.OS === AppPlatform.web ? MODAL_CONTENT_WIDTH : '90%',
-    position: 'absolute',
-    zIndex: 10,
     marginTop: Platform.OS === AppPlatform.web ? 8 : undefined,
     boxShadow:
       Platform.OS === AppPlatform.web
@@ -129,6 +126,7 @@ export const styles = StyleSheet.create({
   calendarContainer: {
     height: CALENDAR_HEIGHT,
     paddingHorizontal: 10,
+    backgroundColor: NEUTRAL_50,
   },
   dayItem: {
     width: '14.28%',
@@ -198,13 +196,11 @@ export const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    marginTop: 12,
     gap: 4,
     padding: 10,
-  },
-  modalContentUpwards: {
-    position: 'absolute',
-    boxShadow: '0px 0px 5px 0px rgba(0,0,0,0.2)',
+    backgroundColor: NEUTRAL_50,
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 8,
   },
   disabledButtonStyle: {
     opacity: 0.2,

@@ -23,6 +23,7 @@ import {
 import {
   NEUTRAL_300,
   NEUTRAL_400,
+  NEUTRAL_50,
   NEUTRAL_600,
   PRIMARY_100,
 } from '../../styles/colors';
@@ -39,6 +40,8 @@ import {
   parseLocalDateString,
   validateDate,
   MODAL_CONTENT_WIDTH,
+  MODAL_CONTENT_TOP_POSITION,
+  MODAL_POSITION_TOP,
 } from './DatePicker.utils';
 
 // Button from the Etendo UI library
@@ -48,11 +51,11 @@ const DatePicker = ({
   value,
   styleField,
   onChangeText,
-  backgroundColor,
-  dateFormat = 'MM/DD/YYYY',
   language = 'en-US',
-  showCalendar = true,
+  dateFormat = 'MM/DD/YYYY',
   disabled = false,
+  showCalendar = true,
+  backgroundColor = NEUTRAL_50,
 }: DatePickerProps) => {
   // states for the date picker
   const [hoveredDay, setHoveredDay] = useState<any>(null);
@@ -72,6 +75,10 @@ const DatePicker = ({
   const [currentSelectedDate, setTempSelectedDate] = useState<Date>(
     new Date(selectedDate),
   );
+  const [modalPosition, setModalPosition] = useState<any>({
+    top: 0,
+    bottom: 0,
+  });
 
   // Effect to validate and set the selected date
   useEffect(() => {
@@ -91,6 +98,16 @@ const DatePicker = ({
       }
     }
   }, [value, dateFormat]);
+
+  // Effect to close the date picker when the user scrolls
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isPickerShow) {
+        setIsPickerShow(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, true);
+  }, [isPickerShow]);
 
   // References for the date picker
   const inputRef: any = useRef(null);
@@ -286,11 +303,16 @@ const DatePicker = ({
         ) => {
           const windowHeight = Dimensions.get('window').height;
           const spaceBelow = windowHeight - pageY - height;
+          let modalLeftPosition = pageX + width - MODAL_CONTENT_WIDTH;
+          modalLeftPosition = Math.max(modalLeftPosition, 0);
 
-          if (spaceBelow < CALENDAR_HEIGHT) {
-            setCalendarDirection('upwards');
+          if (spaceBelow >= CALENDAR_HEIGHT) {
+            setModalPosition({ top: pageY + height, left: modalLeftPosition });
           } else {
-            setCalendarDirection('downwards');
+            setModalPosition({
+              top: pageY - CALENDAR_HEIGHT - MODAL_CONTENT_TOP_POSITION,
+              left: modalLeftPosition,
+            });
           }
         },
       );
@@ -499,9 +521,6 @@ const DatePicker = ({
     );
   };
 
-  // Conditional component based on platform
-  const PlatformComponent: any = Platform.OS === AppPlatform.web ? View : Modal;
-
   return (
     <View style={styles.container}>
       <View
@@ -545,31 +564,28 @@ const DatePicker = ({
         </View>
       </View>
 
-      <PlatformComponent
-        {...(Platform.OS === AppPlatform.web
-          ? {
-              style: {
-                display: isPickerShow ? 'flex' : 'none',
-              },
-            }
-          : {
-              transparent: true,
-              visible: isPickerShow,
-              onRequestClose: showPicker,
-            })}>
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={isPickerShow}
+        onRequestClose={showPicker}>
         <TouchableOpacity
-          style={!(Platform.OS === AppPlatform.web) && styles.modalContainer}
+          style={styles.modalContainer}
           activeOpacity={1}
           onPress={showPicker}>
           <View
             style={[
               styles.modalContent,
               { width: MODAL_CONTENT_WIDTH },
-              calendarDirection === 'downwards'
-                ? null
-                : styles.modalContentUpwards,
-            ]}
-            onStartShouldSetResponder={() => true}>
+              {
+                position:
+                  Platform.OS === AppPlatform.web ? 'absolute' : 'relative',
+                top:
+                  Platform.OS === AppPlatform.web &&
+                  modalPosition.top + MODAL_POSITION_TOP,
+                left: Platform.OS === AppPlatform.web && modalPosition.left,
+              },
+            ]}>
             <View
               style={[
                 styles.header,
@@ -654,7 +670,7 @@ const DatePicker = ({
             </View>
           </View>
         </TouchableOpacity>
-      </PlatformComponent>
+      </Modal>
     </View>
   );
 };
