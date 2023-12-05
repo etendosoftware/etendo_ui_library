@@ -7,17 +7,21 @@ import { sizeSvg } from '../../../helpers/svg_utils';
 export interface SvgImageProps {
   style?: ImageStyle | any;
   fill?: string;
+  width?: number;
+  height?: number;
 }
 export const CalendarIcon = ({
   style,
   fill = DEFAULT_COLOR_THEME,
+  width = 33,
+  height = 32,
 }: SvgImageProps) => {
-  const width = sizeSvg(style?.width, 33);
-  const height = sizeSvg(style?.height, 32);
+  const widthIcon = sizeSvg(width, 33);
+  const heightIcon = sizeSvg(height, 32);
   return (
     <Svg
-      width={width}
-      height={height}
+      width={widthIcon}
+      height={heightIcon}
       viewBox="0 0 33 32"
       fill="none"
       style={style}>
