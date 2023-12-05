@@ -1,5 +1,5 @@
 /* Imports */
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import {
   Modal,
@@ -38,15 +38,17 @@ import {
   getPlaceholderDateFormat,
   parseLocalDateString,
   validateDate,
+  MODAL_CONTENT_WIDTH,
 } from './DatePicker.utils';
 
 // Button from the Etendo UI library
 import { Button } from '../button';
 
 const DatePicker = ({
+  value,
   styleField,
   onChangeText,
-  value,
+  backgroundColor,
   dateFormat = 'MM/DD/YYYY',
   language = 'en-US',
   showCalendar = true,
@@ -71,11 +73,29 @@ const DatePicker = ({
     new Date(selectedDate),
   );
 
-  // Reference for text input
-  const inputRef: any = useRef(null);
+  // Effect to validate and set the selected date
+  useEffect(() => {
+    if (value) {
+      const defaultValue = parseLocalDateString(value, dateFormat);
+      const isValid = validateDate(defaultValue, value, dateFormat);
 
-  // Ref for month list
+      setIsDateValid(isValid);
+      if (isValid) {
+        setSelectedDate(defaultValue);
+        setCurrentMonth(defaultValue.getMonth());
+        setCurrentYear(defaultValue.getFullYear());
+      } else {
+        setSelectedDate(new Date());
+        setCurrentMonth(new Date().getMonth());
+        setCurrentYear(new Date().getFullYear());
+      }
+    }
+  }, [value, dateFormat]);
+
+  // References for the date picker
+  const inputRef: any = useRef(null);
   const monthListRef: any = useRef(null);
+
   // Toggle month selection
   const showMonthSelection = () => {
     if (!isMonthSelection) setDisabledYearSelection(true);
@@ -205,8 +225,8 @@ const DatePicker = ({
         style={styles.list}
         initialScrollIndex={yearList.indexOf(currentYear)}
         getItemLayout={(_, index) => ({
-          length: 43,
-          offset: Platform.OS === AppPlatform.web ? 38 * index : 43.5 * index,
+          length: Platform.OS === AppPlatform.web ? 43 : 30,
+          offset: Platform.OS === AppPlatform.web ? 43 * index : 43 * index,
           index,
         })}
       />
@@ -496,9 +516,14 @@ const DatePicker = ({
             styleField.field,
             styles.inputWrapper,
             !isDateValid && styles.invalidDateInputWrapper,
+            { backgroundColor: backgroundColor },
           ]}>
           <TextInput
-            style={[styles.datePickerInput, disabled && styles.disabledInput]}
+            style={[
+              styles.datePickerInput,
+              disabled && styles.disabledInput,
+              { backgroundColor: backgroundColor },
+            ]}
             value={value}
             placeholder={getPlaceholderDateFormat(dateFormat)}
             placeholderTextColor={NEUTRAL_600}
@@ -513,10 +538,8 @@ const DatePicker = ({
 
           {/* Show calendar icon if showCalendar is true */}
           {showCalendar && (
-            <TouchableOpacity onPress={showPicker}>
-              <CalendarIcon
-                style={[styles.calendarIcon, disabled && { opacity: 0.2 }]}
-              />
+            <TouchableOpacity onPress={showPicker} disabled={disabled}>
+              <CalendarIcon style={disabled && { opacity: 0.2 }} width={25} />
             </TouchableOpacity>
           )}
         </View>
@@ -527,9 +550,6 @@ const DatePicker = ({
           ? {
               style: {
                 display: isPickerShow ? 'flex' : 'none',
-                boxShadow: '0px 1px 1.41px rgba(0, 0, 0, 0.20)',
-                borderRadius: 8,
-                marginTop: 8,
               },
             }
           : {
@@ -542,11 +562,13 @@ const DatePicker = ({
           activeOpacity={1}
           onPress={showPicker}>
           <View
-            style={
+            style={[
+              styles.modalContent,
+              { width: MODAL_CONTENT_WIDTH },
               calendarDirection === 'downwards'
-                ? [styles.modalContent]
-                : [styles.modalContentUpwards, styles.modalContent]
-            }
+                ? null
+                : styles.modalContentUpwards,
+            ]}
             onStartShouldSetResponder={() => true}>
             <View
               style={[

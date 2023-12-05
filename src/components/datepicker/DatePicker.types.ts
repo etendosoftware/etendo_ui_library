@@ -1,3 +1,5 @@
+import { ColorValue } from 'react-native';
+
 // Types for DatePicker component
 export type DayItem = {
   date: Date;
@@ -15,4 +17,5 @@ export interface DatePickerProps {
   value: Date | string | undefined | any;
   showCalendar: boolean | undefined;
   disabled: boolean | undefined;
+  backgroundColor: ColorValue;
 }
