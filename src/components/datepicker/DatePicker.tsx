@@ -105,6 +105,8 @@ const DatePicker = ({
         setIsPickerShow(false);
       }
     };
+
+    let window: any;
     if (Platform.OS === AppPlatform.web) {
       window.addEventListener('scroll', handleScroll, true);
     }
