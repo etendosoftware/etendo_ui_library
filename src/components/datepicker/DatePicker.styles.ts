@@ -36,9 +36,9 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: Platform.OS === AppPlatform.web ? 8 : 20,
     paddingHorizontal: 16,
     backgroundColor: NEUTRAL_50,
+    height: 40,
   },
   invalidDateInputWrapper: {
     borderColor: DESTRUCTIVE_100,
@@ -50,14 +50,13 @@ export const styles = StyleSheet.create({
     textAlign: 'left',
     fontSize: 18,
     outlineStyle: 'none',
-    height: 20,
     flex: 1,
   },
   inputContainerWrapper: {
     backgroundColor: 'transparent',
-    padding: 6,
-    height: Platform.OS !== AppPlatform.web ? 63 : undefined,
+    padding: 5,
     borderRadius: 8,
+    height: Platform.OS === AppPlatform.web ? undefined : 50,
   },
   monthAndYearContainer: {
     flexDirection: 'row',
@@ -76,9 +75,6 @@ export const styles = StyleSheet.create({
   invalidDateWrapperFocused: {
     backgroundColor: DESTRUCTIVE_10,
   },
-  calendarIcon: {
-    width: 24,
-  },
   modalContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -93,6 +89,8 @@ export const styles = StyleSheet.create({
     borderColor: NEUTRAL_300,
     alignSelf: Platform.OS === AppPlatform.web ? 'flex-end' : 'center',
     width: Platform.OS === AppPlatform.web ? MODAL_CONTENT_WIDTH : '90%',
+    position: 'absolute',
+    zIndex: 10,
     marginTop: Platform.OS === AppPlatform.web ? 8 : undefined,
     boxShadow:
       Platform.OS === AppPlatform.web
@@ -168,6 +166,8 @@ export const styles = StyleSheet.create({
   },
   dayText: {
     color: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   currentDayBorder: {
     borderWidth: 1,
@@ -204,7 +204,6 @@ export const styles = StyleSheet.create({
   },
   modalContentUpwards: {
     position: 'absolute',
-    bottom: 70,
     boxShadow: '0px 0px 5px 0px rgba(0,0,0,0.2)',
   },
   disabledButtonStyle: {

@@ -254,6 +254,7 @@ const InputField = ({
           value={value}
           showCalendar={showCalendar}
           disabled={disabled}
+          backgroundColor={backgroundColor}
         />
       ) : (
         <TouchableOpacity

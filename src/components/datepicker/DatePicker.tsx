@@ -1,5 +1,5 @@
 /* Imports */
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import {
   Modal,
@@ -45,9 +45,10 @@ import {
 import { Button } from '../button';
 
 const DatePicker = ({
+  value,
   styleField,
   onChangeText,
-  value,
+  backgroundColor,
   dateFormat = 'MM/DD/YYYY',
   language = 'en-US',
   showCalendar = true,
@@ -71,6 +72,25 @@ const DatePicker = ({
   const [currentSelectedDate, setTempSelectedDate] = useState<Date>(
     new Date(selectedDate),
   );
+
+  // Effect to validate and set the selected date
+  useEffect(() => {
+    if (value) {
+      const defaultValue = parseLocalDateString(value, dateFormat);
+      const isValid = validateDate(defaultValue, value, dateFormat);
+
+      setIsDateValid(isValid);
+      if (isValid) {
+        setSelectedDate(defaultValue);
+        setCurrentMonth(defaultValue.getMonth());
+        setCurrentYear(defaultValue.getFullYear());
+      } else {
+        setSelectedDate(new Date());
+        setCurrentMonth(new Date().getMonth());
+        setCurrentYear(new Date().getFullYear());
+      }
+    }
+  }, [value, dateFormat]);
 
   // References for the date picker
   const inputRef: any = useRef(null);
@@ -205,8 +225,8 @@ const DatePicker = ({
         style={styles.list}
         initialScrollIndex={yearList.indexOf(currentYear)}
         getItemLayout={(_, index) => ({
-          length: 43,
-          offset: Platform.OS === AppPlatform.web ? 38 * index : 43.5 * index,
+          length: Platform.OS === AppPlatform.web ? 43 : 30,
+          offset: Platform.OS === AppPlatform.web ? 43 * index : 43 * index,
           index,
         })}
       />
@@ -496,9 +516,14 @@ const DatePicker = ({
             styleField.field,
             styles.inputWrapper,
             !isDateValid && styles.invalidDateInputWrapper,
+            { backgroundColor: backgroundColor },
           ]}>
           <TextInput
-            style={[styles.datePickerInput, disabled && styles.disabledInput]}
+            style={[
+              styles.datePickerInput,
+              disabled && styles.disabledInput,
+              { backgroundColor: backgroundColor },
+            ]}
             value={value}
             placeholder={getPlaceholderDateFormat(dateFormat)}
             placeholderTextColor={NEUTRAL_600}
@@ -513,10 +538,8 @@ const DatePicker = ({
 
           {/* Show calendar icon if showCalendar is true */}
           {showCalendar && (
-            <TouchableOpacity onPress={showPicker}>
-              <CalendarIcon
-                style={[styles.calendarIcon, disabled && { opacity: 0.2 }]}
-              />
+            <TouchableOpacity onPress={showPicker} disabled={disabled}>
+              <CalendarIcon style={disabled && { opacity: 0.2 }} width={25} />
             </TouchableOpacity>
           )}
         </View>
