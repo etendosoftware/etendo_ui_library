@@ -11,6 +11,7 @@ import {
   TERTIARY_70,
 } from '../../styles/colors';
 import { AppPlatform } from '../../helpers/utilsTypes';
+import { MODAL_CONTENT_WIDTH } from './DatePicker.utils';
 
 // Height of the calendar
 export const CALENDAR_HEIGHT = 260;
@@ -88,9 +89,15 @@ export const styles = StyleSheet.create({
     backgroundColor: NEUTRAL_50,
     borderRadius: 8,
     elevation: 5,
-    width: Platform.OS === AppPlatform.web ? '100%' : '90%',
     borderWidth: 1,
     borderColor: NEUTRAL_300,
+    alignSelf: Platform.OS === AppPlatform.web ? 'flex-end' : 'center',
+    width: Platform.OS === AppPlatform.web ? MODAL_CONTENT_WIDTH : '90%',
+    marginTop: Platform.OS === AppPlatform.web ? 8 : undefined,
+    boxShadow:
+      Platform.OS === AppPlatform.web
+        ? '0px 1px 1.41px rgba(0, 0, 0, 0.20)'
+        : undefined,
   },
   header: {
     flexDirection: 'row',
