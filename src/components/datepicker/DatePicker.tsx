@@ -40,6 +40,8 @@ import {
   parseLocalDateString,
   validateDate,
   MODAL_CONTENT_WIDTH,
+  MODAL_CONTENT_TOP_POSITION,
+  MODAL_POSITION_TOP,
 } from './DatePicker.utils';
 
 // Button from the Etendo UI library
@@ -74,8 +76,8 @@ const DatePicker = ({
     new Date(selectedDate),
   );
   const [modalPosition, setModalPosition] = useState<any>({
-    top: undefined,
-    bottom: undefined,
+    top: 0,
+    bottom: 0,
   });
 
   // Effect to validate and set the selected date
@@ -96,6 +98,16 @@ const DatePicker = ({
       }
     }
   }, [value, dateFormat]);
+
+  // Effect to close the date picker when the user scrolls
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isPickerShow) {
+        setIsPickerShow(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, true);
+  }, [isPickerShow]);
 
   // References for the date picker
   const inputRef: any = useRef(null);
@@ -298,7 +310,7 @@ const DatePicker = ({
             setModalPosition({ top: pageY + height, left: modalLeftPosition });
           } else {
             setModalPosition({
-              top: pageY - CALENDAR_HEIGHT - 155,
+              top: pageY - CALENDAR_HEIGHT - MODAL_CONTENT_TOP_POSITION,
               left: modalLeftPosition,
             });
           }
@@ -566,12 +578,14 @@ const DatePicker = ({
               styles.modalContent,
               { width: MODAL_CONTENT_WIDTH },
               {
-                position: 'absolute',
-                top: modalPosition.top + 5,
-                left: modalPosition.left,
+                position:
+                  Platform.OS === AppPlatform.web ? 'absolute' : 'relative',
+                top:
+                  Platform.OS === AppPlatform.web &&
+                  modalPosition.top + MODAL_POSITION_TOP,
+                left: Platform.OS === AppPlatform.web && modalPosition.left,
               },
-            ]}
-            onStartShouldSetResponder={() => true}>
+            ]}>
             <View
               style={[
                 styles.header,

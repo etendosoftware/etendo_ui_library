@@ -1,6 +1,8 @@
 /* Utils for DatePicker component */
 // Constants
 export const MODAL_CONTENT_WIDTH = 360;
+export const MODAL_CONTENT_TOP_POSITION = 155;
+export const MODAL_POSITION_TOP = 5;
 
 // Format date based on language
 export const formatterDate = (date: Date, format: string) => {
