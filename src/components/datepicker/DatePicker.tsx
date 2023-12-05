@@ -65,7 +65,6 @@ const DatePicker = ({
   const [selectedDate, setSelectedDate] = useState<any>(new Date());
   const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
   const [isYearSelection, setIsYearSelection] = useState<boolean>(false);
-  const [calendarDirection, setCalendarDirection] = useState('downwards');
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [disabledMonthSelection, setDisabledMonthSelection] =
@@ -106,7 +105,9 @@ const DatePicker = ({
         setIsPickerShow(false);
       }
     };
-    window.addEventListener('scroll', handleScroll, true);
+    if (Platform.OS === AppPlatform.web) {
+      window.addEventListener('scroll', handleScroll, true);
+    }
   }, [isPickerShow]);
 
   // References for the date picker
