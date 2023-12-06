@@ -1,6 +1,13 @@
 // Imports
 import React, { ReactNode, useEffect, useState } from 'react';
-import { Text, View, Modal as ModalRN, ViewStyle } from 'react-native';
+import {
+  Text,
+  View,
+  Modal as ModalRN,
+  ViewStyle,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import { styles as modalStyles } from './styles';
 import { Button } from '../button';
 import { CancelIcon } from '../../assets/images/icons';
@@ -47,44 +54,49 @@ const Modal = ({
       transparent={true}
       visible={visible}
       onRequestClose={() => setVisible(false)}>
-      <View style={modalStyles.modalContainer}>
-        <View
-          style={[
-            modalStyles.modalContent,
-            fullScreen && modalStyles.modalFullScreen,
-          ]}>
-          <View style={modalStyles.headerContainer}>
-            <Text
-              numberOfLines={1}
-              style={modalStyles.modalTitle}
-              ellipsizeMode="tail">
-              {title}
-            </Text>
-            {subtitle && (
+      <TouchableOpacity
+        style={modalStyles.modalContainer}
+        activeOpacity={1}
+        onPressOut={() => setVisible(false)}>
+        <TouchableWithoutFeedback>
+          <View
+            style={[
+              modalStyles.modalContent,
+              fullScreen && modalStyles.modalFullScreen,
+            ]}>
+            <View style={modalStyles.headerContainer}>
               <Text
-                numberOfLines={2}
-                style={modalStyles.modalSubtitle}
+                numberOfLines={1}
+                style={modalStyles.modalTitle}
                 ellipsizeMode="tail">
-                {subtitle}
+                {title}
               </Text>
+              {subtitle && (
+                <Text
+                  numberOfLines={2}
+                  style={modalStyles.modalSubtitle}
+                  ellipsizeMode="tail">
+                  {subtitle}
+                </Text>
+              )}
+            </View>
+            {children && (
+              <View style={modalStyles.childrenModalContainer}>{children}</View>
             )}
+            <View style={modalStyles.buttonModalContainer}>
+              {buttonsToDisplay.length && (
+                <ButtonContainer
+                  components={buttonsToDisplay}
+                  style={{
+                    justifyContent: 'flex-end',
+                    paddingVertical: 0,
+                  }}
+                />
+              )}
+            </View>
           </View>
-          {children && (
-            <View style={modalStyles.childrenModalContainer}>{children}</View>
-          )}
-          <View style={modalStyles.buttonModalContainer}>
-            {buttonsToDisplay.length && (
-              <ButtonContainer
-                components={buttonsToDisplay}
-                style={{
-                  justifyContent: 'flex-end',
-                  paddingVertical: 0,
-                }}
-              />
-            )}
-          </View>
-        </View>
-      </View>
+        </TouchableWithoutFeedback>
+      </TouchableOpacity>
     </ModalRN>
   );
 };
