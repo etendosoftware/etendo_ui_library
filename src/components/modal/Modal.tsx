@@ -1,4 +1,3 @@
-// Imports
 import React, { ReactNode, useEffect, useState } from 'react';
 import {
   Text,
@@ -7,36 +6,37 @@ import {
   ViewStyle,
   TouchableOpacity,
   TouchableWithoutFeedback,
+  ScrollView,
 } from 'react-native';
 import { styles as modalStyles } from './styles';
 import { Button } from '../button';
-import { CancelIcon } from '../../assets/images/icons';
 import { ButtonContainer } from '../containers';
+
 interface ModalProps {
-  title: string;
-  subtitle?: string;
-  children?: ReactNode;
   buttons?: ReactNode[];
-  styles?: ViewStyle;
+  children?: ReactNode;
+  disableTapOutside?: boolean;
   fullScreen?: boolean;
   imageHeader?: ReactNode;
-  visible: boolean;
-  setVisible: any;
-  disableTapOutside?: boolean;
   labelCloseButton: string;
+  setVisible: any;
+  styles?: ViewStyle;
+  subtitle?: string;
+  title: string;
+  visible: boolean;
 }
 
 const Modal = ({
-  title,
-  subtitle,
-  visible,
-  setVisible,
   buttons,
   children,
-  fullScreen = false,
   disableTapOutside = false,
-  labelCloseButton,
+  fullScreen = false,
   imageHeader,
+  labelCloseButton,
+  setVisible,
+  subtitle,
+  title,
+  visible,
 }: ModalProps) => {
   const [buttonsToDisplay, setButtonsToDisplay] = useState<ReactNode[]>([
     <Button
@@ -90,7 +90,13 @@ const Modal = ({
               )}
             </View>
             {children && (
-              <View style={modalStyles.childrenModalContainer}>{children}</View>
+              <TouchableOpacity
+                activeOpacity={1}
+                style={modalStyles.childrenModalContainer}>
+                <ScrollView style={{ flexGrow: 0 }}>
+                  <View onStartShouldSetResponder={() => true}>{children}</View>
+                </ScrollView>
+              </TouchableOpacity>
             )}
             <View style={modalStyles.buttonModalContainer}>
               {buttonsToDisplay.length && (
