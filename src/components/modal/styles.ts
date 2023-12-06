@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { PRIMARY_100 } from '../../styles/colors';
+import { NEUTRAL_800, PRIMARY_100 } from '../../styles/colors';
 import { isDeviceTablet } from '../../helpers/table_utils';
 
 export const styles = StyleSheet.create({
@@ -23,12 +23,36 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
-  modalText: {
-    fontSize: 29,
-    fontWeight: '600',
+  modalFullScreen: {
+    width: '100%',
+    height: '100%',
+    maxHeight: '100%',
+    maxWidth: '100%',
+  },
+  headerContainer: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'column',
+
+    width: '100%',
+  },
+  modalTitle: {
+    fontSize: 22,
+    fontWeight: '500',
     textAlign: 'center',
     color: PRIMARY_100,
     maxWidth: '95%',
+    alignSelf: 'flex-start',
+    paddingBottom: 12,
+  },
+  modalSubtitle: {
+    fontSize: 14,
+    fontWeight: '500',
+    textAlign: 'left',
+    color: NEUTRAL_800,
+    maxWidth: '95%',
+    alignSelf: 'flex-start',
+    paddingBottom: 16,
   },
   childrenModalContainer: {
     display: 'flex',
@@ -41,7 +65,6 @@ export const styles = StyleSheet.create({
   buttonModalContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    // alignItems: 'flex-end',
   },
   buttonContainer: {
     width: isDeviceTablet ? '40%' : '45%',

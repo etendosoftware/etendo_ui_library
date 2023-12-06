@@ -28,6 +28,7 @@ import { HamburgerIcon } from './HamburgerIcon';
 import { HidePasswordIcon } from './HidePasswordIcon';
 import { HomeIcon } from './HomeIcon';
 import { ItemsIcon } from './ItemsIcon';
+import { MaximizeIcon } from './MaximizeIcon';
 import { MenuIcon } from './MenuIcon';
 import { MoneyIcon } from './MoneyIcon';
 import { MoreIcon } from './MoreIcon';
@@ -86,6 +87,7 @@ export {
   HidePasswordIcon,
   HomeIcon,
   ItemsIcon,
+  MaximizeIcon,
   MenuIcon,
   MoneyIcon,
   MoreIcon,
