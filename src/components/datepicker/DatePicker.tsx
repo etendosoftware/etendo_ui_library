@@ -47,6 +47,9 @@ import {
 // Button from the Etendo UI library
 import { Button } from '../button';
 
+// Declare window object for web
+declare let window: any;
+
 const DatePicker = ({
   value,
   styleField,
