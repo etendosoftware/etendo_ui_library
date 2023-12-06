@@ -38,10 +38,11 @@ import {
   generateYearList,
   getPlaceholderDateFormat,
   parseLocalDateString,
-  validateDate,
   MODAL_CONTENT_WIDTH,
   MODAL_CONTENT_TOP_POSITION,
   MODAL_POSITION_TOP,
+  convertDateToEtendoERPFormat,
+  validateDate,
 } from './DatePicker.utils';
 
 // Button from the Etendo UI library
@@ -65,7 +66,9 @@ const DatePicker = ({
   const [isDateValid, setIsDateValid] = useState<boolean>(true);
   const [isMonthSelection, setIsMonthSelection] = useState(false);
   const [isPickerShow, setIsPickerShow] = useState<boolean>(false);
-  const [selectedDate, setSelectedDate] = useState<any>(new Date());
+  const [selectedDate, setSelectedDate] = useState<any>(
+    value ? new Date(value) : undefined,
+  );
   const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
   const [isYearSelection, setIsYearSelection] = useState<boolean>(false);
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
@@ -99,26 +102,35 @@ const DatePicker = ({
         setCurrentYear(new Date().getFullYear());
       }
     }
-  }, [value, dateFormat]);
+  }, []);
 
   // Effect to close the date picker when the user scrolls
+
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScroll = (event: any) => {
       if (isPickerShow) {
-        setIsPickerShow(false);
+        if (
+          calendarRef.current &&
+          !calendarRef.current.contains(event.target)
+        ) {
+          setIsPickerShow(false);
+        }
       }
     };
 
-    if (
-      Platform.OS === AppPlatform.web &&
-      window &&
-      typeof window !== 'undefined'
-    ) {
+    if (Platform.OS === AppPlatform.web) {
       window.addEventListener('scroll', handleScroll, true);
     }
+
+    return () => {
+      if (Platform.OS === AppPlatform.web) {
+        window.removeEventListener('scroll', handleScroll, true);
+      }
+    };
   }, [isPickerShow]);
 
   // References for the date picker
+  const calendarRef: any = useRef(null);
   const inputRef: any = useRef(null);
   const monthListRef: any = useRef(null);
 
@@ -344,7 +356,7 @@ const DatePicker = ({
       setIsPickerShow(!isPickerShow);
 
       // If date is selected, set current month and year to selected date
-      if (!isPickerShow && selectedDate) {
+      if (!isPickerShow && selectedDate instanceof Date) {
         setCurrentMonth(selectedDate.getMonth());
         setCurrentYear(selectedDate.getFullYear());
       }
@@ -368,7 +380,7 @@ const DatePicker = ({
   // Function for the button 'Accept'
   const onAccept = () => {
     if (selectedDate) {
-      onChangeText(formatterDate(selectedDate, dateFormat));
+      onChangeText(convertDateToEtendoERPFormat(selectedDate));
     }
     setIsPickerShow(false);
   };
@@ -393,7 +405,7 @@ const DatePicker = ({
     }
 
     // Update the date value as user types
-    onChangeText(processedText);
+    setSelectedDate(processedText);
 
     // Convert to date object if the date is complete and verify if it's valid
     if (processedText.length === 10) {
@@ -434,16 +446,11 @@ const DatePicker = ({
 
   // Handle blur event on text input
   const handleBlur = () => {
-    const formattedText = formatInputText(value);
-    const dateObject = parseLocalDateString(formattedText, dateFormat);
+    const isValidSelectedDate = isDateValid;
+    setIsDateValid(isValidSelectedDate);
 
-    const isValid = validateDate(dateObject, formattedText, dateFormat);
-    setIsDateValid(isValid);
-
-    if (isValid) {
-      setSelectedDate(dateObject);
-    } else {
-      setSelectedDate(undefined);
+    if (onChangeText) {
+      onChangeText(convertDateToEtendoERPFormat(selectedDate));
     }
   };
 
@@ -552,7 +559,11 @@ const DatePicker = ({
               disabled && styles.disabledInput,
               { backgroundColor: backgroundColor },
             ]}
-            value={value}
+            value={
+              selectedDate instanceof Date
+                ? formatterDate(selectedDate, dateFormat)
+                : selectedDate
+            }
             placeholder={getPlaceholderDateFormat(dateFormat)}
             placeholderTextColor={NEUTRAL_600}
             editable={!disabled}
@@ -577,7 +588,8 @@ const DatePicker = ({
         animationType="fade"
         transparent={true}
         visible={isPickerShow}
-        onRequestClose={showPicker}>
+        onRequestClose={showPicker}
+        ref={calendarRef}>
         <TouchableOpacity
           style={styles.modalContainer}
           activeOpacity={1}

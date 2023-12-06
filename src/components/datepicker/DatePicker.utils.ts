@@ -4,9 +4,23 @@ export const MODAL_CONTENT_WIDTH = 360;
 export const MODAL_CONTENT_TOP_POSITION = 155;
 export const MODAL_POSITION_TOP = 5;
 
+// Convert date to compatible format with Etendo ERP
+export const convertDateToEtendoERPFormat = (inputDate: Date) => {
+  const date = new Date(inputDate);
+
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  const hours = date.getHours().toString().padStart(2, '0');
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+  const seconds = date.getSeconds().toString().padStart(2, '0');
+
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.0`;
+};
+
 // Format date based on language
 export const formatterDate = (date: Date, format: string) => {
-  if (date !== undefined) {
+  if (date instanceof Date) {
     const day = date.getDate().toString().padStart(2, '0');
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const year = date.getFullYear();
@@ -17,7 +31,7 @@ export const formatterDate = (date: Date, format: string) => {
     } else if (format === 'DD/MM/YYYY') {
       return `${day}/${month}/${year}`;
     } else {
-      // Default format - // MM/DD/YYYY
+      // Default format - MM/DD/YYYY
       return `${month}/${day}/${year}`;
     }
   }
@@ -115,9 +129,9 @@ export const validateDate = (
   format: string,
 ) => {
   if (
-    isNaN(dateObject.getTime()) ||
-    dateObject.getFullYear() < 1000 ||
-    dateObject.getFullYear() > 9999
+    !dateObject ||
+    new Date(dateObject).getFullYear() < 1000 ||
+    new Date(dateObject).getFullYear() > 9999
   ) {
     return false;
   }
@@ -152,4 +166,43 @@ export const validateDate = (
   }
 
   return true;
+};
+
+// Check if the date is valid
+export const isDateValid = (date: Date) => {
+  // Check if the date is a valid Date object
+  if (Object.prototype.toString.call(date) === '[object Date]') {
+    // Check if the date is valid
+    if (isNaN(date.getTime())) {
+      return false;
+    } else {
+      return true;
+    }
+  } else {
+    // The input is not a Date object
+    return false;
+  }
+};
+
+// Format the text input value
+export const formatInputText = (text: string) => {
+  if (!text) {
+    return '';
+  }
+
+  // Remove all non-numeric characters
+  let processedText = text.replace(/[^0-9]/g, '');
+
+  // Limit the length to 8 characters
+  processedText = processedText.slice(0, 8);
+
+  // Format the date
+  if (processedText.length > 2) {
+    processedText = processedText.slice(0, 2) + '/' + processedText.slice(2);
+  }
+  if (processedText.length > 5) {
+    processedText = processedText.slice(0, 5) + '/' + processedText.slice(5);
+  }
+
+  return processedText;
 };
