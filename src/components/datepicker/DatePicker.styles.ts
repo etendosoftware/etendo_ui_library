@@ -164,8 +164,7 @@ export const styles = StyleSheet.create({
   },
   dayText: {
     color: 'black',
-    justifyContent: 'center',
-    alignItems: 'center',
+    textAlign: 'center',
   },
   currentDayBorder: {
     borderWidth: 1,
