@@ -188,10 +188,6 @@ const DatePicker = ({
       selectedDate,
     );
     setSelectedDate(adjustedDate);
-
-    if (onChangeText) {
-      onChangeText(formatterDate(adjustedDate, dateFormat));
-    }
   };
 
   // Set current year and update the selected date
@@ -201,10 +197,6 @@ const DatePicker = ({
 
     const adjustedDate = adjustDateForMonth(year, currentMonth, selectedDate);
     setSelectedDate(adjustedDate);
-
-    if (onChangeText) {
-      onChangeText(formatterDate(adjustedDate, dateFormat));
-    }
   };
 
   // Render item for month selection
@@ -373,7 +365,7 @@ const DatePicker = ({
     setIsDateValid(isValidDate);
 
     if (isValidDate && onChangeText) {
-      onChangeText(formattedDate);
+      onChangeText(convertDateToEtendoERPFormat(date));
     }
   };
 
