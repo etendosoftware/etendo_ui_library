@@ -19,8 +19,10 @@ interface ModalProps {
   buttons?: ReactNode[];
   styles?: ViewStyle;
   fullScreen?: boolean;
+  imageHeader?: ReactNode;
   visible: boolean;
   setVisible: any;
+  disableTapOutside?: boolean;
   labelCloseButton: string;
 }
 
@@ -32,7 +34,9 @@ const Modal = ({
   buttons,
   children,
   fullScreen = false,
+  disableTapOutside = false,
   labelCloseButton,
+  imageHeader,
 }: ModalProps) => {
   const [buttonsToDisplay, setButtonsToDisplay] = useState<ReactNode[]>([
     <Button
@@ -57,7 +61,7 @@ const Modal = ({
       <TouchableOpacity
         style={modalStyles.modalContainer}
         activeOpacity={1}
-        onPressOut={() => setVisible(false)}>
+        onPressOut={() => !disableTapOutside && setVisible(false)}>
         <TouchableWithoutFeedback>
           <View
             style={[
@@ -65,6 +69,11 @@ const Modal = ({
               fullScreen && modalStyles.modalFullScreen,
             ]}>
             <View style={modalStyles.headerContainer}>
+              {imageHeader && (
+                <View style={modalStyles.imageHeaderContainer}>
+                  {imageHeader}
+                </View>
+              )}
               <Text
                 numberOfLines={1}
                 style={modalStyles.modalTitle}

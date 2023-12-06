@@ -33,8 +33,13 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'column',
-
     width: '100%',
+  },
+  imageHeaderContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingBottom: 16,
   },
   modalTitle: {
     fontSize: 22,
