@@ -22,8 +22,8 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     height: 'auto',
     justifyContent: 'space-between',
-    maxHeight: '70%',
-    maxWidth: isDeviceTablet ? '90%' : '95%',
+    maxHeight: isDeviceTablet ? '100%' : '85%',
+    maxWidth: '85%',
     paddingHorizontal: 20,
     paddingVertical: 30,
     width: 'auto',
@@ -82,5 +82,27 @@ export const styles = StyleSheet.create({
   },
   buttonContainer: {
     width: isDeviceTablet ? '40%' : '45%',
+  },
+});
+export const stylesMaximized = StyleSheet.create({
+  headerContainer: {
+    ...styles.headerContainer,
+    flexDirection: 'row',
+    paddingTop: 16,
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  titleCloseContainer: {
+    flexDirection: 'row',
+  },
+  modalTitle: {
+    ...styles.modalTitle,
+    paddingBottom: 0,
+    alignSelf: 'center',
+  },
+  childrenModalContainer: {
+    ...styles.childrenModalContainer,
+    borderBottomWidth: 0,
+    maxHeight: '90%',
   },
 });

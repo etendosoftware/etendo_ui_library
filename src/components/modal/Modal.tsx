@@ -8,7 +8,7 @@ import {
   TouchableWithoutFeedback,
   ScrollView,
 } from 'react-native';
-import { styles as modalStyles } from './styles';
+import { styles as modalStyles, stylesMaximized } from './styles';
 import { Button } from '../button';
 import { ButtonContainer } from '../containers';
 import { CancelIcon } from '../../assets/images/icons';
@@ -91,7 +91,7 @@ const Modal = ({
         </TouchableOpacity>
       )}
       <View style={modalStyles.buttonModalContainer}>
-        {buttons?.length && (
+        {buttonsToDisplay?.length && (
           <ButtonContainer
             components={buttonsToDisplay}
             style={{
@@ -106,58 +106,34 @@ const Modal = ({
 
   const MaximizedView = () => (
     <View style={{ justifyContent: 'flex-start' }}>
-      <View
-        style={[
-          modalStyles.headerContainer,
-          {
-            flexDirection: 'row',
-            paddingTop: 16,
-            justifyContent: 'space-between',
-          },
-        ]}>
-        <View
-          style={{
-            flexDirection: 'row',
-            width: '100%',
-            justifyContent: 'space-between',
-          }}>
-          <View
-            style={{
-              flexDirection: 'row',
-            }}>
-            <Button
-              typeStyle={'white'}
-              iconLeft={<CancelIcon />}
-              onPress={() => setVisible(false)}
-            />
-            <Text
-              numberOfLines={1}
-              style={[
-                modalStyles.modalTitle,
-                { paddingBottom: 3, alignSelf: 'center' },
-              ]}
-              ellipsizeMode="tail">
-              {title}
-            </Text>
-          </View>
-          {buttonsToDisplay.length && (
-            <ButtonContainer
-              components={[buttonsToDisplay[buttonsToDisplay.length - 1]]}
-              style={{
-                justifyContent: 'flex-end',
-                paddingVertical: 0,
-              }}
-            />
-          )}
+      <View style={stylesMaximized.headerContainer}>
+        <View style={stylesMaximized.titleCloseContainer}>
+          <Button
+            typeStyle={'white'}
+            iconLeft={<CancelIcon />}
+            onPress={() => setVisible(false)}
+          />
+          <Text
+            numberOfLines={1}
+            style={stylesMaximized.modalTitle}
+            ellipsizeMode="tail">
+            {title}
+          </Text>
         </View>
+        {buttonsToDisplay.length && (
+          <ButtonContainer
+            components={[buttonsToDisplay[buttonsToDisplay.length - 1]]}
+            style={{
+              justifyContent: 'flex-end',
+              paddingVertical: 0,
+            }}
+          />
+        )}
       </View>
       {children && (
         <TouchableOpacity
           activeOpacity={1}
-          style={[
-            modalStyles.childrenModalContainer,
-            { borderBottomWidth: 0, maxHeight: '90%' },
-          ]}>
+          style={stylesMaximized.childrenModalContainer}>
           <ScrollView style={{ flexGrow: 0 }}>
             <View onStartShouldSetResponder={() => true}>{children}</View>
           </ScrollView>
