@@ -379,7 +379,6 @@ const DatePicker = ({
 
   // Function for the button 'Cancel'
   const onCancel = () => {
-    setSelectedDate(currentSelectedDate);
     setIsPickerShow(false);
   };
 
