@@ -77,9 +77,6 @@ const DatePicker = ({
     useState<boolean>(false);
   const [disabledYearSelection, setDisabledYearSelection] =
     useState<boolean>(false);
-  const [currentSelectedDate, setTempSelectedDate] = useState<Date>(
-    new Date(selectedDate),
-  );
   const [modalPosition, setModalPosition] = useState<any>({
     top: 0,
     bottom: 0,
@@ -360,7 +357,6 @@ const DatePicker = ({
     const formattedDate = formatterDate(date, dateFormat);
     const isValidDate = validateDate(date, formattedDate, dateFormat);
 
-    setTempSelectedDate(date);
     setSelectedDate(date);
     setIsDateValid(isValidDate);
 
