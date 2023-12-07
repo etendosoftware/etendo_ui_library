@@ -23,6 +23,7 @@ import {
 import {
   NEUTRAL_300,
   NEUTRAL_400,
+  NEUTRAL_50,
   NEUTRAL_600,
   PRIMARY_100,
 } from '../../styles/colors';
@@ -37,41 +38,49 @@ import {
   generateYearList,
   getPlaceholderDateFormat,
   parseLocalDateString,
-  validateDate,
   MODAL_CONTENT_WIDTH,
+  MODAL_CONTENT_TOP_POSITION,
+  MODAL_POSITION_TOP,
+  convertDateToEtendoERPFormat,
+  validateDate,
 } from './DatePicker.utils';
 
 // Button from the Etendo UI library
 import { Button } from '../button';
 
+// Declare window object for web
+declare let window: any;
+
 const DatePicker = ({
   value,
   styleField,
   onChangeText,
-  backgroundColor,
-  dateFormat = 'MM/DD/YYYY',
   language = 'en-US',
-  showCalendar = true,
+  dateFormat = 'MM/DD/YYYY',
   disabled = false,
+  showCalendar = true,
+  backgroundColor = NEUTRAL_50,
 }: DatePickerProps) => {
   // states for the date picker
   const [hoveredDay, setHoveredDay] = useState<any>(null);
   const [isDateValid, setIsDateValid] = useState<boolean>(true);
   const [isMonthSelection, setIsMonthSelection] = useState(false);
   const [isPickerShow, setIsPickerShow] = useState<boolean>(false);
-  const [selectedDate, setSelectedDate] = useState<any>(new Date());
+  const [selectedDate, setSelectedDate] = useState<any>(
+    value ? new Date(value) : undefined,
+  );
   const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
   const [isYearSelection, setIsYearSelection] = useState<boolean>(false);
-  const [calendarDirection, setCalendarDirection] = useState('downwards');
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [disabledMonthSelection, setDisabledMonthSelection] =
     useState<boolean>(false);
   const [disabledYearSelection, setDisabledYearSelection] =
     useState<boolean>(false);
-  const [currentSelectedDate, setTempSelectedDate] = useState<Date>(
-    new Date(selectedDate),
-  );
+  const [modalPosition, setModalPosition] = useState<any>({
+    top: 0,
+    bottom: 0,
+  });
 
   // Effect to validate and set the selected date
   useEffect(() => {
@@ -90,9 +99,35 @@ const DatePicker = ({
         setCurrentYear(new Date().getFullYear());
       }
     }
-  }, [value, dateFormat]);
+  }, []);
+
+  // Effect to close the date picker when the user scrolls
+
+  useEffect(() => {
+    const handleScroll = (event: any) => {
+      if (isPickerShow) {
+        if (
+          calendarRef.current &&
+          !calendarRef.current.contains(event.target)
+        ) {
+          setIsPickerShow(false);
+        }
+      }
+    };
+
+    if (Platform.OS === AppPlatform.web) {
+      window.addEventListener('scroll', handleScroll, true);
+    }
+
+    return () => {
+      if (Platform.OS === AppPlatform.web) {
+        window.removeEventListener('scroll', handleScroll, true);
+      }
+    };
+  }, [isPickerShow]);
 
   // References for the date picker
+  const calendarRef: any = useRef(null);
   const inputRef: any = useRef(null);
   const monthListRef: any = useRef(null);
 
@@ -150,10 +185,6 @@ const DatePicker = ({
       selectedDate,
     );
     setSelectedDate(adjustedDate);
-
-    if (onChangeText) {
-      onChangeText(formatterDate(adjustedDate, dateFormat));
-    }
   };
 
   // Set current year and update the selected date
@@ -163,10 +194,6 @@ const DatePicker = ({
 
     const adjustedDate = adjustDateForMonth(year, currentMonth, selectedDate);
     setSelectedDate(adjustedDate);
-
-    if (onChangeText) {
-      onChangeText(formatterDate(adjustedDate, dateFormat));
-    }
   };
 
   // Render item for month selection
@@ -286,11 +313,16 @@ const DatePicker = ({
         ) => {
           const windowHeight = Dimensions.get('window').height;
           const spaceBelow = windowHeight - pageY - height;
+          let modalLeftPosition = pageX + width - MODAL_CONTENT_WIDTH;
+          modalLeftPosition = Math.max(modalLeftPosition, 0);
 
-          if (spaceBelow < CALENDAR_HEIGHT) {
-            setCalendarDirection('upwards');
+          if (spaceBelow >= CALENDAR_HEIGHT) {
+            setModalPosition({ top: pageY + height, left: modalLeftPosition });
           } else {
-            setCalendarDirection('downwards');
+            setModalPosition({
+              top: pageY - CALENDAR_HEIGHT - MODAL_CONTENT_TOP_POSITION,
+              left: modalLeftPosition,
+            });
           }
         },
       );
@@ -313,7 +345,7 @@ const DatePicker = ({
       setIsPickerShow(!isPickerShow);
 
       // If date is selected, set current month and year to selected date
-      if (!isPickerShow && selectedDate) {
+      if (!isPickerShow && selectedDate instanceof Date) {
         setCurrentMonth(selectedDate.getMonth());
         setCurrentYear(selectedDate.getFullYear());
       }
@@ -325,26 +357,24 @@ const DatePicker = ({
     const formattedDate = formatterDate(date, dateFormat);
     const isValidDate = validateDate(date, formattedDate, dateFormat);
 
-    setTempSelectedDate(date);
     setSelectedDate(date);
     setIsDateValid(isValidDate);
 
     if (isValidDate && onChangeText) {
-      onChangeText(formattedDate);
+      onChangeText(convertDateToEtendoERPFormat(date));
     }
   };
 
   // Function for the button 'Accept'
   const onAccept = () => {
     if (selectedDate) {
-      onChangeText(formatterDate(selectedDate, dateFormat));
+      onChangeText(convertDateToEtendoERPFormat(selectedDate));
     }
     setIsPickerShow(false);
   };
 
   // Function for the button 'Cancel'
   const onCancel = () => {
-    setSelectedDate(currentSelectedDate);
     setIsPickerShow(false);
   };
 
@@ -362,7 +392,7 @@ const DatePicker = ({
     }
 
     // Update the date value as user types
-    onChangeText(processedText);
+    setSelectedDate(processedText);
 
     // Convert to date object if the date is complete and verify if it's valid
     if (processedText.length === 10) {
@@ -403,16 +433,11 @@ const DatePicker = ({
 
   // Handle blur event on text input
   const handleBlur = () => {
-    const formattedText = formatInputText(value);
-    const dateObject = parseLocalDateString(formattedText, dateFormat);
+    const isValidSelectedDate = isDateValid;
+    setIsDateValid(isValidSelectedDate);
 
-    const isValid = validateDate(dateObject, formattedText, dateFormat);
-    setIsDateValid(isValid);
-
-    if (isValid) {
-      setSelectedDate(dateObject);
-    } else {
-      setSelectedDate(undefined);
+    if (onChangeText) {
+      onChangeText(convertDateToEtendoERPFormat(selectedDate));
     }
   };
 
@@ -499,9 +524,6 @@ const DatePicker = ({
     );
   };
 
-  // Conditional component based on platform
-  const PlatformComponent: any = Platform.OS === AppPlatform.web ? View : Modal;
-
   return (
     <View style={styles.container}>
       <View
@@ -524,7 +546,11 @@ const DatePicker = ({
               disabled && styles.disabledInput,
               { backgroundColor: backgroundColor },
             ]}
-            value={value}
+            value={
+              selectedDate instanceof Date
+                ? formatterDate(selectedDate, dateFormat)
+                : selectedDate
+            }
             placeholder={getPlaceholderDateFormat(dateFormat)}
             placeholderTextColor={NEUTRAL_600}
             editable={!disabled}
@@ -545,31 +571,29 @@ const DatePicker = ({
         </View>
       </View>
 
-      <PlatformComponent
-        {...(Platform.OS === AppPlatform.web
-          ? {
-              style: {
-                display: isPickerShow ? 'flex' : 'none',
-              },
-            }
-          : {
-              transparent: true,
-              visible: isPickerShow,
-              onRequestClose: showPicker,
-            })}>
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={isPickerShow}
+        onRequestClose={showPicker}
+        ref={calendarRef}>
         <TouchableOpacity
-          style={!(Platform.OS === AppPlatform.web) && styles.modalContainer}
+          style={styles.modalContainer}
           activeOpacity={1}
           onPress={showPicker}>
           <View
             style={[
               styles.modalContent,
               { width: MODAL_CONTENT_WIDTH },
-              calendarDirection === 'downwards'
-                ? null
-                : styles.modalContentUpwards,
-            ]}
-            onStartShouldSetResponder={() => true}>
+              {
+                position:
+                  Platform.OS === AppPlatform.web ? 'absolute' : 'relative',
+                top:
+                  Platform.OS === AppPlatform.web &&
+                  modalPosition.top + MODAL_POSITION_TOP,
+                left: Platform.OS === AppPlatform.web && modalPosition.left,
+              },
+            ]}>
             <View
               style={[
                 styles.header,
@@ -654,7 +678,7 @@ const DatePicker = ({
             </View>
           </View>
         </TouchableOpacity>
-      </PlatformComponent>
+      </Modal>
     </View>
   );
 };

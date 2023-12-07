@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { inputStyleVariants, inputVariants, styles } from './Input.style';
 import { InputProps } from './Input.types';
 import { InputTitle, InputField, InputHelperText } from './index';
+import { NEUTRAL_50 } from '../../styles/colors';
 
 const Input = ({
   value,
@@ -17,7 +18,7 @@ const Input = ({
   keyboardType,
   displayKey,
   dataPicker,
-  backgroundColor,
+  backgroundColor = NEUTRAL_50,
   showOptionsAmount,
   showSearchInPicker,
   height,
