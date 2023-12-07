@@ -2,30 +2,14 @@ import React, { ReactNode, useEffect, useState } from 'react';
 import {
   View,
   Modal as ModalRN,
-  ViewStyle,
   TouchableOpacity,
   TouchableWithoutFeedback,
 } from 'react-native';
 import { Button } from '../button';
 import MaximizedView from './components/maximizedView/MaximizedView';
 import MinimizedView from './components/minimizedView/MinimizedView';
-import { styles } from './styles';
-
-interface ModalProps {
-  buttons?: ReactNode[];
-  children?: ReactNode;
-  disableTapOutside?: boolean;
-  fullScreen?: boolean;
-  handleSave?: any;
-  imageHeader?: ReactNode;
-  labelCloseButton: string;
-  labelSaveButton?: string;
-  setVisible: any;
-  styles?: ViewStyle;
-  subtitle?: string;
-  title: string;
-  visible: boolean;
-}
+import { styles } from './Modal.styles';
+import { IModalProps } from './Modal.types';
 
 const Modal = ({
   buttons,
@@ -40,7 +24,7 @@ const Modal = ({
   subtitle,
   title,
   visible,
-}: ModalProps) => {
+}: IModalProps) => {
   const [buttonsToDisplay, setButtonsToDisplay] = useState<ReactNode[]>([
     <Button
       typeStyle={'white'}

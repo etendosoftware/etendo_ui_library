@@ -2,14 +2,7 @@ import React from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { ButtonContainer } from '../../../containers';
 import { styles } from './MinimizedView.styles';
-
-interface MinimizedViewProps {
-  buttonsToDisplay?: React.ReactNode[];
-  children?: React.ReactNode;
-  imageHeader?: React.ReactNode;
-  subtitle?: string;
-  title: string;
-}
+import { IMinimizedViewProps } from './MinimizedView.types';
 
 const MinimizedView = ({
   buttonsToDisplay,
@@ -17,7 +10,7 @@ const MinimizedView = ({
   imageHeader,
   subtitle,
   title,
-}: MinimizedViewProps) => {
+}: IMinimizedViewProps) => {
   return (
     <>
       <View style={styles.headerContainer}>

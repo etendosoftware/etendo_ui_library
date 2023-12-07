@@ -4,22 +4,14 @@ import { ButtonContainer } from '../../../containers';
 import { styles } from './MaximizedView.styles';
 import { Button } from '../../../button';
 import { CancelIcon } from '../../../../assets/images/icons';
-
-interface MaximizedViewProps {
-  buttonsToDisplay?: React.ReactNode[];
-  children?: React.ReactNode;
-  imageHeader?: React.ReactNode;
-  setVisible: any;
-  subtitle?: string;
-  title: string;
-}
+import { IMaximizedViewProps } from './MaximizedView.types';
 
 const MaximizedView = ({
   buttonsToDisplay,
   children,
   setVisible,
   title,
-}: MaximizedViewProps) => {
+}: IMaximizedViewProps) => {
   return (
     <View style={{ justifyContent: 'flex-start' }}>
       <View style={styles.headerContainer}>

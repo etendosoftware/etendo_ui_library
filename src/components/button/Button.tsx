@@ -43,7 +43,7 @@ const Button = ({
         return PRIMARY_100;
     }
   };
-  // eslint-disable-next-line @typescript-eslint/no-shadow
+
   const getHoveredTextColorAndViewColor = (typeStyle: ButtonStyleType) => {
     switch (typeStyle) {
       case 'white':
