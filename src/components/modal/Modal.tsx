@@ -1,17 +1,15 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import {
-  Text,
   View,
   Modal as ModalRN,
   ViewStyle,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  ScrollView,
 } from 'react-native';
-import { styles as modalStyles, stylesMaximized } from './styles';
 import { Button } from '../button';
-import { ButtonContainer } from '../containers';
-import { CancelIcon } from '../../assets/images/icons';
+import MaximizedView from './components/maximizedView/MaximizedView';
+import MinimizedView from './components/minimizedView/MinimizedView';
+import { styles } from './styles';
 
 interface ModalProps {
   buttons?: ReactNode[];
@@ -60,88 +58,6 @@ const Modal = ({
     }
   }, []);
 
-  const MinimizedView = () => (
-    <>
-      <View style={modalStyles.headerContainer}>
-        {imageHeader && (
-          <View style={modalStyles.imageHeaderContainer}>{imageHeader}</View>
-        )}
-        <Text
-          numberOfLines={1}
-          style={modalStyles.modalTitle}
-          ellipsizeMode="tail">
-          {title}
-        </Text>
-        {subtitle && (
-          <Text
-            numberOfLines={2}
-            style={modalStyles.modalSubtitle}
-            ellipsizeMode="tail">
-            {subtitle}
-          </Text>
-        )}
-      </View>
-      {children && (
-        <TouchableOpacity
-          activeOpacity={1}
-          style={modalStyles.childrenModalContainer}>
-          <ScrollView style={{ flexGrow: 0 }}>
-            <View onStartShouldSetResponder={() => true}>{children}</View>
-          </ScrollView>
-        </TouchableOpacity>
-      )}
-      <View style={modalStyles.buttonModalContainer}>
-        {buttonsToDisplay?.length && (
-          <ButtonContainer
-            components={buttonsToDisplay}
-            style={{
-              justifyContent: 'flex-end',
-              paddingVertical: 0,
-            }}
-          />
-        )}
-      </View>
-    </>
-  );
-
-  const MaximizedView = () => (
-    <View style={{ justifyContent: 'flex-start' }}>
-      <View style={stylesMaximized.headerContainer}>
-        <View style={stylesMaximized.titleCloseContainer}>
-          <Button
-            typeStyle={'white'}
-            iconLeft={<CancelIcon />}
-            onPress={() => setVisible(false)}
-          />
-          <Text
-            numberOfLines={1}
-            style={stylesMaximized.modalTitle}
-            ellipsizeMode="tail">
-            {title}
-          </Text>
-        </View>
-        {buttonsToDisplay.length && (
-          <ButtonContainer
-            components={[buttonsToDisplay[buttonsToDisplay.length - 1]]}
-            style={{
-              justifyContent: 'flex-end',
-              paddingVertical: 0,
-            }}
-          />
-        )}
-      </View>
-      {children && (
-        <TouchableOpacity
-          activeOpacity={1}
-          style={stylesMaximized.childrenModalContainer}>
-          <ScrollView style={{ flexGrow: 0 }}>
-            <View onStartShouldSetResponder={() => true}>{children}</View>
-          </ScrollView>
-        </TouchableOpacity>
-      )}
-    </View>
-  );
-
   return (
     <ModalRN
       animationType="fade"
@@ -149,16 +65,30 @@ const Modal = ({
       visible={visible}
       onRequestClose={() => setVisible(false)}>
       <TouchableOpacity
-        style={modalStyles.modalContainer}
+        style={styles.modalContainer}
         activeOpacity={1}
         onPressOut={() => !disableTapOutside && setVisible(false)}>
         <TouchableWithoutFeedback>
           <View
-            style={[
-              modalStyles.modalContent,
-              fullScreen && modalStyles.modalFullScreen,
-            ]}>
-            {fullScreen ? <MaximizedView /> : <MinimizedView />}
+            style={[styles.modalContent, fullScreen && styles.modalFullScreen]}>
+            {fullScreen ? (
+              <MaximizedView
+                imageHeader={imageHeader}
+                title={title}
+                subtitle={subtitle}
+                children={children}
+                buttonsToDisplay={buttonsToDisplay}
+                setVisible={setVisible}
+              />
+            ) : (
+              <MinimizedView
+                imageHeader={imageHeader}
+                title={title}
+                subtitle={subtitle}
+                children={children}
+                buttonsToDisplay={buttonsToDisplay}
+              />
+            )}
           </View>
         </TouchableWithoutFeedback>
       </TouchableOpacity>
