@@ -6,7 +6,7 @@ import { sizeSvg } from '../../../helpers/svg_utils';
 
 export interface SvgImageProps {
   style?: ImageStyle | any;
-  fill?: string;
+  fill?: ColorValue;
   width?: number;
   height?: number;
 }
