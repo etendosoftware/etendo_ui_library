@@ -17,10 +17,9 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     height: 'auto',
     justifyContent: 'space-between',
-    maxHeight: isDeviceTablet ? '100%' : '85%',
+    maxHeight: isDeviceTablet ? '45%' : '85%',
     maxWidth: '85%',
-    paddingHorizontal: 20,
-    paddingVertical: 30,
+    padding: 24,
     width: 'auto',
   },
   modalFullScreen: {
@@ -28,5 +27,6 @@ export const styles = StyleSheet.create({
     maxHeight: '100%',
     maxWidth: '100%',
     width: '100%',
+    borderRadius: 0,
   },
 });
