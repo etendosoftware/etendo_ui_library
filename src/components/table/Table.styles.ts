@@ -102,10 +102,9 @@ export const styles = StyleSheet.create({
   },
   emptyStateConteiner: {
     display: 'flex',
-    flexDirection:'column',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FAFAFA',
     height: 400,
     width: '100%',
   },

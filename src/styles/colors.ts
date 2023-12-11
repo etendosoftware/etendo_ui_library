@@ -18,6 +18,7 @@ export const TERTIARY_30 = '#EFF1F7';
 export const TERTIARY_50 = '#EDF1FF';
 export const TERTIARY_80 = '#E0E7FF';
 export const TERTIARY_100 = '#808695';
+export const TERTIARY_500 = '#7182FF';
 export const TERTIARY_800 = '#151C7A';
 
 export const QUATERNARY_10 = '#F5F5FC';
@@ -37,6 +38,8 @@ export const NEUTRAL_400 = '#BDBDBD';
 export const NEUTRAL_500 = '#9E9E9E';
 export const NEUTRAL_600 = '#757575';
 export const NEUTRAL_700 = '#616161';
+export const NEUTRAL_800 = '#424242';
+export const NEUTRAL_1000 = '#121212';
 
 export const INITIAL_10 = '#ECF5FF';
 export const INITIAL_100 = '#3E97FF';
@@ -53,3 +56,4 @@ export const DESTRUCTIVE_100 = '#F36A62';
 export const OVERLAY = 'rgba(0,0,0,0.25)';
 
 export const DEFAULT_COLOR_THEME = PRIMARY_100;
+export const DEFAULT_WHITE_THEME = NEUTRAL_0;

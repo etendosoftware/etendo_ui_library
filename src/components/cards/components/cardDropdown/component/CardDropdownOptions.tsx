@@ -9,7 +9,7 @@ import {
 import React, { useState } from 'react';
 import { CardVariant, styles } from '../CardDropdown.styles';
 import CardDropdownSkeleton from './CardDropdownSkeleton';
-import { ArrowDownIcon } from '../../../../assets/images/icons/ArrowDownIcon';
+import { ArrowDownIcon } from '../../../../../assets/images/icons/ArrowDownIcon';
 import {
   CardDropdownData,
   CardDropdownOptionsProps,
@@ -19,7 +19,7 @@ import {
   PRIMARY_60,
   QUATERNARY_10,
   SECONDARY_100,
-} from '../../../../styles/colors';
+} from '../../../../../styles/colors';
 
 const CardDropdownOptions = ({
   data,

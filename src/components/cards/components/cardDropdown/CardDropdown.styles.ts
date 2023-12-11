@@ -17,7 +17,7 @@ import {
   TERTIARY_100,
   TERTIARY_30,
   TERTIARY_50,
-} from '../../../styles/colors';
+} from '../../../../styles/colors';
 import { CardStyleVariant } from './CardDropdown.types';
 
 export const styles = StyleSheet.create({
@@ -49,7 +49,7 @@ export const styles = StyleSheet.create({
   },
   arrowContainer: {
     height: 20,
-    width: 20
+    width: 20,
   },
   cardTitle: {
     fontSize: 22,

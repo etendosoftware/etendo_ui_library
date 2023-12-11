@@ -1,8 +1,8 @@
-import {View, TouchableOpacity} from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import React from 'react';
-import SkeletonItem from '../../../secondaryComponents/SkeletonItem';
-import {CardVariant, styles} from '../CardDropdown.styles';
-import {CardDropdownSkeletonProps} from '../CardDropdown.types';
+import SkeletonItem from '../../../../secondaryComponents/SkeletonItem';
+import { CardVariant, styles } from '../CardDropdown.styles';
+import { CardDropdownSkeletonProps } from '../CardDropdown.types';
 
 const CardDropdownSkeleton = ({
   onClose,
@@ -16,8 +16,7 @@ const CardDropdownSkeleton = ({
           CardVariant[styleType].colorCardOptionHeader,
         ]}
         activeOpacity={0.7}
-        onPress={onClose}
-      >
+        onPress={onClose}>
         <View style={styles.cardOptionHeaderSkeletonLeftContainer}>
           <SkeletonItem
             color={CardVariant[styleType].colorCardOptionSkeletonHeaderItem}
@@ -40,8 +39,7 @@ const CardDropdownSkeleton = ({
         style={[
           styles.cardOptionSkeletonContainer,
           CardVariant[styleType].colorCardOptionSkeletonContainer,
-        ]}
-      >
+        ]}>
         <SkeletonItem
           color={CardVariant[styleType].colorCardOptionSkeletonItem}
           height={46}
@@ -71,8 +69,7 @@ const CardDropdownSkeleton = ({
         style={[
           styles.cardOptionSkeletonContainer,
           CardVariant[styleType].colorCardOptionSkeletonContainer,
-        ]}
-      >
+        ]}>
         <SkeletonItem
           color={CardVariant[styleType].colorCardOptionSkeletonItem}
           height={46}
@@ -102,8 +99,7 @@ const CardDropdownSkeleton = ({
         style={[
           styles.cardOptionSkeletonContainer,
           CardVariant[styleType].colorCardOptionSkeletonContainer,
-        ]}
-      >
+        ]}>
         <SkeletonItem
           color={CardVariant[styleType].colorCardOptionSkeletonItem}
           height={46}
@@ -141,8 +137,7 @@ const CardDropdownSkeleton = ({
         style={[
           styles.cardOptionSkeletonContainer,
           CardVariant[styleType].colorCardOptionSkeletonContainer,
-        ]}
-      >
+        ]}>
         <SkeletonItem
           color={CardVariant[styleType].colorCardOptionSkeletonItem}
           height={46}
