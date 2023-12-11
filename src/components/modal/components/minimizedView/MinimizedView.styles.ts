@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    marginVertical: 16,
+    marginVertical: 12,
     maxHeight: '60%',
     paddingVertical: 8,
   },
