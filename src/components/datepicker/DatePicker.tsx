@@ -565,7 +565,9 @@ const DatePicker = ({
           {/* Show calendar icon if showCalendar is true */}
           {showCalendar && (
             <TouchableOpacity onPress={showPicker} disabled={disabled}>
-              <CalendarIcon style={disabled && { opacity: 0.2 }} width={25} />
+              <CalendarIcon
+                style={disabled ? { opacity: 0.2, width: 25 } : { width: 25 }}
+              />
             </TouchableOpacity>
           )}
         </View>
