@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
     color: PRIMARY_100,
     fontSize: 22,
     fontWeight: '500',
-    maxWidth: '95%',
+    maxWidth: '100%',
     paddingBottom: 12,
     textAlign: 'center',
   },
