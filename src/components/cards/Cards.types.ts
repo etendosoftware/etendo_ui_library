@@ -1,7 +1,5 @@
 import { ColorValue, DimensionValue } from 'react-native';
-export interface CardsRef {
-  initData: () => void;
-}
+import { Metadata } from '../../types/table.types';
 
 export interface CardsProps {
   data: any[];
@@ -19,13 +17,3 @@ export interface CardsProps {
   backgroundColor?: ColorValue;
   pageSize?: number;
 }
-
-export type Metadata = {
-  primary?: boolean;
-  visible?: boolean;
-  label?: string;
-  key?: string;
-  type?: 'number' | 'string' | 'boolean' | 'date';
-  width?: DimensionValue;
-  title?: boolean;
-};

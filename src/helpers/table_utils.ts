@@ -1,6 +1,7 @@
 import { Columns } from '../components/table/Table.types';
 import { NEUTRAL_0, QUATERNARY_10 } from '../styles/colors';
 import { Dimensions, PixelRatio, Platform, ViewStyle } from 'react-native';
+import { Metadata } from '../types/table.types';
 // getting screen width and height
 const width = Dimensions.get('screen').width;
 const height = Dimensions.get('screen').height;
@@ -64,10 +65,7 @@ export const findPrimaryId = (col: Columns[], data: any) => {
   return primary;
 };
 
-export const findColumnTitle = (
-  columns: Columns[],
-  data: any,
-): Columns | undefined => {
+export const findRowTitle = (columns: Metadata[]): Columns | undefined => {
   const column = columns.find(column => column.title && column.key);
   return column ?? undefined;
 };

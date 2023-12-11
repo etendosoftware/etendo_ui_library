@@ -1,9 +1,6 @@
 import React, { useMemo, useRef, useState } from 'react';
 import { View, Pressable, Animated, ViewStyle, TextStyle } from 'react-native';
-import {
-  findColumnTitle,
-  findPrimaryId,
-} from '../../../../helpers/table_utils';
+import { findRowTitle, findPrimaryId } from '../../../../helpers/table_utils';
 import { CardProps } from './Card.types';
 import { styles } from './Card.style';
 import {
@@ -14,7 +11,7 @@ import {
 } from '../../../../styles/colors';
 import SwitchColumnCard from './components/switchRowCard/SwitchRowCard';
 import SwitchTitleCard from './components/switchTitleCard/SwitchTitleCard';
-import { Metadata } from '../../Cards.types';
+import { Metadata } from '../../../../types/table.types';
 
 const MAX_ROWS: number = 4;
 
@@ -73,7 +70,7 @@ const Card = ({ item, index, metadata, onPress }: CardProps) => {
   };
 
   const getColumnTitle: Metadata | undefined = useMemo(() => {
-    return findColumnTitle(metadata, item);
+    return findRowTitle(metadata);
   }, [metadata, item]);
 
   return (

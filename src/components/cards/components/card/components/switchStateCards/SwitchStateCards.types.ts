@@ -1,5 +1,5 @@
 import { DimensionValue } from 'react-native';
-import { Metadata } from '../../../../Cards.types';
+import { Metadata } from '../../../../../../types/table.types';
 
 export interface SwitchStateCardsProps {
   data: Array<any>;
