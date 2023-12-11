@@ -11,7 +11,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    width: '100%',
   },
   imageHeaderContainer: {
     alignItems: 'center',
@@ -35,6 +34,7 @@ export const styles = StyleSheet.create({
     fontWeight: '500',
     maxWidth: '95%',
     textAlign: 'left',
+    marginBottom: 16,
   },
   childrenModalContainer: {
     alignItems: 'center',
@@ -45,13 +45,14 @@ export const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    marginVertical: 12,
-    maxHeight: '60%',
+    marginBottom: 12,
     paddingVertical: 8,
+    flex: 1,
   },
   buttonModalContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    height: 'auto',
   },
   buttonContainer: {
     width: isDeviceTablet ? '40%' : '45%',
