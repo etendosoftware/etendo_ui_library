@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
 import { CardVariant, styles } from './CardDropdown.styles';
-import { ArrowDownIcon } from '../../../assets/images/icons/ArrowDownIcon';
+import { ArrowDownIcon } from '../../../../assets/images/icons/ArrowDownIcon';
 import CardSkeleton from './component/CardSkeleton';
 import { CardDrpopdownProps, PositionModalType } from './CardDropdown.types';
 import CardDropdownOptions from './component/CardDropdownOptions';
@@ -51,10 +51,8 @@ const CardDropdown = ({
   const handleOnPressDropdown = () => {
     if (isDropdown) {
       setVisibleOptions(true);
-    } else {
-      if (onPress) {
-        onPress(route);
-      }
+    } else if (onPress) {
+      onPress(route);
     }
   };
 

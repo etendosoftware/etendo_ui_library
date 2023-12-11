@@ -1,5 +1,7 @@
-import { NEUTRAL_0, QUATERNARY_10, TERTIARY_30 } from '../styles/colors';
+import { Columns } from '../components/table/Table.types';
+import { NEUTRAL_0, QUATERNARY_10 } from '../styles/colors';
 import { Dimensions, PixelRatio, Platform, ViewStyle } from 'react-native';
+import { Metadata } from '../types/table.types';
 // getting screen width and height
 const width = Dimensions.get('screen').width;
 const height = Dimensions.get('screen').height;
@@ -48,4 +50,22 @@ export const disableOutline = (): ViewStyle | undefined => {
   if (isWeb) {
     return { outline: 'none' } as ViewStyle;
   }
+};
+
+export const findPrimaryId = (col: Columns[], data: any) => {
+  let primary: string = '';
+  for (const element of col) {
+    if (element.primary === true) {
+      if (element.key) {
+        primary = data[element.key];
+        break;
+      }
+    }
+  }
+  return primary;
+};
+
+export const findRowTitle = (columns: Metadata[]): Columns | undefined => {
+  const column = columns.find(column => column.title && column.key);
+  return column ?? undefined;
 };

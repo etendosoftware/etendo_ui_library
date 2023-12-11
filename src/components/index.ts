@@ -6,7 +6,7 @@ import { StatusBar } from './statusbar';
 import { Tab } from './tab';
 import { Table } from './table';
 import { ViewEtendo } from './viewEtendo/ViewEtendo';
-import { CardDropdown } from './cards/cardDropdown';
+import { CardDropdown } from './cards/components/cardDropdown';
 import { SkeletonItem } from './secondaryComponents';
 import { Layout, ButtonContainer } from './containers';
 

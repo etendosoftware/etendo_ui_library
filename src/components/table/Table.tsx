@@ -1,19 +1,17 @@
 import React from 'react';
-import {
-  FlatList,
-  Pressable,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { FlatList, Pressable, TouchableOpacity, View } from 'react-native';
 import { Actions, Columns, TableProps } from './Table.types';
 import { styles } from './Table.styles';
 import TableHeaders from './components/TableHeaders';
 import TableCell from './components/TableCell';
-import { paintOddRows, removeHeaderBorder } from '../../helpers/table_utils';
+import {
+  findPrimaryId,
+  paintOddRows,
+  removeHeaderBorder,
+} from '../../helpers/table_utils';
 import { SkeletonRowTable } from '../secondaryComponents';
 import { NEUTRAL_300 } from '../../styles/colors';
-import EmptyTableState from '../../assets/images/components/EmptyTableState';
+import TableEmpty from './components/TableEmpty';
 
 const Table = ({
   data,
@@ -26,7 +24,7 @@ const Table = ({
   commentEmptyTable,
   onLoadMoreData,
   isLoadingMoreData = true,
-  pageSize = 20,
+  pageSize = 3,
   currentPage = 0,
 }: TableProps) => {
   const handleLoadMore = () => {
@@ -35,27 +33,12 @@ const Table = ({
     }
   };
 
-  const findPrimaryId = (col: Columns[], indexRow: number) => {
-    let primary: string = '';
-    if (indexRow >= 0) {
-      for (const element of col) {
-        if (element.primary === true) {
-          if (element.key) {
-            primary = data[indexRow][element.key];
-            break;
-          }
-        }
-      }
-    }
-    return primary;
-  };
-
   const RenderItem = (item: any, index: number) => {
     return (
       <Pressable
         onPress={() => {
           if (onRowPress) {
-            onRowPress(findPrimaryId(columns, index));
+            onRowPress(findPrimaryId(columns, item));
           }
         }}
         style={[styles.row, paintOddRows(index)]}>
@@ -72,7 +55,7 @@ const Table = ({
                         <TouchableOpacity
                           style={styles.cellEditContainer}
                           onPress={() =>
-                            itemAction.onAction(findPrimaryId(columns, index))
+                            itemAction.onAction(findPrimaryId(columns, item))
                           }
                           key={'tableCellCustom' + actionIndex}>
                           {itemAction.component}
@@ -114,16 +97,6 @@ const Table = ({
     );
   };
 
-  const EmptyState = () => {
-    return (
-      <View style={styles.emptyStateConteiner}>
-        <EmptyTableState />
-        <Text style={styles.emptyTextTitle}>{textEmptyTable}</Text>
-        <Text style={styles.emptyTextSubtitle}>{commentEmptyTable}</Text>
-      </View>
-    );
-  };
-
   return (
     <View
       style={[
@@ -148,7 +121,12 @@ const Table = ({
             ? RenderSkeleton(item.item, item.index)
             : RenderItem(item.item, item.index)
         }
-        ListEmptyComponent={<EmptyState />}
+        ListEmptyComponent={
+          <TableEmpty
+            commentEmptyTable={commentEmptyTable}
+            textEmptyTable={textEmptyTable}
+          />
+        }
         keyExtractor={(_item: any, index: number) => 'Table: ' + index}
         ListFooterComponent={() =>
           isLoadingMoreData &&
