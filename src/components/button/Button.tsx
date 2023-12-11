@@ -43,6 +43,7 @@ const Button = ({
         return PRIMARY_100;
     }
   };
+
   const getHoveredTextColorAndViewColor = (typeStyle: ButtonStyleType) => {
     switch (typeStyle) {
       case 'white':
@@ -118,9 +119,9 @@ const Button = ({
     if (isHovered && !loading) {
       return isHovered
         ? getHoveredTextColorAndViewColor(typeStyle)
-        : ButtonStyleVariant[typeStyle].imageColor;
+        : ButtonStyleVariant[typeStyle]?.imageColor;
     }
-    return ButtonStyleVariant[typeStyle].imageColor;
+    return ButtonStyleVariant[typeStyle]?.imageColor;
   };
 
   const stateSizeIndicator = (iconComponent: React.ReactElement) => {

@@ -27,6 +27,12 @@ export const inputVariants: InputVariantsType = {
       disabledSubmit: true,
     },
   },
+  datePicker: {
+    field: {
+      type: 'textInput',
+      isDatePicker: true,
+    },
+  },
   picker: {
     field: {
       type: 'text',
