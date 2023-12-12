@@ -19,8 +19,6 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   childrenModalContainer: {
-    borderBottomColor: NEUTRAL_400,
-    borderBottomWidth: 1,
     borderTopColor: NEUTRAL_400,
     borderTopWidth: 1,
     display: 'flex',
@@ -29,7 +27,6 @@ export const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 24,
     width: '100%',
-    backgroundColor: 'red',
     maxHeight: '97%',
   },
 });

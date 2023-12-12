@@ -12,7 +12,7 @@ const MinimizedView = ({
   title,
 }: IMinimizedViewProps) => {
   return (
-    <>
+    <View>
       <View style={styles.headerContainer}>
         {imageHeader && (
           <View style={styles.imageHeaderContainer}>{imageHeader}</View>
@@ -49,7 +49,7 @@ const MinimizedView = ({
           />
         )}
       </View>
-    </>
+    </View>
   );
 };
 
