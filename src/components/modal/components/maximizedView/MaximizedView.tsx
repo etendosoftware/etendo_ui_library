@@ -18,11 +18,19 @@ const MaximizedView = ({
   setVisible,
   title,
 }: IMaximizedViewProps) => {
+  const hasSaveButton = () =>
+    !!buttonsToDisplay && buttonsToDisplay?.length > 1;
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ justifyContent: 'flex-start' }}>
         <View style={styles.headerContainer}>
-          <View style={styles.titleCloseContainer}>
+          <View
+            style={[
+              styles.titleCloseContainer,
+              {
+                width: hasSaveButton() ? '70%' : '85%',
+              },
+            ]}>
             <Button
               typeStyle={'white'}
               iconLeft={<CancelIcon />}
@@ -35,26 +43,24 @@ const MaximizedView = ({
               {title}
             </Text>
           </View>
-          {buttonsToDisplay?.length && (
+          {hasSaveButton() && buttonsToDisplay && (
             <ButtonContainer
               components={[buttonsToDisplay[buttonsToDisplay.length - 1]]}
               style={{
                 justifyContent: 'flex-end',
                 paddingVertical: 0,
+                flex: 1,
               }}
             />
           )}
         </View>
         {children && (
-          <TouchableOpacity
-            activeOpacity={1}
-            style={styles.childrenModalContainer}>
+          <View style={styles.childrenModalContainer}>
             <ScrollView style={{ flexGrow: 0 }}>
               <View onStartShouldSetResponder={() => true}>{children}</View>
             </ScrollView>
-          </TouchableOpacity>
+          </View>
         )}
-        {children}
       </View>
     </SafeAreaView>
   );

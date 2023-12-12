@@ -25,16 +25,24 @@ const Modal = ({
   title,
   visible,
 }: IModalProps) => {
-  const [buttonsToDisplay, setButtonsToDisplay] = useState<ReactNode[]>([
-    <Button
-      typeStyle={'white'}
-      text={labelCloseButton}
-      onPress={() => setVisible(false)}
-    />,
-    handleSave && labelSaveButton ? (
-      <Button typeStyle={'white'} text={labelSaveButton} onPress={handleSave} />
-    ) : null,
-  ]);
+  const [buttonsToDisplay, setButtonsToDisplay] = useState<ReactNode[]>(
+    [
+      <Button
+        typeStyle={'white'}
+        text={labelCloseButton}
+        onPress={() => setVisible(false)}
+      />,
+      !!handleSave && !!labelSaveButton ? (
+        <Button
+          typeStyle={'white'}
+          text={labelSaveButton}
+          onPress={handleSave}
+        />
+      ) : (
+        []
+      ),
+    ].flat(),
+  );
 
   useEffect(() => {
     if (buttons) {

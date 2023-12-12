@@ -11,12 +11,15 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'column',
     justifyContent: 'space-between',
+    paddingHorizontal: 24,
+    paddingTop: 24,
+    width: '100%',
   },
   imageHeaderContainer: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
-    paddingBottom: 16,
+    paddingBottom: 12,
   },
   modalTitle: {
     alignSelf: 'flex-start',
@@ -45,14 +48,15 @@ export const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    marginBottom: 12,
     paddingVertical: 8,
+    paddingHorizontal: 24,
     flex: 1,
   },
   buttonModalContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     height: 'auto',
+    padding: 12,
   },
   buttonContainer: {
     width: isDeviceTablet ? '40%' : '45%',

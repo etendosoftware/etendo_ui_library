@@ -1,12 +1,14 @@
 import { StyleSheet } from 'react-native';
 import { styles as modalBasicStyles } from '../minimizedView/MinimizedView.styles';
+import { NEUTRAL_400 } from '../../../../styles/colors';
 
 export const styles = StyleSheet.create({
   headerContainer: {
     ...modalBasicStyles.headerContainer,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '100%',
+    maxWidth: '100%',
+    paddingTop: 0,
   },
   titleCloseContainer: {
     flexDirection: 'row',
@@ -17,8 +19,17 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   childrenModalContainer: {
-    ...modalBasicStyles.childrenModalContainer,
-    borderBottomWidth: 0,
-    maxHeight: '90%',
+    borderBottomColor: NEUTRAL_400,
+    borderBottomWidth: 1,
+    borderTopColor: NEUTRAL_400,
+    borderTopWidth: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    paddingVertical: 8,
+    paddingHorizontal: 24,
+    width: '100%',
+    backgroundColor: 'red',
+    maxHeight: '97%',
   },
 });
