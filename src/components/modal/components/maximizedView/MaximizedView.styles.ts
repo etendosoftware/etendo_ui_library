@@ -5,7 +5,6 @@ export const styles = StyleSheet.create({
   headerContainer: {
     ...modalBasicStyles.headerContainer,
     flexDirection: 'row',
-    paddingTop: 16,
     justifyContent: 'space-between',
     width: '100%',
   },

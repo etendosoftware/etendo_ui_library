@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     maxHeight: isDeviceTablet ? '65%' : '85%',
     maxWidth: '85%',
-    padding: 24,
+    padding: 0,
     width: 'auto',
   },
   modalFullScreen: {
@@ -28,5 +28,6 @@ export const styles = StyleSheet.create({
     maxWidth: '100%',
     width: '100%',
     borderRadius: 0,
+    paddingTop: 0,
   },
 });
