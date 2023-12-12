@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     height: 'auto',
     justifyContent: 'space-between',
-    maxHeight: isDeviceTablet ? '45%' : '85%',
+    maxHeight: isDeviceTablet ? '65%' : '85%',
     maxWidth: '85%',
     padding: 24,
     width: 'auto',

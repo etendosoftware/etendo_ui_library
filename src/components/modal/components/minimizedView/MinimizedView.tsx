@@ -29,15 +29,15 @@ const MinimizedView = ({
           </Text>
         )}
       </View>
-      {children && (
-        <TouchableOpacity
-          activeOpacity={1}
-          style={styles.childrenModalContainer}>
-          <ScrollView style={{ flexGrow: 0 }}>
-            <View onStartShouldSetResponder={() => true}>{children}</View>
-          </ScrollView>
-        </TouchableOpacity>
-      )}
+      <View style={styles.childrenModalContainer}>
+        {children && (
+          <TouchableOpacity activeOpacity={1} style={{ maxHeight: '100%' }}>
+            <ScrollView style={{ flexGrow: 0 }}>
+              <View onStartShouldSetResponder={() => true}>{children}</View>
+            </ScrollView>
+          </TouchableOpacity>
+        )}
+      </View>
       <View style={styles.buttonModalContainer}>
         {buttonsToDisplay?.length && (
           <ButtonContainer
