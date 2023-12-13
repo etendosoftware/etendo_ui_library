@@ -26,24 +26,23 @@ const Modal = ({
   visible,
 }: IModalProps) => {
   const hasActionButton = !!handleAction && !!labelActionButton;
-  const [buttonsToDisplay, setButtonsToDisplay] = useState<ReactNode[]>(
+
+  const actionBtn = hasActionButton && (
+    <Button typeStyle="white" text={labelActionButton} onPress={handleAction} />
+  );
+
+  const butonsList = () =>
     [
       <Button
         typeStyle={'white'}
         text={labelCloseButton}
         onPress={() => setVisible(false)}
       />,
-      hasActionButton ? (
-        <Button
-          typeStyle={'white'}
-          text={labelActionButton}
-          onPress={handleAction}
-        />
-      ) : (
-        []
-      ),
-    ].flat(),
-  );
+      actionBtn,
+    ].filter(Boolean);
+
+  const [buttonsToDisplay, setButtonsToDisplay] =
+    useState<ReactNode[]>(butonsList());
 
   useEffect(() => {
     if (buttons) {
