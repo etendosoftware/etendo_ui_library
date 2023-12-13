@@ -18,8 +18,7 @@ const MaximizedView = ({
   setVisible,
   title,
 }: IMaximizedViewProps) => {
-  const hasSaveButton = () =>
-    !!buttonsToDisplay && buttonsToDisplay?.length > 1;
+  const hasActionButton = !!buttonsToDisplay && buttonsToDisplay?.length > 1;
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ justifyContent: 'flex-start' }}>
@@ -28,7 +27,8 @@ const MaximizedView = ({
             style={[
               styles.titleCloseContainer,
               {
-                width: hasSaveButton() ? '70%' : '85%',
+                width: hasActionButton ? '70%' : '85%',
+                marginRight: hasActionButton ? 16 : 0,
               },
             ]}>
             <Button
@@ -43,7 +43,7 @@ const MaximizedView = ({
               {title}
             </Text>
           </View>
-          {hasSaveButton() && buttonsToDisplay && (
+          {hasActionButton && buttonsToDisplay && (
             <ButtonContainer
               components={[buttonsToDisplay[buttonsToDisplay.length - 1]]}
               style={{

@@ -16,15 +16,16 @@ const Modal = ({
   children,
   disableTapOutside = false,
   fullScreen = false,
-  handleSave,
+  handleAction,
   imageHeader,
   labelCloseButton,
-  labelSaveButton,
+  labelActionButton,
   setVisible,
   subtitle,
   title,
   visible,
 }: IModalProps) => {
+  const hasActionButton = !!handleAction && !!labelActionButton;
   const [buttonsToDisplay, setButtonsToDisplay] = useState<ReactNode[]>(
     [
       <Button
@@ -32,11 +33,11 @@ const Modal = ({
         text={labelCloseButton}
         onPress={() => setVisible(false)}
       />,
-      !!handleSave && !!labelSaveButton ? (
+      hasActionButton ? (
         <Button
           typeStyle={'white'}
-          text={labelSaveButton}
-          onPress={handleSave}
+          text={labelActionButton}
+          onPress={handleAction}
         />
       ) : (
         []
