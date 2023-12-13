@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     backgroundColor: NEUTRAL_50,
     overflow: 'hidden',
     elevation: 5,
+    maxWidth: 380,
   },
   status: {
     height: 8,

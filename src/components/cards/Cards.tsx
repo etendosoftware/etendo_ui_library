@@ -23,8 +23,8 @@ const Cards = ({
   title,
   onPressCard,
   cardsHeight,
-  textEmptyTable,
-  commentEmptyTable,
+  textEmptyCards,
+  commentEmptyCards,
   onLoadMoreData,
   onAddNewData,
   backgroundColor,
@@ -115,8 +115,8 @@ const Cards = ({
           isLoading={isLoading}
           metadata={metadata}
           onPressCard={onPressCard}
-          commentEmptyTable={commentEmptyTable}
-          textEmptyTable={textEmptyTable}
+          commentEmptyCards={commentEmptyCards}
+          textEmptyCards={textEmptyCards}
           tableHeight={containerHeight}
           isTitle={!!title && !!onAddNewData}
         />
