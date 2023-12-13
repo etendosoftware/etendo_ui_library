@@ -96,52 +96,61 @@ const Alert = () => {
     let textColor: ColorValue;
     let icon: JSX.Element;
     let marginLeft: DimensionValue;
+    let imageColor: ColorValue;
 
     switch (typeMessage) {
       case 'info':
         backgroundColor = TERTIARY_101;
         textColor = PRIMARY_100;
+        imageColor = PRIMARY_100;
         marginLeft = 0;
         icon = <></>;
         break;
       case 'success':
         backgroundColor = SUCCESS_110;
         textColor = SUCCESS_900;
+        imageColor = SUCCESS_800;
         marginLeft = 8;
         icon = (
           <SuccessCircleIcon
             style={{ width: 20, height: 20, marginRight: 8 }}
-            fill={SUCCESS_800}
+            fill={imageColor}
           />
         );
         break;
       case 'error':
         backgroundColor = DANGER_100;
         textColor = DANGER_700;
+        imageColor = DANGER_700;
         marginLeft = 8;
         icon = (
           <CancelCircleIcon
             style={{ width: 20, height: 20, marginRight: 8 }}
-            fill={DANGER_700}
+            fill={imageColor}
           />
         );
         break;
       case 'warning':
         backgroundColor = IP_100;
         textColor = IP_900;
+        imageColor = IP_600;
         marginLeft = 8;
         icon = (
-          <WarningCircleIcon style={{ width: 20, height: 20 }} fill={IP_600} />
+          <WarningCircleIcon
+            style={{ width: 20, height: 20 }}
+            fill={imageColor}
+          />
         );
         break;
       default:
         backgroundColor = TERTIARY_100;
         textColor = PRIMARY_100;
         marginLeft = 0;
+        imageColor = PRIMARY_100;
         icon = <></>;
     }
 
-    return { backgroundColor, textColor, icon, marginLeft };
+    return { backgroundColor, textColor, icon, marginLeft, imageColor };
   }, [typeMessage]);
 
   return (
@@ -163,7 +172,7 @@ const Alert = () => {
           : message}
       </Text>
       <Pressable style={styles.closeButton} onPress={onPressClose}>
-        <CancelIcon style={styles.closeIcon} />
+        <CancelIcon style={styles.closeIcon} fill={stylesAlert.imageColor} />
       </Pressable>
     </Animated.View>
   );

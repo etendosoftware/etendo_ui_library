@@ -76,6 +76,6 @@ const processQueue = () => {
   }
 };
 
-export const setDefaultDuration = (duration: number): void => {
+export const setAlertDefaultDuration = (duration: number): void => {
   defaultDuration = duration;
 };
