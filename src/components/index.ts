@@ -9,10 +9,14 @@ import { ViewEtendo } from './viewEtendo/ViewEtendo';
 import { CardDropdown } from './cards/components/cardDropdown';
 import { SkeletonItem } from './secondaryComponents';
 import { Layout, ButtonContainer } from './containers';
+import { Cards } from './cards';
+import { Alert } from './alert';
 
 export {
+  Alert,
   Button,
   CardDropdown,
+  Cards,
   Input,
   Navbar,
   Pagination,
