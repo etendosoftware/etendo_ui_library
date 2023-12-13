@@ -8,8 +8,8 @@ export interface CardsProps {
   cardsHeight?: DimensionValue;
   onPressCard?: (primary: string) => void;
   isLoading?: boolean;
-  textEmptyTable?: string;
-  commentEmptyTable?: string;
+  textEmptyCards?: string;
+  commentEmptyCards?: string;
   onLoadMoreData?: (currentPage?: number, pageSize?: number) => void;
   currentPage?: number;
   isLoadingMoreData?: boolean;

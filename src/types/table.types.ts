@@ -6,6 +6,5 @@ export type Metadata = {
   label?: string;
   key?: string;
   type?: 'number' | 'string' | 'boolean' | 'date';
-  width?: DimensionValue;
   title?: boolean;
 };

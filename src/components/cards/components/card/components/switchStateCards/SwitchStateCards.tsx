@@ -16,8 +16,8 @@ const SwitchStateCards = ({
   isLoading,
   metadata,
   onPressCard,
-  textEmptyTable,
-  commentEmptyTable,
+  textEmptyCards,
+  commentEmptyCards,
   tableHeight = 0,
   isTitle,
 }: SwitchStateCardsProps) => {
@@ -42,8 +42,8 @@ const SwitchStateCards = ({
   if (!data.length) {
     return (
       <TableEmpty
-        textEmptyTable={textEmptyTable}
-        commentEmptyTable={commentEmptyTable}
+        textEmptyTable={textEmptyCards}
+        commentEmptyTable={commentEmptyCards}
       />
     );
   }
