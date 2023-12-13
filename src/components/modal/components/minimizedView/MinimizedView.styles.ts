@@ -1,10 +1,12 @@
-import { Platform, StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import {
   NEUTRAL_400,
   NEUTRAL_800,
   PRIMARY_100,
 } from '../../../../styles/colors';
 import { isDeviceTablet } from '../../../../helpers/table_utils';
+
+const DIFFERENCE_HEIGHT = 500;
 
 export const styles = StyleSheet.create({
   headerContainer: {
@@ -47,7 +49,7 @@ export const styles = StyleSheet.create({
     borderTopWidth: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-    maxHeight: isDeviceTablet || Platform.OS == 'web' ? '70%' : '75%',
+    maxHeight: Dimensions.get('window').height - DIFFERENCE_HEIGHT,
     paddingHorizontal: 24,
     paddingVertical: 8,
   },

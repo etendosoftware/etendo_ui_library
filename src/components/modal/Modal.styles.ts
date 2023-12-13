@@ -7,9 +7,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     flex: 1,
-    height: '100%',
     justifyContent: 'center',
-    width: '100%',
   },
   modalContent: {
     backgroundColor: NEUTRAL_300,
