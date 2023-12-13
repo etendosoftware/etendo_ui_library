@@ -12,6 +12,7 @@ import { CalendarIcon } from './CalendarIcon';
 import { CalendarSecundaryIcon } from './CalendarSecundaryIcon';
 import { CameraIcon } from './CameraIcon';
 import { CancelIcon } from './CancelIcon';
+import { CancelCircleIcon } from './CancelCircleIcon';
 import { ChatIcon } from './ChatIcon';
 import { CheckFalseIcon } from './CheckFalseIcon';
 import { CheckIcon } from './CheckIcon';
@@ -40,6 +41,7 @@ import { ShoppingCartIcon } from './ShoppingCartIcon';
 import { ShoppingBagIcon } from './ShoppingBagIcon';
 import { ShowPasswordIcon } from './ShowPasswordIcon';
 import { SlideShowIcon } from './SlideShowIcon';
+import { SuccessCircleIcon } from './SuccessCircleIcon';
 import { StarIcon } from './StarIcon';
 import { StatisticsIcon } from './StatisticsIcon';
 import { TimeIcon } from './TimeIcon';
@@ -52,6 +54,7 @@ import { UserNoBorderIcon } from './UserNoBorderIcon';
 import { UsersIcon } from './UsersIcon';
 import { VNoteCardIcon } from './VNoteCardIcon';
 import { WarningIcon } from './WarningIcon';
+import { WarningCircleIcon } from './WarningCircleIcon';
 import { WayIcon } from './WayIcon';
 import { WifiIcon } from './WifiIcon';
 import { WithoutWifiIcon } from './WithoutWifiIcon';
@@ -71,6 +74,7 @@ export {
   CalendarSecundaryIcon,
   CameraIcon,
   CancelIcon,
+  CancelCircleIcon,
   ChatIcon,
   CheckFalseIcon,
   CheckIcon,
@@ -95,6 +99,7 @@ export {
   PointIcon,
   ReportsIcon,
   SearchIcon,
+  SuccessCircleIcon,
   ShoppingCartIcon,
   ShoppingBagIcon,
   ShowPasswordIcon,
@@ -111,6 +116,7 @@ export {
   UsersIcon,
   VNoteCardIcon,
   WarningIcon,
+  WarningCircleIcon,
   WayIcon,
   WifiIcon,
   WithoutWifiIcon,
