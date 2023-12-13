@@ -1,8 +1,15 @@
 import React from 'react';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Platform,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { ButtonContainer } from '../../../containers';
 import { styles } from './MinimizedView.styles';
 import { IMinimizedViewProps } from './MinimizedView.types';
+import { isDeviceTablet } from '../../../../helpers/table_utils';
 
 const MinimizedView = ({
   buttonsToDisplay,
@@ -30,7 +37,20 @@ const MinimizedView = ({
         )}
       </View>
       {children && (
-        <View style={styles.childrenModalContainer}>
+        <View
+          style={[
+            styles.childrenModalContainer,
+            imageHeader
+              ? {
+                  maxHeight:
+                    Platform.OS == 'web'
+                      ? '62%'
+                      : isDeviceTablet
+                        ? '60%'
+                        : '68%',
+                }
+              : {},
+          ]}>
           <TouchableOpacity activeOpacity={1} style={{ maxHeight: '100%' }}>
             <ScrollView style={{ flexGrow: 0 }}>
               <View onStartShouldSetResponder={() => true}>{children}</View>

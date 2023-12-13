@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import {
   NEUTRAL_400,
   NEUTRAL_800,
@@ -47,7 +47,7 @@ export const styles = StyleSheet.create({
     borderTopWidth: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-    maxHeight: isDeviceTablet ? '70%' : '75%',
+    maxHeight: isDeviceTablet || Platform.OS == 'web' ? '70%' : '75%',
     paddingHorizontal: 24,
     paddingVertical: 8,
   },
