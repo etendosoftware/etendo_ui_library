@@ -19,6 +19,7 @@ export const TERTIARY_50 = '#EDF1FF';
 export const TERTIARY_70 = '#E2E7FF';
 export const TERTIARY_80 = '#E0E7FF';
 export const TERTIARY_100 = '#808695';
+export const TERTIARY_101 = '#E2E7FF';
 export const TERTIARY_500 = '#7182FF';
 export const TERTIARY_800 = '#151C7A';
 
@@ -50,9 +51,20 @@ export const PROCESS_100 = '#FBA643';
 
 export const SUCCESS_10 = '#E5F7ED';
 export const SUCCESS_100 = '#00B34C';
+export const SUCCESS_110 = '#C8FBCA';
+export const SUCCESS_800 = '#00674B';
+export const SUCCESS_900 = '#005546';
 
 export const DESTRUCTIVE_10 = '#FEF0EF';
 export const DESTRUCTIVE_100 = '#F36A62';
+
+export const DANGER_100 = '#FEEBED';
+export const DANGER_700 = '#AE313F';
+export const Danger_900 = '#74122E';
+
+export const IP_100 = '#FEF4D9';
+export const IP_600 = '#D78330';
+export const IP_900 = '#78320C';
 
 export const OVERLAY = 'rgba(0,0,0,0.25)';
 
