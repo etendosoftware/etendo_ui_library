@@ -9,9 +9,11 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     maxWidth: '100%',
     paddingTop: 0,
+    paddingHorizontal: 12,
   },
   titleCloseContainer: {
     flexDirection: 'row',
+    paddingRight: 20,
   },
   modalTitle: {
     ...modalBasicStyles.modalTitle,
