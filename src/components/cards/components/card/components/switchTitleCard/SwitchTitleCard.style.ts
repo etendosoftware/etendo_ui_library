@@ -29,7 +29,6 @@ export const styles = StyleSheet.create({
   },
   titleRowValue: {
     flexDirection: 'row',
-    height: 24,
     alignItems: 'center',
   },
   check: { width: 16, height: 16 },
