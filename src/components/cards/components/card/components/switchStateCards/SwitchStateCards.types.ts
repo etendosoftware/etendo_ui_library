@@ -6,8 +6,8 @@ export interface SwitchStateCardsProps {
   metadata: Metadata[];
   isLoading?: boolean;
   onPressCard?: (primary: string) => void;
-  textEmptyTable?: string;
-  commentEmptyTable?: string;
+  textEmptyCards?: string;
+  commentEmptyCards?: string;
   tableHeight?: DimensionValue;
   isTitle?: boolean;
 }
