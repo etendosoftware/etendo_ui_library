@@ -85,7 +85,7 @@ const Cards = ({
         styles.container,
         { backgroundColor },
       ]}>
-      {(title ?? onAddNewData) && (
+      {(title || onAddNewData) && (
         <View style={styles.titleContainer}>
           {title && (
             <View style={styles.titleTextContainer}>

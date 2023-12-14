@@ -16,12 +16,13 @@ export const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   titleContainer: {
-    marginHorizontal: 24,
+    paddingHorizontal: 24,
     height: 48,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
+    width: '100%',
   },
   titleTextContainer: {
     flexDirection: 'row',
