@@ -32,6 +32,12 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  check: { width: 16, height: 16 },
-  calendar: { width: 16, height: 16, marginRight: 3 },
+  check: { width: 16, height: 16, minWidth: 16, maxWidth: 16 },
+  calendar: {
+    width: 16,
+    height: 16,
+    marginRight: 3,
+    minWidth: 16,
+    maxWidth: 16,
+  },
 });
