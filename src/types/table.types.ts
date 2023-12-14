@@ -1,5 +1,3 @@
-import { DimensionValue } from 'react-native';
-
 export type Metadata = {
   primary?: boolean;
   visible?: boolean;

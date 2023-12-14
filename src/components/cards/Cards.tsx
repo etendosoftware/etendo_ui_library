@@ -85,20 +85,24 @@ const Cards = ({
         styles.container,
         { backgroundColor },
       ]}>
-      {title && onAddNewData && (
+      {(title ?? onAddNewData) && (
         <View style={styles.titleContainer}>
-          <View style={styles.titleTextContainer}>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.title}> ({data.length})</Text>
-          </View>
+          {title && (
+            <View style={styles.titleTextContainer}>
+              <Text style={styles.title}>{title}</Text>
+              <Text style={styles.title}> ({data.length})</Text>
+            </View>
+          )}
           <View style={styles.buttonContainer}>
-            <Button
-              onPress={onAddNewData}
-              typeStyle={'primary'}
-              height={40}
-              width={40}
-              iconLeft={<MoreIcon style={styles.plus} />}
-            />
+            {onAddNewData && (
+              <Button
+                onPress={onAddNewData}
+                typeStyle={'primary'}
+                height={40}
+                width={40}
+                iconLeft={<MoreIcon style={styles.plus} />}
+              />
+            )}
           </View>
         </View>
       )}
@@ -120,7 +124,7 @@ const Cards = ({
           tableHeight={containerHeight}
           isTitle={!!title && !!onAddNewData}
         />
-        {!!data.length && isLoading && <SkeletonCard />}
+        {!!data.length && isLoading && isLoadingMoreData && <SkeletonCard />}
       </ScrollView>
     </View>
   );
