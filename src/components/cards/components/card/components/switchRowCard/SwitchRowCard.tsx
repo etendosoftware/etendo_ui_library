@@ -56,10 +56,14 @@ const SwitchRowCard = ({ row, item, color = {} }: SwitchRowCardProps) => {
             numberOfLines={1}>
             {row?.label}
           </Text>
-          <Text style={[styles.dots, styles.alignDotsRight]}>{DOTS}</Text>
+          <Text numberOfLines={1} style={[styles.dots, styles.alignDotsRight]}>
+            {DOTS}
+          </Text>
         </View>
         <View style={styles.rowWitchdotsContainer}>
-          <Text style={[styles.dots, styles.alignDotsLeft]}>{DOTS}</Text>
+          <Text numberOfLines={1} style={[styles.dots, styles.alignDotsLeft]}>
+            {DOTS}
+          </Text>
           {getIconByType({ row, item, color })}
           {row.type !== 'boolean' && (
             <Text

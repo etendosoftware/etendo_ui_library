@@ -21,6 +21,7 @@ export const styles = StyleSheet.create({
     lineHeight: 24,
   },
   row: {
+    width: '100%',
     marginHorizontal: 12,
     paddingBottom: 8,
     marginBottom: 8,
