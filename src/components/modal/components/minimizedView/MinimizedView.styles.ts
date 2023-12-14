@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     color: PRIMARY_100,
     fontSize: 22,
-    fontWeight: '500',
+    fontWeight: '600',
     maxWidth: '100%',
     paddingBottom: 12,
     textAlign: 'center',
