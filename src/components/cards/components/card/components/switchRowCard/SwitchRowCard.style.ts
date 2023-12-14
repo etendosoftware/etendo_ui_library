@@ -21,6 +21,8 @@ export const styles = StyleSheet.create({
     lineHeight: 20,
   },
   row: {
+    width: '100%',
+
     flexDirection: 'row',
     paddingHorizontal: 12,
     paddingBottom: 8,
@@ -46,8 +48,10 @@ export const styles = StyleSheet.create({
     letterSpacing: 8,
     color: NEUTRAL_400,
     fontWeight: '700',
+    overflow: 'hidden',
   },
   rowWitchdotsContainer: {
+    overflow: 'hidden',
     width: '50%',
     flexDirection: 'row',
     alignItems: 'center',
