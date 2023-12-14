@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
   },
   row: {
     width: '100%',
-    marginHorizontal: 12,
+    paddingHorizontal: 12,
     paddingBottom: 8,
     marginBottom: 8,
     borderBottomWidth: 1,
