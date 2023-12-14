@@ -7,9 +7,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     flex: 1,
-    height: '100%',
     justifyContent: 'center',
-    width: '100%',
   },
   modalContent: {
     backgroundColor: NEUTRAL_300,
@@ -19,7 +17,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     maxHeight: isDeviceTablet ? '65%' : '85%',
     maxWidth: '85%',
-    padding: 24,
+    padding: 0,
     width: 'auto',
   },
   modalFullScreen: {
@@ -28,5 +26,6 @@ export const styles = StyleSheet.create({
     maxWidth: '100%',
     width: '100%',
     borderRadius: 0,
+    paddingTop: 0,
   },
 });

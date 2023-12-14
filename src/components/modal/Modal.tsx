@@ -16,25 +16,33 @@ const Modal = ({
   children,
   disableTapOutside = false,
   fullScreen = false,
-  handleSave,
+  handleAction,
   imageHeader,
   labelCloseButton,
-  labelSaveButton,
+  labelActionButton,
   setVisible,
   subtitle,
   title,
   visible,
 }: IModalProps) => {
-  const [buttonsToDisplay, setButtonsToDisplay] = useState<ReactNode[]>([
-    <Button
-      typeStyle={'white'}
-      text={labelCloseButton}
-      onPress={() => setVisible(false)}
-    />,
-    handleSave && labelSaveButton ? (
-      <Button typeStyle={'white'} text={labelSaveButton} onPress={handleSave} />
-    ) : null,
-  ]);
+  const hasActionButton = !!handleAction && !!labelActionButton;
+
+  const actionBtn = hasActionButton && (
+    <Button typeStyle="white" text={labelActionButton} onPress={handleAction} />
+  );
+
+  const butonsList = () =>
+    [
+      <Button
+        typeStyle={'white'}
+        text={labelCloseButton}
+        onPress={() => setVisible(false)}
+      />,
+      actionBtn,
+    ].filter(Boolean);
+
+  const [buttonsToDisplay, setButtonsToDisplay] =
+    useState<ReactNode[]>(butonsList());
 
   useEffect(() => {
     if (buttons) {

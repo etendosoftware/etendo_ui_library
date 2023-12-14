@@ -1,5 +1,11 @@
 import React from 'react';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Platform,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { ButtonContainer } from '../../../containers';
 import { styles } from './MinimizedView.styles';
 import { IMinimizedViewProps } from './MinimizedView.types';
@@ -12,7 +18,7 @@ const MinimizedView = ({
   title,
 }: IMinimizedViewProps) => {
   return (
-    <>
+    <View>
       <View style={styles.headerContainer}>
         {imageHeader && (
           <View style={styles.imageHeaderContainer}>{imageHeader}</View>
@@ -49,7 +55,7 @@ const MinimizedView = ({
           />
         )}
       </View>
-    </>
+    </View>
   );
 };
 
