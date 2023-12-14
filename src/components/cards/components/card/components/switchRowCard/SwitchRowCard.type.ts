@@ -5,4 +5,5 @@ export interface SwitchRowCardProps {
   row?: Metadata;
   item: any;
   color: TextStyle | undefined;
+  margin?: boolean;
 }

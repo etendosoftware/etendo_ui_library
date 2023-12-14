@@ -1,6 +1,6 @@
 import React, { useMemo, useRef, useState } from 'react';
 import { View, Pressable, Animated, ViewStyle, TextStyle } from 'react-native';
-import { findRowTitle, findPrimaryId } from '../../../../helpers/table_utils';
+import { findPrimaryId } from '../../../../helpers/table_utils';
 import { CardProps } from './Card.types';
 import { styles } from './Card.style';
 import {
@@ -12,6 +12,7 @@ import {
 import SwitchColumnCard from './components/switchRowCard/SwitchRowCard';
 import SwitchTitleCard from './components/switchTitleCard/SwitchTitleCard';
 import { Metadata } from '../../../../types/table.types';
+import { findRowTitle } from '../../../../helpers/cards_utils';
 
 const MAX_ROWS: number = 4;
 

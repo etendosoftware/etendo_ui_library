@@ -13,7 +13,6 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 20,
   },
-  selfSpace: { width: '50%' },
   textValue: {
     fontFamily: 'Inter',
     color: NEUTRAL_1000,
@@ -36,13 +35,11 @@ export const styles = StyleSheet.create({
   check: {
     width: 16,
     height: 16,
-    marginLeft: 8,
   },
   calendar: {
     width: 16,
     height: 16,
     marginRight: 4,
-    marginLeft: 8,
   },
   dots: {
     flex: 1,
@@ -58,9 +55,11 @@ export const styles = StyleSheet.create({
   },
   alignDotsRight: {
     textAlign: 'right',
+    paddingLeft: 8,
   },
   alignDotsLeft: {
     textAlign: 'left',
+    paddingRight: 8,
   },
   paddingCalendar: {
     paddingRight: 16,

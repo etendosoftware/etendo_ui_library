@@ -3,6 +3,6 @@ export type Metadata = {
   visible?: boolean;
   label?: string;
   key?: string;
-  type?: 'number' | 'string' | 'boolean' | 'date';
+  type?: 'number' | 'string' | 'boolean' | 'date' | 'time';
   title?: boolean;
 };
