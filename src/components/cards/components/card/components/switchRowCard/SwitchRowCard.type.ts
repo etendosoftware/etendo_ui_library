@@ -1,4 +1,4 @@
-import { TextStyle } from 'react-native';
+import { ViewStyle, TextStyle } from 'react-native';
 import { Metadata } from '../../../../../../types/table.types';
 
 export interface SwitchRowCardProps {
@@ -6,4 +6,5 @@ export interface SwitchRowCardProps {
   item: any;
   color: TextStyle | undefined;
   margin?: boolean;
+  backgroundColor?: ViewStyle;
 }

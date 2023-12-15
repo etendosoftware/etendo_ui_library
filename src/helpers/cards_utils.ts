@@ -1,3 +1,4 @@
+import { Platform, ViewStyle } from 'react-native';
 import { Metadata } from '../types/table.types';
 
 export const findRowTitle = (columns: Metadata[]): Metadata | undefined => {

@@ -44,6 +44,7 @@ const Card = ({ item, index, metadata, onPress }: CardProps) => {
     if (isDisabled() || isPressable) {
       return { backgroundColor: NEUTRAL_200 };
     }
+    return { backgroundColor: styles.container.backgroundColor };
   };
 
   const changeStatusBackground = (): ViewStyle | undefined => {
@@ -99,6 +100,7 @@ const Card = ({ item, index, metadata, onPress }: CardProps) => {
                   row={row}
                   item={item}
                   color={changeTextColor()}
+                  backgroundColor={changeBackground()}
                 />
               ),
           )}
