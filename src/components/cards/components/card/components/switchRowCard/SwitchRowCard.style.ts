@@ -49,14 +49,13 @@ export const styles = StyleSheet.create({
   },
   dots: {
     letterSpacing: 8,
-    marginHorizontal: 12,
     color: NEUTRAL_400,
     fontWeight: '700',
     position: 'absolute',
-    width: '100%',
     overflow: 'hidden',
-    height: 20,
+    lineHeight: 20,
     alignSelf: 'center',
+    textAlignVertical: 'center',
     display: 'flex',
   },
   contentMiddleRow: {
