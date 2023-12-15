@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { View, Pressable, Animated, ViewStyle, TextStyle } from 'react-native';
 import { findPrimaryId } from '../../../../helpers/table_utils';
 import { CardProps } from './Card.types';
@@ -18,23 +18,16 @@ const MAX_ROWS: number = 4;
 
 const Card = ({ item, index, metadata, onPress }: CardProps) => {
   const [isPressable, setIsPressable] = useState<boolean>(false);
-
-  const elevationAnim = useRef(new Animated.Value(5)).current;
+  const [shadowOpacity, setShadowOpacity] = useState<ViewStyle>({
+    shadowOpacity: 0.1,
+  });
 
   const onHoverIn = () => {
-    Animated.timing(elevationAnim, {
-      toValue: 12,
-      duration: 150,
-      useNativeDriver: true,
-    }).start();
+    setShadowOpacity({ shadowOpacity: 0.2 });
   };
 
   const onHoverOut = () => {
-    Animated.timing(elevationAnim, {
-      toValue: 5,
-      duration: 150,
-      useNativeDriver: true,
-    }).start();
+    setShadowOpacity({ shadowOpacity: 0.1 });
   };
   const onPressIn = () => {
     setIsPressable(true);
@@ -87,11 +80,7 @@ const Card = ({ item, index, metadata, onPress }: CardProps) => {
         }
       }}>
       <Animated.View
-        style={[
-          styles.container,
-          changeBackground(),
-          { elevation: elevationAnim },
-        ]}>
+        style={[styles.container, changeBackground(), shadowOpacity]}>
         <View style={[styles.status, changeStatusBackground()]} />
         <SwitchTitleCard
           row={getColumnTitle}
