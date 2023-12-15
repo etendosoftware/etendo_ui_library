@@ -59,7 +59,12 @@ const SwitchRowCard = ({ row, item, color = {} }: SwitchRowCardProps) => {
           <Text
             numberOfLines={1}
             ellipsizeMode="clip"
-            style={[styles.dots, styles.alignDotsRight]}>
+            style={[
+              styles.dots,
+              styles.alignDotsRight,
+              // @ts-ignore
+              { textOverflow: 'clip' },
+            ]}>
             {DOTS}
           </Text>
         </View>
@@ -67,7 +72,12 @@ const SwitchRowCard = ({ row, item, color = {} }: SwitchRowCardProps) => {
           <Text
             numberOfLines={1}
             ellipsizeMode="clip"
-            style={[styles.dots, styles.alignDotsLeft]}>
+            style={[
+              styles.dots,
+              styles.alignDotsLeft,
+              // @ts-ignore
+              { textOverflow: 'clip' },
+            ]}>
             {DOTS}
           </Text>
           {getIconByType({ row, item, color })}
