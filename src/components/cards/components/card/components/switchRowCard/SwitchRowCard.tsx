@@ -8,8 +8,7 @@ import {
 } from '../../../../../../assets/images/icons';
 import { styles } from './SwitchRowCard.style';
 import { SwitchRowCardProps } from './SwitchRowCard.type';
-const DOTS: string =
-  '··································································································';
+const DOTS: string = '··························';
 
 export const getIconByType = ({
   row,
