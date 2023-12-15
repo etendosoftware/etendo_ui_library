@@ -22,10 +22,10 @@ export const styles = StyleSheet.create({
   },
   row: {
     width: '100%',
-
+    justifyContent: 'space-between',
     flexDirection: 'row',
     paddingHorizontal: 12,
-    paddingBottom: 8,
+    marginBottom: 8,
     alignItems: 'center',
   },
 
@@ -48,28 +48,27 @@ export const styles = StyleSheet.create({
     maxWidth: 16,
   },
   dots: {
-    flex: 1,
     letterSpacing: 8,
+    marginHorizontal: 12,
     color: NEUTRAL_400,
     fontWeight: '700',
+    position: 'absolute',
+    width: '100%',
     overflow: 'hidden',
+    height: 20,
+    alignSelf: 'center',
+    display: 'flex',
   },
-  rowWitchdotsContainer: {
-    overflow: 'hidden',
-    width: '50%',
+  contentMiddleRow: {
+    maxWidth: '50%',
     flexDirection: 'row',
     alignItems: 'center',
     height: 20,
   },
-  alignDotsRight: {
-    textAlign: 'right',
-    marginLeft: 8,
+  paddingLeft: {
+    paddingLeft: 8,
   },
-  alignDotsLeft: {
-    textAlign: 'left',
-    marginRight: 8,
-  },
-  paddingCalendar: {
-    paddingRight: 16,
+  paddingRight: {
+    paddingRight: 8,
   },
 });

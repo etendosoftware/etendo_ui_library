@@ -16,7 +16,7 @@ export const getIconByType = ({
   item,
   color = {},
 }: SwitchRowCardProps) => {
-  if (row?.key && item[row.key]) {
+  if (row?.key && (item[row.key] || item[row.key] === false)) {
     switch (row.type) {
       case 'date':
         return <CalendarIcon style={styles.calendar} fill={color.color} />;
@@ -41,7 +41,12 @@ export const getIconByType = ({
     }
   }
 };
-const SwitchRowCard = ({ row, item, color = {} }: SwitchRowCardProps) => {
+const SwitchRowCard = ({
+  row,
+  item,
+  color = {},
+  backgroundColor,
+}: SwitchRowCardProps) => {
   if (!row) {
     return;
   }
@@ -49,37 +54,28 @@ const SwitchRowCard = ({ row, item, color = {} }: SwitchRowCardProps) => {
   if (row.type !== 'string' && row.type) {
     return (
       <View style={styles.row}>
-        <View style={styles.rowWitchdotsContainer}>
+        <Text numberOfLines={1} ellipsizeMode="clip" style={styles.dots}>
+          {DOTS}
+        </Text>
+        <View
+          style={[
+            styles.contentMiddleRow,
+            styles.paddingRight,
+            backgroundColor,
+          ]}>
           <Text
             style={[styles.textName, color]}
             ellipsizeMode="tail"
             numberOfLines={1}>
             {row?.label}
           </Text>
-          <Text
-            numberOfLines={1}
-            ellipsizeMode="clip"
-            style={[
-              styles.dots,
-              styles.alignDotsRight,
-              // @ts-ignore
-              { textOverflow: 'clip' },
-            ]}>
-            {DOTS}
-          </Text>
         </View>
-        <View style={styles.rowWitchdotsContainer}>
-          <Text
-            numberOfLines={1}
-            ellipsizeMode="clip"
-            style={[
-              styles.dots,
-              styles.alignDotsLeft,
-              // @ts-ignore
-              { textOverflow: 'clip' },
-            ]}>
-            {DOTS}
-          </Text>
+        <View
+          style={[
+            styles.contentMiddleRow,
+            styles.paddingLeft,
+            backgroundColor,
+          ]}>
           {getIconByType({ row, item, color })}
           {row.type !== 'boolean' && (
             <Text
