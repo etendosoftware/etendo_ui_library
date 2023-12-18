@@ -5,18 +5,25 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 12,
+    maxWidth: 428,
+    alignItems: 'center',
+    width: '100%',
+    paddingHorizontal: 9,
   },
   containerFlex: {
+    maxWidth: 428,
     marginTop: 12,
-    flex: 1,
+    paddingHorizontal: 15,
+    width: '100%',
   },
   titleContainer: {
-    marginHorizontal: 16,
+    paddingHorizontal: 15,
     height: 48,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
+    width: '100%',
   },
   titleTextContainer: {
     flexDirection: 'row',

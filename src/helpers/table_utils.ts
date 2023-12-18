@@ -64,8 +64,3 @@ export const findPrimaryId = (col: Columns[], data: any) => {
   }
   return primary;
 };
-
-export const findRowTitle = (columns: Metadata[]): Columns | undefined => {
-  const column = columns.find(column => column.title && column.key);
-  return column ?? undefined;
-};

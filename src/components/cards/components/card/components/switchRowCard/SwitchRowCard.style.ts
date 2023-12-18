@@ -13,7 +13,6 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 20,
   },
-  selfSpace: { width: '50%' },
   textValue: {
     fontFamily: 'Inter',
     color: NEUTRAL_1000,
@@ -22,9 +21,11 @@ export const styles = StyleSheet.create({
     lineHeight: 20,
   },
   row: {
+    width: '100%',
+    justifyContent: 'space-between',
     flexDirection: 'row',
     paddingHorizontal: 12,
-    paddingBottom: 8,
+    marginBottom: 8,
     alignItems: 'center',
   },
 
@@ -36,33 +37,37 @@ export const styles = StyleSheet.create({
   check: {
     width: 16,
     height: 16,
-    marginLeft: 8,
+    minWidth: 16,
+    maxWidth: 16,
   },
   calendar: {
     width: 16,
     height: 16,
     marginRight: 4,
-    marginLeft: 8,
+    minWidth: 16,
+    maxWidth: 16,
   },
   dots: {
-    flex: 1,
     letterSpacing: 8,
     color: NEUTRAL_400,
     fontWeight: '700',
+    position: 'absolute',
+    overflow: 'hidden',
+    lineHeight: 20,
+    alignSelf: 'center',
+    textAlignVertical: 'center',
+    display: 'flex',
   },
-  rowWitchdotsContainer: {
-    width: '50%',
+  contentMiddleRow: {
+    maxWidth: '50%',
     flexDirection: 'row',
     alignItems: 'center',
     height: 20,
   },
-  alignDotsRight: {
-    textAlign: 'right',
+  paddingLeft: {
+    paddingLeft: 8,
   },
-  alignDotsLeft: {
-    textAlign: 'left',
-  },
-  paddingCalendar: {
-    paddingRight: 16,
+  paddingRight: {
+    paddingRight: 8,
   },
 });

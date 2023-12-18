@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, Text} from 'react-native';
+import { SafeAreaView, StyleSheet, Text } from 'react-native';
 import Button from './components/button/Button';
 
 function App(): JSX.Element {

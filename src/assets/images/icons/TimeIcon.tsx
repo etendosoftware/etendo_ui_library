@@ -1,12 +1,12 @@
 import React from 'react';
-import { ImageStyle } from 'react-native';
+import { ColorValue, ImageStyle } from 'react-native';
 import { Svg, Path, G, Defs, ClipPath, Rect } from 'react-native-svg';
 import { DEFAULT_COLOR_THEME } from '../../../styles/colors';
 import { sizeSvg } from '../../../helpers/svg_utils';
 
 export interface SvgImageProps {
   style?: ImageStyle;
-  fill?: string;
+  fill?: ColorValue;
 }
 
 export const TimeIcon = ({

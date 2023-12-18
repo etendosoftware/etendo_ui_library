@@ -4,7 +4,7 @@ export interface IMaximizedViewProps {
   buttonsToDisplay?: ReactNode[];
   children?: ReactNode;
   imageHeader?: ReactNode;
-  setVisible: any;
+  setVisible: (...params: any[]) => void;
   subtitle?: string;
   title: string;
 }
