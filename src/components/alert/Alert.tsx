@@ -38,7 +38,7 @@ const Alert = () => {
   const [message, setMessage] = useState<string>('');
   const [typeMessage, setTypeMessage] = useState<StatusType>('info');
   const alertTimer = useRef<NodeJS.Timeout | number | undefined>(undefined);
-  const [isVisible, setIsVisible] = useState(false); // Nuevo estado para controlar la visibilidad
+  const [isVisible, setIsVisible] = useState(false);
 
   const slideAnim = useRef(
     new Animated.Value(Dimensions.get('window').height),
@@ -64,7 +64,7 @@ const Alert = () => {
     const showListener = ({ message, type, duration }: IMessage) => {
       setMessage(message);
       setTypeMessage(type);
-      setIsVisible(true); // Muestra la alerta
+      setIsVisible(true);
       slideIn();
 
       if (typeof alertTimer.current === 'number') {
@@ -72,13 +72,13 @@ const Alert = () => {
       }
       alertTimer.current = setTimeout(() => {
         slideOut();
-        setTimeout(() => setIsVisible(false), 500); // Oculta la alerta después de la animación
+        setTimeout(() => setIsVisible(false), 500);
       }, duration);
     };
 
     const clearListener = () => {
       slideOut();
-      setTimeout(() => setIsVisible(false), 500); // Oculta la alerta después de la animación
+      setTimeout(() => setIsVisible(false), 500);
     };
 
     on('clear', clearListener);
