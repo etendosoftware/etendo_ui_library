@@ -33,6 +33,7 @@ import { styles } from './Alert.style';
 
 const MAX_LENGTH_TEXT: number = 70;
 const HEIGHT_MESSAGE: number = 100;
+const HEIGHT_WINDOWS: number = Dimensions.get('window').height;
 
 const Alert = () => {
   const [message, setMessage] = useState<string>('');
@@ -40,13 +41,11 @@ const Alert = () => {
   const alertTimer = useRef<NodeJS.Timeout | number | undefined>(undefined);
   const [isVisible, setIsVisible] = useState(false);
 
-  const slideAnim = useRef(
-    new Animated.Value(Dimensions.get('window').height),
-  ).current;
+  const slideAnim = useRef(new Animated.Value(HEIGHT_WINDOWS)).current;
 
   const slideIn = () => {
     Animated.timing(slideAnim, {
-      toValue: Dimensions.get('window').height - HEIGHT_MESSAGE,
+      toValue: HEIGHT_WINDOWS - HEIGHT_MESSAGE,
       duration: 500,
       useNativeDriver: true,
     }).start();
@@ -54,7 +53,7 @@ const Alert = () => {
 
   const slideOut = () => {
     Animated.timing(slideAnim, {
-      toValue: Dimensions.get('window').height,
+      toValue: HEIGHT_WINDOWS,
       duration: 500,
       useNativeDriver: true,
     }).start();
