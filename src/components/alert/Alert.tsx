@@ -33,37 +33,49 @@ import { styles } from './Alert.style';
 
 const MAX_LENGTH_TEXT: number = 70;
 const HEIGHT_MESSAGE: number = 100;
-const HEIGHT_WINDOWS: number = Dimensions.get('window').height;
+const HEIGHT_WINDOWS: number = Dimensions.get('window').height - 50;
 
 const Alert = () => {
   const [message, setMessage] = useState<string>('');
   const [typeMessage, setTypeMessage] = useState<StatusType>('info');
   const alertTimer = useRef<NodeJS.Timeout | number | undefined>(undefined);
-  const [isVisible, setIsVisible] = useState(false);
 
   const slideAnim = useRef(new Animated.Value(HEIGHT_WINDOWS)).current;
-
+  const opacityAnim = useRef(new Animated.Value(0)).current;
   const slideIn = () => {
-    Animated.timing(slideAnim, {
-      toValue: HEIGHT_WINDOWS - HEIGHT_MESSAGE,
-      duration: 500,
-      useNativeDriver: true,
-    }).start();
+    Animated.parallel([
+      Animated.timing(slideAnim, {
+        toValue: HEIGHT_WINDOWS - HEIGHT_MESSAGE,
+        duration: 500,
+        useNativeDriver: true,
+      }),
+      Animated.timing(opacityAnim, {
+        toValue: 1,
+        duration: 500,
+        useNativeDriver: true,
+      }),
+    ]).start();
   };
 
   const slideOut = () => {
-    Animated.timing(slideAnim, {
-      toValue: HEIGHT_WINDOWS,
-      duration: 500,
-      useNativeDriver: true,
-    }).start();
+    Animated.parallel([
+      Animated.timing(slideAnim, {
+        toValue: HEIGHT_WINDOWS,
+        duration: 500,
+        useNativeDriver: true,
+      }),
+      Animated.timing(opacityAnim, {
+        toValue: 0,
+        duration: 500,
+        useNativeDriver: true,
+      }),
+    ]).start();
   };
 
   useEffect(() => {
     const showListener = ({ message, type, duration }: IMessage) => {
       setMessage(message);
       setTypeMessage(type);
-      setIsVisible(true);
       slideIn();
 
       if (typeof alertTimer.current === 'number') {
@@ -71,13 +83,11 @@ const Alert = () => {
       }
       alertTimer.current = setTimeout(() => {
         slideOut();
-        setTimeout(() => setIsVisible(false), 500);
       }, duration);
     };
 
     const clearListener = () => {
       slideOut();
-      setTimeout(() => setIsVisible(false), 500);
     };
 
     on('clear', clearListener);
@@ -161,15 +171,12 @@ const Alert = () => {
     return { backgroundColor, textColor, icon, marginLeft, imageColor };
   }, [typeMessage]);
 
-  if (!isVisible) {
-    return null;
-  }
   return (
     <Animated.View
       style={[
         { backgroundColor: stylesAlert.backgroundColor },
         styles.container,
-        { transform: [{ translateY: slideAnim }] },
+        { transform: [{ translateY: slideAnim }], opacity: opacityAnim },
       ]}>
       {stylesAlert.icon}
       <Text
