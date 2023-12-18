@@ -21,7 +21,8 @@ export const styles = StyleSheet.create({
     lineHeight: 24,
   },
   row: {
-    marginHorizontal: 12,
+    width: '100%',
+    paddingHorizontal: 12,
     paddingBottom: 8,
     marginBottom: 8,
     borderBottomWidth: 1,
@@ -29,9 +30,14 @@ export const styles = StyleSheet.create({
   },
   titleRowValue: {
     flexDirection: 'row',
-    height: 24,
     alignItems: 'center',
   },
-  check: { width: 16, height: 16 },
-  calendar: { width: 16, height: 16, marginRight: 3 },
+  check: { width: 16, height: 16, minWidth: 16, maxWidth: 16 },
+  calendar: {
+    width: 16,
+    height: 16,
+    marginRight: 3,
+    minWidth: 16,
+    maxWidth: 16,
+  },
 });

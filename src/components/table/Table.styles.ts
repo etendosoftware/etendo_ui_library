@@ -115,11 +115,13 @@ export const styles = StyleSheet.create({
     lineHeight: 28,
     marginTop: 25,
     maxWidth: '80%',
+    textAlign: 'center',
   },
   emptyTextSubtitle: {
     color: NEUTRAL_700,
     fontSize: 14,
     fontWeight: '600',
     lineHeight: 28,
+    textAlign: 'center',
   },
 });

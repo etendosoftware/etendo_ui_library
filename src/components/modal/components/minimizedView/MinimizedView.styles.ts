@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import {
   NEUTRAL_400,
   NEUTRAL_800,
@@ -6,23 +6,28 @@ import {
 } from '../../../../styles/colors';
 import { isDeviceTablet } from '../../../../helpers/table_utils';
 
+const DIFFERENCE_HEIGHT = 500;
+
 export const styles = StyleSheet.create({
   headerContainer: {
     alignItems: 'center',
     flexDirection: 'column',
     justifyContent: 'space-between',
+    paddingHorizontal: 24,
+    paddingTop: 24,
+    width: '100%',
   },
   imageHeaderContainer: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
-    paddingBottom: 16,
+    paddingBottom: 12,
   },
   modalTitle: {
     alignSelf: 'flex-start',
     color: PRIMARY_100,
     fontSize: 22,
-    fontWeight: '500',
+    fontWeight: '600',
     maxWidth: '100%',
     paddingBottom: 12,
     textAlign: 'center',
@@ -42,17 +47,17 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderTopColor: NEUTRAL_400,
     borderTopWidth: 1,
-    display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    marginBottom: 12,
+    maxHeight: Dimensions.get('window').height - DIFFERENCE_HEIGHT,
+    paddingHorizontal: 24,
     paddingVertical: 8,
-    flex: 1,
   },
   buttonModalContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     height: 'auto',
+    padding: 12,
   },
   buttonContainer: {
     width: isDeviceTablet ? '40%' : '45%',

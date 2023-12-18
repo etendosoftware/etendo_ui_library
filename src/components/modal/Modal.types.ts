@@ -6,11 +6,11 @@ export interface IModalProps {
   children?: ReactNode;
   disableTapOutside?: boolean;
   fullScreen?: boolean;
-  handleSave?: any;
+  handleAction?: (...params: any[]) => void;
   imageHeader?: ReactNode;
   labelCloseButton: string;
-  labelSaveButton?: string;
-  setVisible: any;
+  labelActionButton?: string;
+  setVisible: (...params: any[]) => void;
   styles?: ViewStyle;
   subtitle?: string;
   title: string;
