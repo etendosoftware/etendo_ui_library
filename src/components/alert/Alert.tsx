@@ -5,6 +5,8 @@ import {
   ColorValue,
   Pressable,
   DimensionValue,
+  View,
+  Dimensions,
 } from 'react-native';
 import { nextMessage, on, removeListener } from './AlertManager';
 import { IMessage, StatusType } from './Alert.type';
@@ -30,16 +32,21 @@ import {
 import { styles } from './Alert.style';
 
 const MAX_LENGTH_TEXT: number = 70;
+const HEIGHT_MESSAGE: number = 100;
 
 const Alert = () => {
   const [message, setMessage] = useState<string>('');
   const [typeMessage, setTypeMessage] = useState<StatusType>('info');
   const alertTimer = useRef<NodeJS.Timeout | number | undefined>(undefined);
-  const slideAnim = useRef(new Animated.Value(100)).current;
+  const [isVisible, setIsVisible] = useState(false); // Nuevo estado para controlar la visibilidad
+
+  const slideAnim = useRef(
+    new Animated.Value(Dimensions.get('window').height),
+  ).current;
 
   const slideIn = () => {
     Animated.timing(slideAnim, {
-      toValue: -50,
+      toValue: Dimensions.get('window').height - HEIGHT_MESSAGE,
       duration: 500,
       useNativeDriver: true,
     }).start();
@@ -47,7 +54,7 @@ const Alert = () => {
 
   const slideOut = () => {
     Animated.timing(slideAnim, {
-      toValue: 100,
+      toValue: Dimensions.get('window').height,
       duration: 500,
       useNativeDriver: true,
     }).start();
@@ -57,19 +64,21 @@ const Alert = () => {
     const showListener = ({ message, type, duration }: IMessage) => {
       setMessage(message);
       setTypeMessage(type);
+      setIsVisible(true); // Muestra la alerta
       slideIn();
 
       if (typeof alertTimer.current === 'number') {
         clearTimeout(alertTimer.current);
       }
       alertTimer.current = setTimeout(() => {
-        setMessage('');
         slideOut();
+        setTimeout(() => setIsVisible(false), 500); // Oculta la alerta después de la animación
       }, duration);
     };
+
     const clearListener = () => {
-      setMessage('');
       slideOut();
+      setTimeout(() => setIsVisible(false), 500); // Oculta la alerta después de la animación
     };
 
     on('clear', clearListener);
@@ -153,6 +162,9 @@ const Alert = () => {
     return { backgroundColor, textColor, icon, marginLeft, imageColor };
   }, [typeMessage]);
 
+  if (!isVisible) {
+    return null;
+  }
   return (
     <Animated.View
       style={[
@@ -164,7 +176,10 @@ const Alert = () => {
       <Text
         numberOfLines={2}
         style={[
-          { color: stylesAlert.textColor, marginLeft: stylesAlert.marginLeft },
+          {
+            color: stylesAlert.textColor,
+            marginLeft: stylesAlert.marginLeft,
+          },
           styles.text,
         ]}>
         {message.length > MAX_LENGTH_TEXT

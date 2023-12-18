@@ -4,7 +4,6 @@ export const styles = StyleSheet.create({
   container: {
     width: 344,
     position: 'absolute',
-    bottom: 0,
     alignSelf: 'center',
     borderRadius: 8,
     elevation: 6,
