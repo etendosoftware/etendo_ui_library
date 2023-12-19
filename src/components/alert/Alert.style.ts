@@ -29,4 +29,5 @@ export const styles = StyleSheet.create({
     height: 14,
     width: 14,
   },
+  messageIcon: { width: 20, height: 20, marginRight: 8 },
 });
