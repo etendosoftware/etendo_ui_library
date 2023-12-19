@@ -5,6 +5,8 @@ import {
   ColorValue,
   Pressable,
   DimensionValue,
+  View,
+  Dimensions,
 } from 'react-native';
 import { nextMessage, on, removeListener } from './AlertManager';
 import { IMessage, StatusType } from './Alert.type';
@@ -30,27 +32,44 @@ import {
 import { styles } from './Alert.style';
 
 const MAX_LENGTH_TEXT: number = 70;
+const HEIGHT_MESSAGE: number = 100;
+const HEIGHT_WINDOWS: number = Dimensions.get('window').height - 50;
 
 const Alert = () => {
   const [message, setMessage] = useState<string>('');
   const [typeMessage, setTypeMessage] = useState<StatusType>('info');
   const alertTimer = useRef<NodeJS.Timeout | number | undefined>(undefined);
-  const slideAnim = useRef(new Animated.Value(100)).current;
 
+  const slideAnim = useRef(new Animated.Value(HEIGHT_WINDOWS)).current;
+  const opacityAnim = useRef(new Animated.Value(0)).current;
   const slideIn = () => {
-    Animated.timing(slideAnim, {
-      toValue: -50,
-      duration: 500,
-      useNativeDriver: true,
-    }).start();
+    Animated.parallel([
+      Animated.timing(slideAnim, {
+        toValue: HEIGHT_WINDOWS - HEIGHT_MESSAGE,
+        duration: 500,
+        useNativeDriver: true,
+      }),
+      Animated.timing(opacityAnim, {
+        toValue: 1,
+        duration: 500,
+        useNativeDriver: true,
+      }),
+    ]).start();
   };
 
   const slideOut = () => {
-    Animated.timing(slideAnim, {
-      toValue: 100,
-      duration: 500,
-      useNativeDriver: true,
-    }).start();
+    Animated.parallel([
+      Animated.timing(slideAnim, {
+        toValue: HEIGHT_WINDOWS,
+        duration: 500,
+        useNativeDriver: true,
+      }),
+      Animated.timing(opacityAnim, {
+        toValue: 0,
+        duration: 500,
+        useNativeDriver: true,
+      }),
+    ]).start();
   };
 
   useEffect(() => {
@@ -63,12 +82,11 @@ const Alert = () => {
         clearTimeout(alertTimer.current);
       }
       alertTimer.current = setTimeout(() => {
-        setMessage('');
         slideOut();
       }, duration);
     };
+
     const clearListener = () => {
-      setMessage('');
       slideOut();
     };
 
@@ -158,13 +176,16 @@ const Alert = () => {
       style={[
         { backgroundColor: stylesAlert.backgroundColor },
         styles.container,
-        { transform: [{ translateY: slideAnim }] },
+        { transform: [{ translateY: slideAnim }], opacity: opacityAnim },
       ]}>
       {stylesAlert.icon}
       <Text
         numberOfLines={2}
         style={[
-          { color: stylesAlert.textColor, marginLeft: stylesAlert.marginLeft },
+          {
+            color: stylesAlert.textColor,
+            marginLeft: stylesAlert.marginLeft,
+          },
           styles.text,
         ]}>
         {message.length > MAX_LENGTH_TEXT
