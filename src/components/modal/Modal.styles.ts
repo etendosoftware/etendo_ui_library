@@ -19,6 +19,7 @@ export const styles = StyleSheet.create({
     maxWidth: '85%',
     padding: 0,
     width: 'auto',
+    minHeight: 250,
   },
   modalFullScreen: {
     height: '100%',

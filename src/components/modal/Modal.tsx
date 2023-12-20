@@ -20,7 +20,7 @@ const Modal = ({
   imageHeader,
   labelCloseButton,
   labelActionButton,
-  setVisible,
+  showModal,
   subtitle,
   title,
   visible,
@@ -36,7 +36,7 @@ const Modal = ({
       <Button
         typeStyle={'white'}
         text={labelCloseButton}
-        onPress={() => setVisible(false)}
+        onPress={() => showModal(false)}
       />,
       actionBtn,
     ].filter(Boolean);
@@ -56,11 +56,11 @@ const Modal = ({
       animationType="fade"
       transparent={true}
       visible={visible}
-      onRequestClose={() => setVisible(false)}>
+      onRequestClose={() => showModal(false)}>
       <TouchableOpacity
         style={styles.modalContainer}
         activeOpacity={1}
-        onPressOut={() => !disableTapOutside && setVisible(false)}>
+        onPressOut={() => !disableTapOutside && showModal(false)}>
         <TouchableWithoutFeedback>
           <View
             style={[styles.modalContent, fullScreen && styles.modalFullScreen]}>
@@ -71,7 +71,7 @@ const Modal = ({
                 subtitle={subtitle}
                 children={children}
                 buttonsToDisplay={buttonsToDisplay}
-                setVisible={setVisible}
+                setVisible={showModal}
               />
             ) : (
               <MinimizedView

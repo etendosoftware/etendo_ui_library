@@ -10,7 +10,7 @@ export interface IModalProps {
   imageHeader?: ReactNode;
   labelCloseButton: string;
   labelActionButton?: string;
-  setVisible: (...params: any[]) => void;
+  showModal: (...params: any[]) => void;
   styles?: ViewStyle;
   subtitle?: string;
   title: string;

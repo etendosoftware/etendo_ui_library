@@ -31,4 +31,9 @@ export const styles = StyleSheet.create({
     width: '100%',
     maxHeight: '97%',
   },
+  buttonContainer: {
+    justifyContent: 'flex-end',
+    paddingVertical: 0,
+    flex: 1,
+  },
 });

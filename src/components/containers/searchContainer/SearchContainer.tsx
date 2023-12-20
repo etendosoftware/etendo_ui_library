@@ -9,7 +9,7 @@ import { ButtonContainer } from '../buttonContainer';
 
 const SearchContainer: FC<ISearchContainer> = ({
   value,
-  components,
+  buttons,
   style,
   onSubmit,
   placeholder = '',
@@ -35,7 +35,7 @@ const SearchContainer: FC<ISearchContainer> = ({
           height={height}
         />
       </View>
-      <ButtonContainer components={components} style={{ paddingVertical: 0 }} />
+      <ButtonContainer buttons={buttons} style={{ paddingVertical: 0 }} />
     </View>
   );
 };
