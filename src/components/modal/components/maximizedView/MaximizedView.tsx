@@ -40,11 +40,7 @@ const MaximizedView = ({
           {hasActionButton && buttonsToDisplay && (
             <ButtonContainer
               buttons={[buttonsToDisplay[buttonsToDisplay.length - 1]]}
-              style={{
-                justifyContent: 'flex-end',
-                paddingVertical: 0,
-                flex: 1,
-              }}
+              style={styles.buttonContainer}
             />
           )}
         </View>

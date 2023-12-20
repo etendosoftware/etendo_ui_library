@@ -4,7 +4,6 @@ import {
   NEUTRAL_800,
   PRIMARY_100,
 } from '../../../../styles/colors';
-import { isDeviceTablet } from '../../../../helpers/table_utils';
 
 const DIFFERENCE_HEIGHT = 500;
 
@@ -71,6 +70,7 @@ export const styles = StyleSheet.create({
     padding: 12,
   },
   buttonContainer: {
-    width: isDeviceTablet ? '40%' : '45%',
+    justifyContent: 'flex-end',
+    paddingVertical: 0,
   },
 });

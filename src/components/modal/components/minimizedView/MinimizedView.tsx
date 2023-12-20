@@ -66,10 +66,7 @@ const MinimizedView = ({
         {buttonsToDisplay?.length && (
           <ButtonContainer
             buttons={buttonsToDisplay}
-            style={{
-              justifyContent: 'flex-end',
-              paddingVertical: 0,
-            }}
+            style={styles.buttonContainer}
           />
         )}
       </View>
