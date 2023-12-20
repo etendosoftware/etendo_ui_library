@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { ButtonContainer } from '../../../containers';
 import { styles } from './MaximizedView.styles';
 import { Button } from '../../../button';
@@ -45,7 +39,7 @@ const MaximizedView = ({
           </View>
           {hasActionButton && buttonsToDisplay && (
             <ButtonContainer
-              components={[buttonsToDisplay[buttonsToDisplay.length - 1]]}
+              buttons={[buttonsToDisplay[buttonsToDisplay.length - 1]]}
               style={{
                 justifyContent: 'flex-end',
                 paddingVertical: 0,
