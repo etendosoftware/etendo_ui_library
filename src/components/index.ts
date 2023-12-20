@@ -1,6 +1,6 @@
 import { Button } from './button';
 import { Input } from './input';
-import { Navbar } from './navbar';
+import { Navbar, DrawerLateral } from './navbar';
 import { Pagination } from './pagination';
 import { StatusBar } from './statusbar';
 import { Tab } from './tab';
@@ -10,13 +10,14 @@ import { CardDropdown } from './cards/components/cardDropdown';
 import { SkeletonItem } from './secondaryComponents';
 import { Layout, ButtonContainer } from './containers';
 import { Cards } from './cards';
-import { Alert } from './alert';
+import { Alert, setAlertDefaultDuration, show } from './alert';
 
 export {
   Alert,
   Button,
   CardDropdown,
   Cards,
+  DrawerLateral,
   Input,
   Navbar,
   Pagination,
@@ -27,4 +28,6 @@ export {
   ViewEtendo,
   Layout,
   ButtonContainer,
+  show,
+  setAlertDefaultDuration,
 };
