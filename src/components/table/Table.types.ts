@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { DimensionValue, ViewStyle } from 'react-native';
 
 export interface TableProps {
@@ -30,11 +31,6 @@ export type Columns = {
   label?: string;
   key?: string;
   width?: DimensionValue;
-  components?: Actions[];
+  components?: ReactNode[];
   cellStyle?: ViewStyle;
-};
-
-export type Actions = {
-  component: JSX.Element;
-  onAction: (id: string) => void;
 };

@@ -41,6 +41,17 @@ export const styles = StyleSheet.create({
     textAlign: 'left',
     marginBottom: 16,
   },
+  childrenModalContainerWeb: {
+    borderBottomColor: NEUTRAL_400,
+    borderBottomWidth: 1,
+    borderTopColor: NEUTRAL_400,
+    borderTopWidth: 1,
+    flexDirection: 'column',
+    paddingHorizontal: 24,
+    paddingVertical: 8,
+    maxHeight: Dimensions.get('screen').height / 4,
+    overflowY: 'scroll',
+  },
   childrenModalContainer: {
     alignItems: 'center',
     borderBottomColor: NEUTRAL_400,

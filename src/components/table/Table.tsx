@@ -1,6 +1,6 @@
 import React from 'react';
-import { FlatList, Pressable, TouchableOpacity, View } from 'react-native';
-import { Actions, Columns, TableProps } from './Table.types';
+import { FlatList, Pressable, View } from 'react-native';
+import { Columns, TableProps } from './Table.types';
 import { styles } from './Table.styles';
 import TableHeaders from './components/TableHeaders';
 import TableCell from './components/TableCell';
@@ -12,6 +12,7 @@ import {
 import { SkeletonRowTable } from '../secondaryComponents';
 import { NEUTRAL_300 } from '../../styles/colors';
 import TableEmpty from './components/TableEmpty';
+import { ButtonContainer } from '../containers';
 
 const Table = ({
   data,
@@ -49,20 +50,7 @@ const Table = ({
                 style={[styles.cell, col.cellStyle, { width: col.width }]}
                 key={'movementTable' + colIndex}>
                 {col.components ? (
-                  col.components?.map(
-                    (itemAction: Actions, actionIndex: number) => {
-                      return (
-                        <TouchableOpacity
-                          style={styles.cellEditContainer}
-                          onPress={() =>
-                            itemAction.onAction(findPrimaryId(columns, item))
-                          }
-                          key={'tableCellCustom' + actionIndex}>
-                          {itemAction.component}
-                        </TouchableOpacity>
-                      );
-                    },
-                  )
+                  <ButtonContainer components={col.components!} />
                 ) : (
                   <TableCell
                     label={col.key ? item[col.key] : ''}
@@ -77,7 +65,7 @@ const Table = ({
     );
   };
 
-  const RenderSkeleton = (item: any, index: number) => {
+  const RenderSkeleton = (index: number) => {
     return (
       <View style={[styles.row, paintOddRows(index)]}>
         {columns.map((col: Columns, colIndex: number) => {
@@ -118,7 +106,7 @@ const Table = ({
         }
         renderItem={item =>
           isLoadingMoreData && isLoading && !data.length && onLoadMoreData
-            ? RenderSkeleton(item.item, item.index)
+            ? RenderSkeleton(item.index)
             : RenderItem(item.item, item.index)
         }
         ListEmptyComponent={
@@ -133,7 +121,7 @@ const Table = ({
           onLoadMoreData &&
           isLoading &&
           Boolean(data.length) &&
-          RenderSkeleton(null, data.length)
+          RenderSkeleton(data.length)
         }
         onEndReached={() => handleLoadMore()}
         onEndReachedThreshold={0.2}
