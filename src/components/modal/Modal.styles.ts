@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { NEUTRAL_300 } from '../../styles/colors';
+import { NEUTRAL_50 } from '../../styles/colors';
 import { isDeviceTablet } from '../../helpers/table_utils';
 
 export const styles = StyleSheet.create({
@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   modalContent: {
-    backgroundColor: NEUTRAL_300,
+    backgroundColor: NEUTRAL_50,
     borderRadius: 28,
     flexDirection: 'column',
     height: 'auto',

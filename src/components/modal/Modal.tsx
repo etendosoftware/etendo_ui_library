@@ -41,14 +41,15 @@ const Modal = ({
       actionBtn,
     ].filter(Boolean);
 
-  const [buttonsToDisplay, setButtonsToDisplay] =
-    useState<ReactNode[]>(butonsList());
+  const [buttonsToDisplay, setButtonsToDisplay] = useState<ReactNode[]>(
+    butonsList(),
+  );
 
   useEffect(() => {
     if (buttons) {
       setButtonsToDisplay([...buttons, ...buttonsToDisplay]);
     }
-  }, []);
+  }, [buttons, buttonsToDisplay]);
 
   return (
     <ModalRN

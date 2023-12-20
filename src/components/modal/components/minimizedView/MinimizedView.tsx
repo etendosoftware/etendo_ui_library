@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
+  Dimensions,
   Platform,
   ScrollView,
   Text,
@@ -17,6 +18,17 @@ const MinimizedView = ({
   subtitle,
   title,
 }: IMinimizedViewProps) => {
+  const [currentDimensions, setcurrentDimensions] = useState(
+    Dimensions.get('window').height / 4,
+  );
+
+  useEffect(() => {
+    const subscription = Dimensions.addEventListener('change', ({ window }) => {
+      setcurrentDimensions(window.height / 4);
+    });
+    return () => subscription?.remove();
+  });
+
   return (
     <View>
       <View style={styles.headerContainer}>
@@ -36,8 +48,14 @@ const MinimizedView = ({
         )}
       </View>
       {children && (
-        <View style={styles.childrenModalContainer}>
-          <TouchableOpacity activeOpacity={1} style={{ maxHeight: '100%' }}>
+        <View
+          style={[
+            Platform.OS === 'web'
+              ? styles.childrenModalContainerWeb
+              : styles.childrenModalContainer,
+            { maxHeight: currentDimensions },
+          ]}>
+          <TouchableOpacity activeOpacity={1}>
             <ScrollView style={{ flexGrow: 0 }}>
               <View onStartShouldSetResponder={() => true}>{children}</View>
             </ScrollView>
