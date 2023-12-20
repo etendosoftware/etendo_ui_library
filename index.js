@@ -9,8 +9,11 @@ import * as WebIcons from './dist-web/assets/images/icons';
 const isNativeEnvironment = Platform.OS === 'ios' || Platform.OS === 'android';
 
 const {
+  Alert,
   Button,
   CardDropdown,
+  Cards,
+  DrawerLateral,
   Input,
   Navbar,
   Pagination,
@@ -18,6 +21,11 @@ const {
   StatusBar,
   Tab,
   Table,
+  ViewEtendo,
+  Layout,
+  ButtonContainer,
+  show,
+  setAlertDefaultDuration,
 } = isNativeEnvironment ? NativeComponents : WebComponents;
 
 const {
@@ -80,8 +88,11 @@ const {
 } = isNativeEnvironment ? NativeIcons : WebIcons;
 
 export {
+  Alert,
   Button,
   CardDropdown,
+  Cards,
+  DrawerLateral,
   Input,
   Navbar,
   Pagination,
@@ -89,6 +100,11 @@ export {
   StatusBar,
   Tab,
   Table,
+  ViewEtendo,
+  Layout,
+  ButtonContainer,
+  show,
+  setAlertDefaultDuration,
   AdvanceCalendarIcon,
   ArrowDownIcon,
   ArrowFirstIcon,
