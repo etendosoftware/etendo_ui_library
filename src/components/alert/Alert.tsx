@@ -1,44 +1,36 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Animated, Dimensions } from 'react-native';
+import { Animated, Dimensions, Keyboard } from 'react-native';
 import { nextMessage, on, removeListener } from './AlertManager';
 import { IMessage, StatusType } from './Alert.type';
-
 import AlertMessage from './components/AlertMessage';
 
-const HEIGHT_MESSAGE: number = 100;
-const HEIGHT_WINDOWS: number = Dimensions.get('window').height - 50;
+const HEIGHT_MESSAGE = 120;
 
 const Alert = () => {
   const [message, setMessage] = useState<string>('');
   const [typeMessage, setTypeMessage] = useState<StatusType>('info');
   const alertTimer = useRef<NodeJS.Timeout | number | undefined>(undefined);
+  const [windowHeight, setWindowHeight] = useState(
+    Dimensions.get('window').height,
+  );
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
 
-  const slideAnim = useRef(new Animated.Value(HEIGHT_WINDOWS)).current;
+  const slideAnim = useRef(new Animated.Value(0)).current;
   const opacityAnim = useRef(new Animated.Value(0)).current;
-  const slideIn = () => {
-    Animated.parallel([
-      Animated.timing(slideAnim, {
-        toValue: HEIGHT_WINDOWS - HEIGHT_MESSAGE,
-        duration: 500,
-        useNativeDriver: true,
-      }),
-      Animated.timing(opacityAnim, {
-        toValue: 1,
-        duration: 500,
-        useNativeDriver: true,
-      }),
-    ]).start();
-  };
 
-  const slideOut = () => {
+  const startAnimation = (show: boolean) => {
+    const finalPosition = show
+      ? windowHeight - HEIGHT_MESSAGE - keyboardHeight
+      : windowHeight;
+
     Animated.parallel([
       Animated.timing(slideAnim, {
-        toValue: HEIGHT_WINDOWS,
+        toValue: finalPosition,
         duration: 500,
         useNativeDriver: true,
       }),
       Animated.timing(opacityAnim, {
-        toValue: 0,
+        toValue: show ? 1 : 0,
         duration: 500,
         useNativeDriver: true,
       }),
@@ -46,34 +38,58 @@ const Alert = () => {
   };
 
   useEffect(() => {
+    const updateDimensions = () => {
+      const newHeight = Dimensions.get('window').height;
+      setWindowHeight(newHeight);
+    };
+
+    const dimensionsSubscription = Dimensions.addEventListener(
+      'change',
+      updateDimensions,
+    );
+    const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', e =>
+      setKeyboardHeight(e.endCoordinates.height),
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => setKeyboardHeight(0),
+    );
+
+    return () => {
+      dimensionsSubscription.remove();
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
+
+  useEffect(() => {
+    slideAnim.setValue(windowHeight);
+
     const showListener = ({ message, type, duration }: IMessage) => {
       setMessage(message);
       setTypeMessage(type);
-      slideIn();
+      startAnimation(true);
 
       if (typeof alertTimer.current === 'number') {
         clearTimeout(alertTimer.current);
       }
+
       alertTimer.current = setTimeout(() => {
-        slideOut();
+        startAnimation(false);
       }, duration);
     };
 
-    const clearListener = () => {
-      slideOut();
-    };
-
-    on('clear', clearListener);
     on('show', showListener);
+    on('clear', () => startAnimation(false));
 
     return () => {
       removeListener('show', showListener);
+      removeListener('clear', () => startAnimation(false));
       if (typeof alertTimer.current === 'number') {
         clearTimeout(alertTimer.current);
       }
-      removeListener('clear', clearListener);
     };
-  }, [slideAnim]);
+  }, [windowHeight, keyboardHeight]);
 
   const onPressClose = () => {
     if (typeof alertTimer.current === 'number') {
