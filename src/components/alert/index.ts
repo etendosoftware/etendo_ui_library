@@ -1,3 +1,4 @@
 import Alert from './Alert';
+import { show, setAlertDefaultDuration } from './AlertManager';
 
-export { Alert };
+export { Alert, show, setAlertDefaultDuration };

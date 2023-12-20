@@ -10,7 +10,7 @@ import { CardDropdown } from './cards/components/cardDropdown';
 import { SkeletonItem } from './secondaryComponents';
 import { Layout, ButtonContainer } from './containers';
 import { Cards } from './cards';
-import { Alert } from './alert';
+import { Alert, setAlertDefaultDuration, show } from './alert';
 
 export {
   Alert,
@@ -28,4 +28,6 @@ export {
   ViewEtendo,
   Layout,
   ButtonContainer,
+  show,
+  setAlertDefaultDuration,
 };
