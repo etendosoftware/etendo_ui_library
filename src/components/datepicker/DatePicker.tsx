@@ -591,9 +591,13 @@ const DatePicker = ({
                 position:
                   Platform.OS === AppPlatform.web ? 'absolute' : 'relative',
                 top:
-                  Platform.OS === AppPlatform.web &&
-                  modalPosition.top + MODAL_POSITION_TOP,
-                left: Platform.OS === AppPlatform.web && modalPosition.left,
+                  Platform.OS === AppPlatform.web
+                    ? modalPosition.top + MODAL_POSITION_TOP
+                    : undefined,
+                left:
+                  Platform.OS === AppPlatform.web
+                    ? modalPosition.left
+                    : undefined,
               },
             ]}>
             <View
