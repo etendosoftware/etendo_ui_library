@@ -1,6 +1,6 @@
 import { Button } from './button';
 import { Input } from './input';
-import { Navbar } from './navbar';
+import { Navbar, DrawerLateral } from './navbar';
 import { Pagination } from './pagination';
 import { StatusBar } from './statusbar';
 import { Tab } from './tab';
@@ -17,6 +17,7 @@ export {
   Button,
   CardDropdown,
   Cards,
+  DrawerLateral,
   Input,
   Navbar,
   Pagination,
