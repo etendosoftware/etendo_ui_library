@@ -50,7 +50,7 @@ const Table = ({
                 style={[styles.cell, col.cellStyle, { width: col.width }]}
                 key={'movementTable' + colIndex}>
                 {col.components ? (
-                  <ButtonContainer components={col.components!} />
+                  <ButtonContainer buttons={col.components!} />
                 ) : (
                   <TableCell
                     label={col.key ? item[col.key] : ''}
