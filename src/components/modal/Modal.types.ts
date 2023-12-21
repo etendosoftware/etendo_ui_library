@@ -11,7 +11,7 @@ export interface IModalProps {
   labelCloseButton: string;
   labelActionButton?: string;
   showModal: (...params: any[]) => void;
-  styles?: ViewStyle;
+  style?: ViewStyle;
   subtitle?: string;
   title: string;
   visible: boolean;
