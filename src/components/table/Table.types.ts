@@ -1,32 +1,26 @@
 import { ReactNode } from 'react';
 import { DimensionValue, ViewStyle } from 'react-native';
-import { Metadata } from '../../interfaces/table.interface';
+import { CommonTableProps, Metadata } from '../../interfaces/table.interface';
 
-export interface TableProps {
-  columns: Columns[]; // to change for Metadata[]; // common type
+export interface TableProps extends CommonTableProps {
+  columns: ColumnsMetadata[];
   commentEmptyTable?: string;
-  currentPage?: number; // common type
-  data: Array<any>; // common type
-  isLoading?: boolean; // common type
-  isLoadingMoreData?: boolean; // common type
-  onLoadMoreData?: (currentPage: number, pageSize: number) => void; // common type
   onRowPress?: (primary: string) => void;
-  pageSize?: number; // common type
   tableHeight?: DimensionValue;
   textEmptyTable?: string;
-  title?: string; // common type
 }
+
 export interface TableCellProps {
   label?: string;
 }
 
 export interface TableHeaderProps {
   title?: string;
-  columns: Columns[];
+  columns: ColumnsMetadata[];
   isLoading?: boolean;
 }
 
-export interface Columns extends Metadata {
+export interface ColumnsMetadata extends Metadata {
   cellStyle?: ViewStyle;
   components?: ReactNode[];
   key?: string;

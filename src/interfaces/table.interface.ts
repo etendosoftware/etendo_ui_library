@@ -8,3 +8,13 @@ export interface Metadata {
   type?: MetadataType;
   visible?: boolean;
 }
+
+export interface CommonTableProps {
+  currentPage?: number;
+  data: any[];
+  isLoading?: boolean;
+  isLoadingMoreData?: boolean;
+  onLoadMoreData?: (currentPage: number, pageSize: number) => void;
+  pageSize?: number;
+  title?: string;
+}

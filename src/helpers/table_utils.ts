@@ -1,4 +1,4 @@
-import { Columns } from '../components/table/Table.types';
+import { ColumnsMetadata } from '../components/table/Table.types';
 import { NEUTRAL_0, QUATERNARY_10 } from '../styles/colors';
 import { Dimensions, PixelRatio, Platform, ViewStyle } from 'react-native';
 // getting screen width and height
@@ -52,7 +52,7 @@ export const disableOutline = (): ViewStyle | undefined => {
   }
 };
 
-export const findPrimaryId = (col: Columns[], data: any) => {
+export const findPrimaryId = (col: ColumnsMetadata[], data: any) => {
   let primary: string = '';
   for (const element of col) {
     if (element.primary === true) {
