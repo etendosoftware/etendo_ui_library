@@ -115,6 +115,7 @@ const defaultText: TextStyle = {
   minWidth: 0,
   display: 'flex',
   textAlignVertical: 'center',
+  paddingVertical: 0,
 };
 const defaultTextPlaceholder: TextStyle = {
   color: NEUTRAL_600,
@@ -135,8 +136,8 @@ const defaultHelperText: TextStyle = {
 
 const defaultFilterContainer: ViewStyle = {
   height: 50,
-  borderTopWidth: 1,
-  borderTopColor: NEUTRAL_10,
+  borderBottomWidth: 1,
+  borderBottomColor: NEUTRAL_10,
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',

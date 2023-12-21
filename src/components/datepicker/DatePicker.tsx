@@ -44,6 +44,7 @@ import {
   convertDateToEtendoERPFormat,
   validateDate,
 } from './DatePicker.utils';
+import { disableOutline } from '../../helpers/table_utils';
 
 // Button from the Etendo UI library
 import { Button } from '../button';
@@ -525,7 +526,7 @@ const DatePicker = ({
   };
 
   return (
-    <View style={styles.container}>
+    <View>
       <View
         style={[
           styles.inputContainerWrapper,
@@ -543,6 +544,7 @@ const DatePicker = ({
           <TextInput
             style={[
               styles.datePickerInput,
+              disableOutline(),
               disabled && styles.disabledInput,
               { backgroundColor: backgroundColor },
             ]}
