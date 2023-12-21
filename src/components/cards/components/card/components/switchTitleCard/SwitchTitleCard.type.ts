@@ -1,8 +1,8 @@
 import { TextStyle } from 'react-native';
-import { Metadata } from '../../../../../../types/table.types';
+import { CardsMetadata } from '../../../../Cards.types';
 
 export interface SwitchTitleCardProps {
-  row?: Metadata;
+  row?: CardsMetadata;
   item: any;
   color?: TextStyle;
 }

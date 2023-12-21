@@ -1,7 +1,6 @@
 import { Columns } from '../components/table/Table.types';
 import { NEUTRAL_0, QUATERNARY_10 } from '../styles/colors';
 import { Dimensions, PixelRatio, Platform, ViewStyle } from 'react-native';
-import { Metadata } from '../types/table.types';
 // getting screen width and height
 const width = Dimensions.get('screen').width;
 const height = Dimensions.get('screen').height;
@@ -38,10 +37,11 @@ export const isTablet = () => {
     (adjustedWidth >= 1000 || adjustedHeight >= 1000)
   ) {
     return true;
-  } else
+  } else {
     return (
       pixelDensity === 2 && (adjustedWidth >= 1920 || adjustedHeight >= 1920)
     );
+  }
 };
 
 export const isDeviceTablet = isTablet();
