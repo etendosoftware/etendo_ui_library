@@ -8,7 +8,7 @@ import { Table } from './table';
 import { ViewEtendo } from './viewEtendo/ViewEtendo';
 import { CardDropdown } from './cards/components/cardDropdown';
 import { SkeletonItem } from './secondaryComponents';
-import { Layout, ButtonContainer } from './containers';
+import { Layout, ButtonContainer, SearchContainer } from './containers';
 import { Cards } from './cards';
 import { Alert, setAlertDefaultDuration, show } from './alert';
 
@@ -28,6 +28,7 @@ export {
   ViewEtendo,
   Layout,
   ButtonContainer,
+  SearchContainer,
   show,
   setAlertDefaultDuration,
 };

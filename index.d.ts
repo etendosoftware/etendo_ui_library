@@ -1,8 +1,19 @@
 import { Button } from './dist-native/components/button';
 import { Input } from './dist-native/components/input';
-import { Navbar } from './dist-native/components/navbar';
+import { Navbar, DrawerLateral } from './dist-native/components/navbar';
 import { Pagination } from './dist-native/components/pagination';
 import { StatusBar } from './dist-native/components/statusbar';
+import { Cards } from './dist-native/components/cards';
+import {
+  Layout,
+  ButtonContainer,
+  SearchContainer,
+} from './dist-native/components/containers';
+import {
+  Alert,
+  show,
+  setAlertDefaultDuration,
+} from './dist-native/components/alert';
 import { Tab } from './dist-native/components/tab';
 import { Table } from './dist-native/components/table';
 import { ViewEtendo } from './dist-native/components/viewEtendo/ViewEtendo';
@@ -65,8 +76,11 @@ import { WayIcon } from './dist-native/assets/images/icons/WayIcon';
 import { WifiIcon } from './dist-native/assets/images/icons/WifiIcon';
 import { WithoutWifiIcon } from './dist-native/assets/images/icons/WithoutWifiIcon';
 export {
+  Alert,
   Button,
   CardDropdown,
+  Cards,
+  DrawerLateral,
   Input,
   Navbar,
   Pagination,
@@ -75,6 +89,11 @@ export {
   Tab,
   Table,
   ViewEtendo,
+  Layout,
+  ButtonContainer,
+  SearchContainer,
+  show,
+  setAlertDefaultDuration,
   AdvanceCalendarIcon,
   ArrowDownIcon,
   ArrowFirstIcon,
