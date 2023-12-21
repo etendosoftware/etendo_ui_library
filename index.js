@@ -24,6 +24,7 @@ const {
   ViewEtendo,
   Layout,
   ButtonContainer,
+  SearchContainer,
   show,
   setAlertDefaultDuration,
 } = isNativeEnvironment ? NativeComponents : WebComponents;
@@ -98,6 +99,7 @@ export {
   Pagination,
   SkeletonItem,
   StatusBar,
+  SearchContainer,
   Tab,
   Table,
   ViewEtendo,
