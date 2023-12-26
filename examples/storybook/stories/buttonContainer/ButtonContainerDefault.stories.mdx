@@ -1,0 +1,132 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import {
+  ButtonContainer as ButtonContainerDefault,
+  argTypes,
+} from './ButtonContainerDefault';
+import * as Icons from '../utils/Icons';
+import Button from '../../components/button/Button';
+import { View, Text } from 'react-native';
+import { styles } from './ButtonContainer.styles';
+import { NEUTRAL_50 } from '../styles/colors';
+
+<Meta
+  title="Main/ButtonContainer"
+  component={ButtonContainerDefault}
+  argTypes={argTypes}
+  args={ButtonContainerDefault.args}
+/>
+
+## ButtonContainer
+
+- [Overview](#overview)
+- [Props](#props)
+- [ButtonContainer Variants](#buttonContainer-variants)
+  - [ButtonContainer Table / Web](#ButtonContainer-tablet-/-web)
+  - [ButtonContainer Mobile](#ButtonContainer-mobile)
+  - [ButtonContainer moodified by style prop and custom buttons](#ButtonContainer-ButtonContainer-moodified-by-style-prop-and-custom-buttons)
+
+## Overview
+
+The Button Container is designed as an intuitive "wrapper" element, specifically crafted to organize and group buttons in a coherent and structured manner. It incorporates distinct properties to seamlessly align and connect buttons, ensuring a streamlined and easily manageable layout.
+
+<Canvas>
+  <div></div>
+  <Story
+    name="Default"
+    component={ButtonContainerDefault}
+    argTypes={ButtonContainerDefault.argTypes}
+    args={ButtonContainerDefault.args}
+  />
+</Canvas>
+
+### Props
+
+<ArgsTable story="Default" />
+
+## ButtonContainer Variants
+
+### ButtonContainer Tablet / Web
+
+<Canvas>
+  <View style={styles.windowTablet}>
+    <ButtonContainerDefault
+      buttons={[
+        <Button
+          typeStyle={'primary'}
+          text="Sales Order"
+          iconRight={<Icons.CheckIcon />}
+        />,
+        <Button typeStyle={'secondary'} text="Add Payment" width={180} />,
+        <Button
+          typeStyle={'whiteBorder'}
+          iconRight={<Icons.CancelIcon />}
+          text="Cancel"
+          width={120}
+        />,
+        <Button typeStyle={'terciary'} iconLeft={<Icons.CameraIcon />} />,
+        <Button typeStyle={'white'} text="Copy lines" />,
+      ]}
+      style={{ backgroundColor: NEUTRAL_50, width: 'auto' }}
+    />
+  </View>
+</Canvas>
+
+### ButtonContainer Mobile
+
+<Canvas>
+  <View style={styles.windowMobile}>
+    <ButtonContainerDefault
+      buttons={[
+        <Button
+          typeStyle={'primary'}
+          text="Sales Order"
+          iconRight={<Icons.CheckIcon />}
+          width={200}
+        />,
+        <Button
+          typeStyle={'whiteBorder'}
+          iconRight={<Icons.CancelIcon />}
+          text="Cancel"
+          width={120}
+        />,
+        <Button typeStyle={'secondary'} text="Add Payment" width={180} />,
+        <Button typeStyle={'terciary'} iconLeft={<Icons.CameraIcon />} />,
+        <Button typeStyle={'white'} text="Copy lines" />,
+      ]}
+      style={{ backgroundColor: NEUTRAL_50, width: 'auto' }}
+    />
+  </View>
+</Canvas>
+
+### ButtonContainer moodified by `style` prop and custom buttons
+
+<Canvas>
+  <View style={styles.windowTablet}>
+    <ButtonContainerDefault
+      buttons={[
+        <Button
+          typeStyle={'primary'}
+          text="Sales Order"
+          iconRight={<Icons.CheckIcon />}
+        />,
+        <Button typeStyle={'secondary'} text="Add Payment" loading={true} />,
+        <Button
+          typeStyle={'whiteBorder'}
+          iconRight={<Icons.CancelIcon />}
+          text="Cancel"
+          width={120}
+        />,
+        <Button
+          typeStyle={'terciary'}
+          text="Generate new model"
+          height={120}
+        />,
+      ]}
+      style={{
+        backgroundColor: NEUTRAL_50,
+        width: 'auto',
+        justifyContent: 'space-between',
+      }}
+    />
+  </View>
+</Canvas>
