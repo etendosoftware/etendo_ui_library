@@ -1,0 +1,9 @@
+export const FONT_BLACK: string = 'Inter-Black';
+export const FONT_BOLD: string = 'Inter-Bold';
+export const FONT_EXTRABOLD: string = 'Inter-ExtraBold';
+export const FONT_EXTRALIGHT: string = 'Inter-ExtraLight';
+export const FONT_LIGHT: string = 'Inter-Light';
+export const FONT_MEDIUM: string = 'Inter-Medium';
+export const FONT_REGULAR: string = 'Inter-Regular';
+export const FONT_SEMIBOLD: string = 'Inter-SemiBold';
+export const FONT_THIN: string = 'Inter-Thin';
