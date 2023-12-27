@@ -4,7 +4,7 @@ import Button from '../../components/button/Button';
 import { Meta } from '@storybook/react';
 import { NEUTRAL_50 } from '../styles/colors';
 import { View } from 'react-native';
-import * as Icons from '../utils/Icons';
+import * as Icons from '../../assets/images/icons';
 import { styles } from './ButtonContainer.styles';
 
 export const argTypes = {
