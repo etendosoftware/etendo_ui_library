@@ -139,16 +139,6 @@ const DatePicker = ({
   const showMonthSelection = () => {
     setDisabledYearSelection(!isMonthSelection);
     setIsMonthSelection(!isMonthSelection);
-
-    if (!isMonthSelection) {
-      requestAnimationFrame(() => {
-        if (monthListRef.current) {
-          const scrollViewHeight = monthListRef.current.clientHeight;
-          const offset = currentMonth * ITEM_HEIGHT - scrollViewHeight / 2 + ITEM_HEIGHT / 2;
-          monthListRef.current.scrollTo({ y: Math.max(0, offset), animated: false });
-        }
-      });
-    }
   };
 
   // Adjust the selected date if the month has less days
@@ -227,6 +217,22 @@ const DatePicker = ({
       <Text style={styles.yearText}>{item}</Text>
     </TouchableOpacity>
   );
+
+  // Effect to adjust scroll position for month selection
+  useEffect(() => {
+    if (isMonthSelection && monthListRef.current) {
+      const timer = setTimeout(() => {
+        const scrollViewHeight = monthListRef.current.clientHeight || 0;
+        const offset = currentMonth * ITEM_HEIGHT - scrollViewHeight / 2 + ITEM_HEIGHT / 2;
+        monthListRef.current.scrollTo({
+          y: Math.max(0, offset),
+          animated: true,
+        });
+      }, 100);
+
+      return () => clearTimeout(timer);
+    }
+  }, [currentMonth, isMonthSelection]);
 
   // Render month selection list
   const renderMonthSelection = () => {
