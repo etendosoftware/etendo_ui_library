@@ -32,7 +32,7 @@ import { AppPlatform } from '../../helpers/utilsTypes';
 
 import { CALENDAR_HEIGHT, styles } from './DatePicker.styles';
 import { translations } from './DatePicker.translations';
-import { DatePickerProps, DayItem } from './DatePicker.types';
+import { DatePickerProps, DayItem, MonthItemProps } from './DatePicker.types';
 import {
   buildMonth,
   formatterDate,
@@ -195,7 +195,7 @@ const DatePicker = ({
   };
 
   // Render item for month selection
-  const renderMonthItem = ({ item, index }: { item: string, index: number }) => (
+  const renderMonthItem = ({ item, index }: MonthItemProps) => (
     <TouchableOpacity
       style={[styles.item, index === currentMonth && styles.selectedItem]}
       onPress={() => {
@@ -219,17 +219,19 @@ const DatePicker = ({
   );
 
   // Effect to adjust scroll position for month selection
+  const scrollToMonth = () => {
+    const scrollViewHeight = monthListRef.current.clientHeight || 0;
+    const offset = currentMonth * ITEM_HEIGHT - scrollViewHeight / 2 + ITEM_HEIGHT / 2;
+    monthListRef.current.scrollTo({
+      y: Math.max(0, offset),
+      animated: true,
+    });
+  };
+
+  // Dentro de tu useEffect
   useEffect(() => {
     if (isMonthSelection && monthListRef.current) {
-      const timer = setTimeout(() => {
-        const scrollViewHeight = monthListRef.current.clientHeight || 0;
-        const offset = currentMonth * ITEM_HEIGHT - scrollViewHeight / 2 + ITEM_HEIGHT / 2;
-        monthListRef.current.scrollTo({
-          y: Math.max(0, offset),
-          animated: true,
-        });
-      }, 100);
-
+      const timer = setTimeout(scrollToMonth, 100);
       return () => clearTimeout(timer);
     }
   }, [currentMonth, isMonthSelection]);
