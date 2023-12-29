@@ -11,6 +11,7 @@ import {
   Platform,
   Dimensions,
   Pressable,
+  ScrollView,
 } from 'react-native';
 
 import {
@@ -31,13 +32,14 @@ import { AppPlatform } from '../../helpers/utilsTypes';
 
 import { CALENDAR_HEIGHT, styles } from './DatePicker.styles';
 import { translations } from './DatePicker.translations';
-import { DatePickerProps, DayItem } from './DatePicker.types';
+import { DatePickerProps, DayItem, MonthItemProps } from './DatePicker.types';
 import {
   buildMonth,
   formatterDate,
   generateYearList,
   getPlaceholderDateFormat,
   parseLocalDateString,
+  ITEM_HEIGHT,
   MODAL_CONTENT_WIDTH,
   MODAL_CONTENT_TOP_POSITION,
   MODAL_POSITION_TOP,
@@ -128,23 +130,15 @@ const DatePicker = ({
   }, [isPickerShow]);
 
   // References for the date picker
-  const calendarRef: any = useRef(null);
   const inputRef: any = useRef(null);
+  const calendarRef: any = useRef(null);
+  const yearListRef: any = useRef(null);
   const monthListRef: any = useRef(null);
 
   // Toggle month selection
   const showMonthSelection = () => {
-    if (!isMonthSelection) setDisabledYearSelection(true);
-    else setDisabledYearSelection(false);
-
+    setDisabledYearSelection(!isMonthSelection);
     setIsMonthSelection(!isMonthSelection);
-
-    if (!isMonthSelection && monthListRef.current) {
-      monthListRef.current.scrollToIndex({
-        animated: true,
-        index: currentMonth,
-      });
-    }
   };
 
   // Adjust the selected date if the month has less days
@@ -153,6 +147,9 @@ const DatePicker = ({
     month: number,
     currentSelectedDate: Date,
   ) => {
+    if (!(currentSelectedDate instanceof Date) || isNaN(currentSelectedDate.getTime())) {
+      return new Date(year, month, 1);
+    }
     const lastDayOfMonth = new Date(year, month + 1, 0).getDate();
     if (currentSelectedDate.getDate() > lastDayOfMonth) {
       return new Date(year, month, lastDayOfMonth);
@@ -198,7 +195,7 @@ const DatePicker = ({
   };
 
   // Render item for month selection
-  const renderMonthItem = ({ item, index }: any) => (
+  const renderMonthItem = ({ item, index }: MonthItemProps) => (
     <TouchableOpacity
       style={[styles.item, index === currentMonth && styles.selectedItem]}
       onPress={() => {
@@ -221,43 +218,63 @@ const DatePicker = ({
     </TouchableOpacity>
   );
 
-  // Render month selection list
-  const renderMonthSelection = () => (
-    <FlatList
-      ref={monthListRef}
-      data={monthNames}
-      renderItem={renderMonthItem}
-      keyExtractor={(_, index) => index.toString()}
-      style={styles.list}
-      initialScrollIndex={currentMonth}
-      getItemLayout={(_, index) => ({
-        length: Platform.OS === AppPlatform.web ? 20 * index : 43.5,
-        offset: 43.5 * index,
-        index,
-      })}
-    />
-  );
+  // Effect to adjust scroll position for month selection
+  const scrollToMonth = () => {
+    const scrollViewHeight = monthListRef.current.clientHeight || 0;
+    const offset = currentMonth * ITEM_HEIGHT - scrollViewHeight / 2 + ITEM_HEIGHT / 2;
+    monthListRef.current.scrollTo({
+      y: Math.max(0, offset),
+      animated: true,
+    });
+  };
 
-  // Reference for year selection list
-  const yearListRef: any = useRef(null);
+  // Dentro de tu useEffect
+  useEffect(() => {
+    if (isMonthSelection && monthListRef.current) {
+      const timer = setTimeout(scrollToMonth, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [currentMonth, isMonthSelection]);
+
+  // Render month selection list
+  const renderMonthSelection = () => {
+    return (
+      <ScrollView
+        ref={monthListRef}
+        style={styles.list}
+      >
+        {monthNames.map((month: string, index: number) => (
+          <View key={index.toString()} style={{ height: ITEM_HEIGHT }}>
+            {renderMonthItem({ item: month, index })}
+          </View>
+        ))}
+      </ScrollView>
+    );
+  };
+
+  // Year selection list
+  const yearList = generateYearList();
+  useEffect(() => {
+    const index = yearList.indexOf(currentYear);
+    if (index !== -1 && yearListRef.current) {
+      const offset = index * ITEM_HEIGHT;
+      yearListRef.current.scrollTo({ y: offset, animated: false });
+    }
+  }, [currentYear, yearList]);
+
   // Render year selection list
   const renderYearSelection = () => {
-    const yearList = generateYearList();
-
     return (
-      <FlatList
+      <ScrollView
         ref={yearListRef}
-        data={yearList}
-        renderItem={renderYearItem}
-        keyExtractor={item => item.toString()}
         style={styles.list}
-        initialScrollIndex={yearList.indexOf(currentYear)}
-        getItemLayout={(_, index) => ({
-          length: Platform.OS === AppPlatform.web ? 43 : 30,
-          offset: Platform.OS === AppPlatform.web ? 43 * index : 43 * index,
-          index,
-        })}
-      />
+      >
+        {yearList.map((year) => (
+          <View key={year.toString()} style={{ height: ITEM_HEIGHT }}>
+            {renderYearItem({ item: year })}
+          </View>
+        ))}
+      </ScrollView>
     );
   };
 
@@ -368,7 +385,7 @@ const DatePicker = ({
 
   // Function for the button 'Accept'
   const onAccept = () => {
-    if (selectedDate) {
+    if (selectedDate && typeof onChangeText === 'function') {
       onChangeText(convertDateToEtendoERPFormat(selectedDate));
     }
     setIsPickerShow(false);
@@ -667,8 +684,8 @@ const DatePicker = ({
             {isYearSelection
               ? renderYearSelection()
               : isMonthSelection
-              ? renderMonthSelection()
-              : renderCalendar()}
+                ? renderMonthSelection()
+                : renderCalendar()}
 
             <View style={styles.optionsContainer}>
               <Button
