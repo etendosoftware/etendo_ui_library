@@ -8,6 +8,7 @@ import {
   Layout,
   ButtonContainer,
   SearchContainer,
+  TitleContainer,
 } from './dist-native/components/containers';
 import {
   Alert,
@@ -138,6 +139,7 @@ export {
   StarIcon,
   StatisticsIcon,
   TimeIcon,
+  TitleContainer,
   TouchIcon,
   TracingIcon,
   TrashIcon,
