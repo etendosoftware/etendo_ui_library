@@ -84,7 +84,7 @@ const InputField = ({
     if (showOptions) {
       getTopLeft();
     }
-  }, []);
+  }, [dataPicker]);
 
   const getTopLeft = () => {
     if (refComponent.current) {
