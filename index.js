@@ -27,7 +27,7 @@ const {
   SearchContainer,
   show,
   setAlertDefaultDuration,
-  TitleContainer
+  TitleContainer,
 } = isNativeEnvironment ? NativeComponents : WebComponents;
 
 const {
@@ -164,5 +164,5 @@ export {
   WayIcon,
   WifiIcon,
   WithoutWifiIcon,
-  TitleContainer
+  TitleContainer,
 };
