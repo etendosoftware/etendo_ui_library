@@ -5,5 +5,6 @@ export interface ITitleContainer {
   buttons?: ReactNode[];
   style?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<ViewStyle>;
+  buttonsGap?: number;
   title: string;
 }
