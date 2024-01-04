@@ -13,6 +13,7 @@ import SwitchStateCards from './components/card/components/switchStateCards/Swit
 import { Button } from '../button';
 import { MoreIcon, TrashIcon } from '../../assets/images/icons';
 import { CardsProps } from './Cards.types';
+import { Modal } from '../modal';
 
 const SCROLL_EVENT_THROTTLE = 16;
 const BUFFER = 50;
@@ -33,19 +34,27 @@ const Cards = ({
   isLoading,
   isLoadingMoreData,
   onDeleteData,
+  titleModal,
+  subtitleModal,
+  labelActionButtonModal,
+  labelCloseButtonModal,
 }: CardsProps) => {
   const [containerHeight, setContainerHeight] = useState(0);
   const [contentHeight, setContentHeight] = useState(0);
   const [selectionMode, setSelectionMode] = useState(false);
   const [selectedItems, setSelectedItems] = useState<any[]>([]);
-  const [dataList, setDataList] = useState<any[]>(
-    data.map(item => ({ ...item, selected: false })),
-  );
+  const [showModal, setShowModal] = useState(false);
+  const [dataList, setDataList] = useState<any[]>(data);
 
   // todo: delete this useeffect
   useEffect(() => {
     console.log('selectionMode', selectionMode ? '✅✅' : '❌❌');
   }, [selectionMode]);
+
+  // todo: delete this useeffect
+  useEffect(() => {
+    console.log('🐬selectedItems🐬', selectedItems);
+  }, [selectedItems]);
 
   const handleItemsSelected = (item: any) => {
     console.log('item handleItemsSelected', item);
@@ -56,10 +65,6 @@ const Cards = ({
     }
     setSelectedItems(Array.from(list));
   };
-
-  useEffect(() => {
-    console.log('🐬selectedItems🐬', selectedItems);
-  }, [selectedItems]);
 
   const scrollViewRef = useRef<ScrollView>(null);
 
@@ -107,6 +112,10 @@ const Cards = ({
     setSelectedItems([]);
   };
 
+  const handleDeleteSelectedItems = () => {
+    onDeleteData && onDeleteData(selectedItems);
+  };
+
   return (
     <View
       onLayout={onLayout}
@@ -140,7 +149,7 @@ const Cards = ({
         <View style={styles.selectionModeContainer}>
           <View style={styles.titleTextSelectionModeContainer}>
             <Button
-              onPress={onDeleteData} // Improve this
+              onPress={() => setShowModal(true)}
               typeStyle={'primary'}
               height={40}
               width={40}
@@ -182,6 +191,24 @@ const Cards = ({
         />
         {!!data.length && isLoading && isLoadingMoreData && <SkeletonCard />}
       </ScrollView>
+      <Modal
+        showModal={setShowModal}
+        visible={showModal}
+        handleAction={() => handleDeleteSelectedItems()}
+        title={titleModal ? titleModal : 'Delete the selected items?'}
+        subtitle={
+          subtitleModal
+            ? subtitleModal
+            : 'This action will delete the selected items in all devices'
+        }
+        labelActionButton={
+          labelActionButtonModal ? labelActionButtonModal : 'Confirm'
+        }
+        labelCloseButton={
+          labelCloseButtonModal ? labelCloseButtonModal : 'Cancel'
+        }
+        imageHeader={<TrashIcon />}
+      />
     </View>
   );
 };

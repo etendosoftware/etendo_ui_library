@@ -66,6 +66,15 @@ const Card = ({
     return { backgroundColor: styles.container.backgroundColor };
   };
 
+  const addBorderColor = (): ViewStyle | undefined => {
+    if (isSelectionMode && isSelected) {
+      return {
+        borderWidth: 2,
+        borderColor: TERTIARY_800,
+      };
+    }
+  };
+
   const changeStatusBackground = (): ViewStyle | undefined => {
     if (isDisabled()) {
       return { backgroundColor: NEUTRAL_400 };
@@ -108,11 +117,14 @@ const Card = ({
           handleItemsSelected(item);
           setIsSelected(!isSelected);
         }
-      }}
-      // style={{ backgroundColor: isSelected ? 'red' : 'transparent' }}
-    >
+      }}>
       <Animated.View
-        style={[styles.container, changeBackground(), shadowOpacity]}>
+        style={[
+          styles.container,
+          shadowOpacity,
+          changeBackground(),
+          addBorderColor(),
+        ]}>
         <View style={[styles.status, changeStatusBackground()]} />
         <SwitchTitleCard
           row={getColumnTitle}

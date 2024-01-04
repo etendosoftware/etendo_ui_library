@@ -17,4 +17,8 @@ export interface CardsProps {
   pageSize?: number;
   textEmptyCards?: string;
   title?: string;
+  titleModal?: string;
+  subtitleModal?: string;
+  labelActionButtonModal?: string;
+  labelCloseButtonModal?: string;
 }
