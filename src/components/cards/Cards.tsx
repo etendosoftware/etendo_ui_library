@@ -11,7 +11,7 @@ import { styles } from './Cards.style';
 import SkeletonCard from './components/card/components/skeletonCard/SkeletonCard';
 import SwitchStateCards from './components/card/components/switchStateCards/SwitchStateCards';
 import { Button } from '../button';
-import { MoreIcon } from '../../assets/images/icons';
+import { MoreIcon, TrashIcon } from '../../assets/images/icons';
 import { CardsProps } from './Cards.types';
 
 const SCROLL_EVENT_THROTTLE = 16;
@@ -32,9 +32,34 @@ const Cards = ({
   pageSize,
   isLoading,
   isLoadingMoreData,
+  onDeleteData,
 }: CardsProps) => {
   const [containerHeight, setContainerHeight] = useState(0);
   const [contentHeight, setContentHeight] = useState(0);
+  const [selectionMode, setSelectionMode] = useState(false);
+  const [selectedItems, setSelectedItems] = useState<any[]>([]);
+  const [dataList, setDataList] = useState<any[]>(
+    data.map(item => ({ ...item, selected: false })),
+  );
+
+  // todo: delete this useeffect
+  useEffect(() => {
+    console.log('selectionMode', selectionMode ? '✅✅' : '❌❌');
+  }, [selectionMode]);
+
+  const handleItemsSelected = (item: any) => {
+    console.log('item handleItemsSelected', item);
+    const list = new Set(selectedItems);
+    list.has(item) ? list.delete(item) : list.add(item);
+    if (list.size === 0) {
+      setSelectionMode(false);
+    }
+    setSelectedItems(Array.from(list));
+  };
+
+  useEffect(() => {
+    console.log('🐬selectedItems🐬', selectedItems);
+  }, [selectedItems]);
 
   const scrollViewRef = useRef<ScrollView>(null);
 
@@ -77,6 +102,11 @@ const Cards = ({
     setContainerHeight(height);
   };
 
+  const handleCancelSelectionMode = () => {
+    setSelectionMode(false);
+    setSelectedItems([]);
+  };
+
   return (
     <View
       onLayout={onLayout}
@@ -85,7 +115,7 @@ const Cards = ({
         styles.container,
         { backgroundColor },
       ]}>
-      {(title || onAddNewData) && (
+      {(title || onAddNewData) && !selectionMode && (
         <View style={styles.titleContainer}>
           {title && (
             <View style={styles.titleTextContainer}>
@@ -100,12 +130,35 @@ const Cards = ({
                 typeStyle={'primary'}
                 height={40}
                 width={40}
-                iconLeft={<MoreIcon style={styles.plus} />}
+                iconLeft={<MoreIcon style={styles.icon} />}
               />
             )}
           </View>
         </View>
       )}
+      {selectionMode && (
+        <View style={styles.selectionModeContainer}>
+          <View style={styles.titleTextSelectionModeContainer}>
+            <Button
+              onPress={onDeleteData} // Improve this
+              typeStyle={'primary'}
+              height={40}
+              width={40}
+              iconLeft={<TrashIcon style={styles.icon} />}
+            />
+            <Text style={[styles.title, { marginHorizontal: 8 }]}>
+              Selected ({selectedItems.length})
+            </Text>
+          </View>
+          <Button
+            onPress={() => handleCancelSelectionMode()}
+            typeStyle={'white'}
+            text="Cancel"
+            height={40}
+          />
+        </View>
+      )}
+
       <ScrollView
         ref={scrollViewRef}
         style={styles.containerFlex}
@@ -115,7 +168,7 @@ const Cards = ({
           setContentHeight(contentHeight)
         }>
         <SwitchStateCards
-          data={data}
+          data={dataList}
           isLoading={isLoading}
           metadata={metadata}
           onPressCard={onPressCard}
@@ -123,6 +176,9 @@ const Cards = ({
           textEmptyCards={textEmptyCards}
           tableHeight={containerHeight}
           isTitle={!!title && !!onAddNewData}
+          onHoldCard={setSelectionMode}
+          isSelectionMode={selectionMode}
+          handleItemsSelected={handleItemsSelected}
         />
         {!!data.length && isLoading && isLoadingMoreData && <SkeletonCard />}
       </ScrollView>

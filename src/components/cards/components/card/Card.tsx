@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { View, Pressable, Animated, ViewStyle, TextStyle } from 'react-native';
 import { findPrimaryId } from '../../../../helpers/table_utils';
 import { CardProps } from './Card.types';
@@ -7,6 +7,7 @@ import {
   NEUTRAL_200,
   NEUTRAL_400,
   NEUTRAL_500,
+  TERTIARY_50,
   TERTIARY_800,
 } from '../../../../styles/colors';
 import SwitchColumnCard from './components/switchRowCard/SwitchRowCard';
@@ -16,11 +17,26 @@ import { findRowTitle } from '../../../../helpers/cards_utils';
 
 const MAX_ROWS: number = 4;
 
-const Card = ({ item, index, metadata, onPress }: CardProps) => {
+const Card = ({
+  item,
+  index,
+  metadata,
+  onPress,
+  onHoldCard,
+  handleItemsSelected,
+  isSelectionMode,
+}: CardProps) => {
   const [isPressable, setIsPressable] = useState<boolean>(false);
   const [shadowOpacity, setShadowOpacity] = useState<ViewStyle>({
     shadowOpacity: 0.1,
   });
+  const [isSelected, setIsSelected] = useState(false);
+
+  useEffect(() => {
+    if (!isSelectionMode) {
+      setIsSelected(false);
+    }
+  }, [isSelectionMode]);
 
   const onHoverIn = () => {
     setShadowOpacity({ shadowOpacity: 0.2 });
@@ -43,6 +59,9 @@ const Card = ({ item, index, metadata, onPress }: CardProps) => {
   const changeBackground = (): ViewStyle | undefined => {
     if (isDisabled() || isPressable) {
       return { backgroundColor: NEUTRAL_200 };
+    }
+    if (isSelectionMode && isSelected) {
+      return { backgroundColor: TERTIARY_50 };
     }
     return { backgroundColor: styles.container.backgroundColor };
   };
@@ -71,6 +90,12 @@ const Card = ({ item, index, metadata, onPress }: CardProps) => {
   return (
     <Pressable
       disabled={isDisabled()}
+      onLongPress={() => {
+        onHoldCard(true);
+        console.log('onHoldCard');
+        handleItemsSelected(item);
+        setIsSelected(!isSelected);
+      }}
       onHoverIn={onHoverIn}
       onHoverOut={onHoverOut}
       onPressIn={onPressIn}
@@ -79,7 +104,13 @@ const Card = ({ item, index, metadata, onPress }: CardProps) => {
         if (onPress) {
           onPress(findPrimaryId(metadata, item));
         }
-      }}>
+        if (isSelectionMode) {
+          handleItemsSelected(item);
+          setIsSelected(!isSelected);
+        }
+      }}
+      // style={{ backgroundColor: isSelected ? 'red' : 'transparent' }}
+    >
       <Animated.View
         style={[styles.container, changeBackground(), shadowOpacity]}>
         <View style={[styles.status, changeStatusBackground()]} />

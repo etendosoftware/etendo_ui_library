@@ -21,6 +21,7 @@ export const TERTIARY_80 = '#E0E7FF';
 export const TERTIARY_100 = '#808695';
 export const TERTIARY_101 = '#E2E7FF';
 export const TERTIARY_500 = '#7182FF';
+export const TERTIARY_700 = '#3844B7';
 export const TERTIARY_800 = '#151C7A';
 
 export const QUATERNARY_10 = '#F5F5FC';

@@ -5,4 +5,7 @@ export interface CardProps {
   index: number;
   metadata: Metadata[];
   onPress?: (primary: string) => void;
+  onHoldCard: (...params: any[]) => void;
+  handleItemsSelected: (...params: any[]) => void;
+  isSelectionMode: boolean;
 }

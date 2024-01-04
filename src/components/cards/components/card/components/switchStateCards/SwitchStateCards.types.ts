@@ -10,4 +10,7 @@ export interface SwitchStateCardsProps {
   commentEmptyCards?: string;
   tableHeight?: DimensionValue;
   isTitle?: boolean;
+  onHoldCard: (...params: any[]) => void;
+  handleItemsSelected: (...params: any[]) => void;
+  isSelectionMode: boolean;
 }

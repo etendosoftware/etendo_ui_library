@@ -2,18 +2,19 @@ import { ColorValue, DimensionValue } from 'react-native';
 import { Metadata } from '../../types/table.types';
 
 export interface CardsProps {
-  data: any[];
-  metadata: Metadata[];
-  title?: string;
-  cardsHeight?: DimensionValue;
-  onPressCard?: (primary: string) => void;
-  isLoading?: boolean;
-  textEmptyCards?: string;
-  commentEmptyCards?: string;
-  onLoadMoreData?: (currentPage?: number, pageSize?: number) => void;
-  currentPage?: number;
-  isLoadingMoreData?: boolean;
-  onAddNewData?: () => void;
   backgroundColor?: ColorValue;
+  cardsHeight?: DimensionValue;
+  commentEmptyCards?: string;
+  currentPage?: number;
+  data: any[];
+  isLoading?: boolean;
+  isLoadingMoreData?: boolean;
+  metadata: Metadata[];
+  onAddNewData?: () => void;
+  onDeleteData?: (...params: any[]) => void;
+  onLoadMoreData?: (currentPage?: number, pageSize?: number) => void;
+  onPressCard?: (primary: string) => void;
   pageSize?: number;
+  textEmptyCards?: string;
+  title?: string;
 }
