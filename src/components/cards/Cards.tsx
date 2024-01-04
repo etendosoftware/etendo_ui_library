@@ -45,25 +45,30 @@ const Cards = ({
   const [selectedItems, setSelectedItems] = useState<any[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [dataList, setDataList] = useState<any[]>(data);
-
-  // todo: delete this useeffect
+  const [dataOG, setDataOG] = useState<any[]>([]);
   useEffect(() => {
-    console.log('selectionMode', selectionMode ? '✅✅' : '❌❌');
-  }, [selectionMode]);
-
-  // todo: delete this useeffect
-  useEffect(() => {
-    console.log('🐬selectedItems🐬', selectedItems);
-  }, [selectedItems]);
+    setDataOG(data);
+  }, []);
 
   const handleItemsSelected = (item: any) => {
-    console.log('item handleItemsSelected', item);
-    const list = new Set(selectedItems);
-    list.has(item) ? list.delete(item) : list.add(item);
-    if (list.size === 0) {
+    const selectedItemsSet = new Set(selectedItems);
+    const dataSet = new Set(dataList);
+    if (selectedItemsSet.has(item)) {
+      selectedItemsSet.delete(item);
+    } else {
+      selectedItemsSet.clear();
+      selectedItemsSet.add(item);
+      setDataList(
+        Array.from(dataSet).map((item2: any) => {
+          return { ...item2, isActive: item2._id === item._id };
+        }),
+      );
+    }
+
+    if (selectedItemsSet.size === 0) {
       setSelectionMode(false);
     }
-    setSelectedItems(Array.from(list));
+    setSelectedItems(Array.from(selectedItemsSet));
   };
 
   const scrollViewRef = useRef<ScrollView>(null);
@@ -110,6 +115,7 @@ const Cards = ({
   const handleCancelSelectionMode = () => {
     setSelectionMode(false);
     setSelectedItems([]);
+    setDataList(dataOG);
   };
 
   const handleDeleteSelectedItems = () => {
