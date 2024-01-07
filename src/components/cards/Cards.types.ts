@@ -11,7 +11,7 @@ export interface CardsProps {
   isLoadingMoreData?: boolean;
   metadata: Metadata[];
   onAddNewData?: () => void;
-  onDeleteData?: (...params: any[]) => void;
+  onDeleteData: (...params: any[]) => void;
   onLoadMoreData?: (currentPage?: number, pageSize?: number) => void;
   onPressCard?: (primary: string) => void;
   pageSize?: number;

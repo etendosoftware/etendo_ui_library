@@ -14,6 +14,8 @@ import { Button } from '../button';
 import { MoreIcon, TrashIcon } from '../../assets/images/icons';
 import { CardsProps } from './Cards.types';
 import { Modal } from '../modal';
+import CARDS from './Cards.constants';
+const { TITLE, SUBTITLE, LABEL_ACTION_BUTTON, LABEL_CLOSE_BUTTON } = CARDS;
 
 const SCROLL_EVENT_THROTTLE = 16;
 const BUFFER = 50;
@@ -46,17 +48,21 @@ const Cards = ({
   const [showModal, setShowModal] = useState(false);
   const [dataList, setDataList] = useState<any[]>(data);
   const [dataOG, setDataOG] = useState<any[]>([]);
+  const [selectedItem, setSelectedItem] = useState<any>(null);
+
   useEffect(() => {
     setDataOG(data);
   }, []);
 
   const handleItemsSelected = (item: any) => {
+    setSelectedItem(item);
+
     const selectedItemsSet = new Set(selectedItems);
     const dataSet = new Set(dataList);
+    selectedItems.includes(item);
     if (selectedItemsSet.has(item)) {
       selectedItemsSet.delete(item);
     } else {
-      selectedItemsSet.clear();
       selectedItemsSet.add(item);
       setDataList(
         Array.from(dataSet).map((item2: any) => {
@@ -66,8 +72,9 @@ const Cards = ({
     }
 
     if (selectedItemsSet.size === 0) {
-      setSelectionMode(false);
+      handleCancelSelectionMode();
     }
+
     setSelectedItems(Array.from(selectedItemsSet));
   };
 
@@ -112,14 +119,20 @@ const Cards = ({
     setContainerHeight(height);
   };
 
-  const handleCancelSelectionMode = () => {
+  const handleCancelSelectionMode = (isCancelAction: boolean = true) => {
     setSelectionMode(false);
     setSelectedItems([]);
-    setDataList(dataOG);
+    setSelectedItem(null);
+    if (isCancelAction) {
+      setDataList(dataOG);
+    } else {
+      setDataList(dataOG.filter(item => item !== selectedItem));
+    }
   };
 
-  const handleDeleteSelectedItems = () => {
-    onDeleteData && onDeleteData(selectedItems);
+  const handleDeleteSelectedItems = (itemsToSend: any) => {
+    onDeleteData(itemsToSend);
+    handleCancelSelectionMode(false);
   };
 
   return (
@@ -173,7 +186,6 @@ const Cards = ({
           />
         </View>
       )}
-
       <ScrollView
         ref={scrollViewRef}
         style={styles.containerFlex}
@@ -197,24 +209,24 @@ const Cards = ({
         />
         {!!data.length && isLoading && isLoadingMoreData && <SkeletonCard />}
       </ScrollView>
-      <Modal
-        showModal={setShowModal}
-        visible={showModal}
-        handleAction={() => handleDeleteSelectedItems()}
-        title={titleModal ? titleModal : 'Delete the selected items?'}
-        subtitle={
-          subtitleModal
-            ? subtitleModal
-            : 'This action will delete the selected items in all devices'
-        }
-        labelActionButton={
-          labelActionButtonModal ? labelActionButtonModal : 'Confirm'
-        }
-        labelCloseButton={
-          labelCloseButtonModal ? labelCloseButtonModal : 'Cancel'
-        }
-        imageHeader={<TrashIcon />}
-      />
+      {selectedItem && (
+        <Modal
+          showModal={setShowModal}
+          visible={showModal}
+          handleAction={() => handleDeleteSelectedItems(selectedItem)}
+          title={titleModal ? titleModal : TITLE}
+          subtitle={subtitleModal ? subtitleModal : SUBTITLE}
+          labelActionButton={
+            labelActionButtonModal
+              ? labelActionButtonModal
+              : LABEL_ACTION_BUTTON
+          }
+          labelCloseButton={
+            labelCloseButtonModal ? labelCloseButtonModal : LABEL_CLOSE_BUTTON
+          }
+          imageHeader={<TrashIcon />}
+        />
+      )}
     </View>
   );
 };
