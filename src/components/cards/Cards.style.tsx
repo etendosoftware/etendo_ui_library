@@ -25,8 +25,19 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
   },
+  selectionModeContainer: {
+    paddingHorizontal: 15,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   titleTextContainer: {
     flexDirection: 'row',
+  },
+  titleTextSelectionModeContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   title: {
     fontFamily: 'Inter',
@@ -35,6 +46,6 @@ export const styles = StyleSheet.create({
     lineHeight: 28,
     color: PRIMARY_100,
   },
-  plus: { height: 16, width: 16 },
+  icon: { height: 16, width: 16 },
   buttonContainer: { alignItems: 'flex-end', flex: 1 },
 });

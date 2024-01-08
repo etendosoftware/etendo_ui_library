@@ -20,6 +20,9 @@ const SwitchStateCards = ({
   commentEmptyCards,
   tableHeight = 0,
   isTitle,
+  onHoldCard,
+  handleItemsSelected,
+  isSelectionMode,
 }: SwitchStateCardsProps) => {
   if (
     isLoading &&
@@ -54,6 +57,9 @@ const SwitchStateCards = ({
       index={index}
       metadata={metadata}
       onPress={onPressCard}
+      onHoldCard={onHoldCard}
+      handleItemsSelected={handleItemsSelected}
+      isSelectionMode={isSelectionMode}
     />
   );
 

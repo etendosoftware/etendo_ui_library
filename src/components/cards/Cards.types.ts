@@ -10,4 +10,9 @@ export interface CardsProps extends CommonTableProps {
   onAddNewData?: () => void;
   onPressCard?: (primary: string) => void;
   textEmptyCards?: string;
+  onDeleteData?: (...params: any[]) => void;
+  titleModal?: string;
+  subtitleModal?: string;
+  labelActionButtonModal?: string;
+  labelCloseButtonModal?: string;
 }
