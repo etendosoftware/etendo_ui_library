@@ -1,9 +1,9 @@
 import { DimensionValue } from 'react-native';
-import { Metadata } from '../../../../../../types/table.types';
+import { CardsMetadata } from '../../../../Cards.types';
 
 export interface SwitchStateCardsProps {
   data: Array<any>;
-  metadata: Metadata[];
+  metadata: CardsMetadata[];
   isLoading?: boolean;
   onPressCard?: (primary: string) => void;
   textEmptyCards?: string;

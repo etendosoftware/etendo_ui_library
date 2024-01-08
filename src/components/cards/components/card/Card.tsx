@@ -12,8 +12,8 @@ import {
 } from '../../../../styles/colors';
 import SwitchColumnCard from './components/switchRowCard/SwitchRowCard';
 import SwitchTitleCard from './components/switchTitleCard/SwitchTitleCard';
-import { Metadata } from '../../../../types/table.types';
 import { findRowTitle } from '../../../../helpers/cards_utils';
+import { CardsMetadata } from '../../Cards.types';
 
 const MAX_ROWS: number = 4;
 
@@ -92,9 +92,9 @@ const Card = ({
     return {};
   };
 
-  const getColumnTitle: Metadata | undefined = useMemo(() => {
+  const getColumnTitle: CardsMetadata | undefined = useMemo(() => {
     return findRowTitle(metadata);
-  }, [metadata, item]);
+  }, [metadata]);
 
   return (
     <Pressable

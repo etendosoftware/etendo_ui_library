@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from 'react';
 import {
   View,
@@ -84,7 +85,7 @@ const Cards = ({
     if (isLoading && data.length) {
       scrollViewRef.current?.scrollToEnd({ animated: true });
     }
-  }, [isLoading]);
+  }, [isLoading, data]);
 
   useEffect(() => {
     if (containerHeight > contentHeight && data.length) {
@@ -94,7 +95,7 @@ const Cards = ({
 
   const handleLoadMore = async () => {
     if (!isLoading && onLoadMoreData && isLoadingMoreData) {
-      onLoadMoreData(currentPage, pageSize);
+      onLoadMoreData(currentPage!, pageSize!);
     }
   };
 
@@ -191,8 +192,8 @@ const Cards = ({
         style={styles.containerFlex}
         onScroll={onScroll}
         scrollEventThrottle={SCROLL_EVENT_THROTTLE}
-        onContentSizeChange={(contentWidth, contentHeight) =>
-          setContentHeight(contentHeight)
+        onContentSizeChange={(_contentWidth, contentHeightChange) =>
+          setContentHeight(contentHeightChange)
         }>
         <SwitchStateCards
           data={dataList}
