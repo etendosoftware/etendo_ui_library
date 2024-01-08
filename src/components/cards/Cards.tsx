@@ -53,7 +53,7 @@ const Cards = ({
 
   const handleLoadMore = async () => {
     if (!isLoading && onLoadMoreData && isLoadingMoreData) {
-      onLoadMoreData(currentPage, pageSize);
+      onLoadMoreData(currentPage!, pageSize!);
     }
   };
 
