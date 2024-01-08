@@ -1,19 +1,13 @@
 import { ColorValue, DimensionValue } from 'react-native';
-import { Metadata } from '../../types/table.types';
+import { CommonTableProps, Metadata } from '../../interfaces/table.interface';
 
-export interface CardsProps {
-  data: any[];
-  metadata: Metadata[];
-  title?: string;
-  cardsHeight?: DimensionValue;
-  onPressCard?: (primary: string) => void;
-  isLoading?: boolean;
-  textEmptyCards?: string;
-  commentEmptyCards?: string;
-  onLoadMoreData?: (currentPage?: number, pageSize?: number) => void;
-  currentPage?: number;
-  isLoadingMoreData?: boolean;
-  onAddNewData?: () => void;
+export interface CardsMetadata extends Metadata {}
+export interface CardsProps extends CommonTableProps {
   backgroundColor?: ColorValue;
-  pageSize?: number;
+  cardsHeight?: DimensionValue;
+  commentEmptyCards?: string;
+  metadata: CardsMetadata[];
+  onAddNewData?: () => void;
+  onPressCard?: (primary: string) => void;
+  textEmptyCards?: string;
 }

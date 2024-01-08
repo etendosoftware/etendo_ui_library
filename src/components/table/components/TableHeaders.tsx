@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { styles } from '../Table.styles';
-import { Columns, TableHeaderProps } from '../Table.types';
+import { ColumnsMetadata, TableHeaderProps } from '../Table.types';
 import { SkeletonRowTable } from '../../secondaryComponents';
 import { TERTIARY_80 } from '../../../styles/colors';
 
@@ -16,7 +16,7 @@ const TableHeaders = ({ title, columns, isLoading }: TableHeaderProps) => {
         </View>
       )}
       <View style={styles.headerContainer}>
-        {columns.map((item: Columns, colIndex: number) => {
+        {columns.map((item: ColumnsMetadata, colIndex: number) => {
           return isLoading ? (
             item.visible && (
               <View

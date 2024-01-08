@@ -1,8 +1,8 @@
-import { Metadata } from '../../../../types/table.types';
+import { CardsMetadata } from '../../Cards.types';
 
 export interface CardProps {
   item: any;
   index: number;
-  metadata: Metadata[];
+  metadata: CardsMetadata[];
   onPress?: (primary: string) => void;
 }

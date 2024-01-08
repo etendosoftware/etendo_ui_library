@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList, Pressable, View } from 'react-native';
-import { Columns, TableProps } from './Table.types';
+import { ColumnsMetadata, TableProps } from './Table.types';
 import { styles } from './Table.styles';
 import TableHeaders from './components/TableHeaders';
 import TableCell from './components/TableCell';
@@ -43,7 +43,7 @@ const Table = ({
           }
         }}
         style={[styles.row, paintOddRows(index)]}>
-        {columns.map((col: Columns, colIndex: number) => {
+        {columns.map((col: ColumnsMetadata, colIndex: number) => {
           return (
             col.visible && (
               <View
@@ -68,7 +68,7 @@ const Table = ({
   const RenderSkeleton = (index: number) => {
     return (
       <View style={[styles.row, paintOddRows(index)]}>
-        {columns.map((col: Columns, colIndex: number) => {
+        {columns.map((col: ColumnsMetadata, colIndex: number) => {
           return (
             col.visible && (
               <SkeletonRowTable
