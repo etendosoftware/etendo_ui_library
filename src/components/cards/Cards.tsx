@@ -53,7 +53,7 @@ const Cards = ({
 
   useEffect(() => {
     setDataOG(data);
-  }, []);
+  }, [data]);
 
   const handleItemsSelected = (item: any) => {
     setSelectedItem(item);
