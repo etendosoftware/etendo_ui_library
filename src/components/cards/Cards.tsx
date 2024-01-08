@@ -132,7 +132,7 @@ const Cards = ({
   };
 
   const handleDeleteSelectedItems = (itemsToSend: any) => {
-    onDeleteData(itemsToSend);
+    onDeleteData && onDeleteData(itemsToSend);
     handleCancelSelectionMode(false);
   };
 
