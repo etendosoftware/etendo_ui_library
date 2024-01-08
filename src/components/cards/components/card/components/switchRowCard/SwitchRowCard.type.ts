@@ -1,8 +1,8 @@
 import { ViewStyle, TextStyle } from 'react-native';
-import { Metadata } from '../../../../../../types/table.types';
+import { CardsMetadata } from '../../../../Cards.types';
 
 export interface SwitchRowCardProps {
-  row?: Metadata;
+  row?: CardsMetadata;
   item: any;
   color: TextStyle | undefined;
   margin?: boolean;
