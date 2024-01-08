@@ -1,6 +1,6 @@
 {
   "name": "etendo-ui-library",
-  "version": "1.3.48",
+  "version": "1.3.58",
   "private": false,
   "scripts": {
     "android": "react-native run-android",
@@ -19,7 +19,8 @@
     "nextjs": "cd examples/nextjs && yarn install && yarn dev",
     "copy-to-reactnative": "rsync -av --exclude='__tests__' --exclude='__snapshots__' --exclude='*.test.*' src/ ./examples/ReactNative",
     "copy-to-nextjs": "rsync -av --exclude='__tests__' --exclude='__snapshots__' --exclude='*.test.*' src/ ./examples/nextjs/apps/web/app",
-    "watch": "nodemon --watch src -e js,jsx,ts,tsx --exec \"concurrently 'yarn copy-to-reactnative' 'yarn copy-to-nextjs'\""
+    "copy-to-storybook": "rsync -av --exclude='__tests__' --exclude='__snapshots__' --exclude='*.test.*' src/ ./examples/storybook",
+    "watch": "nodemon --watch src -e js,jsx,ts,tsx --exec \"concurrently 'yarn copy-to-reactnative' 'yarn copy-to-nextjs' 'yarn copy-to-storybook' \""
   },
   "main": "index.js",
   "types": "index.d.ts",

@@ -24,8 +24,10 @@ const {
   ViewEtendo,
   Layout,
   ButtonContainer,
+  SearchContainer,
   show,
   setAlertDefaultDuration,
+  TitleContainer,
 } = isNativeEnvironment ? NativeComponents : WebComponents;
 
 const {
@@ -98,6 +100,7 @@ export {
   Pagination,
   SkeletonItem,
   StatusBar,
+  SearchContainer,
   Tab,
   Table,
   ViewEtendo,
@@ -161,4 +164,5 @@ export {
   WayIcon,
   WifiIcon,
   WithoutWifiIcon,
+  TitleContainer,
 };

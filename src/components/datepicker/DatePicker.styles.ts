@@ -6,6 +6,7 @@ import {
   NEUTRAL_300,
   NEUTRAL_400,
   NEUTRAL_50,
+  NEUTRAL_800,
   PRIMARY_100,
   QUATERNARY_50,
   TERTIARY_70,
@@ -48,15 +49,17 @@ export const styles = StyleSheet.create({
   datePickerInput: {
     textAlign: 'left',
     fontSize: 18,
-    outlineStyle: 'none',
+    color: PRIMARY_100,
+    fontWeight: '500',
     flex: 1,
+    paddingVertical: 0,
+    paddingHorizontal: 0,
   },
   inputContainerWrapper: {
     borderRadius: 8,
-    height: Platform.OS === AppPlatform.web ? undefined : 50,
     borderWidth: 5,
-    margin: -5,
     borderColor: 'transparent',
+    position: 'relative',
   },
   monthAndYearContainer: {
     flexDirection: 'row',
@@ -118,7 +121,7 @@ export const styles = StyleSheet.create({
   dayHeaderText: {
     width: '14.28%',
     textAlign: 'center',
-    color: 'NEUTRAL_800',
+    color: NEUTRAL_800,
   },
   notCurrentMonthStyle: {
     color: NEUTRAL_400,

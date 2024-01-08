@@ -24,6 +24,7 @@ const Modal = ({
   subtitle,
   title,
   visible,
+  style,
 }: IModalProps) => {
   const hasActionButton = !!handleAction && !!labelActionButton;
 
@@ -63,7 +64,12 @@ const Modal = ({
         onPressOut={() => !disableTapOutside && showModal(false)}>
         <TouchableWithoutFeedback>
           <View
-            style={[styles.modalContent, fullScreen && styles.modalFullScreen]}>
+            style={[
+              styles.modalContent,
+              fullScreen && styles.modalFullScreen,
+              !children && { minHeight: subtitle ? 230 : 0 },
+              style,
+            ]}>
             {fullScreen ? (
               <MaximizedView
                 imageHeader={imageHeader}

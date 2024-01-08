@@ -19,3 +19,8 @@ export interface DatePickerProps {
   disabled: boolean | undefined;
   backgroundColor: ColorValue;
 }
+
+export interface MonthItemProps {
+  item: string;
+  index: number;
+};
