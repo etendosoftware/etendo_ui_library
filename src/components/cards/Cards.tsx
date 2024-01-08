@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from 'react';
 import {
   View,
@@ -48,7 +49,6 @@ const Cards = ({
     if (containerHeight > contentHeight && data.length) {
       handleLoadMore();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [containerHeight, contentHeight, data]);
 
   const handleLoadMore = async () => {
