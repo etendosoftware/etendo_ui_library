@@ -60,9 +60,8 @@ const Cards = ({
 
     const selectedItemsSet = new Set(selectedItems);
     const dataSet = new Set(dataList);
-    selectedItems.includes(item);
-    if (selectedItemsSet.has(item)) {
-      selectedItemsSet.delete(item);
+    if (selectedItemsSet.size > 0) {
+      selectedItemsSet.clear();
     } else {
       selectedItemsSet.add(item);
       setDataList(
@@ -144,30 +143,9 @@ const Cards = ({
         styles.container,
         { backgroundColor },
       ]}>
-      {(title || onAddNewData) && !selectionMode && (
-        <View style={styles.titleContainer}>
-          {title && (
-            <View style={styles.titleTextContainer}>
-              <Text style={styles.title}>{title}</Text>
-              <Text style={styles.title}> ({data.length})</Text>
-            </View>
-          )}
-          <View style={styles.buttonContainer}>
-            {onAddNewData && (
-              <Button
-                onPress={onAddNewData}
-                typeStyle={'primary'}
-                height={40}
-                width={40}
-                iconLeft={<MoreIcon style={styles.icon} />}
-              />
-            )}
-          </View>
-        </View>
-      )}
-      {selectionMode && (
-        <View style={styles.selectionModeContainer}>
-          <View style={styles.titleTextSelectionModeContainer}>
+      <View style={styles.selectionModeContainer}>
+        <View style={styles.titleTextSelectionModeContainer}>
+          {selectionMode && (
             <Button
               onPress={() => setShowModal(true)}
               typeStyle={'primary'}
@@ -175,18 +153,30 @@ const Cards = ({
               width={40}
               iconLeft={<TrashIcon style={styles.icon} />}
             />
-            <Text style={[styles.title, { marginHorizontal: 8 }]}>
-              Selected ({selectedItems.length})
-            </Text>
-          </View>
+          )}
+          <Text
+            style={[styles.title, { marginHorizontal: selectionMode ? 8 : 0 }]}>
+            {selectionMode
+              ? `Selected (${selectedItems.length})`
+              : `${title} (${data.length})`}
+          </Text>
+        </View>
+        {selectionMode ? (
           <Button
             onPress={() => handleCancelSelectionMode()}
             typeStyle={'white'}
             text="Cancel"
             height={40}
           />
-        </View>
-      )}
+        ) : (
+          <Button
+            onPress={() => handleCancelSelectionMode()}
+            typeStyle={'white'}
+            text="Cancel"
+            height={40}
+          />
+        )}
+      </View>
       <ScrollView
         ref={scrollViewRef}
         style={styles.containerFlex}
