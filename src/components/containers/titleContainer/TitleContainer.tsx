@@ -41,7 +41,12 @@ const TitleContainer: FC<ITitleContainer> = ({
 
   return (
     <View style={[DEFAULT.TITLE_CONTAINER, style]}>
-      <Text style={[DEFAULT.TITLE_STYLE, textStyle]}>{title}</Text>
+      <Text
+        style={[DEFAULT.TITLE_STYLE, textStyle]}
+        numberOfLines={1}
+        ellipsizeMode="tail">
+        {title}
+      </Text>
       {arrayOfButtons && (
         <ButtonContainer
           buttons={arrayOfButtons}

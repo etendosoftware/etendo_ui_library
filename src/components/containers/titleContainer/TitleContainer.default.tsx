@@ -15,6 +15,7 @@ export const DEFAULT = StyleSheet.create({
     flexDirection: isDeviceTablet ? 'row' : 'column',
     justifyContent: isDeviceTablet ? 'space-between' : 'flex-start',
     alignItems: 'flex-start',
+    flexWrap: 'wrap',
   },
   BUTTON_CONTAINER: {
     width: 24,
