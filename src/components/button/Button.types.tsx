@@ -23,7 +23,7 @@ export interface IconStyleProps {
   marginLeft?: DimensionValue;
 }
 export interface ButtonProps {
-  onPress?: () => void;
+  onPress?: (...params: any[]) => void;
   text?: string;
   typeStyle: ButtonStyleType;
   iconLeft?: React.ReactElement;
@@ -35,4 +35,5 @@ export interface ButtonProps {
   paddingHorizontal?: DimensionValue;
   paddingVertical?: DimensionValue;
   loading?: boolean;
+  metadata?: any;
 }

@@ -28,6 +28,7 @@ const Button = ({
   paddingHorizontal = 12,
   paddingVertical = 12,
   loading = false,
+  metadata,
 }: ButtonProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -165,9 +166,7 @@ const Button = ({
   };
 
   const handleOnPress = () => {
-    if (onPress) {
-      onPress();
-    }
+    onPress && (metadata ? onPress(metadata) : onPress());
   };
   return (
     <TouchableOpacity disabled={disabled ?? loading}>
