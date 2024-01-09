@@ -44,13 +44,22 @@ const Table = ({
         }}
         style={[styles.row, paintOddRows(index)]}>
         {columns.map((col: ColumnsMetadata, colIndex: number) => {
+          let components: React.ReactNode[] = [];
+          if (col.components) {
+            const updatedComponents = col.components!.map((component: any) => {
+              return React.cloneElement(component, {
+                metadata: item,
+              });
+            });
+            components = updatedComponents;
+          }
           return (
             col.visible && (
               <View
                 style={[styles.cell, col.cellStyle, { width: col.width }]}
                 key={'movementTable' + colIndex}>
                 {col.components ? (
-                  <ButtonContainer buttons={col.components!} />
+                  <ButtonContainer buttons={components} />
                 ) : (
                   <TableCell
                     label={col.key ? item[col.key] : ''}
