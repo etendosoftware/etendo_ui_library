@@ -12,6 +12,7 @@ export const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 14,
     lineHeight: 20,
+    marginLeft: 12,
   },
   textValue: {
     fontFamily: 'Inter',
@@ -19,19 +20,20 @@ export const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 14,
     lineHeight: 20,
+    marginLeft: 12,
   },
   row: {
     width: '100%',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    paddingHorizontal: 12,
+    paddingRight: 12,
     marginBottom: 8,
     alignItems: 'center',
   },
 
   column: {
     flexDirection: 'column',
-    paddingHorizontal: 12,
+    paddingRight: 12,
     paddingBottom: 8,
   },
   check: {

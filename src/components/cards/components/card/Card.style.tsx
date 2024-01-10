@@ -18,6 +18,8 @@ export const styles = StyleSheet.create({
   },
   status: {
     height: 8,
-    marginBottom: 8,
+  },
+  spacingCard: {
+    height: 8,
   },
 });

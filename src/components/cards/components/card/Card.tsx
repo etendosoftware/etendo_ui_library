@@ -66,13 +66,19 @@ const Card = ({
     return { backgroundColor: styles.container.backgroundColor };
   };
 
-  const addBorderColor = (): ViewStyle | undefined => {
-    if (isSelectionMode && isSelected) {
-      return {
-        borderWidth: 2,
-        borderColor: TERTIARY_800,
-      };
-    }
+  const addBorderColor = (): ViewStyle => {
+    const borderColor =
+      isSelectionMode && isSelected ? TERTIARY_800 : 'transparent';
+    return {
+      borderWidth: 2,
+      borderLeftColor: borderColor,
+      borderRightColor: borderColor,
+      borderBottomColor: borderColor,
+      borderBottomLeftRadius: 8,
+      borderBottomRightRadius: 8,
+      borderTopWidth: 0,
+      borderTopColor: 'transparent',
+    };
   };
 
   const changeStatusBackground = (): ViewStyle | undefined => {
@@ -119,34 +125,32 @@ const Card = ({
         }
       }}>
       <Animated.View
-        style={[
-          styles.container,
-          shadowOpacity,
-          changeBackground(),
-          addBorderColor(),
-        ]}>
+        style={[styles.container, shadowOpacity, changeBackground()]}>
         <View style={[styles.status, changeStatusBackground()]} />
-        <SwitchTitleCard
-          row={getColumnTitle}
-          item={item}
-          color={changeTextColor()}
-        />
-        {metadata
-          .filter(row => row.visible)
-          .slice(0, MAX_ROWS)
-          .map(
-            (row, rowIndex) =>
-              row.visible &&
-              !row.title && (
-                <SwitchColumnCard
-                  key={'rowCard' + index + rowIndex}
-                  row={row}
-                  item={item}
-                  color={changeTextColor()}
-                  backgroundColor={changeBackground()}
-                />
-              ),
-          )}
+        <Animated.View style={[addBorderColor()]}>
+          <View style={[styles.spacingCard]} />
+          <SwitchTitleCard
+            row={getColumnTitle}
+            item={item}
+            color={changeTextColor()}
+          />
+          {metadata
+            .filter(row => row.visible)
+            .slice(0, MAX_ROWS)
+            .map(
+              (row, rowIndex) =>
+                row.visible &&
+                !row.title && (
+                  <SwitchColumnCard
+                    key={'rowCard' + index + rowIndex}
+                    row={row}
+                    item={item}
+                    color={changeTextColor()}
+                    backgroundColor={changeBackground()}
+                  />
+                ),
+            )}
+        </Animated.View>
       </Animated.View>
     </Pressable>
   );
