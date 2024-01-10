@@ -16,7 +16,14 @@ import { MoreIcon, TrashIcon } from '../../assets/images/icons';
 import { CardsProps } from './Cards.types';
 import { Modal } from '../modal';
 import CARDS from './Cards.constants';
-const { TITLE, SUBTITLE, LABEL_ACTION_BUTTON, LABEL_CLOSE_BUTTON } = CARDS;
+const {
+  TITLE,
+  SUBTITLE,
+  LABEL_ACTION_BUTTON,
+  LABEL_CLOSE_BUTTON,
+  SELECTED_LABEL,
+  CANCEL_SELECTED_LABEL,
+} = CARDS;
 
 const SCROLL_EVENT_THROTTLE = 16;
 const BUFFER = 50;
@@ -41,6 +48,8 @@ const Cards = ({
   subtitleModal,
   labelActionButtonModal,
   labelCloseButtonModal,
+  selectionLabel,
+  cancelSelectionLabel,
 }: CardsProps) => {
   const [containerHeight, setContainerHeight] = useState(0);
   const [contentHeight, setContentHeight] = useState(0);
@@ -157,7 +166,7 @@ const Cards = ({
           <Text
             style={[styles.title, { marginHorizontal: selectionMode ? 8 : 0 }]}>
             {selectionMode
-              ? `Selected (${selectedItems.length})`
+              ? `${selectionLabel || SELECTED_LABEL} (${selectedItems.length})`
               : `${title} (${data.length})`}
           </Text>
         </View>
@@ -165,7 +174,7 @@ const Cards = ({
           <Button
             onPress={() => handleCancelSelectionMode()}
             typeStyle={'white'}
-            text="Cancel"
+            text={cancelSelectionLabel || CANCEL_SELECTED_LABEL}
             height={40}
           />
         ) : (

@@ -15,4 +15,6 @@ export interface CardsProps extends CommonTableProps {
   subtitleModal?: string;
   labelActionButtonModal?: string;
   labelCloseButtonModal?: string;
+  selectionLabel?: string;
+  cancelSelectionLabel?: string;
 }
