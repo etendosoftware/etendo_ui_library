@@ -170,10 +170,11 @@ const Cards = ({
           />
         ) : (
           <Button
-            onPress={() => handleCancelSelectionMode()}
-            typeStyle={'white'}
-            text="Cancel"
+            onPress={onAddNewData}
+            typeStyle={'primary'}
             height={40}
+            width={40}
+            iconLeft={<MoreIcon style={styles.icon} />}
           />
         )}
       </View>
