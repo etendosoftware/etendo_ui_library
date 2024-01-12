@@ -1,3 +1,4 @@
+export const PRIMARY_20 = '#343444';
 export const PRIMARY_30 = '#8689AA';
 export const PRIMARY_40 = '#606380';
 export const PRIMARY_50 = '#575A72';
@@ -61,7 +62,7 @@ export const DESTRUCTIVE_100 = '#F36A62';
 
 export const DANGER_100 = '#FEEBED';
 export const DANGER_700 = '#AE313F';
-export const Danger_900 = '#74122E';
+export const DANGER_900 = '#74122E';
 
 export const IP_100 = '#FEF4D9';
 export const IP_600 = '#D78330';
