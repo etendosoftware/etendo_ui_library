@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { DANGER_100, DANGER_700, DANGER_900, NEUTRAL_0, NEUTRAL_100, TERTIARY_100, TERTIARY_30, TERTIARY_50, TERTIARY_70 } from '../../styles/colors';
+import { DANGER_100, DANGER_700, DANGER_900, NEUTRAL_0, NEUTRAL_100, NEUTRAL_200, PRIMARY_100, TERTIARY_100, TERTIARY_30, TERTIARY_70 } from '../../styles/colors';
 import { ErrorIcon } from '../../assets/images/icons/ErrorIcon';
 import { RenderMarkdownText } from './MarkdownUtils';
 import { TextMessageProps } from './TextMessage.types';
@@ -16,7 +16,7 @@ const TextMessage: React.FC<TextMessageProps> = ({
 }) => {
     const messageStyle: any = [
         styles.messageContainer,
-        { backgroundColor: type === 'error' ? DANGER_100 : type === 'right-user' ? TERTIARY_30 : backgroundColor || NEUTRAL_0 },
+        { backgroundColor: type === 'error' ? DANGER_100 : type === 'right-user' ? NEUTRAL_200 : backgroundColor || NEUTRAL_0 },
         { alignSelf: type === 'right-user' ? 'flex-end' : 'flex-start' }
     ];
 
@@ -71,7 +71,10 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
     },
     title: {
-        backgroundColor: NEUTRAL_0,
+        color: PRIMARY_100,
+        fontSize: 16,
+        fontWeight: "600",
+        marginBottom: 2,
     },
     file: {
         backgroundColor: TERTIARY_70,

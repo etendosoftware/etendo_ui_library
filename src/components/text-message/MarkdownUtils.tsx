@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
-import { Text, StyleSheet, View, ScrollView, Platform, Clipboard, Linking, ImageStyle } from 'react-native';
-import { Prism as WebSyntaxHighlighter } from "react-syntax-highlighter";
-import { DANGER_900, INITIAL_100, NEUTRAL_0, NEUTRAL_100, PRIMARY_100, PRIMARY_20, SECONDARY_30, TERTIARY_100, TERTIARY_70 } from '../../styles/colors';
+import { Text, StyleSheet, View, ScrollView, Platform, Clipboard, Linking } from 'react-native';
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { DANGER_900, INITIAL_100, NEUTRAL_0, NEUTRAL_100, PRIMARY_100, PRIMARY_20, TERTIARY_70 } from '../../styles/colors';
 import { CopyIcon } from '../../assets/images/icons/CopyIcon';
 import { TextMessageProps } from './TextMessage.types';
 
 // @ts-ignore
 import { nightOwl } from 'react-syntax-highlighter/src/styles/prism';
-// @ts-ignore
-import SyntaxHighlighter from 'react-native-syntax-highlighter';
 
 // Props typing for the HighlightCode component
 interface HighlightCodeProps {
@@ -31,37 +29,19 @@ const HighlightCode: React.FC<HighlightCodeProps> = ({ code, language }) => {
                 <CopyIcon fill={NEUTRAL_0} style={{ width: 12, height: 12 }} />
                 <Text style={styles.copyButtonText} onPress={copyToClipboard}>{copiedCode ? 'Copied text!' : 'Copy code'}</Text>
             </View>
-            {Platform.OS === 'web' ? (
-                // Web version uses WebSyntaxHighlighter
-                <WebSyntaxHighlighter
-                    language={language}
-                    PreTag="div"
-                    customStyle={{
-                        borderBottomRightRadius: "0.25rem",
-                        borderBottomLeftRadius: "0.25rem",
-                        fontSize: "0.75rem",
-                        margin: 0
-                    }}
-                    style={nightOwl}
-                >
-                    {code}
-                </WebSyntaxHighlighter>
-            ) : (
-                // Mobile version uses SyntaxHighlighter
-                <SyntaxHighlighter
-                    language={language}
-                    wrapLines={true}
-                    customStyle={{
-                        borderBottomRightRadius: "0.25rem",
-                        borderBottomLeftRadius: "0.25rem",
-                        fontSize: "0.75rem",
-                        margin: 0
-                    }}
-                    style={nightOwl}
-                >
-                    {code}
-                </SyntaxHighlighter>
-            )}
+            <SyntaxHighlighter
+                language={language}
+                PreTag="div"
+                customStyle={{
+                    borderBottomRightRadius: "0.25rem",
+                    borderBottomLeftRadius: "0.25rem",
+                    fontSize: "0.75rem",
+                    margin: 0
+                }}
+                style={nightOwl}
+            >
+                {code}
+            </SyntaxHighlighter>
         </View>
     );
 };
@@ -69,7 +49,7 @@ const HighlightCode: React.FC<HighlightCodeProps> = ({ code, language }) => {
 // Component to render markdown text
 export const RenderMarkdownText: React.FC<TextMessageProps> = ({ text, type = 'default' }) => {
     // Define a function to determine text color based on the type
-    const textColor = type === 'error' ? DANGER_900 : type === 'right-user' ? TERTIARY_100 : NEUTRAL_100;
+    const textColor = type === 'error' ? DANGER_900 : NEUTRAL_100;
 
     // Regular expressions for markdown patterns
     const boldPattern = /\*\*(.*?)\*\*/g;
