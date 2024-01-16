@@ -12,6 +12,7 @@ const TextMessage: React.FC<TextMessageProps> = ({
     file,
     time,
     type,
+    titleStyle,
     backgroundColor,
 }) => {
     const messageStyle: any = [
@@ -20,10 +21,14 @@ const TextMessage: React.FC<TextMessageProps> = ({
         { alignSelf: type === 'right-user' ? 'flex-end' : 'flex-start' }
     ];
 
+    const renderTitle = (title: string) => {
+        return <Text style={[styles.title, titleStyle]}>{title}</Text>;
+    };
+
     return (
         <View style={messageStyle}>
             {/* Optionally display title if it exists */}
-            {title && <Text style={styles.title}>{title}</Text>}
+            {title && renderTitle(title)}
 
             {/* Optionally display file name if it exists */}
             {file && <Text style={styles.file}>{file}</Text>}
