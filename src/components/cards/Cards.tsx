@@ -62,6 +62,7 @@ const Cards = ({
 
   useEffect(() => {
     setDataOG(data);
+    setDataList(data);
   }, [data]);
 
   const handleItemsSelected = (item: any) => {
@@ -142,6 +143,7 @@ const Cards = ({
   const handleDeleteSelectedItems = (itemsToSend: any) => {
     onDeleteData && onDeleteData(itemsToSend);
     handleCancelSelectionMode(false);
+    setShowModal(false);
   };
 
   return (
@@ -167,7 +169,7 @@ const Cards = ({
             style={[styles.title, { marginHorizontal: selectionMode ? 8 : 0 }]}>
             {selectionMode
               ? `${selectionLabel || SELECTED_LABEL} (${selectedItems.length})`
-              : `${title} (${data.length})`}
+              : `${title} (${dataList.length})`}
           </Text>
         </View>
         {selectionMode ? (
