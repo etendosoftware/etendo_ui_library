@@ -6,7 +6,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 // @ts-ignore
 import { CopyIcon } from "../../assets/images/icons/CopyIcon";
 import { NEUTRAL_0, PRIMARY_20 } from "../../styles/colors";
-import { nightOwl, tomorrowNight } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { nightOwl } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 export const CodeComponent = ({
     node,
@@ -17,7 +17,6 @@ export const CodeComponent = ({
 }: any) => {
     const [copiedCode, setCopiedCode] = useState(false);
 
-    // Obtener el texto de props.children si es un string o un elemento React
     const textContent =
         typeof children === 'string'
             ? children

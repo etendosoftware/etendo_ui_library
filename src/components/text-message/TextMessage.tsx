@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { DANGER_100, DANGER_700, DANGER_900, NEUTRAL_0, NEUTRAL_100, NEUTRAL_200, PRIMARY_100, TERTIARY_100, TERTIARY_30, TERTIARY_70 } from '../../styles/colors';
+import { DANGER_100, DANGER_700, DANGER_900, NEUTRAL_0, NEUTRAL_100, NEUTRAL_1000, NEUTRAL_200, NEUTRAL_400, PRIMARY_100, TERTIARY_100, TERTIARY_30, TERTIARY_70 } from '../../styles/colors';
 import { ErrorIcon } from '../../assets/images/icons/ErrorIcon';
 import { RenderMarkdownText } from './MarkdownUtils';
 import { TextMessageProps } from './TextMessage.types';
+import { FileIcon } from '../../assets/images/icons/FileIcon';
 
 // TextMessage component definition
 const TextMessage: React.FC<TextMessageProps> = ({
@@ -12,26 +13,35 @@ const TextMessage: React.FC<TextMessageProps> = ({
     file,
     time,
     type,
-    titleStyle,
     backgroundColor,
 }) => {
     const messageStyle: any = [
         styles.messageContainer,
+        { borderTopLeftRadius: type === 'left-user' || type === 'error' ? 0 : 8 },
+        { borderTopRightRadius: type === 'right-user' ? 0 : 8 },
         { backgroundColor: type === 'error' ? DANGER_100 : type === 'right-user' ? NEUTRAL_200 : backgroundColor || NEUTRAL_0 },
         { alignSelf: type === 'right-user' ? 'flex-end' : 'flex-start' }
     ];
 
-    const renderTitle = (title: string) => {
-        return <Text style={[styles.title, titleStyle]}>{title}</Text>;
+    const renderTitle = (title: string, type: 'left-user' | 'right-user' | 'error' | undefined) => {
+        return <Text style={[styles.title, { color: type == 'error' ? DANGER_900 : NEUTRAL_1000 }]}>{title}</Text>;
     };
 
     return (
         <View style={messageStyle}>
             {/* Optionally display title if it exists */}
-            {title && renderTitle(title)}
+            {title && renderTitle(title, type)}
 
             {/* Optionally display file name if it exists */}
-            {file && <Text style={styles.file}>{file}</Text>}
+            {file &&
+                <View style={[
+                    styles.fileContainer,
+                    type === 'right-user' ? styles.rightUserFileContainer : styles.otherUserFileContainer
+                ]}>
+                    <FileIcon style={styles.fileIcon} />
+                    <Text style={styles.file}>{file}</Text>
+                </View>
+            }
 
             {/* Container for the error icon and the text */}
             <View style={styles.textContentWithIcon}>
@@ -62,10 +72,9 @@ const styles = StyleSheet.create({
     },
     messageContainer: {
         padding: 8,
-        borderBottomLeftRadius: 8,
-        borderBottomRightRadius: 8,
+        borderRadius: 8,
         flexDirection: 'column',
-        marginTop: 12,
+        marginBottom: 12,
         maxWidth: '100%',
     },
     textContentWithIcon: {
@@ -76,13 +85,10 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
     },
     title: {
-        color: PRIMARY_100,
+        color: NEUTRAL_1000,
         fontSize: 16,
         fontWeight: "600",
         marginBottom: 2,
-    },
-    file: {
-        backgroundColor: TERTIARY_70,
     },
     botMessage: {
         backgroundColor: NEUTRAL_0,
@@ -103,6 +109,31 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius: 8,
         flexDirection: "column",
         justifyContent: 'space-between',
+    },
+    fileContainer: {
+        marginTop: 2,
+        marginBottom: 4,
+        padding: 8,
+        borderRadius: 8,
+        borderColor: NEUTRAL_400,
+        borderWidth: 1,
+        flexDirection: "row",
+        alignItems: "center",
+    },
+    rightUserFileContainer: {
+        backgroundColor: NEUTRAL_0,
+    },
+    otherUserFileContainer: {
+        backgroundColor: NEUTRAL_200,
+    },
+    fileIcon: {
+        width: 36,
+        height: 36,
+    },
+    file: {
+        paddingHorizontal: 8,
+        fontWeight: "500",
+        fontSize: 14,
     },
     defaultTimestamp: {
         color: TERTIARY_100,
