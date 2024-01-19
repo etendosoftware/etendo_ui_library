@@ -18,7 +18,7 @@ import { FileSearchInputProps } from './FileSearchInput.types';
 import { IInputButtons } from '../inputBase.types';
 
 // Import DocumentPicker for mobile platforms only
-let DocumentPicker = null;
+let DocumentPicker: any = null;
 if (Platform.OS !== 'web') {
     DocumentPicker = require('react-native-document-picker').default;
 }

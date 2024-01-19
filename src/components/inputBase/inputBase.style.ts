@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
 import {
-  DANGER_600,
   DANGER_700,
   NEUTRAL_0,
   NEUTRAL_1000,
@@ -30,7 +29,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   containerIsError: {
-    borderColor: DANGER_600,
+    borderColor: DANGER_700,
   },
   containerIsDisabled: {
     borderColor: NEUTRAL_400,
