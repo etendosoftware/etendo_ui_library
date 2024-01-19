@@ -9,8 +9,8 @@ export interface SvgImageProps {
 }
 
 export const FileIcon = ({ style, fill = '#121212' }: SvgImageProps) => {
-    const width = sizeSvg(style?.width || 48);
-    const height = sizeSvg(style?.height || 48);
+    const width = sizeSvg(style?.width || 32);
+    const height = sizeSvg(style?.height || 32);
 
     return (
         <Svg

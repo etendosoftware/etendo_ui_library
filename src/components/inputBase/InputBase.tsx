@@ -1,0 +1,152 @@
+import {
+  ColorValue,
+  Text,
+  TextInput,
+  TextStyle,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from 'react-native';
+import { styles } from './inputBase.style';
+import React, { useState } from 'react';
+import { IInputBase, IInputButtons } from './inputBase.types';
+
+const InputBase = ({
+  value,
+  placeholder,
+  title,
+  helperText,
+  isDisabled,
+  isError,
+  onChangeText,
+  leftButtons,
+  rightButtons,
+}: IInputBase) => {
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+
+  const onFocusChange = () => {
+    setIsFocused(true);
+  };
+
+  const onBlurChange = () => {
+    setIsFocused(false);
+  };
+
+  const borderWidth: number = isFocused ? 3 : 1;
+  const paddingVertical: number = 13 - (borderWidth - 1);
+  const paddingHorizontal: number = 12 - (borderWidth - 1);
+
+  const borderStyle = (): ViewStyle | undefined => {
+    if (!value && !isFocused) {
+      return styles.containerPlaceholder;
+    }
+    if (isFocused) {
+      return styles.containerFocused;
+    }
+    if (isDisabled) {
+      return styles.containerIsDisabled;
+    }
+    if (isError) {
+      return styles.containerIsError;
+    }
+  };
+
+  const iconColorStyle = (): ColorValue | undefined => {
+    if (!value) {
+      return styles.iconPlaceholder.color;
+    }
+    if (isDisabled) {
+      return styles.iconIsDisabled.color;
+    }
+    if (isFocused) {
+      return styles.iconIsFocus.color;
+    }
+    if (isError) {
+      return styles.iconIsError.color;
+    }
+  };
+
+  const textColorStyle = (): TextStyle | undefined => {
+    if (!value) {
+      return styles.textPlaceholder;
+    }
+    if (isDisabled) {
+      return styles.textIsDisabled;
+    }
+    if (isFocused) {
+      return styles.textIsFocus;
+    }
+    if (isError && !isFocused) {
+      return styles.textIsError;
+    }
+  };
+
+  return (
+    <>
+      {!!title && (
+        <Text numberOfLines={1} ellipsizeMode="tail" style={styles.title}>
+          {title}
+        </Text>
+      )}
+      <View
+        style={[
+          styles.container,
+          borderStyle(),
+          {
+            borderWidth: borderWidth,
+            paddingVertical: paddingVertical,
+            paddingHorizontal: paddingHorizontal,
+          },
+        ]}>
+        {!!leftButtons &&
+          leftButtons.map((item: IInputButtons, index) => (
+            <TouchableOpacity
+              key={`right-icon-${index}`}
+              disabled={!item.onPress || isDisabled}
+              onPress={() => {
+                if (item.onPress) {
+                  item.onPress();
+                }
+              }}>
+              {React.cloneElement(item.icon, {
+                style: item.icon.props.style || styles.iconLeft,
+                fill: iconColorStyle(),
+              })}
+            </TouchableOpacity>
+          ))}
+        <TextInput
+          value={value}
+          onChangeText={onChangeText}
+          placeholder={placeholder}
+          editable={!isDisabled}
+          onFocus={onFocusChange}
+          onBlur={onBlurChange}
+          style={[styles.textInput, textColorStyle()]}
+        />
+        {!!rightButtons &&
+          rightButtons.map((item: IInputButtons, index) => (
+            <TouchableOpacity
+              key={`right-icon-${index}`}
+              disabled={!item.onPress || isDisabled}
+              onPress={() => {
+                if (item.onPress) {
+                  item.onPress();
+                }
+              }}>
+              {React.cloneElement(item.icon, {
+                style: item.icon.props.style || styles.iconRight,
+                fill: iconColorStyle(),
+              })}
+            </TouchableOpacity>
+          ))}
+      </View>
+      {!!helperText && (
+        <Text numberOfLines={1} ellipsizeMode="tail" style={styles.helperText}>
+          {helperText}
+        </Text>
+      )}
+    </>
+  );
+};
+
+export default InputBase;
