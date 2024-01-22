@@ -54,6 +54,7 @@ export const PROCESS_100 = '#FBA643';
 export const SUCCESS_10 = '#E5F7ED';
 export const SUCCESS_100 = '#00B34C';
 export const SUCCESS_110 = '#C8FBCA';
+export const SUCCESS_600 = '#009950';
 export const SUCCESS_800 = '#00674B';
 export const SUCCESS_900 = '#005546';
 

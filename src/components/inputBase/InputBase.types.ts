@@ -17,3 +17,4 @@ export interface IInputBase {
   rightButtons?: ReactNode[];
   onSubmit?: (...params: any[]) => void;
 }
+

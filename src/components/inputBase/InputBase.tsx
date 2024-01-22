@@ -8,11 +8,11 @@ import {
   ViewStyle,
 } from 'react-native';
 import React, { ReactNode, useEffect, useState } from 'react';
-import { IInputBase } from './InputBase.types';
 import { ButtonContainer } from '../containers';
-import { styles } from './InputBase.style';
 import { Button } from '../button';
 import { CornerDownRightIcon } from '../../assets/images/icons/CornerDownRightIcon';
+import { styles } from './InputBase.styles';
+import { IInputBase } from './InputBase.types';
 
 const InputBase = ({
   value,
@@ -88,7 +88,7 @@ const InputBase = ({
       ...(rightButtons ?? []),
       onSubmit !== undefined && (
         <Button
-          width={24}
+          width={48}
           typeStyle="white"
           onPress={onSubmit}
           iconLeft={<CornerDownRightIcon style={styles.iconSize} />}
@@ -137,7 +137,7 @@ const InputBase = ({
           onFocus={onFocusChange}
           onBlur={onBlurChange}
           style={[styles.textInput, textColorStyle()]}
-          onSubmitEditing={onSubmit || (() => {})}
+          onSubmitEditing={onSubmit || (() => { })}
         />
         {!!buttons && (
           <ButtonContainer style={styles.buttonContainer} buttons={buttons} />

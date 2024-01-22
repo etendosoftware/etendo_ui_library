@@ -74,6 +74,7 @@ export const styles = StyleSheet.create({
     letterSpacing: -0.16,
     color: PRIMARY_100,
     flex: 1,
+    outlineStyle: "none",
   },
   helperText: {
     fontFamily: 'Inter',
