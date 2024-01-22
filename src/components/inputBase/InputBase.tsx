@@ -84,7 +84,6 @@ const InputBase = ({
   };
 
   useEffect(() => {
-    console.log('onSubmit', onSubmit);
     setButtons([
       ...(rightButtons ?? []),
       onSubmit !== undefined && (
@@ -138,6 +137,7 @@ const InputBase = ({
           onFocus={onFocusChange}
           onBlur={onBlurChange}
           style={[styles.textInput, textColorStyle()]}
+          onSubmitEditing={onSubmit || (() => {})}
         />
         {!!buttons && (
           <ButtonContainer
