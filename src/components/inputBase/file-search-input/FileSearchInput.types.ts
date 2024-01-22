@@ -1,4 +1,4 @@
-import { IInputBase } from "../inputBase.types";
+import { IInputBase } from "../InputBase.types";
 
 interface IFile {
     name: string;

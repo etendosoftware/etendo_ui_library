@@ -7,9 +7,9 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { styles } from './inputBase.style';
+import { styles } from './InputBase.style';
 import React, { useState } from 'react';
-import { IInputBase, IInputButtons } from './inputBase.types';
+import { IInputBase, IInputButtons } from './InputBase.types';
 
 const InputBase = ({
   value,

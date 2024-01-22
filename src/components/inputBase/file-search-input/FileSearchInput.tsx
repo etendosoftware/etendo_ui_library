@@ -15,7 +15,7 @@ import { FileIcon } from '../../../assets/images/icons/FileIcon';
 
 // Import types
 import { FileSearchInputProps } from './FileSearchInput.types';
-import { IInputButtons } from '../inputBase.types';
+import { IInputButtons } from '../InputBase.types';
 
 // Import DocumentPicker for mobile platforms only
 let DocumentPicker: any = null;
