@@ -91,7 +91,7 @@ const InputBase = ({
           width={24}
           typeStyle="white"
           onPress={onSubmit}
-          iconLeft={<CornerDownRightIcon style={{ width: 24, height: 24 }} />}
+          iconLeft={<CornerDownRightIcon style={styles.iconSize} />}
         />
       ),
     ]);
@@ -140,15 +140,7 @@ const InputBase = ({
           onSubmitEditing={onSubmit || (() => {})}
         />
         {!!buttons && (
-          <ButtonContainer
-            style={{
-              flexDirection: 'row',
-              paddingVertical: 0,
-              gap: 0,
-              marginLeft: 5,
-            }}
-            buttons={buttons}
-          />
+          <ButtonContainer style={styles.buttonContainer} buttons={buttons} />
         )}
       </View>
       {!!helperText && (
