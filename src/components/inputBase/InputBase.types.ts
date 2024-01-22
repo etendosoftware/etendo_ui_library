@@ -15,4 +15,5 @@ export interface IInputBase {
   onChangeText?: (value: string) => void;
   icon?: IInputButtons;
   rightButtons?: ReactNode[];
+  onSubmit?: (...params: any[]) => void;
 }

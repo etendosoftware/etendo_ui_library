@@ -7,10 +7,12 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { IInputBase } from './InputBase.types';
 import { ButtonContainer } from '../containers';
 import { styles } from './InputBase.style';
+import { Button } from '../button';
+import { CornerDownRightIcon } from '../../assets/images/icons/CornerDownRightIcon';
 
 const InputBase = ({
   value,
@@ -22,8 +24,10 @@ const InputBase = ({
   onChangeText,
   icon,
   rightButtons,
+  onSubmit,
 }: IInputBase) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [buttons, setButtons] = useState<ReactNode[]>([]);
 
   const onFocusChange = () => {
     setIsFocused(true);
@@ -79,6 +83,21 @@ const InputBase = ({
     }
   };
 
+  useEffect(() => {
+    console.log('onSubmit', onSubmit);
+    setButtons([
+      ...(rightButtons ?? []),
+      onSubmit !== undefined && (
+        <Button
+          width={24}
+          typeStyle="white"
+          onPress={onSubmit}
+          iconLeft={<CornerDownRightIcon style={{ width: 24, height: 24 }} />}
+        />
+      ),
+    ]);
+  }, [onSubmit, rightButtons]);
+
   return (
     <>
       {!!title && (
@@ -120,7 +139,7 @@ const InputBase = ({
           onBlur={onBlurChange}
           style={[styles.textInput, textColorStyle()]}
         />
-        {!!rightButtons && (
+        {!!buttons && (
           <ButtonContainer
             style={{
               flexDirection: 'row',
@@ -128,7 +147,7 @@ const InputBase = ({
               gap: 0,
               marginLeft: 5,
             }}
-            buttons={rightButtons}
+            buttons={buttons}
           />
         )}
       </View>
