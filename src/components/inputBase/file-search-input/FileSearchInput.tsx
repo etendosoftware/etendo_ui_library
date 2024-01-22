@@ -156,7 +156,7 @@ const FileSearchInput = ({
     // Define the right buttons for the input
     const rightButtons: ReactNode[] = [
         <Button
-            width={24}
+            width={48}
             typeStyle="white"
             onPress={handleFileButtonClick}
             iconLeft={<ClipboardIcon style={{ width: 24, height: 24 }} fill={PRIMARY_100} />}

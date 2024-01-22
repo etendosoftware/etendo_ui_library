@@ -88,7 +88,7 @@ const InputBase = ({
       ...(rightButtons ?? []),
       onSubmit !== undefined && (
         <Button
-          width={24}
+          width={48}
           typeStyle="white"
           onPress={onSubmit}
           iconLeft={<CornerDownRightIcon style={styles.iconSize} />}
