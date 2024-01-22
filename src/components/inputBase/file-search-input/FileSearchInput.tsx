@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, TouchableOpacity, Animated, Platform, Text, } from 'react-native';
+import { View, TouchableOpacity, Animated, Platform, Text, Alert, } from 'react-native';
 import InputBase from '../InputBase';
 
 // Import styles
@@ -24,7 +24,9 @@ if (Platform.OS !== 'web') {
 }
 
 const FileSearchInput = ({
+    value,
     onSubmit,
+    setLoadingFile,
     loadingFile,
     onLoadingFile,
     file,
@@ -32,6 +34,7 @@ const FileSearchInput = ({
     ...inputBaseProps
 }: FileSearchInputProps) => {
     const [progress, setProgress] = useState(0);
+    const dropAreaRef = useRef(null);
     const fileInputRef = useRef<any>(null);
     const progressAnim = useRef(new Animated.Value(0)).current;
     const progressSteps = [5, 25, 50, 70, 90];
@@ -43,12 +46,30 @@ const FileSearchInput = ({
         }
     }, [loadingFile, progress]);
 
+    const handleDrop = (event: any) => {
+        event.preventDefault();
+        const files = event.dataTransfer.files;
+        if (files.length > 0) {
+            const file = files[0]; // Tomar el primer archivo si se sueltan varios
+            startLoading(file);
+            if (onLoadingFile && typeof onLoadingFile === 'function') {
+                onLoadingFile(file, () => setFile(file));
+            } else {
+                setFile(file);
+            }
+        }
+    };
+
     const completeProgress = () => {
         setProgress(100);
         animateProgress(100);
+
+        setTimeout(() => {
+            setProgress(0);
+            animateProgress(0);
+        }, 2000);
     };
 
-    // Smoothly animate the progress bar
     const animateProgress = (toValue: any) => {
         Animated.timing(progressAnim, {
             toValue,
@@ -57,8 +78,8 @@ const FileSearchInput = ({
         }).start();
     };
 
-    // Function to start the file loading process
     const startLoading = (pickedFile: any) => {
+        currentStep = 0;
         setFile(pickedFile);
         setProgress(progressSteps[0]);
         animateProgress(progressSteps[0]);
@@ -115,6 +136,24 @@ const FileSearchInput = ({
         }
     };
 
+    // Disable message sending if a file is loading or if the input text is empty
+    const handleSendMessage = () => {
+        if (!loadingFile && value?.trim() !== '') {
+            if (onSubmit) {
+                onSubmit(fileInputRef.current);
+                setProgress(0);
+                animateProgress(0);
+                setLoadingFile(false);
+            }
+        } else {
+            Alert.alert(
+                "Message Incomplete",
+                "Please wait for the file to finish loading or ensure the message is not empty."
+            );
+        }
+    };
+
+
     // Define the right buttons for the input
     const rightButtons: IInputButtons[] = [
         {
@@ -123,23 +162,22 @@ const FileSearchInput = ({
         },
         {
             icon: <CornerDownRightIcon />,
-            onPress: () => {
-                if (onSubmit) {
-                    onSubmit(fileInputRef.current);
-                }
-            },
+            onPress: handleSendMessage,
         },
     ];
 
     // Handle file selection from the input - Web specific
     const handleFileSelect = (event: any) => {
         const file = event.target.files[0];
-        startLoading(file);
-        if (onLoadingFile && typeof onLoadingFile === 'function') {
-            onLoadingFile(file, () => setFile(file));
-        } else {
-            setFile(file);
+        if (file) {
+            startLoading(file);
+            if (onLoadingFile && typeof onLoadingFile === 'function') {
+                onLoadingFile(file, () => setFile(file));
+            } else {
+                setFile(file);
+            }
         }
+        event.target.value = null;
     };
 
     // Function to handle file deletion
@@ -147,7 +185,11 @@ const FileSearchInput = ({
         setFile(null);
         setProgress(0);
         animateProgress(0);
+        if (fileInputRef.current) {
+            fileInputRef.current.value = null;
+        }
     };
+
 
     return (
         <View style={styles.container}>
@@ -190,19 +232,29 @@ const FileSearchInput = ({
 
             {/* Input base with right buttons */}
             <View style={styles.inputContainer}>
-                <InputBase
-                    {...inputBaseProps}
-                    rightButtons={rightButtons}
-                />
-                {/* Input for web file selection */}
-                {Platform.OS === 'web' && (
-                    <input
-                        type="file"
-                        ref={fileInputRef}
-                        style={{ display: 'none' }}
-                        onChange={handleFileSelect}
+                {Platform.OS === "web" ?
+                    <div
+                        ref={dropAreaRef}
+                        onDrop={handleDrop}
+                    >
+                        <InputBase
+                            value={value}
+                            {...inputBaseProps}
+                            rightButtons={rightButtons}
+                        />
+                        <input
+                            type="file"
+                            ref={fileInputRef}
+                            style={{ display: 'none' }}
+                            onChange={handleFileSelect}
+                        />
+                    </div> :
+                    <InputBase
+                        value={value}
+                        {...inputBaseProps}
+                        rightButtons={rightButtons}
                     />
-                )}
+                }
             </View>
         </View>
     );

@@ -12,5 +12,6 @@ export interface FileSearchInputProps extends IInputBase {
     file: IFile | null;
     setFile: React.Dispatch<React.SetStateAction<IFile | null>>;
     loadingFile: boolean;
+    setLoadingFile: React.Dispatch<React.SetStateAction<boolean>>;
     onLoadingFile: (file: IFile, callback?: () => void) => void;
 }

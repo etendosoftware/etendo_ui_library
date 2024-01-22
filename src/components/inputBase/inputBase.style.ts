@@ -67,7 +67,7 @@ export const styles = StyleSheet.create({
   textInput: {
     paddingHorizontal: 0,
     height: 48,
-    backgroundColor: 'white',
+    backgroundColor: NEUTRAL_0,
     fontFamily: 'Inter',
     fontSize: 16,
     fontStyle: 'normal',
