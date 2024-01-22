@@ -20,6 +20,7 @@ import { CheckIcon } from './CheckIcon';
 import { CheckTrueIcon } from './CheckTrueIcon';
 import { CircularArrowIcon } from './CircularArrowIcon';
 import { ConfigurationIcon } from './ConfigurationIcon';
+import { CornerDownRightIcon } from './CornerDownRightIcon';
 import { DeliveryBoxIcon } from './DeliveryBoxIcon';
 import { DocumentIcon } from './DocumentIcon';
 import { EditIcon } from './EditIcon';
@@ -86,6 +87,7 @@ export {
   CheckTrueIcon,
   CircularArrowIcon,
   ConfigurationIcon,
+  CornerDownRightIcon,
   DeliveryBoxIcon,
   DocumentIcon,
   EditIcon,

@@ -62,6 +62,7 @@ export const DESTRUCTIVE_10 = '#FEF0EF';
 export const DESTRUCTIVE_100 = '#F36A62';
 
 export const DANGER_100 = '#FEEBED';
+export const DANGER_600 = '#D0474B';
 export const DANGER_700 = '#AE313F';
 export const DANGER_900 = '#74122E';
 

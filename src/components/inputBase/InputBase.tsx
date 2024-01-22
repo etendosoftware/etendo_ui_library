@@ -7,9 +7,12 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
+import React, { ReactNode, useEffect, useState } from 'react';
+import { IInputBase } from './InputBase.types';
+import { ButtonContainer } from '../containers';
 import { styles } from './InputBase.style';
-import React, { useState } from 'react';
-import { IInputBase, IInputButtons } from './InputBase.types';
+import { Button } from '../button';
+import { CornerDownRightIcon } from '../../assets/images/icons/CornerDownRightIcon';
 
 const InputBase = ({
   value,
@@ -19,10 +22,12 @@ const InputBase = ({
   isDisabled,
   isError,
   onChangeText,
-  leftButtons,
+  icon,
   rightButtons,
+  onSubmit,
 }: IInputBase) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [buttons, setButtons] = useState<ReactNode[]>([]);
 
   const onFocusChange = () => {
     setIsFocused(true);
@@ -39,9 +44,6 @@ const InputBase = ({
   const borderStyle = (): ViewStyle | undefined => {
     if (!value && !isFocused) {
       return styles.containerPlaceholder;
-    }
-    if (isFocused) {
-      return styles.containerFocused;
     }
     if (isDisabled) {
       return styles.containerIsDisabled;
@@ -81,6 +83,20 @@ const InputBase = ({
     }
   };
 
+  useEffect(() => {
+    setButtons([
+      ...(rightButtons ?? []),
+      onSubmit !== undefined && (
+        <Button
+          width={24}
+          typeStyle="white"
+          onPress={onSubmit}
+          iconLeft={<CornerDownRightIcon style={styles.iconSize} />}
+        />
+      ),
+    ]);
+  }, [onSubmit, rightButtons]);
+
   return (
     <>
       {!!title && (
@@ -98,22 +114,21 @@ const InputBase = ({
             paddingHorizontal: paddingHorizontal,
           },
         ]}>
-        {!!leftButtons &&
-          leftButtons.map((item: IInputButtons, index) => (
-            <TouchableOpacity
-              key={`right-icon-${index}`}
-              disabled={!item.onPress || isDisabled}
-              onPress={() => {
-                if (item.onPress) {
-                  item.onPress();
-                }
-              }}>
-              {React.cloneElement(item.icon, {
-                style: item.icon.props.style || styles.iconLeft,
-                fill: iconColorStyle(),
-              })}
-            </TouchableOpacity>
-          ))}
+        {!!icon && (
+          <TouchableOpacity
+            disabled={!icon.onPress || isDisabled}
+            onPress={() => {
+              if (icon.onPress) {
+                icon.onPress();
+              }
+            }}
+            style={{ marginRight: 5 }}>
+            {React.cloneElement(icon.icon, {
+              style: icon.icon.props.style || styles.iconRight,
+              fill: iconColorStyle(),
+            })}
+          </TouchableOpacity>
+        )}
         <TextInput
           value={value}
           onChangeText={onChangeText}
@@ -122,23 +137,11 @@ const InputBase = ({
           onFocus={onFocusChange}
           onBlur={onBlurChange}
           style={[styles.textInput, textColorStyle()]}
+          onSubmitEditing={onSubmit || (() => { })}
         />
-        {!!rightButtons &&
-          rightButtons.map((item: IInputButtons, index) => (
-            <TouchableOpacity
-              key={`right-icon-${index}`}
-              disabled={!item.onPress || isDisabled}
-              onPress={() => {
-                if (item.onPress) {
-                  item.onPress();
-                }
-              }}>
-              {React.cloneElement(item.icon, {
-                style: item.icon.props.style || styles.iconRight,
-                fill: iconColorStyle(),
-              })}
-            </TouchableOpacity>
-          ))}
+        {!!buttons && (
+          <ButtonContainer style={styles.buttonContainer} buttons={buttons} />
+        )}
       </View>
       {!!helperText && (
         <Text numberOfLines={1} ellipsizeMode="tail" style={styles.helperText}>
