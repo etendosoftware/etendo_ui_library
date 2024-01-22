@@ -12,7 +12,6 @@ import { ButtonContainer } from '../containers';
 import { Button } from '../button';
 import { CornerDownRightIcon } from '../../assets/images/icons/CornerDownRightIcon';
 import { styles } from './InputBase.styles';
-import { IInputBase } from './InputBase.types';
 
 const InputBase = ({
   value,
@@ -25,7 +24,7 @@ const InputBase = ({
   icon,
   rightButtons,
   onSubmit,
-}: IInputBase) => {
+}: any) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [buttons, setButtons] = useState<ReactNode[]>([]);
 
