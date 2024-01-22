@@ -89,7 +89,7 @@ export const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     paddingVertical: 0,
-    gap: 0,
+    gap: 12,
     marginLeft: 5,
   },
 });

@@ -1,21 +1,20 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, ReactNode } from 'react';
 import { View, TouchableOpacity, Animated, Platform, Text, Alert, } from 'react-native';
 import InputBase from '../InputBase';
 
 // Import styles
 import { styles } from './FileSearchInput.styles';
-import { SUCCESS_600 } from '../../../styles/colors';
+import { PRIMARY_100, SUCCESS_600 } from '../../../styles/colors';
 
 // Import icons
 import { CheckCircleIcon } from '../../../assets/images/icons/CheckCircleIcon';
 import { ClipboardIcon } from '../../../assets/images/icons/Clipboard';
-import { CornerDownRightIcon } from '../../../assets/images/icons/CornerDownRightIcon';
 import { DeleteIcon } from '../../../assets/images/icons/DeleteIcon';
 import { FileIcon } from '../../../assets/images/icons/FileIcon';
 
 // Import types
 import { FileSearchInputProps } from './FileSearchInput.types';
-import { IInputButtons } from '../InputBase.types';
+import { Button } from '../../button';
 
 // Import DocumentPicker for mobile platforms only
 let DocumentPicker: any = null;
@@ -155,15 +154,13 @@ const FileSearchInput = ({
 
 
     // Define the right buttons for the input
-    const rightButtons: IInputButtons[] = [
-        {
-            icon: <ClipboardIcon />,
-            onPress: handleFileButtonClick,
-        },
-        {
-            icon: <CornerDownRightIcon />,
-            onPress: handleSendMessage,
-        },
+    const rightButtons: ReactNode[] = [
+        <Button
+            width={24}
+            typeStyle="white"
+            onPress={handleFileButtonClick}
+            iconLeft={<ClipboardIcon style={{ width: 24, height: 24 }} fill={PRIMARY_100} />}
+        />
     ];
 
     // Handle file selection from the input - Web specific
@@ -229,7 +226,6 @@ const FileSearchInput = ({
                         </View>
                     </View>
                 )}
-
             {/* Input base with right buttons */}
             <View style={styles.inputContainer}>
                 {Platform.OS === "web" ?
@@ -240,6 +236,7 @@ const FileSearchInput = ({
                         <InputBase
                             value={value}
                             {...inputBaseProps}
+                            onSubmit={handleSendMessage}
                             rightButtons={rightButtons}
                         />
                         <input
@@ -252,6 +249,7 @@ const FileSearchInput = ({
                     <InputBase
                         value={value}
                         {...inputBaseProps}
+                        onSubmit={handleSendMessage}
                         rightButtons={rightButtons}
                     />
                 }
