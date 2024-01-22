@@ -8,6 +8,7 @@ interface IFile {
 }
 
 export interface FileSearchInputProps extends IInputBase {
+    value?: string;
     onSubmit?: (message: string, file?: IFile) => void;
     file: IFile | null;
     setFile: React.Dispatch<React.SetStateAction<IFile | null>>;
