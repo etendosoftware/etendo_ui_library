@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, ReactNode } from 'react';
 
 export interface IInputButtons {
   icon: ReactElement;
@@ -13,6 +13,7 @@ export interface IInputBase {
   isDisabled?: boolean;
   isError?: boolean;
   onChangeText?: (value: string) => void;
-  leftButtons?: IInputButtons[];
-  rightButtons?: IInputButtons[];
+  icon?: IInputButtons;
+  rightButtons?: ReactNode[];
+  onSubmit?: (...params: any[]) => void;
 }

@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import {
+  DANGER_600,
   DANGER_700,
   NEUTRAL_0,
   NEUTRAL_1000,
@@ -29,16 +30,13 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   containerIsError: {
-    borderColor: DANGER_700,
+    borderColor: DANGER_600,
   },
   containerIsDisabled: {
     borderColor: NEUTRAL_400,
   },
   containerPlaceholder: {
     borderColor: NEUTRAL_400,
-  },
-  containerFocused: {
-    borderColor: PRIMARY_100,
   },
   iconPlaceholder: {
     color: NEUTRAL_800,
@@ -67,7 +65,7 @@ export const styles = StyleSheet.create({
   textInput: {
     paddingHorizontal: 0,
     height: 48,
-    backgroundColor: NEUTRAL_0,
+    backgroundColor: 'white',
     fontFamily: 'Inter',
     fontSize: 16,
     fontStyle: 'normal',
@@ -76,7 +74,6 @@ export const styles = StyleSheet.create({
     letterSpacing: -0.16,
     color: PRIMARY_100,
     flex: 1,
-    outlineStyle: 'none',
   },
   helperText: {
     fontFamily: 'Inter',
@@ -86,6 +83,13 @@ export const styles = StyleSheet.create({
     letterSpacing: -0.14,
     color: NEUTRAL_800,
   },
-  iconLeft: { width: 24, height: 24, marginRight: 12 },
-  iconRight: { width: 24, height: 24, marginLeft: 12 },
+  iconLeft: { width: 24, height: 24, marginRight: 8 },
+  iconRight: { width: 24, height: 24, marginLeft: 8 },
+  iconSize: { width: 24, height: 24 },
+  buttonContainer: {
+    flexDirection: 'row',
+    paddingVertical: 0,
+    gap: 0,
+    marginLeft: 5,
+  },
 });
