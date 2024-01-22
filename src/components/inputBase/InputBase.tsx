@@ -8,11 +8,11 @@ import {
   ViewStyle,
 } from 'react-native';
 import React, { ReactNode, useEffect, useState } from 'react';
-import { IInputBase } from './InputBase.types';
 import { ButtonContainer } from '../containers';
-import { styles } from './InputBase.style';
 import { Button } from '../button';
 import { CornerDownRightIcon } from '../../assets/images/icons/CornerDownRightIcon';
+import { styles } from './InputBase.styles';
+import { IInputBase } from './InputBase.types';
 
 const InputBase = ({
   value,
