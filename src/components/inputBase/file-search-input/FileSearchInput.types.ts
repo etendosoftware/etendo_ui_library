@@ -1,6 +1,6 @@
 import { IInputBase } from "../InputBase.types";
 
-interface IFile {
+export interface IFile {
     name: string;
     size: number;
     type: string;
