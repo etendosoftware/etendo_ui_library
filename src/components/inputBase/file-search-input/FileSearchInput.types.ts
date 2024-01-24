@@ -1,11 +1,23 @@
+import { Animated } from 'react-native';
 import { IInputBase } from '../InputBase.types';
+
+export type FetchData = {
+    file: any;
+    url: string;
+    method: string;
+};
 
 export interface FileSearchInputProps extends IInputBase {
     value: string;
-    placeholder: string;
-    onChangeText: (text: string) => void;
-    onSubmit?: (message: string, file?: any) => void;
     setFile: (file: any) => void;
-    isSimulation: boolean;
-    fetchData?: { file: any, url: string, method: string };
+    onChangeText: (text: string) => void;
+    onSubmit: (message: string, file?: any) => void;
+    placeholder: string;
+    fetchData?: FetchData;
+}
+
+export interface FileStatusDisplayProps {
+    file: any;
+    progressAnim: Animated.Value;
+    handleDeleteFile: () => void;
 }

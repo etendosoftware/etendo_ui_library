@@ -22,6 +22,7 @@ import { FileIcon } from '../../../assets/images/icons/FileIcon';
 // Import types
 import { FileSearchInputProps } from './FileSearchInput.types';
 import { Button } from '../../button';
+import FileStatusDisplay from './FileStatusDisplay';
 
 // Import DocumentPicker for mobile platforms only
 let DocumentPicker: any = null;
@@ -37,7 +38,6 @@ const FileSearchInput = ({
   onSubmit,
   setFile,
   fetchData,
-  isSimulation = false,
   ...inputBaseProps
 }: FileSearchInputProps) => {
   const [file, setLocalFile] = useState<any>(null);
@@ -142,7 +142,7 @@ const FileSearchInput = ({
   const handleSendMessage = () => {
     if (!loadingFile && value?.trim() !== '') {
       if (onSubmit) {
-        onSubmit(fileInputRef.current);
+        onSubmit(value, fileInputRef.current);
         setProgress(0);
         animateProgress(0);
         setLoadingFile(false);
@@ -157,16 +157,19 @@ const FileSearchInput = ({
   };
 
   // Define the right buttons for the input
-  const rightButtons: ReactNode[] = [
-    <Button
-      width={48}
-      typeStyle="white"
-      onPress={handleFileButtonClick}
-      iconLeft={
-        <ClipboardIcon style={{ width: 24, height: 24 }} fill={PRIMARY_100} />
-      }
-    />,
-  ];
+  const rightButtons: ReactNode[] = [];
+  if (fetchData) {
+    rightButtons.push(
+      <Button
+        width={48}
+        typeStyle="white"
+        onPress={handleFileButtonClick}
+        iconLeft={
+          <ClipboardIcon style={{ width: 24, height: 24 }} fill={PRIMARY_100} />
+        }
+      />
+    );
+  }
 
   // Handle file selection from the input - Web specific
   const handleFileSelect = (event: any) => {
@@ -194,31 +197,23 @@ const FileSearchInput = ({
 
   // Manejo de la carga de archivos
   const uploadFile = async (file: any) => {
-    if (isSimulation) {
-      setLoadingFile(true);
-      const loadTime = Math.random() * (7000 - 3000) + 3000;
-      setTimeout(() => {
-        setLoadingFile(false);
-        setFile(file);
-      }, loadTime);
-    } else {
-      if (!fetchData || !fetchData.url || !fetchData.method) {
-        console.error('Fetch data is not properly defined.');
-        return;
-      }
-      const formData = new FormData();
-      formData.append(fetchData.file || 'file', file);
-      try {
-        const response = await fetch(fetchData.url, {
-          method: fetchData.method,
-          body: formData,
-        });
-        const result = await response.json();
-        setFile(result);
-        completeProgress();
-      } catch (error) {
-        console.error('Error uploading file:', error);
-      }
+
+    if (!fetchData || !fetchData.url || !fetchData.method) {
+      Alert.alert('Fetch data is not properly defined.');
+      return;
+    }
+    const formData = new FormData();
+    formData.append(fetchData.file || 'file', file);
+    try {
+      const response = await fetch(fetchData.url, {
+        method: fetchData.method,
+        body: formData,
+      });
+      const result = await response.json();
+      setFile(result);
+      completeProgress();
+    } catch (error) {
+      console.error('Error uploading file:', error);
     }
   };
 
@@ -226,30 +221,11 @@ const FileSearchInput = ({
     <View style={styles.container}>
       {/* Display when file is selected */}
       {file && loadingFile ? (
-        <View style={styles.fileNameContainer}>
-          <View style={styles.fileNameLeftContainer}>
-            <FileIcon style={styles.fileIcon} />
-            <View style={styles.fileNameLeftContent}>
-              <Text style={styles.fileNameText}>{file.name}</Text>
-              <View style={styles.progressBarBackground}>
-                <Animated.View
-                  style={[
-                    styles.progressBarFill,
-                    {
-                      width: progressAnim.interpolate({
-                        inputRange: [0, 100],
-                        outputRange: ['0%', '100%'],
-                      }),
-                    },
-                  ]}
-                />
-              </View>
-            </View>
-          </View>
-          <TouchableOpacity onPress={handleDeleteFile}>
-            <DeleteIcon style={styles.deleteIcon} />
-          </TouchableOpacity>
-        </View>
+        <FileStatusDisplay
+          file={file}
+          progressAnim={progressAnim}
+          handleDeleteFile={handleDeleteFile}
+        />
       ) : (
         file && (
           <View style={styles.fileNameContainer}>
