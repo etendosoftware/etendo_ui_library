@@ -1,5 +1,6 @@
 import {
   ColorValue,
+  Platform,
   Text,
   TextInput,
   TextStyle,
@@ -83,6 +84,12 @@ const InputBase = ({
       return styles.textIsError;
     }
   };
+
+  const textInputStyle = [styles.textInput, textColorStyle()];
+
+  if (Platform.OS === 'web') {
+    textInputStyle.push({ outlineWidth: 0 } as any);
+  }
 
   useEffect(() => {
     setButtons([
