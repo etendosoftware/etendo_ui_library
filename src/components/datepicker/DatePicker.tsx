@@ -12,6 +12,7 @@ import {
   Dimensions,
   Pressable,
   ScrollView,
+  TouchableWithoutFeedback,
 } from 'react-native';
 
 import {
@@ -202,7 +203,7 @@ const DatePicker = ({
         selectMonth(index);
         setDisabledYearSelection(false);
       }}>
-      <Text style={styles.monthText}>{item}</Text>
+      <Text style={{ fontSize: 16, color: PRIMARY_100, }}>{item}</Text>
     </TouchableOpacity>
   );
 
@@ -349,6 +350,8 @@ const DatePicker = ({
 
   // Toggle date picker display
   const showPicker = () => {
+    if (!isPickerShow) setIsPickerShow(true);
+
     if (!disabled) {
       calculateCalendarDirection();
       // Close month and year selection if they are open
@@ -358,9 +361,6 @@ const DatePicker = ({
       // Enable month and year selection
       if (disabledMonthSelection) setDisabledMonthSelection(false);
       if (disabledYearSelection) setDisabledYearSelection(false);
-
-      // Set picker visibility
-      setIsPickerShow(!isPickerShow);
 
       // If date is selected, set current month and year to selected date
       if (!isPickerShow && selectedDate instanceof Date) {
@@ -596,113 +596,110 @@ const DatePicker = ({
         animationType="fade"
         transparent={true}
         visible={isPickerShow}
-        onRequestClose={showPicker}
-        ref={calendarRef}>
-        <TouchableOpacity
-          style={styles.modalContainer}
-          activeOpacity={1}
-          onPress={showPicker}>
-          <View
-            style={[
-              styles.modalContent,
-              { width: MODAL_CONTENT_WIDTH },
-              {
-                position:
-                  Platform.OS === AppPlatform.web ? 'absolute' : 'relative',
-                top:
-                  Platform.OS === AppPlatform.web
-                    ? modalPosition.top + MODAL_POSITION_TOP
-                    : undefined,
-                left:
-                  Platform.OS === AppPlatform.web
-                    ? modalPosition.left
-                    : undefined,
-              },
-            ]}>
-            <View
-              style={[
-                styles.header,
-                (isMonthSelection || isYearSelection) && {
-                  borderBottomWidth: 1,
-                  borderBottomColor: NEUTRAL_300,
-                },
-              ]}>
-              <TouchableOpacity
+        onRequestClose={() => setIsPickerShow(false)}
+      >
+        <TouchableWithoutFeedback onPress={() => setIsPickerShow(false)}>
+          <View style={styles.modalContainer}>
+            <TouchableWithoutFeedback onPress={(e) => e.stopPropagation()}>
+              <View
                 style={[
-                  styles.monthAndYearContainer,
-                  disabledMonthSelection && styles.disabledButtonStyle,
+                  styles.modalContent,
+                  { width: MODAL_CONTENT_WIDTH },
+                  {
+                    position: Platform.OS === AppPlatform.web ? 'absolute' : 'relative',
+                    top: Platform.OS === AppPlatform.web ? modalPosition.top + MODAL_POSITION_TOP : undefined,
+                    left: Platform.OS === AppPlatform.web ? modalPosition.left : undefined,
+                  },
                 ]}
-                disabled={disabledMonthSelection}
-                onPress={showMonthSelection}>
-                <TouchableOpacity onPress={goToPreviousMonth}>
-                  <ArrowLeftIcon style={{ width: 10, padding: 5 }} />
-                </TouchableOpacity>
-                <View style={styles.monthAndYearContent}>
-                  <Text style={styles.monthText}>
-                    {monthsShort[currentMonth]}
-                  </Text>
-                  <ArrowDownIcon
-                    style={{
-                      width: 8,
-                      transform: [
-                        { rotate: isYearSelection ? '180deg' : '0deg' },
-                      ],
-                    }}
+              >
+                <View
+                  style={[
+                    styles.header,
+                    (isMonthSelection || isYearSelection) && {
+                      borderBottomWidth: 1,
+                      borderBottomColor: NEUTRAL_300,
+                    },
+                  ]}>
+                  <TouchableOpacity
+                    style={[
+                      styles.monthAndYearContainer,
+                      disabledMonthSelection && styles.disabledButtonStyle,
+                    ]}
+                    disabled={disabledMonthSelection}
+                    onPress={showMonthSelection}>
+                    <TouchableOpacity style={[styles.iconContainer, { alignItems: "flex-start", padding: 16, paddingLeft: 4, }]} onPress={goToPreviousMonth}>
+                      <ArrowLeftIcon style={styles.iconStyle} />
+                    </TouchableOpacity>
+                    <View style={[styles.monthAndYearContent]}>
+                      <Text style={styles.monthText}>
+                        {monthsShort[currentMonth]}
+                      </Text>
+                      <ArrowDownIcon
+                        style={{
+                          width: 8,
+                          transform: [
+                            { rotate: isMonthSelection ? '180deg' : '0deg' },
+                          ],
+                        }}
+                      />
+                    </View>
+                    <TouchableOpacity style={[styles.iconContainer, { alignItems: "flex-start", padding: 16, }]} onPress={goToNextMonth}>
+                      <ArrowRightIcon style={styles.iconStyle} />
+                    </TouchableOpacity>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    style={[
+                      styles.monthAndYearContainer,
+                      disabledYearSelection && styles.disabledButtonStyle,
+                    ]}
+                    disabled={disabledYearSelection}
+                    onPress={showYearSelection}>
+                    <TouchableOpacity style={[styles.iconContainer, { alignItems: "flex-start", padding: 16, }]} onPress={goToPreviousYear}>
+                      <ArrowLeftIcon style={styles.iconStyle} />
+                    </TouchableOpacity>
+                    <View style={styles.monthAndYearContent}>
+                      <Text style={styles.yearText}>
+                        {currentYear}
+                      </Text>
+                      <ArrowDownIcon
+                        style={{
+                          width: 8,
+                          transform: [
+                            { rotate: isYearSelection ? '180deg' : '0deg' },
+                          ],
+                        }}
+                      />
+                    </View>
+                    <TouchableOpacity style={[styles.iconContainer, { alignItems: "flex-start", padding: 16, paddingRight: 4 }]} onPress={goToNextYear}>
+                      <ArrowRightIcon style={styles.iconStyle} />
+                    </TouchableOpacity>
+                  </TouchableOpacity>
+                </View>
+                {isYearSelection
+                  ? renderYearSelection()
+                  : isMonthSelection
+                    ? renderMonthSelection()
+                    : renderCalendar()}
+
+                <View style={styles.optionsContainer}>
+                  <Button
+                    typeStyle="white"
+                    text={translations[language].cancel}
+                    onPress={onCancel}
+                    paddingVertical={10}
+                  />
+                  <Button
+                    typeStyle="terciary"
+                    text={translations[language].accept}
+                    onPress={onAccept}
+                    paddingVertical={10}
                   />
                 </View>
-                <TouchableOpacity onPress={goToNextMonth}>
-                  <ArrowRightIcon style={{ width: 10, padding: 5 }} />
-                </TouchableOpacity>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={[
-                  styles.monthAndYearContainer,
-                  disabledYearSelection && styles.disabledButtonStyle,
-                ]}
-                disabled={disabledYearSelection}
-                onPress={showYearSelection}>
-                <TouchableOpacity onPress={goToPreviousYear}>
-                  <ArrowLeftIcon style={{ width: 10, padding: 5 }} />
-                </TouchableOpacity>
-                <View style={styles.monthAndYearContent}>
-                  <Text style={styles.yearText}>{currentYear}</Text>
-                  <ArrowDownIcon
-                    style={{
-                      width: 8,
-                      transform: [
-                        { rotate: isYearSelection ? '180deg' : '0deg' },
-                      ],
-                    }}
-                  />
-                </View>
-                <TouchableOpacity onPress={goToNextYear}>
-                  <ArrowRightIcon style={{ width: 10, padding: 5 }} />
-                </TouchableOpacity>
-              </TouchableOpacity>
-            </View>
-            {isYearSelection
-              ? renderYearSelection()
-              : isMonthSelection
-                ? renderMonthSelection()
-                : renderCalendar()}
-
-            <View style={styles.optionsContainer}>
-              <Button
-                typeStyle="white"
-                text={translations[language].cancel}
-                onPress={onCancel}
-                paddingVertical={10}
-              />
-              <Button
-                typeStyle="terciary"
-                text={translations[language].accept}
-                onPress={onAccept}
-                paddingVertical={10}
-              />
-            </View>
+              </View>
+            </TouchableWithoutFeedback>
           </View>
-        </TouchableOpacity>
+        </TouchableWithoutFeedback>
       </Modal>
     </View>
   );

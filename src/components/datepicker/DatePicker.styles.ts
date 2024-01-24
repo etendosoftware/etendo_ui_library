@@ -15,7 +15,7 @@ import { AppPlatform } from '../../helpers/utilsTypes';
 import { MODAL_CONTENT_WIDTH } from './DatePicker.utils';
 
 // Height of the calendar
-export const CALENDAR_HEIGHT = 260;
+export const CALENDAR_HEIGHT = 320;
 
 // StyleSheet for DatePicker
 export const styles = StyleSheet.create({
@@ -64,13 +64,19 @@ export const styles = StyleSheet.create({
   monthAndYearContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+  },
+  iconContainer: {
+    justifyContent: "center",
+  },
+  iconStyle: {
+    width: 16,
+    height: 16,
   },
   monthAndYearContent: {
     flexDirection: 'row',
-    marginHorizontal: 12,
     alignItems: 'center',
-    gap: 8,
+    gap: 4,
+    justifyContent: "center",
   },
   inputWrapperFocused: {
     backgroundColor: QUATERNARY_50,
@@ -102,11 +108,12 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingTop: 15,
-    paddingBottom: 10,
+    paddingTop: 16,
+    paddingBottom: 12,
   },
   monthText: {
     fontSize: 16,
+    width: 36,
     color: PRIMARY_100,
   },
   arrow: {
@@ -138,12 +145,10 @@ export const styles = StyleSheet.create({
     marginVertical: 2,
   },
   dayItemText: {
-    padding: 8,
+    padding: 12,
     marginVertical: 2,
     borderRadius: 100,
     textAlign: 'center',
-    width: 34,
-    height: 34,
   },
   dayItemTextHover: {
     backgroundColor: NEUTRAL_200,
@@ -157,8 +162,8 @@ export const styles = StyleSheet.create({
     backgroundColor: PRIMARY_100,
     borderRadius: 100,
     padding: 8,
-    height: 34,
-    width: 34,
+    height: 36,
+    width: 36,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -170,25 +175,30 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
   },
   currentDayBorder: {
+    borderRadius: 100,
     borderWidth: 1,
     borderColor: PRIMARY_100,
-    borderRadius: 100,
+    padding: 8,
+    height: 36,
+    width: 36,
     justifyContent: 'center',
     alignItems: 'center',
   },
   list: {
     height: CALENDAR_HEIGHT,
     paddingHorizontal: 10,
-    paddingVertical: 5,
+    paddingVertical: 8,
   },
   item: {
     justifyContent: 'center',
     padding: 10,
+    width: "100%",
     margin: 2,
   },
   yearText: {
     fontSize: 16,
-    width: 40,
+    width: 44,
+    color: PRIMARY_100,
   },
   selectedItem: {
     backgroundColor: TERTIARY_70,
