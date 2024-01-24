@@ -13,7 +13,6 @@ export const styles = StyleSheet.create({
   containerFlex: {
     maxWidth: 428,
     marginTop: 12,
-    paddingHorizontal: 15,
     width: '100%',
   },
   titleContainer: {

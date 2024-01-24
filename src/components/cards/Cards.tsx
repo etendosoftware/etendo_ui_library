@@ -191,7 +191,7 @@ const Cards = ({
       </View>
       <ScrollView
         ref={scrollViewRef}
-        style={styles.containerFlex}
+        style={[styles.containerFlex, { paddingHorizontal: dataList.length > 0 ? 16 : 0 }]}
         onScroll={onScroll}
         scrollEventThrottle={SCROLL_EVENT_THROTTLE}
         onContentSizeChange={(_contentWidth, contentHeightChange) =>
