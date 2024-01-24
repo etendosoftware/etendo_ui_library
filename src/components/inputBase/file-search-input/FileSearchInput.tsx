@@ -256,6 +256,7 @@ const FileSearchInput = ({
               onSubmit={handleSendMessage}
               rightButtons={rightButtons}
               isLoading={loadingFile}
+              placeholder={placeholder}
             />
             <input
               type="file"
@@ -272,6 +273,7 @@ const FileSearchInput = ({
             onSubmit={handleSendMessage}
             rightButtons={rightButtons}
             isLoading={loadingFile}
+            placeholder={placeholder}
           />
         )}
       </View>
