@@ -145,8 +145,8 @@ const InputBase = ({
           editable={!isDisabled}
           onFocus={onFocusChange}
           onBlur={onBlurChange}
-          style={[styles.textInput, textColorStyle()]}
-          onSubmitEditing={onSubmit || (() => {})}
+          style={textInputStyle}
+          onSubmitEditing={onSubmit || (() => { })}
         />
         {!!buttons && (
           <ButtonContainer style={styles.buttonContainer} buttons={buttons} />

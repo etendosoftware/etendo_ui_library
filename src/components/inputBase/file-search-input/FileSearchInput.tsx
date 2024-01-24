@@ -29,16 +29,19 @@ if (Platform.OS !== 'web') {
   DocumentPicker = require('react-native-document-picker').default;
 }
 
+
 const FileSearchInput = ({
   value,
+  placeholder,
+  onChangeText,
   onSubmit,
-  setLoadingFile,
-  loadingFile,
-  onLoadingFile,
-  file,
   setFile,
+  fetchData,
+  isSimulation = false,
   ...inputBaseProps
 }: FileSearchInputProps) => {
+  const [file, setLocalFile] = useState<any>(null);
+  const [loadingFile, setLoadingFile] = useState(false);
   const [progress, setProgress] = useState(0);
   const dropAreaRef = useRef(null);
   const fileInputRef = useRef<any>(null);
@@ -56,13 +59,9 @@ const FileSearchInput = ({
     event.preventDefault();
     const files = event.dataTransfer.files;
     if (files.length > 0) {
-      const file = files[0]; // Tomar el primer archivo si se sueltan varios
+      const file = files[0];
       startLoading(file);
-      if (onLoadingFile && typeof onLoadingFile === 'function') {
-        onLoadingFile(file, () => setFile(file));
-      } else {
-        setFile(file);
-      }
+      setFile(file);
     }
   };
 
@@ -86,7 +85,9 @@ const FileSearchInput = ({
 
   const startLoading = (pickedFile: any) => {
     currentStep = 0;
+    setLoadingFile(true);
     setFile(pickedFile);
+    setLocalFile(pickedFile);
     setProgress(progressSteps[0]);
     animateProgress(progressSteps[0]);
 
@@ -119,7 +120,7 @@ const FileSearchInput = ({
           type: [DocumentPicker.types.allFiles],
         });
 
-        const pickedFile = {
+        const pickedFile: any = {
           name: response[0].name,
           size: response[0].size,
           type: response[0].type,
@@ -127,13 +128,7 @@ const FileSearchInput = ({
         };
 
         startLoading(pickedFile);
-
-        // If an onLoadingFile function is provided, call it
-        if (onLoadingFile && typeof onLoadingFile === 'function') {
-          onLoadingFile(pickedFile, () => setFile(pickedFile));
-        } else {
-          setFile(pickedFile);
-        }
+        setFile(pickedFile);
       } catch (err) {
         if (!DocumentPicker.isCancel(err)) {
           console.error(err);
@@ -150,6 +145,7 @@ const FileSearchInput = ({
         setProgress(0);
         animateProgress(0);
         setLoadingFile(false);
+        setLocalFile(null);
       }
     } else {
       Alert.alert(
@@ -176,11 +172,9 @@ const FileSearchInput = ({
     const file = event.target.files[0];
     if (file) {
       startLoading(file);
-      if (onLoadingFile && typeof onLoadingFile === 'function') {
-        onLoadingFile(file, () => setFile(file));
-      } else {
-        setFile(file);
-      }
+      setFile(file);
+      setLocalFile(file);
+      uploadFile(file);
     }
     event.target.value = null;
   };
@@ -192,6 +186,36 @@ const FileSearchInput = ({
     animateProgress(0);
     if (fileInputRef.current) {
       fileInputRef.current.value = null;
+    }
+  };
+
+  // Manejo de la carga de archivos
+  const uploadFile = async (file: any) => {
+    if (isSimulation) {
+      setLoadingFile(true);
+      const loadTime = Math.random() * (7000 - 3000) + 3000;
+      setTimeout(() => {
+        setLoadingFile(false);
+        setFile(file);
+      }, loadTime);
+    } else {
+      if (!fetchData || !fetchData.url || !fetchData.method) {
+        console.error('Fetch data is not properly defined.');
+        return;
+      }
+      const formData = new FormData();
+      formData.append(fetchData.file || 'file', file);
+      try {
+        const response = await fetch(fetchData.url, {
+          method: fetchData.method,
+          body: formData,
+        });
+        const result = await response.json();
+        setFile(result);
+        completeProgress();
+      } catch (error) {
+        console.error('Error uploading file:', error);
+      }
     }
   };
 
@@ -247,8 +271,9 @@ const FileSearchInput = ({
         {Platform.OS === 'web' ? (
           <div ref={dropAreaRef} onDrop={handleDrop}>
             <InputBase
-              value={value}
               {...inputBaseProps}
+              value={value}
+              onChangeText={onChangeText}
               onSubmit={handleSendMessage}
               rightButtons={rightButtons}
               isLoading={loadingFile}
@@ -262,8 +287,9 @@ const FileSearchInput = ({
           </div>
         ) : (
           <InputBase
-            value={value}
             {...inputBaseProps}
+            value={value}
+            onChangeText={onChangeText}
             onSubmit={handleSendMessage}
             rightButtons={rightButtons}
             isLoading={loadingFile}
