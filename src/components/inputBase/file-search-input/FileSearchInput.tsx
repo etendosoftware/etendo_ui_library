@@ -68,6 +68,7 @@ const FileSearchInput = ({
   const completeProgress = () => {
     setProgress(100);
     animateProgress(100);
+    setLoadingFile(false);
 
     setTimeout(() => {
       setProgress(0);
@@ -182,8 +183,10 @@ const FileSearchInput = ({
   // Function to handle file deletion
   const handleDeleteFile = () => {
     setFile(null);
+    setLocalFile(null);
     setProgress(0);
     animateProgress(0);
+    setLoadingFile(false);
     if (fileInputRef.current) {
       fileInputRef.current.value = null;
     }
