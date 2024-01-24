@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, ReactNode } from 'react';
+import React, { useState, useRef, ReactNode } from 'react';
 import {
   View,
   TouchableOpacity,
@@ -49,11 +49,11 @@ const FileSearchInput = ({
   const progressSteps = [5, 25, 50, 70, 90];
   let currentStep = 0;
 
-  useEffect(() => {
-    if (!loadingFile && progress === 90) {
-      completeProgress();
-    }
-  }, [loadingFile, progress]);
+  // Function to reset progress bar
+  const resetProgress = () => {
+    setProgress(0);
+    animateProgress(0);
+  };
 
   const handleDrop = (event: any) => {
     event.preventDefault();
@@ -85,23 +85,20 @@ const FileSearchInput = ({
   };
 
   const startLoading = (pickedFile: any) => {
+    resetProgress();
     currentStep = 0;
     setLoadingFile(true);
     setFile(pickedFile);
     setLocalFile(pickedFile);
-    setProgress(progressSteps[0]);
-    animateProgress(progressSteps[0]);
 
+    const lastStepIndex = progressSteps.length - 1;
     let progressInterval = setInterval(() => {
-      if (currentStep < progressSteps.length - 1) {
+      if (currentStep < lastStepIndex) {
         currentStep++;
         setProgress(progressSteps[currentStep]);
         animateProgress(progressSteps[currentStep]);
       } else {
         clearInterval(progressInterval);
-        if (!loadingFile) {
-          completeProgress();
-        }
       }
     }, 1000);
   };
@@ -185,35 +182,46 @@ const FileSearchInput = ({
 
   // Function to handle file deletion
   const handleDeleteFile = () => {
+    resetProgress();
     setFile(null);
     setLocalFile(null);
+    setLoadingFile(false);
     setProgress(0);
     animateProgress(0);
-    setLoadingFile(false);
     if (fileInputRef.current) {
       fileInputRef.current.value = null;
     }
-  };
+  };;
 
-  // Manejo de la carga de archivos
   const uploadFile = async (file: any) => {
-
     if (!fetchData || !fetchData.url || !fetchData.method) {
       Alert.alert('Fetch data is not properly defined.');
       return;
     }
     const formData = new FormData();
-    formData.append(fetchData.file || 'file', file);
+    formData.append(fetchData.file, file);
+
+    let response;
     try {
-      const response = await fetch(fetchData.url, {
+      response = await fetch(fetchData.url, {
         method: fetchData.method,
         body: formData,
       });
-      const result = await response.json();
-      setFile(result);
-      completeProgress();
+      if (response.ok) {
+        const result = await response.json();
+        setFile(result);
+        setLocalFile(result);
+        completeProgress();
+      } else {
+        throw new Error('Failed to upload file');
+      }
     } catch (error) {
+      setProgress(0);
+      animateProgress(0);
       console.error('Error uploading file:', error);
+      Alert.alert('Error', 'Failed to upload file');
+    } finally {
+      setLoadingFile(false);
     }
   };
 
