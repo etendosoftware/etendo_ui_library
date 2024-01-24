@@ -25,6 +25,7 @@ const InputBase = ({
   icon,
   rightButtons,
   onSubmit,
+  isLoading,
 }: IInputBase) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [buttons, setButtons] = useState<ReactNode[]>([]);
@@ -92,10 +93,11 @@ const InputBase = ({
           typeStyle="white"
           onPress={onSubmit}
           iconLeft={<CornerDownRightIcon style={styles.iconSize} />}
+          disabled={isLoading}
         />
       ),
     ]);
-  }, [onSubmit, rightButtons]);
+  }, [onSubmit, isLoading, rightButtons]);
 
   return (
     <>
@@ -137,7 +139,7 @@ const InputBase = ({
           onFocus={onFocusChange}
           onBlur={onBlurChange}
           style={[styles.textInput, textColorStyle()]}
-          onSubmitEditing={onSubmit || (() => { })}
+          onSubmitEditing={onSubmit || (() => {})}
         />
         {!!buttons && (
           <ButtonContainer style={styles.buttonContainer} buttons={buttons} />
