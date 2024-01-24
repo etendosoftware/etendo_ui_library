@@ -6,15 +6,15 @@ export interface IInputButtons {
 }
 
 export interface IInputBase {
-  value?: string;
-  placeholder?: string;
-  title?: string;
   helperText?: string;
+  icon?: IInputButtons;
   isDisabled?: boolean;
   isError?: boolean;
+  isLoading?: boolean;
   onChangeText?: (value: string) => void;
-  icon?: IInputButtons;
-  rightButtons?: ReactNode[];
   onSubmit?: (...params: any[]) => void;
+  placeholder?: string;
+  rightButtons?: ReactNode[];
+  title?: string;
+  value?: string;
 }
-
