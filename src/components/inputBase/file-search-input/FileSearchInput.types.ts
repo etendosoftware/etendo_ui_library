@@ -1,18 +1,23 @@
-import { IInputBase } from "../InputBase.types";
+import { Animated } from 'react-native';
+import { IInputBase } from '../InputBase.types';
 
-interface IFile {
-    name: string;
-    size: number;
-    type: string;
-    uri: string;
-}
+export type FetchData = {
+    file: any;
+    url: string;
+    method: string;
+};
 
 export interface FileSearchInputProps extends IInputBase {
-    value?: string;
-    onSubmit?: (message: string, file?: IFile) => void;
-    file: IFile | null;
-    setFile: React.Dispatch<React.SetStateAction<IFile | null>>;
-    loadingFile: boolean;
-    setLoadingFile: React.Dispatch<React.SetStateAction<boolean>>;
-    onLoadingFile: (file: IFile, callback?: () => void) => void;
+    value: string;
+    setFile: (file: any) => void;
+    onChangeText: (text: string) => void;
+    onSubmit: (message: string, file?: any) => void;
+    placeholder: string;
+    fetchData?: FetchData;
+}
+
+export interface FileStatusDisplayProps {
+    file: any;
+    progressAnim: Animated.Value;
+    handleDeleteFile: () => void;
 }

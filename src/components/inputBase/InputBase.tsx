@@ -1,5 +1,6 @@
 import {
   ColorValue,
+  Platform,
   Text,
   TextInput,
   TextStyle,
@@ -25,6 +26,7 @@ const InputBase = ({
   icon,
   rightButtons,
   onSubmit,
+  isLoading,
 }: IInputBase) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [buttons, setButtons] = useState<ReactNode[]>([]);
@@ -83,6 +85,12 @@ const InputBase = ({
     }
   };
 
+  const textInputStyle = [styles.textInput, textColorStyle()];
+
+  if (Platform.OS === 'web') {
+    textInputStyle.push({ outlineWidth: 0 } as any);
+  }
+
   useEffect(() => {
     setButtons([
       ...(rightButtons ?? []),
@@ -92,10 +100,11 @@ const InputBase = ({
           typeStyle="white"
           onPress={onSubmit}
           iconLeft={<CornerDownRightIcon style={styles.iconSize} />}
+          disabled={isLoading}
         />
       ),
     ]);
-  }, [onSubmit, rightButtons]);
+  }, [onSubmit, isLoading, rightButtons]);
 
   return (
     <>
@@ -136,7 +145,7 @@ const InputBase = ({
           editable={!isDisabled}
           onFocus={onFocusChange}
           onBlur={onBlurChange}
-          style={[styles.textInput, textColorStyle()]}
+          style={textInputStyle}
           onSubmitEditing={onSubmit || (() => { })}
         />
         {!!buttons && (
