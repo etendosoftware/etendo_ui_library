@@ -77,6 +77,7 @@ const DatePicker = ({
   const [isYearSelection, setIsYearSelection] = useState<boolean>(false);
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+  const [initialSelectedDate, setInitialSelectedDate] = useState(selectedDate);
   const [disabledMonthSelection, setDisabledMonthSelection] =
     useState<boolean>(false);
   const [disabledYearSelection, setDisabledYearSelection] =
@@ -350,7 +351,10 @@ const DatePicker = ({
 
   // Toggle date picker display
   const showPicker = () => {
-    if (!isPickerShow) setIsPickerShow(true);
+    if (!isPickerShow) {
+      setIsPickerShow(true);
+      setInitialSelectedDate(selectedDate);
+    }
 
     if (!disabled) {
       calculateCalendarDirection();
@@ -393,6 +397,7 @@ const DatePicker = ({
 
   // Function for the button 'Cancel'
   const onCancel = () => {
+    setSelectedDate(initialSelectedDate);
     setIsPickerShow(false);
   };
 
