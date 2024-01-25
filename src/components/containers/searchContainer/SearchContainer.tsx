@@ -35,6 +35,7 @@ const SearchContainer: FC<ISearchContainer> = ({
           height={height}
         />
       </View>
+      <View style={styles.spacing} />
       <ButtonContainer buttons={buttons} style={{ paddingVertical: 0 }} />
     </View>
   );

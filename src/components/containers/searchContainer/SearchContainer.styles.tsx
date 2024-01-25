@@ -5,4 +5,8 @@ export const styles = StyleSheet.create({
   inputContainer: {
     width: isDeviceTablet ? '50%' : '100%',
   },
+  spacing: {
+    width: 12,
+    height: 12,
+  },
 });

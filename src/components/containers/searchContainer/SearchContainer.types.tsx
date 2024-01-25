@@ -3,10 +3,10 @@ import { DimensionValue, StyleProp, ViewStyle } from 'react-native';
 
 export interface ISearchContainer {
   buttons: ReactNode[];
-  style?: StyleProp<ViewStyle>;
-  value?: string;
+  height?: number;
   onSubmit: (...params: any[]) => void;
   placeholder?: string;
-  height?: number;
+  style?: StyleProp<ViewStyle>;
+  value?: string;
   widthSearchInput?: DimensionValue;
 }
