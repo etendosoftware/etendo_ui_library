@@ -150,7 +150,11 @@ const InputOptions = ({
   const onContentSizeChange = (contentWidth: number, contentHeight: number) => {
     const containerHeight = calculatedMaxHeight;
 
-    if (contentHeight > containerHeight && data.length > showOptionsAmount) {
+    if (
+      showOptionsAmount &&
+      contentHeight > containerHeight &&
+      data.length > showOptionsAmount
+    ) {
       setStartIndex((startIndex + 1) % data.length);
     }
 
@@ -245,28 +249,29 @@ const InputOptions = ({
             indicatorStyle={'black'}
             onContentSizeChange={onContentSizeChange}>
             {data?.map((item: any, index: number) => {
+              const actualIndex = (startIndex + index) % data.length;
               return (
                 <Pressable
                   onHoverIn={() => {
-                    setIndexHover(index);
+                    setIndexHover(actualIndex);
                   }}
                   onHoverOut={() => {
                     setIndexHover(-1);
                   }}
                   onPressIn={() => {
-                    setIndexHover(index);
+                    setIndexHover(actualIndex);
                   }}
                   onPressOut={() => {
                     setIndexHover(-1);
                   }}
-                  key={index}
+                  key={actualIndex}
                   style={[
                     styles.optionContainer,
                     0 === index && { marginTop: 0 },
-                    getBackground(index),
+                    getBackground(actualIndex),
                     addRadius(index === data?.length - 1),
                   ]}
-                  onPress={() => handleOptionSelected(item, index)}>
+                  onPress={() => handleOptionSelected(item, actualIndex)}>
                   {displayKey && (
                     <Text
                       numberOfLines={1}

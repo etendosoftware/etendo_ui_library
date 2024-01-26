@@ -133,18 +133,20 @@ const InputField = ({
     }
   };
 
-  const handleOnChangeFilterText = (filterText: string = '') => {
-    setFilterValue(filterText);
+  const handleOnChangeFilterText = (filterText?: string) => {
+    setFilterValue(filterText || '');
+
     if (displayKey) {
       if (isPagination && onLoadMoreData) {
         onLoadMoreData(0, filterText);
         return;
       }
+
+      const lowerCaseFilterText = filterText?.toLocaleLowerCase() || '';
+
       setDataOptionsFilter(
         dataPicker.filter((item: any) =>
-          item[displayKey]
-            .toLocaleLowerCase()
-            .includes(filterText.toLocaleLowerCase()),
+          item[displayKey].toLocaleLowerCase().includes(lowerCaseFilterText),
         ),
       );
     }
