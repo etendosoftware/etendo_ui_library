@@ -5,7 +5,7 @@ import {
   Animated,
   Platform,
   Text,
-  Alert,
+  SafeAreaView,
 } from 'react-native';
 import InputBase from '../InputBase';
 
@@ -23,6 +23,7 @@ import { FileIcon } from '../../../assets/images/icons/FileIcon';
 import { FileSearchInputProps } from './FileSearchInput.types';
 import { Button } from '../../button';
 import FileStatusDisplay from './FileStatusDisplay';
+import { Alert, show } from '../../alert';
 
 // Import DocumentPicker for mobile platforms only
 let DocumentPicker: any = null;
@@ -37,10 +38,12 @@ const FileSearchInput = ({
   onChangeText,
   onSubmit,
   setFile,
-  fetchData,
+  sendData,
+  maxFileSize = 512,
   ...inputBaseProps
 }: FileSearchInputProps) => {
   const [file, setLocalFile] = useState<any>(null);
+  const [isFileValid, setIsFileValid] = useState<boolean>(false);
   const [loadingFile, setLoadingFile] = useState(false);
   const [progress, setProgress] = useState(0);
   const dropAreaRef = useRef(null);
@@ -69,6 +72,7 @@ const FileSearchInput = ({
     setProgress(100);
     animateProgress(100);
     setLoadingFile(false);
+    setIsFileValid(true);
 
     setTimeout(() => {
       setProgress(0);
@@ -103,6 +107,22 @@ const FileSearchInput = ({
     }, 1000);
   };
 
+  const validateAndLoadFile = (pickedFile: any) => {
+    if (maxFileSize && pickedFile.size > maxFileSize * 1024 * 1024) {
+      show(`File size should not exceed ${maxFileSize} MB`, 'error');
+      setIsFileValid(false);
+      setLoadingFile(false);
+      setLocalFile(null);
+      return false;
+    }
+
+    setIsFileValid(true);
+    setLoadingFile(true);
+    setLocalFile(pickedFile);
+    startLoading(pickedFile);
+    return true;
+  };
+
   // Handles file button click - Opens file picker on web and uses DocumentPicker on mobile
   const handleFileButtonClick = async () => {
     if (Platform.OS === 'web') {
@@ -125,8 +145,7 @@ const FileSearchInput = ({
           uri: response[0].uri,
         };
 
-        startLoading(pickedFile);
-        setFile(pickedFile);
+        validateAndLoadFile(pickedFile);
       } catch (err) {
         if (!DocumentPicker.isCancel(err)) {
           console.error(err);
@@ -139,23 +158,26 @@ const FileSearchInput = ({
   const handleSendMessage = () => {
     if (!loadingFile && value?.trim() !== '') {
       if (onSubmit) {
-        onSubmit(value, fileInputRef.current);
-        setProgress(0);
-        animateProgress(0);
-        setLoadingFile(false);
+        onSubmit(value, isFileValid ? file : null);
+        resetProgress();
+        setFile(null);
         setLocalFile(null);
+        setIsFileValid(false);
       }
     } else {
-      Alert.alert(
-        'Message Incomplete',
-        'Please wait for the file to finish loading or ensure the message is not empty.',
-      );
+      let errorMessage = 'Please wait for the file to finish loading.';
+      if (value?.trim() === '') {
+        errorMessage = 'Message cannot be empty.';
+      } else if (file && !isFileValid) {
+        errorMessage = `File size should not exceed ${maxFileSize} MB.`;
+      }
+      show(errorMessage, 'error');
     }
   };
 
   // Define the right buttons for the input
   const rightButtons: ReactNode[] = [];
-  if (fetchData) {
+  if (sendData) {
     rightButtons.push(
       <Button
         width={48}
@@ -172,10 +194,12 @@ const FileSearchInput = ({
   const handleFileSelect = (event: any) => {
     const file = event.target.files[0];
     if (file) {
-      startLoading(file);
-      setFile(file);
-      setLocalFile(file);
-      uploadFile(file);
+      if (validateAndLoadFile(file)) {
+        startLoading(file);
+        setFile(file);
+        setLocalFile(file);
+        uploadFile(file);
+      }
     }
     event.target.value = null;
   };
@@ -194,48 +218,46 @@ const FileSearchInput = ({
   };;
 
   const uploadFile = async (file: any) => {
-    if (!fetchData || !fetchData.url || !fetchData.method) {
-      Alert.alert('Fetch data is not properly defined.');
+    if (!sendData || !sendData.url || !sendData.method) {
       return;
     }
     const formData = new FormData();
-    formData.append(fetchData.file, file);
+    formData.append(sendData.file, file);
 
+    setLoadingFile(true);
     let response;
     try {
-      response = await fetch(fetchData.url, {
-        method: fetchData.method,
+      response = await fetch(sendData.url, {
+        method: sendData.method,
         body: formData,
       });
       if (response.ok) {
         const result = await response.json();
         setFile(result);
         setLocalFile(result);
+        setLoadingFile(false);
         completeProgress();
       } else {
         throw new Error('Failed to upload file');
       }
     } catch (error) {
-      setProgress(0);
-      animateProgress(0);
       console.error('Error uploading file:', error);
-      Alert.alert('Error', 'Failed to upload file');
-    } finally {
-      setLoadingFile(false);
+      show('Error uploading file', 'error');
     }
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <Alert />
       {/* Display when file is selected */}
-      {file && loadingFile ? (
+      {file && loadingFile && isFileValid ? (
         <FileStatusDisplay
           file={file}
           progressAnim={progressAnim}
           handleDeleteFile={handleDeleteFile}
         />
       ) : (
-        file && (
+        file && isFileValid && (
           <View style={styles.fileNameContainer}>
             <View style={styles.fileNameLoadedLeftContainer}>
               <FileIcon style={styles.fileIcon} />
@@ -254,7 +276,7 @@ const FileSearchInput = ({
         )
       )}
       {/* Input base with right buttons */}
-      <View style={styles.inputContainer}>
+      <View>
         {Platform.OS === 'web' ? (
           <div ref={dropAreaRef} onDrop={handleDrop}>
             <InputBase
@@ -285,7 +307,7 @@ const FileSearchInput = ({
           />
         )}
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

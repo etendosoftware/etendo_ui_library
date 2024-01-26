@@ -3,7 +3,8 @@ import { NEUTRAL_0, NEUTRAL_100, NEUTRAL_1000, NEUTRAL_300, NEUTRAL_400, SUCCESS
 
 export const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        width: "100%",
+        height: "10%",
     },
     inputContainer: {
         flex: 1,

@@ -1,7 +1,7 @@
 import { Animated } from 'react-native';
 import { IInputBase } from '../InputBase.types';
 
-export type FetchData = {
+export type SendData = {
     file: any;
     url: string;
     method: string;
@@ -13,7 +13,8 @@ export interface FileSearchInputProps extends IInputBase {
     onChangeText: (text: string) => void;
     onSubmit: (message: string, file?: any) => void;
     placeholder: string;
-    fetchData?: FetchData;
+    sendData?: SendData;
+    maxFileSize?: number;
 }
 
 export interface FileStatusDisplayProps {
