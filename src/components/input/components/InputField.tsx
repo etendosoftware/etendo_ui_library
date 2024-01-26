@@ -50,6 +50,11 @@ const InputField = ({
   language,
   dateFormat,
   showCalendar,
+  isLoadingMoreData,
+  onLoadMoreData,
+  currentPage,
+  isPagination,
+  isStopLoadMoreData,
 }: InputFieldProps) => {
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(true);
@@ -128,9 +133,13 @@ const InputField = ({
     }
   };
 
-  const handleOnChangeFilterText = (filterText: string) => {
+  const handleOnChangeFilterText = (filterText?: string) => {
     setFilterValue(filterText);
-    if (displayKey)
+    if (displayKey) {
+      if (isPagination && onLoadMoreData) {
+        onLoadMoreData(0, filterText);
+        return;
+      }
       setDataOptionsFilter(
         dataPicker.filter((item: any) =>
           item[displayKey]
@@ -138,6 +147,7 @@ const InputField = ({
             .includes(filterText.toLocaleLowerCase()),
         ),
       );
+    }
   };
 
   const handleOnClose = () => {
@@ -317,6 +327,11 @@ const InputField = ({
           showSearchInPicker={showSearchInPicker}
           placeholderPickerSearch={placeholderPickerSearch}
           dataPicker={dataPicker}
+          onLoadMoreData={onLoadMoreData}
+          isLoadingMoreData={isLoadingMoreData}
+          currentPage={currentPage}
+          isPagination={isPagination}
+          isStopLoadMoreData={isStopLoadMoreData}
         />
       </TouchableOpacity>
     </View>

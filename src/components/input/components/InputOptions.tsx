@@ -11,12 +11,17 @@ import {
   Keyboard,
   KeyboardEvent,
   Dimensions,
+  ActivityIndicator,
 } from 'react-native';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { styles } from '../Input.style';
 import { InputOptionsProps } from '../Input.types';
 import { SearchIcon } from '../../../assets/images/icons/SearchIcon';
-import { NEUTRAL_600, QUATERNARY_10 } from '../../../styles/colors';
+import {
+  NEUTRAL_600,
+  PRIMARY_100,
+  QUATERNARY_10,
+} from '../../../styles/colors';
 import { CancelIcon } from '../../../assets/images/icons/CancelIcon';
 import { disableOutline } from '../../../helpers/table_utils';
 
@@ -33,15 +38,23 @@ const InputOptions = ({
   showSearchInPicker,
   placeholderPickerSearch,
   optionsTop,
+  isLoadingMoreData,
+  onLoadMoreData,
+  currentPage,
+  isPagination,
+  isStopLoadMoreData,
 }: InputOptionsProps) => {
   const [showSearchImg, setShowSearchImg] = useState<boolean>(true);
   const [showScroll, setShowScroll] = useState<boolean>(true);
-
+  const [startIndex, setStartIndex] = useState<number>(0);
+  const [filterInputValue, setFilterInputValue] = useState('');
   const [placeholderText, setPlaceholderText] = useState<string>(
     placeholderPickerSearch ?? '',
   );
   const [indexHover, setIndexHover] = useState<number>(-1);
+
   const textInputRef = useRef<TextInput>(null);
+  const scrollViewRef = useRef<ScrollView>(null);
 
   const handleOptionSelected = (item: any, index: number) => {
     if (onOptionSelected) {
@@ -82,11 +95,13 @@ const InputOptions = ({
       return { borderBottomLeftRadius: 5, borderBottomRightRadius: 5 };
     }
   };
+
   const removePadding = (remove: boolean): ViewStyle | undefined => {
     if (!remove) {
       return { paddingHorizontal: 0 };
     }
   };
+
   const addPadding = (add: boolean): ViewStyle | undefined => {
     if (!add) {
       return { paddingHorizontal: 8 };
@@ -94,8 +109,10 @@ const InputOptions = ({
   };
 
   const handleCancelFilter = () => {
+    setFilterInputValue('');
     onChangeFilterText('');
   };
+
   const useKeyboard = () => {
     const [keyboardHeight, setKeyboardHeight] = useState(0);
 
@@ -129,16 +146,16 @@ const InputOptions = ({
   const calculatedMaxHeight = showOptionsAmount
     ? 8 + 48 * showOptionsAmount
     : screenHeight;
+
   const onContentSizeChange = (contentWidth: number, contentHeight: number) => {
     const containerHeight = calculatedMaxHeight;
+
+    if (contentHeight > containerHeight && data.length > showOptionsAmount) {
+      setStartIndex((startIndex + 1) % data.length);
+    }
+
     setShowScroll(contentHeight > containerHeight);
   };
-
-  useEffect(() => {
-    if (placeholderPickerSearch) {
-      setPlaceholderText(placeholderPickerSearch);
-    }
-  }, [placeholderPickerSearch]);
 
   const keyboardHeight = useKeyboard();
   const bottomValue = positionModal.bottom || 0;
@@ -153,6 +170,50 @@ const InputOptions = ({
       return bottomValue - heightValue * 2 - keyboardHeight;
     }
   };
+
+  const loadMoreData = () => {
+    if (
+      onLoadMoreData &&
+      !isStopLoadMoreData &&
+      !isLoadingMoreData &&
+      (currentPage || currentPage === 0) &&
+      isPagination
+    ) {
+      if (scrollViewRef.current)
+        scrollViewRef.current.scrollToEnd({ animated: true });
+
+      onLoadMoreData(currentPage + 1, filterValue);
+    }
+  };
+
+  const debounce = <T extends (...args: any[]) => void>(
+    func: T,
+    delay: number,
+  ) => {
+    let inDebounce: NodeJS.Timeout;
+
+    return function (this: ThisParameterType<T>, ...args: Parameters<T>) {
+      const context = this;
+      clearTimeout(inDebounce);
+      inDebounce = setTimeout(() => func.apply(context, args), delay);
+    };
+  };
+
+  const debounceOnChange = useRef(
+    debounce((nextValue: string) => {
+      if (scrollViewRef.current)
+        scrollViewRef.current.scrollTo({ y: 0, animated: false });
+      onChangeFilterText(nextValue);
+    }, 500),
+  ).current;
+
+  const onChangeText = useCallback(
+    (text: string) => {
+      setFilterInputValue(text);
+      debounceOnChange(text);
+    },
+    [debounceOnChange],
+  );
 
   return (
     <Modal transparent={true} visible={showOptions} animationType="fade">
@@ -184,28 +245,29 @@ const InputOptions = ({
             indicatorStyle={'black'}
             onContentSizeChange={onContentSizeChange}>
             {data?.map((item: any, index: number) => {
+              const actualIndex = (startIndex + index) % data.length;
               return (
                 <Pressable
                   onHoverIn={() => {
-                    setIndexHover(index);
+                    setIndexHover(actualIndex);
                   }}
                   onHoverOut={() => {
                     setIndexHover(-1);
                   }}
                   onPressIn={() => {
-                    setIndexHover(index);
+                    setIndexHover(actualIndex);
                   }}
                   onPressOut={() => {
                     setIndexHover(-1);
                   }}
-                  key={index}
+                  key={actualIndex}
                   style={[
                     styles.optionContainer,
                     0 === index && { marginTop: 0 },
-                    getBackground(index),
+                    getBackground(actualIndex),
                     addRadius(index === data?.length - 1),
                   ]}
-                  onPress={() => handleOptionSelected(item, index)}>
+                  onPress={() => handleOptionSelected(item, actualIndex)}>
                   {displayKey && (
                     <Text
                       numberOfLines={1}
@@ -274,7 +336,7 @@ const InputOptions = ({
                 styles.optionFilterContainer,
                 removePadding(!filterValue && showSearchImg),
               ]}>
-              {filterValue === '' && showSearchImg && (
+              {filterInputValue === '' && showSearchImg && (
                 <View style={styles.searchContainer}>
                   <SearchIcon
                     style={styles.optionFilterImg}
@@ -291,12 +353,23 @@ const InputOptions = ({
                   addPadding(!filterValue && showSearchImg),
                   disableOutline(),
                 ]}
-                value={filterValue}
-                onChangeText={onChangeFilterText}
+                value={filterInputValue}
+                onChangeText={onChangeText}
                 placeholder={placeholderText}
                 placeholderTextColor={NEUTRAL_600}
               />
-              {filterValue !== '' && (
+              {isLoadingMoreData && (
+                <TouchableOpacity
+                  style={{ marginRight: 12 }}
+                  onPress={handleCancelFilter}>
+                  <ActivityIndicator
+                    size={'small'}
+                    color={PRIMARY_100}
+                    style={[styles.cancelFilterImg]}
+                  />
+                </TouchableOpacity>
+              )}
+              {filterInputValue !== '' && (
                 <TouchableOpacity
                   style={styles.cancelContainer}
                   onPress={handleCancelFilter}>
@@ -305,7 +378,9 @@ const InputOptions = ({
               )}
             </Pressable>
           )}
+
           <ScrollView
+            ref={scrollViewRef}
             style={[
               showScroll && { marginRight: 8 },
               { maxHeight: calculatedMaxHeight },
@@ -315,7 +390,16 @@ const InputOptions = ({
             persistentScrollbar
             showsVerticalScrollIndicator
             indicatorStyle={'black'}
-            onContentSizeChange={onContentSizeChange}>
+            onContentSizeChange={onContentSizeChange}
+            onScroll={({ nativeEvent }) => {
+              const isCloseToBottom =
+                nativeEvent.layoutMeasurement.height +
+                  nativeEvent.contentOffset.y >=
+                nativeEvent.contentSize.height - 50;
+              if (isCloseToBottom) {
+                loadMoreData();
+              }
+            }}>
             {data?.map((item: any, index: number) => {
               return (
                 <Pressable
@@ -350,6 +434,9 @@ const InputOptions = ({
                 </Pressable>
               );
             })}
+            {isLoadingMoreData && (
+              <ActivityIndicator size={'large'} color={PRIMARY_100} />
+            )}
           </ScrollView>
         </View>
       )}
