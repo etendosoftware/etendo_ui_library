@@ -245,29 +245,28 @@ const InputOptions = ({
             indicatorStyle={'black'}
             onContentSizeChange={onContentSizeChange}>
             {data?.map((item: any, index: number) => {
-              const actualIndex = (startIndex + index) % data.length;
               return (
                 <Pressable
                   onHoverIn={() => {
-                    setIndexHover(actualIndex);
+                    setIndexHover(index);
                   }}
                   onHoverOut={() => {
                     setIndexHover(-1);
                   }}
                   onPressIn={() => {
-                    setIndexHover(actualIndex);
+                    setIndexHover(index);
                   }}
                   onPressOut={() => {
                     setIndexHover(-1);
                   }}
-                  key={actualIndex}
+                  key={index}
                   style={[
                     styles.optionContainer,
                     0 === index && { marginTop: 0 },
-                    getBackground(actualIndex),
+                    getBackground(index),
                     addRadius(index === data?.length - 1),
                   ]}
-                  onPress={() => handleOptionSelected(item, actualIndex)}>
+                  onPress={() => handleOptionSelected(item, index)}>
                   {displayKey && (
                     <Text
                       numberOfLines={1}

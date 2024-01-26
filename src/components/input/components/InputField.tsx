@@ -133,7 +133,7 @@ const InputField = ({
     }
   };
 
-  const handleOnChangeFilterText = (filterText?: string) => {
+  const handleOnChangeFilterText = (filterText: string = '') => {
     setFilterValue(filterText);
     if (displayKey) {
       if (isPagination && onLoadMoreData) {
