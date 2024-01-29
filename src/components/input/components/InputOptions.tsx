@@ -183,9 +183,6 @@ const InputOptions = ({
       (currentPage || currentPage === 0) &&
       isPagination
     ) {
-      if (scrollViewRef.current)
-        scrollViewRef.current.scrollToEnd({ animated: true });
-
       onLoadMoreData(currentPage + 1, filterValue);
     }
   };
@@ -438,9 +435,6 @@ const InputOptions = ({
                 </Pressable>
               );
             })}
-            {isLoadingMoreData && (
-              <ActivityIndicator size={'large'} color={PRIMARY_100} />
-            )}
           </ScrollView>
         </View>
       )}
