@@ -27,6 +27,7 @@ const Table = ({
   isLoadingMoreData = true,
   pageSize = 3,
   currentPage = 0,
+  style,
 }: TableProps) => {
   const handleLoadMore = () => {
     if (isLoadingMoreData && !isLoading && onLoadMoreData) {
@@ -95,46 +96,48 @@ const Table = ({
   };
 
   return (
-    <View
-      style={[
-        styles.container,
-        removeHeaderBorder(title),
-        { height: tableHeight },
-      ]}>
-      <TableHeaders
-        title={title}
-        columns={columns}
-        isLoading={!(isLoading && !data.length)}
-      />
+    <View style={[style]}>
+      <View
+        style={[
+          styles.container,
+          removeHeaderBorder(title),
+          { height: tableHeight },
+        ]}>
+        <TableHeaders
+          title={title}
+          columns={columns}
+          isLoading={!(isLoading && !data.length)}
+        />
 
-      <FlatList
-        data={
-          isLoadingMoreData && isLoading && !data.length
-            ? Array(pageSize).fill({})
-            : data
-        }
-        renderItem={item =>
-          isLoadingMoreData && isLoading && !data.length && onLoadMoreData
-            ? RenderSkeleton(item.index)
-            : RenderItem(item.item, item.index)
-        }
-        ListEmptyComponent={
-          <TableEmpty
-            commentEmptyTable={commentEmptyTable}
-            textEmptyTable={textEmptyTable}
-          />
-        }
-        keyExtractor={(_item: any, index: number) => 'Table: ' + index}
-        ListFooterComponent={() =>
-          isLoadingMoreData &&
-          onLoadMoreData &&
-          isLoading &&
-          Boolean(data.length) &&
-          RenderSkeleton(data.length)
-        }
-        onEndReached={() => handleLoadMore()}
-        onEndReachedThreshold={0.2}
-      />
+        <FlatList
+          data={
+            isLoadingMoreData && isLoading && !data.length
+              ? Array(pageSize).fill({})
+              : data
+          }
+          renderItem={item =>
+            isLoadingMoreData && isLoading && !data.length && onLoadMoreData
+              ? RenderSkeleton(item.index)
+              : RenderItem(item.item, item.index)
+          }
+          ListEmptyComponent={
+            <TableEmpty
+              commentEmptyTable={commentEmptyTable}
+              textEmptyTable={textEmptyTable}
+            />
+          }
+          keyExtractor={(_item: any, index: number) => 'Table: ' + index}
+          ListFooterComponent={() =>
+            isLoadingMoreData &&
+            onLoadMoreData &&
+            isLoading &&
+            Boolean(data.length) &&
+            RenderSkeleton(data.length)
+          }
+          onEndReached={() => handleLoadMore()}
+          onEndReachedThreshold={0.2}
+        />
+      </View>
     </View>
   );
 };
