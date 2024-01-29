@@ -1,3 +1,4 @@
+import { StyleProp, ViewStyle } from 'react-native';
 import { MetadataType } from '../types/table.types';
 
 export interface Metadata {
@@ -17,4 +18,5 @@ export interface CommonTableProps {
   onLoadMoreData?: (currentPage: number, pageSize: number) => void;
   pageSize?: number;
   title?: string;
+  style?: StyleProp<ViewStyle>;
 }
