@@ -2,9 +2,9 @@ import { StyleSheet } from 'react-native';
 import {
   DANGER_600,
   DANGER_700,
-  NEUTRAL_0,
   NEUTRAL_1000,
   NEUTRAL_400,
+  NEUTRAL_50,
   NEUTRAL_500,
   NEUTRAL_800,
   PRIMARY_100,
@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     color: NEUTRAL_800,
   },
   container: {
-    backgroundColor: NEUTRAL_0,
+    backgroundColor: NEUTRAL_50,
     height: 48,
     borderRadius: 8,
     borderColor: PRIMARY_100,
@@ -65,7 +65,7 @@ export const styles = StyleSheet.create({
   textInput: {
     paddingHorizontal: 0,
     height: 48,
-    backgroundColor: 'white',
+    backgroundColor: NEUTRAL_50,
     fontFamily: 'Inter',
     fontSize: 16,
     fontStyle: 'normal',
