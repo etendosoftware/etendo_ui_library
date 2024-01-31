@@ -33,6 +33,11 @@ const Input = ({
   language,
   dateFormat,
   showCalendar,
+  currentPage,
+  isLoadingMoreData,
+  onLoadMoreData,
+  isPagination,
+  isStopLoadMoreData,
 }: InputProps) => {
   const stateStyle = () => {
     if (typeField === 'readOnly') {
@@ -93,6 +98,11 @@ const Input = ({
         language={language}
         dateFormat={dateFormat}
         showCalendar={showCalendar}
+        currentPage={currentPage}
+        onLoadMoreData={onLoadMoreData}
+        isLoadingMoreData={isLoadingMoreData}
+        isPagination={isPagination}
+        isStopLoadMoreData={isStopLoadMoreData}
       />
       <InputHelperText
         label={helperText}

@@ -100,6 +100,11 @@ export interface InputProps {
   language?: LanguageFormat;
   dateFormat?: DateFormat;
   showCalendar?: boolean;
+  isLoadingMoreData?: boolean;
+  onLoadMoreData?: (currentPage?: number, filterText?: string) => void;
+  currentPage?: number;
+  isPagination?: boolean;
+  isStopLoadMoreData?: boolean;
 }
 
 export interface InputTitleProps {
@@ -147,6 +152,11 @@ export interface InputFieldProps {
   onBlur: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   dateFormat?: any;
   showCalendar?: boolean;
+  isLoadingMoreData?: boolean;
+  onLoadMoreData?: (currentPage?: number, filterText?: string) => void;
+  currentPage?: number;
+  isPagination?: boolean;
+  isStopLoadMoreData?: boolean;
 }
 
 export interface InputHelperProps {
@@ -174,4 +184,9 @@ export interface InputOptionsProps {
   placeholderPickerSearch?: string;
   optionsTop: boolean;
   dataPicker: any;
+  isLoadingMoreData?: boolean;
+  onLoadMoreData?: (currentPage?: number, filterText?: string) => void;
+  currentPage?: number;
+  isPagination?: boolean;
+  isStopLoadMoreData?: boolean;
 }
