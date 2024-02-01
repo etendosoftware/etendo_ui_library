@@ -1,6 +1,7 @@
 import { Button } from './button';
 import { CardDropdown } from './cards/components/cardDropdown';
 import { Input } from './input';
+import { FileSearchInput, InputBase } from './inputBase';
 import { Modal } from './modal';
 import { Navbar, DrawerLateral } from './navbar';
 import { Pagination } from './pagination';
@@ -25,7 +26,9 @@ export {
   CardDropdown,
   Cards,
   DrawerLateral,
+  FileSearchInput,
   Input,
+  InputBase,
   Layout,
   Modal,
   Navbar,
