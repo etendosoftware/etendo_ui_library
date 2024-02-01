@@ -26,7 +26,17 @@ import { Alert, show } from '../../alert';
 // Import DocumentPicker for mobile platforms only
 let DocumentPicker: any = null;
 if (Platform.OS !== 'web') {
-  DocumentPicker = require('react-native-document-picker').default;
+  try {
+    import('react-native-document-picker')
+      .then((module) => {
+        DocumentPicker = module.default;
+      })
+      .catch(error => {
+        console.error('Cannot load DocumentPicker', error);
+      });
+  } catch (error) {
+    console.error('Error importing DocumentPicker', error);
+  }
 }
 
 const FileSearchInput = ({
