@@ -168,7 +168,6 @@ const FileSearchInput = ({
       if (!!setFile) setFile(null);
       setLocalFile(null);
       setIsFileValid(false);
-      if (!!uploadFile) uploadFile(file);
     } else {
       let errorMessage = 'Please wait for the file to finish loading.';
       if (value.trim() === '') {
