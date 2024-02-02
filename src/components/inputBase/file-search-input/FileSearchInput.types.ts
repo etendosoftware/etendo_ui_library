@@ -4,7 +4,7 @@ interface UploadConfig {
     file: any;
     url: string;
     method: string;
-    headers: HeadersInit_;
+    headers?: HeadersInit_;
 }
 
 export interface FileSearchInputProps extends IInputBase {

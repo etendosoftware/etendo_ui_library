@@ -4,7 +4,6 @@ import { NEUTRAL_100, NEUTRAL_1000, NEUTRAL_300, NEUTRAL_400, NEUTRAL_50 } from 
 export const styles = StyleSheet.create({
     container: {
         width: "100%",
-        height: "10%",
     },
     inputContainer: {
         flex: 1,
@@ -17,12 +16,10 @@ export const styles = StyleSheet.create({
         borderWidth: 1,
         flexDirection: "row",
         gap: 4,
-        height: "100%",
-        flex: 1,
         justifyContent: "space-between",
         marginBottom: 4,
         paddingHorizontal: 8,
-        paddingVertical: Platform.OS === "web" ? 16 : 32,
+        height: 64,
     },
     fileNameLeftContainer: {
         flexDirection: "row",
@@ -72,7 +69,6 @@ export const styles = StyleSheet.create({
         overflow: 'hidden',
         whiteSpace: 'nowrap',
         width: "100%",
-        flex: 1,
         marginLeft: Platform.OS === "web" ? undefined : 8,
     },
     fileIcon: {
@@ -87,7 +83,6 @@ export const styles = StyleSheet.create({
     progressBarFill: {
         backgroundColor: NEUTRAL_100,
         borderRadius: 10,
-        height: '100%',
     },
     progressBarContainer: {
         backgroundColor: NEUTRAL_300,
@@ -96,7 +91,6 @@ export const styles = StyleSheet.create({
         width: "100%",
     },
     progressBar: {
-        height: '100%',
         backgroundColor: NEUTRAL_1000,
         borderRadius: 2,
     },
