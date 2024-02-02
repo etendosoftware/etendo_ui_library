@@ -20,7 +20,6 @@ import { FileIcon } from '../../../assets/images/icons/FileIcon';
 // Import types
 import { FileSearchInputProps } from './FileSearchInput.types';
 import { Button } from '../../button';
-import { Alert, show } from '../../alert';
 import { ErrorIcon } from '../../../assets/images/icons/ErrorIcon';
 import { SkeletonItem } from '../../secondaryComponents';
 import { isWebPlatform } from '../../../helpers/functions_utils';
@@ -114,7 +113,6 @@ const FileSearchInput = ({
     resetProgress();
 
     if (maxFileSize && pickedFile.size > maxFileSize * 1024 * 1024) {
-      show(`File size should not exceed ${maxFileSize} MB`, 'error');
       setIsFileValid(false);
       setLoadingFile(false);
       setLocalFile(null);
@@ -129,7 +127,6 @@ const FileSearchInput = ({
       if (!!uploadFile) await uploadFile(pickedFile);
     } catch (error) {
       console.error('Error uploading file:', error);
-      show('Error uploading file', 'error');
     }
     return true;
   };
@@ -180,7 +177,6 @@ const FileSearchInput = ({
       } else if (file && !isFileValid) {
         errorMessage = `File size should not exceed ${maxFileSize} MB.`;
       }
-      show(errorMessage, 'error');
     }
   };
 
@@ -260,8 +256,6 @@ const FileSearchInput = ({
 
   return (
     <SafeAreaView style={styles.container}>
-      <Alert />
-
       {/* Display when file is selected */}
       {file && isFileValid && (
         <View style={styles.fileNameContainer}>
