@@ -33,18 +33,22 @@ export const styles = StyleSheet.create({
     },
     fileNameLeftContent: {
         height: 24,
-        width: "80%",
+        width: "85%",
     },
     fileNameLoadedLeftContainer: {
         alignItems: "center",
         flexDirection: "row",
         gap: 4,
-        width: Platform.OS === "web" ? "75%" : "85%",
+        width: Platform.OS === "web" ? "80%" : "85%",
     },
     checkCircleIcon: {
         height: 24,
         width: 24,
         marginRight: 8,
+    },
+    errorIcon: {
+        height: 20,
+        width: 20,
     },
     deleteIcon: {
         height: 20,
@@ -71,10 +75,14 @@ export const styles = StyleSheet.create({
         flex: 1,
         marginLeft: Platform.OS === "web" ? undefined : 8,
     },
-
     fileIcon: {
-        height: Platform.OS === "web" ? 40 : 36,
-        width: Platform.OS === "web" ? 40 : 36,
+        height: 36,
+        width: 36,
+    },
+    fileContainer: {
+        height: Platform.OS === "web" ? undefined : 28,
+        width: "100%",
+        backgroundColor: "red",
     },
     progressBarFill: {
         backgroundColor: NEUTRAL_100,
@@ -83,9 +91,9 @@ export const styles = StyleSheet.create({
     },
     progressBarContainer: {
         backgroundColor: NEUTRAL_300,
-        width: '100%',
         borderRadius: 16,
         marginLeft: Platform.OS === "web" ? undefined : 8,
+        width: "100%",
     },
     progressBar: {
         height: '100%',

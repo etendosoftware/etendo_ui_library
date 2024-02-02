@@ -12,7 +12,6 @@ import {
 
 export const styles = StyleSheet.create({
   title: {
-    fontFamily: 'Inter',
     fontSize: 16,
     fontWeight: '600',
     lineHeight: 24,
@@ -66,7 +65,6 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 0,
     height: 48,
     backgroundColor: NEUTRAL_50,
-    fontFamily: 'Inter',
     fontSize: 16,
     fontStyle: 'normal',
     fontWeight: '500',
@@ -76,7 +74,6 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   helperText: {
-    fontFamily: 'Inter',
     fontSize: 14,
     fontWeight: '500',
     lineHeight: 22,
