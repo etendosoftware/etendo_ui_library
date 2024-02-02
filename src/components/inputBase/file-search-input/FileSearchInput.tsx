@@ -10,7 +10,7 @@ import InputBase from '../InputBase';
 
 // Import styles
 import { styles } from './FileSearchInput.styles';
-import { NEUTRAL_1000, PRIMARY_100, SUCCESS_600 } from '../../../styles/colors';
+import { DANGER_700, NEUTRAL_1000, PRIMARY_100, SUCCESS_600 } from '../../../styles/colors';
 
 // Import icons
 import { CheckCircleIcon } from '../../../assets/images/icons/CheckCircleIcon';
@@ -22,6 +22,8 @@ import { FileIcon } from '../../../assets/images/icons/FileIcon';
 import { FileSearchInputProps } from './FileSearchInput.types';
 import { Button } from '../../button';
 import { Alert, show } from '../../alert';
+import { ErrorIcon } from '../../../assets/images/icons/ErrorIcon';
+import { SkeletonItem } from '../../secondaryComponents';
 
 // Import DocumentPicker for mobile platforms only
 let DocumentPicker: any = null;
@@ -45,17 +47,16 @@ const FileSearchInput = ({
   onChangeText,
   onSubmit,
   setFile,
-  uploadFile,
-  loadedFile,
-  setLoadedFile,
+  uploadConfig,
   maxFileSize = 512,
   ...inputBaseProps
 }: FileSearchInputProps) => {
   // States
+  const [progress, setProgress] = useState<number>(0);
   const [file, setLocalFile] = useState<File | null>(null);
+  const [loadingFile, setLoadingFile] = useState<boolean>(false);
   const [isFileValid, setIsFileValid] = useState<boolean>(false);
-  const [loadingFile, setLoadingFile] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [fileStatus, setFileStatus] = useState<'none' | 'loaded' | 'error'>('none');
 
   // References
   const dropAreaRef = useRef(null);
@@ -67,7 +68,7 @@ const FileSearchInput = ({
     setIsFileValid(false);
     setLoadingFile(false);
     setProgress(0);
-    if (!!setLoadedFile) setLoadedFile(false);
+    setFileStatus("none");
   };
 
   // Handles file drop events, typically from drag-and-drop actions
@@ -89,7 +90,7 @@ const FileSearchInput = ({
     setIsFileValid(true);
 
     setTimeout(() => {
-      if (!!setLoadedFile) setLoadedFile(true);
+      setFileStatus("loaded");
       setProgress(0);
     }, 100);
   };
@@ -172,7 +173,6 @@ const FileSearchInput = ({
       if (!!setFile) setFile(null);
       setLocalFile(null);
       setIsFileValid(false);
-      if (!!uploadFile) uploadFile(file);
     } else {
       let errorMessage = 'Please wait for the file to finish loading.';
       if (value.trim() === '') {
@@ -186,7 +186,7 @@ const FileSearchInput = ({
 
   // Define the right buttons for the input
   const rightButtons: ReactNode[] = [];
-  if (!!uploadFile) {
+  if (!!uploadConfig) {
     rightButtons.push(
       <Button
         width={48}
@@ -212,6 +212,31 @@ const FileSearchInput = ({
     event.target.value = null;
   };
 
+  // Function to upload a file to a server
+  const uploadFile = async (pickedFile: File) => {
+    if (!!uploadConfig) {
+      const formData = new FormData();
+      formData.append("file", pickedFile);
+
+      let response;
+      try {
+        response = await fetch(uploadConfig.url, {
+          method: uploadConfig.method,
+          body: formData,
+          headers: uploadConfig.headers,
+        });
+        if (response.ok) {
+          setFileStatus('loaded');
+        } else {
+          throw new Error('Failed to upload file');
+        }
+      } catch (error) {
+        console.error('Error uploading file:', error);
+        setFileStatus('error');
+      }
+    }
+  };
+
   // Function to handle file deletion
   const handleDeleteFile = () => {
     resetProgress();
@@ -220,7 +245,7 @@ const FileSearchInput = ({
     setLocalFile(null);
     setLoadingFile(false);
     if (!!setFile) setFile(null);
-    if (!!setLoadedFile) setLoadedFile(false);
+    setFileStatus("none");
     if (fileInputRef.current) {
       fileInputRef.current.value = null;
     }
@@ -228,14 +253,15 @@ const FileSearchInput = ({
 
   // Effect to complete progress
   useEffect(() => {
-    if (loadedFile) {
+    if (fileStatus === "loaded") {
       completeProgress();
     }
-  }, [loadedFile]);
+  }, [fileStatus]);
 
   return (
     <SafeAreaView style={styles.container}>
       <Alert />
+
       {/* Display when file is selected */}
       {file && isFileValid && (
         <View style={styles.fileNameContainer}>
@@ -249,19 +275,31 @@ const FileSearchInput = ({
               </Text>
               {progress > 0 &&
                 <View style={styles.progressBarContainer}>
-                  <View style={{ width: `${progress}%`, height: 8, backgroundColor: NEUTRAL_1000, borderRadius: 16 }} />
+                  <SkeletonItem width={`${progress}%`} height={8} color={NEUTRAL_1000} borderRadius={16} />
                 </View>}
             </View>
           </View>
 
           <View style={styles.fileNameRightContainer}>
-            <CheckCircleIcon
-              style={styles.checkCircleIcon}
-              fill={SUCCESS_600}
-            />
-            <TouchableOpacity onPress={handleDeleteFile}>
-              <DeleteIcon style={styles.deleteIcon} />
-            </TouchableOpacity>
+            {fileStatus === 'loaded' && (
+              <CheckCircleIcon
+                style={styles.checkCircleIcon}
+                fill={SUCCESS_600}
+              />
+            )}
+            {fileStatus === 'error' && (
+              <TouchableOpacity onPress={handleDeleteFile}>
+                <ErrorIcon
+                  style={styles.errorIcon}
+                  fill={DANGER_700}
+                />
+              </TouchableOpacity>
+            )}
+            {fileStatus === 'none' &&
+              <TouchableOpacity onPress={handleDeleteFile}>
+                <DeleteIcon style={styles.deleteIcon} />
+              </TouchableOpacity>
+            }
           </View>
         </View>
       )}
