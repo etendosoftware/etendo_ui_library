@@ -2,7 +2,6 @@ import React, { useState, useRef, ReactNode, useEffect } from 'react';
 import {
   View,
   TouchableOpacity,
-  Platform,
   Text,
   SafeAreaView,
 } from 'react-native';
@@ -24,10 +23,11 @@ import { Button } from '../../button';
 import { Alert, show } from '../../alert';
 import { ErrorIcon } from '../../../assets/images/icons/ErrorIcon';
 import { SkeletonItem } from '../../secondaryComponents';
+import { isWebPlatform } from '../../../helpers/functions_utils';
 
 // Import DocumentPicker for mobile platforms only
 let DocumentPicker: any = null;
-if (Platform.OS !== 'web') {
+if (!isWebPlatform()) {
   try {
     import('react-native-document-picker')
       .then((module) => {
@@ -136,9 +136,9 @@ const FileSearchInput = ({
 
   // Handles file button click - Opens file picker on web and uses DocumentPicker on mobile
   const handleFileButtonClick = async () => {
-    if (Platform.OS === 'web') {
+    if (isWebPlatform()) {
       fileInputRef.current.click();
-    } else if (Platform.OS === 'android' || Platform.OS === 'ios') {
+    } else {
       if (!DocumentPicker) {
         console.error('DocumentPicker is not available on this platform.');
         return;
@@ -269,7 +269,7 @@ const FileSearchInput = ({
 
             <FileIcon style={styles.fileIcon} />
 
-            <View style={{ height: Platform.OS === "web" ? undefined : 28, width: "80%" }}>
+            <View style={{ height: isWebPlatform() ? undefined : 28, width: "80%" }}>
               <Text style={styles.fileNameText} numberOfLines={1} ellipsizeMode='tail'>
                 {file.name}
               </Text>
@@ -305,7 +305,7 @@ const FileSearchInput = ({
       )}
       {/* Input base with right buttons */}
       <View>
-        {Platform.OS === 'web' ? (
+        {isWebPlatform() ? (
           <div ref={dropAreaRef} onDrop={handleDrop}>
             <InputBase
               {...inputBaseProps}
