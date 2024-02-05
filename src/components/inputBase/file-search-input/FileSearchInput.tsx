@@ -70,14 +70,18 @@ const FileSearchInput = ({
     setFileStatus("none");
   };
 
+  // Prevent default behavior
+  const handleDragOver = (event: any) => {
+    event.preventDefault();
+  };
+
   // Handles file drop events, typically from drag-and-drop actions
   const handleDrop = (event: any) => {
     event.preventDefault();
     const files = event.dataTransfer.files;
     if (files.length > 0) {
       const file = files[0];
-      startLoading(file);
-      if (!!setFile) setFile(file);
+      validateAndLoadFile(file);
     }
   };
 
@@ -281,15 +285,7 @@ const FileSearchInput = ({
                 fill={SUCCESS_600}
               />
             )}
-            {fileStatus === 'error' && (
-              <TouchableOpacity onPress={handleDeleteFile}>
-                <ErrorIcon
-                  style={styles.errorIcon}
-                  fill={DANGER_700}
-                />
-              </TouchableOpacity>
-            )}
-            {fileStatus === 'none' &&
+            {fileStatus === 'none' || fileStatus === 'error' &&
               <TouchableOpacity onPress={handleDeleteFile}>
                 <DeleteIcon style={styles.deleteIcon} />
               </TouchableOpacity>
@@ -300,7 +296,13 @@ const FileSearchInput = ({
       {/* Input base with right buttons */}
       <View>
         {isWebPlatform() ? (
-          <div ref={dropAreaRef} onDrop={handleDrop}>
+          <div
+            ref={dropAreaRef}
+            onDrop={handleDrop}
+            onDragOver={handleDragOver}
+            onDragEnter={handleDragOver}
+            onDragLeave={handleDragOver}
+          >
             <InputBase
               {...inputBaseProps}
               value={value}
