@@ -23,6 +23,7 @@ import { translations } from '../../datepicker/DatePicker.translations';
 import { DayItem, MonthItemProps } from '../../datepicker/DatePicker.types';
 import { useDatePickerInput } from './hooks/useDatePickerInput';
 import { ITEM_HEIGHT, MODAL_CONTENT_WIDTH, MODAL_POSITION_TOP } from './DatePickerInput.constants';
+import { DatePickerInputProps } from './DatePickerInput.types';
 
 const DatePickerInput = ({
     placeholder,
@@ -38,7 +39,7 @@ const DatePickerInput = ({
     language = 'en-US',
     dateFormat = 'MM/DD/YYYY',
     ...props
-}: any) => {
+}: DatePickerInputProps) => {
     const {
         selectedDate,
         isPickerShow,
