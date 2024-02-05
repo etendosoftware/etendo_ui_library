@@ -130,7 +130,6 @@ const FileSearchInput = ({
     if (!SUPPORTED_MIME_TYPES.includes(pickedFile.type)) {
       setIsFileValid(false);
       setLoadingFile(false);
-      if (!!setFile) setFile(null);
       return false;
     }
 
