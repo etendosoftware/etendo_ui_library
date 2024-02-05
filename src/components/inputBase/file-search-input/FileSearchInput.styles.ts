@@ -30,13 +30,13 @@ export const styles = StyleSheet.create({
     },
     fileNameLeftContent: {
         height: 24,
-        width: "85%",
+        width: "100%",
     },
     fileNameLoadedLeftContainer: {
         alignItems: "center",
         flexDirection: "row",
         gap: 4,
-        width: Platform.OS === "web" ? "80%" : "85%",
+        width: "85%",
     },
     checkCircleIcon: {
         height: 24,

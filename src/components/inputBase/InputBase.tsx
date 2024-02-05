@@ -39,7 +39,7 @@ const InputBase = ({
     setIsFocused(false);
   };
 
-  const borderWidth: number = isFocused ? 3 : 1;
+  const borderWidth: number = isFocused ? 1.5 : 1;
   const paddingVertical: number = 13 - (borderWidth - 1);
   const paddingHorizontal: number = 12 - (borderWidth - 1);
 

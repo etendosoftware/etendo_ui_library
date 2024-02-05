@@ -13,7 +13,7 @@ export interface FileSearchInputProps extends IInputBase {
     onSubmit: (message: string, file?: any) => void;
     placeholder: string;
     setFile?: (file: any) => void;
-    onFileUploaded?: (fileId: string | number) => void;
+    onFileUploaded?: (object: any) => void;
     maxFileSize?: number;
     uploadConfig?: UploadConfig | undefined,
 }
