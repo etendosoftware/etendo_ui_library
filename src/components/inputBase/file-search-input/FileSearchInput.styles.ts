@@ -1,53 +1,51 @@
 import { StyleSheet, Platform } from 'react-native';
-import { NEUTRAL_0, NEUTRAL_100, NEUTRAL_1000, NEUTRAL_300, NEUTRAL_400, SUCCESS_600 } from '../../../styles/colors';
+import { NEUTRAL_100, NEUTRAL_1000, NEUTRAL_300, NEUTRAL_400, NEUTRAL_50 } from '../../../styles/colors';
 
 export const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        width: "100%",
     },
     inputContainer: {
         flex: 1,
     },
     fileNameContainer: {
         alignItems: 'center',
-        backgroundColor: NEUTRAL_0,
+        backgroundColor: NEUTRAL_50,
         borderColor: NEUTRAL_400,
         borderRadius: 8,
         borderWidth: 1,
         flexDirection: "row",
         gap: 4,
-        height: "100%",
         justifyContent: "space-between",
         marginBottom: 4,
-        paddingLeft: 8,
-        paddingRight: 16,
-        paddingVertical: Platform.OS === "web" ? 16 : 32,
-        width: "100%",
+        paddingHorizontal: 8,
+        height: 64,
     },
     fileNameLeftContainer: {
         flexDirection: "row",
         gap: 4,
-        width: Platform.OS === "web" ? "97.5%" : "95%",
+    },
+    fileNameRightContainer: {
+        flexDirection: "row",
     },
     fileNameLeftContent: {
-        flex: 1,
         height: 24,
+        width: "100%",
     },
     fileNameLoadedLeftContainer: {
         alignItems: "center",
         flexDirection: "row",
         gap: 4,
-        width: Platform.OS === "web" ? undefined : "85%",
+        width: "85%",
     },
     checkCircleIcon: {
         height: 24,
         width: 24,
+        marginRight: 8,
     },
-    fileNameRightContainer: {
-        flexDirection: "row",
-        alignItems: "center",
-        gap: 8,
-        width: Platform.OS === "web" ? undefined : "15%"
+    errorIcon: {
+        height: 20,
+        width: 20,
     },
     deleteIcon: {
         height: 20,
@@ -67,21 +65,33 @@ export const styles = StyleSheet.create({
         color: NEUTRAL_1000,
         fontWeight: "500",
         fontSize: Platform.OS === "web" ? 14 : 16,
-        height: "100%",
         paddingBottom: Platform.OS === "web" ? 4 : undefined,
+        overflow: 'hidden',
+        whiteSpace: 'nowrap',
+        width: "100%",
+        marginLeft: Platform.OS === "web" ? undefined : 8,
     },
     fileIcon: {
         height: 36,
         width: 36,
     },
-    progressBarBackground: {
-        backgroundColor: NEUTRAL_300,
-        borderRadius: 10,
-        height: 8,
+    fileContainer: {
+        height: Platform.OS === "web" ? undefined : 28,
+        width: "100%",
+        backgroundColor: "red",
     },
     progressBarFill: {
         backgroundColor: NEUTRAL_100,
         borderRadius: 10,
-        height: '100%',
+    },
+    progressBarContainer: {
+        backgroundColor: NEUTRAL_300,
+        borderRadius: 16,
+        marginLeft: Platform.OS === "web" ? undefined : 8,
+        width: "100%",
+    },
+    progressBar: {
+        backgroundColor: NEUTRAL_1000,
+        borderRadius: 2,
     },
 });

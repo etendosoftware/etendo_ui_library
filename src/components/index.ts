@@ -1,16 +1,18 @@
 import { Button } from './button';
+import { CardDropdown } from './cards/components/cardDropdown';
 import { Input } from './input';
+import { FileSearchInput, InputBase } from './inputBase';
+import { Modal } from './modal';
 import { Navbar, DrawerLateral } from './navbar';
 import { Pagination } from './pagination';
+import { SkeletonItem } from './secondaryComponents';
 import { StatusBar } from './statusbar';
 import { Tab } from './tab';
 import { Table } from './table';
 import { ViewEtendo } from './viewEtendo/ViewEtendo';
-import { CardDropdown } from './cards/components/cardDropdown';
-import { SkeletonItem } from './secondaryComponents';
 import {
-  Layout,
   ButtonContainer,
+  Layout,
   SearchContainer,
   TitleContainer,
 } from './containers';
@@ -24,8 +26,11 @@ export {
   CardDropdown,
   Cards,
   DrawerLateral,
+  FileSearchInput,
   Input,
+  InputBase,
   Layout,
+  Modal,
   Navbar,
   Pagination,
   SearchContainer,

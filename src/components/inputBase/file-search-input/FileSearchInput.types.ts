@@ -1,23 +1,19 @@
-import { Animated } from 'react-native';
 import { IInputBase } from '../InputBase.types';
 
-export type FetchData = {
+interface UploadConfig {
     file: any;
     url: string;
     method: string;
-};
+    headers?: HeadersInit_;
+}
 
 export interface FileSearchInputProps extends IInputBase {
     value: string;
-    setFile: (file: any) => void;
     onChangeText: (text: string) => void;
     onSubmit: (message: string, file?: any) => void;
     placeholder: string;
-    fetchData?: FetchData;
-}
-
-export interface FileStatusDisplayProps {
-    file: any;
-    progressAnim: Animated.Value;
-    handleDeleteFile: () => void;
+    setFile?: (file: any) => void;
+    onFileUploaded?: (object: any) => void;
+    maxFileSize?: number;
+    uploadConfig?: UploadConfig | undefined,
 }

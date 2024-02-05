@@ -1,17 +1,15 @@
-import React, { useState, useRef, ReactNode } from 'react';
+import React, { useState, useRef, ReactNode, useEffect } from 'react';
 import {
   View,
   TouchableOpacity,
-  Animated,
-  Platform,
   Text,
-  Alert,
+  SafeAreaView,
 } from 'react-native';
 import InputBase from '../InputBase';
 
 // Import styles
 import { styles } from './FileSearchInput.styles';
-import { PRIMARY_100, SUCCESS_600 } from '../../../styles/colors';
+import { NEUTRAL_1000, PRIMARY_100, SUCCESS_600 } from '../../../styles/colors';
 
 // Import icons
 import { CheckCircleIcon } from '../../../assets/images/icons/CheckCircleIcon';
@@ -22,14 +20,24 @@ import { FileIcon } from '../../../assets/images/icons/FileIcon';
 // Import types
 import { FileSearchInputProps } from './FileSearchInput.types';
 import { Button } from '../../button';
-import FileStatusDisplay from './FileStatusDisplay';
+import { SkeletonItem } from '../../secondaryComponents';
+import { isWebPlatform } from '../../../helpers/functions_utils';
 
 // Import DocumentPicker for mobile platforms only
 let DocumentPicker: any = null;
-if (Platform.OS !== 'web') {
-  DocumentPicker = require('react-native-document-picker').default;
+if (!isWebPlatform()) {
+  try {
+    import('react-native-document-picker')
+      .then((module) => {
+        DocumentPicker = module.default;
+      })
+      .catch(error => {
+        console.error('Cannot load DocumentPicker', error);
+      });
+  } catch (error) {
+    console.error('Error importing DocumentPicker', error);
+  }
 }
-
 
 const FileSearchInput = ({
   value,
@@ -37,77 +45,103 @@ const FileSearchInput = ({
   onChangeText,
   onSubmit,
   setFile,
-  fetchData,
+  onFileUploaded,
+  uploadConfig,
+  maxFileSize = 512,
   ...inputBaseProps
 }: FileSearchInputProps) => {
-  const [file, setLocalFile] = useState<any>(null);
-  const [loadingFile, setLoadingFile] = useState(false);
-  const [progress, setProgress] = useState(0);
+  // States
+  const [progress, setProgress] = useState<number>(0);
+  const [file, setLocalFile] = useState<File | null>(null);
+  const [loadingFile, setLoadingFile] = useState<boolean>(false);
+  const [isFileValid, setIsFileValid] = useState<boolean>(false);
+  const [fileStatus, setFileStatus] = useState<'none' | 'loaded' | 'canceled' | 'error'>('none');
+
+  // References
   const dropAreaRef = useRef(null);
   const fileInputRef = useRef<any>(null);
-  const progressAnim = useRef(new Animated.Value(0)).current;
-  const progressSteps = [5, 25, 50, 70, 90];
-  let currentStep = 0;
 
   // Function to reset progress bar
   const resetProgress = () => {
+    setLocalFile(null);
+    setIsFileValid(false);
+    setLoadingFile(false);
     setProgress(0);
-    animateProgress(0);
+    setFileStatus("none");
   };
 
+  // Prevent default behavior
+  const handleDragOver = (event: any) => {
+    event.preventDefault();
+  };
+
+  // Handles file drop events, typically from drag-and-drop actions
   const handleDrop = (event: any) => {
     event.preventDefault();
     const files = event.dataTransfer.files;
     if (files.length > 0) {
-      const file = files[0];
-      startLoading(file);
-      setFile(file);
+      const droppedFile = files[0];
+      validateAndLoadFile(droppedFile);
+      if (!!setFile) setFile(droppedFile);
+      setLocalFile(droppedFile);
     }
   };
 
+  // Completes the file loading process, sets progress to 100%, and then resets
   const completeProgress = () => {
     setProgress(100);
     animateProgress(100);
     setLoadingFile(false);
+    setIsFileValid(true);
 
     setTimeout(() => {
+      setFileStatus("loaded");
       setProgress(0);
-      animateProgress(0);
-    }, 2000);
+    }, 100);
   };
 
-  const animateProgress = (toValue: any) => {
-    Animated.timing(progressAnim, {
-      toValue,
-      duration: 500,
-      useNativeDriver: false,
-    }).start();
+  // Updates the file loading progress
+  const animateProgress = (toValue: number) => {
+    setProgress(toValue);
   };
 
-  const startLoading = (pickedFile: any) => {
-    resetProgress();
-    currentStep = 0;
+  // Initiates the file loading process by setting the initial progress
+  const startLoading = (pickedFile: File) => {
     setLoadingFile(true);
-    setFile(pickedFile);
+    if (!!setFile) (pickedFile);
     setLocalFile(pickedFile);
+    setProgress(25);
+    animateProgress(25);
+  };
 
-    const lastStepIndex = progressSteps.length - 1;
-    let progressInterval = setInterval(() => {
-      if (currentStep < lastStepIndex) {
-        currentStep++;
-        setProgress(progressSteps[currentStep]);
-        animateProgress(progressSteps[currentStep]);
-      } else {
-        clearInterval(progressInterval);
-      }
-    }, 1000);
+  // Validates the file size and starts the file loading process
+  const validateAndLoadFile = async (pickedFile: File) => {
+    resetProgress();
+
+    if (maxFileSize && pickedFile.size > maxFileSize * 1024 * 1024) {
+      setIsFileValid(false);
+      setLoadingFile(false);
+      setLocalFile(null);
+      return false;
+    }
+
+    setIsFileValid(true);
+    setLoadingFile(true);
+    setLocalFile(pickedFile);
+    startLoading(pickedFile);
+    try {
+      if (!!uploadFile) await uploadFile(pickedFile);
+    } catch (error) {
+      console.error('Error uploading file:', error);
+    }
+    return true;
   };
 
   // Handles file button click - Opens file picker on web and uses DocumentPicker on mobile
   const handleFileButtonClick = async () => {
-    if (Platform.OS === 'web') {
+    if (isWebPlatform()) {
       fileInputRef.current.click();
-    } else if (Platform.OS === 'android' || Platform.OS === 'ios') {
+    } else {
       if (!DocumentPicker) {
         console.error('DocumentPicker is not available on this platform.');
         return;
@@ -125,8 +159,7 @@ const FileSearchInput = ({
           uri: response[0].uri,
         };
 
-        startLoading(pickedFile);
-        setFile(pickedFile);
+        validateAndLoadFile(pickedFile);
       } catch (err) {
         if (!DocumentPicker.isCancel(err)) {
           console.error(err);
@@ -135,27 +168,27 @@ const FileSearchInput = ({
     }
   };
 
-  // Disable message sending if a file is loading or if the input text is empty
+  // Handles the sending of the message
   const handleSendMessage = () => {
-    if (!loadingFile && value?.trim() !== '') {
-      if (onSubmit) {
-        onSubmit(value, fileInputRef.current);
-        setProgress(0);
-        animateProgress(0);
-        setLoadingFile(false);
-        setLocalFile(null);
-      }
+    if (!loadingFile && value.trim() !== '') {
+      onSubmit?.(value, isFileValid ? file : null);
+      resetProgress();
+      if (!!setFile) setFile(null);
+      setLocalFile(null);
+      setIsFileValid(false);
     } else {
-      Alert.alert(
-        'Message Incomplete',
-        'Please wait for the file to finish loading or ensure the message is not empty.',
-      );
+      let errorMessage = 'Please wait for the file to finish loading.';
+      if (value.trim() === '') {
+        errorMessage = 'Message cannot be empty.';
+      } else if (file && !isFileValid) {
+        errorMessage = `File size should not exceed ${maxFileSize} MB.`;
+      }
     }
   };
 
   // Define the right buttons for the input
   const rightButtons: ReactNode[] = [];
-  if (fetchData) {
+  if (!!uploadConfig) {
     rightButtons.push(
       <Button
         width={48}
@@ -169,94 +202,109 @@ const FileSearchInput = ({
   }
 
   // Handle file selection from the input - Web specific
-  const handleFileSelect = (event: any) => {
+  const handleFileSelect = async (event: any) => {
     const file = event.target.files[0];
     if (file) {
-      startLoading(file);
-      setFile(file);
-      setLocalFile(file);
-      uploadFile(file);
+      if (await validateAndLoadFile(file)) {
+        startLoading(file);
+        if (!!setFile) setFile(file);
+        setLocalFile(file);
+      }
     }
     event.target.value = null;
   };
 
-  // Function to handle file deletion
-  const handleDeleteFile = () => {
-    resetProgress();
-    setFile(null);
-    setLocalFile(null);
-    setLoadingFile(false);
-    setProgress(0);
-    animateProgress(0);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = null;
-    }
-  };;
+  // Function to upload a file to a server
+  const uploadFile = async (pickedFile: File) => {
+    if (!!uploadConfig) {
+      const formData = new FormData();
+      formData.append("file", pickedFile);
 
-  const uploadFile = async (file: any) => {
-    if (!fetchData || !fetchData.url || !fetchData.method) {
-      Alert.alert('Fetch data is not properly defined.');
-      return;
-    }
-    const formData = new FormData();
-    formData.append(fetchData.file, file);
-
-    let response;
-    try {
-      response = await fetch(fetchData.url, {
-        method: fetchData.method,
-        body: formData,
-      });
-      if (response.ok) {
-        const result = await response.json();
-        setFile(result);
-        setLocalFile(result);
-        completeProgress();
-      } else {
-        throw new Error('Failed to upload file');
+      try {
+        const response = await fetch(uploadConfig.url, {
+          method: uploadConfig.method,
+          body: formData,
+          headers: uploadConfig.headers,
+        });
+        if (response.ok) {
+          const data = await response.json();
+          if (!!onFileUploaded) {
+            onFileUploaded(data);
+          }
+          if (fileStatus !== "canceled") {
+            setFileStatus('loaded');
+          }
+        } else {
+          throw new Error('Failed to upload file');
+        }
+      } catch (error) {
+        console.error('Error uploading file:', error);
+        setFileStatus('error');
       }
-    } catch (error) {
-      setProgress(0);
-      animateProgress(0);
-      console.error('Error uploading file:', error);
-      Alert.alert('Error', 'Failed to upload file');
-    } finally {
-      setLoadingFile(false);
     }
   };
 
+  // Function to handle file deletion
+  const handleCancelFile = () => {
+    resetProgress();
+    animateProgress(0);
+    if (!!setFile) setFile(null);
+    setFileStatus("canceled");
+    if (fileInputRef.current) {
+      fileInputRef.current.value = null;
+    }
+  };
+
+  // Effect to complete progress
+  useEffect(() => {
+    if (fileStatus === "loaded") {
+      completeProgress();
+    }
+  }, [fileStatus]);
+
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {/* Display when file is selected */}
-      {file && loadingFile ? (
-        <FileStatusDisplay
-          file={file}
-          progressAnim={progressAnim}
-          handleDeleteFile={handleDeleteFile}
-        />
-      ) : (
-        file && (
-          <View style={styles.fileNameContainer}>
-            <View style={styles.fileNameLoadedLeftContainer}>
-              <FileIcon style={styles.fileIcon} />
-              <Text style={styles.fileNameText}>{file.name}</Text>
+      {file && isFileValid && fileStatus !== "canceled" && (
+        <View style={styles.fileNameContainer}>
+          <View style={styles.fileNameLoadedLeftContainer}>
+
+            <FileIcon style={styles.fileIcon} />
+
+            <View style={{ height: isWebPlatform() ? undefined : 28, width: "85%" }}>
+              <Text style={styles.fileNameText} numberOfLines={1} ellipsizeMode='tail'>
+                {file.name}
+              </Text>
+              {progress > 0 &&
+                <View style={styles.progressBarContainer}>
+                  <SkeletonItem width={`${progress}%`} height={8} color={NEUTRAL_1000} borderRadius={16} />
+                </View>}
             </View>
-            <View style={styles.fileNameRightContainer}>
+          </View>
+
+          <View style={styles.fileNameRightContainer}>
+            {fileStatus === 'loaded' && (
               <CheckCircleIcon
                 style={styles.checkCircleIcon}
                 fill={SUCCESS_600}
               />
-              <TouchableOpacity onPress={handleDeleteFile}>
-                <DeleteIcon style={styles.deleteIcon} />
-              </TouchableOpacity>
-            </View>
+            )}
+            <TouchableOpacity onPress={handleCancelFile}>
+              <DeleteIcon style={styles.deleteIcon} />
+            </TouchableOpacity>
           </View>
-        )
+        </View>
       )}
       {/* Input base with right buttons */}
-      <View style={styles.inputContainer}>
-        {Platform.OS === 'web' ? (
-          <div ref={dropAreaRef} onDrop={handleDrop}>
+      <View>
+        {isWebPlatform() ? (
+          <div
+            ref={dropAreaRef}
+            onDrop={handleDrop}
+            onDragOver={handleDragOver}
+            onDragEnter={handleDragOver}
+            onDragLeave={handleDragOver}
+          >
             <InputBase
               {...inputBaseProps}
               value={value}
@@ -285,7 +333,7 @@ const FileSearchInput = ({
           />
         )}
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
