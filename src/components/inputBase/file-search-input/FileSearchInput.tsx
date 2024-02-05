@@ -80,8 +80,10 @@ const FileSearchInput = ({
     event.preventDefault();
     const files = event.dataTransfer.files;
     if (files.length > 0) {
-      const file = files[0];
-      validateAndLoadFile(file);
+      const droppedFile = files[0];
+      validateAndLoadFile(droppedFile);
+      if (!!setFile) setFile(droppedFile);
+      setLocalFile(droppedFile);
     }
   };
 
@@ -226,7 +228,9 @@ const FileSearchInput = ({
         });
         if (response.ok) {
           const data = await response.json();
-          if (!!onFileUploaded) onFileUploaded(data);
+          if (!!onFileUploaded) {
+            onFileUploaded(data);
+          }
           setFileStatus('loaded');
         } else {
           throw new Error('Failed to upload file');
@@ -280,16 +284,15 @@ const FileSearchInput = ({
           </View>
 
           <View style={styles.fileNameRightContainer}>
-            {fileStatus === 'loaded' ? (
+            {fileStatus === 'loaded' && (
               <CheckCircleIcon
                 style={styles.checkCircleIcon}
                 fill={SUCCESS_600}
               />
-            ) :
-              <TouchableOpacity onPress={handleDeleteFile}>
-                <DeleteIcon style={styles.deleteIcon} />
-              </TouchableOpacity>
-            }
+            )}
+            <TouchableOpacity onPress={handleDeleteFile}>
+              <DeleteIcon style={styles.deleteIcon} />
+            </TouchableOpacity>
           </View>
         </View>
       )}
