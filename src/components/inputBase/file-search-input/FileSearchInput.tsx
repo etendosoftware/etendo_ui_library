@@ -55,7 +55,7 @@ const FileSearchInput = ({
   const [file, setLocalFile] = useState<File | null>(null);
   const [loadingFile, setLoadingFile] = useState<boolean>(false);
   const [isFileValid, setIsFileValid] = useState<boolean>(false);
-  const [fileStatus, setFileStatus] = useState<'none' | 'loaded' | 'error'>('none');
+  const [fileStatus, setFileStatus] = useState<'none' | 'loaded' | 'canceled' | 'error'>('none');
 
   // References
   const dropAreaRef = useRef(null);
@@ -231,7 +231,9 @@ const FileSearchInput = ({
           if (!!onFileUploaded) {
             onFileUploaded(data);
           }
-          setFileStatus('loaded');
+          if (fileStatus !== "canceled") {
+            setFileStatus('loaded');
+          }
         } else {
           throw new Error('Failed to upload file');
         }
@@ -243,14 +245,11 @@ const FileSearchInput = ({
   };
 
   // Function to handle file deletion
-  const handleDeleteFile = () => {
+  const handleCancelFile = () => {
     resetProgress();
-    setProgress(0);
     animateProgress(0);
-    setLocalFile(null);
-    setLoadingFile(false);
     if (!!setFile) setFile(null);
-    setFileStatus("none");
+    setFileStatus("canceled");
     if (fileInputRef.current) {
       fileInputRef.current.value = null;
     }
@@ -266,13 +265,13 @@ const FileSearchInput = ({
   return (
     <SafeAreaView style={styles.container}>
       {/* Display when file is selected */}
-      {file && isFileValid && (
+      {file && isFileValid && fileStatus !== "canceled" && (
         <View style={styles.fileNameContainer}>
           <View style={styles.fileNameLoadedLeftContainer}>
 
             <FileIcon style={styles.fileIcon} />
 
-            <View style={{ height: isWebPlatform() ? undefined : 28, width: "80%" }}>
+            <View style={{ height: isWebPlatform() ? undefined : 28, width: "85%" }}>
               <Text style={styles.fileNameText} numberOfLines={1} ellipsizeMode='tail'>
                 {file.name}
               </Text>
@@ -290,7 +289,7 @@ const FileSearchInput = ({
                 fill={SUCCESS_600}
               />
             )}
-            <TouchableOpacity onPress={handleDeleteFile}>
+            <TouchableOpacity onPress={handleCancelFile}>
               <DeleteIcon style={styles.deleteIcon} />
             </TouchableOpacity>
           </View>
