@@ -9,7 +9,7 @@ import InputBase from '../InputBase';
 
 // Import styles
 import { styles } from './FileSearchInput.styles';
-import { DANGER_700, NEUTRAL_1000, PRIMARY_100, SUCCESS_600 } from '../../../styles/colors';
+import { NEUTRAL_1000, PRIMARY_100, SUCCESS_600 } from '../../../styles/colors';
 
 // Import icons
 import { CheckCircleIcon } from '../../../assets/images/icons/CheckCircleIcon';
@@ -20,7 +20,6 @@ import { FileIcon } from '../../../assets/images/icons/FileIcon';
 // Import types
 import { FileSearchInputProps } from './FileSearchInput.types';
 import { Button } from '../../button';
-import { ErrorIcon } from '../../../assets/images/icons/ErrorIcon';
 import { SkeletonItem } from '../../secondaryComponents';
 import { isWebPlatform } from '../../../helpers/functions_utils';
 
@@ -46,6 +45,7 @@ const FileSearchInput = ({
   onChangeText,
   onSubmit,
   setFile,
+  onFileUploaded,
   uploadConfig,
   maxFileSize = 512,
   ...inputBaseProps
@@ -218,14 +218,15 @@ const FileSearchInput = ({
       const formData = new FormData();
       formData.append("file", pickedFile);
 
-      let response;
       try {
-        response = await fetch(uploadConfig.url, {
+        const response = await fetch(uploadConfig.url, {
           method: uploadConfig.method,
           body: formData,
           headers: uploadConfig.headers,
         });
         if (response.ok) {
+          const data = await response.json();
+          if (!!onFileUploaded) onFileUploaded(data);
           setFileStatus('loaded');
         } else {
           throw new Error('Failed to upload file');
@@ -279,13 +280,12 @@ const FileSearchInput = ({
           </View>
 
           <View style={styles.fileNameRightContainer}>
-            {fileStatus === 'loaded' && (
+            {fileStatus === 'loaded' ? (
               <CheckCircleIcon
                 style={styles.checkCircleIcon}
                 fill={SUCCESS_600}
               />
-            )}
-            {fileStatus === 'none' || fileStatus === 'error' &&
+            ) :
               <TouchableOpacity onPress={handleDeleteFile}>
                 <DeleteIcon style={styles.deleteIcon} />
               </TouchableOpacity>
