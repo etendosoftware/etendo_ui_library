@@ -22,6 +22,7 @@ import { FileSearchInputProps } from './FileSearchInput.types';
 import { Button } from '../../button';
 import { SkeletonItem } from '../../secondaryComponents';
 import { isWebPlatform } from '../../../helpers/functions_utils';
+import { SUPPORTED_MIME_TYPES } from './FileSearchInput.constants';
 
 // Import DocumentPicker for mobile platforms only
 let DocumentPicker: any = null;
@@ -117,6 +118,7 @@ const FileSearchInput = ({
   // Validates the file size and starts the file loading process
   const validateAndLoadFile = async (pickedFile: File) => {
     resetProgress();
+    if (!!setFile) setFile(pickedFile);
 
     if (maxFileSize && pickedFile.size > maxFileSize * 1024 * 1024) {
       setIsFileValid(false);
@@ -125,14 +127,20 @@ const FileSearchInput = ({
       return false;
     }
 
+    if (!SUPPORTED_MIME_TYPES.includes(pickedFile.type)) {
+      setIsFileValid(false);
+      setLoadingFile(false);
+      if (!!setFile) setFile(null);
+      return false;
+    }
+
     setIsFileValid(true);
-    setLoadingFile(true);
-    setLocalFile(pickedFile);
     startLoading(pickedFile);
     try {
       if (!!uploadFile) await uploadFile(pickedFile);
     } catch (error) {
       console.error('Error uploading file:', error);
+      setFileStatus('error');
     }
     return true;
   };
@@ -231,9 +239,7 @@ const FileSearchInput = ({
           if (!!onFileUploaded) {
             onFileUploaded(data);
           }
-          if (fileStatus !== "canceled") {
-            setFileStatus('loaded');
-          }
+          setFileStatus('loaded');
         } else {
           throw new Error('Failed to upload file');
         }
