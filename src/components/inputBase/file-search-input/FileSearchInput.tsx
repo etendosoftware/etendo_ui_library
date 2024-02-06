@@ -121,14 +121,6 @@ const FileSearchInput = ({
     resetProgress();
     if (!!setFile) setFile(pickedFile);
 
-    if (maxFileSize && pickedFile.size > maxFileSize * 1024 * 1024) {
-      setIsFileValid(false);
-      setLocalFile(null);
-      const fileSizeError = new Error(`File size should not exceed ${maxFileSize} MB.`);
-      onError?.(fileSizeError);
-      return false;
-    }
-
     setIsFileValid(true);
     startLoading(pickedFile);
     try {
