@@ -22,7 +22,6 @@ import { FileSearchInputProps } from './FileSearchInput.types';
 import { Button } from '../../button';
 import { SkeletonItem } from '../../secondaryComponents';
 import { isWebPlatform } from '../../../helpers/functions_utils';
-import { SUPPORTED_MIME_TYPES } from './FileSearchInput.constants';
 
 // Import DocumentPicker for mobile platforms only
 let DocumentPicker: any = null;
@@ -126,12 +125,8 @@ const FileSearchInput = ({
       setIsFileValid(false);
       setLoadingFile(false);
       setLocalFile(null);
-      return false;
-    }
-
-    if (!SUPPORTED_MIME_TYPES.includes(pickedFile.type)) {
-      setIsFileValid(false);
-      setLoadingFile(false);
+      const fileSizeError = new Error(`File size should not exceed ${maxFileSize} MB.`);
+      onError?.(fileSizeError);
       return false;
     }
 
@@ -253,11 +248,11 @@ const FileSearchInput = ({
       } catch (error: any) {
         if (error.name === 'AbortError') {
           console.error('File upload cancelled');
-          onError?.(error.error);
+          onError?.(error);
           setFileStatus('canceled');
         } else {
           console.error('Error uploading file:', error);
-          onError?.(error.error);
+          onError?.(error);
           setFileStatus('error');
         }
       }
