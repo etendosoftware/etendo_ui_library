@@ -123,7 +123,6 @@ const FileSearchInput = ({
 
     if (maxFileSize && pickedFile.size > maxFileSize * 1024 * 1024) {
       setIsFileValid(false);
-      setLoadingFile(false);
       setLocalFile(null);
       const fileSizeError = new Error(`File size should not exceed ${maxFileSize} MB.`);
       onError?.(fileSizeError);
@@ -212,7 +211,6 @@ const FileSearchInput = ({
     const file = event.target.files[0];
     if (file) {
       if (await validateAndLoadFile(file)) {
-        startLoading(file);
         if (!!setFile) setFile(file);
         setLocalFile(file);
       }
@@ -237,6 +235,7 @@ const FileSearchInput = ({
         });
         if (response.ok) {
           completeProgress();
+          setLoadingFile(false);
           setFileStatus('loaded');
           if (!!onFileUploaded) {
             const data = await response.json();
@@ -283,13 +282,6 @@ const FileSearchInput = ({
       }
     };
   }, []);
-
-  // Effect to complete progress
-  useEffect(() => {
-    if (fileStatus === "loaded") {
-      completeProgress();
-    }
-  }, [fileStatus]);
 
   return (
     <SafeAreaView style={styles.container}>
