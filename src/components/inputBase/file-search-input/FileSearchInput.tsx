@@ -234,18 +234,23 @@ const FileSearchInput = ({
             onFileUploaded(data);
           }
         } else {
-          throw new Error('Failed to upload file');
+          const errorResponse = await response.json();
+          console.error('Error uploading file:', errorResponse);
+          onError?.(errorResponse);
+          setFileStatus('error');
+          resetProgress();
+          if (!!setFile) setFile(null);
         }
       } catch (error: any) {
         if (error.name === 'AbortError') {
           console.error('File upload cancelled');
-          onError?.(error);
           setFileStatus('canceled');
         } else {
           console.error('Error uploading file:', error);
-          onError?.(error);
           setFileStatus('error');
         }
+        resetProgress();
+        if (!!setFile) setFile(null);
       }
     }
   };
