@@ -1,5 +1,12 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Platform, Dimensions } from 'react-native';
 import { NEUTRAL_100, NEUTRAL_1000, NEUTRAL_300, NEUTRAL_400, NEUTRAL_50 } from '../../../styles/colors';
+import { isWebPlatform } from '../../../helpers/functions_utils';
+const windowWidth = Dimensions.get('window').width;
+export const mediaQueryWidths = {
+    MOBILE: 480,
+    TABLET: 768,
+    DESKTOP: 1280,
+};
 
 export const styles = StyleSheet.create({
     container: {
@@ -36,7 +43,7 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         flexDirection: "row",
         gap: 4,
-        width: "85%",
+        width: windowWidth >= mediaQueryWidths.TABLET ? "95%" : "85%",
     },
     checkCircleIcon: {
         height: 24,
@@ -61,6 +68,10 @@ export const styles = StyleSheet.create({
     loadingText: {
         fontSize: 14,
     },
+    fileContent: {
+        height: isWebPlatform() ? undefined : 28,
+        width: windowWidth >= mediaQueryWidths.TABLET ? "97.25%" : "90%",
+    },
     fileNameText: {
         color: NEUTRAL_1000,
         fontWeight: "500",
@@ -78,7 +89,6 @@ export const styles = StyleSheet.create({
     fileContainer: {
         height: Platform.OS === "web" ? undefined : 28,
         width: "100%",
-        backgroundColor: "red",
     },
     progressBarFill: {
         backgroundColor: NEUTRAL_100,
