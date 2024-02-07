@@ -179,7 +179,7 @@ const Cards = ({
             text={cancelSelectionLabel || CANCEL_SELECTED_LABEL}
             height={40}
           />
-        ) : (
+        ) : onAddNewData ? (
           <Button
             onPress={onAddNewData}
             typeStyle={'primary'}
@@ -187,11 +187,16 @@ const Cards = ({
             width={40}
             iconLeft={<MoreIcon style={styles.icon} />}
           />
+        ) : (
+          <></>
         )}
       </View>
       <ScrollView
         ref={scrollViewRef}
-        style={[styles.containerFlex, { paddingHorizontal: dataList.length > 0 ? 16 : 0 }]}
+        style={[
+          styles.containerFlex,
+          { paddingHorizontal: dataList.length > 0 ? 16 : 0 },
+        ]}
         onScroll={onScroll}
         scrollEventThrottle={SCROLL_EVENT_THROTTLE}
         onContentSizeChange={(_contentWidth, contentHeightChange) =>
