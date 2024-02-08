@@ -1,6 +1,6 @@
 const path = require('path');
 
-module.exports = async ({config}) => {
+module.exports = async ({ config }) => {
   config.module.rules.push({
     test: /\.(sass|scss|css)$/,
     use: ['resolve-url-loader'],
