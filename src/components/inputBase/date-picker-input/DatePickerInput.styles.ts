@@ -12,7 +12,10 @@ import {
     TERTIARY_70,
 } from '../../../styles/colors';
 import { AppPlatform } from '../../../helpers/utilsTypes';
-import { CALENDAR_HEIGHT, MODAL_CONTENT_WIDTH } from './DatePickerInput.constants';
+import { MODAL_CONTENT_WIDTH } from './DatePickerInput.constants';
+
+// Height of the calendar
+export const CALENDAR_HEIGHT = 320;
 
 // StyleSheet for DatePicker
 export const styles = StyleSheet.create({

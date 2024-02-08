@@ -49,6 +49,24 @@ export const formatterDate = (date: Date, format: string) => {
     return '';
 };
 
+// Parsea una fecha en formato DD/MM/YYYY a un objeto Date
+export const parseDateString = (dateString: any, format: any) => {
+    const parts = dateString.split("/");
+    let day, month: any, year: any;
+
+    if (format === 'DD/MM/YYYY') {
+        day = parseInt(parts[0], 10);
+        month = parseInt(parts[1], 10) - 1; // Los meses en JS son de 0-11
+        year = parseInt(parts[2], 10);
+    } else if (format === 'MM/DD/YYYY') {
+        month = parseInt(parts[0], 10) - 1;
+        day = parseInt(parts[1], 10);
+        year = parseInt(parts[2], 10);
+    }
+
+    return new Date(year, month, day);
+};
+
 // Get placeholder text based on date format
 export const getPlaceholderDateFormat = (dateFormat: string) => {
     return dateFormat === 'MM/DD/YYYY' ? 'MM/DD/YYYY' : 'DD/MM/YYYY';

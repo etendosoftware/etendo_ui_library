@@ -15,8 +15,7 @@ import { ArrowDownIcon, ArrowLeftIcon, ArrowRightIcon, CalendarIcon } from '../.
 import { Button } from '../../button';
 import { NEUTRAL_300, NEUTRAL_400, PRIMARY_100 } from '../../../styles/colors';
 
-// Import necessary utilities and constants
-import { adjustDateForMonth, buildMonth, convertDateToEtendoERPFormat, formatterDate, generateYearList, validateDate } from './DatePickerInput.utils';
+import { adjustDateForMonth, buildMonth, convertDateToEtendoERPFormat, formatterDate, generateYearList, parseDateString, validateDate } from './DatePickerInput.utils';
 import { styles } from './DatePickerInput.styles';
 import { AppPlatform } from '../../../helpers/utilsTypes';
 import { translations } from '../../datepicker/DatePicker.translations';
@@ -64,6 +63,7 @@ const DatePickerInput = ({
         setCurrentYear,
         selectMonth,
     } = useDatePickerInput(value, dateFormat);
+    const inputRef = useRef<any>(null);
 
     // Get short day names and month names based on language
     const DAYS_SHORT_NAMES = translations[language].daysShort;
@@ -93,10 +93,13 @@ const DatePickerInput = ({
     // Function for the button 'Accept'
     const onAccept = () => {
         if (selectedDate && typeof onChangeText === 'function') {
-            onChangeText(convertDateToEtendoERPFormat(selectedDate));
+            const dateObject = parseDateString(selectedDate, dateFormat);
+            const formattedDateForERP = convertDateToEtendoERPFormat(dateObject);
+            onChangeText(formattedDateForERP);
         }
         setIsPickerShow(false);
     };
+
 
     // Function for the button 'Cancel'
     const onCancel = () => {
@@ -112,6 +115,17 @@ const DatePickerInput = ({
             yearListRef.current.scrollTo({ y: offset, animated: false });
         }
     }, [currentYear, yearList]);
+
+    useEffect(() => {
+        if (Platform.OS === 'web' && isPickerShow && inputRef.current) {
+            const rect = inputRef.current.getBoundingClientRect();
+            setModalPosition({
+                top: rect.bottom,
+                left: rect.left,
+            });
+        }
+    }, [isPickerShow]);
+
 
     // Render item for year selection
     const renderYearItem = ({ item }: { item: number }) => (
@@ -129,7 +143,6 @@ const DatePickerInput = ({
     const selectYear = (year: number) => {
         setCurrentYear(year);
         setIsYearSelection(false);
-
         const adjustedDate = adjustDateForMonth(year, currentMonth, selectedDate);
         setSelectedDate(adjustedDate);
     };
@@ -181,13 +194,36 @@ const DatePickerInput = ({
 
     // Handle date selection from the calendar
     const onDateSelected = (date: Date) => {
-        const formattedDate = formatterDate(date, dateFormat);
-        const isValidDate = validateDate(date, formattedDate, dateFormat);
+        const formattedDateForDisplay = formatterDate(date, dateFormat);
+        const formattedDateForERP = convertDateToEtendoERPFormat(date);
 
-        setSelectedDate(date);
+        setSelectedDate(formattedDateForDisplay);
 
-        if (isValidDate && onChangeText) {
-            onChangeText(convertDateToEtendoERPFormat(date));
+        if (onChangeText) {
+            onChangeText(formattedDateForERP);
+        }
+    };
+
+    const handleTextChange = (text: string) => {
+        let processedText = text.replace(/\D/g, '').substring(0, 8);
+
+        if (processedText.length > 4) {
+            processedText = `${processedText.substring(0, 2)}/${processedText.substring(2, 4)}/${processedText.substring(4)}`;
+        } else if (processedText.length > 2) {
+            processedText = `${processedText.substring(0, 2)}/${processedText.substring(2)}`;
+        }
+
+        const parts = processedText.split('/');
+        if (parts.length === 3) {
+            const parsedDate = new Date(parseInt(parts[2]), parseInt(parts[0]) - 1, parseInt(parts[1]));
+            if (!isNaN(parsedDate.getTime())) {
+                setSelectedDate(formatterDate(parsedDate, dateFormat));
+                if (onChangeText) {
+                    onChangeText(processedText);
+                }
+            }
+        } else if (onChangeText) {
+            onChangeText(processedText);
         }
     };
 
@@ -274,24 +310,22 @@ const DatePickerInput = ({
         );
     };
 
-
     return (
-        <View>
+        <View ref={inputRef}>
             <InputBase
-                value={value}
+                value={selectedDate}
                 placeholder={placeholder}
                 title={title}
                 helperText={helperText}
                 isDisabled={isDisabled}
                 isError={isError}
-                onChangeText={onChangeText}
+                onChangeText={handleTextChange}
                 icon={icon}
                 rightButtons={rightButtons}
                 onSubmit={onSubmit}
                 isLoading={isLoading}
                 {...props}
             />
-
             {isPickerShow && (
                 <Modal
                     animationType="fade"
