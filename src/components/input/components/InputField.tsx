@@ -21,7 +21,6 @@ import {
 import { ShowPasswordIcon } from '../../../assets/images/icons/ShowPasswordIcon';
 import { HidePasswordIcon } from '../../../assets/images/icons/HidePasswordIcon';
 import InputOptions from './InputOptions';
-import DatePicker from '../../datepicker/DatePicker';
 import { NEUTRAL_0, NEUTRAL_400, NEUTRAL_600 } from '../../../styles/colors';
 import { disableOutline } from '../../../helpers/table_utils';
 
@@ -257,18 +256,7 @@ const InputField = ({
       (!onSubmit && type !== InputFieldVariant.TextInputPassword)
     );
   };
-  return configField?.isDatePicker ? (
-    <DatePicker
-      dateFormat={dateFormat}
-      language={language}
-      styleField={styleField}
-      onChangeText={onChangeText}
-      value={value}
-      showCalendar={showCalendar}
-      disabled={disabled}
-      backgroundColor={backgroundColor}
-    />
-  ) : (
+  return (
     <View style={[styleField.focus, getFocusStyle()]}>
       <TouchableOpacity
         ref={refComponent}

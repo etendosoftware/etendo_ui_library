@@ -46,6 +46,7 @@ const FileSearchInput = ({
   onSubmit,
   setFile,
   onFileUploaded,
+  onError,
   uploadConfig,
   maxFileSize = 512,
   ...inputBaseProps
@@ -60,6 +61,7 @@ const FileSearchInput = ({
   // References
   const dropAreaRef = useRef(null);
   const fileInputRef = useRef<any>(null);
+  const abortControllerRef = useRef<any>(null);
 
   // Function to reset progress bar
   const resetProgress = () => {
@@ -117,22 +119,16 @@ const FileSearchInput = ({
   // Validates the file size and starts the file loading process
   const validateAndLoadFile = async (pickedFile: File) => {
     resetProgress();
-
-    if (maxFileSize && pickedFile.size > maxFileSize * 1024 * 1024) {
-      setIsFileValid(false);
-      setLoadingFile(false);
-      setLocalFile(null);
-      return false;
-    }
+    if (!!setFile) setFile(pickedFile);
 
     setIsFileValid(true);
-    setLoadingFile(true);
-    setLocalFile(pickedFile);
     startLoading(pickedFile);
     try {
       if (!!uploadFile) await uploadFile(pickedFile);
     } catch (error) {
       console.error('Error uploading file:', error);
+      setFileStatus('error');
+      onError?.(error);
     }
     return true;
   };
@@ -160,9 +156,10 @@ const FileSearchInput = ({
         };
 
         validateAndLoadFile(pickedFile);
-      } catch (err) {
-        if (!DocumentPicker.isCancel(err)) {
-          console.error(err);
+      } catch (error) {
+        if (!DocumentPicker.isCancel(error)) {
+          console.error(error);
+          onError?.(error);
         }
       }
     }
@@ -191,7 +188,7 @@ const FileSearchInput = ({
   if (!!uploadConfig) {
     rightButtons.push(
       <Button
-        width={48}
+        paddingHorizontal={6}
         typeStyle="white"
         onPress={handleFileButtonClick}
         iconLeft={
@@ -206,7 +203,6 @@ const FileSearchInput = ({
     const file = event.target.files[0];
     if (file) {
       if (await validateAndLoadFile(file)) {
-        startLoading(file);
         if (!!setFile) setFile(file);
         setLocalFile(file);
       }
@@ -214,38 +210,58 @@ const FileSearchInput = ({
     event.target.value = null;
   };
 
-  // Function to upload a file to a server
   const uploadFile = async (pickedFile: File) => {
     if (!!uploadConfig) {
       const formData = new FormData();
       formData.append("file", pickedFile);
+
+      abortControllerRef.current = new AbortController();
+      const { signal } = abortControllerRef.current;
 
       try {
         const response = await fetch(uploadConfig.url, {
           method: uploadConfig.method,
           body: formData,
           headers: uploadConfig.headers,
+          signal,
         });
         if (response.ok) {
-          const data = await response.json();
+          completeProgress();
+          setLoadingFile(false);
+          setFileStatus('loaded');
           if (!!onFileUploaded) {
+            const data = await response.json();
             onFileUploaded(data);
           }
-          if (fileStatus !== "canceled") {
-            setFileStatus('loaded');
-          }
         } else {
-          throw new Error('Failed to upload file');
+          const errorResponse = await response.json();
+          console.error('Error uploading file:', errorResponse);
+          onError?.(errorResponse);
+          setFileStatus('error');
+          resetProgress();
+          if (!!setFile) setFile(null);
         }
-      } catch (error) {
-        console.error('Error uploading file:', error);
-        setFileStatus('error');
+      } catch (error: any) {
+        if (error.name === 'AbortError') {
+          console.error('File upload cancelled');
+          setFileStatus('canceled');
+        } else {
+          console.error('Error uploading file:', error);
+          setFileStatus('error');
+        }
+        resetProgress();
+        if (!!setFile) setFile(null);
       }
     }
   };
 
+
   // Function to handle file deletion
   const handleCancelFile = () => {
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+
     resetProgress();
     animateProgress(0);
     if (!!setFile) setFile(null);
@@ -255,12 +271,14 @@ const FileSearchInput = ({
     }
   };
 
-  // Effect to complete progress
+  // Initialize reference
   useEffect(() => {
-    if (fileStatus === "loaded") {
-      completeProgress();
-    }
-  }, [fileStatus]);
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+    };
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -271,7 +289,7 @@ const FileSearchInput = ({
 
             <FileIcon style={styles.fileIcon} />
 
-            <View style={{ height: isWebPlatform() ? undefined : 28, width: "85%" }}>
+            <View style={styles.fileContent}>
               <Text style={styles.fileNameText} numberOfLines={1} ellipsizeMode='tail'>
                 {file.name}
               </Text>

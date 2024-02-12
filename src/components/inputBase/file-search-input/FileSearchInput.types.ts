@@ -4,16 +4,17 @@ interface UploadConfig {
     file: any;
     url: string;
     method: string;
-    headers?: HeadersInit_;
+    headers?: any;
 }
 
 export interface FileSearchInputProps extends IInputBase {
     value: string;
     onChangeText: (text: string) => void;
     onSubmit: (message: string, file?: any) => void;
-    placeholder: string;
+    placeholder?: string;
     setFile?: (file: any) => void;
     onFileUploaded?: (object: any) => void;
+    onError?: (error: any) => void;
     maxFileSize?: number;
     uploadConfig?: UploadConfig | undefined,
 }
