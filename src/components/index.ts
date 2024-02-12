@@ -1,5 +1,6 @@
 import { Button } from './button';
 import { CardDropdown } from './cards/components/cardDropdown';
+import { DatePickerInput } from './inputBase';
 import { Input } from './input';
 import { FileSearchInput, InputBase } from './inputBase';
 import { Modal } from './modal';
@@ -25,6 +26,7 @@ export {
   ButtonContainer,
   CardDropdown,
   Cards,
+  DatePickerInput,
   DrawerLateral,
   FileSearchInput,
   Input,
