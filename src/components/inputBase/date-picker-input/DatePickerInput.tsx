@@ -127,7 +127,7 @@ const DatePickerInput = ({
         }
     }, [currentYear, isYearSelection, yearList]);
 
-    // Efect to center month selected
+    // Apply effect to center the selected month
     useEffect(() => {
         if (isMonthSelection && monthListRef.current) {
             const offset = currentMonth * ITEM_HEIGHT;
@@ -240,7 +240,7 @@ const DatePickerInput = ({
         setSelectedDate(processedText);
     };
 
-    // Function Handle Blur
+    // Function to handle the onBlur event
     const handleBlur = () => {
         const parts = selectedDate.split('/');
         let dateIsValid = false;
