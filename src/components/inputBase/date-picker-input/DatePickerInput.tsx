@@ -11,18 +11,16 @@ import {
     FlatList,
 } from 'react-native';
 import InputBase from '../InputBase';
-import { ArrowDownIcon, ArrowLeftIcon, ArrowRightIcon, CalendarIcon } from '../../../assets/images/icons';
 import { Button } from '../../button';
-import { NEUTRAL_300, NEUTRAL_400, PRIMARY_100 } from '../../../styles/colors';
-
-import { adjustDateForMonth, buildMonth, convertDateToEtendoERPFormat, formatterDate, generateYearList, parseDateString, validateDate } from './DatePickerInput.utils';
-import { styles } from './DatePickerInput.styles';
-import { AppPlatform } from '../../../helpers/utilsTypes';
-import { translations } from '../../datepicker/DatePicker.translations';
-import { DayItem, MonthItemProps } from '../../datepicker/DatePicker.types';
+import { sizeStyles, styles } from './DatePickerInput.styles';
+import { DatePickerInputProps, DayItem, MonthItemProps } from './DatePickerInput.types';
 import { useDatePickerInput } from './hooks/useDatePickerInput';
-import { ITEM_HEIGHT, MODAL_CONTENT_WIDTH, MODAL_POSITION_TOP } from './DatePickerInput.constants';
-import { DatePickerInputProps } from './DatePickerInput.types';
+import { isWebPlatform } from '../../../helpers/functions_utils';
+import { NEUTRAL_300, NEUTRAL_400, PRIMARY_100 } from '../../../styles/colors';
+import { ITEM_HEIGHT, MODAL_POSITION_TOP } from './DatePickerInput.constants';
+import { ArrowDownIcon, ArrowLeftIcon, ArrowRightIcon, CalendarIcon } from '../../../assets/images/icons';
+import { buildMonth, convertDateToEtendoERPFormat, formatterDate, generateYearList, parseDateString, parseLocalDateString } from './DatePickerInput.utils';
+import { translations } from './DatePickerInput.translations';
 
 const DatePickerInput = ({
     placeholder,
@@ -37,6 +35,9 @@ const DatePickerInput = ({
     isLoading,
     language = 'en-US',
     dateFormat = 'MM/DD/YYYY',
+    minDate,
+    maxDate,
+    size = 'large',
     ...props
 }: DatePickerInputProps) => {
     const {
@@ -60,18 +61,31 @@ const DatePickerInput = ({
         showMonthSelection,
         currentMonth,
         currentYear,
-        setCurrentYear,
         selectMonth,
+        setCurrentMonth,
+        isYearSelection,
+        setIsYearSelection,
+        setCurrentYear,
     } = useDatePickerInput(value, dateFormat);
+    // Get responsive styles
+    const currentSizeStyles = sizeStyles[size];
+
+    // States
+    const [hoveredDay, setHoveredDay] = useState<any>(null);
+    const [isInputError, setIsInputError] = useState<boolean>(false);
+    const [modalPosition, setModalPosition] = useState<any>({ top: 0, bottom: 0, });
+
+    // References
     const inputRef = useRef<any>(null);
+
+    // Date constants
+    const parsedMinDate = minDate ? parseLocalDateString(minDate, dateFormat) : null;
+    const parsedMaxDate = maxDate ? parseLocalDateString(maxDate, dateFormat) : null;
 
     // Get short day names and month names based on language
     const DAYS_SHORT_NAMES = translations[language].daysShort;
     const MONTHS_SHORT_NAMES = translations[language].monthsShort;
     const MONTHS_FULL_NAMES = translations[language].monthNames;
-
-    const [hoveredDay, setHoveredDay] = useState<any>(null);
-    const [isYearSelection, setIsYearSelection] = useState<boolean>(false);
 
     // Define the right button for the input (Calendar Icon)
     const rightButtons = [
@@ -85,21 +99,17 @@ const DatePickerInput = ({
         />,
     ];
 
-    const [modalPosition, setModalPosition] = useState<any>({
-        top: 0,
-        bottom: 0,
-    });
-
     // Function for the button 'Accept'
     const onAccept = () => {
-        if (selectedDate && typeof onChangeText === 'function') {
-            const dateObject = parseDateString(selectedDate, dateFormat);
+        const dateObject = parseDateString(selectedDate, dateFormat);
+        if (dateObject && !isNaN(dateObject.getTime())) {
             const formattedDateForERP = convertDateToEtendoERPFormat(dateObject);
-            onChangeText(formattedDateForERP);
+            if (typeof onChangeText === 'function') {
+                onChangeText(formattedDateForERP);
+            }
+            setIsPickerShow(false);
         }
-        setIsPickerShow(false);
     };
-
 
     // Function for the button 'Cancel'
     const onCancel = () => {
@@ -109,23 +119,40 @@ const DatePickerInput = ({
     // Year selection list
     const yearList = generateYearList();
     useEffect(() => {
-        const index = yearList.indexOf(currentYear);
-        if (index !== -1 && yearListRef.current) {
-            const offset = index * ITEM_HEIGHT;
-            yearListRef.current.scrollTo({ y: offset, animated: false });
+        if (isYearSelection && yearListRef.current && yearList.includes(currentYear)) {
+            const index = yearList.indexOf(currentYear);
+            if (yearListRef.current.scrollToIndex) {
+                yearListRef.current.scrollToIndex({ animated: true, index });
+            }
         }
-    }, [currentYear, yearList]);
+    }, [currentYear, isYearSelection, yearList]);
 
+    // Efect to center month selected
     useEffect(() => {
-        if (Platform.OS === 'web' && isPickerShow && inputRef.current) {
+        if (isMonthSelection && monthListRef.current) {
+            const offset = currentMonth * ITEM_HEIGHT;
+            monthListRef.current.scrollTo({ y: offset, animated: false });
+        }
+    }, [isMonthSelection, currentMonth]);
+
+    // Effect to set modal position
+    useEffect(() => {
+        if (Platform.OS === 'web' && isPickerShow && inputRef.current && typeof window !== 'undefined') {
             const rect = inputRef.current.getBoundingClientRect();
+            const modalWidth = currentSizeStyles.modalWidth;
+            const screenWidth = window.innerWidth;
+            let calculatedLeft = rect.right - modalWidth;
+
+            if (calculatedLeft + modalWidth > screenWidth) {
+                calculatedLeft = screenWidth - modalWidth - 20;
+            }
+
             setModalPosition({
-                top: rect.bottom,
-                left: rect.left,
+                top: rect.bottom + window.scrollY,
+                left: calculatedLeft > 0 ? calculatedLeft : 0,
             });
         }
     }, [isPickerShow]);
-
 
     // Render item for year selection
     const renderYearItem = ({ item }: { item: number }) => (
@@ -143,10 +170,7 @@ const DatePickerInput = ({
     const selectYear = (year: number) => {
         setCurrentYear(year);
         setIsYearSelection(false);
-        const adjustedDate = adjustDateForMonth(year, currentMonth, selectedDate);
-        setSelectedDate(adjustedDate);
     };
-
 
     // Render year selection list
     const renderYearSelection = () => {
@@ -195,15 +219,15 @@ const DatePickerInput = ({
     // Handle date selection from the calendar
     const onDateSelected = (date: Date) => {
         const formattedDateForDisplay = formatterDate(date, dateFormat);
-        const formattedDateForERP = convertDateToEtendoERPFormat(date);
-
-        setSelectedDate(formattedDateForDisplay);
+        setSelectedDate(formattedDateForDisplay.toString());
 
         if (onChangeText) {
+            const formattedDateForERP = convertDateToEtendoERPFormat(date);
             onChangeText(formattedDateForERP);
         }
     };
 
+    // Control when text is changed by keyboard
     const handleTextChange = (text: string) => {
         let processedText = text.replace(/\D/g, '').substring(0, 8);
 
@@ -213,32 +237,56 @@ const DatePickerInput = ({
             processedText = `${processedText.substring(0, 2)}/${processedText.substring(2)}`;
         }
 
-        const parts = processedText.split('/');
-        if (parts.length === 3) {
-            const parsedDate = new Date(parseInt(parts[2]), parseInt(parts[0]) - 1, parseInt(parts[1]));
-            if (!isNaN(parsedDate.getTime())) {
-                setSelectedDate(formatterDate(parsedDate, dateFormat));
-                if (onChangeText) {
-                    onChangeText(processedText);
-                }
+        setSelectedDate(processedText);
+    };
+
+    // Function Handle Blur
+    const handleBlur = () => {
+        const parts = selectedDate.split('/');
+        let dateIsValid = false;
+
+        if (selectedDate.length === 10 && parts.length === 3) {
+            const month = parseInt(parts[0], 10) - 1;
+            const day = parseInt(parts[1], 10);
+            const year = parseInt(parts[2], 10);
+            const date = new Date(year, month, day);
+
+            dateIsValid = date.getFullYear() === year && date.getMonth() === month && date.getDate() === day;
+            const dateIsWithinRange = (!parsedMinDate || date >= parsedMinDate) && (!parsedMaxDate || date <= parsedMaxDate);
+            dateIsValid = dateIsValid && dateIsWithinRange;
+
+            if (dateIsValid) {
+                setCurrentYear(year);
+                setCurrentMonth(month);
+                setSelectedDate(formatterDate(date, dateFormat));
             }
-        } else if (onChangeText) {
-            onChangeText(processedText);
         }
+
+        setIsInputError(!dateIsValid);
     };
 
     // Render individual day item
     const renderDayItem = ({ date, isCurrentMonth }: DayItem) => {
+        const isDateBeforeMin = parsedMinDate ? date < parsedMinDate : false;
+        const isDateAfterMax = parsedMaxDate ? date > parsedMaxDate : false;
+        const isDateSelectable = !isDateBeforeMin && !isDateAfterMax;
+
+        const disabledDayStyle = isDateSelectable ? {} : styles.disabledButtonStyle;
+
         const isToday =
             date.getDate() === new Date().getDate() &&
             date.getMonth() === new Date().getMonth() &&
             date.getFullYear() === new Date().getFullYear();
 
-        const isSelectedDate =
-            isCurrentMonth &&
-            date.getDate() === new Date(selectedDate).getDate() &&
-            date.getMonth() === new Date(selectedDate).getMonth() &&
-            date.getFullYear() === new Date(selectedDate).getFullYear();
+        const isSelectedDate = isCurrentMonth && selectedDate && (() => {
+            if (typeof selectedDate === 'string') {
+                const parts = selectedDate.split('/');
+                const selectedDateObj = new Date(Date.UTC(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0])));
+                return date.getUTCDate() === selectedDateObj.getUTCDate() &&
+                    date.getUTCMonth() === selectedDateObj.getUTCMonth() &&
+                    date.getUTCFullYear() === selectedDateObj.getUTCFullYear();
+            }
+        })();
 
         const notCurrentMonthStyle: any = {
             color: NEUTRAL_400,
@@ -253,13 +301,16 @@ const DatePickerInput = ({
 
         return (
             <Pressable
-                onPress={() => isPartOfCurrentMonth && onDateSelected(date)}
-                onHoverIn={() => setHoveredDay(dayKey)}
-                onHoverOut={() => setHoveredDay(null)}
+                onPress={() => isPartOfCurrentMonth && isDateSelectable && onDateSelected(date)}
+                disabled={!isDateSelectable}
                 style={[
                     styles.dayItem,
                     isPartOfCurrentMonth ? null : notCurrentMonthStyle,
-                ]}>
+                    disabledDayStyle,
+                ]}
+                onHoverIn={() => setHoveredDay(dayKey)}
+                onHoverOut={() => setHoveredDay(null)}
+            >
                 <View
                     style={[
                         styles.dayItemText,
@@ -314,13 +365,14 @@ const DatePickerInput = ({
         <View ref={inputRef}>
             <InputBase
                 value={selectedDate}
-                placeholder={placeholder}
+                placeholder={dateFormat}
                 title={title}
                 helperText={helperText}
                 isDisabled={isDisabled}
-                isError={isError}
+                isError={isInputError}
                 onChangeText={handleTextChange}
                 icon={icon}
+                onBlur={handleBlur}
                 rightButtons={rightButtons}
                 onSubmit={onSubmit}
                 isLoading={isLoading}
@@ -339,11 +391,11 @@ const DatePickerInput = ({
                                 <View
                                     style={[
                                         styles.modalContent,
-                                        { width: MODAL_CONTENT_WIDTH },
+                                        { width: currentSizeStyles.modalWidth, height: currentSizeStyles.calendarHeight },
                                         {
-                                            position: Platform.OS === AppPlatform.web ? 'absolute' : 'relative',
-                                            top: Platform.OS === AppPlatform.web ? modalPosition.top + MODAL_POSITION_TOP : undefined,
-                                            left: Platform.OS === AppPlatform.web ? modalPosition.left : undefined,
+                                            position: isWebPlatform() ? 'absolute' : 'relative',
+                                            top: isWebPlatform() ? modalPosition.top + MODAL_POSITION_TOP : undefined,
+                                            left: isWebPlatform() ? modalPosition.left : undefined,
                                         },
                                     ]}
                                 >

@@ -1,4 +1,4 @@
-/* Utils for DatePicker component */
+/* Utils for DatePickerInput component */
 // Adjust the selected date if the month has less days
 export const adjustDateForMonth = (
     year: number,
@@ -49,14 +49,14 @@ export const formatterDate = (date: Date, format: string) => {
     return '';
 };
 
-// Parsea una fecha en formato DD/MM/YYYY a un objeto Date
+// Parse a date in DD/MM/YYYY format to a Date object
 export const parseDateString = (dateString: any, format: any) => {
     const parts = dateString.split("/");
     let day, month: any, year: any;
 
     if (format === 'DD/MM/YYYY') {
         day = parseInt(parts[0], 10);
-        month = parseInt(parts[1], 10) - 1; // Los meses en JS son de 0-11
+        month = parseInt(parts[1], 10) - 1;
         year = parseInt(parts[2], 10);
     } else if (format === 'MM/DD/YYYY') {
         month = parseInt(parts[0], 10) - 1;

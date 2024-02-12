@@ -2,6 +2,8 @@ import { Platform, StyleSheet } from 'react-native';
 import {
     DESTRUCTIVE_10,
     DESTRUCTIVE_100,
+    NEUTRAL_0,
+    NEUTRAL_100,
     NEUTRAL_200,
     NEUTRAL_300,
     NEUTRAL_400,
@@ -11,27 +13,34 @@ import {
     QUATERNARY_50,
     TERTIARY_70,
 } from '../../../styles/colors';
-import { AppPlatform } from '../../../helpers/utilsTypes';
-import { MODAL_CONTENT_WIDTH } from './DatePickerInput.constants';
+import { CALENDAR_HEIGHT, ITEM_HEIGHT } from './DatePickerInput.constants';
+import { isWebPlatform } from '../../../helpers/functions_utils';
 
-// Height of the calendar
-export const CALENDAR_HEIGHT = 320;
+export const sizeStyles = {
+    small: {
+        modalWidth: 300,
+        calendarHeight: 200,
+        textFontSize: 14,
+        itemHeight: 30,
+    },
+    medium: {
+        modalWidth: 340,
+        calendarHeight: 300,
+        textFontSize: 16,
+        itemHeight: 360,
+    },
+    large: {
+        modalWidth: 380,
+        calendarHeight: 400,
+        textFontSize: 18,
+        itemHeight: ITEM_HEIGHT,
+    },
+};
 
 // StyleSheet for DatePicker
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-    },
-    datePickerButton: {
-        borderWidth: 1,
-        borderColor: 'gray',
-        paddingVertical: Platform.OS === AppPlatform.web ? 8 : 20,
-        paddingHorizontal: 12,
-        borderRadius: 4,
-        backgroundColor: 'white',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
     },
     inputWrapper: {
         flexDirection: 'row',
@@ -46,18 +55,9 @@ export const styles = StyleSheet.create({
     disabledInput: {
         opacity: 0.2,
     },
-    datePickerInput: {
-        textAlign: 'left',
-        fontSize: 18,
-        color: PRIMARY_100,
-        fontWeight: '500',
-        flex: 1,
-        paddingVertical: 0,
-        paddingHorizontal: 0,
-    },
     inputContainerWrapper: {
         borderRadius: 8,
-        borderWidth: 5,
+        borderWidth: 4,
         borderColor: 'transparent',
         position: 'relative',
     },
@@ -89,17 +89,17 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor:
-            Platform.OS === AppPlatform.web ? 'rgba(0,0,0,0)' : 'rgba(0,0,0,0.5)',
+            isWebPlatform() ? 'rgba(0,0,0,0)' : 'rgba(0,0,0,0.5)',
     },
     modalContent: {
         backgroundColor: NEUTRAL_50,
         borderRadius: 8,
         borderColor: NEUTRAL_300,
-        alignSelf: Platform.OS === AppPlatform.web ? undefined : 'center',
-        width: Platform.OS === AppPlatform.web ? MODAL_CONTENT_WIDTH : '90%',
-        marginTop: Platform.OS === AppPlatform.web ? 8 : undefined,
+        alignSelf: isWebPlatform() ? undefined : 'center',
+        width: '90%',
+        marginTop: isWebPlatform() ? 8 : undefined,
         boxShadow:
-            Platform.OS === AppPlatform.web
+            isWebPlatform()
                 ? '0px 1px 1.41px rgba(0, 0, 0, 0.20)'
                 : undefined,
     },
@@ -152,6 +152,7 @@ export const styles = StyleSheet.create({
     },
     dayItemTextHover: {
         backgroundColor: NEUTRAL_200,
+        width: 42,
     },
     todayItemTextHover: {
         backgroundColor: TERTIARY_70,
@@ -168,10 +169,10 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
     },
     selectedDayText: {
-        color: 'white',
+        color: NEUTRAL_0,
     },
     dayText: {
-        color: 'black',
+        color: NEUTRAL_100,
         textAlign: 'center',
     },
     currentDayBorder: {

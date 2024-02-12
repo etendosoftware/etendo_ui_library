@@ -11,6 +11,7 @@ export interface IInputBase {
   isDisabled?: boolean;
   isError?: boolean;
   isLoading?: boolean;
+  onBlur?: () => void;
   onChangeText?: (value: string) => void;
   onSubmit?: (...params: any[]) => void;
   placeholder?: string;

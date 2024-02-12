@@ -24,7 +24,6 @@ export type InputFieldVariants =
   | 'textInputPassword'
   | 'pressableText'
   | 'pressableSearch'
-  | 'datePicker';
 
 export enum InputFieldVariant {
   ReadOnly = 'readOnly',
@@ -37,8 +36,6 @@ export enum InputFieldVariant {
 }
 
 export type KeyboardTypes = 'text' | 'number';
-export type DateFormat = 'DD/MM/YYYY' | 'MM/DD/YYYY';
-export type LanguageFormat = 'en-US' | 'es-ES';
 
 export type InputFieldConfigType = {
   type: InputFieldType;
@@ -49,7 +46,6 @@ export type InputFieldConfigType = {
   disabledSubmit?: boolean;
   backgroundColor?: ColorValue;
   placeholderStyle?: TextStyle;
-  isDatePicker?: boolean;
 };
 
 export type InputVariantsType = Record<
@@ -97,8 +93,6 @@ export interface InputProps {
   onBlur?: (event?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   onOptionSelected?: (selectedItem: Array<Record<string, any>>) => void;
   backgroundColor?: ColorValue;
-  language?: LanguageFormat;
-  dateFormat?: DateFormat;
   showCalendar?: boolean;
   isLoadingMoreData?: boolean;
   onLoadMoreData?: (currentPage?: number, filterText?: string) => void;

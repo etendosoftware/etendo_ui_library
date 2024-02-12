@@ -14,6 +14,7 @@ import { Button } from '../button';
 import { CornerDownRightIcon } from '../../assets/images/icons/CornerDownRightIcon';
 import { styles } from './InputBase.styles';
 import { IInputBase } from './InputBase.types';
+import { DANGER_700, NEUTRAL_800 } from '../../styles/colors';
 
 const InputBase = ({
   value,
@@ -27,6 +28,7 @@ const InputBase = ({
   rightButtons,
   onSubmit,
   isLoading,
+  onBlur,
 }: IInputBase) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [buttons, setButtons] = useState<ReactNode[]>([]);
@@ -37,6 +39,7 @@ const InputBase = ({
 
   const onBlurChange = () => {
     setIsFocused(false);
+    onBlur?.();
   };
 
   const borderWidth: number = isFocused ? 1.5 : 1;
@@ -109,7 +112,7 @@ const InputBase = ({
   return (
     <>
       {!!title && (
-        <Text numberOfLines={1} ellipsizeMode="tail" style={styles.title}>
+        <Text numberOfLines={1} ellipsizeMode="tail" style={[styles.title, { color: !isError ? NEUTRAL_800 : DANGER_700 }]}>
           {title}
         </Text>
       )}

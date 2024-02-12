@@ -4,7 +4,7 @@ import { ITEM_HEIGHT } from '../DatePickerInput.constants';
 
 export const useDatePickerInput = (initialValue: any, dateFormat = 'MM/DD/YYYY') => {
     const yearListRef = useRef<any>(null);
-    const monthListRef = useRef(null);
+    const monthListRef = useRef<any>(null);
 
     const [selectedDate, setSelectedDate] = useState<any>(initialValue ? new Date(initialValue) : undefined);
     const [isPickerShow, setIsPickerShow] = useState(false);
@@ -59,7 +59,7 @@ export const useDatePickerInput = (initialValue: any, dateFormat = 'MM/DD/YYYY')
 
         if (!isYearSelection) {
             const index = generateYearList().indexOf(currentYear);
-            if (index !== -1 && yearListRef.current) {
+            if (index !== -1 && yearListRef.current && yearListRef.current.scrollToIndex) {
                 yearListRef.current.scrollToIndex({ animated: true, index });
             }
         }
@@ -69,15 +69,7 @@ export const useDatePickerInput = (initialValue: any, dateFormat = 'MM/DD/YYYY')
     const selectMonth = (monthIndex: number) => {
         setCurrentMonth(monthIndex);
         setIsMonthSelection(false);
-
-        const adjustedDate = adjustDateForMonth(
-            currentYear,
-            monthIndex,
-            selectedDate,
-        );
-        setSelectedDate(adjustedDate);
     };
-
 
     // Set current year and update the selected date
     const selectYear = (year: any) => {
@@ -106,6 +98,14 @@ export const useDatePickerInput = (initialValue: any, dateFormat = 'MM/DD/YYYY')
             yearListRef.current.scrollTo({ y: offset, animated: false });
         }
     }, [currentYear, yearList]);
+
+    useEffect(() => {
+        const index = yearList.indexOf(currentYear);
+        if (index !== -1 && yearListRef.current) {
+            const offset = index * ITEM_HEIGHT;
+            yearListRef.current.scrollTo({ y: offset, animated: false });
+        }
+    }, [currentMonth]);
 
     // Go to previous month
     const goToPreviousMonth = () => {
@@ -146,5 +146,6 @@ export const useDatePickerInput = (initialValue: any, dateFormat = 'MM/DD/YYYY')
         showMonthSelection,
         setCurrentMonth,
         setCurrentYear,
+        setIsYearSelection,
     };
 };

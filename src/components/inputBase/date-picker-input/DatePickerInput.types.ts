@@ -1,6 +1,5 @@
 import { IInputBase } from "../InputBase.types";
 
-// Types for DatePicker component
 export type DayItem = {
     date: Date;
     isCurrentMonth: boolean;
@@ -12,5 +11,13 @@ export type LanguageFormat = 'en-US' | 'es-ES';
 export interface DatePickerInputProps extends IInputBase {
     language: LanguageFormat;
     dateFormat: DateFormat;
-    showCalendar?: boolean | undefined;
+    showCalendar?: boolean;
+    minDate?: string;
+    maxDate?: string;
+    size?: 'small' | 'medium' | 'large';
 }
+
+export interface MonthItemProps {
+    item: string;
+    index: number;
+};
