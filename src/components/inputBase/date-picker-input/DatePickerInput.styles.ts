@@ -18,7 +18,7 @@ import { isWebPlatform } from '../../../helpers/functions_utils';
 export const sizeStyles = {
     small: {
         modalWidth: 280,
-        calendarHeight: 228,
+        calendarHeight: 180,
         textFontSize: 14,
         itemHeight: 30,
         monthText: 12,
@@ -30,11 +30,11 @@ export const sizeStyles = {
         dayItem: { marginVertical: 0, },
         currentDayBorder: { width: 24, height: 24 },
         dayHeaderText: { fontSize: 12, },
-        dayItemTextHover: { width: 37, }
+        dayItemText: { padding: 4, width: 27, height: 27, },
     },
     medium: {
-        modalWidth: 300,
-        calendarHeight: 288,
+        modalWidth: 320,
+        calendarHeight: 240,
         textFontSize: 16,
         itemHeight: 360,
         monthText: 14,
@@ -46,23 +46,23 @@ export const sizeStyles = {
         dayItem: { marginVertical: 1, },
         currentDayBorder: { width: 28, height: 28 },
         dayHeaderText: { fontSize: 14, },
-        dayItemTextHover: { width: 41, }
+        dayItemText: { padding: 8, width: 30, height: 30 },
     },
     large: {
         modalWidth: 360,
-        calendarHeight: 310,
+        calendarHeight: 300,
         textFontSize: 18,
         itemHeight: ITEM_HEIGHT,
         monthText: 16,
         yearText: 16,
         iconStyle: { width: 16, height: 16, },
         headerPadding: { paddingTop: 14 },
-        headerDayPadding: { paddingVertical: 12, },
+        headerDayPadding: { paddingVertical: 8, },
         dayText: { fontSize: 14, },
         dayItem: { marginVertical: 2, },
         currentDayBorder: { width: 36, height: 36 },
         dayHeaderText: { fontSize: 16, },
-        dayItemTextHover: { width: 42, }
+        dayItemText: { padding: 12, width: 40, height: 40 },
     },
 };
 
@@ -169,9 +169,10 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
     },
     dayItemText: {
-        padding: 12,
         borderRadius: 100,
-        textAlign: 'center',
+        textAlign: "center",
+        justifyContent: "center",
+        alignItems: "center",
     },
     dayItemTextHover: {
         backgroundColor: NEUTRAL_200,
@@ -184,9 +185,6 @@ export const styles = StyleSheet.create({
     selectedDayBackground: {
         backgroundColor: PRIMARY_100,
         borderRadius: 100,
-        padding: 8,
-        height: 36,
-        width: 36,
         justifyContent: 'center',
         alignItems: 'center',
     },

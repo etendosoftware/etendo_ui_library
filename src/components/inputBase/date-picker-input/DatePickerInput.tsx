@@ -72,6 +72,7 @@ const DatePickerInput = ({
     // States
     const [hoveredDay, setHoveredDay] = useState<any>(null);
     const [isInputError, setIsInputError] = useState<boolean>(false);
+    const [isDateSelected, setIsDateSelected] = useState<boolean>(false);
     const [tempSelectedDate, setTempSelectedDate] = useState<string | null>(null);
     const [calendarPosition, setCalendarPosition] = useState<any>({ top: undefined, bottom: undefined });
 
@@ -92,6 +93,7 @@ const DatePickerInput = ({
         setTempSelectedDate(selectedDate);
         if (selectedDate) handleBlur();
         togglePicker();
+        setIsDateSelected(false);
     };
 
     // Define the right button for the input (Calendar Icon)
@@ -154,6 +156,7 @@ const DatePickerInput = ({
         setSelectedDate(tempSelectedDate || '');
         setIsPickerShow(false);
         setTempSelectedDate(null);
+        setIsDateSelected(false);
     };
 
     // Year selection list
@@ -298,6 +301,7 @@ const DatePickerInput = ({
     const onDateSelected = (date: Date) => {
         const formattedDateForDisplay = formatterDate(date, dateFormat);
         setSelectedDate(formattedDateForDisplay.toString());
+        setIsDateSelected(true);
 
         if (onChangeText) {
             const formattedDateForERP = convertDateToEtendoERPFormat(date);
@@ -420,10 +424,11 @@ const DatePickerInput = ({
                 <View
                     style={[
                         styles.dayItemText,
+                        currentSizeStyles.dayItemText,
                         isSelectedDate ? styles.selectedDayBackground : {},
                         isToday && !isSelectedDate ? [styles.currentDayBorder] : {},
                         !isCurrentMonth ? notCurrentMonthStyle : {},
-                        isHovered && !isToday ? [styles.dayItemTextHover, currentSizeStyles.dayItemTextHover] : {},
+                        isHovered && !isToday ? [styles.dayItemTextHover] : {},
                         isTodayHovered ? styles.todayItemTextHover : {},
                     ]}>
                     <Text
@@ -595,6 +600,7 @@ const DatePickerInput = ({
                                             text={translations[language].accept}
                                             onPress={onAccept}
                                             paddingVertical={10}
+                                            disabled={!isDateSelected}
                                         />
                                     </View>
                                 </View>
