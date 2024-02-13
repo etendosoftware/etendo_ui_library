@@ -3,7 +3,6 @@ import {
     View,
     Modal,
     TouchableWithoutFeedback,
-    Platform,
     TouchableOpacity,
     Text,
     ScrollView,
@@ -16,7 +15,7 @@ import { translations } from './DatePickerInput.translations';
 import { sizeStyles, styles } from './DatePickerInput.styles';
 import { useDatePickerInput } from './hooks/useDatePickerInput';
 import { isWebPlatform } from '../../../helpers/functions_utils';
-import { ITEM_HEIGHT, MODAL_POSITION_TOP } from './DatePickerInput.constants';
+import { ITEM_HEIGHT } from './DatePickerInput.constants';
 import { NEUTRAL_300, NEUTRAL_400, PRIMARY_100 } from '../../../styles/colors';
 import { DatePickerInputProps, DayItem, MonthItemProps } from './DatePickerInput.types';
 import { ArrowDownIcon, ArrowLeftIcon, ArrowRightIcon, CalendarIcon } from '../../../assets/images/icons';
@@ -74,7 +73,6 @@ const DatePickerInput = ({
     const [hoveredDay, setHoveredDay] = useState<any>(null);
     const [isInputError, setIsInputError] = useState<boolean>(false);
     const [tempSelectedDate, setTempSelectedDate] = useState<string | null>(null);
-    const [modalPosition, setModalPosition] = useState<any>({ top: 0, bottom: 0, });
 
     // References
     const inputRef = useRef<any>(null);
@@ -91,6 +89,7 @@ const DatePickerInput = ({
     // Function to open the calendar
     const openCalendar = () => {
         setTempSelectedDate(selectedDate);
+        if (selectedDate) handleBlur();
         togglePicker();
     };
 
@@ -110,26 +109,6 @@ const DatePickerInput = ({
     const closeCalendar = () => {
         setIsPickerShow(false);
     };
-
-    // Scroll event handler
-    const handleScroll = () => {
-        if (isPickerShow) {
-            closeCalendar();
-        }
-    };
-
-    // Effect to listen to the scroll event
-    useEffect(() => {
-        if (isWebPlatform()) {
-            window.addEventListener('scroll', handleScroll);
-        }
-
-        return () => {
-            if (isWebPlatform()) {
-                window.removeEventListener('scroll', handleScroll);
-            }
-        };
-    }, [isPickerShow]);
 
     // Calculate the position of the calendar modal
     useEffect(() => {
@@ -153,11 +132,6 @@ const DatePickerInput = ({
                 // If there is not enough space below but there is enough space above, show the calendar above
                 topPosition = rect.top + window.scrollY - modalHeight;
             }
-
-            setModalPosition({
-                top: topPosition,
-                left: calculatedLeft > 0 ? calculatedLeft : 0,
-            });
         }
     }, [isPickerShow, currentSizeStyles]);
 
@@ -228,11 +202,6 @@ const DatePickerInput = ({
                 // Not enough space above or below, handle as needed
                 topPosition = rect.bottom + window.scrollY; // O alguna otra lógica
             }
-
-            setModalPosition({
-                top: topPosition,
-                left: calculatedLeft > 0 ? calculatedLeft : 0,
-            });
         }
     }, [isPickerShow, currentSizeStyles]);
 
@@ -328,9 +297,21 @@ const DatePickerInput = ({
         let dateIsValid = false;
 
         if (selectedDate.length === 10 && parts.length === 3) {
-            const month = parseInt(parts[0], 10) - 1;
-            const day = parseInt(parts[1], 10);
-            const year = parseInt(parts[2], 10);
+            let day, month, year;
+
+            if (dateFormat === 'DD/MM/YYYY') {
+                day = parseInt(parts[0], 10);
+                month = parseInt(parts[1], 10) - 1;
+                year = parseInt(parts[2], 10);
+            } else if (dateFormat === 'MM/DD/YYYY') {
+                month = parseInt(parts[0], 10) - 1;
+                day = parseInt(parts[1], 10);
+                year = parseInt(parts[2], 10);
+            } else {
+                setIsInputError(true);
+                return;
+            }
+
             const date = new Date(year, month, day);
 
             dateIsValid = date.getFullYear() === year && date.getMonth() === month && date.getDate() === day;
@@ -346,6 +327,7 @@ const DatePickerInput = ({
 
         setIsInputError(!dateIsValid);
     };
+
 
     // Render individual day item
     const renderDayItem = ({ date, isCurrentMonth }: DayItem) => {
@@ -457,6 +439,15 @@ const DatePickerInput = ({
         );
     };
 
+    const PlatformCalendarPicker: any = isWebPlatform() ? View : Modal;
+
+    const modalProps = !isWebPlatform() ? {
+        transparent: true,
+        visible: isPickerShow,
+        onRequestClose: () => setIsPickerShow(false),
+        animationType: "fade"
+    } : {};
+
     return (
         <View ref={inputRef}>
             <InputBase
@@ -475,23 +466,19 @@ const DatePickerInput = ({
                 {...props}
             />
             {isPickerShow && (
-                <Modal
-                    animationType="fade"
-                    transparent={true}
-                    visible={isPickerShow}
-                    onRequestClose={() => setIsPickerShow(false)}
-                >
+                <PlatformCalendarPicker {...modalProps}>
                     <TouchableWithoutFeedback onPress={() => setIsPickerShow(false)}>
                         <View style={styles.modalContainer}>
                             <TouchableWithoutFeedback onPress={(e) => e.stopPropagation()}>
                                 <View
                                     style={[
                                         styles.modalContent,
-                                        { width: currentSizeStyles.modalWidth, height: currentSizeStyles.calendarHeight },
                                         {
-                                            position: isWebPlatform() ? 'absolute' : 'relative',
-                                            top: isWebPlatform() ? modalPosition.top + MODAL_POSITION_TOP : undefined,
-                                            left: isWebPlatform() ? modalPosition.left : undefined,
+                                            position: isWebPlatform() ? "absolute" : "relative",
+                                            width: currentSizeStyles.modalWidth,
+                                            height: currentSizeStyles.calendarHeight,
+                                            top: isWebPlatform() ? '100%' : undefined,
+                                            right: isWebPlatform() ? 0 : undefined,
                                         },
                                     ]}
                                 >
@@ -583,7 +570,7 @@ const DatePickerInput = ({
                             </TouchableWithoutFeedback>
                         </View>
                     </TouchableWithoutFeedback>
-                </Modal>
+                </PlatformCalendarPicker>
             )}
         </View>
     );
