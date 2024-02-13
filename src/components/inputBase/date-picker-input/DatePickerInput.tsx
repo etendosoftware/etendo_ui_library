@@ -14,11 +14,11 @@ import InputBase from '../InputBase';
 import { Button } from '../../button';
 import { translations } from './DatePickerInput.translations';
 import { sizeStyles, styles } from './DatePickerInput.styles';
-import { DatePickerInputProps, DayItem, MonthItemProps } from './DatePickerInput.types';
 import { useDatePickerInput } from './hooks/useDatePickerInput';
 import { isWebPlatform } from '../../../helpers/functions_utils';
-import { NEUTRAL_300, NEUTRAL_400, PRIMARY_100 } from '../../../styles/colors';
 import { ITEM_HEIGHT, MODAL_POSITION_TOP } from './DatePickerInput.constants';
+import { NEUTRAL_300, NEUTRAL_400, PRIMARY_100 } from '../../../styles/colors';
+import { DatePickerInputProps, DayItem, MonthItemProps } from './DatePickerInput.types';
 import { ArrowDownIcon, ArrowLeftIcon, ArrowRightIcon, CalendarIcon } from '../../../assets/images/icons';
 import { buildMonth, convertDateToEtendoERPFormat, formatterDate, generateYearList, parseDateString, parseLocalDateString } from './DatePickerInput.utils';
 
