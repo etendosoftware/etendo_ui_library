@@ -30,8 +30,6 @@ const Input = ({
   onOptionSelected,
   typeField,
   isError,
-  language,
-  dateFormat,
   showCalendar,
   currentPage,
   isLoadingMoreData,
@@ -95,8 +93,6 @@ const Input = ({
         displayKey={displayKey}
         backgroundColor={backgroundColor}
         height={height}
-        language={language}
-        dateFormat={dateFormat}
         showCalendar={showCalendar}
         currentPage={currentPage}
         onLoadMoreData={onLoadMoreData}
