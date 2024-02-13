@@ -119,33 +119,30 @@ export const getDaysInMonth = (year: number, month: number) => {
 export const buildMonth = (year: number, month: number) => {
     const days = [];
     const firstDayOfMonth = new Date(year, month, 1).getDay();
-    const totalDays = getDaysInMonth(year, month);
+    const totalDaysCurrentMonth = getDaysInMonth(year, month);
 
     // Calculate the previous month and year
     const previousMonth = month === 0 ? 11 : month - 1;
-    const previousMonthYear = month === 0 ? year - 1 : year;
-    const previousMonthDays = getDaysInMonth(previousMonthYear, previousMonth);
+    const previousYear = month === 0 ? year - 1 : year;
+    const totalDaysPreviousMonth = getDaysInMonth(previousYear, previousMonth);
 
     // Fill days from previous month
-    for (let i = firstDayOfMonth; i > 0; i--) {
-        days.push(
-            new Date(previousMonthYear, previousMonth, previousMonthDays - i + 1),
-        );
+    for (let i = 0; i < firstDayOfMonth; i++) {
+        days.unshift(new Date(previousYear, previousMonth, totalDaysPreviousMonth - i));
     }
 
     // Add days of current month
-    for (let day = 1; day <= totalDays; day++) {
+    for (let day = 1; day <= totalDaysCurrentMonth; day++) {
         days.push(new Date(year, month, day));
     }
 
     // Calculate next month and year
     const nextMonth = month === 11 ? 0 : month + 1;
-    const nextMonthYear = month === 11 ? year + 1 : year;
+    const nextYear = month === 11 ? year + 1 : year;
 
-    // Fill the rest of the days in the last week with next month's days
-    let day = 1;
-    while (days.length % 7 !== 0) {
-        days.push(new Date(nextMonthYear, nextMonth, day++));
+    while (days.length < 42) {
+        const day: number = days.length - totalDaysCurrentMonth - firstDayOfMonth + 1;
+        days.push(new Date(nextYear, nextMonth, day));
     }
 
     return days;

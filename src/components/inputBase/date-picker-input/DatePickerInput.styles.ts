@@ -1,9 +1,8 @@
-import { Platform, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import {
     DESTRUCTIVE_10,
     DESTRUCTIVE_100,
     NEUTRAL_0,
-    NEUTRAL_100,
     NEUTRAL_200,
     NEUTRAL_300,
     NEUTRAL_400,
@@ -18,22 +17,52 @@ import { isWebPlatform } from '../../../helpers/functions_utils';
 
 export const sizeStyles = {
     small: {
-        modalWidth: 300,
-        calendarHeight: 200,
+        modalWidth: 280,
+        calendarHeight: 180,
         textFontSize: 14,
         itemHeight: 30,
+        monthText: 12,
+        yearText: 12,
+        iconStyle: { width: 12, height: 12, },
+        headerPadding: { paddingTop: 2 },
+        headerDayPadding: { paddingVertical: 0, },
+        dayText: { fontSize: 10, },
+        dayItem: { marginVertical: 0, },
+        currentDayBorder: { width: 24, height: 24 },
+        dayHeaderText: { fontSize: 12, },
+        dayItemText: { padding: 4, width: 27, height: 27, },
     },
     medium: {
-        modalWidth: 340,
-        calendarHeight: 300,
+        modalWidth: 320,
+        calendarHeight: 240,
         textFontSize: 16,
         itemHeight: 360,
+        monthText: 14,
+        yearText: 14,
+        iconStyle: { width: 14, height: 14, },
+        headerPadding: { paddingTop: 14 },
+        headerDayPadding: { paddingVertical: 12, },
+        dayText: { fontSize: 13, },
+        dayItem: { marginVertical: 1, },
+        currentDayBorder: { width: 28, height: 28 },
+        dayHeaderText: { fontSize: 14, },
+        dayItemText: { padding: 8, width: 30, height: 30 },
     },
     large: {
-        modalWidth: 380,
-        calendarHeight: 400,
+        modalWidth: 360,
+        calendarHeight: 300,
         textFontSize: 18,
         itemHeight: ITEM_HEIGHT,
+        monthText: 16,
+        yearText: 16,
+        iconStyle: { width: 16, height: 16, },
+        headerPadding: { paddingTop: 14 },
+        headerDayPadding: { paddingVertical: 8, },
+        dayText: { fontSize: 14, },
+        dayItem: { marginVertical: 2, },
+        currentDayBorder: { width: 36, height: 36 },
+        dayHeaderText: { fontSize: 16, },
+        dayItemText: { padding: 12, width: 40, height: 40 },
     },
 };
 
@@ -53,7 +82,7 @@ export const styles = StyleSheet.create({
         borderColor: DESTRUCTIVE_100,
     },
     disabledInput: {
-        opacity: 0.2,
+        opacity: 0.3,
     },
     inputContainerWrapper: {
         borderRadius: 8,
@@ -108,8 +137,6 @@ export const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingHorizontal: 20,
-        paddingTop: 16,
-        paddingBottom: 12,
     },
     monthText: {
         fontSize: 16,
@@ -123,7 +150,6 @@ export const styles = StyleSheet.create({
     dayHeader: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingVertical: 16,
     },
     dayHeaderText: {
         width: '14.28%',
@@ -134,7 +160,6 @@ export const styles = StyleSheet.create({
         color: NEUTRAL_400,
     },
     calendarContainer: {
-        height: CALENDAR_HEIGHT,
         paddingHorizontal: 10,
         backgroundColor: NEUTRAL_50,
     },
@@ -142,17 +167,15 @@ export const styles = StyleSheet.create({
         width: '14.28%',
         justifyContent: 'center',
         alignItems: 'center',
-        marginVertical: 2,
     },
     dayItemText: {
-        padding: 12,
-        marginVertical: 2,
         borderRadius: 100,
-        textAlign: 'center',
+        textAlign: "center",
+        justifyContent: "center",
+        alignItems: "center",
     },
     dayItemTextHover: {
         backgroundColor: NEUTRAL_200,
-        width: 42,
     },
     todayItemTextHover: {
         backgroundColor: TERTIARY_70,
@@ -162,9 +185,6 @@ export const styles = StyleSheet.create({
     selectedDayBackground: {
         backgroundColor: PRIMARY_100,
         borderRadius: 100,
-        padding: 8,
-        height: 36,
-        width: 36,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -172,7 +192,6 @@ export const styles = StyleSheet.create({
         color: NEUTRAL_0,
     },
     dayText: {
-        color: NEUTRAL_100,
         textAlign: 'center',
     },
     currentDayBorder: {
@@ -180,8 +199,6 @@ export const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: PRIMARY_100,
         padding: 8,
-        height: 36,
-        width: 36,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -216,6 +233,6 @@ export const styles = StyleSheet.create({
         borderBottomRightRadius: 8,
     },
     disabledButtonStyle: {
-        opacity: 0.2,
+        opacity: 0.3,
     },
 });

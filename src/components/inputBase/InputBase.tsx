@@ -29,6 +29,7 @@ const InputBase = ({
   onSubmit,
   isLoading,
   onBlur,
+  keyboardType = "default",
 }: IInputBase) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [buttons, setButtons] = useState<ReactNode[]>([]);
@@ -150,6 +151,7 @@ const InputBase = ({
           onBlur={onBlurChange}
           style={textInputStyle}
           onSubmitEditing={onSubmit || (() => { })}
+          keyboardType={keyboardType}
         />
         {!!buttons && (
           <ButtonContainer style={styles.buttonContainer} buttons={buttons} />
