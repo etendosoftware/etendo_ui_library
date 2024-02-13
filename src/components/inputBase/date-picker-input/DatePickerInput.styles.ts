@@ -86,8 +86,8 @@ export const styles = StyleSheet.create({
     },
     modalContainer: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: isWebPlatform() ? undefined : "center",
+        alignItems: isWebPlatform() ? "flex-end" : "center",
         backgroundColor:
             isWebPlatform() ? 'rgba(0,0,0,0)' : 'rgba(0,0,0,0.5)',
     },
