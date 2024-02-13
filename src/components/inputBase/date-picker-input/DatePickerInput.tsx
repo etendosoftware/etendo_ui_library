@@ -14,11 +14,11 @@ import InputBase from '../InputBase';
 import { Button } from '../../button';
 import { translations } from './DatePickerInput.translations';
 import { sizeStyles, styles } from './DatePickerInput.styles';
-import { DatePickerInputProps, DayItem, MonthItemProps } from './DatePickerInput.types';
 import { useDatePickerInput } from './hooks/useDatePickerInput';
 import { isWebPlatform } from '../../../helpers/functions_utils';
-import { NEUTRAL_300, NEUTRAL_400, PRIMARY_100 } from '../../../styles/colors';
 import { ITEM_HEIGHT, MODAL_POSITION_TOP } from './DatePickerInput.constants';
+import { NEUTRAL_300, NEUTRAL_400, PRIMARY_100 } from '../../../styles/colors';
+import { DatePickerInputProps, DayItem, MonthItemProps } from './DatePickerInput.types';
 import { ArrowDownIcon, ArrowLeftIcon, ArrowRightIcon, CalendarIcon } from '../../../assets/images/icons';
 import { buildMonth, convertDateToEtendoERPFormat, formatterDate, generateYearList, parseDateString, parseLocalDateString } from './DatePickerInput.utils';
 
@@ -73,6 +73,7 @@ const DatePickerInput = ({
     // States
     const [hoveredDay, setHoveredDay] = useState<any>(null);
     const [isInputError, setIsInputError] = useState<boolean>(false);
+    const [tempSelectedDate, setTempSelectedDate] = useState<string | null>(null);
     const [modalPosition, setModalPosition] = useState<any>({ top: 0, bottom: 0, });
 
     // References
@@ -87,17 +88,78 @@ const DatePickerInput = ({
     const MONTHS_SHORT_NAMES = translations[language].monthsShort;
     const MONTHS_FULL_NAMES = translations[language].monthNames;
 
+    // Function to open the calendar
+    const openCalendar = () => {
+        setTempSelectedDate(selectedDate);
+        togglePicker();
+    };
+
     // Define the right button for the input (Calendar Icon)
     const rightButtons = [
         <Button
             key="calendar"
             width={48}
             typeStyle="white"
-            onPress={togglePicker}
+            onPress={openCalendar}
             iconLeft={<CalendarIcon style={{ width: 24, height: 24 }} fill={PRIMARY_100} />}
             disabled={isDisabled || isLoading}
         />,
     ];
+
+    // Function to close the calendar
+    const closeCalendar = () => {
+        setIsPickerShow(false);
+    };
+
+    // Scroll event handler
+    const handleScroll = () => {
+        if (isPickerShow) {
+            closeCalendar();
+        }
+    };
+
+    // Effect to listen to the scroll event
+    useEffect(() => {
+        if (isWebPlatform()) {
+            window.addEventListener('scroll', handleScroll);
+        }
+
+        return () => {
+            if (isWebPlatform()) {
+                window.removeEventListener('scroll', handleScroll);
+            }
+        };
+    }, [isPickerShow]);
+
+    // Calculate the position of the calendar modal
+    useEffect(() => {
+        if (isWebPlatform() && isPickerShow && inputRef.current && typeof window !== 'undefined') {
+            const rect = inputRef.current.getBoundingClientRect();
+            const modalWidth = currentSizeStyles.modalWidth;
+            const modalHeight = currentSizeStyles.calendarHeight;
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+
+            let calculatedLeft = rect.right - modalWidth;
+            if (calculatedLeft + modalWidth > screenWidth) {
+                calculatedLeft = screenWidth - modalWidth - 20;
+            }
+
+            const spaceBelow = screenHeight - rect.bottom;
+            const spaceAbove = rect.top;
+
+            let topPosition = rect.bottom + window.scrollY;
+            if (spaceBelow < modalHeight && spaceAbove > modalHeight) {
+                // If there is not enough space below but there is enough space above, show the calendar above
+                topPosition = rect.top + window.scrollY - modalHeight;
+            }
+
+            setModalPosition({
+                top: topPosition,
+                left: calculatedLeft > 0 ? calculatedLeft : 0,
+            });
+        }
+    }, [isPickerShow, currentSizeStyles]);
 
     // Function for the button 'Accept'
     const onAccept = () => {
@@ -109,11 +171,14 @@ const DatePickerInput = ({
             }
             setIsPickerShow(false);
         }
+        setTempSelectedDate(null);
     };
 
     // Function for the button 'Cancel'
     const onCancel = () => {
+        setSelectedDate(tempSelectedDate || '');
         setIsPickerShow(false);
+        setTempSelectedDate(null);
     };
 
     // Year selection list
@@ -137,22 +202,39 @@ const DatePickerInput = ({
 
     // Effect to set modal position
     useEffect(() => {
-        if (Platform.OS === 'web' && isPickerShow && inputRef.current && typeof window !== 'undefined') {
+        if (isWebPlatform() && isPickerShow && inputRef.current && typeof window !== 'undefined') {
             const rect = inputRef.current.getBoundingClientRect();
             const modalWidth = currentSizeStyles.modalWidth;
+            const modalHeight = currentSizeStyles.calendarHeight;
             const screenWidth = window.innerWidth;
-            let calculatedLeft = rect.right - modalWidth;
+            const screenHeight = window.innerHeight;
 
+            let calculatedLeft = rect.right - modalWidth;
             if (calculatedLeft + modalWidth > screenWidth) {
                 calculatedLeft = screenWidth - modalWidth - 20;
             }
 
+            const spaceBelow = screenHeight - rect.bottom;
+            const spaceAbove = rect.top;
+
+            let topPosition;
+            if (spaceBelow >= modalHeight) {
+                // Enough space below, place calendar below the input
+                topPosition = rect.bottom + window.scrollY - 5;
+            } else if (spaceAbove >= modalHeight) {
+                // Enough space above, place calendar above the input
+                topPosition = rect.top + window.scrollY - modalHeight - 70;
+            } else {
+                // Not enough space above or below, handle as needed
+                topPosition = rect.bottom + window.scrollY; // O alguna otra lógica
+            }
+
             setModalPosition({
-                top: rect.bottom + window.scrollY,
+                top: topPosition,
                 left: calculatedLeft > 0 ? calculatedLeft : 0,
             });
         }
-    }, [isPickerShow]);
+    }, [isPickerShow, currentSizeStyles]);
 
     // Render item for year selection
     const renderYearItem = ({ item }: { item: number }) => (
@@ -279,13 +361,27 @@ const DatePickerInput = ({
             date.getFullYear() === new Date().getFullYear();
 
         const isSelectedDate = isCurrentMonth && selectedDate && (() => {
-            if (typeof selectedDate === 'string') {
+            if (typeof selectedDate === 'string' && selectedDate.length === 10) {
+                let selectedYear, selectedMonth, selectedDay;
                 const parts = selectedDate.split('/');
-                const selectedDateObj = new Date(Date.UTC(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0])));
-                return date.getUTCDate() === selectedDateObj.getUTCDate() &&
-                    date.getUTCMonth() === selectedDateObj.getUTCMonth() &&
-                    date.getUTCFullYear() === selectedDateObj.getUTCFullYear();
+
+                if (dateFormat === 'DD/MM/YYYY') {
+                    selectedDay = parseInt(parts[0], 10);
+                    selectedMonth = parseInt(parts[1], 10) - 1;
+                    selectedYear = parseInt(parts[2], 10);
+                } else if (dateFormat === 'MM/DD/YYYY') {
+                    selectedMonth = parseInt(parts[0], 10) - 1;
+                    selectedDay = parseInt(parts[1], 10);
+                    selectedYear = parseInt(parts[2], 10);
+                } else {
+                    return false;
+                }
+
+                return date.getDate() === selectedDay &&
+                    date.getMonth() === selectedMonth &&
+                    date.getFullYear() === selectedYear;
             }
+            return false;
         })();
 
         const notCurrentMonthStyle: any = {
@@ -365,7 +461,7 @@ const DatePickerInput = ({
         <View ref={inputRef}>
             <InputBase
                 value={selectedDate}
-                placeholder={dateFormat}
+                placeholder={placeholder || dateFormat}
                 title={title}
                 helperText={helperText}
                 isDisabled={isDisabled}
