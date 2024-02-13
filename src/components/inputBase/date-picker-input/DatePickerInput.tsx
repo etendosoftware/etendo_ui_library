@@ -36,7 +36,7 @@ const DatePickerInput = ({
     dateFormat = 'MM/DD/YYYY',
     minDate,
     maxDate,
-    size = 'large',
+    size = 'medium',
     ...props
 }: DatePickerInputProps) => {
     const {
@@ -67,12 +67,13 @@ const DatePickerInput = ({
         setCurrentYear,
     } = useDatePickerInput(value, dateFormat);
     // Get responsive styles
-    const currentSizeStyles = sizeStyles[size];
+    const currentSizeStyles = isWebPlatform() ? sizeStyles[size] : sizeStyles['large'];
 
     // States
     const [hoveredDay, setHoveredDay] = useState<any>(null);
     const [isInputError, setIsInputError] = useState<boolean>(false);
     const [tempSelectedDate, setTempSelectedDate] = useState<string | null>(null);
+    const [calendarPosition, setCalendarPosition] = useState<any>({ top: undefined, bottom: undefined });
 
     // References
     const inputRef = useRef<any>(null);
@@ -166,6 +167,32 @@ const DatePickerInput = ({
         }
     }, [currentYear, isYearSelection, yearList]);
 
+    // Calendar position
+    useEffect(() => {
+        if (isWebPlatform() && isPickerShow && inputRef.current && typeof window !== 'undefined') {
+            const rect = inputRef.current.getBoundingClientRect();
+            const modalHeight = currentSizeStyles.calendarHeight;
+            const screenHeight = window.innerHeight;
+
+            const spaceBelow = screenHeight - rect.bottom;
+            const spaceAbove = rect.top;
+
+            if (spaceBelow < modalHeight && spaceAbove > modalHeight) {
+                // Not enough space below, show calendar above      
+                setCalendarPosition({ top: 'auto', bottom: '3.5rem' });
+            } else {
+                // Enough space below, show calendar below
+                setCalendarPosition({ top: '100%', bottom: 'auto' });
+            }
+        }
+    }, [isPickerShow, currentSizeStyles.calendarHeight]);
+
+
+    // Reset error status when selected value changes
+    useEffect(() => {
+        setIsInputError(false);
+    }, [selectedDate]);
+
     // Apply effect to center the selected month
     useEffect(() => {
         if (isMonthSelection && monthListRef.current) {
@@ -200,7 +227,7 @@ const DatePickerInput = ({
                 topPosition = rect.top + window.scrollY - modalHeight - 70;
             } else {
                 // Not enough space above or below, handle as needed
-                topPosition = rect.bottom + window.scrollY; // O alguna otra lógica
+                topPosition = rect.bottom + window.scrollY;
             }
         }
     }, [isPickerShow, currentSizeStyles]);
@@ -383,6 +410,7 @@ const DatePickerInput = ({
                 disabled={!isDateSelectable}
                 style={[
                     styles.dayItem,
+                    currentSizeStyles.dayItem,
                     isPartOfCurrentMonth ? null : notCurrentMonthStyle,
                     disabledDayStyle,
                 ]}
@@ -393,9 +421,9 @@ const DatePickerInput = ({
                     style={[
                         styles.dayItemText,
                         isSelectedDate ? styles.selectedDayBackground : {},
-                        isToday && !isSelectedDate ? styles.currentDayBorder : {},
+                        isToday && !isSelectedDate ? [styles.currentDayBorder] : {},
                         !isCurrentMonth ? notCurrentMonthStyle : {},
-                        isHovered ? styles.dayItemTextHover : {},
+                        isHovered && !isToday ? [styles.dayItemTextHover, currentSizeStyles.dayItemTextHover] : {},
                         isTodayHovered ? styles.todayItemTextHover : {},
                     ]}>
                     <Text
@@ -405,6 +433,7 @@ const DatePickerInput = ({
                             !isCurrentMonth ? notCurrentMonthStyle : {},
                             isPartOfCurrentMonth ? null : notCurrentMonthStyle,
                             isTodayHovered && { color: PRIMARY_100 },
+                            currentSizeStyles.dayText,
                         ]}>
                         {date.getDate()}
                     </Text>
@@ -418,10 +447,10 @@ const DatePickerInput = ({
         const daysInMonth = buildMonth(currentYear, currentMonth);
 
         return (
-            <View style={styles.calendarContainer}>
-                <View style={styles.dayHeader}>
+            <View style={[styles.calendarContainer, { height: currentSizeStyles.calendarHeight }]}>
+                <View style={[styles.dayHeader, currentSizeStyles.headerDayPadding]}>
                     {DAYS_SHORT_NAMES.map((day: string) => (
-                        <Text key={day} style={styles.dayHeaderText}>
+                        <Text key={day} style={[styles.dayHeaderText, currentSizeStyles.dayHeaderText]}>
                             {day}
                         </Text>
                     ))}
@@ -463,6 +492,7 @@ const DatePickerInput = ({
                 rightButtons={rightButtons}
                 onSubmit={onSubmit}
                 isLoading={isLoading}
+                keyboardType="numeric"
                 {...props}
             />
             {isPickerShow && (
@@ -476,8 +506,8 @@ const DatePickerInput = ({
                                         {
                                             position: isWebPlatform() ? "absolute" : "relative",
                                             width: currentSizeStyles.modalWidth,
-                                            height: currentSizeStyles.calendarHeight,
-                                            top: isWebPlatform() ? '100%' : undefined,
+                                            top: calendarPosition.top,
+                                            bottom: calendarPosition.bottom,
                                             right: isWebPlatform() ? 0 : undefined,
                                         },
                                     ]}
@@ -485,6 +515,7 @@ const DatePickerInput = ({
                                     <View
                                         style={[
                                             styles.header,
+                                            currentSizeStyles.headerPadding,
                                             (isMonthSelection || isYearSelection) && {
                                                 borderBottomWidth: 1,
                                                 borderBottomColor: NEUTRAL_300,
@@ -498,10 +529,10 @@ const DatePickerInput = ({
                                             disabled={disabledMonthSelection}
                                             onPress={showMonthSelection}>
                                             <TouchableOpacity style={[styles.iconContainer, { alignItems: "flex-start", padding: 16, paddingLeft: 4, }]} onPress={goToPreviousMonth}>
-                                                <ArrowLeftIcon style={styles.iconStyle} />
+                                                <ArrowLeftIcon style={currentSizeStyles.iconStyle} />
                                             </TouchableOpacity>
                                             <View style={[styles.monthAndYearContent]}>
-                                                <Text style={styles.monthText}>
+                                                <Text style={[styles.monthText, { fontSize: currentSizeStyles.monthText }]}>
                                                     {MONTHS_SHORT_NAMES[currentMonth]}
                                                 </Text>
                                                 <ArrowDownIcon
@@ -514,7 +545,7 @@ const DatePickerInput = ({
                                                 />
                                             </View>
                                             <TouchableOpacity style={[styles.iconContainer, { alignItems: "flex-start", padding: 16, }]} onPress={goToNextMonth}>
-                                                <ArrowRightIcon style={styles.iconStyle} />
+                                                <ArrowRightIcon style={currentSizeStyles.iconStyle} />
                                             </TouchableOpacity>
                                         </TouchableOpacity>
 
@@ -526,10 +557,10 @@ const DatePickerInput = ({
                                             disabled={disabledYearSelection}
                                             onPress={showYearSelection}>
                                             <TouchableOpacity style={[styles.iconContainer, { alignItems: "flex-start", padding: 16, }]} onPress={goToPreviousYear}>
-                                                <ArrowLeftIcon style={styles.iconStyle} />
+                                                <ArrowLeftIcon style={currentSizeStyles.iconStyle} />
                                             </TouchableOpacity>
                                             <View style={styles.monthAndYearContent}>
-                                                <Text style={styles.yearText}>
+                                                <Text style={[styles.yearText, { fontSize: currentSizeStyles.yearText }]}>
                                                     {currentYear}
                                                 </Text>
                                                 <ArrowDownIcon
@@ -542,7 +573,7 @@ const DatePickerInput = ({
                                                 />
                                             </View>
                                             <TouchableOpacity style={[styles.iconContainer, { alignItems: "flex-start", padding: 16, paddingRight: 4 }]} onPress={goToNextYear}>
-                                                <ArrowRightIcon style={styles.iconStyle} />
+                                                <ArrowRightIcon style={currentSizeStyles.iconStyle} />
                                             </TouchableOpacity>
                                         </TouchableOpacity>
                                     </View>
