@@ -157,6 +157,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingHorizontal: 20,
+        borderBottomWidth: 1,
     },
     monthText: {
         fontSize: 16,

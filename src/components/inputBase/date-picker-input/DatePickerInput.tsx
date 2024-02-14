@@ -528,10 +528,7 @@ const DatePickerInput = ({
                                         style={[
                                             styles.header,
                                             currentSizeStyles.headerPadding,
-                                            (isMonthSelection || isYearSelection) && {
-                                                borderBottomWidth: 1,
-                                                borderBottomColor: NEUTRAL_300,
-                                            },
+                                            { borderBottomColor: isMonthSelection || isYearSelection ? NEUTRAL_300 : "transparent", }
                                         ]}>
                                         <TouchableOpacity
                                             style={[
