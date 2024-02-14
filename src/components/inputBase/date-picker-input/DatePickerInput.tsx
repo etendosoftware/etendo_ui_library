@@ -611,9 +611,9 @@ const DatePickerInput = ({
                             </TouchableWithoutFeedback>
                         </View>
                     </TouchableWithoutFeedback>
-                </PlatformCalendarPicker >
+                </PlatformCalendarPicker>
             )}
-        </View >
+        </View>
     );
 };
 
