@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import { formatterDate, generateYearList, validateDate, adjustDateForMonth } from '../DatePickerInput.utils';
-import { ITEM_HEIGHT } from '../DatePickerInput.constants';
 
 export const useDatePickerInput = (initialValue: any, dateFormat = 'MM/DD/YYYY') => {
     const yearListRef = useRef<any>(null);
@@ -89,24 +88,6 @@ export const useDatePickerInput = (initialValue: any, dateFormat = 'MM/DD/YYYY')
         return { date: formattedDate, isValid: isValidDate };
     };
 
-    // Year selection list
-    const yearList = generateYearList();
-    useEffect(() => {
-        const index = yearList.indexOf(currentYear);
-        if (index !== -1 && yearListRef.current) {
-            const offset = index * ITEM_HEIGHT;
-            yearListRef.current.scrollTo({ y: offset, animated: false });
-        }
-    }, [currentYear, yearList]);
-
-    useEffect(() => {
-        const index = yearList.indexOf(currentYear);
-        if (index !== -1 && yearListRef.current) {
-            const offset = index * ITEM_HEIGHT;
-            yearListRef.current.scrollTo({ y: offset, animated: false });
-        }
-    }, [currentMonth]);
-
     // Go to previous month
     const goToPreviousMonth = () => {
         if (!disabledMonthSelection) {
@@ -125,7 +106,6 @@ export const useDatePickerInput = (initialValue: any, dateFormat = 'MM/DD/YYYY')
         isYearSelection,
         yearListRef,
         monthListRef,
-        yearList,
         togglePicker,
         changeMonthAndYear,
         selectMonth,
