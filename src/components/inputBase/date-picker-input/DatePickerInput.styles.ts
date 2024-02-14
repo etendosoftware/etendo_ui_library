@@ -12,7 +12,6 @@ import {
     QUATERNARY_50,
     TERTIARY_70,
 } from '../../../styles/colors';
-import { CALENDAR_HEIGHT, ITEM_HEIGHT } from './DatePickerInput.constants';
 import { isWebPlatform } from '../../../helpers/functions_utils';
 
 export const sizeStyles = {
@@ -31,12 +30,19 @@ export const sizeStyles = {
         currentDayBorder: { width: 24, height: 24 },
         dayHeaderText: { fontSize: 12, },
         dayItemText: { padding: 4, width: 27, height: 27, },
+        list: {
+            height: 180,
+            paddingHorizontal: 8,
+            paddingVertical: 4,
+        },
+        listFontSize: 12,
+        listItemPadding: 6,
     },
     medium: {
         modalWidth: 320,
         calendarHeight: 240,
         textFontSize: 16,
-        itemHeight: 360,
+        itemHeight: 40,
         monthText: 14,
         yearText: 14,
         iconStyle: { width: 14, height: 14, },
@@ -47,12 +53,19 @@ export const sizeStyles = {
         currentDayBorder: { width: 28, height: 28 },
         dayHeaderText: { fontSize: 14, },
         dayItemText: { padding: 8, width: 30, height: 30 },
+        list: {
+            height: 240,
+            paddingHorizontal: 10,
+            paddingVertical: 8,
+        },
+        listFontSize: 14,
+        listItemPadding: 8,
     },
     large: {
         modalWidth: 360,
         calendarHeight: 300,
         textFontSize: 18,
-        itemHeight: ITEM_HEIGHT,
+        itemHeight: 50,
         monthText: 16,
         yearText: 16,
         iconStyle: { width: 16, height: 16, },
@@ -63,6 +76,13 @@ export const sizeStyles = {
         currentDayBorder: { width: 36, height: 36 },
         dayHeaderText: { fontSize: 16, },
         dayItemText: { padding: 12, width: 40, height: 40 },
+        list: {
+            height: 300,
+            paddingHorizontal: 10,
+            paddingVertical: 8,
+        },
+        listFontSize: 16,
+        listItemPadding: 10,
     },
 };
 
@@ -202,14 +222,8 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    list: {
-        height: CALENDAR_HEIGHT,
-        paddingHorizontal: 10,
-        paddingVertical: 8,
-    },
     item: {
         justifyContent: 'center',
-        padding: 10,
         width: "100%",
         margin: 2,
     },

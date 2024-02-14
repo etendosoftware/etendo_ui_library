@@ -15,7 +15,6 @@ import { translations } from './DatePickerInput.translations';
 import { sizeStyles, styles } from './DatePickerInput.styles';
 import { useDatePickerInput } from './hooks/useDatePickerInput';
 import { isWebPlatform } from '../../../helpers/functions_utils';
-import { ITEM_HEIGHT } from './DatePickerInput.constants';
 import { NEUTRAL_300, NEUTRAL_400, PRIMARY_100 } from '../../../styles/colors';
 import { DatePickerInputProps, DayItem, MonthItemProps } from './DatePickerInput.types';
 import { ArrowDownIcon, ArrowLeftIcon, ArrowRightIcon, CalendarIcon } from '../../../assets/images/icons';
@@ -161,14 +160,22 @@ const DatePickerInput = ({
 
     // Year selection list
     const yearList = generateYearList();
+
     useEffect(() => {
-        if (isYearSelection && yearListRef.current && yearList.includes(currentYear)) {
-            const index = yearList.indexOf(currentYear);
-            if (yearListRef.current.scrollToIndex) {
-                yearListRef.current.scrollToIndex({ animated: true, index });
-            }
+        const index = yearList.indexOf(currentYear);
+        if (index !== -1 && yearListRef.current) {
+            const offset = index * currentSizeStyles.itemHeight;
+            yearListRef.current.scrollTo({ y: offset, animated: false });
         }
-    }, [currentYear, isYearSelection, yearList]);
+    }, [currentYear, yearList]);
+
+    useEffect(() => {
+        const index = yearList.indexOf(currentYear);
+        if (index !== -1 && yearListRef.current) {
+            const offset = index * currentSizeStyles.itemHeight;
+            yearListRef.current.scrollTo({ y: offset, animated: false });
+        }
+    }, [currentMonth]);
 
     // Calendar position
     useEffect(() => {
@@ -182,10 +189,10 @@ const DatePickerInput = ({
 
             if (spaceBelow < modalHeight && spaceAbove > modalHeight) {
                 // Not enough space below, show calendar above      
-                setCalendarPosition({ top: 'auto', bottom: '3.5rem' });
+                setCalendarPosition({ top: 'auto', bottom: helperText ? '4.7rem' : '3.35rem' });
             } else {
                 // Enough space below, show calendar below
-                setCalendarPosition({ top: '100%', bottom: 'auto' });
+                setCalendarPosition({ top: helperText ? '-1.55rem' : '0rem' });
             }
         }
     }, [isPickerShow, currentSizeStyles.calendarHeight]);
@@ -199,7 +206,7 @@ const DatePickerInput = ({
     // Apply effect to center the selected month
     useEffect(() => {
         if (isMonthSelection && monthListRef.current) {
-            const offset = currentMonth * ITEM_HEIGHT;
+            const offset = currentMonth * currentSizeStyles.itemHeight;
             monthListRef.current.scrollTo({ y: offset, animated: false });
         }
     }, [isMonthSelection, currentMonth]);
@@ -238,12 +245,12 @@ const DatePickerInput = ({
     // Render item for year selection
     const renderYearItem = ({ item }: { item: number }) => (
         <TouchableOpacity
-            style={[styles.item, item === currentYear ? styles.selectedItem : null]}
+            style={[styles.item, { padding: currentSizeStyles.listItemPadding }, item === currentYear ? styles.selectedItem : null]}
             onPress={() => {
                 selectYear(item);
                 setDisabledMonthSelection(false);
             }}>
-            <Text style={styles.yearText}>{item}</Text>
+            <Text style={[styles.yearText, { fontSize: currentSizeStyles.listFontSize }]}>{item}</Text>
         </TouchableOpacity>
     );
 
@@ -258,10 +265,10 @@ const DatePickerInput = ({
         return (
             <ScrollView
                 ref={yearListRef}
-                style={styles.list}
+                style={currentSizeStyles.list}
             >
                 {yearList.map((year) => (
-                    <View key={year.toString()} style={{ height: ITEM_HEIGHT }}>
+                    <View key={year.toString()} style={{ height: currentSizeStyles.itemHeight }}>
                         {renderYearItem({ item: year })}
                     </View>
                 ))}
@@ -272,12 +279,12 @@ const DatePickerInput = ({
     // Render item for month selection
     const renderMonthItem = ({ item, index }: MonthItemProps) => (
         <TouchableOpacity
-            style={[styles.item, index === currentMonth && styles.selectedItem]}
+            style={[styles.item, { padding: currentSizeStyles.listItemPadding }, index === currentMonth && styles.selectedItem]}
             onPress={() => {
                 selectMonth(index);
                 setDisabledYearSelection(false);
             }}>
-            <Text style={{ fontSize: 16, color: PRIMARY_100, }}>{item}</Text>
+            <Text style={{ fontSize: currentSizeStyles.listFontSize, color: PRIMARY_100, }}>{item}</Text>
         </TouchableOpacity>
     );
 
@@ -286,10 +293,10 @@ const DatePickerInput = ({
         return (
             <ScrollView
                 ref={monthListRef}
-                style={styles.list}
+                style={currentSizeStyles.list}
             >
                 {MONTHS_FULL_NAMES.map((month: string, index: number) => (
-                    <View key={index.toString()} style={{ height: ITEM_HEIGHT }}>
+                    <View key={index.toString()} style={{ height: currentSizeStyles.itemHeight }}>
                         {renderMonthItem({ item: month, index })}
                     </View>
                 ))}
