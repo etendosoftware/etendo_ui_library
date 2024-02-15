@@ -14,7 +14,7 @@ import { Button } from '../button';
 import { CornerDownRightIcon } from '../../assets/images/icons/CornerDownRightIcon';
 import { styles } from './InputBase.styles';
 import { IInputBase } from './InputBase.types';
-import { DANGER_700, NEUTRAL_800 } from '../../styles/colors';
+import { DANGER_700, NEUTRAL_500, NEUTRAL_800 } from '../../styles/colors';
 
 const InputBase = ({
   value,
@@ -42,6 +42,13 @@ const InputBase = ({
     setIsFocused(false);
     onBlur?.();
   };
+
+  function determineTextColor(isError: boolean | undefined, isDisabled: boolean | undefined) {
+    if (isDisabled) {
+      return NEUTRAL_500;
+    }
+    return isError ? DANGER_700 : NEUTRAL_800;
+  }
 
   const borderWidth: number = isFocused ? 1.5 : 1;
   const paddingVertical: number = 13 - (borderWidth - 1);
@@ -113,7 +120,7 @@ const InputBase = ({
   return (
     <>
       {!!title && (
-        <Text numberOfLines={1} ellipsizeMode="tail" style={[styles.title, { color: !isError ? NEUTRAL_800 : DANGER_700 }]}>
+        <Text numberOfLines={1} ellipsizeMode="tail" style={[styles.title, { color: determineTextColor(isError, isDisabled) }]}>
           {title}
         </Text>
       )}
@@ -158,7 +165,7 @@ const InputBase = ({
         )}
       </View>
       {!!helperText && (
-        <Text numberOfLines={1} ellipsizeMode="tail" style={styles.helperText}>
+        <Text numberOfLines={1} ellipsizeMode="tail" style={[styles.helperText, { color: determineTextColor(isError, isDisabled) }]}>
           {helperText}
         </Text>
       )}
