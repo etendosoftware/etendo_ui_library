@@ -331,6 +331,11 @@ const DatePickerInput = ({
 
     // Function to handle the onBlur event
     const handleBlur = () => {
+        if (selectedDate.trim() === '') {
+            setIsInputError(false);
+            return;
+        }
+
         const parts = selectedDate.split('/');
         let dateIsValid = false;
 
