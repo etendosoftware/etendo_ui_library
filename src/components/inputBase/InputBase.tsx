@@ -26,6 +26,7 @@ const InputBase = ({
   onChangeText,
   icon,
   rightButtons,
+  onPress,
   onSubmit,
   isLoading,
   onBlur,
@@ -46,6 +47,7 @@ const InputBase = ({
   const borderWidth: number = isFocused ? 1.5 : 1;
   const paddingVertical: number = 13 - (borderWidth - 1);
   const paddingHorizontal: number = 12 - (borderWidth - 1);
+  const isEditable = onPress ? false : !isDisabled;
 
   const borderStyle = (): ViewStyle | undefined => {
     if (!value && !isFocused) {
@@ -142,17 +144,19 @@ const InputBase = ({
             })}
           </TouchableOpacity>
         )}
-        <TextInput
-          value={value}
-          onChangeText={onChangeText}
-          placeholder={placeholder}
-          editable={!isDisabled}
-          onFocus={onFocusChange}
-          onBlur={onBlurChange}
-          style={textInputStyle}
-          onSubmitEditing={onSubmit || (() => { })}
-          keyboardType={keyboardType}
-        />
+        <TouchableOpacity style={textInputStyle} onPress={onPress}>
+          <TextInput
+            value={value}
+            onChangeText={onChangeText}
+            placeholder={placeholder}
+            editable={isEditable}
+            onFocus={onFocusChange}
+            onBlur={onBlurChange}
+            style={textInputStyle}
+            onSubmitEditing={onSubmit || (() => { })}
+            keyboardType={keyboardType}
+          />
+        </TouchableOpacity>
         {!!buttons && (
           <ButtonContainer style={styles.buttonContainer} buttons={buttons} />
         )}
