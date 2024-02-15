@@ -78,7 +78,6 @@ export const styles = StyleSheet.create({
     fontWeight: '500',
     lineHeight: 22,
     letterSpacing: -0.14,
-    color: NEUTRAL_800,
   },
   iconLeft: { width: 24, height: 24, marginRight: 8 },
   iconRight: { width: 24, height: 24, marginLeft: 8 },
