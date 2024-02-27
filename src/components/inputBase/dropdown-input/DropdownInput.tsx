@@ -15,6 +15,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
     onSelect,
     fetchData,
     displayKey,
+    staticData = [],
     initialPage = 0,
     fetchDataBySearch,
     pageSize: size = 10,
@@ -148,16 +149,20 @@ const DropdownInput: React.FC<IDropdownInput> = ({
         setLoading(true);
 
         let fetchedOptions: any = [];
-        if (fetchDataBySearch && searchQuery.length > 0) {
-            fetchedOptions = await fetchDataBySearch(searchQuery);
-        } else if (fetchData) {
-            fetchedOptions = await fetchData(page, size);
-            if (fetchedOptions.length < size) {
-                setHasMore(false);
+        if ((fetchDataBySearch && searchQuery.length > 0) || reset || page === initialPage) {
+            if (fetchDataBySearch && searchQuery.length > 0) {
+                fetchedOptions = await fetchDataBySearch(searchQuery);
+            } else if (fetchData) {
+                fetchedOptions = await fetchData(page, size);
+                if (fetchedOptions.length < size) {
+                    setHasMore(false);
+                }
             }
         }
 
-        let newOptions = searchQuery.length > 0 ? fetchedOptions : [...options, ...fetchedOptions.filter((option: any) => !options.map(o => JSON.stringify(o)).includes(JSON.stringify(option)))];
+        const combinedOptions = [...staticData, ...fetchedOptions.filter((option: any) => !staticData.map(o => JSON.stringify(o)).includes(JSON.stringify(option)))];
+
+        let newOptions = searchQuery.length > 0 ? combinedOptions : [...options, ...combinedOptions.filter((option: any) => !options.map(o => JSON.stringify(o)).includes(JSON.stringify(option)))];
         if (selectedOption && searchQuery.length === 0 && !reset) {
             const selectedOptionIndex = newOptions.findIndex((option: any) => option[displayKey] === selectedOption);
             if (selectedOptionIndex !== -1) {
