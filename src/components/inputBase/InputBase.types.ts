@@ -7,7 +7,7 @@ export interface IInputButtons {
 
 export interface IInputBase {
   helperText?: string;
-  icon?: IInputButtons;
+  icon?: any;
   isDisabled?: boolean;
   isError?: boolean;
   isLoading?: boolean;

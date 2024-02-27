@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
-import { NEUTRAL_300, TERTIARY_100, TERTIARY_70 } from "../../../styles/colors";
+import { NEUTRAL_300, TERTIARY_70 } from "../../../styles/colors";
+import { isWebPlatform } from "../../../helpers/functions_utils";
 
 export const styles = StyleSheet.create({
     wrapper: {
@@ -13,10 +14,13 @@ export const styles = StyleSheet.create({
         transform: [{ rotate: '180deg' }],
     },
     searchInput: {
-        padding: 10,
+        padding: 8,
         borderBottomWidth: 1,
         fontWeight: '500',
         borderColor: NEUTRAL_300,
+        width: "100%",
+        paddingRight: 20,
+        marginBottom: !(isWebPlatform()) ? 8 : null,
     },
     dropdown: {
         position: 'absolute',
@@ -26,11 +30,10 @@ export const styles = StyleSheet.create({
         left: 0,
         marginTop: 6,
         padding: 6,
-        zIndex: 1000,
         borderWidth: 1.5,
         borderColor: NEUTRAL_300,
         borderRadius: 8,
-        gap: 8
+        gap: 8,
     },
     option: {
         paddingHorizontal: 8,
@@ -45,5 +48,33 @@ export const styles = StyleSheet.create({
     },
     highlightedText: {
         fontWeight: 'bold',
+    },
+    searchInputWrapper: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: "100%",
+        justifyContent: 'space-between',
+    },
+    cancelIcon: {
+        width: 12,
+        height: 12,
+    },
+    selectedOptionContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: "100%",
+    },
+    fullScreen: {
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        backgroundColor: "red",
+        zIndex: 2,
+    },
+    noResultsText: {
+        textAlign: 'center',
+        paddingVertical: 4,
+        fontWeight: '600',
     },
 });

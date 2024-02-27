@@ -15,6 +15,7 @@ import { CornerDownRightIcon } from '../../assets/images/icons/CornerDownRightIc
 import { styles } from './InputBase.styles';
 import { IInputBase } from './InputBase.types';
 import { DANGER_700, NEUTRAL_500, NEUTRAL_800 } from '../../styles/colors';
+import { cursorPointer } from '../../helpers/table_utils';
 
 const InputBase = ({
   value,
@@ -144,22 +145,20 @@ const InputBase = ({
                 icon.onPress();
               }
             }}
-            style={{ marginRight: 5 }}>
-            {React.cloneElement(icon.icon, {
-              style: icon.icon.props.style || styles.iconRight,
-              fill: iconColorStyle(),
-            })}
+            style={{ marginRight: 8 }}>
+            {icon}
           </TouchableOpacity>
         )}
         <TouchableOpacity style={textInputStyle} onPress={onPress}>
           <TextInput
             value={value}
+            onPressIn={onPress}
             onChangeText={onChangeText}
             placeholder={placeholder}
             editable={isEditable}
             onFocus={onFocusChange}
             onBlur={onBlurChange}
-            style={textInputStyle}
+            style={[textInputStyle, onPress && cursorPointer()]}
             onSubmitEditing={onSubmit || (() => { })}
             keyboardType={keyboardType}
           />
