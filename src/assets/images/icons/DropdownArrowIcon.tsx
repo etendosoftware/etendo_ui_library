@@ -2,13 +2,14 @@ import React from 'react';
 import { ImageStyle } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import { sizeSvg } from '../../../helpers/svg_utils';
+import { PRIMARY_100 } from '../../../styles/colors';
 
 export interface SvgImageProps {
     style?: ImageStyle;
     fill?: string;
 }
 
-export const DropdownArrowIcon = ({ style, fill = '#202452' }: SvgImageProps) => {
+export const DropdownArrowIcon = ({ style, fill = PRIMARY_100 }: SvgImageProps) => {
     const width = sizeSvg(style?.width, 24);
     const height = sizeSvg(style?.height, 24);
 
