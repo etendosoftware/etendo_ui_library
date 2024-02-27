@@ -145,7 +145,7 @@ const InputBase = ({
                 icon.onPress();
               }
             }}
-            style={{ marginRight: 8 }}>
+            style={styles.icon}>
             {icon}
           </TouchableOpacity>
         )}

@@ -8,7 +8,7 @@ import { CancelIcon } from '../../../assets/images/icons';
 import { isWebPlatform } from '../../../helpers/functions_utils';
 import { NEUTRAL_600, PRIMARY_100 } from '../../../styles/colors';
 import { DropdownArrowIcon } from '../../../assets/images/icons/DropdownArrowIcon';
-import { OPTION_HEIGHT } from './DropdownInput.constants';
+import { DEBOUNCE_DELAY, OPTION_HEIGHT } from './DropdownInput.constants';
 import { disableOutline } from '../../../helpers/table_utils';
 
 const DropdownInput: React.FC<IDropdownInput> = ({
@@ -254,7 +254,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
             }
             const newTimerId: any = setTimeout(() => {
                 loadOptions();
-            }, 1000);
+            }, DEBOUNCE_DELAY);
             setTimerId(newTimerId);
         }
     }, [dropdownVisible, searchQuery]);
