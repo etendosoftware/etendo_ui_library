@@ -52,6 +52,12 @@ export const disableOutline = (): ViewStyle | undefined => {
   }
 };
 
+export const cursorPointer = (): ViewStyle | undefined => {
+  if (isWeb) {
+    return { cursor: 'pointer' } as ViewStyle;
+  }
+};
+
 export const findPrimaryId = (col: ColumnsMetadata[], data: any) => {
   let primary: string = '';
   for (const element of col) {

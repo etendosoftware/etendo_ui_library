@@ -88,4 +88,7 @@ export const styles = StyleSheet.create({
     gap: 0,
     marginLeft: 5,
   },
+  icon: {
+    marginRight: 8
+  },
 });
