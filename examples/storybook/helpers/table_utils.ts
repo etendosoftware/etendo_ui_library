@@ -5,7 +5,7 @@ import { Dimensions, PixelRatio, Platform, ViewStyle } from 'react-native';
 const width = Dimensions.get('screen').width;
 const height = Dimensions.get('screen').height;
 
-export const isWeb = Platform.OS === 'web';
+const isWeb = Platform.OS === 'web';
 
 export const removeHeaderBorder = (header?: string) => {
   return (
