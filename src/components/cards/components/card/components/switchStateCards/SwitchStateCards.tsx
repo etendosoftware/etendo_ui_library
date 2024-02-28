@@ -5,6 +5,7 @@ import Card from '../../Card';
 import { styles } from '../skeletonCard/SkeletonCard.style';
 import { styles as stylesTAble } from '../../../../Cards.style';
 import { SwitchStateCardsProps } from './SwitchStateCards.types';
+import { View } from 'react-native';
 
 const SKELETON_CARD_HEIGHT: number = 142;
 const SKELETON_CARD_MARGIN_BOTTOM: number = styles.container.marginBottom;

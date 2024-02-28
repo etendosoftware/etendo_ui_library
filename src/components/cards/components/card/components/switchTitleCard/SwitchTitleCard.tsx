@@ -4,12 +4,17 @@ import { styles } from './SwitchTitleCard.style';
 import { SwitchTitleCardProps } from './SwitchTitleCard.type';
 import { getIconByType } from '../switchRowCard/SwitchRowCard';
 
-const SwitchTitleCard = ({ row, item, color = {} }: SwitchTitleCardProps) => {
+const SwitchTitleCard = ({
+  row,
+  item,
+  color = {},
+  isEmptyData = false,
+}: SwitchTitleCardProps) => {
   if (!row) {
     return;
   }
   return (
-    <View style={styles.row}>
+    <View style={[styles.row, isEmptyData && { borderBottomWidth: 0 }]}>
       <Text
         style={[styles.textName, color]}
         ellipsizeMode="tail"
