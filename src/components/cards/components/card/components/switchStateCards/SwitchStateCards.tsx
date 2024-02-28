@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import SkeletonCard from '../skeletonCard/SkeletonCard';
 import TableEmpty from '../../../../../table/components/TableEmpty';
 import Card from '../../Card';
 import { styles } from '../skeletonCard/SkeletonCard.style';
 import { styles as stylesTAble } from '../../../../Cards.style';
 import { SwitchStateCardsProps } from './SwitchStateCards.types';
-import { View } from 'react-native';
 
 const SKELETON_CARD_HEIGHT: number = 142;
 const SKELETON_CARD_MARGIN_BOTTOM: number = styles.container.marginBottom;
@@ -24,7 +23,7 @@ const SwitchStateCards = ({
   onHoldCard,
   handleItemsSelected,
   isSelectionMode,
-}: SwitchStateCardsProps) => {
+}: SwitchStateCardsProps): ReactElement | null  => {
   if (
     isLoading &&
     !data.length &&
@@ -37,10 +36,10 @@ const SwitchStateCards = ({
       ) /
       (SKELETON_CARD_HEIGHT + SKELETON_CARD_MARGIN_BOTTOM);
 
-    return Array.from(
+    return <>{Array.from(
       { length: numberOfSkeletons },
       (_: any, index: number) => <SkeletonCard key={'SkeletonCard' + index} />,
-    );
+    )}</>;
   }
 
   if (!data.length) {
@@ -63,8 +62,7 @@ const SwitchStateCards = ({
       isSelectionMode={isSelectionMode}
     />
   );
-
-  return data.map(renderCard);
+  return <>{data.map(renderCard)}</>
 };
 
 export default SwitchStateCards;
