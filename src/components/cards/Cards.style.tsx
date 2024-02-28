@@ -3,20 +3,16 @@ import { PRIMARY_100 } from '../../styles/colors';
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
     paddingTop: 12,
     maxWidth: 428,
-    alignItems: 'center',
-    width: '100%',
-    paddingHorizontal: 9,
+    display: 'flex',
   },
   containerFlex: {
-    maxWidth: 428,
     marginTop: 12,
-    width: '100%',
+    marginHorizontal: 12,
   },
   titleContainer: {
-    paddingHorizontal: 15,
+    paddingHorizontal: 12,
     height: 48,
     display: 'flex',
     alignItems: 'center',
@@ -25,7 +21,7 @@ export const styles = StyleSheet.create({
     width: '100%',
   },
   selectionModeContainer: {
-    paddingHorizontal: 15,
+    paddingHorizontal: 25,
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -37,13 +33,15 @@ export const styles = StyleSheet.create({
   titleTextSelectionModeContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginHorizontal: 10,
   },
   title: {
     fontFamily: 'Inter',
     fontWeight: '700',
     fontSize: 20,
-    lineHeight: 28,
+    lineHeight: 40,
     color: PRIMARY_100,
+    flex: 1,
   },
   icon: { height: 16, width: 16 },
   buttonContainer: { alignItems: 'flex-end', flex: 1 },

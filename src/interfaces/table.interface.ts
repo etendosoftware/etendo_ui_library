@@ -12,7 +12,7 @@ export interface Metadata {
 
 export interface CommonTableProps {
   currentPage?: number;
-  data: any[];
+  data?: any[];
   isLoading?: boolean;
   isLoadingMoreData?: boolean;
   onLoadMoreData?: (currentPage: number, pageSize: number) => void;

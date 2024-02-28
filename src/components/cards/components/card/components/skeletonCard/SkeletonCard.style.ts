@@ -7,9 +7,10 @@ export const styles = StyleSheet.create({
     marginBottom: 12,
     paddingBottom: 10,
     backgroundColor: NEUTRAL_50,
-    elevation: 5,
+    elevation: 3,
     overflow: 'hidden',
     maxWidth: 380,
+    marginHorizontal: 10,
   },
   skeletonItem: {
     marginBottom: 8,

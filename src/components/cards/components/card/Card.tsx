@@ -107,7 +107,6 @@ const Card = ({
       disabled={isDisabled()}
       onLongPress={() => {
         onHoldCard(true);
-        console.log('onHoldCard');
         handleItemsSelected(item);
         setIsSelected(!isSelected);
       }}
@@ -133,6 +132,12 @@ const Card = ({
             row={getColumnTitle}
             item={item}
             color={changeTextColor()}
+            isEmptyData={
+              !(
+                metadata.filter(row => row.visible).slice(0, MAX_ROWS).length -
+                1
+              )
+            }
           />
           {metadata
             .filter(row => row.visible)
