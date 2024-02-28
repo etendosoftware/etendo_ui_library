@@ -200,7 +200,6 @@ const DropdownInput: React.FC<IDropdownInput> = ({
             setDropdownVisible(false)
         } else {
             setDropdownVisible(true);
-            setOptions([]);
             setHasMore(true);
             setSearchQuery('');
             setPage(initialPage);
@@ -246,18 +245,22 @@ const DropdownInput: React.FC<IDropdownInput> = ({
 
     // Triggers loading of options based on the search query or dropdown visibility
     useEffect(() => {
-        if (searchQuery.length === 0) {
-            loadOptions();
-        } else if (dropdownVisible) {
-            if (timerId) {
-                clearTimeout(timerId);
-            }
+        if (options.length > 0 && searchQuery.length === 0) {
+            return;
+        }
+    }, [dropdownVisible, searchQuery, options.length]);
+
+    useEffect(() => {
+        if (searchQuery.length > 0) {
+            if (timerId) clearTimeout(timerId);
             const newTimerId: any = setTimeout(() => {
-                loadOptions();
+                loadOptions(true);
             }, DEBOUNCE_DELAY);
             setTimerId(newTimerId);
+        } else if (searchQuery.length === 0) {
+            loadOptions(false);
         }
-    }, [dropdownVisible, searchQuery]);
+    }, [searchQuery]);
 
     // Effect to close the dropdown when clicking outside the component if it is open
     useEffect(() => {
