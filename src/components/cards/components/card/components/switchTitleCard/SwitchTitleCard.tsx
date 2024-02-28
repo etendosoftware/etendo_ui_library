@@ -11,7 +11,7 @@ const SwitchTitleCard = ({
   isEmptyData = false,
 }: SwitchTitleCardProps) => {
   if (!row) {
-    return;
+    return <></>;
   }
   return (
     <View style={[styles.row, isEmptyData && { borderBottomWidth: 0 }]}>

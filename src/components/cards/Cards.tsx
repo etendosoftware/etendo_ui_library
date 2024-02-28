@@ -25,7 +25,7 @@ const {
   CANCEL_SELECTED_LABEL,
 } = CARDS;
 
-const BUFFER = 0.001;
+const BUFFER = 5;
 
 const Cards = ({
   data,
@@ -89,8 +89,8 @@ const Cards = ({
     prevData: any[],
     isLoadingMore: boolean,
   ) => {
-    if (!isLoading && fetchMordeData && isLoadingMore && !data) {
-      fetchMordeData(currentPage, prevData);
+    if (!isLoading && onFetchData && isLoadingMore && !data) {
+      await fetchMordeData(currentPage, prevData);
     }
   };
 
@@ -129,9 +129,9 @@ const Cards = ({
     );
   };
 
-  const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+  const onScroll = async (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     if (isAtEndOfScroll(event.nativeEvent)) {
-      handleLoadMore(currentPage, dataList, isLoadMoreData);
+      await handleLoadMore(currentPage, dataList, isLoadMoreData);
     }
   };
 
@@ -158,15 +158,18 @@ const Cards = ({
   const fetchMordeData = async (currentPage: number, prevData: any[]) => {
     if (onFetchData) {
       setIsLoading(true);
-      await onFetchData(currentPage, pageSize).then((res: any) => {
-        if (res.length === 0) {
-          setIsLoadMoreData(false);
-          return;
-        }
-        setDataList([...prevData, ...res]);
-      });
-      setCurrentPage(currentPage + 1);
-      setIsLoading(false);
+      await onFetchData(currentPage, pageSize)
+        .then((res: any) => {
+          if (res.length === 0) {
+            setIsLoadMoreData(false);
+            return;
+          }
+          setDataList([...prevData, ...res]);
+        })
+        .finally(() => {
+          setCurrentPage(currentPage + 1);
+          setIsLoading(false);
+        });
     }
   };
 
@@ -238,6 +241,7 @@ const Cards = ({
         nestedScrollEnabled
         ref={scrollViewRef}
         style={styles.containerFlex}
+        scrollEventThrottle={16}
         onScroll={onScroll}>
         <SwitchStateCards
           data={dataList}
