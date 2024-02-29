@@ -58,7 +58,7 @@ const Cards = ({
   const [currentPage, setCurrentPage] = useState<number>(0);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isInitial, setIsInitial] = useState<boolean>(false);
+  const [isInitial, setIsInitial] = useState<boolean>(isResetFetching);
   const [isLoadMoreData, setIsLoadMoreData] = useState<boolean>(true);
 
   const scrollViewRef = useRef<ScrollView>(null);
