@@ -19,8 +19,12 @@ export const styles = StyleSheet.create({
         fontWeight: '500',
         borderColor: NEUTRAL_300,
         width: "100%",
-        paddingRight: 20,
+        paddingRight: !isWebPlatform() ? 20 : null,
         marginBottom: !(isWebPlatform()) ? 8 : null,
+    },
+    searchTextInput: {
+        width: "100%",
+        paddingRight: 8
     },
     dropdown: {
         position: 'absolute',

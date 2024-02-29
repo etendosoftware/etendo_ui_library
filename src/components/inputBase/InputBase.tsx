@@ -149,7 +149,7 @@ const InputBase = ({
             {icon}
           </TouchableOpacity>
         )}
-        <TouchableOpacity style={textInputStyle} onPress={onPress}>
+        <TouchableOpacity disabled={isDisabled} style={textInputStyle} onPress={onPress}>
           <TextInput
             value={value}
             onPressIn={onPress}
