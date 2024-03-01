@@ -292,13 +292,12 @@ const DropdownInput: React.FC<IDropdownInput> = ({
 
     // Scrolls to the selected option in the dropdown if one is selected and options are available
     useEffect(() => {
-        if (dropdownVisible && options.length > 0) {
+        if (dropdownVisible && options.length > 0 && !loading) {
             setTimeout(() => {
                 scrollToSelectedOption();
             }, 0);
         }
-    }, [dropdownVisible, options.length]);
-
+    }, [dropdownVisible, options.length, selectedOption, loading]);
 
     return (
         <View style={styles.wrapper} ref={dropdownRef}>
