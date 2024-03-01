@@ -6,15 +6,14 @@ export const styles = StyleSheet.create({
     marginBottom: 12,
     backgroundColor: NEUTRAL_50,
     overflow: 'hidden',
-    maxWidth: 380,
-    width: '100%',
     shadowColor: NEUTRAL_100,
     shadowOffset: {
       width: 3,
       height: 5,
     },
     shadowRadius: 8,
-    elevation: 5,
+    elevation: 3,
+    marginHorizontal: 12,
   },
   status: {
     height: 8,

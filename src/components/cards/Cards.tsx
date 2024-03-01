@@ -25,8 +25,7 @@ const {
   CANCEL_SELECTED_LABEL,
 } = CARDS;
 
-const SCROLL_EVENT_THROTTLE = 16;
-const BUFFER = 50;
+const BUFFER = 5;
 
 const Cards = ({
   data,
@@ -36,75 +35,87 @@ const Cards = ({
   cardsHeight,
   textEmptyCards,
   commentEmptyCards,
-  onLoadMoreData,
   onAddNewData,
   backgroundColor,
-  currentPage,
   pageSize,
-  isLoading,
-  isLoadingMoreData,
   onDeleteData,
+  onFetchData,
   titleModal,
   subtitleModal,
   labelActionButtonModal,
   labelCloseButtonModal,
-  selectionLabel,
-  cancelSelectionLabel,
+  selectionLabel = SELECTED_LABEL,
+  cancelSelectionLabel = CANCEL_SELECTED_LABEL,
+  isSelectionMode = false,
+  isResetFetching = true,
 }: CardsProps) => {
   const [containerHeight, setContainerHeight] = useState(0);
-  const [contentHeight, setContentHeight] = useState(0);
   const [selectionMode, setSelectionMode] = useState(false);
   const [selectedItems, setSelectedItems] = useState<any[]>([]);
   const [showModal, setShowModal] = useState(false);
-  const [dataList, setDataList] = useState<any[]>(data);
-  const [dataOG, setDataOG] = useState<any[]>([]);
+  const [dataList, setDataList] = useState<any[]>([]);
   const [selectedItem, setSelectedItem] = useState<any>(null);
+  const [currentPage, setCurrentPage] = useState<number>(0);
 
-  useEffect(() => {
-    setDataOG(data);
-    setDataList(data);
-  }, [data]);
-
-  const handleItemsSelected = (item: any) => {
-    setSelectedItem(item);
-
-    const selectedItemsSet = new Set(selectedItems);
-    const dataSet = new Set(dataList);
-    if (selectedItemsSet.size > 0) {
-      selectedItemsSet.clear();
-    } else {
-      selectedItemsSet.add(item);
-      setDataList(
-        Array.from(dataSet).map((item2: any) => {
-          return { ...item2, isActive: item2._id === item._id };
-        }),
-      );
-    }
-
-    if (selectedItemsSet.size === 0) {
-      handleCancelSelectionMode();
-    }
-
-    setSelectedItems(Array.from(selectedItemsSet));
-  };
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isInitial, setIsInitial] = useState<boolean>(isResetFetching);
+  const [isLoadMoreData, setIsLoadMoreData] = useState<boolean>(true);
 
   const scrollViewRef = useRef<ScrollView>(null);
 
   useEffect(() => {
-    if (isLoading && data.length) {
-      scrollViewRef.current?.scrollToEnd({ animated: true });
+    if (isInitial) {
+      setDataList([]);
+      setIsLoadMoreData(true);
+      handleLoadMore(0, [], true);
     }
-  }, [isLoading, data]);
+    setIsInitial(true);
+  }, [isResetFetching]);
 
   useEffect(() => {
-    if (containerHeight > contentHeight && data.length) {
-      handleLoadMore();
+    if (data) {
+      setDataList(data);
     }
-  }, [containerHeight, contentHeight, data]);
+  }, [data]);
 
-  const handleLoadMore = async () => {
-    if (!isLoading && onLoadMoreData && isLoadingMoreData) {
-      onLoadMoreData(currentPage!, pageSize!);
+  useEffect(() => {
+    if (isLoading && dataList.length) {
+      scrollViewRef.current?.scrollToEnd({ animated: true });
+    }
+  }, [isLoading]);
+
+  const handleLoadMore = async (
+    currentPage: number,
+    prevData: any[],
+    isLoadingMore: boolean,
+  ) => {
+    if (!isLoading && onFetchData && isLoadingMore && !data) {
+      await fetchMordeData(currentPage, prevData);
+    }
+  };
+
+  const handleItemsSelected = (item: any) => {
+    if (isSelectionMode) {
+      setSelectedItem(item);
+      setSelectionMode(true);
+      const selectedItemsSet = new Set(selectedItems);
+      const dataSet = new Set(dataList);
+      if (selectedItemsSet.size > 0) {
+        selectedItemsSet.clear();
+      } else {
+        selectedItemsSet.add(item);
+        setDataList(
+          Array.from(dataSet).map((item2: any) => {
+            return { ...item2, isActive: item2._id === item._id };
+          }),
+        );
+      }
+
+      if (selectedItemsSet.size === 0) {
+        handleCancelSelectionMode();
+      }
+
+      setSelectedItems(Array.from(selectedItemsSet));
     }
   };
 
@@ -118,9 +129,9 @@ const Cards = ({
     );
   };
 
-  const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+  const onScroll = async (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     if (isAtEndOfScroll(event.nativeEvent)) {
-      handleLoadMore();
+      await handleLoadMore(currentPage, dataList, isLoadMoreData);
     }
   };
 
@@ -133,10 +144,8 @@ const Cards = ({
     setSelectionMode(false);
     setSelectedItems([]);
     setSelectedItem(null);
-    if (isCancelAction) {
-      setDataList(dataOG);
-    } else {
-      setDataList(dataOG.filter(item => item !== selectedItem));
+    if (!isCancelAction) {
+      setDataList(dataList.filter(item => item !== selectedItem));
     }
   };
 
@@ -144,6 +153,49 @@ const Cards = ({
     onDeleteData && onDeleteData(itemsToSend);
     handleCancelSelectionMode(false);
     setShowModal(false);
+  };
+
+  const fetchMordeData = async (currentPage: number, prevData: any[]) => {
+    if (onFetchData) {
+      setIsLoading(true);
+      await onFetchData(currentPage, pageSize)
+        .then((res: any) => {
+          if (res.length === 0) {
+            setIsLoadMoreData(false);
+            return;
+          }
+          setDataList([...prevData, ...res]);
+        })
+        .finally(() => {
+          setCurrentPage(currentPage + 1);
+          setIsLoading(false);
+        });
+    }
+  };
+
+  const handleTitleText = (): React.ReactElement | undefined => {
+    let displayTitle: string | undefined = title;
+
+    let itemCount: string = `(${dataList?.length.toString()})`;
+    if (!title) {
+      itemCount = '';
+      displayTitle = '';
+    }
+    if (!title && !isSelectionMode) {
+      return;
+    }
+
+    if (isSelectionMode && selectionMode) {
+      itemCount = `(${selectedItems?.length.toString()})`;
+      displayTitle = selectionLabel;
+    }
+
+    const textStyle = {
+      ...styles.title,
+      marginHorizontal: selectionMode ? 8 : 0,
+    };
+
+    return <Text style={textStyle}>{`${displayTitle} ${itemCount}`}</Text>;
   };
 
   return (
@@ -155,53 +207,42 @@ const Cards = ({
         { backgroundColor },
       ]}>
       <View style={styles.selectionModeContainer}>
-        <View style={styles.titleTextSelectionModeContainer}>
-          {selectionMode && (
-            <Button
-              onPress={() => setShowModal(true)}
-              typeStyle={'primary'}
-              height={40}
-              width={40}
-              iconLeft={<TrashIcon style={styles.icon} />}
-            />
-          )}
-          <Text
-            style={[styles.title, { marginHorizontal: selectionMode ? 8 : 0 }]}>
-            {selectionMode
-              ? `${selectionLabel || SELECTED_LABEL} (${selectedItems.length})`
-              : `${title} (${dataList.length})`}
-          </Text>
-        </View>
-        {selectionMode ? (
+        {isSelectionMode && selectionMode && (
           <Button
-            onPress={() => handleCancelSelectionMode()}
-            typeStyle={'white'}
-            text={cancelSelectionLabel || CANCEL_SELECTED_LABEL}
-            height={40}
-          />
-        ) : onAddNewData ? (
-          <Button
-            onPress={onAddNewData}
+            onPress={() => setShowModal(true)}
             typeStyle={'primary'}
             height={40}
             width={40}
-            iconLeft={<MoreIcon style={styles.icon} />}
+            iconLeft={<TrashIcon style={styles.icon} />}
+          />
+        )}
+        {handleTitleText()}
+        {isSelectionMode && selectionMode ? (
+          <Button
+            onPress={() => handleCancelSelectionMode()}
+            typeStyle={'white'}
+            text={cancelSelectionLabel}
+            height={40}
+            paddingVertical={5}
           />
         ) : (
-          <></>
+          onAddNewData && (
+            <Button
+              onPress={onAddNewData}
+              typeStyle={'primary'}
+              height={40}
+              width={40}
+              iconLeft={<MoreIcon style={styles.icon} />}
+            />
+          )
         )}
       </View>
       <ScrollView
+        nestedScrollEnabled
         ref={scrollViewRef}
-        style={[
-          styles.containerFlex,
-          { paddingHorizontal: dataList.length > 0 ? 16 : 0 },
-        ]}
-        onScroll={onScroll}
-        scrollEventThrottle={SCROLL_EVENT_THROTTLE}
-        onContentSizeChange={(_contentWidth, contentHeightChange) =>
-          setContentHeight(contentHeightChange)
-        }>
+        style={styles.containerFlex}
+        scrollEventThrottle={16}
+        onScroll={onScroll}>
         <SwitchStateCards
           data={dataList}
           isLoading={isLoading}
@@ -212,31 +253,24 @@ const Cards = ({
           tableHeight={containerHeight}
           isTitle={!!title && !!onAddNewData}
           onHoldCard={setSelectionMode}
-          isSelectionMode={selectionMode}
+          isSelectionMode={isSelectionMode && selectionMode}
           handleItemsSelected={handleItemsSelected}
         />
-        {!!data.length && isLoading && isLoadingMoreData && <SkeletonCard />}
+        {!!dataList.length && isLoading && <SkeletonCard />}
       </ScrollView>
       {selectedItem && (
         <Modal
           showModal={setShowModal}
           visible={showModal}
           handleAction={() => handleDeleteSelectedItems(selectedItem)}
-          title={titleModal ? titleModal : TITLE}
-          subtitle={subtitleModal ? subtitleModal : SUBTITLE}
-          labelActionButton={
-            labelActionButtonModal
-              ? labelActionButtonModal
-              : LABEL_ACTION_BUTTON
-          }
-          labelCloseButton={
-            labelCloseButtonModal ? labelCloseButtonModal : LABEL_CLOSE_BUTTON
-          }
+          title={titleModal ?? TITLE}
+          subtitle={subtitleModal ?? SUBTITLE}
+          labelActionButton={labelActionButtonModal ?? LABEL_ACTION_BUTTON}
+          labelCloseButton={labelCloseButtonModal ?? LABEL_CLOSE_BUTTON}
           imageHeader={<TrashIcon />}
         />
       )}
     </View>
   );
 };
-
 export default Cards;
