@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, Modal, TouchableOpacity, FlatList, ActivityIndicator, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList, ActivityIndicator, TextInput } from 'react-native';
 
 import InputBase from '../InputBase';
 import { styles } from './DropdownInput.styles';
@@ -8,17 +8,18 @@ import { CancelIcon } from '../../../assets/images/icons';
 import { isWebPlatform } from '../../../helpers/functions_utils';
 import { NEUTRAL_600, PRIMARY_100 } from '../../../styles/colors';
 import { DropdownArrowIcon } from '../../../assets/images/icons/DropdownArrowIcon';
-import { DEBOUNCE_DELAY, OPTION_HEIGHT } from './DropdownInput.constants';
+import { DEBOUNCE_DELAY, INITIAL_PAGE, OPTION_HEIGHT } from './DropdownInput.constants';
 import { disableOutline } from '../../../helpers/table_utils';
 
 const DropdownInput: React.FC<IDropdownInput> = ({
+    title,
     onSelect,
     fetchData,
     displayKey,
     staticData = [],
-    initialPage = 0,
     fetchDataBySearch,
-    pageSize: size = 10,
+    isDisabled = false,
+    pageSize = 10,
     maxVisibleOptions = 5,
     noResultsText = 'No results',
     searchPlaceholder = 'Search',
@@ -27,6 +28,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
 }) => {
     /* References */
     const dropdownRef = useRef<any>(null);
+    const flatListRef = useRef<any>(null);
 
     /* States */
     const [page, setPage] = useState<number>(0);
@@ -49,7 +51,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
         return (
             <View style={[styles.searchInput, styles.searchInputWrapper]}>
                 <TextInput
-                    style={[{ width: "100%" }, disableOutline()]}
+                    style={[styles.searchTextInput, disableOutline()]}
                     onChangeText={onChange}
                     value={searchQuery}
                     placeholder={searchPlaceholder}
@@ -99,12 +101,16 @@ const DropdownInput: React.FC<IDropdownInput> = ({
                 <ActivityIndicator size="small" color={PRIMARY_100} style={{ marginVertical: 4 }} />
             ) : options.length > 0 ? (
                 <FlatList
+                    ref={flatListRef}
                     style={{ height: getDropdownHeight(options.length, maxVisibleOptions) }}
                     data={options}
                     renderItem={({ item }) => renderDropdownOption(item)}
                     keyExtractor={(item, index) => `${item.value}-${index}`}
                     onEndReached={handleEndReached}
                     onEndReachedThreshold={0.75}
+                    getItemLayout={(_, index) => (
+                        { length: OPTION_HEIGHT, offset: OPTION_HEIGHT * index, index }
+                    )}
                 />
             ) : (
                 <Text style={styles.noResultsText}>{noResultsText}</Text>
@@ -118,7 +124,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
 
         return (
             <View style={styles.selectedOptionContainer}>
-                <Text>{selectedOption}</Text>
+                <Text numberOfLines={1} ellipsizeMode="tail">{selectedOption}</Text>
                 <TouchableOpacity onPress={deselectOption}>
                     <CancelIcon fill={NEUTRAL_600} style={styles.cancelIcon} />
                 </TouchableOpacity>
@@ -144,35 +150,30 @@ const DropdownInput: React.FC<IDropdownInput> = ({
 
     /* Functions */
     // Loads options for the dropdown menu. It fetches data based on the current search query or pagination
-    const loadOptions = async (reset: boolean = false) => {
+    const loadOptions = async (reset = false) => {
         if (!hasMore && !reset) return;
         setLoading(true);
 
-        let fetchedOptions: any = [];
-        if ((fetchDataBySearch && searchQuery.length > 0) || reset || page === initialPage) {
-            if (fetchDataBySearch && searchQuery.length > 0) {
-                fetchedOptions = await fetchDataBySearch(searchQuery);
-            } else if (fetchData) {
-                fetchedOptions = await fetchData(page, size);
-                if (fetchedOptions.length < size) {
-                    setHasMore(false);
+        try {
+            let fetchedOptions: any = [];
+            if ((fetchDataBySearch && searchQuery.length > 0) || reset || page === INITIAL_PAGE) {
+                if (fetchDataBySearch && searchQuery.length > 0) {
+                    fetchedOptions = await fetchDataBySearch(searchQuery);
+                } else if (fetchData) {
+                    fetchedOptions = await fetchData(page, pageSize);
+                    if (fetchedOptions.length < pageSize) {
+                        setHasMore(false);
+                    }
                 }
             }
+
+            setOptions(fetchedOptions);
+        } catch (error) {
+            console.error(error);
+            setHasMore(false);
+        } finally {
+            setLoading(false);
         }
-
-        const combinedOptions = [...staticData, ...fetchedOptions.filter((option: any) => !staticData.map(o => JSON.stringify(o)).includes(JSON.stringify(option)))];
-
-        let newOptions = searchQuery.length > 0 ? combinedOptions : [...options, ...combinedOptions.filter((option: any) => !options.map(o => JSON.stringify(o)).includes(JSON.stringify(option)))];
-        if (selectedOption && searchQuery.length === 0 && !reset) {
-            const selectedOptionIndex = newOptions.findIndex((option: any) => option[displayKey] === selectedOption);
-            if (selectedOptionIndex !== -1) {
-                const selectedOptionItem = newOptions.splice(selectedOptionIndex, 1)[0];
-                newOptions = [selectedOptionItem, ...newOptions];
-            }
-        }
-
-        setOptions(newOptions);
-        setLoading(false);
     };
 
     // Calculates the dropdown's height based on the number of options and the maximum number of visible options
@@ -190,39 +191,53 @@ const DropdownInput: React.FC<IDropdownInput> = ({
     // Handles the selection of an option, updates the selectedOption state, hides the dropdown, and triggers the onSelect callback
     const handleSelect = (option: any) => {
         onSelect?.(option);
+        setSearchQuery('');
         setDropdownVisible(false);
         setSelectedOption(option[displayKey]);
     };
 
+    // Scrolls to the selected option in the dropdown if it exists
+    const scrollToSelectedOption = () => {
+        if (selectedOption && options.length > 0) {
+            const selectedIndex = options.findIndex(option => option[displayKey] === selectedOption);
+            if (selectedIndex >= 0) {
+                flatListRef.current?.scrollToIndex({
+                    animated: false,
+                    index: selectedIndex,
+                });
+            }
+        }
+    };
+
     // Toggles the visibility of the dropdown. If opening, it resets the search query, page, options list, and hasMore state
     const toggleDropdown = () => {
-        if (dropdownVisible) {
-            setDropdownVisible(false)
-        } else {
+        if (!dropdownVisible || selectedOption) {
+            if (options.length === 0 || selectedOption) {
+                loadOptions(true);
+            }
             setDropdownVisible(true);
-            setHasMore(true);
-            setSearchQuery('');
-            setPage(initialPage);
+        } else {
+            setDropdownVisible(false);
         }
     };
 
     // Handles changes to the search query by updating the searchQuery state, resetting the page, and indicating more items can be loaded
     const handleSearchQueryChange = async (text: string) => {
         setSearchQuery(text);
-        setPage(initialPage);
+        setPage(INITIAL_PAGE);
         setHasMore(true);
     };
 
     // Handles the event when the end of the dropdown list is reached, increments the page if more items can be loaded
     const handleEndReached = () => {
         if (loading || !hasMore) return;
-        setPage((prev: any) => prev + 1);
+        setPage(prevPage => prevPage + 1);
     };
 
     // Clears the search input, resets the page to the initial value, and sets hasMore to true to indicate more items can be loaded.
     const clearSearchInput = () => {
         setSearchQuery('');
-        setPage(initialPage);
+        setPage(INITIAL_PAGE);
         setHasMore(true);
     };
 
@@ -275,6 +290,15 @@ const DropdownInput: React.FC<IDropdownInput> = ({
         }
     }, [dropdownVisible]);
 
+    // Scrolls to the selected option in the dropdown if one is selected and options are available
+    useEffect(() => {
+        if (dropdownVisible && options.length > 0 && !loading) {
+            setTimeout(() => {
+                scrollToSelectedOption();
+            }, 0);
+        }
+    }, [dropdownVisible, options.length, selectedOption, loading]);
+
     return (
         <View style={styles.wrapper} ref={dropdownRef}>
             <InputBase
@@ -282,7 +306,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
                 value={selectedOption}
                 onChangeText={onSelect}
                 rightButtons={[
-                    <TouchableOpacity key="dropdownToggle" style={dropdownVisible && styles.iconOpen} onPress={(event) => { event.stopPropagation(); toggleDropdown(); }}>
+                    <TouchableOpacity disabled={isDisabled} key="dropdownToggle" style={dropdownVisible && styles.iconOpen} onPress={(event) => { event.stopPropagation(); toggleDropdown(); }}>
                         <DropdownArrowIcon
                             style={styles.icon}
                             fill={PRIMARY_100}
@@ -291,6 +315,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
                 ]}
                 placeholder={placeholder}
                 onPress={toggleDropdown}
+                title={title}
             />
             {dropdownVisible && renderDropdownContent()}
         </View>
