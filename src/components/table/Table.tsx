@@ -15,7 +15,7 @@ import TableEmpty from './components/TableEmpty';
 import { ButtonContainer } from '../containers';
 
 const Table = ({
-  data,
+  data = [],
   columns,
   title,
   onRowPress,

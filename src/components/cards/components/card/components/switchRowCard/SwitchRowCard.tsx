@@ -47,7 +47,7 @@ const SwitchRowCard = ({
   backgroundColor,
 }: SwitchRowCardProps) => {
   if (!row) {
-    return;
+    return <></>;
   }
 
   if (row.type !== 'string' && row.type) {

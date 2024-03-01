@@ -5,4 +5,5 @@ export interface SwitchTitleCardProps {
   row?: CardsMetadata;
   item: any;
   color?: TextStyle;
+  isEmptyData?: boolean;
 }

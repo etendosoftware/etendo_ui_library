@@ -12,9 +12,12 @@ export interface CardsProps extends CommonTableProps {
   textEmptyCards?: string;
   onDeleteData?: (...params: any[]) => void;
   titleModal?: string;
+  onFetchData?: (currentPage: number, pageSize?: number) => Promise<any[]>;
   subtitleModal?: string;
   labelActionButtonModal?: string;
   labelCloseButtonModal?: string;
   selectionLabel?: string;
   cancelSelectionLabel?: string;
+  isSelectionMode?: boolean;
+  isResetFetching?: boolean;
 }

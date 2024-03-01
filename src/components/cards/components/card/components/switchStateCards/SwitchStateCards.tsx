@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import SkeletonCard from '../skeletonCard/SkeletonCard';
 import TableEmpty from '../../../../../table/components/TableEmpty';
 import Card from '../../Card';
@@ -23,7 +23,7 @@ const SwitchStateCards = ({
   onHoldCard,
   handleItemsSelected,
   isSelectionMode,
-}: SwitchStateCardsProps) => {
+}: SwitchStateCardsProps): ReactElement | null  => {
   if (
     isLoading &&
     !data.length &&
@@ -36,10 +36,10 @@ const SwitchStateCards = ({
       ) /
       (SKELETON_CARD_HEIGHT + SKELETON_CARD_MARGIN_BOTTOM);
 
-    return Array.from(
+    return <>{Array.from(
       { length: numberOfSkeletons },
       (_: any, index: number) => <SkeletonCard key={'SkeletonCard' + index} />,
-    );
+    )}</>;
   }
 
   if (!data.length) {
@@ -62,8 +62,7 @@ const SwitchStateCards = ({
       isSelectionMode={isSelectionMode}
     />
   );
-
-  return data.map(renderCard);
+  return <>{data.map(renderCard)}</>
 };
 
 export default SwitchStateCards;
