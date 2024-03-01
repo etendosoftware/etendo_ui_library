@@ -92,7 +92,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
     // Renders the dropdown's main content, including search input, loading indicator, and options list
     const renderDropdownContent = () => (
         <View style={[styles.dropdown, dropdownStyle]}>
-            {fetchDataBySearch &&
+            {staticData.length === 0 && fetchDataBySearch &&
                 renderSearchInput(
                     searchQuery,
                     handleSearchQueryChange,
@@ -155,14 +155,14 @@ const DropdownInput: React.FC<IDropdownInput> = ({
     const loadOptions = async (reset = false) => {
         if (reset) {
             setPage(0);
-            setOptions([]);
+            setOptions(staticData || []);
         }
 
         if ((loading || loadingMore) && !reset) return;
         setLoading(reset);
         setLoadingMore(!reset);
 
-        const nextPage = searchCleared ? 0 : page + 1;
+        const nextPage = page + 1;
 
         try {
             let fetchedOptions: any = [];
@@ -175,7 +175,14 @@ const DropdownInput: React.FC<IDropdownInput> = ({
                 fetchedOptions = data || [];
             }
 
-            setOptions(prev => [...prev, ...fetchedOptions]);
+            if (page === 0) {
+                setOptions(prev => {
+                    const newOptions = fetchedOptions.filter((fo: any) => !prev.some(po => po.id === fo.id));
+                    return [...prev, ...newOptions];
+                });
+            } else {
+                setOptions(prev => [...prev, ...fetchedOptions]);
+            }
             setPage(prevPage => prevPage + 1);
         } catch (error) {
             console.error(error);
