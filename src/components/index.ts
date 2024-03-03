@@ -1,8 +1,12 @@
 import { Button } from './button';
 import { CardDropdown } from './cards/components/cardDropdown';
-import { DatePickerInput } from './inputBase';
+import {
+  DatePickerInput,
+  DropdownInput,
+  InputBase,
+  FileSearchInput,
+} from './inputBase';
 import { Input } from './input';
-import { FileSearchInput, InputBase } from './inputBase';
 import { Modal } from './modal';
 import { Navbar, DrawerLateral } from './navbar';
 import { Pagination } from './pagination';
@@ -31,6 +35,7 @@ export {
   FileSearchInput,
   Input,
   InputBase,
+  DropdownInput,
   Layout,
   Modal,
   Navbar,
