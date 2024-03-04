@@ -46,6 +46,7 @@ import {
   InputBase,
   DatePickerInput,
   FileSearchInput,
+  DropdownInput,
 } from './dist-native/components/inputBase';
 import { ItemsIcon } from './dist-native/assets/images/icons/ItemsIcon';
 import { MenuIcon } from './dist-native/assets/images/icons/MenuIcon';
