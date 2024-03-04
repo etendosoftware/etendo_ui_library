@@ -125,7 +125,6 @@ export {
   DrawerLateral,
   EditIcon,
   EditNotesIcon,
-  FileSearchInput,
   GarbageIcon,
   GoIcon,
   HamburgerIcon,
