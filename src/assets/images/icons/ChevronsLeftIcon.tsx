@@ -9,7 +9,7 @@ export interface SvgImageProps {
   fill?: ColorValue;
 }
 
-export const ChevronsRightIcon = ({
+export const ChevronsLeftIcon = ({
   style,
   fill = DEFAULT_COLOR_THEME,
 }: SvgImageProps) => {

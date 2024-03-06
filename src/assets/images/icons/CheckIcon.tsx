@@ -13,19 +13,14 @@ export const CheckIcon = ({
   style,
   fill = DEFAULT_COLOR_THEME,
 }: SvgImageProps) => {
-  const width = sizeSvg(style?.width, 43);
-  const height = sizeSvg(style?.height, 32);
+  const width = sizeSvg(style?.width, 24);
+  const height = sizeSvg(style?.height, 24);
   return (
-    <Svg
-      width={width}
-      height={height}
-      viewBox="0 0 43 32"
-      fill="none"
-      style={style}>
+    <Svg width={width} height={height} viewBox="0 0 24 24" fill="none">
       <Path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M41.0309 1.12469C39.3624 -0.37562 36.6578 -0.374175 34.9899 1.12469L15.4917 21.2185L6.88504 12.2221C5.21785 10.4783 2.51325 10.4783 0.92578 12.2224C-0.277994 13.9669 -0.277994 16.7949 0.92578 18.5386L12.4693 30.6925C14.1382 32.4358 16.8428 32.4358 18.5114 30.6925L41.0309 7.15158C42.6985 5.40676 42.6985 2.57913 41.0309 1.12469Z"
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M20.7071 5.29289C21.0976 5.68342 21.0976 6.31658 20.7071 6.70711L9.70711 17.7071C9.31658 18.0976 8.68342 18.0976 8.29289 17.7071L3.29289 12.7071C2.90237 12.3166 2.90237 11.6834 3.29289 11.2929C3.68342 10.9024 4.31658 10.9024 4.70711 11.2929L9 15.5858L19.2929 5.29289C19.6834 4.90237 20.3166 4.90237 20.7071 5.29289Z"
         fill={fill}
       />
     </Svg>
