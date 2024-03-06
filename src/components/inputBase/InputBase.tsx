@@ -145,7 +145,8 @@ const InputBase = ({
                 icon.onPress();
               }
             }}
-            style={styles.icon}>
+            style={[styles.icon, isDisabled ? { opacity: 0.5 } : { opacity: 1 }]}
+          >
             {icon}
           </TouchableOpacity>
         )}
