@@ -14,7 +14,8 @@ import { Button } from '../button';
 import { CornerDownRightIcon } from '../../assets/images/icons/CornerDownRightIcon';
 import { styles } from './InputBase.styles';
 import { IInputBase } from './InputBase.types';
-import { DANGER_700, NEUTRAL_800 } from '../../styles/colors';
+import { DANGER_700, NEUTRAL_500, NEUTRAL_800 } from '../../styles/colors';
+import { cursorPointer } from '../../helpers/table_utils';
 
 const InputBase = ({
   value,
@@ -26,6 +27,7 @@ const InputBase = ({
   onChangeText,
   icon,
   rightButtons,
+  onPress,
   onSubmit,
   isLoading,
   onBlur,
@@ -43,9 +45,17 @@ const InputBase = ({
     onBlur?.();
   };
 
+  function determineTextColor(isError: boolean | undefined, isDisabled: boolean | undefined) {
+    if (isDisabled) {
+      return NEUTRAL_500;
+    }
+    return isError ? DANGER_700 : NEUTRAL_800;
+  }
+
   const borderWidth: number = isFocused ? 1.5 : 1;
   const paddingVertical: number = 13 - (borderWidth - 1);
   const paddingHorizontal: number = 12 - (borderWidth - 1);
+  const isEditable = onPress ? false : !isDisabled;
 
   const borderStyle = (): ViewStyle | undefined => {
     if (!value && !isFocused) {
@@ -113,7 +123,7 @@ const InputBase = ({
   return (
     <>
       {!!title && (
-        <Text numberOfLines={1} ellipsizeMode="tail" style={[styles.title, { color: !isError ? NEUTRAL_800 : DANGER_700 }]}>
+        <Text numberOfLines={1} ellipsizeMode="tail" style={[styles.title, { color: determineTextColor(isError, isDisabled) }]}>
           {title}
         </Text>
       )}
@@ -135,30 +145,30 @@ const InputBase = ({
                 icon.onPress();
               }
             }}
-            style={{ marginRight: 5 }}>
-            {React.cloneElement(icon.icon, {
-              style: icon.icon.props.style || styles.iconRight,
-              fill: iconColorStyle(),
-            })}
+            style={styles.icon}>
+            {icon}
           </TouchableOpacity>
         )}
-        <TextInput
-          value={value}
-          onChangeText={onChangeText}
-          placeholder={placeholder}
-          editable={!isDisabled}
-          onFocus={onFocusChange}
-          onBlur={onBlurChange}
-          style={textInputStyle}
-          onSubmitEditing={onSubmit || (() => { })}
-          keyboardType={keyboardType}
-        />
+        <TouchableOpacity disabled={isDisabled} style={textInputStyle} onPress={onPress}>
+          <TextInput
+            value={value}
+            onPressIn={onPress}
+            onChangeText={onChangeText}
+            placeholder={placeholder}
+            editable={isEditable}
+            onFocus={onFocusChange}
+            onBlur={onBlurChange}
+            style={[textInputStyle, onPress && cursorPointer()]}
+            onSubmitEditing={onSubmit || (() => { })}
+            keyboardType={keyboardType}
+          />
+        </TouchableOpacity>
         {!!buttons && (
           <ButtonContainer style={styles.buttonContainer} buttons={buttons} />
         )}
       </View>
       {!!helperText && (
-        <Text numberOfLines={1} ellipsizeMode="tail" style={styles.helperText}>
+        <Text numberOfLines={1} ellipsizeMode="tail" style={[styles.helperText, { color: determineTextColor(isError, isDisabled) }]}>
           {helperText}
         </Text>
       )}

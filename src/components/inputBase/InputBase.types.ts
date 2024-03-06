@@ -7,7 +7,7 @@ export interface IInputButtons {
 
 export interface IInputBase {
   helperText?: string;
-  icon?: IInputButtons;
+  icon?: any;
   isDisabled?: boolean;
   isError?: boolean;
   isLoading?: boolean;
@@ -18,5 +18,6 @@ export interface IInputBase {
   rightButtons?: ReactNode[];
   title?: string;
   value?: string;
+  onPress?: () => void;
   keyboardType?: 'default' | 'numeric' | 'email-address' | 'ascii-capable' | 'numbers-and-punctuation' | 'url' | 'number-pad' | 'phone-pad' | 'name-phone-pad' | 'decimal-pad' | 'twitter' | 'web-search' | 'visible-password';
 }
