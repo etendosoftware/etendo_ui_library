@@ -92,7 +92,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
         const currentOptionsLength = currentOptions.length;
 
         return <View style={[styles.dropdown, dropdownStyle]}>
-            {staticData.length === 0 && fetchData?.search &&
+            {staticData?.length === 0 && fetchData?.search &&
                 renderSearchInput(
                     searchQuery,
                     handleSearchQueryChange,
@@ -174,9 +174,9 @@ const DropdownInput: React.FC<IDropdownInput> = ({
 
         try {
             if (searchQuery.trim() && fetchData?.search) {
-                fetchedOptions = await fetchData.search(searchQuery, nextPage, pageSize);
+                fetchedOptions = await fetchData?.search(searchQuery, nextPage, pageSize);
             } else if (fetchData?.normal) {
-                fetchedOptions = await fetchData.normal(nextPage, pageSize);
+                fetchedOptions = await fetchData?.normal(nextPage, pageSize);
             }
 
             if (page === 0 && staticData.length > 0) {
