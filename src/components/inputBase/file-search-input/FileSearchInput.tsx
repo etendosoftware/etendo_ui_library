@@ -1,10 +1,5 @@
 import React, { useState, useRef, ReactNode, useEffect } from 'react';
-import {
-  View,
-  TouchableOpacity,
-  Text,
-  SafeAreaView,
-} from 'react-native';
+import { View, TouchableOpacity, Text, SafeAreaView } from 'react-native';
 import InputBase from '../InputBase';
 
 // Import styles
@@ -13,7 +8,7 @@ import { NEUTRAL_1000, PRIMARY_100, SUCCESS_600 } from '../../../styles/colors';
 
 // Import icons
 import { CheckCircleIcon } from '../../../assets/images/icons/CheckCircleIcon';
-import { ClipboardIcon } from '../../../assets/images/icons/Clipboard';
+import { ClipboardIcon } from '../../../assets/images/icons/ClipboardIcon';
 import { DeleteIcon } from '../../../assets/images/icons/DeleteIcon';
 import { FileIcon } from '../../../assets/images/icons/FileIcon';
 
@@ -28,7 +23,7 @@ let DocumentPicker: any = null;
 if (!isWebPlatform()) {
   try {
     import('react-native-document-picker')
-      .then((module) => {
+      .then(module => {
         DocumentPicker = module.default;
       })
       .catch(error => {
@@ -56,7 +51,9 @@ const FileSearchInput = ({
   const [file, setLocalFile] = useState<File | null>(null);
   const [loadingFile, setLoadingFile] = useState<boolean>(false);
   const [isFileValid, setIsFileValid] = useState<boolean>(false);
-  const [fileStatus, setFileStatus] = useState<'none' | 'loaded' | 'canceled' | 'error'>('none');
+  const [fileStatus, setFileStatus] = useState<
+    'none' | 'loaded' | 'canceled' | 'error'
+  >('none');
 
   // References
   const dropAreaRef = useRef(null);
@@ -69,7 +66,7 @@ const FileSearchInput = ({
     setIsFileValid(false);
     setLoadingFile(false);
     setProgress(0);
-    setFileStatus("none");
+    setFileStatus('none');
   };
 
   // Prevent default behavior
@@ -97,7 +94,7 @@ const FileSearchInput = ({
     setIsFileValid(true);
 
     setTimeout(() => {
-      setFileStatus("loaded");
+      setFileStatus('loaded');
       setProgress(0);
     }, 100);
   };
@@ -110,7 +107,7 @@ const FileSearchInput = ({
   // Initiates the file loading process by setting the initial progress
   const startLoading = (pickedFile: File) => {
     setLoadingFile(true);
-    if (!!setFile) (pickedFile);
+    if (!!setFile) pickedFile;
     setLocalFile(pickedFile);
     setProgress(25);
     animateProgress(25);
@@ -194,7 +191,7 @@ const FileSearchInput = ({
         iconLeft={
           <ClipboardIcon style={{ width: 24, height: 24 }} fill={PRIMARY_100} />
         }
-      />
+      />,
     );
   }
 
@@ -213,7 +210,7 @@ const FileSearchInput = ({
   const uploadFile = async (pickedFile: File) => {
     if (!!uploadConfig) {
       const formData = new FormData();
-      formData.append("file", pickedFile);
+      formData.append('file', pickedFile);
 
       abortControllerRef.current = new AbortController();
       const { signal } = abortControllerRef.current;
@@ -255,7 +252,6 @@ const FileSearchInput = ({
     }
   };
 
-
   // Function to handle file deletion
   const handleCancelFile = () => {
     if (abortControllerRef.current) {
@@ -265,7 +261,7 @@ const FileSearchInput = ({
     resetProgress();
     animateProgress(0);
     if (!!setFile) setFile(null);
-    setFileStatus("canceled");
+    setFileStatus('canceled');
     if (fileInputRef.current) {
       fileInputRef.current.value = null;
     }
@@ -283,20 +279,28 @@ const FileSearchInput = ({
   return (
     <SafeAreaView style={styles.container}>
       {/* Display when file is selected */}
-      {file && isFileValid && fileStatus !== "canceled" && (
+      {file && isFileValid && fileStatus !== 'canceled' && (
         <View style={styles.fileNameContainer}>
           <View style={styles.fileNameLoadedLeftContainer}>
-
             <FileIcon style={styles.fileIcon} />
 
             <View style={styles.fileContent}>
-              <Text style={styles.fileNameText} numberOfLines={1} ellipsizeMode='tail'>
+              <Text
+                style={styles.fileNameText}
+                numberOfLines={1}
+                ellipsizeMode="tail">
                 {file.name}
               </Text>
-              {progress > 0 &&
+              {progress > 0 && (
                 <View style={styles.progressBarContainer}>
-                  <SkeletonItem width={`${progress}%`} height={8} color={NEUTRAL_1000} borderRadius={16} />
-                </View>}
+                  <SkeletonItem
+                    width={`${progress}%`}
+                    height={8}
+                    color={NEUTRAL_1000}
+                    borderRadius={16}
+                  />
+                </View>
+              )}
             </View>
           </View>
 
@@ -321,8 +325,7 @@ const FileSearchInput = ({
             onDrop={handleDrop}
             onDragOver={handleDragOver}
             onDragEnter={handleDragOver}
-            onDragLeave={handleDragOver}
-          >
+            onDragLeave={handleDragOver}>
             <InputBase
               {...inputBaseProps}
               value={value}

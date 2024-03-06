@@ -18,8 +18,8 @@ import {
   InputFieldVariant,
   KeyboardTypes,
 } from '../Input.types';
-import { ShowPasswordIcon } from '../../../assets/images/icons/ShowPasswordIcon';
-import { HidePasswordIcon } from '../../../assets/images/icons/HidePasswordIcon';
+import { EyeIcon } from '../../../assets/images/icons/EyeIcon';
+import { EyeOffIcon } from '../../../assets/images/icons/EyeOffIcon';
 import InputOptions from './InputOptions';
 import { NEUTRAL_0, NEUTRAL_400, NEUTRAL_600 } from '../../../styles/colors';
 import { disableOutline } from '../../../helpers/table_utils';
@@ -212,9 +212,7 @@ const InputField = ({
     const fillValue = disabled ? NEUTRAL_400 : undefined;
 
     if (type === InputFieldVariant.TextInputPassword) {
-      const PasswordComponent = showPassword
-        ? HidePasswordIcon
-        : ShowPasswordIcon;
+      const PasswordComponent = showPassword ? EyeOffIcon : EyeIcon;
 
       return (
         <PasswordComponent style={styles.inputImageSize} fill={fillValue} />

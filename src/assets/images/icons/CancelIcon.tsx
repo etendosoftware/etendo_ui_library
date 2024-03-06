@@ -5,7 +5,7 @@ import { DEFAULT_COLOR_THEME } from '../../../styles/colors';
 import { sizeSvg } from '../../../helpers/svg_utils';
 
 export interface SvgImageProps {
-  style?: any;
+  style?: ImageStyle;
   fill?: string;
 }
 export const CancelIcon = ({
