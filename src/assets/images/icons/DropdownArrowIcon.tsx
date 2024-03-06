@@ -5,7 +5,7 @@ import { sizeSvg } from '../../../helpers/svg_utils';
 import { PRIMARY_100 } from '../../../styles/colors';
 
 export interface SvgImageProps {
-    style?: ImageStyle;
+    style?: any;
     fill?: string;
 }
 
