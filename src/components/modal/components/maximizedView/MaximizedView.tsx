@@ -3,7 +3,7 @@ import { SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { ButtonContainer } from '../../../containers';
 import { styles } from './MaximizedView.styles';
 import { Button } from '../../../button';
-import { CancelIcon } from '../../../../assets/images/icons';
+import { XIcon } from '../../../../assets/images/icons';
 import { IMaximizedViewProps } from './MaximizedView.types';
 
 const MaximizedView = ({
@@ -27,7 +27,7 @@ const MaximizedView = ({
             ]}>
             <Button
               typeStyle={'white'}
-              iconLeft={<CancelIcon />}
+              iconLeft={<XIcon />}
               onPress={() => setVisible(false)}
             />
             <Text

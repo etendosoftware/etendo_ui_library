@@ -4,7 +4,6 @@ import { InputVariantsType, TypeInputStyleVariant } from './Input.types';
 
 import { ArrowDownIcon } from '../../assets/images/icons/ArrowDownIcon';
 import { SearchIcon } from '../../assets/images/icons/SearchIcon';
-import { ShowPasswordIcon } from '../../assets/images/icons/ShowPasswordIcon';
 import {
   DESTRUCTIVE_10,
   DESTRUCTIVE_100,
@@ -18,6 +17,7 @@ import {
   PRIMARY_100,
   QUATERNARY_50,
 } from '../../styles/colors';
+import { EyeIcon } from '../../assets/images/icons';
 
 export const inputVariants: InputVariantsType = {
   readOnly: {
@@ -68,7 +68,7 @@ export const inputVariants: InputVariantsType = {
   textInputPassword: {
     field: {
       type: 'textInput',
-      image: <ShowPasswordIcon style={{ height: 15, width: 15 }} />,
+      image: <EyeIcon style={{ height: 15, width: 15 }} />,
       disabledField: true,
       disabledSubmit: false,
     },

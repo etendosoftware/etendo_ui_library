@@ -8,10 +8,10 @@ import {
 } from 'react-native';
 import { styles } from '../Alert.style';
 import {
-  CancelCircleIcon,
-  CancelIcon,
-  SuccessCircleIcon,
-  WarningCircleIcon,
+  AlertCircleFill,
+  CheckCircleFillIcon,
+  XCircleFillIcon,
+  XIcon,
 } from '../../../assets/images/icons';
 import {
   DANGER_100,
@@ -58,7 +58,7 @@ const AlertMessage = ({
         imageColor = SUCCESS_800;
         marginLeft = 8;
         icon = (
-          <SuccessCircleIcon style={styles.messageIcon} fill={imageColor} />
+          <CheckCircleFillIcon style={styles.messageIcon} fill={imageColor} />
         );
         break;
       case 'error':
@@ -66,18 +66,14 @@ const AlertMessage = ({
         textColor = DANGER_700;
         imageColor = DANGER_700;
         marginLeft = 8;
-        icon = (
-          <CancelCircleIcon style={styles.messageIcon} fill={imageColor} />
-        );
+        icon = <XCircleFillIcon style={styles.messageIcon} fill={imageColor} />;
         break;
       case 'warning':
         backgroundColor = IP_100;
         textColor = IP_900;
         imageColor = IP_600;
         marginLeft = 8;
-        icon = (
-          <WarningCircleIcon style={styles.messageIcon} fill={imageColor} />
-        );
+        icon = <AlertCircleFill style={styles.messageIcon} fill={imageColor} />;
         break;
       default:
         backgroundColor = TERTIARY_100;
@@ -113,7 +109,7 @@ const AlertMessage = ({
           : message}
       </Text>
       <Pressable style={styles.closeButton} onPress={onPressClose}>
-        <CancelIcon style={styles.closeIcon} fill={stylesAlert.imageColor} />
+        <XIcon style={styles.closeIcon} fill={stylesAlert.imageColor} />
       </Pressable>
     </Animated.View>
   );
