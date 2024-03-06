@@ -1,6 +1,6 @@
 import React from 'react';
 import { ImageStyle, ColorValue } from 'react-native';
-import { Svg, Path, Circle } from 'react-native-svg';
+import { Svg, Path } from 'react-native-svg';
 import { DEFAULT_COLOR_THEME } from '../../../styles/colors';
 import { sizeSvg } from '../../../helpers/svg_utils';
 
