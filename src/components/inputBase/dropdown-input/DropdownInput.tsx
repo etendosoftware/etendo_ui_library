@@ -92,7 +92,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
         const currentOptionsLength = currentOptions.length;
 
         return <View style={[styles.dropdown, dropdownStyle]}>
-            {staticData.length === 0 && fetchData.search &&
+            {staticData.length === 0 && fetchData?.search &&
                 renderSearchInput(
                     searchQuery,
                     handleSearchQueryChange,
@@ -170,16 +170,21 @@ const DropdownInput: React.FC<IDropdownInput> = ({
         if (isNewSearch) setLoading(true);
 
         const nextPage = isNewSearch ? 1 : page + 1;
+        let fetchedOptions: any = [];
 
         try {
-            let fetchedOptions: any = [];
-            if (searchQuery.trim()) {
-                fetchedOptions = await fetchData.search?.(searchQuery, nextPage, pageSize);
-            } else {
-                fetchedOptions = await fetchData.normal?.(nextPage, pageSize);
+            if (searchQuery.trim() && fetchData?.search) {
+                fetchedOptions = await fetchData.search(searchQuery, nextPage, pageSize);
+            } else if (fetchData?.normal) {
+                fetchedOptions = await fetchData.normal(nextPage, pageSize);
             }
 
-            setOptions(prevOptions => isNewSearch ? fetchedOptions : [...prevOptions, ...fetchedOptions]);
+            if (page === 0 && staticData.length > 0) {
+                setOptions(prevOptions => isNewSearch ? [...staticData, ...fetchedOptions] : [...prevOptions, ...staticData, ...fetchedOptions]);
+            } else {
+                setOptions(prevOptions => isNewSearch ? fetchedOptions : [...prevOptions, ...fetchedOptions]);
+            }
+
             setPage(nextPage);
         } catch (error) {
             console.error(error);
@@ -266,7 +271,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
             setSearchOptions([]);
         } else {
             setLoading(true);
-            fetchData.search?.(text, 1, pageSize)
+            fetchData?.search?.(text, 1, pageSize)
                 .then((fetchedOptions: any) => {
                     setSearchOptions(fetchedOptions || []);
                     setLoading(false);
