@@ -104,11 +104,6 @@ const Cards = ({
         selectedItemsSet.clear();
       } else {
         selectedItemsSet.add(item);
-        setDataList(
-          Array.from(dataSet).map((item2: any) => {
-            return { ...item2, isActive: item2._id === item._id };
-          }),
-        );
       }
 
       if (selectedItemsSet.size === 0) {
@@ -202,7 +197,7 @@ const Cards = ({
     <View
       onLayout={onLayout}
       style={[
-        { maxHeight: cardsHeight },
+        { maxHeight: cardsHeight, height: cardsHeight },
         styles.container,
         { backgroundColor },
       ]}>

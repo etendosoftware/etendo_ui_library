@@ -42,6 +42,12 @@ import { HamburgerIcon } from './dist-native/assets/images/icons/HamburgerIcon';
 import { HidePasswordIcon } from './dist-native/assets/images/icons/HidePasswordIcon';
 import { HomeIcon } from './dist-native/assets/images/icons/HomeIcon';
 import { Input } from './dist-native/components/input';
+import {
+  InputBase,
+  DatePickerInput,
+  FileSearchInput,
+  DropdownInput,
+} from './dist-native/components/inputBase';
 import { ItemsIcon } from './dist-native/assets/images/icons/ItemsIcon';
 import { MenuIcon } from './dist-native/assets/images/icons/MenuIcon';
 import { Modal } from './dist-native/components/modal';
@@ -115,6 +121,10 @@ export {
   HidePasswordIcon,
   HomeIcon,
   Input,
+  InputBase,
+  DatePickerInput,
+  FileSearchInput,
+  DropdownInput,
   ItemsIcon,
   Layout,
   MenuIcon,
