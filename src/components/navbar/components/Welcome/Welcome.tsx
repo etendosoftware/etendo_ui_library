@@ -15,7 +15,7 @@ const Welcome = ({ name, title }: WelcomeProps) => {
       <StarIcon style={styles.imageStar} fill={SECONDARY_100} />
       <View>
         {(title || name) && (
-          <>
+          <View style={styles.titleContainer}>
             <Text
               numberOfLines={1}
               ellipsizeMode="tail"
@@ -28,7 +28,7 @@ const Welcome = ({ name, title }: WelcomeProps) => {
               style={styles.titleName}>
               {name ? name + '!' : 'User!'}
             </Text>
-          </>
+          </View>
         )}
       </View>
     </View>
