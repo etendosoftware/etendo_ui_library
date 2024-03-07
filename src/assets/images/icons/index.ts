@@ -230,6 +230,7 @@ import { SmileIcon } from './SmileIcon';
 import { SpeakerIcon } from './SpeakerIcon';
 import { SquareIcon } from './SquareIcon';
 import { StarIcon } from './StarIcon';
+import { SparksIcon } from './SparksIcon';
 import { StopCircleIcon } from './StopCircleIcon';
 import { SunIcon } from './SunIcon';
 import { SunriseIcon } from './SunriseIcon';
@@ -430,6 +431,7 @@ export {
   PenTool,
   RotateCwIcon,
   StarIcon,
+  SparksIcon,
   TvIcon,
   WifiIcon,
   ArchiveIcon,

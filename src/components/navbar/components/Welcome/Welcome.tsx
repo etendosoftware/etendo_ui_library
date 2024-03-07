@@ -1,8 +1,8 @@
 import { View, Text } from 'react-native';
 import React from 'react';
 import { styles } from './Welcome.styles';
-import { StarIcon } from '../../../../assets/images/icons/StarIcon';
 import { SECONDARY_100 } from '../../../../styles/colors';
+import { SparksIcon } from '../../../../assets/images/icons/SparksIcon';
 
 interface WelcomeProps {
   name: string | undefined;
@@ -12,7 +12,7 @@ interface WelcomeProps {
 const Welcome = ({ name, title }: WelcomeProps) => {
   return (
     <View style={styles.container}>
-      <StarIcon style={styles.imageStar} fill={SECONDARY_100} />
+      <SparksIcon style={styles.imageStar} fill={SECONDARY_100} />
       <View>
         {(title || name) && (
           <View style={styles.titleContainer}>
