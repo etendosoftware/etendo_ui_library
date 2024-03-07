@@ -45,7 +45,7 @@ export const WiffiOffIcon = ({
       </G>
       <Defs>
         <ClipPath id="clip0_1992_7414">
-          <Rect width={width} height={height} fill={fill} />
+          <Rect width="24" height="24" fill={fill} />
         </ClipPath>
       </Defs>
     </Svg>
