@@ -39,7 +39,7 @@ export const ShoppingCartIcon = ({
       </G>
       <Defs>
         <ClipPath id="clip0_1992_7446">
-          <Rect width={width} height={height} fill="transparent" />
+          <Rect width="24" height="24" fill="transparent" />
         </ClipPath>
       </Defs>
     </Svg>

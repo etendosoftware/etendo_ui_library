@@ -45,7 +45,7 @@ export const CloudRainIcon = ({
       </G>
       <Defs>
         <ClipPath id="clip0_1992_7641">
-          <Rect width={width} height={height} fill={'transparent'} />
+          <Rect width="24" height="24" fill={'transparent'} />
         </ClipPath>
       </Defs>
     </Svg>
