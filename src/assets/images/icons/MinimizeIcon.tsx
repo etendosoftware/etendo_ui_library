@@ -9,7 +9,7 @@ export interface SvgImageProps {
   fill?: ColorValue;
 }
 
-export const Minimize2Icon = ({
+export const MinimizeIcon = ({
   style,
   fill = DEFAULT_COLOR_THEME,
 }: SvgImageProps) => {

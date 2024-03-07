@@ -22,7 +22,7 @@ import {
   PRIMARY_100,
   QUATERNARY_10,
 } from '../../../styles/colors';
-import { CancelIcon } from '../../../assets/images/icons/CancelIcon';
+import { XIcon } from '../../../assets/images/icons/XIcon';
 import { disableOutline } from '../../../helpers/table_utils';
 
 const InputOptions = ({
@@ -292,7 +292,7 @@ const InputOptions = ({
                 <View style={styles.searchContainer}>
                   <SearchIcon
                     style={styles.optionFilterImg}
-                    fill={NEUTRAL_600}
+                    fill={PRIMARY_100}
                   />
                 </View>
               )}
@@ -314,7 +314,7 @@ const InputOptions = ({
                 <TouchableOpacity
                   style={styles.cancelContainer}
                   onPress={handleCancelFilter}>
-                  <CancelIcon style={styles.cancelFilterImg} />
+                  <XIcon style={styles.cancelFilterImg} />
                 </TouchableOpacity>
               )}
             </Pressable>
@@ -374,7 +374,7 @@ const InputOptions = ({
                 <TouchableOpacity
                   style={styles.cancelContainer}
                   onPress={handleCancelFilter}>
-                  <CancelIcon style={styles.cancelFilterImg} />
+                  <XIcon style={styles.cancelFilterImg} />
                 </TouchableOpacity>
               )}
             </Pressable>

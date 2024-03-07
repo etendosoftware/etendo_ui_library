@@ -52,12 +52,14 @@ import { ChevronRightIcon } from './ChevronRightIcon';
 import { ChevronUpIcon } from './ChevronUpIcon';
 import { ChevronsDownIcon } from './ChevronsDownIcon';
 import { ChevronsRightIcon } from './ChevronsRightIcon';
+import { ChevronsLeftIcon } from './ChevronsLeftIcon';
 import { ChevronsUpIcon } from './ChevronsUpIcon';
 import { ChromeIcon } from './ChromeIcon';
 import { CircleIcon } from './CircleIcon';
 import { ClipboardIcon } from './ClipboardIcon';
 import { ClockIcon } from './ClockIcon';
 import { CloudDrizzleIcon } from './CloudDrizzleIcon';
+import { CloudRainIcon } from './CloudRainIcon';
 import { CloudIcon } from './CloudIcon';
 import { CloudLightingIcon } from './CloudLightingIcon';
 import { CloudOffIcon } from './CloudOffIcon';
@@ -71,6 +73,7 @@ import { CommandIcon } from './CommandIcon';
 import { CompassIcon } from './CompassIcon';
 import { CopyIcon } from './CopyIcon';
 import { CornerDownLeftIcon } from './CornerDownLeftIcon';
+import { CornerDownRightIcon } from './CornerDownRightIcon';
 import { CornerLeftDownIcon } from './CornerLeftDownIcon';
 import { CornerLeftUpIcon } from './CornerLeftUpIcon';
 import { CornerRightDownIcon } from './CornerRightDownIcon';
@@ -89,6 +92,7 @@ import { DivideIcon } from './DivideIcon';
 import { DivideSquareIcon } from './DivideSquareIcon';
 import { DollarIcon } from './DollarIcon';
 import { DownloadCloudIcon } from './DownloadCloudIcon';
+import { DownloadIcon } from './DownloadIcon';
 import { DribbbleIcon } from './DribbbleIcon';
 import { DropletIcon } from './DropletIcon';
 import { Edit2Icon } from './Edit2Icon';
@@ -102,6 +106,7 @@ import { FastForwardIcon } from './FastForwardIcon';
 import { FeatherIcon } from './FeatherIcon';
 import { FigmaIcon } from './FigmaIcon';
 import { FileIcon } from './FileIcon';
+import { FileTextIcon } from './FileTextIcon';
 import { FileMinusIcon } from './FileMinusIcon';
 import { FilePlusIcon } from './FilePlusIcon';
 import { FilmIcon } from './FilmIcon';
@@ -157,6 +162,7 @@ import { MessageSquareIcon } from './MessageSquareIcon';
 import { MicIcon } from './MicIcon';
 import { MicOffIcon } from './MicOffIcon';
 import { Minimize2Icon } from './Minimize2Icon';
+import { MinimizeIcon } from './MinimizeIcon';
 import { MinusCircleIcon } from './MinusCircleIcon';
 import { MinusIcon } from './MinusIcon';
 import { MinusSquareIcon } from './MinusSquareIcon';
@@ -204,6 +210,7 @@ import { SaveIcon } from './SaveIcon';
 import { ScissorsIcon } from './ScissorsIcon';
 import { SearchIcon } from './SearchIcon';
 import { SendIcon } from './SendIcon';
+import { ServerIcon } from './ServerIcon';
 import { SettingIcon } from './SettingIcon';
 import { Share2Icon } from './Share2Icon';
 import { ShareIcon } from './ShareIcon';
@@ -258,6 +265,7 @@ import { UserCheckIcon } from './UserCheckIcon';
 import { UserMinusIcon } from './UserMinusIcon';
 import { UserPlusIcon } from './UserPlusIcon';
 import { UserXIcon } from './UserXIcon';
+import { UserIcon } from './UserIcon';
 import { UsersIcon } from './UsersIcon';
 import { VideoIcon } from './VideoIcon';
 import { VideoOffIcon } from './VideoOffIcon';
@@ -413,8 +421,10 @@ export {
   ApertureIcon,
   BookIcon,
   CloudDrizzleIcon,
+  CloudRainIcon,
   DatabaseIcon,
   FilmIcon,
+  FileTextIcon,
   HomeIcon,
   MehIcon,
   PenTool,
@@ -488,8 +498,10 @@ export {
   FramerIcon,
   ItalicICon,
   Minimize2Icon,
+  MinimizeIcon,
   PhoneMissedIcon,
   SettingIcon,
+  ServerIcon,
   TabletIcon,
   UnlockIcon,
   XSquareIcon,
@@ -497,6 +509,7 @@ export {
   CameraOffIcon,
   CodesandboxIcon,
   DownloadCloudIcon,
+  DownloadIcon,
   FrownIcon,
   KeyIcon,
   MinusCircleIcon,
@@ -504,6 +517,7 @@ export {
   Share2Icon,
   TagIcon,
   UploadCloudIcon,
+  ChevronsLeftIcon,
   YoutubeIcon,
   ArrowRightCircleIcon,
   CastIcon,
@@ -530,6 +544,7 @@ export {
   UserCheckIcon,
   ZapOffIcon,
   ArrowUpCircleIcon,
+  CornerDownRightIcon,
   CheckCircleIcon,
   CommandIcon,
   Edit2Icon,
@@ -564,4 +579,5 @@ export {
   ShoppingCartIcon,
   ThumbsUpIcon,
   UsersIcon,
+  UserIcon,
 };
