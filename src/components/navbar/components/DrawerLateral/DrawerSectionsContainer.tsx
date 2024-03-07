@@ -105,7 +105,7 @@ const DrawerSectionsContainer = ({
                           index,
                           0,
                         ),
-                        style: styles.modalSectionItemImage,
+                        style: item?.image?.props.style,
                       })}
                     <Text
                       numberOfLines={1}

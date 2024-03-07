@@ -190,8 +190,8 @@ export const styles = StyleSheet.create({
     height: 24,
   },
   cardOptionImagenSize: {
-    width: 27,
-    height: 27,
+    width: 24,
+    height: 24,
   },
   cardOptionArrowImage: {
     height: 12,

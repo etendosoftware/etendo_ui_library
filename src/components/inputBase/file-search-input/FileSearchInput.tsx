@@ -8,7 +8,6 @@ import { NEUTRAL_1000, PRIMARY_100, SUCCESS_600 } from '../../../styles/colors';
 
 // Import icons
 import { CheckCircleIcon } from '../../../assets/images/icons/CheckCircleIcon';
-import { ClipboardIcon } from '../../../assets/images/icons/ClipboardIcon';
 import { DeleteIcon } from '../../../assets/images/icons/DeleteIcon';
 import { FileIcon } from '../../../assets/images/icons/FileIcon';
 
@@ -17,6 +16,7 @@ import { FileSearchInputProps } from './FileSearchInput.types';
 import { Button } from '../../button';
 import { SkeletonItem } from '../../secondaryComponents';
 import { isWebPlatform } from '../../../helpers/functions_utils';
+import { PaperclipIcon } from '../../../assets/images/icons';
 
 // Import DocumentPicker for mobile platforms only
 let DocumentPicker: any = null;
@@ -189,7 +189,7 @@ const FileSearchInput = ({
         typeStyle="white"
         onPress={handleFileButtonClick}
         iconLeft={
-          <ClipboardIcon style={{ width: 24, height: 24 }} fill={PRIMARY_100} />
+          <PaperclipIcon style={{ width: 24, height: 24 }} fill={PRIMARY_100} />
         }
       />,
     );
