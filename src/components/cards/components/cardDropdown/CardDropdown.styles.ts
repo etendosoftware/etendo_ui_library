@@ -43,9 +43,8 @@ export const styles = StyleSheet.create({
     height: 40,
   },
   cardArrowImage: {
-    height: 12,
-    width: 12,
-    marginRight: 10,
+    height: 24,
+    width: 24,
   },
   arrowContainer: {
     height: 20,
@@ -194,9 +193,8 @@ export const styles = StyleSheet.create({
     height: 24,
   },
   cardOptionArrowImage: {
-    height: 12,
-    width: 12,
-    transform: [{ rotate: '180deg' }],
+    height: 24,
+    width: 24,
   },
   cardItemTextContainer: {
     flex: 1,
