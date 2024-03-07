@@ -1,6 +1,6 @@
 export const styles = {
   menuImage: {
-    width: 20,
-    height: 20,
+    width: 24,
+    height: 24,
   },
 };
