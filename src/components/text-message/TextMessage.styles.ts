@@ -121,7 +121,6 @@ export const styles = StyleSheet.create({
     color: DANGER_900,
   },
   errorIconContainer: {
-    backgroundColor: DANGER_700,
     color: DANGER_900,
     justifyContent: 'center',
     alignItems: 'center',
