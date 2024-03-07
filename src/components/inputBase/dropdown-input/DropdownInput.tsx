@@ -32,9 +32,11 @@ const DropdownInput: React.FC<IDropdownInput> = ({
 
     /* States */
     const [page, setPage] = useState<number>(0);
+    const [hasMore, setHasMore] = useState<boolean>(true);
     const [loading, setLoading] = useState<boolean>(false);
     const [options, setOptions] = useState<Array<any>>([]);
     const [searchQuery, setSearchQuery] = useState<string>('');
+    const [loadingMore, setLoadingMore] = useState<boolean>(false);
     const [searchOptions, setSearchOptions] = useState<Array<any>>([]);
     const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
     const [selectedOption, setSelectedOption] = useState<string | undefined>(undefined);
@@ -112,6 +114,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
                     getItemLayout={(_, index) => (
                         { length: OPTION_HEIGHT, offset: OPTION_HEIGHT * index, index }
                     )}
+                    ListFooterComponent={renderFooter}
                 />
                 : options.length > 0 ? (
                     <FlatList
@@ -125,6 +128,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
                         getItemLayout={(_, index) => (
                             { length: OPTION_HEIGHT, offset: OPTION_HEIGHT * index, index }
                         )}
+                        ListFooterComponent={renderFooter}
                     />
                 ) : (
                     <Text style={styles.noResultsText}>{noResultsText}</Text>
@@ -165,11 +169,16 @@ const DropdownInput: React.FC<IDropdownInput> = ({
     /* Functions */
     // Loads options for the dropdown menu. It fetches data based on the current search query or pagination
     const loadOptions = async (isNewSearch = false) => {
-        if (loading && !isNewSearch) return;
+        if ((loading && !isNewSearch) || loadingMore || (!isNewSearch && !hasMore)) return;
 
-        if (isNewSearch) setLoading(true);
+        if (isNewSearch) {
+            setLoading(true);
+            setHasMore(true);
+        } else {
+            setLoadingMore(true);
+        }
 
-        const nextPage = isNewSearch ? 1 : page + 1;
+        const nextPage = isNewSearch ? 0 : page + 1;
         let fetchedOptions: any = [];
 
         try {
@@ -179,6 +188,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
                 fetchedOptions = await fetchData?.normal(nextPage, pageSize);
             }
 
+            setHasMore(fetchedOptions.length === pageSize);
             if (page === 0 && staticData.length > 0) {
                 setOptions(prevOptions => isNewSearch ? [...staticData, ...fetchedOptions] : [...prevOptions, ...staticData, ...fetchedOptions]);
             } else {
@@ -189,14 +199,30 @@ const DropdownInput: React.FC<IDropdownInput> = ({
         } catch (error) {
             console.error(error);
         } finally {
-            setLoading(false);
+            if (isNewSearch) {
+                setLoading(false);
+            } else {
+                setLoadingMore(false);
+            }
         }
+    };
+
+
+    // Footer when looking for more options
+    const renderFooter = () => {
+        if (!loadingMore) return null;
+
+        return (
+            <ActivityIndicator size="small" color={PRIMARY_100} style={{ marginVertical: 4 }} />
+        );
     };
 
     // Clears the search input and resets the search results
     const clearSearch = () => {
         setSearchQuery('');
         setSearchOptions([]);
+        setLoadingMore(false);
+        setHasMore(true);
     };
 
     // Function to calculate the position of the dropdown and adjust it if necessary
@@ -269,6 +295,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
 
         if (text.trim() === '') {
             setSearchOptions([]);
+            setHasMore(true);
         } else {
             setLoading(true);
             fetchData?.search?.(text, 1, pageSize)
