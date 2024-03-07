@@ -1,0 +1,35 @@
+import React from 'react';
+import { ImageStyle, ColorValue } from 'react-native';
+import Svg, { Path } from 'react-native-svg';
+import { DEFAULT_COLOR_THEME } from '../../../styles/colors';
+import { sizeSvg } from '../../../helpers/svg_utils';
+
+export interface SvgImageProps {
+  style?: ImageStyle;
+  fill?: ColorValue;
+}
+
+export const DiscIcon = ({
+  style,
+  fill = DEFAULT_COLOR_THEME,
+}: SvgImageProps) => {
+  const width = sizeSvg(style?.width, 24);
+  const height = sizeSvg(style?.height, 24);
+
+  return (
+    <Svg width={width} height={height} viewBox="0 0 24 24" fill="none">
+      <Path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3ZM1 12C1 5.92487 5.92487 1 12 1C18.0751 1 23 5.92487 23 12C23 18.0751 18.0751 23 12 23C5.92487 23 1 18.0751 1 12Z"
+        fill={fill}
+      />
+      <Path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10ZM8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12Z"
+        fill={fill}
+      />
+    </Svg>
+  );
+};

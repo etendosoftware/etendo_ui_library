@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { Modal, TouchableOpacity } from 'react-native';
-import { BellActiveIcon } from '../../../../assets/images/icons/BellActiveIcon';
 import { BellIcon } from '../../../../assets/images/icons/BellIcon';
+import { BellOffIcon } from '../../../../assets/images/icons/BellOffIcon';
 import {
   NotificationProps,
   OptionNotificationItem,
@@ -70,9 +70,9 @@ const Notification = ({
           getTopLeft();
         }}>
         {anyNotification ? (
-          <BellActiveIcon style={styles.imageNotification} fill={NEUTRAL_0} />
-        ) : (
           <BellIcon style={styles.imageNotification} fill={NEUTRAL_0} />
+        ) : (
+          <BellOffIcon style={styles.imageNotification} fill={NEUTRAL_0} />
         )}
       </TouchableOpacity>
       <Modal transparent visible={showOptions} animationType="fade">

@@ -4,12 +4,12 @@ import { View, Text, TouchableOpacity, FlatList, ActivityIndicator, TextInput, D
 import InputBase from '../InputBase';
 import { styles } from './DropdownInput.styles';
 import { IDropdownInput } from './DropdownInput.types';
-import { CancelIcon } from '../../../assets/images/icons';
 import { OPTION_HEIGHT } from './DropdownInput.constants';
 import { disableOutline } from '../../../helpers/table_utils';
 import { isWebPlatform } from '../../../helpers/functions_utils';
 import { NEUTRAL_600, PRIMARY_100 } from '../../../styles/colors';
 import { DropdownArrowIcon } from '../../../assets/images/icons/DropdownArrowIcon';
+import { CancelCircleIcon } from '../../../assets/images/icons/CancelCircleIcon';
 
 const DropdownInput: React.FC<IDropdownInput> = ({
     title,
@@ -61,7 +61,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
                 />
                 {searchQuery.length > 0 && (
                     <TouchableOpacity onPress={clearSearch} disabled={isDisabled}>
-                        <CancelIcon fill={PRIMARY_100} style={[styles.cancelIcon, isDisabled ? { opacity: 0.5 } : { opacity: 1 }]} />
+                        <CancelCircleIcon fill={PRIMARY_100} style={[styles.cancelIcon, isDisabled ? { opacity: 0.5 } : { opacity: 1 }]} />
                     </TouchableOpacity>
                 )}
             </View>
@@ -144,7 +144,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
             <View style={styles.selectedOptionContainer}>
                 <Text numberOfLines={1} ellipsizeMode="tail">{selectedOption}</Text>
                 <TouchableOpacity onPress={deselectOption}>
-                    <CancelIcon fill={NEUTRAL_600} style={styles.cancelIcon} />
+                    <CancelCircleIcon fill={NEUTRAL_600} style={styles.cancelIcon} />
                 </TouchableOpacity>
             </View>
         );

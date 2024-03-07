@@ -97,20 +97,16 @@ export const styles = StyleSheet.create({
     paddingLeft: 15,
     borderRadius: 8,
   },
-  modalSectionItemImage: {
-    width: 24,
-    height: 24,
-    marginRight: 12,
-  },
+
   modalSectionItemText: {
     color: NEUTRAL_0,
     fontSize: 16,
     width: 150,
+    marginLeft: 10,
   },
   modalSectionMenuDropdownImage: {
-    width: 8,
-    height: 5,
-    marginLeft: 15,
+    width: 20,
+    height: 20,
   },
   modalSectionSubMenuContainer: {
     display: 'flex',

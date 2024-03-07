@@ -14,7 +14,6 @@ export const paginationStyleVariant: PaginationStyleVariant = {
     icon: {
       width: 22,
       height: 22,
-      marginRight: 17,
     },
     pageNumberContainer: {
       backgroundColor: QUATERNARY_50,
@@ -23,7 +22,7 @@ export const paginationStyleVariant: PaginationStyleVariant = {
       borderRadius: 3,
       justifyContent: 'center',
       alignSelf: 'center',
-      marginRight: 12,
+      marginHorizontal: 5,
     },
     pageNumberText: {
       fontWeight: '500',

@@ -6,13 +6,13 @@ import {
   DrawerDataSubMenuType,
   DrawerLatertalMenuProps,
 } from '../../Navbar.types';
-import { ArrowDownIcon } from '../../../../assets/images/icons/ArrowDownIcon';
 import {
   getCurrentSelectIndex,
   getStyleImageSelectedSubSection,
   getStyleSelected,
 } from './DrawerLateralHelper';
 import { NEUTRAL_0 } from '../../../../styles/colors';
+import { ChevronDownIcon } from '../../../../assets/images/icons';
 
 const DrawerLateralSubMenu = ({
   data,
@@ -76,7 +76,6 @@ const DrawerLateralSubMenu = ({
               indexSection,
               indexSubSection,
             ),
-            style: styles.modalSectionItemImage,
           })}
         <Text
           numberOfLines={1}
@@ -84,7 +83,7 @@ const DrawerLateralSubMenu = ({
           style={styles.modalSectionItemText}>
           {label}
         </Text>
-        <ArrowDownIcon
+        <ChevronDownIcon
           style={styles.modalSectionMenuDropdownImage}
           fill={NEUTRAL_0}
         />

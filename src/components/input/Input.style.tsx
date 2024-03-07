@@ -2,9 +2,7 @@ import React from 'react';
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { InputVariantsType, TypeInputStyleVariant } from './Input.types';
 
-import { ArrowDownIcon } from '../../assets/images/icons/ArrowDownIcon';
 import { SearchIcon } from '../../assets/images/icons/SearchIcon';
-import { ShowPasswordIcon } from '../../assets/images/icons/ShowPasswordIcon';
 import {
   DESTRUCTIVE_10,
   DESTRUCTIVE_100,
@@ -18,6 +16,7 @@ import {
   PRIMARY_100,
   QUATERNARY_50,
 } from '../../styles/colors';
+import { ChevronDownIcon, EyeIcon } from '../../assets/images/icons';
 
 export const inputVariants: InputVariantsType = {
   readOnly: {
@@ -32,7 +31,7 @@ export const inputVariants: InputVariantsType = {
       type: 'text',
       disabledField: false,
       disabledSubmit: true,
-      image: <ArrowDownIcon style={{ height: 10, width: 10 }} />,
+      image: <ChevronDownIcon style={{ height: 24, width: 24 }} />,
     },
   },
   textInput: {
@@ -54,7 +53,7 @@ export const inputVariants: InputVariantsType = {
       type: 'textInput',
       disabledField: true,
       disabledSubmit: false,
-      image: <SearchIcon style={{ height: 15, width: 15 }} />,
+      image: <SearchIcon style={{ height: 24, width: 24 }} />,
     },
   },
   pressableSearch: {
@@ -62,13 +61,13 @@ export const inputVariants: InputVariantsType = {
       type: 'text',
       disabledField: false,
       disabledSubmit: true,
-      image: <SearchIcon style={{ height: 15, width: 15 }} />,
+      image: <SearchIcon style={{ height: 24, width: 24 }} />,
     },
   },
   textInputPassword: {
     field: {
       type: 'textInput',
-      image: <ShowPasswordIcon style={{ height: 15, width: 15 }} />,
+      image: <EyeIcon style={{ height: 24, width: 24 }} />,
       disabledField: true,
       disabledSubmit: false,
     },
@@ -194,8 +193,8 @@ export const inputStyleVariants: TypeInputStyleVariant = {
 export const styles = StyleSheet.create({
   inputContainer: {},
   inputImageSize: {
-    height: 22,
-    width: 22,
+    height: 24,
+    width: 24,
   },
   hideContainer: {
     height: 22,
@@ -306,12 +305,12 @@ export const styles = StyleSheet.create({
     ...defaultFilterContainer,
   },
   optionFilterImg: {
-    width: 15,
-    height: 15,
+    width: 24,
+    height: 24,
   },
   cancelFilterImg: {
-    width: 12,
-    height: 12,
+    width: 24,
+    height: 24,
   },
   cancelContainer: {
     marginRight: 4,

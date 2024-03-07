@@ -2,9 +2,9 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import {
   CalendarIcon,
-  CheckFalseIcon,
-  CheckTrueIcon,
-  TimeIcon,
+  CheckSquareicon,
+  ClockIcon,
+  SquareIcon,
 } from '../../../../../../assets/images/icons';
 import { styles } from './SwitchRowCard.style';
 import { SwitchRowCardProps } from './SwitchRowCard.type';
@@ -20,20 +20,12 @@ export const getIconByType = ({
       case 'date':
         return <CalendarIcon style={styles.calendar} fill={color.color} />;
       case 'time':
-        return <TimeIcon style={styles.calendar} fill={color.color} />;
+        return <ClockIcon style={styles.calendar} fill={color.color} />;
       case 'boolean':
         return item[row.key] ? (
-          <CheckTrueIcon
-            style={styles.check}
-            stroke={color.color}
-            fill={'transparent'}
-          />
+          <CheckSquareicon style={styles.check} fill={color.color} />
         ) : (
-          <CheckFalseIcon
-            style={styles.check}
-            stroke={color.color}
-            fill={'transparent'}
-          />
+          <SquareIcon style={styles.check} fill={color.color} />
         );
       default:
         break;

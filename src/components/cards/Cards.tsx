@@ -12,7 +12,7 @@ import { styles } from './Cards.style';
 import SkeletonCard from './components/card/components/skeletonCard/SkeletonCard';
 import SwitchStateCards from './components/card/components/switchStateCards/SwitchStateCards';
 import { Button } from '../button';
-import { MoreIcon, TrashIcon } from '../../assets/images/icons';
+import { PlusIcon, TrashIcon } from '../../assets/images/icons';
 import { CardsProps } from './Cards.types';
 import { Modal } from '../modal';
 import CARDS from './Cards.constants';
@@ -227,7 +227,7 @@ const Cards = ({
               typeStyle={'primary'}
               height={40}
               width={40}
-              iconLeft={<MoreIcon style={styles.icon} />}
+              iconLeft={<PlusIcon style={styles.icon} />}
             />
           )
         )}

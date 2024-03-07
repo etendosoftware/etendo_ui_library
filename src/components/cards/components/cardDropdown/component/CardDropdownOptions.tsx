@@ -9,7 +9,6 @@ import {
 import React, { useState } from 'react';
 import { CardVariant, styles } from '../CardDropdown.styles';
 import CardDropdownSkeleton from './CardDropdownSkeleton';
-import { ArrowDownIcon } from '../../../../../assets/images/icons/ArrowDownIcon';
 import {
   CardDropdownData,
   CardDropdownOptionsProps,
@@ -20,6 +19,7 @@ import {
   QUATERNARY_10,
   SECONDARY_100,
 } from '../../../../../styles/colors';
+import { ChevronDownIcon } from '../../../../../assets/images/icons';
 
 const CardDropdownOptions = ({
   data,
@@ -101,7 +101,7 @@ const CardDropdownOptions = ({
                   {title}
                 </Text>
                 <View style={styles.cardOptionArrowContainer}>
-                  <ArrowDownIcon
+                  <ChevronDownIcon
                     style={styles.cardOptionArrowImage}
                     fill={NEUTRAL_0}
                   />
