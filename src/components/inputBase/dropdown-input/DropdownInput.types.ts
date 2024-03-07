@@ -3,7 +3,7 @@ import { IInputBase } from "../InputBase.types";
 export interface IDropdownInput extends IInputBase {
     displayKey: keyof any;
     fetchData?: {
-        normal: (page: number, size: number) => Promise<any[]>;
+        normal?: (page: number, size: number) => Promise<any[]>;
         search?: (searchQuery: string, page: number, size: number) => Promise<any[]>;
     };
     initialPage?: number;
