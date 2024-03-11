@@ -56,6 +56,7 @@ import { ChevronsLeftIcon } from './ChevronsLeftIcon';
 import { ChevronsUpIcon } from './ChevronsUpIcon';
 import { ChromeIcon } from './ChromeIcon';
 import { CircleIcon } from './CircleIcon';
+import { ClearIcon } from './ClearIcon';
 import { ClipboardIcon } from './ClipboardIcon';
 import { ClockIcon } from './ClockIcon';
 import { CloudDrizzleIcon } from './CloudDrizzleIcon';
@@ -330,6 +331,7 @@ export {
   ChevronsDownIcon,
   CornerRightDownIcon,
   FacebookIcon,
+  ClearIcon,
   GridIcon,
   LockIcon,
   MusicIcon,

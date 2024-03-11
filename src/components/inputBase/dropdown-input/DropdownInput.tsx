@@ -9,7 +9,7 @@ import { disableOutline } from '../../../helpers/table_utils';
 import { isWebPlatform } from '../../../helpers/functions_utils';
 import { NEUTRAL_600, PRIMARY_100 } from '../../../styles/colors';
 import { DropdownArrowIcon } from '../../../assets/images/icons/DropdownArrowIcon';
-import { CancelCircleIcon } from '../../../assets/images/icons/CancelCircleIcon';
+import { ClearIcon } from '../../../assets/images/icons';
 
 const DropdownInput: React.FC<IDropdownInput> = ({
     title,
@@ -61,7 +61,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
                 />
                 {searchQuery.length > 0 && (
                     <TouchableOpacity onPress={clearSearch} disabled={isDisabled}>
-                        <CancelCircleIcon fill={PRIMARY_100} style={[styles.cancelIcon, isDisabled ? { opacity: 0.5 } : { opacity: 1 }]} />
+                        <ClearIcon fill={PRIMARY_100} style={[styles.cancelIcon, isDisabled ? { opacity: 0.5 } : { opacity: 1 }]} />
                     </TouchableOpacity>
                 )}
             </View>
@@ -144,7 +144,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
             <View style={styles.selectedOptionContainer}>
                 <Text numberOfLines={1} ellipsizeMode="tail">{selectedOption}</Text>
                 <TouchableOpacity onPress={deselectOption}>
-                    <CancelCircleIcon fill={NEUTRAL_600} style={styles.cancelIcon} />
+                    <ClearIcon fill={NEUTRAL_600} style={[styles.cancelIcon, isDisabled ? { opacity: 0.5 } : { opacity: 1 }]} />
                 </TouchableOpacity>
             </View>
         );
@@ -179,7 +179,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
         }
 
         const nextPage = isNewSearch ? 0 : page + 1;
-        let fetchedOptions: any = [];
+        let fetchedOptions = [];
 
         try {
             if (searchQuery.trim() && fetchData?.search) {
@@ -188,11 +188,20 @@ const DropdownInput: React.FC<IDropdownInput> = ({
                 fetchedOptions = await fetchData?.normal(nextPage, pageSize);
             }
 
+            const newOptions = fetchedOptions.filter((fetchedOption) =>
+                !options.some((existingOption) => existingOption.id === fetchedOption.id) // Asumiendo que 'id' es un identificador único
+            );
+
             setHasMore(fetchedOptions.length === pageSize);
-            if (page === 0 && staticData.length > 0) {
-                setOptions(prevOptions => isNewSearch ? [...staticData, ...fetchedOptions] : [...prevOptions, ...staticData, ...fetchedOptions]);
+
+            if (isNewSearch) {
+                if (staticData.length > 0) {
+                    setOptions([...staticData, ...newOptions]);
+                } else {
+                    setOptions(newOptions);
+                }
             } else {
-                setOptions(prevOptions => isNewSearch ? fetchedOptions : [...prevOptions, ...fetchedOptions]);
+                setOptions(prevOptions => [...prevOptions, ...newOptions]);
             }
 
             setPage(nextPage);
@@ -206,7 +215,6 @@ const DropdownInput: React.FC<IDropdownInput> = ({
             }
         }
     };
-
 
     // Footer when looking for more options
     const renderFooter = () => {
@@ -261,6 +269,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
         setSearchQuery('');
         setDropdownVisible(false);
         setSelectedOption(option[displayKey]);
+        setHasMore(true);
     };
 
     // Scrolls to the selected option in the dropdown if it exists
@@ -298,7 +307,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
             setHasMore(true);
         } else {
             setLoading(true);
-            fetchData?.search?.(text, 1, pageSize)
+            fetchData?.search?.(text, 0, pageSize)
                 .then((fetchedOptions: any) => {
                     setSearchOptions(fetchedOptions || []);
                     setLoading(false);
