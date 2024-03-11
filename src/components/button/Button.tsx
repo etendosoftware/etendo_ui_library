@@ -4,6 +4,7 @@ import {
   Pressable,
   Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
 import {
   NEUTRAL_50,
@@ -154,15 +155,17 @@ const Button = ({
       );
     }
 
-    return React.cloneElement(icon, {
-      style: {
-        width: icon?.props?.style?.width || 16,
-        height: icon?.props?.style?.height || 16,
-        marginRight,
-        marginLeft,
-      },
-      fill: iconColor,
-    });
+    return (
+      <View style={{ marginRight, marginLeft }}>
+        {React.cloneElement(icon, {
+          style: {
+            width: icon?.props?.style?.width || 16,
+            height: icon?.props?.style?.height || 16,
+          },
+          fill: iconColor,
+        })}
+      </View>
+    );
   };
 
   const handleOnPress = () => {

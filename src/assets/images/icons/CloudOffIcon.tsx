@@ -29,7 +29,7 @@ export const CloudOffIcon = ({
       </G>
       <Defs>
         <ClipPath id="clip0_1992_7599">
-          <Rect width={width} height={height} fill={fill} />
+          <Rect width="24" height="24" fill={fill} />
         </ClipPath>
       </Defs>
     </Svg>
