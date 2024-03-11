@@ -31,7 +31,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
     const flatListRef = useRef<any>(null);
 
     /* States */
-    const [page, setPage] = useState<number>(0);
+    const [page, setPage] = useState<number>(1);
     const [hasMore, setHasMore] = useState<boolean>(true);
     const [loading, setLoading] = useState<boolean>(false);
     const [options, setOptions] = useState<Array<any>>([]);
@@ -169,51 +169,48 @@ const DropdownInput: React.FC<IDropdownInput> = ({
     /* Functions */
     // Loads options for the dropdown menu. It fetches data based on the current search query or pagination
     const loadOptions = async (isNewSearch = false) => {
-        if ((loading && !isNewSearch) || loadingMore || (!isNewSearch && !hasMore)) return;
+        if ((loading || loadingMore) || (!isNewSearch && !hasMore)) return;
+
+        const currentPage = isNewSearch ? 1 : page + 1;
 
         if (isNewSearch) {
             setLoading(true);
+            setOptions([]);
             setHasMore(true);
+            setPage(1);
         } else {
             setLoadingMore(true);
         }
 
-        const nextPage = isNewSearch ? 0 : page + 1;
-        let fetchedOptions = [];
-
         try {
-            if (searchQuery.trim() && fetchData?.search) {
-                fetchedOptions = await fetchData?.search(searchQuery, nextPage, pageSize);
+            let fetchedOptions = [];
+            if (searchQuery.trim().length > 0 && fetchData?.search) {
+                fetchedOptions = await fetchData.search(searchQuery, currentPage, pageSize);
             } else if (fetchData?.normal) {
-                fetchedOptions = await fetchData?.normal(nextPage, pageSize);
+                fetchedOptions = await fetchData.normal(currentPage, pageSize);
             }
 
-            const newOptions = fetchedOptions.filter((fetchedOption) =>
-                !options.some((existingOption) => existingOption.id === fetchedOption.id) // Asumiendo que 'id' es un identificador único
-            );
-
+            const newOptions = isNewSearch ? fetchedOptions : [...options, ...fetchedOptions];
+            setOptions(newOptions);
             setHasMore(fetchedOptions.length === pageSize);
 
-            if (isNewSearch) {
-                if (staticData.length > 0) {
-                    setOptions([...staticData, ...newOptions]);
-                } else {
-                    setOptions(newOptions);
-                }
-            } else {
-                setOptions(prevOptions => [...prevOptions, ...newOptions]);
+            if (!isNewSearch) {
+                setPage(currentPage);
             }
-
-            setPage(nextPage);
         } catch (error) {
             console.error(error);
         } finally {
-            if (isNewSearch) {
-                setLoading(false);
-            } else {
-                setLoadingMore(false);
-            }
+            setLoading(false);
+            setLoadingMore(false);
         }
+    };
+
+    const mergeUniqueOptions = (existingOptions: any, newOptions: any) => {
+        const existingOptionsSet = new Map(existingOptions.map((option: any) => [option[displayKey], option]));
+        newOptions.forEach((option: any) => {
+            existingOptionsSet.set(option[displayKey], option);
+        });
+        return Array.from(existingOptionsSet.values());
     };
 
     // Footer when looking for more options
@@ -265,11 +262,17 @@ const DropdownInput: React.FC<IDropdownInput> = ({
 
     // Handles the selection of an option, updates the selectedOption state, hides the dropdown, and triggers the onSelect callback
     const handleSelect = (option: any) => {
-        onSelect?.(option);
+        onSelect?.(option)
         setSearchQuery('');
         setDropdownVisible(false);
         setSelectedOption(option[displayKey]);
         setHasMore(true);
+
+        const updatedOptions = mergeUniqueOptions(options, [option]);
+        setOptions(updatedOptions);
+
+        const updatedSearchOptions = mergeUniqueOptions(searchOptions, [option]);
+        setSearchOptions(updatedSearchOptions);
     };
 
     // Scrolls to the selected option in the dropdown if it exists
@@ -305,11 +308,15 @@ const DropdownInput: React.FC<IDropdownInput> = ({
         if (text.trim() === '') {
             setSearchOptions([]);
             setHasMore(true);
+            setPage(1);
         } else {
             setLoading(true);
-            fetchData?.search?.(text, 0, pageSize)
+            fetchData?.search?.(text, 1, pageSize)
                 .then((fetchedOptions: any) => {
-                    setSearchOptions(fetchedOptions || []);
+                    const uniqueOptions = filterDuplicateOptions(fetchedOptions);
+                    setSearchOptions(uniqueOptions);
+                    setHasMore(uniqueOptions.length === pageSize);
+                    setPage(1);
                     setLoading(false);
                 })
                 .catch((error: any) => {
@@ -320,9 +327,22 @@ const DropdownInput: React.FC<IDropdownInput> = ({
         }
     };
 
+    // Filter repeated options
+    const filterDuplicateOptions = (fetchedOptions: any) => {
+        const unique = new Map();
+        fetchedOptions.forEach((option: any) => {
+            if (!unique.has(option[displayKey])) {
+                unique.set(option[displayKey], option);
+            }
+        });
+        return Array.from(unique.values());
+    };
+
     // Handles the event when the end of the dropdown list is reached, increments the page if more items can be loaded
     const handleEndReached = () => {
-        loadOptions();
+        if (hasMore && !loading && !loadingMore) {
+            loadOptions();
+        }
     };
 
     // Function to close the dropdown if the click was outside
@@ -347,20 +367,12 @@ const DropdownInput: React.FC<IDropdownInput> = ({
         }
     }, [dropdownVisible]);
 
-
     // Adjust the position every time the dropdown becomes visible
     useEffect(() => {
         if (dropdownVisible && selectedOption) {
             scrollToSelectedOption();
         }
     }, [selectedOption, dropdownVisible]);
-
-    // Initial loading of options when opening the dropdown or changing the search term
-    useEffect(() => {
-        if (dropdownVisible && (searchQuery.length > 0 || options.length === 0)) {
-            loadOptions();
-        }
-    }, [dropdownVisible, searchQuery]);
 
     return (
         <View style={styles.wrapper} ref={dropdownRef}>
