@@ -190,7 +190,8 @@ const DropdownInput: React.FC<IDropdownInput> = ({
                 fetchedOptions = await fetchData.normal(currentPage, pageSize);
             }
 
-            const newOptions = isNewSearch ? fetchedOptions : [...options, ...fetchedOptions];
+            let newOptions = isNewSearch ? [...staticData, ...fetchedOptions] : [...options, ...fetchedOptions];
+            newOptions = mergeUniqueOptions(newOptions);
             setOptions(newOptions);
             setHasMore(fetchedOptions.length === pageSize);
 
@@ -205,11 +206,8 @@ const DropdownInput: React.FC<IDropdownInput> = ({
         }
     };
 
-    const mergeUniqueOptions = (existingOptions: any, newOptions: any) => {
-        const existingOptionsSet = new Map(existingOptions.map((option: any) => [option[displayKey], option]));
-        newOptions.forEach((option: any) => {
-            existingOptionsSet.set(option[displayKey], option);
-        });
+    const mergeUniqueOptions = (optionsArray: any) => {
+        const existingOptionsSet = new Map(optionsArray.map((option: any) => [option[displayKey], option]));
         return Array.from(existingOptionsSet.values());
     };
 
@@ -268,10 +266,10 @@ const DropdownInput: React.FC<IDropdownInput> = ({
         setSelectedOption(option[displayKey]);
         setHasMore(true);
 
-        const updatedOptions = mergeUniqueOptions(options, [option]);
+        const updatedOptions = mergeUniqueOptions(options);
         setOptions(updatedOptions);
 
-        const updatedSearchOptions = mergeUniqueOptions(searchOptions, [option]);
+        const updatedSearchOptions = mergeUniqueOptions(searchOptions);
         setSearchOptions(updatedSearchOptions);
     };
 
