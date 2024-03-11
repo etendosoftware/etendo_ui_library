@@ -93,47 +93,36 @@ const DropdownInput: React.FC<IDropdownInput> = ({
         const currentOptions = searchQuery.length > 0 ? searchOptions : options;
         const currentOptionsLength = currentOptions.length;
 
-        return <View style={[styles.dropdown, dropdownStyle]}>
-            {staticData?.length === 0 && fetchData?.search &&
-                renderSearchInput(
-                    searchQuery,
-                    handleSearchQueryChange,
-                    searchPlaceholder
-                )}
-            {loading ? (
-                <ActivityIndicator size="small" color={PRIMARY_100} style={{ marginVertical: 4 }} />
-            ) : searchQuery.length > 0 && searchOptions.length > 0 ?
-                <FlatList
-                    ref={flatListRef}
-                    style={{ height: getDropdownHeight(currentOptionsLength, maxVisibleOptions) }}
-                    data={searchOptions}
-                    renderItem={({ item }) => renderDropdownOption(item)}
-                    keyExtractor={(item, index) => `${item.value}-${index}`}
-                    onEndReached={handleEndReached}
-                    onEndReachedThreshold={0.75}
-                    getItemLayout={(_, index) => (
-                        { length: OPTION_HEIGHT, offset: OPTION_HEIGHT * index, index }
+        return (
+            <View style={[styles.dropdown, dropdownStyle]}>
+                {staticData?.length === 0 && fetchData?.search &&
+                    renderSearchInput(
+                        searchQuery,
+                        handleSearchQueryChange,
+                        searchPlaceholder
                     )}
-                    ListFooterComponent={renderFooter}
-                />
-                : options.length > 0 ? (
-                    <FlatList
-                        ref={flatListRef}
-                        style={{ height: getDropdownHeight(options.length, maxVisibleOptions) }}
-                        data={options}
-                        renderItem={({ item }) => renderDropdownOption(item)}
-                        keyExtractor={(item, index) => `${item.value}-${index}`}
-                        onEndReached={handleEndReached}
-                        onEndReachedThreshold={0.75}
-                        getItemLayout={(_, index) => (
-                            { length: OPTION_HEIGHT, offset: OPTION_HEIGHT * index, index }
-                        )}
-                        ListFooterComponent={renderFooter}
-                    />
+                {loading ? (
+                    <ActivityIndicator size="small" color={PRIMARY_100} style={{ marginVertical: 4 }} />
                 ) : (
-                    <Text style={styles.noResultsText}>{noResultsText}</Text>
+                    currentOptionsLength > 0 ? (
+                        <FlatList
+                            ref={flatListRef}
+                            style={{ height: getDropdownHeight(currentOptionsLength, maxVisibleOptions) }}
+                            data={currentOptions}
+                            renderItem={({ item }) => renderDropdownOption(item)}
+                            keyExtractor={(item, index) => `${item.value}-${index}`}
+                            onEndReached={handleEndReached}
+                            getItemLayout={(_, index) => (
+                                { length: OPTION_HEIGHT, offset: OPTION_HEIGHT * index, index }
+                            )}
+                            ListFooterComponent={renderFooter}
+                        />
+                    ) : (
+                        <Text style={styles.noResultsText}>{noResultsText}</Text>
+                    )
                 )}
-        </View>
+            </View>
+        );
     };
 
     // Renders the currently selected option with an option to deselect
@@ -175,11 +164,11 @@ const DropdownInput: React.FC<IDropdownInput> = ({
 
         if (isNewSearch) {
             setLoading(true);
-            setOptions([]);
             setHasMore(true);
             setPage(1);
         } else {
             setLoadingMore(true);
+            setPage(currentPage);
         }
 
         try {
@@ -194,10 +183,6 @@ const DropdownInput: React.FC<IDropdownInput> = ({
             newOptions = mergeUniqueOptions(newOptions);
             setOptions(newOptions);
             setHasMore(fetchedOptions.length === pageSize);
-
-            if (!isNewSearch) {
-                setPage(currentPage);
-            }
         } catch (error) {
             console.error(error);
         } finally {
