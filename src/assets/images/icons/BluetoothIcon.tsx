@@ -18,7 +18,7 @@ export const BluetoothIcon = ({
     <Svg width={width} height={height} viewBox="0 0 24 24" fill="none">
       <Defs>
         <ClipPath id="clip0_1992_7522">
-          <Rect width={width} height={height} fill="white" />
+          <Rect width="24" height="24" fill="white" />
         </ClipPath>
       </Defs>
       <G clip-path="url(#clip0_1992_7522)">

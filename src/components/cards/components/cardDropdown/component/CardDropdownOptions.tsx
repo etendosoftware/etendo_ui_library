@@ -19,7 +19,7 @@ import {
   QUATERNARY_10,
   SECONDARY_100,
 } from '../../../../../styles/colors';
-import { ChevronDownIcon } from '../../../../../assets/images/icons';
+import { ChevronUpIcon } from '../../../../../assets/images/icons';
 
 const CardDropdownOptions = ({
   data,
@@ -101,7 +101,7 @@ const CardDropdownOptions = ({
                   {title}
                 </Text>
                 <View style={styles.cardOptionArrowContainer}>
-                  <ChevronDownIcon
+                  <ChevronUpIcon
                     style={styles.cardOptionArrowImage}
                     fill={NEUTRAL_0}
                   />

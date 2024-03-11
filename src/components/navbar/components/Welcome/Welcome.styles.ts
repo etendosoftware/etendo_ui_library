@@ -27,4 +27,7 @@ export const styles = StyleSheet.create({
     fontWeight: '800',
     width: 187,
   },
+  titleContainer: {
+    marginLeft: 10,
+  },
 });

@@ -3,9 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import { paginationStyleVariant } from './Pagination.styles';
 import { PaginationProps } from './Pagination.types';
-import { ArrowLeftIcon } from '../../assets/images/icons/ArrowLeftIcon';
-import { ArrowRightIcon } from '../../assets/images/icons/ArrowRightIcon';
-import { ChevronsLeftIcon, ChevronsRightIcon } from '../../assets/images/icons';
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  SkipbackIcon,
+  SkipforewardIcon,
+} from '../../assets/images/icons';
 
 /* Pagination component */
 const Pagination = ({
@@ -55,10 +58,10 @@ const Pagination = ({
         <TouchableOpacity
           disabled={page <= 1 || totalData === 0}
           onPress={backToFirstPage}>
-          <ChevronsLeftIcon
+          <SkipbackIcon
             style={{
-              height: 26,
-              width: 26,
+              height: 24,
+              width: 24,
             }}
           />
         </TouchableOpacity>
@@ -66,10 +69,10 @@ const Pagination = ({
         <TouchableOpacity
           disabled={page <= 1 || totalData === 0}
           onPress={backPage}>
-          <ArrowLeftIcon
+          <ChevronLeftIcon
             style={{
-              height: 22,
-              width: 22,
+              height: 26,
+              width: 26,
             }}
           />
         </TouchableOpacity>
@@ -86,10 +89,10 @@ const Pagination = ({
           onPress={() => {
             nextPage();
           }}>
-          <ArrowRightIcon
+          <ChevronRightIcon
             style={{
-              height: 22,
-              width: 22,
+              height: 26,
+              width: 26,
             }}
           />
         </TouchableOpacity>
@@ -105,10 +108,10 @@ const Pagination = ({
               );
             }
           }}>
-          <ChevronsRightIcon
+          <SkipforewardIcon
             style={{
-              height: 26,
-              width: 26,
+              height: 24,
+              width: 24,
             }}
           />
         </TouchableOpacity>
