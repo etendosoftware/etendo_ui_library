@@ -31,6 +31,7 @@ const InputBase = ({
   onSubmit,
   isLoading,
   onBlur,
+  secureTextEntry,
   keyboardType = "default",
 }: IInputBase) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
@@ -162,6 +163,7 @@ const InputBase = ({
             style={[textInputStyle, onPress && cursorPointer()]}
             onSubmitEditing={onSubmit || (() => { })}
             keyboardType={keyboardType}
+            secureTextEntry={secureTextEntry}
           />
         </TouchableOpacity>
         {!!buttons && (

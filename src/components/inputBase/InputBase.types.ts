@@ -19,5 +19,6 @@ export interface IInputBase {
   title?: string;
   value?: string;
   onPress?: () => void;
+  secureTextEntry?: boolean;
   keyboardType?: 'default' | 'numeric' | 'email-address' | 'ascii-capable' | 'numbers-and-punctuation' | 'url' | 'number-pad' | 'phone-pad' | 'name-phone-pad' | 'decimal-pad' | 'twitter' | 'web-search' | 'visible-password';
 }
