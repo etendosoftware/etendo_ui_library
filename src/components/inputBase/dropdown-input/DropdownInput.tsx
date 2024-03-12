@@ -60,7 +60,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
                     placeholderTextColor={NEUTRAL_600}
                     underlineColorAndroid="transparent"
                 />
-                {searchQuery.length > 0 && (
+                {searchQuery?.length > 0 && (
                     <TouchableOpacity onPress={clearSearch} disabled={isDisabled}>
                         <ClearIcon fill={PRIMARY_100} style={[styles.cancelIcon, isDisabled ? { opacity: 0.5 } : { opacity: 1 }]} />
                     </TouchableOpacity>
@@ -91,8 +91,8 @@ const DropdownInput: React.FC<IDropdownInput> = ({
 
     // Renders the dropdown's main content, including search input, loading indicator, and options list
     const renderDropdownContent = () => {
-        const currentOptions = searchQuery.length > 0 ? searchOptions : options;
-        const currentOptionsLength = currentOptions.length;
+        const currentOptions = searchQuery?.length > 0 ? searchOptions : options;
+        const currentOptionsLength = currentOptions?.length;
 
         return (
             <View style={[styles.dropdown, dropdownStyle]}>
@@ -181,13 +181,16 @@ const DropdownInput: React.FC<IDropdownInput> = ({
 
         try {
             let fetchedOptions = [];
-            if (searchQuery.trim().length > 0 && fetchData?.search) {
+            if (searchQuery?.trim().length > 0 && fetchData?.search) {
                 fetchedOptions = await fetchData.search(searchQuery, currentPage, pageSize);
             } else if (fetchData?.normal) {
                 fetchedOptions = await fetchData.normal(currentPage, pageSize);
             }
 
-            const newOptions = isNewSearch ? [...fetchedOptions] : [...options, ...fetchedOptions];
+            let newOptions: any[] = isNewSearch ? [...fetchedOptions] : [...options, ...fetchedOptions];
+            if (staticData?.length) {
+                newOptions = staticData;
+            }
             setOptions(newOptions);
             setHasMore(fetchedOptions.length === pageSize);
         } catch (error) {
