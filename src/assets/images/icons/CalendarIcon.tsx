@@ -16,36 +16,13 @@ export const CalendarIcon = ({
   const height = sizeSvg(style?.height, 24);
 
   return (
-    <Svg
-      width={width}
-      height={height}
-      viewBox="0 0 24 24"
-      fill="none"
-      style={style}>
+    <Svg width={width} height={height} viewBox="0 0 24 24" fill="none">
       <Path
-        d="M19 4H5C3.89543 4 3 4.89543 3 6V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V6C21 4.89543 20.1046 4 19 4Z"
-        stroke={fill}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round" />
-      <Path
-        d="M16 2V6"
-        stroke={fill}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round" />
-      <Path
-        d="M8 2V6"
-        stroke={fill}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round" />
-      <Path
-        d="M3 10H21"
-        stroke={fill}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round" />
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M19 3H17V2C17 1.45 16.55 1 16 1C15.45 1 15 1.45 15 2V3H9V2C9 1.45 8.55 1 8 1C7.45 1 7 1.45 7 2V3H5C3.34 3 2 4.34 2 6V20C2 21.66 3.34 23 5 23H19C20.66 23 22 21.66 22 20V6C22 4.34 20.66 3 19 3ZM5 5H7V6C7 6.55 7.45 7 8 7C8.55 7 9 6.55 9 6V5H15V6C15 6.55 15.45 7 16 7C16.55 7 17 6.55 17 6V5H19C19.55 5 20 5.45 20 6V9H4V6C4 5.45 4.45 5 5 5ZM19 21H5C4.45 21 4 20.55 4 20V11H20V20C20 20.55 19.55 21 19 21Z"
+        fill={fill}
+      />
     </Svg>
   );
 };

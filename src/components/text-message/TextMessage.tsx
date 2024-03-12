@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import {
   DANGER_100,
+  DANGER_700,
   DANGER_900,
   NEUTRAL_0,
   NEUTRAL_1000,
@@ -75,7 +76,10 @@ const TextMessage: React.FC<TextMessageProps> = ({
       <View style={styles.textContentWithIcon}>
         {type === 'error' && (
           <View style={styles.errorIconContainer}>
-            <XCircleFillIcon style={{ height: 8, width: 8 }} />
+            <XCircleFillIcon
+              style={{ height: 16, width: 16 }}
+              fill={DANGER_700}
+            />
           </View>
         )}
         {/* Render the markdown text */}

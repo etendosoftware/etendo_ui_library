@@ -7,10 +7,10 @@ import {
 } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
 import { CardVariant, styles } from './CardDropdown.styles';
-import { ArrowDownIcon } from '../../../../assets/images/icons/ArrowDownIcon';
 import CardSkeleton from './component/CardSkeleton';
 import { CardDrpopdownProps, PositionModalType } from './CardDropdown.types';
 import CardDropdownOptions from './component/CardDropdownOptions';
+import { ChevronDownIcon } from '../../../../assets/images/icons';
 
 const CardDropdown = ({
   title,
@@ -139,7 +139,7 @@ const CardDropdown = ({
         </Text>
         {isDropdown && (
           <View style={styles.cardArrowImage}>
-            <ArrowDownIcon
+            <ChevronDownIcon
               style={styles.cardArrowImage}
               fill={getStyle().colorCardArrowImageFill}
             />
