@@ -4,8 +4,8 @@ import { styles } from './Profile.styles';
 import ProfileOptions from './ProfileOptions';
 import ProfileImage from './ProfileImage';
 import { PosicionModalType, ProfileProps } from '../../Navbar.types';
-import { AplicationsIcon } from '../../../../assets/images/icons/AplicationsIcon';
 import { NEUTRAL_0 } from '../../../../styles/colors';
+import { GridIcon } from '../../../../assets/images/icons';
 
 const Profile = ({
   profileImage,
@@ -67,7 +67,7 @@ const Profile = ({
           setShowOptions(true);
         }}>
         {otherOptions?.length ? (
-          <AplicationsIcon
+          <GridIcon
             style={{ width: isTablet ? 32 : 28, height: isTablet ? 32 : 28 }}
             fill={NEUTRAL_0}
           />
