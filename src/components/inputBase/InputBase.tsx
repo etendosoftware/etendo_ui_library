@@ -117,8 +117,8 @@ const InputBase = ({
       onSubmit !== undefined && (
         <View style={{ marginLeft: 8 }}>
           <Button
-            paddingVertical={0}
-            paddingHorizontal={0}
+            paddingVertical={7}
+            paddingHorizontal={8}
             typeStyle="white"
             onPress={onSubmit}
             iconLeft={<CornerDownRightIcon style={styles.iconSize} />}
