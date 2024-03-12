@@ -1,5 +1,5 @@
-import { StyleSheet  } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-    icon:{ height: 22, width: 22 }
-})
+  icon: { height: 24, width: 24 },
+});

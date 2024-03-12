@@ -32,7 +32,7 @@ const InputBase = ({
   isLoading,
   onBlur,
   secureTextEntry,
-  keyboardType = "default",
+  keyboardType = 'default',
 }: IInputBase) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [buttons, setButtons] = useState<ReactNode[]>([]);
@@ -46,7 +46,10 @@ const InputBase = ({
     onBlur?.();
   };
 
-  function determineTextColor(isError: boolean | undefined, isDisabled: boolean | undefined) {
+  function determineTextColor(
+    isError: boolean | undefined,
+    isDisabled: boolean | undefined,
+  ) {
     if (isDisabled) {
       return NEUTRAL_500;
     }
@@ -55,7 +58,9 @@ const InputBase = ({
 
   const borderWidth: number = isFocused ? 1.5 : 1;
   const paddingVertical: number = 13 - (borderWidth - 1);
-  const paddingHorizontal: number = 12 - (borderWidth - 1);
+  const paddingLeft: number = 12 - (borderWidth - 1);
+  const paddingRight: number =
+    (rightButtons?.length ? 3 : 12) - (borderWidth - 1);
   const isEditable = onPress ? false : !isDisabled;
 
   const borderStyle = (): ViewStyle | undefined => {
@@ -110,21 +115,46 @@ const InputBase = ({
     setButtons([
       ...(rightButtons ?? []),
       onSubmit !== undefined && (
-        <Button
-          paddingHorizontal={6}
-          typeStyle="white"
-          onPress={onSubmit}
-          iconLeft={<CornerDownRightIcon style={styles.iconSize} />}
-          disabled={isLoading}
-        />
+        <View style={{ marginLeft: 8 }}>
+          <Button
+            paddingVertical={0}
+            paddingHorizontal={0}
+            typeStyle="white"
+            onPress={onSubmit}
+            iconLeft={<CornerDownRightIcon style={styles.iconSize} />}
+            disabled={isLoading}
+          />
+        </View>
       ),
     ]);
   }, [onSubmit, isLoading, rightButtons]);
 
+  const handleChange = (string: string) => {
+    if (onChangeText && keyboardType) {
+      if (
+        ['numeric', 'number-pad', 'phone-pad', 'decimal-pad'].includes(
+          keyboardType,
+        )
+      ) {
+        const regexNumber = /^[\d.,\/]*$/;
+        if (regexNumber.test(string) || string === '') {
+          onChangeText(string);
+        }
+      } else {
+        onChangeText(string);
+      }
+    }
+  };
   return (
     <>
       {!!title && (
-        <Text numberOfLines={1} ellipsizeMode="tail" style={[styles.title, { color: determineTextColor(isError, isDisabled) }]}>
+        <Text
+          numberOfLines={1}
+          ellipsizeMode="tail"
+          style={[
+            styles.title,
+            { color: determineTextColor(isError, isDisabled) },
+          ]}>
           {title}
         </Text>
       )}
@@ -135,7 +165,8 @@ const InputBase = ({
           {
             borderWidth: borderWidth,
             paddingVertical: paddingVertical,
-            paddingHorizontal: paddingHorizontal,
+            paddingLeft: paddingLeft,
+            paddingRight: paddingRight,
           },
         ]}>
         {!!icon && (
@@ -146,22 +177,27 @@ const InputBase = ({
                 icon.onPress();
               }
             }}
-            style={[styles.icon, isDisabled ? { opacity: 0.5 } : { opacity: 1 }]}
-          >
+            style={[
+              styles.icon,
+              isDisabled ? { opacity: 0.5 } : { opacity: 1 },
+            ]}>
             {icon}
           </TouchableOpacity>
         )}
-        <TouchableOpacity disabled={isDisabled} style={textInputStyle} onPress={onPress}>
+        <TouchableOpacity
+          disabled={isDisabled}
+          style={textInputStyle}
+          onPress={onPress}>
           <TextInput
             value={value}
             onPressIn={onPress}
-            onChangeText={onChangeText}
+            onChangeText={handleChange}
             placeholder={placeholder}
             editable={isEditable}
             onFocus={onFocusChange}
             onBlur={onBlurChange}
             style={[textInputStyle, onPress && cursorPointer()]}
-            onSubmitEditing={onSubmit || (() => { })}
+            onSubmitEditing={onSubmit || (() => {})}
             keyboardType={keyboardType}
             secureTextEntry={secureTextEntry}
           />
@@ -171,7 +207,13 @@ const InputBase = ({
         )}
       </View>
       {!!helperText && (
-        <Text numberOfLines={1} ellipsizeMode="tail" style={[styles.helperText, { color: determineTextColor(isError, isDisabled) }]}>
+        <Text
+          numberOfLines={1}
+          ellipsizeMode="tail"
+          style={[
+            styles.helperText,
+            { color: determineTextColor(isError, isDisabled) },
+          ]}>
           {helperText}
         </Text>
       )}

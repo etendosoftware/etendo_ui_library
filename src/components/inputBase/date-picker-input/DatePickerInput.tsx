@@ -125,8 +125,9 @@ const DatePickerInput = ({
   const rightButtons = [
     <Button
       key="calendar"
-      width={48}
       typeStyle="white"
+      paddingHorizontal={8}
+      paddingVertical={7}
       onPress={openCalendar}
       iconLeft={
         <CalendarIcon style={{ width: 24, height: 24 }} fill={PRIMARY_100} />
@@ -397,15 +398,15 @@ const DatePickerInput = ({
 
   // Function to handle the onBlur event
   const handleBlur = () => {
-    if (selectedDate.trim() === '') {
+    if (selectedDate?.trim() === '') {
       setIsInputError(false);
       return;
     }
 
-    const parts = selectedDate.split('/');
+    const parts = selectedDate?.split('/');
     let dateIsValid = false;
 
-    if (selectedDate.length === 10 && parts.length === 3) {
+    if (selectedDate?.length === 10 && parts.length === 3) {
       let day, month, year;
 
       if (dateFormat === 'DD/MM/YYYY') {

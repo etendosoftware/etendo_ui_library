@@ -7,10 +7,10 @@ import { styles } from './PasswordInput.style';
 
 const PassowordInput = ({ ...inputBaseProps }: IPasswordInput) => {
   const handleOnPress = () => {
-    setIsVisiblePassword(prev => !prev)
+    setIsVisiblePassword(prev => !prev);
   };
-  const [isVisiblePassword, setIsVisiblePassword] = useState<boolean>(false)
-  
+  const [isVisiblePassword, setIsVisiblePassword] = useState<boolean>(false);
+
   return (
     <InputBase
       secureTextEntry={!isVisiblePassword}
@@ -18,10 +18,16 @@ const PassowordInput = ({ ...inputBaseProps }: IPasswordInput) => {
       rightButtons={[
         <Button
           typeStyle={'white'}
-          paddingHorizontal={5}
-          paddingVertical={5}
+          paddingHorizontal={8}
+          paddingVertical={7}
           onPress={handleOnPress}
-          iconLeft={isVisiblePassword? <EyeIcon style={styles.icon}/>: <EyeOffIcon style={styles.icon}/>}
+          iconLeft={
+            isVisiblePassword ? (
+              <EyeIcon style={styles.icon} />
+            ) : (
+              <EyeOffIcon style={styles.icon} />
+            )
+          }
         />,
       ]}
     />

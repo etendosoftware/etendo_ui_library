@@ -6,7 +6,8 @@ import {
   InputBase,
   FileSearchInput,
   SearchInput,
-  PassowordInput
+  PassowordInput,
+  TextInput,
 } from './inputBase';
 import { Input } from './input';
 import { Modal } from './modal';
@@ -40,6 +41,7 @@ export {
   DropdownInput,
   SearchInput,
   PassowordInput,
+  TextInput,
   Layout,
   Modal,
   Navbar,

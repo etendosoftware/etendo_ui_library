@@ -5,20 +5,21 @@ import Button from '../../button/Button';
 import { ISearchInput } from './SearchInput.types';
 import { styles } from './SearchInput.style';
 
-const SearchInput = ({ onSubmit,...inputBaseProps }:ISearchInput) => {
-  const handleOnPress= () => {
-    if(onSubmit ){
-      onSubmit(inputBaseProps?.value ?? '')
+const SearchInput = ({ onSubmit, ...inputBaseProps }: ISearchInput) => {
+  const handleOnPress = () => {
+    if (onSubmit) {
+      onSubmit(inputBaseProps?.value ?? '');
     }
-  }
+  };
   return (
     <InputBase
       {...inputBaseProps}
       rightButtons={[
         <Button
           typeStyle={'white'}
-          paddingHorizontal={5}
-          paddingVertical={5} onPress={handleOnPress}
+          paddingHorizontal={8}
+          paddingVertical={7}
+          onPress={handleOnPress}
           iconLeft={<SearchIcon style={styles.icon} />}
         />,
       ]}
