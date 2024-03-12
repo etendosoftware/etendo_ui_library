@@ -364,7 +364,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
                 onChangeText={onSelect}
                 isDisabled={isDisabled}
                 rightButtons={[
-                    <TouchableOpacity disabled={isDisabled} key="dropdownToggle" style={dropdownVisible && styles.iconOpen} onPress={(event) => { event.stopPropagation(); toggleDropdown(); }}>
+                    <TouchableOpacity disabled={isDisabled} key="dropdownToggle" style={[dropdownVisible && styles.iconOpen,{paddingHorizontal:8}]} onPress={(event) => { event.stopPropagation(); toggleDropdown(); }}>
                         <DropdownArrowIcon style={[styles.icon, isDisabled ? { opacity: 0.5 } : { opacity: 1 }]} fill={PRIMARY_100} />
                     </TouchableOpacity>
                 ]}
