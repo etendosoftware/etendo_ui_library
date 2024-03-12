@@ -185,7 +185,8 @@ const FileSearchInput = ({
   if (!!uploadConfig) {
     rightButtons.push(
       <Button
-        paddingHorizontal={6}
+        paddingVertical={7}
+        paddingHorizontal={0}
         typeStyle="white"
         onPress={handleFileButtonClick}
         iconLeft={

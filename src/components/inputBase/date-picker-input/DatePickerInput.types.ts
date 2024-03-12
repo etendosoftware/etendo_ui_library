@@ -8,7 +8,7 @@ export type DayItem = {
 export type DateFormat = 'DD/MM/YYYY' | 'MM/DD/YYYY';
 export type LanguageFormat = 'en-US' | 'es-ES';
 
-export interface DatePickerInputProps extends IInputBase {
+export interface DatePickerInputProps extends Omit<IInputBase, 'keyboardType'> {
     language: LanguageFormat;
     dateFormat: DateFormat;
     showCalendar?: boolean;

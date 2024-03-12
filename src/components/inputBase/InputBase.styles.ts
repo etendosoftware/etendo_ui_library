@@ -85,10 +85,8 @@ export const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     paddingVertical: 0,
-    gap: 0,
-    marginLeft: 5,
   },
   icon: {
-    marginRight: 8
+    marginRight: 8,
   },
 });

@@ -5,7 +5,5 @@ export const DEFAULT_BUTTON_CONTAINER: ViewStyle = {
   paddingHorizontal: 0,
   flexDirection: 'row',
   justifyContent: 'flex-start',
-  gap: 16,
   alignItems: 'center',
-  flexWrap: 'wrap',
 };
