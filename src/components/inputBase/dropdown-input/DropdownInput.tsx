@@ -35,6 +35,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
     const [hasMore, setHasMore] = useState<boolean>(true);
     const [loading, setLoading] = useState<boolean>(false);
     const [options, setOptions] = useState<Array<any>>([]);
+    const [loadedPages, setLoadedPages] = useState(new Set());
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [loadingMore, setLoadingMore] = useState<boolean>(false);
     const [searchOptions, setSearchOptions] = useState<Array<any>>([]);
@@ -158,17 +159,24 @@ const DropdownInput: React.FC<IDropdownInput> = ({
     /* Functions */
     // Loads options for the dropdown menu. It fetches data based on the current search query or pagination
     const loadOptions = async (isNewSearch = false) => {
-        if ((loading || loadingMore) || (!isNewSearch && !hasMore)) return;
+        if (loading || loadingMore) return;
 
         const currentPage = isNewSearch ? 1 : page + 1;
+
+        if (!isNewSearch && loadedPages.has(currentPage)) {
+            return;
+        }
 
         if (isNewSearch) {
             setLoading(true);
             setHasMore(true);
             setPage(1);
+            setOptions(staticData);
+            setLoadedPages(new Set([1]));
         } else {
             setLoadingMore(true);
             setPage(currentPage);
+            setLoadedPages(new Set(loadedPages).add(currentPage));
         }
 
         try {
@@ -179,8 +187,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
                 fetchedOptions = await fetchData.normal(currentPage, pageSize);
             }
 
-            let newOptions = isNewSearch ? [...staticData, ...fetchedOptions] : [...options, ...fetchedOptions];
-            newOptions = mergeUniqueOptions(newOptions);
+            const newOptions = isNewSearch ? [...fetchedOptions] : [...options, ...fetchedOptions];
             setOptions(newOptions);
             setHasMore(fetchedOptions.length === pageSize);
         } catch (error) {
@@ -189,11 +196,6 @@ const DropdownInput: React.FC<IDropdownInput> = ({
             setLoading(false);
             setLoadingMore(false);
         }
-    };
-
-    const mergeUniqueOptions = (optionsArray: any) => {
-        const existingOptionsSet = new Map(optionsArray.map((option: any) => [option[displayKey], option]));
-        return Array.from(existingOptionsSet.values());
     };
 
     // Footer when looking for more options
@@ -250,12 +252,6 @@ const DropdownInput: React.FC<IDropdownInput> = ({
         setDropdownVisible(false);
         setSelectedOption(option[displayKey]);
         setHasMore(true);
-
-        const updatedOptions = mergeUniqueOptions(options);
-        setOptions(updatedOptions);
-
-        const updatedSearchOptions = mergeUniqueOptions(searchOptions);
-        setSearchOptions(updatedSearchOptions);
     };
 
     // Scrolls to the selected option in the dropdown if it exists
