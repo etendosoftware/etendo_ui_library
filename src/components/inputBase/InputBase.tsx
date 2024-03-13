@@ -15,8 +15,7 @@ import { styles } from './InputBase.styles';
 import { IInputBase } from './InputBase.types';
 import { DANGER_700, NEUTRAL_500, NEUTRAL_800 } from '../../styles/colors';
 import { cursorPointer } from '../../helpers/table_utils';
-import { Grid } from './Grid';
-import { BoxIcon } from '../../assets/images/icons';
+import { GridContainer } from '../containers/gridContainer';
 
 const InputBase = ({
   value,
@@ -181,7 +180,7 @@ const InputBase = ({
             secureTextEntry={secureTextEntry}
           />
         </TouchableOpacity>
-        {!!rightButtons && <Grid gap={12} components={rightButtons} />}
+        {!!rightButtons && <GridContainer gap={12} components={rightButtons} />}
       </View>
       {!!helperText && (
         <Text

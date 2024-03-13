@@ -1,10 +1,11 @@
 import { ReactNode } from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
+import { TextStyle, ViewStyle } from 'react-native';
 
 export interface ITitleContainer {
   buttons?: ReactNode[];
-  style?: StyleProp<ViewStyle>;
-  textStyle?: StyleProp<ViewStyle>;
+  styleContainer?: ViewStyle;
+  styleGridContainer?: ViewStyle;
+  styleTitle?: TextStyle;
   buttonsGap?: number;
   title: string;
 }
