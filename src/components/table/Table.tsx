@@ -12,7 +12,7 @@ import {
 import { SkeletonRowTable } from '../secondaryComponents';
 import { NEUTRAL_300 } from '../../styles/colors';
 import TableEmpty from './components/TableEmpty';
-import { ButtonContainer } from '../containers';
+import { GridContainer } from '../containers/gridContainer';
 
 const Table = ({
   data = [],
@@ -60,7 +60,7 @@ const Table = ({
                 style={[styles.cell, col.cellStyle, { width: col.width }]}
                 key={'movementTable' + colIndex}>
                 {col.components ? (
-                  <ButtonContainer buttons={components} />
+                  <GridContainer components={components} />
                 ) : (
                   <TableCell
                     label={col.key ? item[col.key] : ''}

@@ -5,7 +5,7 @@ import { ISearchContainer } from './SearchContainer.types';
 
 import { styles } from './SearchContainer.styles';
 import { Input } from '../../input';
-import { ButtonContainer } from '../buttonContainer';
+import { GridContainer } from '../gridContainer';
 
 const SearchContainer: FC<ISearchContainer> = ({
   value,
@@ -36,7 +36,7 @@ const SearchContainer: FC<ISearchContainer> = ({
         />
       </View>
       <View style={styles.spacing} />
-      <ButtonContainer buttons={buttons} style={{ paddingVertical: 0 }} />
+      <GridContainer components={buttons} />
     </View>
   );
 };

@@ -11,7 +11,7 @@ const isNativeEnvironment = Platform.OS === 'ios' || Platform.OS === 'android';
 const {
   Alert,
   Button,
-  ButtonContainer,
+  GridContainer,
   CardDropdown,
   Cards,
   DrawerLateral,
@@ -335,7 +335,7 @@ const {
 export {
   Alert,
   Button,
-  ButtonContainer,
+  GridContainer,
   CardDropdown,
   Cards,
   DrawerLateral,
