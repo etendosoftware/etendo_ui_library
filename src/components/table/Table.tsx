@@ -12,7 +12,7 @@ import {
 import { SkeletonRowTable } from '../secondaryComponents';
 import { NEUTRAL_300 } from '../../styles/colors';
 import TableEmpty from './components/TableEmpty';
-import { GridContainer } from '../containers';
+import { GridContainer } from '../containers/gridContainer';
 
 const Table = ({
   data = [],

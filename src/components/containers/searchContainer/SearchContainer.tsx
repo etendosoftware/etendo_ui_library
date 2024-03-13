@@ -5,7 +5,7 @@ import { ISearchContainer } from './SearchContainer.types';
 
 import { styles } from './SearchContainer.styles';
 import { Input } from '../../input';
-import { GridContainer } from '../';
+import { GridContainer } from '../gridContainer';
 
 const SearchContainer: FC<ISearchContainer> = ({
   value,
