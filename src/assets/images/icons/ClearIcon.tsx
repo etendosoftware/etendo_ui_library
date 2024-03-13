@@ -6,19 +6,23 @@ import { NEUTRAL_800 } from '../../../styles/colors';
 export interface SvgImageProps {
     style?: any;
     fill?: string;
+    width?: number;
+    height?: number;
 }
 
 export const ClearIcon = ({
     style,
+    width,
+    height,
     fill = NEUTRAL_800,
 }: SvgImageProps) => {
-    const width = sizeSvg(style?.width, 24);
-    const height = sizeSvg(style?.height, 24);
+    const sizeWidth = sizeSvg(style?.width || width, 24);
+    const sizeHeight = sizeSvg(style?.height || height, 24);
 
     return (
         <Svg
-            width={width}
-            height={height}
+            width={sizeWidth}
+            height={sizeHeight}
             viewBox="0 0 10 10"
             fill="none"
             style={style}>
