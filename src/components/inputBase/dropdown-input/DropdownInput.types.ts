@@ -13,5 +13,4 @@ export interface IDropdownInput extends IInputBase {
     pageSize?: number;
     searchPlaceholder?: string;
     staticData?: any[];
-    zIndex?: number;
 }
