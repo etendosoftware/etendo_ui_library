@@ -1,10 +1,10 @@
 import React from 'react';
 import { SafeAreaView, ScrollView, Text, View } from 'react-native';
-import { GridContainer } from '../../../containers';
 import { styles } from './MaximizedView.styles';
 import { Button } from '../../../button';
 import { XIcon } from '../../../../assets/images/icons';
 import { IMaximizedViewProps } from './MaximizedView.types';
+import { GridContainer } from '../../../containers/gridContainer';
 
 const MaximizedView = ({
   buttonsToDisplay,
