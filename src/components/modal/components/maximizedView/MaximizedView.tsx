@@ -1,6 +1,6 @@
 import React from 'react';
 import { SafeAreaView, ScrollView, Text, View } from 'react-native';
-import { ButtonContainer } from '../../../containers';
+import { GridContainer } from '../../../containers';
 import { styles } from './MaximizedView.styles';
 import { Button } from '../../../button';
 import { XIcon } from '../../../../assets/images/icons';
@@ -38,9 +38,9 @@ const MaximizedView = ({
             </Text>
           </View>
           {hasActionButton && buttonsToDisplay && (
-            <ButtonContainer
-              buttons={[buttonsToDisplay[buttonsToDisplay.length - 1]]}
-              style={styles.buttonContainer}
+            <GridContainer
+              components={[buttonsToDisplay[buttonsToDisplay.length - 1]]}
+              stylesContainer={styles.buttonContainer}
             />
           )}
         </View>

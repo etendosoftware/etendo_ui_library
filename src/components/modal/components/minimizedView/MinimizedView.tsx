@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { ButtonContainer } from '../../../containers';
+import { GridContainer } from '../../../containers';
 import { styles } from './MinimizedView.styles';
 import { IMinimizedViewProps } from './MinimizedView.types';
 
@@ -64,9 +64,9 @@ const MinimizedView = ({
       )}
       <View style={styles.buttonModalContainer}>
         {buttonsToDisplay?.length && (
-          <ButtonContainer
-            buttons={buttonsToDisplay}
-            style={styles.buttonContainer}
+          <GridContainer
+            components={buttonsToDisplay}
+            stylesContainer={styles.buttonContainer}
           />
         )}
       </View>

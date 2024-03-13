@@ -9,13 +9,13 @@ import {
   ViewStyle,
 } from 'react-native';
 import React, { ReactNode, useEffect, useState } from 'react';
-import { ButtonContainer } from '../containers';
 import { Button } from '../button';
 import { CornerDownRightIcon } from '../../assets/images/icons/CornerDownRightIcon';
 import { styles } from './InputBase.styles';
 import { IInputBase } from './InputBase.types';
 import { DANGER_700, NEUTRAL_500, NEUTRAL_800 } from '../../styles/colors';
 import { cursorPointer } from '../../helpers/table_utils';
+import { GridContainer } from '../containers/gridContainer';
 
 const InputBase = ({
   value,
@@ -203,7 +203,10 @@ const InputBase = ({
           />
         </TouchableOpacity>
         {!!buttons && (
-          <ButtonContainer style={styles.buttonContainer} buttons={buttons} />
+          <GridContainer
+            stylesContainer={styles.buttonContainer}
+            components={buttons}
+          />
         )}
       </View>
       {!!helperText && (
