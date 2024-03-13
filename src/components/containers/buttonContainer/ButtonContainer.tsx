@@ -5,7 +5,7 @@ import { IButtonContainer } from './ButtonContainer.types';
 
 const ButtonContainer: FC<IButtonContainer> = ({ buttons, style }) => {
   return (
-    <View style={[DEFAULT_BUTTON_CONTAINER, style]}>
+    <View style={[DEFAULT_BUTTON_CONTAINER]}>
       {buttons.map((button, index) => (
         <View key={index}>{button}</View>
       ))}

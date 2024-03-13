@@ -126,7 +126,7 @@ const DatePickerInput = ({
     <Button
       key="calendar"
       typeStyle="white"
-      paddingHorizontal={8}
+      paddingHorizontal={0}
       paddingVertical={7}
       onPress={openCalendar}
       iconLeft={

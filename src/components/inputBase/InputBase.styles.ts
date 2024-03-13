@@ -83,7 +83,6 @@ export const styles = StyleSheet.create({
   iconRight: { width: 24, height: 24, marginLeft: 8 },
   iconSize: { width: 24, height: 24 },
   buttonContainer: {
-    flexDirection: 'row',
     paddingVertical: 0,
   },
   icon: {

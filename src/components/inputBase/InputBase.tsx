@@ -9,13 +9,14 @@ import {
   ViewStyle,
 } from 'react-native';
 import React, { ReactNode, useEffect, useState } from 'react';
-import { ButtonContainer } from '../containers';
 import { Button } from '../button';
 import { CornerDownRightIcon } from '../../assets/images/icons/CornerDownRightIcon';
 import { styles } from './InputBase.styles';
 import { IInputBase } from './InputBase.types';
 import { DANGER_700, NEUTRAL_500, NEUTRAL_800 } from '../../styles/colors';
 import { cursorPointer } from '../../helpers/table_utils';
+import { Grid } from './Grid';
+import { BoxIcon } from '../../assets/images/icons';
 
 const InputBase = ({
   value,
@@ -35,7 +36,6 @@ const InputBase = ({
   keyboardType = 'default',
 }: IInputBase) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
-  const [buttons, setButtons] = useState<ReactNode[]>([]);
 
   const onFocusChange = () => {
     setIsFocused(true);
@@ -58,9 +58,7 @@ const InputBase = ({
 
   const borderWidth: number = isFocused ? 1.5 : 1;
   const paddingVertical: number = 13 - (borderWidth - 1);
-  const paddingLeft: number = 12 - (borderWidth - 1);
-  const paddingRight: number =
-    (rightButtons?.length ? 3 : 12) - (borderWidth - 1);
+  const paddingHorizontal: number = 12 - (borderWidth - 1);
   const isEditable = onPress ? false : !isDisabled;
 
   const borderStyle = (): ViewStyle | undefined => {
@@ -111,24 +109,6 @@ const InputBase = ({
     textInputStyle.push({ outlineWidth: 0 } as any);
   }
 
-  useEffect(() => {
-    setButtons([
-      ...(rightButtons ?? []),
-      onSubmit !== undefined && (
-        <View style={{ marginLeft: 8 }}>
-          <Button
-            paddingVertical={7}
-            paddingHorizontal={8}
-            typeStyle="white"
-            onPress={onSubmit}
-            iconLeft={<CornerDownRightIcon style={styles.iconSize} />}
-            disabled={isLoading}
-          />
-        </View>
-      ),
-    ]);
-  }, [onSubmit, isLoading, rightButtons]);
-
   const handleChange = (string: string) => {
     if (onChangeText && keyboardType) {
       if (
@@ -163,10 +143,9 @@ const InputBase = ({
           styles.container,
           borderStyle(),
           {
-            borderWidth: borderWidth,
-            paddingVertical: paddingVertical,
-            paddingLeft: paddingLeft,
-            paddingRight: paddingRight,
+            paddingHorizontal,
+            paddingVertical,
+            borderWidth,
           },
         ]}>
         {!!icon && (
@@ -202,9 +181,7 @@ const InputBase = ({
             secureTextEntry={secureTextEntry}
           />
         </TouchableOpacity>
-        {!!buttons && (
-          <ButtonContainer style={styles.buttonContainer} buttons={buttons} />
-        )}
+        {!!rightButtons && <Grid gap={12} components={rightButtons} />}
       </View>
       {!!helperText && (
         <Text
