@@ -27,11 +27,6 @@ export const styles = StyleSheet.create({
         paddingRight: 8
     },
     dropdown: {
-        position: 'absolute',
-        width: '100%',
-        backgroundColor: 'white',
-        top: '100%',
-        left: 0,
         marginTop: 6,
         padding: 6,
         borderWidth: 1.5,
