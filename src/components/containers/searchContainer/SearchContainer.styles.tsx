@@ -6,7 +6,6 @@ export const styles = StyleSheet.create({
     width: isDeviceTablet ? '50%' : '100%',
   },
   spacing: {
-    width: 12,
     height: 12,
   },
 });

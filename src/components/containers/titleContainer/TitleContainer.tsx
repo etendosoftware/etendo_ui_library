@@ -2,55 +2,29 @@ import React, { FC, ReactNode, useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 import { DEFAULT } from './TitleContainer.default';
 import { ITitleContainer } from './TitleContainer.types';
-import { ButtonContainer } from '../buttonContainer';
+import { GridContainer } from '../gridContainer';
 
 const TitleContainer: FC<ITitleContainer> = ({
   buttons,
-  style,
   title,
-  textStyle,
+  styleContainer,
+  styleTitle,
+  styleGridContainer,
   buttonsGap,
 }) => {
-  const [arrayOfButtons, setArrayOfButtons] = useState<ReactNode[]>([]);
-
-  useEffect(() => {
-    // This adds a gap between buttons if it's possible using a dummy View
-    const renderButtonsWithGaps = (buttonsList: ReactNode[]) => {
-      const result = [];
-      for (let i = 0; i < buttonsList.length; i++) {
-        result.push(buttonsList[i]);
-        if (i < buttonsList.length - 1) {
-          result.push(
-            <View
-              style={[
-                DEFAULT.BUTTON_CONTAINER,
-                buttonsGap ? { width: buttonsGap } : null,
-              ]}
-              key={`view-${i}`}
-            />,
-          );
-        }
-      }
-      return result;
-    };
-
-    if (buttons) {
-      setArrayOfButtons(renderButtonsWithGaps(buttons));
-    }
-  }, [buttons, buttonsGap]);
-
   return (
-    <View style={[DEFAULT.TITLE_CONTAINER, style]}>
+    <View style={[DEFAULT.TITLE_CONTAINER, styleContainer]}>
       <Text
-        style={[DEFAULT.TITLE_STYLE, textStyle]}
+        style={[DEFAULT.TITLE_STYLE, styleTitle]}
         numberOfLines={1}
         ellipsizeMode="tail">
         {title}
       </Text>
-      {arrayOfButtons && (
-        <ButtonContainer
-          buttons={arrayOfButtons}
-          style={{ paddingVertical: 0, gap: 0 }}
+      {buttons && (
+        <GridContainer
+          components={buttons}
+          stylesContainer={styleGridContainer}
+          gap={buttonsGap}
         />
       )}
     </View>
