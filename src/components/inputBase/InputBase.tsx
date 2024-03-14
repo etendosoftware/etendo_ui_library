@@ -180,7 +180,12 @@ const InputBase = ({
             secureTextEntry={secureTextEntry}
           />
         </TouchableOpacity>
-        {!!rightButtons && <GridContainer gap={12} components={rightButtons} />}
+        {!!rightButtons && (
+          <GridContainer
+            stylesContainer={styles.buttonContainer}
+            components={rightButtons}
+          />
+        )}
       </View>
       {!!helperText && (
         <Text

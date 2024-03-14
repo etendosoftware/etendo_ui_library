@@ -24,7 +24,7 @@ const TitleContainer: FC<ITitleContainer> = ({
         <GridContainer
           components={buttons}
           stylesContainer={styleGridContainer}
-          gap={buttonsGap}
+          gapHorizontal={buttonsGap}
         />
       )}
     </View>
