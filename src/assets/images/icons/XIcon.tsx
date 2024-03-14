@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageStyle, ColorValue } from 'react-native';
+import { ColorValue } from 'react-native';
 import { Svg, Path } from 'react-native-svg';
 import { DEFAULT_COLOR_THEME } from '../../../styles/colors';
 import { sizeSvg } from '../../../helpers/svg_utils';
@@ -7,13 +7,16 @@ import { sizeSvg } from '../../../helpers/svg_utils';
 export interface SvgImageProps {
   style?: any;
   fill?: ColorValue;
+  width?: number;
+  height?: number;
 }
 
-export const XIcon = ({ style, fill = DEFAULT_COLOR_THEME }: SvgImageProps) => {
-  const width = sizeSvg(style?.width, 24);
-  const height = sizeSvg(style?.height, 24);
+export const XIcon = ({ style, width, height, fill = DEFAULT_COLOR_THEME, }: SvgImageProps) => {
+  const sizeWidth = sizeSvg(style?.width || width, 24);
+  const sizeHeight = sizeSvg(style?.height || height, 24);
+
   return (
-    <Svg width={width} height={height} viewBox="0 0 24 24" fill="none">
+    <Svg width={sizeWidth} height={sizeHeight} viewBox="0 0 24 24" fill="none">
       <Path
         fill-rule="evenodd"
         clip-rule="evenodd"
