@@ -9,7 +9,7 @@ import { disableOutline } from '../../../helpers/table_utils';
 import { isWebPlatform } from '../../../helpers/functions_utils';
 import { NEUTRAL_600, PRIMARY_100 } from '../../../styles/colors';
 import { DropdownArrowIcon } from '../../../assets/images/icons/DropdownArrowIcon';
-import { ClearIcon } from '../../../assets/images/icons';
+import { XIcon } from '../../../assets/images/icons';
 
 const DropdownInput: React.FC<IDropdownInput> = ({
   title,
@@ -40,6 +40,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
   const [loadedPages, setLoadedPages] = useState(new Set());
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [loadingMore, setLoadingMore] = useState<boolean>(false);
+  const [isDropdownUp, setIsDropdownUp] = useState<boolean>(false);
   const [searchOptions, setSearchOptions] = useState<Array<any>>([]);
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
   const [inputPosition, setInputPosition] = useState({ x: 0, y: 0, width: 0 });
@@ -65,7 +66,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
         />
         {searchQuery?.length > 0 && (
           <TouchableOpacity onPress={(event) => { event.stopPropagation(); clearSearch(); }} disabled={isDisabled}>
-            <ClearIcon fill={PRIMARY_100} width={12} height={12} style={[styles.cancelIcon, isDisabled ? { opacity: 0.5 } : { opacity: 1 }]} />
+            <XIcon fill={PRIMARY_100} width={20} height={20} style={[styles.cancelIcon, isDisabled ? { opacity: 0.5 } : { opacity: 1 }]} />
           </TouchableOpacity>
         )}
       </View>
@@ -96,6 +97,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
   const renderDropdownContent = () => {
     const currentOptions = searchQuery?.length > 0 ? searchOptions : options;
     const currentOptionsLength = currentOptions?.length;
+    const containerHeight = OPTION_HEIGHT * maxVisibleOptions;
 
     return (
       <Modal transparent={true} animationType="fade" visible={dropdownVisible} onRequestClose={toggleDropdown}>
@@ -122,24 +124,26 @@ const DropdownInput: React.FC<IDropdownInput> = ({
                   searchPlaceholder
                 )}
               {loading ? (
-                <ActivityIndicator size="small" color={PRIMARY_100} style={{ marginVertical: 4 }} />
+                <View style={{ height: isDropdownUp ? containerHeight : 'auto' }}>
+                  <ActivityIndicator size="small" color={PRIMARY_100} style={{ marginVertical: 4 }} />
+                </View>
+              ) : currentOptionsLength > 0 ? (
+                <FlatList
+                  ref={flatListRef}
+                  style={{ height: isDropdownUp ? containerHeight : getDropdownHeight(currentOptionsLength, maxVisibleOptions) }}
+                  data={currentOptions}
+                  renderItem={({ item }) => renderDropdownOption(item)}
+                  keyExtractor={(item, index) => `${item.value}-${index}`}
+                  onEndReached={handleEndReached}
+                  getItemLayout={(_, index) => (
+                    { length: OPTION_HEIGHT, offset: OPTION_HEIGHT * index, index }
+                  )}
+                  ListFooterComponent={renderFooter}
+                />
               ) : (
-                currentOptionsLength > 0 ? (
-                  <FlatList
-                    ref={flatListRef}
-                    style={{ height: getDropdownHeight(currentOptionsLength, maxVisibleOptions) }}
-                    data={currentOptions}
-                    renderItem={({ item }) => renderDropdownOption(item)}
-                    keyExtractor={(item, index) => `${item.value}-${index}`}
-                    onEndReached={handleEndReached}
-                    getItemLayout={(_, index) => (
-                      { length: OPTION_HEIGHT, offset: OPTION_HEIGHT * index, index }
-                    )}
-                    ListFooterComponent={renderFooter}
-                  />
-                ) : (
+                <View style={{ height: isDropdownUp ? containerHeight : 'auto' }}>
                   <Text style={styles.noResultsText}>{noResultsText}</Text>
-                )
+                </View>
               )}
             </View>
           </View>
@@ -156,7 +160,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
       <View style={styles.selectedOptionContainer}>
         <Text numberOfLines={1} ellipsizeMode="tail">{selectedOption}</Text>
         <TouchableOpacity onPress={deselectOption}>
-          <ClearIcon fill={NEUTRAL_600} width={12} height={12} style={[styles.cancelIcon, isDisabled ? { opacity: 0.5 } : { opacity: 1 }]} />
+          <XIcon fill={NEUTRAL_600} width={20} height={20} style={[styles.cancelIcon, isDisabled ? { opacity: 0.5 } : { opacity: 1 }]} />
         </TouchableOpacity>
       </View>
     );
@@ -251,28 +255,30 @@ const DropdownInput: React.FC<IDropdownInput> = ({
   const adjustDropdownPosition = useCallback(() => {
     inputContainerRef.current.measure((x: number, y: number, width: number, height: number, pageX: number, pageY: number) => {
       const windowHeight = Dimensions.get('window').height;
-      const estimatedDropdownHeight = getDropdownHeight(options.length, maxVisibleOptions);
-      const spaceAbove = pageY;
       const spaceBelow = windowHeight - pageY - height;
+      const dropdownHeight = getDropdownHeight(options.length, maxVisibleOptions);
+      const isDropdownUp = dropdownHeight > spaceBelow;
+      const extraOffsetTop = title ? -4 : -28;
+      const extraOffsetBottom = helperText ? -22 : 0;
 
-      const extraOffsetTop = title ? -20 : -28;
-
-      if (estimatedDropdownHeight < spaceBelow) {
-        setInputPosition({ x: pageX, y: pageY + height, width });
-      } else if (estimatedDropdownHeight < spaceAbove) {
-        setInputPosition({ x: pageX, y: pageY - estimatedDropdownHeight - OPTION_HEIGHT + extraOffsetTop, width });
+      if (isDropdownUp) {
+        setInputPosition({ x: pageX, y: pageY - dropdownHeight - OPTION_HEIGHT + extraOffsetTop, width });
+        setIsDropdownUp(true);
       } else {
-        const preferTop = spaceAbove > spaceBelow;
-        const newY = preferTop ? pageY - estimatedDropdownHeight - OPTION_HEIGHT + extraOffsetTop : pageY + height;
-        setInputPosition({ x: pageX, y: newY, width });
+        setInputPosition({ x: pageX, y: pageY + height + extraOffsetBottom, width });
+        setIsDropdownUp(false);
       }
     });
   }, [options.length, maxVisibleOptions, title, dropdownVisible]);
 
   // Calculates the dropdown's height based on the number of options and the maximum number of visible options
-  const getDropdownHeight = (optionsLength: number, maxVisibleOptions: number) => {
-    const numberOfOptions = Math.min(optionsLength, maxVisibleOptions);
-    return numberOfOptions * OPTION_HEIGHT;
+  const getDropdownHeight = (optionsLength: number, maxVisibleOptions: number, isDropdownUp: boolean = false) => {
+    if (isDropdownUp) {
+      return maxVisibleOptions * OPTION_HEIGHT;
+    } else {
+      const numberOfOptions = Math.min(optionsLength, maxVisibleOptions);
+      return numberOfOptions * OPTION_HEIGHT;
+    }
   };
 
   // Deselects the currently selected option and triggers the onSelect callback with an empty value
