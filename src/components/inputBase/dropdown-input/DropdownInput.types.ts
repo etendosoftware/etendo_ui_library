@@ -1,6 +1,6 @@
 import { IInputBase } from "../InputBase.types";
 
-export interface IDropdownInput extends IInputBase {
+export interface IDropdownInput extends Omit<IInputBase, 'keyboardType' | 'secureTextEntry'> {
     displayKey: keyof any;
     fetchData?: {
         normal?: (page: number, size: number) => Promise<any[]>;

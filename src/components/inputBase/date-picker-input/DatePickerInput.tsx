@@ -22,7 +22,6 @@ import {
   MonthItemProps,
 } from './DatePickerInput.types';
 import {
-  ArrowLeftIcon,
   CalendarIcon,
   ChevronDownIcon,
   ChevronLeftIcon,
@@ -45,9 +44,7 @@ const DatePickerInput = ({
   isError,
   value,
   onChangeText,
-  onSubmit,
   icon,
-  isLoading,
   language = 'en-US',
   dateFormat = 'MM/DD/YYYY',
   minDate,
@@ -132,7 +129,7 @@ const DatePickerInput = ({
       iconLeft={
         <CalendarIcon style={{ width: 24, height: 24 }} fill={PRIMARY_100} />
       }
-      disabled={isDisabled || isLoading}
+      disabled={isDisabled}
     />,
   ];
 
@@ -592,8 +589,6 @@ const DatePickerInput = ({
         icon={icon}
         onBlur={handleBlur}
         rightButtons={rightButtons}
-        onSubmit={onSubmit}
-        isLoading={isLoading}
         keyboardType="numeric"
         {...props}
       />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import InputBase from '../InputBase';
 import {
   CheckCircleFillIcon,
@@ -8,14 +8,16 @@ import { ITextInput } from './TextInput.types';
 import { DANGER_600, SUCCESS_600 } from '../../../styles/colors';
 import { View } from 'react-native';
 import { styles } from './TextInput.style';
+import { ButtonProps } from '../../button/Button.types';
+import { SvgImageProps } from '../InputBase.types';
 
 const TextInput = ({
   validation = 'none',
   rightButtons,
   ...inputBaseProps
 }: ITextInput) => {
-  const getValidation = (): React.ReactNode[] | undefined => {
-    let icons: React.ReactNode[] = [];
+  const getValidation = (): ReactElement<ButtonProps | SvgImageProps>[] | undefined => {
+    let icons: ReactElement<ButtonProps | SvgImageProps>[] = [];
 
     if (validation === 'success') {
       icons.push(

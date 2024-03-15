@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { View, Text, TouchableOpacity, FlatList, ActivityIndicator, TextInput, Dimensions, Modal } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList, ActivityIndicator, TextInput, Dimensions, Modal, Pressable } from 'react-native';
 
 import InputBase from '../InputBase';
 import { styles } from './DropdownInput.styles';
@@ -403,15 +403,15 @@ const DropdownInput: React.FC<IDropdownInput> = ({
 
   return (
     <View style={styles.wrapper} ref={dropdownRef}>
-      <View ref={inputContainerRef}>
+      <TouchableOpacity ref={inputContainerRef} activeOpacity={1}>
         <InputBase
           {...inputBaseProps}
           value={selectedOption}
           onChangeText={onSelect}
           isDisabled={isDisabled}
           rightButtons={[
-            <TouchableOpacity disabled={isDisabled} key="dropdownToggle" style={[dropdownVisible && styles.iconOpen, { paddingHorizontal: 8 }]} onPress={(event) => { event.stopPropagation(); toggleDropdown(); }}>
-              <DropdownArrowIcon style={[styles.icon, isDisabled ? { opacity: 0.5 } : { opacity: 1 }]} fill={PRIMARY_100} />
+            <TouchableOpacity disabled={isDisabled} key="dropdownToggle" style={[dropdownVisible && styles.iconOpen]} onPress={(event) => { event.stopPropagation(); toggleDropdown(); }}>
+              <DropdownArrowIcon style={[styles.icon]} fill={PRIMARY_100} />
             </TouchableOpacity>
           ]}
           placeholder={placeholder}
@@ -419,7 +419,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
           title={title}
           helperText={helperText}
         />
-      </View>
+      </TouchableOpacity>
       {dropdownVisible && renderDropdownContent()}
     </View>
   );
