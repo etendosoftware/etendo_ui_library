@@ -7,7 +7,6 @@ import {
   ViewStyle,
 } from 'react-native';
 import { spaceBetween, styles, widthOptions } from './Notification.styles';
-import { PointIcon } from '../../../../assets/images/icons/PointIcon';
 import {
   NotificationOptionProps,
   OptionNotificationType,
@@ -20,6 +19,7 @@ import {
   SECONDARY_100,
   SUCCESS_100,
 } from '../../../../styles/colors';
+import { MinusCircleIcon } from '../../../../assets/images/icons';
 
 const NotificationsOptions = ({
   optionsNotifications,
@@ -82,7 +82,7 @@ const NotificationsOptions = ({
                     onOptionSelected(optionNotificationItem, index)
                   }>
                   <View style={styles.optionImage}>
-                    <PointIcon
+                    <MinusCircleIcon
                       fill={getOptionImageType(optionNotificationItem?.type)}
                       style={styles.optionImageSize}
                     />
