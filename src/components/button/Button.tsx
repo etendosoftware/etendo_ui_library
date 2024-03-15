@@ -4,6 +4,7 @@ import {
   Pressable,
   Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
 import {
   NEUTRAL_50,
@@ -28,6 +29,7 @@ const Button = ({
   paddingHorizontal = 12,
   paddingVertical = 12,
   loading = false,
+  metadata,
 }: ButtonProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -43,6 +45,7 @@ const Button = ({
         return PRIMARY_100;
     }
   };
+
   const getHoveredTextColorAndViewColor = (typeStyle: ButtonStyleType) => {
     switch (typeStyle) {
       case 'white':
@@ -118,9 +121,9 @@ const Button = ({
     if (isHovered && !loading) {
       return isHovered
         ? getHoveredTextColorAndViewColor(typeStyle)
-        : ButtonStyleVariant[typeStyle].imageColor;
+        : ButtonStyleVariant[typeStyle]?.imageColor;
     }
-    return ButtonStyleVariant[typeStyle].imageColor;
+    return ButtonStyleVariant[typeStyle]?.imageColor;
   };
 
   const stateSizeIndicator = (iconComponent: React.ReactElement) => {
@@ -152,21 +155,21 @@ const Button = ({
       );
     }
 
-    return React.cloneElement(icon, {
-      style: {
-        width: icon?.props?.style?.width || 16,
-        height: icon?.props?.style?.height || 16,
-        marginRight,
-        marginLeft,
-      },
-      fill: iconColor,
-    });
+    return (
+      <View style={{ marginRight, marginLeft }}>
+        {React.cloneElement(icon, {
+          style: {
+            width: icon?.props?.style?.width || 16,
+            height: icon?.props?.style?.height || 16,
+          },
+          fill: icon?.props?.fill || iconColor,
+        })}
+      </View>
+    );
   };
 
   const handleOnPress = () => {
-    if (onPress) {
-      onPress();
-    }
+    onPress && (metadata ? onPress(metadata) : onPress());
   };
   return (
     <TouchableOpacity disabled={disabled ?? loading}>

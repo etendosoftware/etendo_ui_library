@@ -102,10 +102,9 @@ export const styles = StyleSheet.create({
   },
   emptyStateConteiner: {
     display: 'flex',
-    flexDirection:'column',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FAFAFA',
     height: 400,
     width: '100%',
   },
@@ -116,11 +115,13 @@ export const styles = StyleSheet.create({
     lineHeight: 28,
     marginTop: 25,
     maxWidth: '80%',
+    textAlign: 'center',
   },
   emptyTextSubtitle: {
     color: NEUTRAL_700,
     fontSize: 14,
     fontWeight: '600',
     lineHeight: 28,
+    textAlign: 'center',
   },
 });

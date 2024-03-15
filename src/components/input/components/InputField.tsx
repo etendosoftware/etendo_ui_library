@@ -18,8 +18,8 @@ import {
   InputFieldVariant,
   KeyboardTypes,
 } from '../Input.types';
-import { ShowPasswordIcon } from '../../../assets/images/icons/ShowPasswordIcon';
-import { HidePasswordIcon } from '../../../assets/images/icons/HidePasswordIcon';
+import { EyeIcon } from '../../../assets/images/icons/EyeIcon';
+import { EyeOffIcon } from '../../../assets/images/icons/EyeOffIcon';
 import InputOptions from './InputOptions';
 import { NEUTRAL_0, NEUTRAL_400, NEUTRAL_600 } from '../../../styles/colors';
 import { disableOutline } from '../../../helpers/table_utils';
@@ -46,6 +46,14 @@ const InputField = ({
   onOptionSelected,
   onFocus,
   onBlur,
+  language,
+  dateFormat,
+  showCalendar,
+  isLoadingMoreData,
+  onLoadMoreData,
+  currentPage,
+  isPagination,
+  isStopLoadMoreData,
 }: InputFieldProps) => {
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(true);
@@ -75,16 +83,12 @@ const InputField = ({
   };
 
   useEffect(() => {
-    if (dataPicker) {
-      setDataOptionsFilter(dataPicker);
-    }
-  }, [dataPicker]);
+    setDataOptionsFilter(dataPicker);
 
-  useEffect(() => {
     if (showOptions) {
       getTopLeft();
     }
-  }, []);
+  }, [dataPicker]);
 
   const getTopLeft = () => {
     if (refComponent.current) {
@@ -128,16 +132,23 @@ const InputField = ({
     }
   };
 
-  const handleOnChangeFilterText = (filterText: string) => {
-    setFilterValue(filterText);
-    if (displayKey)
+  const handleOnChangeFilterText = (filterText?: string) => {
+    setFilterValue(filterText || '');
+
+    if (displayKey) {
+      if (isPagination && onLoadMoreData) {
+        onLoadMoreData(0, filterText);
+        return;
+      }
+
+      const lowerCaseFilterText = filterText?.toLocaleLowerCase() || '';
+
       setDataOptionsFilter(
         dataPicker.filter((item: any) =>
-          item[displayKey]
-            .toLocaleLowerCase()
-            .includes(filterText.toLocaleLowerCase()),
+          item[displayKey].toLocaleLowerCase().includes(lowerCaseFilterText),
         ),
       );
+    }
   };
 
   const handleOnClose = () => {
@@ -201,9 +212,7 @@ const InputField = ({
     const fillValue = disabled ? NEUTRAL_400 : undefined;
 
     if (type === InputFieldVariant.TextInputPassword) {
-      const PasswordComponent = showPassword
-        ? HidePasswordIcon
-        : ShowPasswordIcon;
+      const PasswordComponent = showPassword ? EyeOffIcon : EyeIcon;
 
       return (
         <PasswordComponent style={styles.inputImageSize} fill={fillValue} />
@@ -256,8 +265,7 @@ const InputField = ({
           { height },
         ]}
         disabled={disabled || configField.disabledField}
-        onPress={handleOnPress}
-      >
+        onPress={handleOnPress}>
         {configField?.type === InputFieldVariant.TextInput && (
           <TextInput
             editable={!disabled || !configField.disabledField}
@@ -281,8 +289,7 @@ const InputField = ({
           <Text
             numberOfLines={1}
             ellipsizeMode="tail"
-            style={[getStyleText(), disableOutline(), styleField.textDefault]}
-          >
+            style={[getStyleText(), disableOutline(), styleField.textDefault]}>
             {getText()}
           </Text>
         )}
@@ -290,8 +297,7 @@ const InputField = ({
           <TouchableOpacity
             onPress={handlePressImage}
             style={styles.buttonContainerInputField}
-            disabled={isAreaDisabled()}
-          >
+            disabled={isAreaDisabled()}>
             {getImage(configField.image)}
           </TouchableOpacity>
         )}
@@ -309,6 +315,11 @@ const InputField = ({
           showSearchInPicker={showSearchInPicker}
           placeholderPickerSearch={placeholderPickerSearch}
           dataPicker={dataPicker}
+          onLoadMoreData={onLoadMoreData}
+          isLoadingMoreData={isLoadingMoreData}
+          currentPage={currentPage}
+          isPagination={isPagination}
+          isStopLoadMoreData={isStopLoadMoreData}
         />
       </TouchableOpacity>
     </View>

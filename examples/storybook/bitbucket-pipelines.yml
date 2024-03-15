@@ -1,0 +1,16 @@
+pipelines:
+  default:
+    - step:
+        name: Chromatic Deployment
+        image: node:20.3.0
+        script:
+          - yarn install
+          - npx chromatic --project-token=chpt_4ed23761854a652
+  branches:
+    develop:
+      - step:
+          name: Chromatic Deployment
+          image: node:20.3.0
+          script:
+            - yarn install
+            - npx chromatic --project-token=chpt_4ed23761854a652

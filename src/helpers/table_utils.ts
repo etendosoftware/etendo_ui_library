@@ -1,10 +1,11 @@
-import { NEUTRAL_0, QUATERNARY_10, TERTIARY_30 } from '../styles/colors';
+import { ColumnsMetadata } from '../components/table/Table.types';
+import { NEUTRAL_0, QUATERNARY_10 } from '../styles/colors';
 import { Dimensions, PixelRatio, Platform, ViewStyle } from 'react-native';
 // getting screen width and height
 const width = Dimensions.get('screen').width;
 const height = Dimensions.get('screen').height;
 
-const isWeb = Platform.OS === 'web';
+export const isWeb = Platform.OS === 'web';
 
 export const removeHeaderBorder = (header?: string) => {
   return (
@@ -36,10 +37,11 @@ export const isTablet = () => {
     (adjustedWidth >= 1000 || adjustedHeight >= 1000)
   ) {
     return true;
-  } else
+  } else {
     return (
       pixelDensity === 2 && (adjustedWidth >= 1920 || adjustedHeight >= 1920)
     );
+  }
 };
 
 export const isDeviceTablet = isTablet();
@@ -48,4 +50,23 @@ export const disableOutline = (): ViewStyle | undefined => {
   if (isWeb) {
     return { outline: 'none' } as ViewStyle;
   }
+};
+
+export const cursorPointer = (): ViewStyle | undefined => {
+  if (isWeb) {
+    return { cursor: 'pointer' } as ViewStyle;
+  }
+};
+
+export const findPrimaryId = (col: ColumnsMetadata[], data: any) => {
+  let primary: string = '';
+  for (const element of col) {
+    if (element.primary === true) {
+      if (element.key) {
+        primary = data[element.key];
+        break;
+      }
+    }
+  }
+  return primary;
 };

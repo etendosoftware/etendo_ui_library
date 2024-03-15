@@ -3,4 +3,4 @@ import Table from './Table';
 import TableCell from './components/TableCell';
 import TableCellEdit from './components/TableCellEdit';
 
-export {TableHeaders, Table, TableCell, TableCellEdit};
+export { TableHeaders, Table, TableCell, TableCellEdit };

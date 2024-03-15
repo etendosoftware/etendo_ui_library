@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { inputStyleVariants, inputVariants, styles } from './Input.style';
 import { InputProps } from './Input.types';
 import { InputTitle, InputField, InputHelperText } from './index';
+import { NEUTRAL_50 } from '../../styles/colors';
 
 const Input = ({
   value,
@@ -17,7 +18,7 @@ const Input = ({
   keyboardType,
   displayKey,
   dataPicker,
-  backgroundColor,
+  backgroundColor = NEUTRAL_50,
   showOptionsAmount,
   showSearchInPicker,
   height,
@@ -29,6 +30,12 @@ const Input = ({
   onOptionSelected,
   typeField,
   isError,
+  showCalendar,
+  currentPage,
+  isLoadingMoreData,
+  onLoadMoreData,
+  isPagination,
+  isStopLoadMoreData,
 }: InputProps) => {
   const stateStyle = () => {
     if (typeField === 'readOnly') {
@@ -52,7 +59,8 @@ const Input = ({
     return disabled;
   };
 
-  const showFilterSearch = dataPicker && (showSearchInPicker ?? dataPicker?.length > 16);
+  const showFilterSearch =
+    dataPicker && (showSearchInPicker ?? dataPicker?.length > 16);
 
   return (
     <View style={styles.inputContainer}>
@@ -85,6 +93,12 @@ const Input = ({
         displayKey={displayKey}
         backgroundColor={backgroundColor}
         height={height}
+        showCalendar={showCalendar}
+        currentPage={currentPage}
+        onLoadMoreData={onLoadMoreData}
+        isLoadingMoreData={isLoadingMoreData}
+        isPagination={isPagination}
+        isStopLoadMoreData={isStopLoadMoreData}
       />
       <InputHelperText
         label={helperText}

@@ -3,10 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import { paginationStyleVariant } from './Pagination.styles';
 import { PaginationProps } from './Pagination.types';
-import { ArrowLeftIcon } from '../../assets/images/icons/ArrowLeftIcon';
-import { ArrowFirstIcon } from '../../assets/images/icons/ArrowFirstIcon';
-import { ArrowRightIcon } from '../../assets/images/icons/ArrowRightIcon';
-import { ArrowLastIcon } from '../../assets/images/icons/ArrowLastIcon';
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  SkipbackIcon,
+  SkipforewardIcon,
+} from '../../assets/images/icons';
 
 /* Pagination component */
 const Pagination = ({
@@ -55,26 +57,22 @@ const Pagination = ({
       <View style={paginationStyleVariant.primary.container}>
         <TouchableOpacity
           disabled={page <= 1 || totalData === 0}
-          onPress={backToFirstPage}
-        >
-          <ArrowFirstIcon
+          onPress={backToFirstPage}>
+          <SkipbackIcon
             style={{
-              height: 10,
-              width: 10,
-              marginRight: 10,
+              height: 24,
+              width: 24,
             }}
           />
         </TouchableOpacity>
 
         <TouchableOpacity
           disabled={page <= 1 || totalData === 0}
-          onPress={backPage}
-        >
-          <ArrowLeftIcon
+          onPress={backPage}>
+          <ChevronLeftIcon
             style={{
-              height: 10,
-              width: 10,
-              marginRight: 10,
+              height: 26,
+              width: 26,
             }}
           />
         </TouchableOpacity>
@@ -90,13 +88,11 @@ const Pagination = ({
           disabled={page === pageNumbers.length || totalData === 0}
           onPress={() => {
             nextPage();
-          }}
-        >
-          <ArrowRightIcon
+          }}>
+          <ChevronRightIcon
             style={{
-              height: 10,
-              width: 10,
-              marginRight: 10,
+              height: 26,
+              width: 26,
             }}
           />
         </TouchableOpacity>
@@ -111,13 +107,11 @@ const Pagination = ({
                 totalData - (totalData % amountDataPerPage) - 8,
               );
             }
-          }}
-        >
-          <ArrowLastIcon
+          }}>
+          <SkipforewardIcon
             style={{
-              height: 10,
-              width: 10,
-              marginRight: 10,
+              height: 24,
+              width: 24,
             }}
           />
         </TouchableOpacity>
