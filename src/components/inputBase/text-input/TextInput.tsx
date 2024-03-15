@@ -5,7 +5,7 @@ import {
   XCircleFillIcon,
 } from '../../../assets/images/icons';
 import { ITextInput } from './TextInput.types';
-import { DANGER_600, SUCCESS_600 } from '../../../styles/colors';
+import { DANGER_600, NEUTRAL_500, SUCCESS_600 } from '../../../styles/colors';
 import { View } from 'react-native';
 import { styles } from './TextInput.style';
 import { ButtonProps } from '../../button/Button.types';
@@ -14,16 +14,19 @@ import { SvgImageProps } from '../InputBase.types';
 const TextInput = ({
   validation = 'none',
   rightButtons,
+  isDisabled,
   ...inputBaseProps
 }: ITextInput) => {
-  const getValidation = (): ReactElement<ButtonProps | SvgImageProps>[] | undefined => {
+  const getValidation = ():
+    | ReactElement<ButtonProps | SvgImageProps>[]
+    | undefined => {
     let icons: ReactElement<ButtonProps | SvgImageProps>[] = [];
 
     if (validation === 'success') {
       icons.push(
         <View style={styles.iconContainer}>
           <CheckCircleFillIcon
-            fill={SUCCESS_600}
+            fill={isDisabled ? NEUTRAL_500 : SUCCESS_600}
             style={styles.icon}
           />
         </View>,
@@ -32,7 +35,7 @@ const TextInput = ({
       icons.push(
         <View style={styles.iconContainer}>
           <XCircleFillIcon
-            fill={DANGER_600}
+            fill={isDisabled ? NEUTRAL_500 : DANGER_600}
             style={styles.icon}
           />
         </View>,
@@ -45,7 +48,13 @@ const TextInput = ({
     return icons?.length ? icons : undefined;
   };
 
-  return <InputBase rightButtons={getValidation()} {...inputBaseProps} />;
+  return (
+    <InputBase
+      isDisabled={isDisabled}
+      rightButtons={getValidation()}
+      {...inputBaseProps}
+    />
+  );
 };
 
 export default TextInput;

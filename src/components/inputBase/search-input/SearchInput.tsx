@@ -4,25 +4,30 @@ import { SearchIcon } from '../../../assets/images/icons';
 import Button from '../../button/Button';
 import { ISearchInput } from './SearchInput.types';
 import { styles } from './SearchInput.style';
+import { RightButtons } from '../InputBase.types';
 
-const SearchInput = ({ onSubmit, ...inputBaseProps }: ISearchInput) => {
+const SearchInput = ({ onSubmit,rightButtons, ...inputBaseProps }: ISearchInput) => {
   const handleOnPress = () => {
     if (onSubmit) {
       onSubmit(inputBaseProps?.value ?? '');
     }
   };
-  return (
-    <InputBase
-      {...inputBaseProps}
-      rightButtons={[
-        <Button
+  const SearchButton = (
+    <Button
           typeStyle={'white'}
           paddingHorizontal={0}
           paddingVertical={7}
           onPress={handleOnPress}
           iconLeft={<SearchIcon style={styles.icon} />}
         />
-      ]}
+  );
+  let buttons: RightButtons | undefined = rightButtons;
+    buttons = buttons ? [...buttons, SearchButton] : [SearchButton];
+  
+  return (
+    <InputBase
+      {...inputBaseProps}
+      rightButtons={buttons}
     />
   );
 };

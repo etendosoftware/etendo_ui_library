@@ -36,7 +36,9 @@ const InputBase = ({
   const isEditable = onPress ? false : !isDisabled;
 
   const onFocusChange = () => {
-    setIsFocused(true);
+    if(!isDisabled){
+      setIsFocused(true);
+    }
   };
 
   const onBlurChange = () => {
@@ -44,9 +46,9 @@ const InputBase = ({
     onBlur?.();
   };
 
-  const determineColor = (isText?: boolean) => {
-    if (isText) {
-      return textColorStyle();
+  const determineColor = (icon?:boolean) => {
+    if (icon) {
+      return iconColorStyle();
     }
     if (isDisabled) {
       return NEUTRAL_500;
@@ -68,6 +70,21 @@ const InputBase = ({
     return PRIMARY_100;
   };
 
+   const iconColorStyle = (): ColorValue => {
+    if (isDisabled) {
+      return NEUTRAL_500;
+    }
+
+    if (isFocused) {
+      return PRIMARY_100;
+    }
+    if (isError && !isFocused) {
+      return DANGER_700;
+    }
+    return PRIMARY_100;
+  };
+
+
   const textInputStyle = [styles.textInput, { color: textColorStyle() }];
 
   if (Platform.OS === 'web') {
@@ -75,7 +92,7 @@ const InputBase = ({
   }
 
   const handleChange = (string: string) => {
-    if (onChangeText && keyboardType) {
+    if (onChangeText) {
       if (
         ['numeric', 'number-pad', 'phone-pad', 'decimal-pad'].includes(
           keyboardType,
@@ -95,7 +112,7 @@ const InputBase = ({
     if (!icon) return null;
     const { style = {}, ...otherIconProps } = icon.props;
     return React.cloneElement(icon, {
-      fill: determineColor(),
+      fill: determineColor(true),
       style: {
         ...style,
         height: style.height || styles.icon.height,
@@ -129,7 +146,7 @@ const InputBase = ({
           <View style={styles.iconContainer}>
             {React.cloneElement(icon, {
               style: styles.icon,
-              fill: determineColor(),
+              fill: determineColor(true),
             })}
           </View>
         )}
@@ -164,7 +181,8 @@ const InputBase = ({
               modifiedProps.paddingHorizontal = modifiedProps?.paddingHorizontal || 0;
               modifiedProps.iconLeft = determineIconStyles(iconLeft);
               modifiedProps.iconRight = determineIconStyles(iconRight);
-              
+              modifiedProps.text = ''
+
               return (
                 <ButtonComponent.type
                   {...modifiedProps}
