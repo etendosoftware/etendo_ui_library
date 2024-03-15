@@ -162,7 +162,7 @@ const Button = ({
             width: icon?.props?.style?.width || 16,
             height: icon?.props?.style?.height || 16,
           },
-          fill: iconColor,
+          fill: icon?.props?.fill || iconColor,
         })}
       </View>
     );

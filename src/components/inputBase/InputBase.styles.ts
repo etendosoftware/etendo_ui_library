@@ -1,14 +1,5 @@
 import { StyleSheet } from 'react-native';
-import {
-  DANGER_600,
-  DANGER_700,
-  NEUTRAL_1000,
-  NEUTRAL_400,
-  NEUTRAL_50,
-  NEUTRAL_500,
-  NEUTRAL_800,
-  PRIMARY_100,
-} from '../../styles/colors';
+import { NEUTRAL_50, NEUTRAL_800, PRIMARY_100 } from '../../styles/colors';
 
 export const styles = StyleSheet.create({
   title: {
@@ -28,38 +19,10 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
-  containerIsError: {
-    borderColor: DANGER_600,
-  },
-  containerIsDisabled: {
-    borderColor: NEUTRAL_400,
-  },
-  containerPlaceholder: {
-    borderColor: NEUTRAL_400,
-  },
-  iconPlaceholder: {
-    color: NEUTRAL_800,
-  },
-  iconIsDisabled: {
-    color: NEUTRAL_500,
-  },
-  iconIsError: {
-    color: NEUTRAL_800,
-  },
-  iconIsFocus: {
-    color: NEUTRAL_1000,
-  },
-  textPlaceholder: {
-    color: NEUTRAL_500,
-  },
-  textIsError: {
-    color: DANGER_700,
-  },
-  textIsFocus: {
-    color: NEUTRAL_800,
-  },
-  textIsDisabled: {
-    color: NEUTRAL_500,
+  containerInput: {
+    height: 48,
+    backgroundColor: NEUTRAL_50,
+    flex: 1,
   },
   textInput: {
     paddingHorizontal: 0,
@@ -79,14 +42,15 @@ export const styles = StyleSheet.create({
     lineHeight: 22,
     letterSpacing: -0.14,
   },
-  iconLeft: { width: 24, height: 24, marginRight: 8 },
-  iconRight: { width: 24, height: 24, marginLeft: 8 },
-  iconSize: { width: 24, height: 24 },
-  buttonContainer: {
-    flexDirection: 'row',
-    paddingVertical: 0,
+  gridContainer: {
+    alignItems: 'center',
+    paddingLeft: 12,
+  },
+  iconContainer: {
+    marginRight: 8,
   },
   icon: {
-    marginRight: 8,
+    width: 24,
+    height: 24,
   },
 });

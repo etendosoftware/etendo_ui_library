@@ -1,5 +1,17 @@
-import React, { useState, useRef, ReactNode, useEffect } from 'react';
-import { View, TouchableOpacity, Text, SafeAreaView } from 'react-native';
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  ReactElement,
+  JSXElementConstructor,
+} from 'react';
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  SafeAreaView,
+  ButtonProps,
+} from 'react-native';
 import InputBase from '../InputBase';
 
 // Import styles
@@ -16,7 +28,11 @@ import { FileSearchInputProps } from './FileSearchInput.types';
 import { Button } from '../../button';
 import { SkeletonItem } from '../../secondaryComponents';
 import { isWebPlatform } from '../../../helpers/functions_utils';
-import { PaperclipIcon } from '../../../assets/images/icons';
+import {
+  CornerDownRightIcon,
+  PaperclipIcon,
+} from '../../../assets/images/icons';
+import { RightButtons, SvgImageProps } from '../InputBase.types';
 
 // Import DocumentPicker for mobile platforms only
 let DocumentPicker: any = null;
@@ -44,6 +60,7 @@ const FileSearchInput = ({
   onError,
   uploadConfig,
   maxFileSize = 512,
+  rightButtons,
   ...inputBaseProps
 }: FileSearchInputProps) => {
   // States
@@ -156,6 +173,7 @@ const FileSearchInput = ({
       } catch (error) {
         if (!DocumentPicker.isCancel(error)) {
           console.error(error);
+
           onError?.(error);
         }
       }
@@ -179,21 +197,37 @@ const FileSearchInput = ({
       }
     }
   };
-
+  
   // Define the right buttons for the input
-  const rightButtons: ReactNode[] = [];
+
+  const UploadButton = (
+    <Button
+      paddingVertical={7}
+      typeStyle="white"
+      onPress={handleFileButtonClick}
+      iconLeft={
+        <PaperclipIcon />
+      }
+    />
+  );
+  const SendButton = (
+    <Button
+      paddingVertical={7}
+      typeStyle="white"
+      onPress={handleSendMessage}
+      iconLeft={
+        <CornerDownRightIcon />
+      }
+    />
+  );
+
+  let buttons: RightButtons | undefined = rightButtons;
   if (!!uploadConfig) {
-    rightButtons.push(
-      <Button
-        paddingVertical={7}
-        paddingHorizontal={0}
-        typeStyle="white"
-        onPress={handleFileButtonClick}
-        iconLeft={
-          <PaperclipIcon style={{ width: 24, height: 24 }} fill={PRIMARY_100} />
-        }
-      />,
-    );
+    buttons = buttons ? [...buttons, UploadButton] : [UploadButton];
+  }
+
+  if (!!onSubmit){
+    buttons = buttons ? [...buttons, SendButton] : [SendButton];
   }
 
   // Handle file selection from the input - Web specific
@@ -331,9 +365,7 @@ const FileSearchInput = ({
               {...inputBaseProps}
               value={value}
               onChangeText={onChangeText}
-              onSubmit={handleSendMessage}
-              rightButtons={rightButtons}
-              isLoading={loadingFile}
+              rightButtons={buttons}
               placeholder={placeholder}
             />
             <input
@@ -348,9 +380,7 @@ const FileSearchInput = ({
             {...inputBaseProps}
             value={value}
             onChangeText={onChangeText}
-            onSubmit={handleSendMessage}
-            rightButtons={rightButtons}
-            isLoading={loadingFile}
+            rightButtons={buttons}
             placeholder={placeholder}
           />
         )}

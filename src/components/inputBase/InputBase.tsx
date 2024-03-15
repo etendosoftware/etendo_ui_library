@@ -3,17 +3,13 @@ import {
   Platform,
   Text,
   TextInput,
-  TextStyle,
   TouchableOpacity,
   View,
-  ViewStyle,
 } from 'react-native';
-import React, { ReactNode, useEffect, useState } from 'react';
-import { Button } from '../button';
-import { CornerDownRightIcon } from '../../assets/images/icons/CornerDownRightIcon';
+import React, { useState } from 'react';
 import { styles } from './InputBase.styles';
 import { IInputBase } from './InputBase.types';
-import { DANGER_700, NEUTRAL_500, NEUTRAL_800 } from '../../styles/colors';
+import { DANGER_700, NEUTRAL_500, PRIMARY_100 } from '../../styles/colors';
 import { cursorPointer } from '../../helpers/table_utils';
 import { GridContainer } from '../containers/gridContainer';
 
@@ -28,17 +24,21 @@ const InputBase = ({
   icon,
   rightButtons,
   onPress,
-  onSubmit,
-  isLoading,
   onBlur,
+  onSubmitEditing,
   secureTextEntry,
   keyboardType = 'default',
 }: IInputBase) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
-  const [buttons, setButtons] = useState<ReactNode[]>([]);
+  const borderWidth: number = isFocused ? 3 : 1;
+  const paddingVertical: number = 13 - (borderWidth - 1);
+  const paddingHorizontal: number = 12 - (borderWidth - 1);
+  const isEditable = onPress ? false : !isDisabled;
 
   const onFocusChange = () => {
-    setIsFocused(true);
+    if(!isDisabled){
+      setIsFocused(true);
+    }
   };
 
   const onBlurChange = () => {
@@ -46,91 +46,53 @@ const InputBase = ({
     onBlur?.();
   };
 
-  function determineTextColor(
-    isError: boolean | undefined,
-    isDisabled: boolean | undefined,
-  ) {
+  const determineColor = (icon?:boolean) => {
+    if (icon) {
+      return iconColorStyle();
+    }
     if (isDisabled) {
       return NEUTRAL_500;
     }
-    return isError ? DANGER_700 : NEUTRAL_800;
-  }
-
-  const borderWidth: number = isFocused ? 1.5 : 1;
-  const paddingVertical: number = 13 - (borderWidth - 1);
-  const paddingLeft: number = 12 - (borderWidth - 1);
-  const paddingRight: number =
-    (rightButtons?.length ? 3 : 12) - (borderWidth - 1);
-  const isEditable = onPress ? false : !isDisabled;
-
-  const borderStyle = (): ViewStyle | undefined => {
-    if (!value && !isFocused) {
-      return styles.containerPlaceholder;
-    }
-    if (isDisabled) {
-      return styles.containerIsDisabled;
-    }
-    if (isError) {
-      return styles.containerIsError;
-    }
+    return isError ? DANGER_700 : PRIMARY_100;
   };
 
-  const iconColorStyle = (): ColorValue | undefined => {
-    if (!value) {
-      return styles.iconPlaceholder.color;
+  const textColorStyle = (): ColorValue => {
+    if (!value || isDisabled) {
+      return NEUTRAL_500;
     }
-    if (isDisabled) {
-      return styles.iconIsDisabled.color;
-    }
-    if (isFocused) {
-      return styles.iconIsFocus.color;
-    }
-    if (isError) {
-      return styles.iconIsError.color;
-    }
-  };
 
-  const textColorStyle = (): TextStyle | undefined => {
-    if (!value) {
-      return styles.textPlaceholder;
-    }
-    if (isDisabled) {
-      return styles.textIsDisabled;
-    }
     if (isFocused) {
-      return styles.textIsFocus;
+      return PRIMARY_100;
     }
     if (isError && !isFocused) {
-      return styles.textIsError;
+      return DANGER_700;
     }
+    return PRIMARY_100;
   };
 
-  const textInputStyle = [styles.textInput, textColorStyle()];
+   const iconColorStyle = (): ColorValue => {
+    if (isDisabled) {
+      return NEUTRAL_500;
+    }
+
+    if (isFocused) {
+      return PRIMARY_100;
+    }
+    if (isError && !isFocused) {
+      return DANGER_700;
+    }
+    return PRIMARY_100;
+  };
+
+
+  const textInputStyle = [styles.textInput, { color: textColorStyle() }];
 
   if (Platform.OS === 'web') {
     textInputStyle.push({ outlineWidth: 0 } as any);
   }
 
-  useEffect(() => {
-    setButtons([
-      ...(rightButtons ?? []),
-      onSubmit !== undefined && (
-        <View style={{ marginLeft: 8 }}>
-          <Button
-            paddingVertical={7}
-            paddingHorizontal={8}
-            typeStyle="white"
-            onPress={onSubmit}
-            iconLeft={<CornerDownRightIcon style={styles.iconSize} />}
-            disabled={isLoading}
-          />
-        </View>
-      ),
-    ]);
-  }, [onSubmit, isLoading, rightButtons]);
-
   const handleChange = (string: string) => {
-    if (onChangeText && keyboardType) {
+    if (onChangeText) {
       if (
         ['numeric', 'number-pad', 'phone-pad', 'decimal-pad'].includes(
           keyboardType,
@@ -145,48 +107,52 @@ const InputBase = ({
       }
     }
   };
+
+  const determineIconStyles = (icon: any) => {
+    if (!icon) return null;
+    const { style = {}, ...otherIconProps } = icon.props;
+    return React.cloneElement(icon, {
+      fill: determineColor(true),
+      style: {
+        ...style,
+        height: style.height || styles.icon.height,
+        width: style.width || styles.icon.width,
+      },
+      ...otherIconProps,
+    });
+  };
+
   return (
     <>
       {!!title && (
         <Text
           numberOfLines={1}
           ellipsizeMode="tail"
-          style={[
-            styles.title,
-            { color: determineTextColor(isError, isDisabled) },
-          ]}>
+          style={[styles.title, { color: determineColor() }]}>
           {title}
         </Text>
       )}
       <View
         style={[
           styles.container,
-          borderStyle(),
+          { borderColor: determineColor() },
           {
-            borderWidth: borderWidth,
-            paddingVertical: paddingVertical,
-            paddingLeft: paddingLeft,
-            paddingRight: paddingRight,
+            paddingHorizontal,
+            paddingVertical,
+            borderWidth,
           },
         ]}>
         {!!icon && (
-          <TouchableOpacity
-            disabled={!icon.onPress || isDisabled}
-            onPress={() => {
-              if (icon.onPress) {
-                icon.onPress();
-              }
-            }}
-            style={[
-              styles.icon,
-              isDisabled ? { opacity: 0.5 } : { opacity: 1 },
-            ]}>
-            {icon}
-          </TouchableOpacity>
+          <View style={styles.iconContainer}>
+            {React.cloneElement(icon, {
+              style: styles.icon,
+              fill: determineColor(true),
+            })}
+          </View>
         )}
         <TouchableOpacity
           disabled={isDisabled}
-          style={textInputStyle}
+          style={styles.containerInput}
           onPress={onPress}>
           <TextInput
             value={value}
@@ -196,16 +162,36 @@ const InputBase = ({
             editable={isEditable}
             onFocus={onFocusChange}
             onBlur={onBlurChange}
+            onSubmitEditing={onSubmitEditing}
             style={[textInputStyle, onPress && cursorPointer()]}
-            onSubmitEditing={onSubmit || (() => {})}
             keyboardType={keyboardType}
             secureTextEntry={secureTextEntry}
           />
         </TouchableOpacity>
-        {!!buttons && (
+        {!!rightButtons && (
           <GridContainer
-            stylesContainer={styles.buttonContainer}
-            components={buttons}
+            gapHorizontal={12}
+            stylesContainer={styles.gridContainer}
+            components={rightButtons.map((ButtonComponent: any, index) => {
+              const { iconLeft, iconRight, ...otherProps } =
+                ButtonComponent.props;
+              const modifiedProps = { ...otherProps };
+
+              modifiedProps.paddingVertical = modifiedProps?.paddingVertical || 0;
+              modifiedProps.paddingHorizontal = modifiedProps?.paddingHorizontal || 0;
+              modifiedProps.iconLeft = determineIconStyles(iconLeft);
+              modifiedProps.iconRight = determineIconStyles(iconRight);
+              modifiedProps.text = ''
+
+              return (
+                <ButtonComponent.type
+                  {...modifiedProps}
+                  key={index}
+                  disabled={isDisabled}
+                  typeStyle={'white'}
+                />
+              );
+            })}
           />
         )}
       </View>
@@ -213,10 +199,7 @@ const InputBase = ({
         <Text
           numberOfLines={1}
           ellipsizeMode="tail"
-          style={[
-            styles.helperText,
-            { color: determineTextColor(isError, isDisabled) },
-          ]}>
+          style={[styles.helperText, { color: determineColor() }]}>
           {helperText}
         </Text>
       )}
