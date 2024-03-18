@@ -6,7 +6,7 @@ import {
   InputBase,
   FileSearchInput,
   SearchInput,
-  PassowordInput,
+  PasswordInput,
   TextInput,
 } from './inputBase';
 import { Input } from './input';
@@ -40,7 +40,7 @@ export {
   InputBase,
   DropdownInput,
   SearchInput,
-  PassowordInput,
+  PasswordInput,
   TextInput,
   Layout,
   Modal,
