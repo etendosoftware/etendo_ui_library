@@ -24,6 +24,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
   noResultsText = 'No results',
   searchPlaceholder = 'Search',
   placeholder = 'Select an Option',
+  value,
   ...inputBaseProps
 }) => {
   /* References */
@@ -44,7 +45,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
   const [searchOptions, setSearchOptions] = useState<Array<any>>([]);
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
   const [inputPosition, setInputPosition] = useState({ x: 0, y: 0, width: 0 });
-  const [selectedOption, setSelectedOption] = useState<string | undefined>(undefined);
+  const [selectedOption, setSelectedOption] = useState<string | undefined>(value);
 
   /* UI Rendering Functions */
   // Renders a searchable input field with a clear button for the dropdown
@@ -402,7 +403,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
   }, [options, adjustDropdownPosition]);
 
   return (
-    <View style={styles.wrapper} ref={dropdownRef}>
+    <TouchableOpacity activeOpacity={1} style={styles.wrapper} ref={dropdownRef}>
       <TouchableOpacity ref={inputContainerRef} activeOpacity={1}>
         <InputBase
           {...inputBaseProps}
@@ -421,7 +422,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
         />
       </TouchableOpacity>
       {dropdownVisible && renderDropdownContent()}
-    </View>
+    </TouchableOpacity>
   );
 };
 
