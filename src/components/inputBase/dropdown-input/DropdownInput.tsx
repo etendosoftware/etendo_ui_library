@@ -44,7 +44,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
   const [isDropdownUp, setIsDropdownUp] = useState<boolean>(false);
   const [searchOptions, setSearchOptions] = useState<Array<any>>([]);
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
-  const [inputPosition, setInputPosition] = useState<any>({ x: 0, y: 0, width: 0, top: 0 });
+  const [inputPosition, setInputPosition] = useState({ x: 0, y: 0, width: 0 });
   const [selectedOption, setSelectedOption] = useState<string | undefined>(value);
 
   /* UI Rendering Functions */
