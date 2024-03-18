@@ -44,7 +44,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
   const [isDropdownUp, setIsDropdownUp] = useState<boolean>(false);
   const [searchOptions, setSearchOptions] = useState<Array<any>>([]);
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
-  const [inputPosition, setInputPosition] = useState({ x: 0, y: 0, width: 0 });
+  const [inputPosition, setInputPosition] = useState({ x: 0, y: 0, width: 0, top: 0 });
   const [selectedOption, setSelectedOption] = useState<string | undefined>(value);
 
   /* UI Rendering Functions */
@@ -117,7 +117,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
           activeOpacity={1}
         >
           <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <View style={[{ position: 'absolute', top: inputPosition.y, left: inputPosition.x, width: inputPosition.width, backgroundColor: 'white', borderRadius: 8, overflow: 'hidden' }, styles.dropdown]} onStartShouldSetResponder={() => true}>
+            <View style={[{ position: 'absolute', top: inputPosition.y || 0, left: inputPosition.x, width: inputPosition.width, backgroundColor: 'white', borderRadius: 8, overflow: 'hidden' }, styles.dropdown]} onStartShouldSetResponder={() => true}>
               {staticData?.length === 0 && fetchData?.search &&
                 renderSearchInput(
                   searchQuery,
@@ -403,7 +403,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
   }, [options, adjustDropdownPosition]);
 
   return (
-    <TouchableOpacity activeOpacity={1} style={styles.wrapper} ref={dropdownRef}>
+    <View style={styles.wrapper} ref={dropdownRef}>
       <TouchableOpacity ref={inputContainerRef} activeOpacity={1}>
         <InputBase
           {...inputBaseProps}
@@ -422,7 +422,7 @@ const DropdownInput: React.FC<IDropdownInput> = ({
         />
       </TouchableOpacity>
       {dropdownVisible && renderDropdownContent()}
-    </TouchableOpacity>
+    </View>
   );
 };
 
