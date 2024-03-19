@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { NEUTRAL_0, NEUTRAL_300, PRIMARY_100 } from '../../../styles/colors';
+import { NEUTRAL_0, NEUTRAL_300, NEUTRAL_50, PRIMARY_100 } from '../../../styles/colors';
 
 export const styles = StyleSheet.create({
   fullScreenTouchable: {
@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
   },
   optionsContainer: {
     position: 'absolute',
-    backgroundColor: NEUTRAL_0,
+    backgroundColor: NEUTRAL_50,
     padding: 8,
     paddingBottom: 0,
     borderRadius: 8,
@@ -22,7 +22,6 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 8,
     maxHeight: 40,
     minHeight: 40,
-    backgroundColor: NEUTRAL_0,
   },
   optionText: {
     color: PRIMARY_100,

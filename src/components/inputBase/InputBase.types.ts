@@ -1,9 +1,10 @@
-import { ReactElement } from 'react';
+import { ReactElement, RefObject } from 'react';
 import {
   ColorValue,
   ImageStyle,
   NativeSyntheticEvent,
   TextInputSubmitEditingEventData,
+  View,
   ViewStyle,
 } from 'react-native';
 import { ButtonProps } from '../button/Button.types';
@@ -43,4 +44,5 @@ export interface IInputBase {
     | 'visible-password';
   styleContainer?: ViewStyle;
   isFocusable?: boolean;
+  refInputContainer?: RefObject<View>;
 }

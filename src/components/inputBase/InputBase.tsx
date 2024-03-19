@@ -30,6 +30,7 @@ const InputBase = ({
   keyboardType = 'default',
   styleContainer,
   isFocusable = true,
+  refInputContainer,
 }: IInputBase) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const borderWidth: number = isFocused ? 3 : 1;
@@ -134,6 +135,7 @@ const InputBase = ({
         </Text>
       )}
       <View
+        ref={refInputContainer}
         style={[
           styles.container,
           { borderColor: determineColor() },

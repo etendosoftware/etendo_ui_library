@@ -38,13 +38,13 @@ const DropdownInputOptions = ({
   onFilterTextChange,
   noResultsText,
   isModalUp,
-  displayMode,
+  displayMode
 }: IDropdownInputOptions) => {
   const scrollViewRef = useRef<ScrollView>(null);
 
   const [filterText, setFilterText] = useState<string | null>(null);
 
-  const isCenteredModal = displayMode === 'centeredModal';
+  const isCenteredModal = displayMode === 'centeredModal'
 
   useEffect(() => {
     if (!isLoading && filterText !== null) {
@@ -113,16 +113,11 @@ const DropdownInputOptions = ({
       </View>
     );
   };
-  console.log({isCenteredModal,isModalUp,isStaticData})
-  console.log((!isStaticData && !isModalUp))
-  console.log((!isStaticData && isCenteredModal))
-  console.log((!isStaticData && !isModalUp) || (!isStaticData && isCenteredModal))
 
   return (
     <Modal
       transparent={true}
       visible={isVisibleDropdown}
-      animationType="fade"
       onRequestClose={() => {
         onClose();
       }}>
@@ -133,7 +128,6 @@ const DropdownInputOptions = ({
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           style={[
-            styles.fullScreenTouchable,
             isCenteredModal && styles.containerNative,
             { width: windowWidth, height: windowHeight },
           ]}>
@@ -154,9 +148,12 @@ const DropdownInputOptions = ({
                 width: modalPosition.width,
               },
             ]}>
-            {!!((!isStaticData && !isModalUp) || (!isStaticData && isCenteredModal)) &&
-              filterComponent()}
+            {!!(
+              (!isStaticData && !isModalUp) ||
+              (!isStaticData && isCenteredModal)
+            ) && filterComponent()}
             <ScrollView
+              contentContainerStyle={{ flexGrow: 1 }}
               ref={scrollViewRef}
               scrollEventThrottle={16}
               onScroll={onScroll}>
