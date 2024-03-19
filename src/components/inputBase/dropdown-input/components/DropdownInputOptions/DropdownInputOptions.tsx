@@ -5,6 +5,8 @@ import {
   Text,
   ScrollView,
   ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
 import {
@@ -111,6 +113,10 @@ const DropdownInputOptions = ({
       </View>
     );
   };
+  console.log({isCenteredModal,isModalUp,isStaticData})
+  console.log((!isStaticData && !isModalUp))
+  console.log((!isStaticData && isCenteredModal))
+  console.log((!isStaticData && !isModalUp) || (!isStaticData && isCenteredModal))
 
   return (
     <Modal
@@ -121,70 +127,77 @@ const DropdownInputOptions = ({
         onClose();
       }}>
       <TouchableOpacity
-        style={[
-          styles.fullScreenTouchable,
-          isCenteredModal && styles.containerNative,
-          { width: windowWidth, height: windowHeight },
-        ]}
+        style={[styles.fullScreenTouchable]}
         onPress={() => onClose()}
         activeOpacity={1}>
-        <View
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           style={[
-            styles.optionsContainer,
-            {
-              maxHeight:
-                maxVisibleOptions && data && data?.length <= maxVisibleOptions
-                  ? 'auto'
-                  : maxVisibleOptions && maxVisibleOptions * 48 + 48 + 16,
-            },
-            !isCenteredModal && {
-              top: modalPosition.top + 8,
-              left: modalPosition.left,
-            },
-            {
-              width: modalPosition.width,
-            },
+            styles.fullScreenTouchable,
+            isCenteredModal && styles.containerNative,
+            { width: windowWidth, height: windowHeight },
           ]}>
-          {((!isStaticData && !isModalUp) || isCenteredModal) &&
-            filterComponent()}
-          <ScrollView
-            ref={scrollViewRef}
-            scrollEventThrottle={16}
-            onScroll={onScroll}>
-            {displayKey &&
-              data?.map((item, index) => {
-                return (
-                  <TouchableOpacity
-                    key={'dropdown' + index}
-                    onPress={() => {
-                      onSelectOption(item);
-                    }}
-                    style={[
-                      styles.option,
-                      !!value &&
-                        item[displayKey] === value && {
-                          backgroundColor: TERTIARY_101,
-                        },
-                    ]}>
-                    <Text style={styles.optionText}>{item[displayKey]}</Text>
-                  </TouchableOpacity>
-                );
-              })}
-            {isLoading && (
-              <ActivityIndicator
-                size={'small'}
-                style={styles.loading}
-                color={PRIMARY_100}
-              />
-            )}
-            {!isLoading && !data?.length && (
-              <View style={styles.option}>
-                <Text style={styles.optionText}>{noResultsText}</Text>
-              </View>
-            )}
-          </ScrollView>
-          {!isStaticData && isModalUp && !isCenteredModal && filterComponent()}
-        </View>
+          <View
+            style={[
+              styles.optionsContainer,
+              {
+                maxHeight:
+                  maxVisibleOptions && data && data?.length <= maxVisibleOptions
+                    ? 'auto'
+                    : maxVisibleOptions && maxVisibleOptions * 48 + 48 + 16,
+              },
+              !isCenteredModal && {
+                top: modalPosition.top + 8,
+                left: modalPosition.left,
+              },
+              {
+                width: modalPosition.width,
+              },
+            ]}>
+            {!!((!isStaticData && !isModalUp) || (!isStaticData && isCenteredModal)) &&
+              filterComponent()}
+            <ScrollView
+              ref={scrollViewRef}
+              scrollEventThrottle={16}
+              onScroll={onScroll}>
+              {displayKey &&
+                data?.map((item, index) => {
+                  return (
+                    <TouchableOpacity
+                      key={'dropdown' + index}
+                      onPress={() => {
+                        onSelectOption(item);
+                      }}
+                      style={[
+                        styles.option,
+                        !!value &&
+                          item[displayKey] === value && {
+                            backgroundColor: TERTIARY_101,
+                          },
+                      ]}>
+                      <Text style={styles.optionText}>{item[displayKey]}</Text>
+                    </TouchableOpacity>
+                  );
+                })}
+              {isLoading && (
+                <ActivityIndicator
+                  size={'small'}
+                  style={styles.loading}
+                  color={PRIMARY_100}
+                />
+              )}
+              {!isLoading && !data?.length && (
+                <View style={styles.option}>
+                  <Text style={styles.optionText}>{noResultsText}</Text>
+                </View>
+              )}
+            </ScrollView>
+            {!isStaticData &&
+              isModalUp &&
+              !isCenteredModal &&
+              filterComponent()}
+          </View>
+        </KeyboardAvoidingView>
       </TouchableOpacity>
     </Modal>
   );
