@@ -1,16 +1,48 @@
-import { IInputBase } from "../InputBase.types";
+import {
+  DimensionValue,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+} from 'react-native';
+import { IInputBase } from '../InputBase.types';
 
-export interface IDropdownInput extends Omit<IInputBase, 'keyboardType' | 'secureTextEntry'> {
-    displayKey: keyof any;
-    fetchData?: {
-        normal?: (page: number, size: number) => Promise<any[]>;
-        search?: (searchQuery: string, page: number, size: number) => Promise<any[]>;
-    };
-    initialPage?: number;
-    maxVisibleOptions?: number;
-    noResultsText?: string;
-    onSelect?: (option: any) => void;
-    pageSize?: number;
-    searchPlaceholder?: string;
-    staticData?: any[];
+export interface IDropdownInput
+  extends Omit<IInputBase, 'keyboardType' | 'secureTextEntry'> {
+  staticData?: any[];
+  displayKey?: string;
+  maxVisibleOptions?: number;
+  onSelect?: (option: any) => void;
+  onFetchData?: (
+    currentPage: number,
+    pageSize?: number,
+    filterText?: string,
+  ) => Promise<any[]>;
+  pageSize?: number;
+  searchPlaceholder?: string;
+  noResultsText?: string;
+  displayMode?: 'dropdown' | 'centeredModal';
+}
+
+export interface IDropdownInputOptions {
+  isVisibleDropdown: boolean;
+  onClose: () => void;
+  onScroll: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
+  onSelectOption: (item: any) => void;
+  onFilterTextChange: (value: string) => void;
+  maxVisibleOptions?: number;
+  modalPosition: {
+    top: number;
+    left: number;
+    width: number;
+  };
+  windowWidth: DimensionValue;
+  windowHeight: DimensionValue;
+  data?: any[];
+  displayKey?: string;
+  value?: string;
+  isLoading?: boolean;
+  isStaticData?: boolean;
+  searchPlaceholder?: string;
+  noResultsText?: string;
+  isModalUp: boolean;
+  displayMode?: 'dropdown' | 'centeredModal';
 }

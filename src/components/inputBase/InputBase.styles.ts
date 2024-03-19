@@ -20,8 +20,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   containerInput: {
-    height: 48,
-    backgroundColor: NEUTRAL_50,
+    height: 45,
     flex: 1,
   },
   textInput: {

@@ -28,15 +28,17 @@ const InputBase = ({
   onSubmitEditing,
   secureTextEntry,
   keyboardType = 'default',
+  styleContainer,
+  isFocusable = true,
 }: IInputBase) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const borderWidth: number = isFocused ? 3 : 1;
-  const paddingVertical: number = 13 - (borderWidth - 1);
-  const paddingHorizontal: number = 12 - (borderWidth - 1);
+  const paddingVertical: number = 13 - borderWidth;
+  const paddingHorizontal: number = 12 - borderWidth;
   const isEditable = onPress ? false : !isDisabled;
 
   const onFocusChange = () => {
-    if(!isDisabled){
+    if (!isDisabled && isFocusable) {
       setIsFocused(true);
     }
   };
@@ -46,7 +48,7 @@ const InputBase = ({
     onBlur?.();
   };
 
-  const determineColor = (icon?:boolean) => {
+  const determineColor = (icon?: boolean) => {
     if (icon) {
       return iconColorStyle();
     }
@@ -70,7 +72,7 @@ const InputBase = ({
     return PRIMARY_100;
   };
 
-   const iconColorStyle = (): ColorValue => {
+  const iconColorStyle = (): ColorValue => {
     if (isDisabled) {
       return NEUTRAL_500;
     }
@@ -83,7 +85,6 @@ const InputBase = ({
     }
     return PRIMARY_100;
   };
-
 
   const textInputStyle = [styles.textInput, { color: textColorStyle() }];
 
@@ -141,6 +142,7 @@ const InputBase = ({
             paddingVertical,
             borderWidth,
           },
+          { ...styleContainer },
         ]}>
         {!!icon && (
           <View style={styles.iconContainer}>
@@ -177,11 +179,13 @@ const InputBase = ({
                 ButtonComponent.props;
               const modifiedProps = { ...otherProps };
 
-              modifiedProps.paddingVertical = modifiedProps?.paddingVertical || 0;
-              modifiedProps.paddingHorizontal = modifiedProps?.paddingHorizontal || 0;
+              modifiedProps.paddingVertical =
+                modifiedProps?.paddingVertical || 0;
+              modifiedProps.paddingHorizontal =
+                modifiedProps?.paddingHorizontal || 0;
               modifiedProps.iconLeft = determineIconStyles(iconLeft);
               modifiedProps.iconRight = determineIconStyles(iconRight);
-              modifiedProps.text = ''
+              modifiedProps.text = '';
 
               return (
                 <ButtonComponent.type

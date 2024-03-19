@@ -4,6 +4,7 @@ import {
   ImageStyle,
   NativeSyntheticEvent,
   TextInputSubmitEditingEventData,
+  ViewStyle,
 } from 'react-native';
 import { ButtonProps } from '../button/Button.types';
 
@@ -34,14 +35,12 @@ export interface IInputBase {
     | 'default'
     | 'numeric'
     | 'email-address'
-    | 'ascii-capable'
-    | 'numbers-and-punctuation'
     | 'url'
     | 'number-pad'
     | 'phone-pad'
-    | 'name-phone-pad'
     | 'decimal-pad'
-    | 'twitter'
     | 'web-search'
     | 'visible-password';
+  styleContainer?: ViewStyle;
+  isFocusable?: boolean;
 }
