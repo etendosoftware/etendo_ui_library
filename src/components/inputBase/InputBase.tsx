@@ -28,15 +28,17 @@ const InputBase = ({
   onSubmitEditing,
   secureTextEntry,
   keyboardType = 'default',
+  styleContainer,
+  isFocusable = true
 }: IInputBase) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const borderWidth: number = isFocused ? 3 : 1;
-  const paddingVertical: number = 13 - (borderWidth - 1);
-  const paddingHorizontal: number = 12 - (borderWidth - 1);
+  const paddingVertical: number = 13 - (borderWidth);
+  const paddingHorizontal: number = 12 - (borderWidth);
   const isEditable = onPress ? false : !isDisabled;
 
   const onFocusChange = () => {
-    if(!isDisabled){
+    if(!isDisabled && isFocusable){
       setIsFocused(true);
     }
   };
@@ -141,6 +143,7 @@ const InputBase = ({
             paddingVertical,
             borderWidth,
           },
+          {...styleContainer}
         ]}>
         {!!icon && (
           <View style={styles.iconContainer}>

@@ -1,4 +1,7 @@
 /* Constants */
-export const OPTION_HEIGHT = 40;
-export const DEBOUNCE_DELAY = 1000;
-export const INITIAL_PAGE = 0;
+export const BUFFER = 5;
+export const SEARCH_PLACEHOLDER = 'Search';
+export const NO_RESULT_TEXT = 'No results';
+export const DISPLAY_MODE = 'dropdown';
+export const PAGE_SIZE = 5;
+export const MAX_VISIBLE_OPTION = 4;
