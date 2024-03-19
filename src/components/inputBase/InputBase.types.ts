@@ -43,4 +43,5 @@ export interface IInputBase {
     | 'visible-password';
   styleContainer?: ViewStyle;
   isFocusable?: boolean;
+  refInputContainer?: any;
 }

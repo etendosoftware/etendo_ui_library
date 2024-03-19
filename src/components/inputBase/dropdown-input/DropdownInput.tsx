@@ -55,11 +55,12 @@ const DropdownInput = ({
     if (isVisibleDropdown && ref.current) {
       ref.current.measure((x, y, width, height, pageX, pageY) => {
         const spaceBelow = windowHeight - (pageY + height);
-        const neededSpace = heightOptions + 16;
-
-        if (neededSpace > spaceBelow) {
-          const topPosition = Math.max(pageY - neededSpace, 0);
-          setModalPosition({ top: topPosition, left: pageX, width: width });
+        if (heightOptions + 16 > spaceBelow) {
+          setModalPosition({
+            top: pageY - heightOptions - 16,
+            left: pageX,
+            width: width,
+          });
           setIsModalUp(true);
         } else {
           setModalPosition({ top: pageY + height, left: pageX, width: width });
@@ -158,11 +159,11 @@ const DropdownInput = ({
   return (
     <>
       <View
-        ref={ref}
         onLayout={() => {
           adjustDropdownPosition();
         }}>
         <InputBase
+          refInputContainer={ref}
           {...inputBaseProps}
           rightButtons={[
             <Button
@@ -202,7 +203,6 @@ const DropdownInput = ({
           onFilterTextChange={handleOnFilterTextChange}
           noResultsText={noResultsText}
           isModalUp={isModalUp}
-          displayMode={displayMode}
         />
       )}
     </>
