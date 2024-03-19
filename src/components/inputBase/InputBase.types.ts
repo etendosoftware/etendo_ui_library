@@ -35,14 +35,10 @@ export interface IInputBase {
     | 'default'
     | 'numeric'
     | 'email-address'
-    | 'ascii-capable'
-    | 'numbers-and-punctuation'
     | 'url'
     | 'number-pad'
     | 'phone-pad'
-    | 'name-phone-pad'
     | 'decimal-pad'
-    | 'twitter'
     | 'web-search'
     | 'visible-password';
   styleContainer?: ViewStyle;
