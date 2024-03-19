@@ -36,5 +36,5 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'rgba(0,0,0,0.5)',
   },
-  searchContainer:{ marginBottom: 8 }
+  searchContainer: { marginBottom: 8 },
 });

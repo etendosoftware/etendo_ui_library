@@ -11,9 +11,14 @@ import { Button } from '../../button';
 import { ChevronDownIcon, ChevronUpIcon } from '../../../assets/images/icons';
 import { isWebPlatform } from '../../../helpers/functions_utils';
 import InputOptions from './components/DropdownInputOptions/DropdownInputOptions';
-import { BUFFER, DISPLAY_MODE, MAX_VISIBLE_OPTION, NO_RESULT_TEXT, PAGE_SIZE, SEARCH_PLACEHOLDER } from './DropdownInput.constants';
-
-
+import {
+  BUFFER,
+  DISPLAY_MODE,
+  MAX_VISIBLE_OPTION,
+  NO_RESULT_TEXT,
+  PAGE_SIZE,
+  SEARCH_PLACEHOLDER,
+} from './DropdownInput.constants';
 
 const DropdownInput = ({
   staticData,

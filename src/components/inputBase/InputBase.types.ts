@@ -1,12 +1,12 @@
-import { ReactElement } from "react";
+import { ReactElement } from 'react';
 import {
   ColorValue,
   ImageStyle,
   NativeSyntheticEvent,
   TextInputSubmitEditingEventData,
   ViewStyle,
-} from "react-native";
-import { ButtonProps } from "../button/Button.types";
+} from 'react-native';
+import { ButtonProps } from '../button/Button.types';
 
 export interface SvgImageProps {
   style?: ImageStyle;
@@ -23,7 +23,7 @@ export interface IInputBase {
   onBlur?: () => void;
   onChangeText?: (value: string) => void;
   onSubmitEditing?: (
-    event: NativeSyntheticEvent<TextInputSubmitEditingEventData>
+    event: NativeSyntheticEvent<TextInputSubmitEditingEventData>,
   ) => void;
   placeholder?: string;
   rightButtons?: RightButtons;
@@ -32,19 +32,19 @@ export interface IInputBase {
   onPress?: () => void;
   secureTextEntry?: boolean;
   keyboardType?:
-    | "default"
-    | "numeric"
-    | "email-address"
-    | "ascii-capable"
-    | "numbers-and-punctuation"
-    | "url"
-    | "number-pad"
-    | "phone-pad"
-    | "name-phone-pad"
-    | "decimal-pad"
-    | "twitter"
-    | "web-search"
-    | "visible-password";
+    | 'default'
+    | 'numeric'
+    | 'email-address'
+    | 'ascii-capable'
+    | 'numbers-and-punctuation'
+    | 'url'
+    | 'number-pad'
+    | 'phone-pad'
+    | 'name-phone-pad'
+    | 'decimal-pad'
+    | 'twitter'
+    | 'web-search'
+    | 'visible-password';
   styleContainer?: ViewStyle;
-  isFocusable?:boolean;
+  isFocusable?: boolean;
 }
