@@ -87,9 +87,10 @@ const DropdownInput = ({
   }, [staticData]);
 
   useEffect(() => {
-    setDataList([])
+    setDataList([]);
+    setIsLoadMoreData(true);
     if (isVisibleDropdown) {
-      fetchMordeData(0, dataList, isLoadMoreData, '');
+      fetchMordeData(0, dataList, true, '');
     }
   }, [isVisibleDropdown]);
 
