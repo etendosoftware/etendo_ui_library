@@ -3,6 +3,7 @@ import {
   ColorValue,
   ImageStyle,
   NativeSyntheticEvent,
+  TextInput,
   TextInputSubmitEditingEventData,
   View,
   ViewStyle,
@@ -45,4 +46,5 @@ export interface IInputBase {
   styleContainer?: ViewStyle;
   isFocusable?: boolean;
   refInputContainer?: RefObject<View>;
+  refInput?: RefObject<TextInput>
 }

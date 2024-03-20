@@ -31,6 +31,7 @@ const InputBase = ({
   styleContainer,
   isFocusable = true,
   refInputContainer,
+  refInput
 }: IInputBase) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const borderWidth: number = isFocused ? 3 : 1;
@@ -159,6 +160,7 @@ const InputBase = ({
           style={styles.containerInput}
           onPress={onPress}>
           <TextInput
+          ref={refInput}
             value={value}
             onPressIn={onPress}
             onChangeText={handleChange}

@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
   },
   optionText: {
     color: PRIMARY_100,
-    fontSize: 16,
+    fontSize: 15,
     letterSpacing: -0.16,
     fontWeight: '500',
   },
