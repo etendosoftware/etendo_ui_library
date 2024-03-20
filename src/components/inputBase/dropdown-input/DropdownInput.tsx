@@ -5,6 +5,7 @@ import {
   NativeSyntheticEvent,
   NativeScrollEvent,
   TextInput,
+  ScrollView,
 } from 'react-native';
 import InputBase from '../InputBase';
 import { IDropdownInput } from './DropdownInput.types';
@@ -14,7 +15,6 @@ import { isWebPlatform } from '../../../helpers/functions_utils';
 import InputOptions from './components/DropdownInputOptions/DropdownInputOptions';
 import {
   BUFFER,
-  DISPLAY_MODE,
   MAX_VISIBLE_OPTION,
   NO_RESULT_TEXT,
   PAGE_SIZE,
@@ -31,7 +31,6 @@ const DropdownInput = ({
   pageSize = PAGE_SIZE,
   searchPlaceholder = SEARCH_PLACEHOLDER,
   noResultsText = NO_RESULT_TEXT,
-  displayMode = DISPLAY_MODE,
   ...inputBaseProps
 }: IDropdownInput) => {
   const ref = useRef<View>(null);
@@ -54,7 +53,7 @@ const DropdownInput = ({
   const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
 
   const adjustDropdownPosition = useCallback(() => {
-    if (isVisibleDropdown && ref.current) {
+    if (ref.current) {
       ref.current.measure((x, y, width, height, pageX, pageY) => {
         const spaceBelow = windowHeight - (pageY + height);
         if (heightOptions + 16 > spaceBelow) {
@@ -70,15 +69,23 @@ const DropdownInput = ({
         }
       });
     }
-  }, [isVisibleDropdown, heightOptions, windowHeight]);
+  }, [heightOptions, windowHeight]);
+
 
   useEffect(() => {
-    setHeightOptions(
-      maxVisibleOptions && dataList && dataList?.length <= maxVisibleOptions
-        ? 48 + 48 + 16
-        : maxVisibleOptions && maxVisibleOptions * 48 + 48 + 16,
-    );
-  }, [dataList, isVisibleDropdown, isLoading]);
+    if (isWebPlatform()) {
+      if (dataList?.length === 0) {
+        if (isLoading) {
+          return setHeightOptions(48 + 16);
+        }
+        return setHeightOptions(48 + 48 + 16);
+      }
+      if (maxVisibleOptions && dataList?.length <= maxVisibleOptions) {
+        return setHeightOptions(dataList?.length * 48 + 48 + 16);
+      }
+      setHeightOptions(maxVisibleOptions * 48 + 48 + 16);
+    }
+  }, [dataList, isLoading, windowHeight]);
 
   useEffect(() => {
     if (!!staticData) {
@@ -87,23 +94,24 @@ const DropdownInput = ({
   }, [staticData]);
 
   useEffect(() => {
-    setDataList([]);
-    setIsLoadMoreData(true);
-    if (isVisibleDropdown) {
-      fetchMordeData(0, dataList, true, '');
+    setFilterText('')
+    if (isVisibleDropdown && !staticData) {
+      setDataList([]);
+      setIsLoadMoreData(true);
+      fetchMordeData(0, [], true, '');
     }
   }, [isVisibleDropdown]);
 
   useEffect(() => {
-    adjustDropdownPosition();
+      adjustDropdownPosition();
+      if (isWebPlatform()) {
 
-    const handleScroll = () => {
-      if (isVisibleDropdown) {
-        adjustDropdownPosition();
-      }
-    };
+      const handleScroll = () => {
+        if (isVisibleDropdown) {
+          adjustDropdownPosition();
+        }
+      };
 
-    if (isWebPlatform()) {
       window.addEventListener('scroll', handleScroll, { passive: true });
 
       return () => window.removeEventListener('scroll', handleScroll);
@@ -114,15 +122,17 @@ const DropdownInput = ({
     onSelect?.(item);
     setIsVisibleDropdown(false);
 
-    if (refInput.current) {
-      refInput.current.setNativeProps({
+    if (refInput?.current?.setNativeProps) {
+      refInput?.current?.setNativeProps({
         selection: { start: 0, end: 0 },
       });
     }
+    
   };
+
   const onScroll = async (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     if (isAtEndOfScroll(event.nativeEvent) && !isLoading) {
-      fetchMordeData(currentPage, dataList, isLoadMoreData, filterText);
+      await fetchMordeData(currentPage, dataList, isLoadMoreData, filterText);
     }
   };
   const fetchMordeData = async (
@@ -157,19 +167,21 @@ const DropdownInput = ({
       layoutMeasurement.height + contentOffset.y >= contentSize.height - BUFFER
     );
   };
-  const handleOnFilterTextChange = (value: string) => {
+  const handleOnFilterTextChange = async (value: string) => {
     setDataList([]);
     setCurrentPage(0);
     setIsLoadMoreData(true);
     setFilterText(value);
-    fetchMordeData(0, [], true, value);
+    await fetchMordeData(0, [], true, value);
   };
 
   return (
     <>
       <View
         onLayout={() => {
-          adjustDropdownPosition();
+          if (isWebPlatform()) {
+            adjustDropdownPosition();
+          }
         }}>
         <InputBase
           refInput={refInput}
@@ -194,7 +206,7 @@ const DropdownInput = ({
       </View>
       {isVisibleDropdown && !!modalPosition.width && (
         <InputOptions
-          isVisibleDropdown
+          isVisibleDropdown={isVisibleDropdown}
           onClose={() => {
             setIsVisibleDropdown(false);
           }}
@@ -213,7 +225,6 @@ const DropdownInput = ({
           onFilterTextChange={handleOnFilterTextChange}
           noResultsText={noResultsText}
           isModalUp={isModalUp}
-          displayMode={displayMode}
         />
       )}
     </>

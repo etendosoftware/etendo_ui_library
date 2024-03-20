@@ -4,19 +4,18 @@ import {
   TouchableOpacity,
   Text,
   ScrollView,
-  ActivityIndicator,
   KeyboardAvoidingView,
   Platform,
+  ActivityIndicator,
 } from 'react-native';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   NEUTRAL_400,
   PRIMARY_100,
   TERTIARY_101,
 } from '../../../../../styles/colors';
 import { SearchInput } from '../../../search-input';
-import { Button } from '../../../../button';
-import { XIcon } from '../../../../../assets/images/icons';
+
 import { styles } from '../../DropdownInput.styles';
 import { IDropdownInputOptions } from '../../DropdownInput.types';
 
@@ -38,16 +37,13 @@ const DropdownInputOptions = ({
   onFilterTextChange,
   noResultsText,
   isModalUp,
-  displayMode
 }: IDropdownInputOptions) => {
-  const scrollViewRef = useRef<ScrollView>(null);
+  const [filterText, setFilterText] = useState<string>('');
 
-  const [filterText, setFilterText] = useState<string | null>(null);
-
-  const isCenteredModal = displayMode === 'centeredModal'
+  const isCenteredModal = Platform.OS === 'android' || Platform.OS === 'ios';
 
   useEffect(() => {
-    if (!isLoading && filterText !== null) {
+    if (!isLoading && filterText) {
       const handler = setTimeout(() => {
         onFilterTextChange(filterText);
       }, 500);
@@ -55,32 +51,6 @@ const DropdownInputOptions = ({
       return () => clearTimeout(handler);
     }
   }, [filterText]);
-
-  useEffect(() => {
-    if (isLoading && data?.length) {
-      scrollViewRef.current?.scrollToEnd();
-    }
-  }, [isLoading]);
-
-  useEffect(() => {
-    if (
-      isVisibleDropdown &&
-      data &&
-      value &&
-      scrollViewRef.current &&
-      displayKey
-    ) {
-      const selectedIndex = data.findIndex(item => item[displayKey] === value);
-      if (selectedIndex >= 0) {
-        const positionY = selectedIndex * 48;
-        setTimeout(() => {
-          if (scrollViewRef.current) {
-            scrollViewRef.current.scrollTo({ y: positionY, animated: false });
-          }
-        }, 100);
-      }
-    }
-  }, [isVisibleDropdown]);
 
   const filterComponent = () => {
     return (
@@ -97,14 +67,11 @@ const DropdownInputOptions = ({
             onFilterTextChange(filterText || '');
           }}
           rightButtons={
-            !!filterText
+            isLoading
               ? [
-                  <Button
-                    typeStyle={'white'}
-                    iconLeft={<XIcon />}
-                    onPress={() => {
-                      setFilterText('');
-                    }}
+                  <ActivityIndicator
+                    style={styles.iconLoading}
+                    color={PRIMARY_100}
                   />,
                 ]
               : []
@@ -122,7 +89,9 @@ const DropdownInputOptions = ({
         onClose();
       }}>
       <TouchableOpacity
-        onPress={() => onClose()}
+        onPress={() => {
+          onClose();
+        }}
         activeOpacity={1}>
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -134,7 +103,9 @@ const DropdownInputOptions = ({
             onStartShouldSetResponder={() => true}
             style={[
               styles.optionsContainer,
-              isCenteredModal && {height: maxVisibleOptions && maxVisibleOptions * 48 + 48 + 16},
+              isCenteredModal && {
+                height: maxVisibleOptions && maxVisibleOptions * 48 + 48 + 16,
+              },
               {
                 maxHeight:
                   maxVisibleOptions && data && data?.length <= maxVisibleOptions
@@ -155,7 +126,6 @@ const DropdownInputOptions = ({
             ) && filterComponent()}
             <ScrollView
               contentContainerStyle={{ flexGrow: 1 }}
-              ref={scrollViewRef}
               scrollEventThrottle={16}
               onScroll={onScroll}>
               {displayKey &&
@@ -173,17 +143,12 @@ const DropdownInputOptions = ({
                             backgroundColor: TERTIARY_101,
                           },
                       ]}>
-                      <Text style={styles.optionText} numberOfLines={2}>{item[displayKey]}</Text>
+                      <Text style={styles.optionText} numberOfLines={2}>
+                        {item[displayKey]}
+                      </Text>
                     </TouchableOpacity>
                   );
                 })}
-              {isLoading && (
-                <ActivityIndicator
-                  size={'small'}
-                  style={styles.loading}
-                  color={PRIMARY_100}
-                />
-              )}
               {!isLoading && !data?.length && (
                 <View style={styles.option}>
                   <Text style={styles.optionText}>{noResultsText}</Text>
