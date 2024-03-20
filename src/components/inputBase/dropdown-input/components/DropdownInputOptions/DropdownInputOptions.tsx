@@ -58,7 +58,7 @@ const DropdownInputOptions = ({
 
   useEffect(() => {
     if (isLoading && data?.length) {
-      scrollViewRef.current?.scrollToEnd({ animated: true });
+      scrollViewRef.current?.scrollToEnd();
     }
   }, [isLoading]);
 
@@ -173,7 +173,7 @@ const DropdownInputOptions = ({
                             backgroundColor: TERTIARY_101,
                           },
                       ]}>
-                      <Text style={styles.optionText}>{item[displayKey]}</Text>
+                      <Text style={styles.optionText} numberOfLines={2}>{item[displayKey]}</Text>
                     </TouchableOpacity>
                   );
                 })}

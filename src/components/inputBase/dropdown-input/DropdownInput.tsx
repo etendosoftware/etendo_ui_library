@@ -4,6 +4,7 @@ import {
   Dimensions,
   NativeSyntheticEvent,
   NativeScrollEvent,
+  TextInput,
 } from 'react-native';
 import InputBase from '../InputBase';
 import { IDropdownInput } from './DropdownInput.types';
@@ -34,6 +35,7 @@ const DropdownInput = ({
   ...inputBaseProps
 }: IDropdownInput) => {
   const ref = useRef<View>(null);
+  const refInput = useRef<TextInput>(null);
   const [isVisibleDropdown, setIsVisibleDropdown] = useState<boolean>(false);
   const [dataList, setDataList] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(0);
@@ -85,8 +87,9 @@ const DropdownInput = ({
   }, [staticData]);
 
   useEffect(() => {
-    if (isVisibleDropdown && !dataList.length) {
-      fetchMordeData(currentPage, dataList, isLoadMoreData, '');
+    setDataList([])
+    if (isVisibleDropdown) {
+      fetchMordeData(0, dataList, isLoadMoreData, '');
     }
   }, [isVisibleDropdown]);
 
@@ -109,10 +112,15 @@ const DropdownInput = ({
   const onSelectOption = (item: any) => {
     onSelect?.(item);
     setIsVisibleDropdown(false);
-  };
 
+    if (refInput.current) {
+      refInput.current.setNativeProps({
+        selection: { start: 0, end: 0 },
+      });
+    }
+  };
   const onScroll = async (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    if (isAtEndOfScroll(event.nativeEvent)) {
+    if (isAtEndOfScroll(event.nativeEvent) && !isLoading) {
       fetchMordeData(currentPage, dataList, isLoadMoreData, filterText);
     }
   };
@@ -163,6 +171,7 @@ const DropdownInput = ({
           adjustDropdownPosition();
         }}>
         <InputBase
+          refInput={refInput}
           refInputContainer={ref}
           {...inputBaseProps}
           rightButtons={[
@@ -182,7 +191,7 @@ const DropdownInput = ({
           }}
         />
       </View>
-      {isVisibleDropdown && (
+      {isVisibleDropdown && !!modalPosition.width && (
         <InputOptions
           isVisibleDropdown
           onClose={() => {
