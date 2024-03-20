@@ -92,7 +92,7 @@ const SwitchRowCard = ({
       <Text
         style={[styles.textValue, color]}
         ellipsizeMode="tail"
-        numberOfLines={2}>
+        numberOfLines={row?.numberOfLines ?? 2}>
         {row?.key ? item[row.key] : ''}
       </Text>
     </View>

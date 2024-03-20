@@ -26,8 +26,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   closeIcon: {
-    height: 14,
-    width: 14,
+    height: 24,
+    width: 24,
   },
   messageIcon: { width: 20, height: 20, marginRight: 8 },
 });

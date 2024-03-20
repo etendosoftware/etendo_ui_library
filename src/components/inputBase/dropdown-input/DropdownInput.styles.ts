@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { NEUTRAL_0, NEUTRAL_300, NEUTRAL_50, PRIMARY_100 } from '../../../styles/colors';
+import { NEUTRAL_300, NEUTRAL_50, PRIMARY_100 } from '../../../styles/colors';
 
 export const styles = StyleSheet.create({
   fullScreenTouchable: {

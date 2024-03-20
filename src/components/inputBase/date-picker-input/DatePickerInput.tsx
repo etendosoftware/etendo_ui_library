@@ -648,8 +648,8 @@ const DatePickerInput = ({
                         </Text>
                         <ChevronDownIcon
                           style={{
-                            width: 12,
-                            height: 12,
+                            width: 22,
+                            height: 22,
                           }}
                         />
                       </View>
@@ -688,8 +688,8 @@ const DatePickerInput = ({
                         </Text>
                         <ChevronDownIcon
                           style={{
-                            width: 14,
-                            height: 14,
+                            width: 22,
+                            height: 22,
                           }}
                         />
                       </View>
