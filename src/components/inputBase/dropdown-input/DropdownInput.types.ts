@@ -2,8 +2,10 @@ import {
   DimensionValue,
   NativeScrollEvent,
   NativeSyntheticEvent,
+  ScrollView,
 } from 'react-native';
 import { IInputBase } from '../InputBase.types';
+import { RefObject } from 'react';
 
 export interface IDropdownInput
   extends Omit<IInputBase, 'keyboardType' | 'secureTextEntry'> {
@@ -19,7 +21,6 @@ export interface IDropdownInput
   pageSize?: number;
   searchPlaceholder?: string;
   noResultsText?: string;
-  displayMode?: 'dropdown' | 'centeredModal';
 }
 
 export interface IDropdownInputOptions {
@@ -44,5 +45,5 @@ export interface IDropdownInputOptions {
   searchPlaceholder?: string;
   noResultsText?: string;
   isModalUp: boolean;
-  displayMode?: 'dropdown' | 'centeredModal';
+  refScrollView?: RefObject<ScrollView>
 }

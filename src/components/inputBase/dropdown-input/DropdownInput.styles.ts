@@ -36,4 +36,5 @@ export const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.5)',
   },
   searchContainer: { marginBottom: 8 },
+  iconLoading: {height:24,width:24}
 });
