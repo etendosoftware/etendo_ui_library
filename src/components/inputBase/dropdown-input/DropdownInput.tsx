@@ -203,6 +203,7 @@ const DropdownInput = ({
           onFilterTextChange={handleOnFilterTextChange}
           noResultsText={noResultsText}
           isModalUp={isModalUp}
+          displayMode={displayMode}
         />
       )}
     </>

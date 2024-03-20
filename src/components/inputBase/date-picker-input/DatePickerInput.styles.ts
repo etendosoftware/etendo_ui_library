@@ -22,7 +22,7 @@ export const sizeStyles = {
     itemHeight: 30,
     monthText: 12,
     yearText: 12,
-    iconStyle: { width: 14, height: 14 },
+    iconStyle: { width: 26, height: 26 },
     headerPadding: { paddingTop: 2 },
     headerDayPadding: { paddingVertical: 0 },
     dayText: { fontSize: 10 },
@@ -45,7 +45,7 @@ export const sizeStyles = {
     itemHeight: 40,
     monthText: 14,
     yearText: 14,
-    iconStyle: { width: 16, height: 16 },
+    iconStyle: { width: 26, height: 26 },
     headerPadding: { paddingTop: 14 },
     headerDayPadding: { paddingVertical: 12 },
     dayText: { fontSize: 13 },
@@ -68,7 +68,7 @@ export const sizeStyles = {
     itemHeight: 50,
     monthText: 16,
     yearText: 16,
-    iconStyle: { width: 18, height: 18 },
+    iconStyle: { width: 26, height: 26 },
     headerPadding: { paddingTop: 14 },
     headerDayPadding: { paddingVertical: 8 },
     dayText: { fontSize: 14 },
@@ -118,8 +118,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   iconStyle: {
-    width: 16,
-    height: 16,
+    width: 26,
+    height: 26,
   },
   monthAndYearContent: {
     flexDirection: 'row',
@@ -211,6 +211,8 @@ export const styles = StyleSheet.create({
     color: NEUTRAL_0,
   },
   dayText: {
+    width: 22,
+    height: 22,
     textAlign: 'center',
   },
   currentDayBorder: {

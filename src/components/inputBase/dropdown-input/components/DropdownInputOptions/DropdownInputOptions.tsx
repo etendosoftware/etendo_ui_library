@@ -122,7 +122,6 @@ const DropdownInputOptions = ({
         onClose();
       }}>
       <TouchableOpacity
-        style={[styles.fullScreenTouchable]}
         onPress={() => onClose()}
         activeOpacity={1}>
         <KeyboardAvoidingView
@@ -132,8 +131,10 @@ const DropdownInputOptions = ({
             { width: windowWidth, height: windowHeight },
           ]}>
           <View
+            onStartShouldSetResponder={() => true}
             style={[
               styles.optionsContainer,
+              isCenteredModal && {height: maxVisibleOptions && maxVisibleOptions * 48 + 48 + 16},
               {
                 maxHeight:
                   maxVisibleOptions && data && data?.length <= maxVisibleOptions

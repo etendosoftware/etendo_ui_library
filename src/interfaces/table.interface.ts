@@ -8,6 +8,7 @@ export interface Metadata {
   title?: boolean;
   type?: MetadataType;
   visible?: boolean;
+  numberOfLines?:number;
 }
 
 export interface CommonTableProps {
