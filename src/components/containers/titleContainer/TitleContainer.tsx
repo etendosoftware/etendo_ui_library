@@ -1,5 +1,5 @@
-import React, { FC, ReactNode, useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import React, { FC } from 'react';
+import { Text } from 'react-native';
 import { DEFAULT } from './TitleContainer.default';
 import { ITitleContainer } from './TitleContainer.types';
 import { GridContainer } from '../gridContainer';
@@ -10,24 +10,27 @@ const TitleContainer: FC<ITitleContainer> = ({
   styleContainer,
   styleTitle,
   styleGridContainer,
-  buttonsGap,
+  gridGapHorizontal,
+  gridGapVertical,
 }) => {
   return (
-    <View style={[DEFAULT.TITLE_CONTAINER, styleContainer]}>
-      <Text
-        style={[DEFAULT.TITLE_STYLE, styleTitle]}
-        numberOfLines={1}
-        ellipsizeMode="tail">
-        {title}
-      </Text>
-      {buttons && (
+    <GridContainer
+      stylesContainer={styleContainer}
+      components={[
+        <Text
+          style={[DEFAULT.TITLE_STYLE, styleTitle]}
+          numberOfLines={1}
+          ellipsizeMode="tail">
+          {title}
+        </Text>,
         <GridContainer
           components={buttons}
           stylesContainer={styleGridContainer}
-          gapHorizontal={buttonsGap}
-        />
-      )}
-    </View>
+          gapHorizontal={gridGapHorizontal}
+          gapVertical={gridGapVertical}
+        />,
+      ]}
+    />
   );
 };
 
