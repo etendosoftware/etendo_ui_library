@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
   View,
   Modal,
@@ -8,6 +8,8 @@ import {
   ScrollView,
   Pressable,
   FlatList,
+  Dimensions,
+  TextInput,
 } from 'react-native';
 import InputBase from '../InputBase';
 import { Button } from '../../button';
@@ -17,6 +19,7 @@ import { useDatePickerInput } from './hooks/useDatePickerInput';
 import { isWebPlatform } from '../../../helpers/functions_utils';
 import { NEUTRAL_300, NEUTRAL_400, PRIMARY_100 } from '../../../styles/colors';
 import {
+  BoxShadowStyle,
   DatePickerInputProps,
   DayItem,
   MonthItemProps,
@@ -89,13 +92,17 @@ const DatePickerInput = ({
   const [isInputError, setIsInputError] = useState<boolean>(false);
   const [isDateSelected, setIsDateSelected] = useState<boolean>(false);
   const [tempSelectedDate, setTempSelectedDate] = useState<string | null>(null);
-  const [calendarPosition, setCalendarPosition] = useState<any>({
-    top: undefined,
-    bottom: undefined,
-  });
+
+  const [modalPosition, setModalPosition] = useState<{
+    top: number;
+    left: number;
+    width: number;
+  }>({ top: 0, left: 0, width: 0 });
+
+  const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
 
   // References
-  const inputRef = useRef<any>(null);
+  const inputRef = useRef<TextInput>(null);
 
   // Date constants
   const parsedMinDate = minDate
@@ -126,9 +133,7 @@ const DatePickerInput = ({
       paddingHorizontal={0}
       paddingVertical={7}
       onPress={openCalendar}
-      iconLeft={
-        <CalendarIcon style={{ width: 24, height: 24 }} fill={PRIMARY_100} />
-      }
+      iconLeft={<CalendarIcon style={{ width: 24, height: 24 }} />}
       disabled={isDisabled}
     />,
   ];
@@ -137,36 +142,6 @@ const DatePickerInput = ({
   const closeCalendar = () => {
     setIsPickerShow(false);
   };
-
-  // Calculate the position of the calendar modal
-  useEffect(() => {
-    if (
-      isWebPlatform() &&
-      isPickerShow &&
-      inputRef.current &&
-      typeof window !== 'undefined'
-    ) {
-      const rect = inputRef.current.getBoundingClientRect();
-      const modalWidth = currentSizeStyles.modalWidth;
-      const modalHeight = currentSizeStyles.calendarHeight;
-      const screenWidth = window.innerWidth;
-      const screenHeight = window.innerHeight;
-
-      let calculatedLeft = rect.right - modalWidth;
-      if (calculatedLeft + modalWidth > screenWidth) {
-        calculatedLeft = screenWidth - modalWidth - 20;
-      }
-
-      const spaceBelow = screenHeight - rect.bottom;
-      const spaceAbove = rect.top;
-
-      let topPosition = rect.bottom + window.scrollY;
-      if (spaceBelow < modalHeight && spaceAbove > modalHeight) {
-        // If there is not enough space below but there is enough space above, show the calendar above
-        topPosition = rect.top + window.scrollY - modalHeight;
-      }
-    }
-  }, [isPickerShow, currentSizeStyles]);
 
   // Function for the button 'Accept'
   const onAccept = () => {
@@ -198,43 +173,7 @@ const DatePickerInput = ({
       const offset = index * currentSizeStyles.itemHeight;
       yearListRef.current.scrollTo({ y: offset, animated: false });
     }
-  }, [currentYear, yearList]);
-
-  useEffect(() => {
-    const index = yearList.indexOf(currentYear);
-    if (index !== -1 && yearListRef.current) {
-      const offset = index * currentSizeStyles.itemHeight;
-      yearListRef.current.scrollTo({ y: offset, animated: false });
-    }
-  }, [currentMonth]);
-
-  // Calendar position
-  useEffect(() => {
-    if (
-      isWebPlatform() &&
-      isPickerShow &&
-      inputRef.current &&
-      typeof window !== 'undefined'
-    ) {
-      const rect = inputRef.current.getBoundingClientRect();
-      const modalHeight = currentSizeStyles.calendarHeight;
-      const screenHeight = window.innerHeight;
-
-      const spaceBelow = screenHeight - rect.bottom;
-      const spaceAbove = rect.top;
-
-      if (spaceBelow < modalHeight && spaceAbove > modalHeight) {
-        // Not enough space below, show calendar above
-        setCalendarPosition({
-          top: 'auto',
-          bottom: helperText ? '4.7rem' : '3.35rem',
-        });
-      } else {
-        // Enough space below, show calendar below
-        setCalendarPosition({ top: helperText ? '-1.55rem' : '0rem' });
-      }
-    }
-  }, [isPickerShow, currentSizeStyles.calendarHeight]);
+  }, [currentYear, yearList, currentMonth]);
 
   // Reset error status when selected value changes
   useEffect(() => {
@@ -249,41 +188,38 @@ const DatePickerInput = ({
     }
   }, [isMonthSelection, currentMonth]);
 
-  // Effect to set modal position
-  useEffect(() => {
-    if (
-      isWebPlatform() &&
-      isPickerShow &&
-      inputRef.current &&
-      typeof window !== 'undefined'
-    ) {
-      const rect = inputRef.current.getBoundingClientRect();
-      const modalWidth = currentSizeStyles.modalWidth;
-      const modalHeight = currentSizeStyles.calendarHeight;
-      const screenWidth = window.innerWidth;
-      const screenHeight = window.innerHeight;
-
-      let calculatedLeft = rect.right - modalWidth;
-      if (calculatedLeft + modalWidth > screenWidth) {
-        calculatedLeft = screenWidth - modalWidth - 20;
-      }
-
-      const spaceBelow = screenHeight - rect.bottom;
-      const spaceAbove = rect.top;
-
-      let topPosition;
-      if (spaceBelow >= modalHeight) {
-        // Enough space below, place calendar below the input
-        topPosition = rect.bottom + window.scrollY - 5;
-      } else if (spaceAbove >= modalHeight) {
-        // Enough space above, place calendar above the input
-        topPosition = rect.top + window.scrollY - modalHeight - 70;
-      } else {
-        // Not enough space above or below, handle as needed
-        topPosition = rect.bottom + window.scrollY;
-      }
+  const adjustDropdownPosition = useCallback(() => {
+    if (inputRef.current && isWebPlatform()) {
+      inputRef.current.measure((x, y, width, height, pageX, pageY) => {
+        const spaceBelow = windowHeight - (pageY + height);
+        const spaceInputModal = 16;
+        if (currentSizeStyles.heightCalendar + spaceInputModal > spaceBelow) {
+          setModalPosition({
+            top: pageY - currentSizeStyles.heightCalendar - spaceInputModal,
+            left: pageX,
+            width: width,
+          });
+        } else {
+          setModalPosition({ top: pageY + height, left: pageX, width: width });
+        }
+      });
     }
-  }, [isPickerShow, currentSizeStyles]);
+  }, [windowHeight, isPickerShow]);
+
+  useEffect(() => {
+    if (isWebPlatform()) {
+      adjustDropdownPosition();
+      const handleScroll = () => {
+        if (isPickerShow) {
+          adjustDropdownPosition();
+        }
+      };
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
+  }, [isPickerShow, adjustDropdownPosition]);
 
   // Render item for year selection
   const renderYearItem = ({ item }: { item: number }) => (
@@ -541,7 +477,7 @@ const DatePickerInput = ({
       <View
         style={[
           styles.calendarContainer,
-          { height: currentSizeStyles.calendarHeight },
+          { height: currentSizeStyles.calendarBody },
         ]}>
         <View style={[styles.dayHeader, currentSizeStyles.headerDayPadding]}>
           {DAYS_SHORT_NAMES.map((day: string) => (
@@ -565,26 +501,22 @@ const DatePickerInput = ({
     );
   };
 
-  const PlatformCalendarPicker: any = isWebPlatform() ? View : Modal;
-
-  const modalProps = !isWebPlatform()
-    ? {
-        transparent: true,
-        visible: isPickerShow,
-        onRequestClose: () => setIsPickerShow(false),
-        animationType: 'fade',
-      }
-    : {};
+  const boxShadow = (): BoxShadowStyle | {} => {
+    return isWebPlatform()
+      ? { boxShadow: '0px 1px 1.41px rgba(0, 0, 0, 0.20)' }
+      : {};
+  };
 
   return (
-    <View ref={inputRef}>
+    <View>
       <InputBase
+        refInputContainer={inputRef}
         value={selectedDate}
         placeholder={placeholder || dateFormat}
         title={title}
         helperText={helperText}
         isDisabled={isDisabled}
-        isError={isInputError}
+        isError={isInputError || isError}
         onChangeText={handleTextChange}
         icon={icon}
         onBlur={handleBlur}
@@ -593,19 +525,27 @@ const DatePickerInput = ({
         {...props}
       />
       {isPickerShow && (
-        <PlatformCalendarPicker {...modalProps}>
+        <Modal
+          transparent={true}
+          visible={isPickerShow}
+          onRequestClose={() => setIsPickerShow(false)}
+          animationType={'fade'}>
           <TouchableWithoutFeedback onPress={() => setIsPickerShow(false)}>
             <View style={styles.modalContainer}>
-              <TouchableWithoutFeedback onPress={e => e.stopPropagation()}>
+              <TouchableWithoutFeedback>
                 <View
                   style={[
                     styles.modalContent,
+                    boxShadow(),
                     {
-                      position: isWebPlatform() ? 'absolute' : 'relative',
+                      position: 'absolute',
                       width: currentSizeStyles.modalWidth,
-                      top: calendarPosition.top,
-                      bottom: calendarPosition.bottom,
-                      right: isWebPlatform() ? 0 : undefined,
+                      top: isWebPlatform() ? modalPosition.top : undefined,
+                      left: isWebPlatform()
+                        ? modalPosition.left +
+                          modalPosition.width -
+                          currentSizeStyles.modalWidth
+                        : undefined,
                     },
                   ]}>
                   <View
@@ -629,10 +569,9 @@ const DatePickerInput = ({
                       <TouchableOpacity
                         style={[
                           styles.iconContainer,
+                          currentSizeStyles.iconContainer,
                           {
-                            alignItems: 'flex-start',
-                            padding: 16,
-                            paddingLeft: 4,
+                            paddingLeft: 0,
                           },
                         ]}
                         onPress={goToPreviousMonth}>
@@ -647,16 +586,13 @@ const DatePickerInput = ({
                           {MONTHS_SHORT_NAMES[currentMonth]}
                         </Text>
                         <ChevronDownIcon
-                          style={{
-                            width: 22,
-                            height: 22,
-                          }}
+                          style={currentSizeStyles.iconDownStyle}
                         />
                       </View>
                       <TouchableOpacity
                         style={[
                           styles.iconContainer,
-                          { alignItems: 'flex-start', padding: 16 },
+                          currentSizeStyles.iconContainer,
                         ]}
                         onPress={goToNextMonth}>
                         <ChevronRightIcon style={currentSizeStyles.iconStyle} />
@@ -673,7 +609,7 @@ const DatePickerInput = ({
                       <TouchableOpacity
                         style={[
                           styles.iconContainer,
-                          { alignItems: 'flex-start', padding: 16 },
+                          currentSizeStyles.iconContainer,
                         ]}
                         onPress={goToPreviousYear}>
                         <ChevronLeftIcon style={currentSizeStyles.iconStyle} />
@@ -687,19 +623,15 @@ const DatePickerInput = ({
                           {currentYear}
                         </Text>
                         <ChevronDownIcon
-                          style={{
-                            width: 22,
-                            height: 22,
-                          }}
+                          style={currentSizeStyles.iconDownStyle}
                         />
                       </View>
                       <TouchableOpacity
                         style={[
                           styles.iconContainer,
+                          currentSizeStyles.iconContainer,
                           {
-                            alignItems: 'flex-start',
-                            padding: 16,
-                            paddingRight: 4,
+                            paddingRight: 0,
                           },
                         ]}
                         onPress={goToNextYear}>
@@ -732,7 +664,7 @@ const DatePickerInput = ({
               </TouchableWithoutFeedback>
             </View>
           </TouchableWithoutFeedback>
-        </PlatformCalendarPicker>
+        </Modal>
       )}
     </View>
   );
