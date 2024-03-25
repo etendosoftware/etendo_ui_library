@@ -19,7 +19,6 @@ import { Tab } from './tab';
 import { Table } from './table';
 import { ViewEtendo } from './viewEtendo/ViewEtendo';
 import {
-  ButtonContainer,
   Layout,
   SearchContainer,
   TitleContainer,
@@ -30,7 +29,6 @@ import { Alert, setAlertDefaultDuration, show } from './alert';
 export {
   Alert,
   Button,
-  ButtonContainer,
   CardDropdown,
   Cards,
   DatePickerInput,
