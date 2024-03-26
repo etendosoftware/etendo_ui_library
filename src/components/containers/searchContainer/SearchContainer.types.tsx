@@ -1,14 +1,9 @@
-import { DimensionValue, StyleProp, ViewStyle } from 'react-native';
-import { ISearchInput } from '../../inputBase/search-input/SearchInput.types';
+import { DimensionValue, ViewStyle} from 'react-native';
 import { RightButtons } from '../../inputBase/InputBase.types';
+import { ISearchInput } from '../../inputBase/search-input/SearchInput.types';
 
 export interface ISearchContainer extends Omit<ISearchInput, 'styleContainer'>{
   buttons?: RightButtons;
-  height?: number;
-  onSubmit: (...params: any[]) => void;
-  placeholder?: string;
-  style?: StyleProp<ViewStyle>;
-  value?: string;
   widthSearchInput?: DimensionValue;
   styleContainer?: ViewStyle;
   styleGridContainer?: ViewStyle;
