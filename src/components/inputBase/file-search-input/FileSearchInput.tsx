@@ -2,24 +2,20 @@ import React, {
   useState,
   useRef,
   useEffect,
-  ReactElement,
-  JSXElementConstructor,
 } from 'react';
 import {
   View,
   TouchableOpacity,
   Text,
   SafeAreaView,
-  ButtonProps,
 } from 'react-native';
 import InputBase from '../InputBase';
 
 // Import styles
 import { styles } from './FileSearchInput.styles';
-import { NEUTRAL_1000, PRIMARY_100, SUCCESS_600 } from '../../../styles/colors';
+import { NEUTRAL_1000, SUCCESS_600 } from '../../../styles/colors';
 
 // Import icons
-import { CheckCircleIcon } from '../../../assets/images/icons/CheckCircleIcon';
 import { DeleteIcon } from '../../../assets/images/icons/DeleteIcon';
 import { FileIcon } from '../../../assets/images/icons/FileIcon';
 
@@ -29,8 +25,10 @@ import { Button } from '../../button';
 import { SkeletonItem } from '../../secondaryComponents';
 import { isWebPlatform } from '../../../helpers/functions_utils';
 import {
+  CheckCircleFillIcon,
   CornerDownRightIcon,
   PaperclipIcon,
+  XIcon,
 } from '../../../assets/images/icons';
 import { RightButtons, SvgImageProps } from '../InputBase.types';
 
@@ -341,13 +339,13 @@ const FileSearchInput = ({
 
           <View style={styles.fileNameRightContainer}>
             {fileStatus === 'loaded' && (
-              <CheckCircleIcon
+              <CheckCircleFillIcon
                 style={styles.checkCircleIcon}
                 fill={SUCCESS_600}
               />
             )}
-            <TouchableOpacity onPress={handleCancelFile}>
-              <DeleteIcon style={styles.deleteIcon} />
+            <TouchableOpacity style={styles.containerXicon} onPress={handleCancelFile}>
+              <XIcon style={styles.deleteIcon} />
             </TouchableOpacity>
           </View>
         </View>

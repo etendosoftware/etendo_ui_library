@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
         flex: 1,
     },
     fileNameContainer: {
-        alignItems: 'center',
+        alignItems: "center",
         backgroundColor: NEUTRAL_50,
         borderColor: NEUTRAL_400,
         borderRadius: 8,
@@ -34,6 +34,7 @@ export const styles = StyleSheet.create({
     },
     fileNameRightContainer: {
         flexDirection: "row",
+        alignItems:'center'
     },
     fileNameLeftContent: {
         height: 24,
@@ -48,7 +49,6 @@ export const styles = StyleSheet.create({
     checkCircleIcon: {
         height: 24,
         width: 24,
-        marginRight: 8,
     },
     errorIcon: {
         height: 20,
@@ -104,4 +104,7 @@ export const styles = StyleSheet.create({
         backgroundColor: NEUTRAL_1000,
         borderRadius: 2,
     },
+    containerXicon: {
+        marginLeft: 5
+    }
 });
