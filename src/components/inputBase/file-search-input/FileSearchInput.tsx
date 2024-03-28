@@ -1,14 +1,5 @@
-import React, {
-  useState,
-  useRef,
-  useEffect,
-} from 'react';
-import {
-  View,
-  TouchableOpacity,
-  Text,
-  SafeAreaView,
-} from 'react-native';
+import React, { useState, useRef, useEffect } from 'react';
+import { View, TouchableOpacity, Text, SafeAreaView } from 'react-native';
 import InputBase from '../InputBase';
 
 // Import styles
@@ -16,7 +7,6 @@ import { styles } from './FileSearchInput.styles';
 import { NEUTRAL_1000, SUCCESS_600 } from '../../../styles/colors';
 
 // Import icons
-import { DeleteIcon } from '../../../assets/images/icons/DeleteIcon';
 import { FileIcon } from '../../../assets/images/icons/FileIcon';
 
 // Import types
@@ -195,7 +185,7 @@ const FileSearchInput = ({
       }
     }
   };
-  
+
   // Define the right buttons for the input
 
   const UploadButton = (
@@ -203,9 +193,7 @@ const FileSearchInput = ({
       paddingVertical={7}
       typeStyle="white"
       onPress={handleFileButtonClick}
-      iconLeft={
-        <PaperclipIcon />
-      }
+      iconLeft={<PaperclipIcon />}
     />
   );
   const SendButton = (
@@ -213,9 +201,7 @@ const FileSearchInput = ({
       paddingVertical={7}
       typeStyle="white"
       onPress={handleSendMessage}
-      iconLeft={
-        <CornerDownRightIcon />
-      }
+      iconLeft={<CornerDownRightIcon />}
     />
   );
 
@@ -224,7 +210,7 @@ const FileSearchInput = ({
     buttons = buttons ? [...buttons, UploadButton] : [UploadButton];
   }
 
-  if (!!onSubmit){
+  if (!!onSubmit) {
     buttons = buttons ? [...buttons, SendButton] : [SendButton];
   }
 
@@ -315,8 +301,9 @@ const FileSearchInput = ({
       {file && isFileValid && fileStatus !== 'canceled' && (
         <View style={styles.fileNameContainer}>
           <View style={styles.fileNameLoadedLeftContainer}>
-            <FileIcon style={styles.fileIcon} />
-
+            <View style={styles.fileIconContainer}>
+              <FileIcon style={styles.fileIcon} />
+            </View>
             <View style={styles.fileContent}>
               <Text
                 style={styles.fileNameText}
@@ -344,7 +331,9 @@ const FileSearchInput = ({
                 fill={SUCCESS_600}
               />
             )}
-            <TouchableOpacity style={styles.containerXicon} onPress={handleCancelFile}>
+            <TouchableOpacity
+              style={styles.containerXicon}
+              onPress={handleCancelFile}>
               <XIcon style={styles.deleteIcon} />
             </TouchableOpacity>
           </View>
