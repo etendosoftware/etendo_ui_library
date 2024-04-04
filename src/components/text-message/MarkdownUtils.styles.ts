@@ -69,6 +69,9 @@ export const styleMarkdown: any = {
   },
   img: {
     borderRadius: 4,
+    width: '100%',
+    height: 'auto',
+    resizeMode: 'contain',
   },
   imgButtonContainer: {
     transition: "opacity 0.3s ease, visibility 0.3s ease",
