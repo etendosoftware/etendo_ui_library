@@ -111,11 +111,11 @@ const InputBase = ({
     }
   };
 
-  const determineIconStyles = (icon: any) => {
+  const determineIconStyles = (icon: any, disable?:boolean) => {
     if (!icon) return null;
     const { style = {}, ...otherIconProps } = icon.props;
     return React.cloneElement(icon, {
-      fill: determineColor(true),
+      fill: disable ? NEUTRAL_500 : determineColor(true),
       style: {
         ...style,
         height: style.height || styles.icon.height,
@@ -182,20 +182,19 @@ const InputBase = ({
               const { iconLeft, iconRight, ...otherProps } =
                 ButtonComponent.props;
               const modifiedProps = { ...otherProps };
-
               modifiedProps.paddingVertical =
                 modifiedProps?.paddingVertical || 0;
               modifiedProps.paddingHorizontal =
                 modifiedProps?.paddingHorizontal || 0;
-              modifiedProps.iconLeft = determineIconStyles(iconLeft);
-              modifiedProps.iconRight = determineIconStyles(iconRight);
+              modifiedProps.iconLeft = determineIconStyles(iconLeft, modifiedProps.disabled || isDisabled);
+              modifiedProps.iconRight = determineIconStyles(iconRight, modifiedProps.disabled || isDisabled);
               modifiedProps.text = '';
 
               return (
                 <ButtonComponent.type
                   {...modifiedProps}
                   key={index}
-                  disabled={isDisabled}
+                  disabled={isDisabled || modifiedProps.disabled}
                   typeStyle={'white'}
                 />
               );
