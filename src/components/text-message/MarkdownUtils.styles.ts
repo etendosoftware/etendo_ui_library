@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 import {
   INITIAL_100,
   NEUTRAL_0,
@@ -6,19 +6,19 @@ import {
   PRIMARY_100,
   PRIMARY_20,
   TERTIARY_70,
-} from "../../styles/colors";
+} from '../../styles/colors';
 
 export const styles = StyleSheet.create({
   boldText: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   italicText: {
-    fontStyle: "italic",
+    fontStyle: 'italic',
   },
   copyButton: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
     padding: 5,
     borderTopRightRadius: 4,
     borderTopLeftRadius: 4,
@@ -31,41 +31,41 @@ export const styles = StyleSheet.create({
   },
   linkText: {
     color: INITIAL_100,
-    fontWeight: "600",
-    textDecorationLine: "underline",
+    fontWeight: '600',
+    textDecorationLine: 'underline',
   },
   inlineCode: {
     backgroundColor: TERTIARY_70,
     paddingHorizontal: 4,
     borderRadius: 4,
     color: PRIMARY_100,
-    fontWeight: "700",
+    fontWeight: '700',
   },
   paragraph: {
     margin: 0,
     padding: 0,
     lineHeight: 20,
     color: NEUTRAL_800,
-    fontWeight: "500",
+    fontWeight: '500',
   },
   listItem: {
-    fontWeight: "700",
+    fontWeight: '700',
   },
 });
 
 export const styleMarkdown: any = {
   imgContainerLink: {
-    textDecoration: "none",
+    textDecoration: 'none',
   },
   imgContainer: {
     margin: 8,
-    transition: "background-color 0.3s ease",
-    border: "1px solid #E0E0E0",
+    transition: 'background-color 0.3s ease',
+    border: '1px solid #E0E0E0',
     borderRadius: 8,
     padding: 4,
-    alignItems: "center",
-    justifyContent: "center",
-    display: "flex",
+    alignItems: 'center',
+    justifyContent: 'center',
+    display: 'flex',
   },
   img: {
     borderRadius: 4,
@@ -74,12 +74,10 @@ export const styleMarkdown: any = {
     resizeMode: 'contain',
   },
   imgButtonContainer: {
-    transition: "opacity 0.3s ease, visibility 0.3s ease",
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
+    transition: 'opacity 0.3s ease, visibility 0.3s ease',
+    position: 'absolute',
+    margin: 'auto',
   },
-  boxShadow: "0px 4px 10px 0px #4242421A",
-  boxShadowActive: "0px 4px 10px 0px #42424233",
+  boxShadow: '0px 4px 10px 0px #4242421A',
+  boxShadowActive: '0px 4px 10px 0px #42424233',
 };

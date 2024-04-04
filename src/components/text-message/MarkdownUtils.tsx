@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { Text, ScrollView } from "react-native";
-import { TextMessageProps } from "./TextMessage.types";
-import ReactMarkdown from "react-markdown";
-import { CodeComponent } from "./CodeComponent";
-import { AnchorComponent } from "./AnchorComponent";
-import { getTextColorByType } from "./TextMessage.utils";
-import { styleMarkdown, styles } from "./MarkdownUtils.styles";
-import { Button } from "../button";
-import { PlusIcon } from "../../assets/images/icons";
-import { PRIMARY_100 } from "../../styles/colors";
+import React, { useState } from 'react';
+import { Text, ScrollView } from 'react-native';
+import { TextMessageProps } from './TextMessage.types';
+import ReactMarkdown from 'react-markdown';
+import { CodeComponent } from './CodeComponent';
+import { AnchorComponent } from './AnchorComponent';
+import { getTextColorByType } from './TextMessage.utils';
+import { styleMarkdown, styles } from './MarkdownUtils.styles';
+import { Button } from '../button';
+import { PlusIcon } from '../../assets/images/icons';
+import { PRIMARY_100 } from '../../styles/colors';
 
 const InlineCode = ({ children }: any) => (
   <Text style={styles.inlineCode}>{children}</Text>
@@ -22,8 +22,7 @@ const Paragraph = ({ children, type, ...props }: any) => {
         { color: getTextColorByType(type) },
         props.style,
       ]}
-      {...props}
-    >
+      {...props}>
       {children}
     </Text>
   );
@@ -36,30 +35,27 @@ const CustomImageComponent = ({ src, alt, style }: any) => {
       href={src}
       target="_blank"
       rel="noopener noreferrer"
-      style={styleMarkdown.imgContainerLink}
-    >
+      style={styleMarkdown.imgContainerLink}>
       <div
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         style={{
           ...styleMarkdown.imgContainer,
-          background: isHovered ? PRIMARY_100 : "transparent",
+          background: isHovered ? PRIMARY_100 : 'transparent',
           boxShadow: isHovered
             ? styleMarkdown.boxShadowActive
             : styleMarkdown.boxShadow,
-        }}
-      >
+        }}>
         <img src={src} alt={alt} style={{ ...style, ...styleMarkdown.img }} />
-      </div>
-      <div
-        onMouseEnter={() => setIsHovered(true)}
-        style={{
-          ...styleMarkdown.imgButtonContainer,
-          opacity: isHovered ? 1 : 0,
-          visibility: isHovered ? "visible" : "hidden",
-        }}
-      >
-        <Button typeStyle="primary" iconLeft={<PlusIcon />} />
+        <div
+          onMouseEnter={() => setIsHovered(true)}
+          style={{
+            ...styleMarkdown.imgButtonContainer,
+            opacity: isHovered ? 1 : 0,
+            visibility: isHovered ? 'visible' : 'hidden',
+          }}>
+          <Button typeStyle="primary" iconLeft={<PlusIcon />} />
+        </div>
       </div>
     </a>
   );
@@ -68,7 +64,7 @@ const CustomImageComponent = ({ src, alt, style }: any) => {
 // Component to render markdown text
 export const RenderMarkdownText: React.FC<TextMessageProps> = ({
   text,
-  type = "left-user",
+  type = 'left-user',
 }) => {
   return (
     <ScrollView horizontal={false} style={{ flex: 1 }}>
@@ -79,8 +75,7 @@ export const RenderMarkdownText: React.FC<TextMessageProps> = ({
           a: AnchorComponent,
           p: ({ node, ...props }) => <Paragraph {...props} type={type} />,
           img: CustomImageComponent,
-        }}
-      >
+        }}>
         {text}
       </ReactMarkdown>
     </ScrollView>
