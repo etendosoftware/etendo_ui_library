@@ -49,6 +49,8 @@ const FileSearchInput = ({
   uploadConfig,
   maxFileSize = 512,
   rightButtons,
+  isAttachDisable,
+  isSendDisable,
   ...inputBaseProps
 }: FileSearchInputProps) => {
   // States
@@ -193,6 +195,7 @@ const FileSearchInput = ({
       paddingVertical={7}
       typeStyle="white"
       onPress={handleFileButtonClick}
+      disabled={isAttachDisable}
       iconLeft={<PaperclipIcon />}
     />
   );
@@ -201,6 +204,7 @@ const FileSearchInput = ({
       paddingVertical={7}
       typeStyle="white"
       onPress={handleSendMessage}
+      disabled={isSendDisable}
       iconLeft={<CornerDownRightIcon />}
     />
   );

@@ -17,4 +17,6 @@ export interface FileSearchInputProps extends Omit<IInputBase, 'keyboardType' | 
     onError?: (error: any) => void;
     maxFileSize?: number;
     uploadConfig?: UploadConfig | undefined,
+    isSendDisable?: boolean;
+    isAttachDisable?: boolean;
 }
