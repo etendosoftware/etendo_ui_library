@@ -27,7 +27,7 @@ const Paragraph = ({ children, type, ...props }: any) => {
     </Text>
   );
 };
-const CustomImageComponent = ({ src, alt, style }: any) => {
+const ImageComponent = ({ src, alt, style }: any) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -74,7 +74,7 @@ export const RenderMarkdownText: React.FC<TextMessageProps> = ({
           code: InlineCode,
           a: AnchorComponent,
           p: ({ node, ...props }) => <Paragraph {...props} type={type} />,
-          img: CustomImageComponent,
+          img: ImageComponent,
         }}>
         {text}
       </ReactMarkdown>
