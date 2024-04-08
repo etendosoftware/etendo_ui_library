@@ -29,7 +29,6 @@ import {
 } from '../../../assets/images/icons';
 import { RightButtons } from '../InputBase.types';
 
-
 // Import DocumentPicker for mobile platforms only
 let DocumentPicker: any = null;
 if (!isWebPlatform()) {
@@ -46,8 +45,8 @@ if (!isWebPlatform()) {
   }
 }
 
-const POSITION_UP_FILE = 76
-const POSITION_DOWN_FILE = -38
+const POSITION_DOWN_FILE = 52;
+const POSITION_UP_FILE = -60;
 
 const FileSearchInput = ({
   value,
@@ -321,19 +320,11 @@ const FileSearchInput = ({
   const adjustDropdownPosition = useCallback(() => {
     if (refInput.current) {
       refInput.current.measure((x, y, width, height, pageX, pageY) => {
-        if (height + 16 > pageY) {
           setModalPosition({
-            top: POSITION_UP_FILE,
+            top:height + 12 > pageY ? POSITION_DOWN_FILE : POSITION_UP_FILE,
             left: pageX,
             width: width,
           });
-        } else {
-          setModalPosition({
-            top: POSITION_DOWN_FILE,
-            left: pageX,
-            width: width,
-          });
-        }
       });
     }
   }, [windowHeight]);
@@ -341,15 +332,14 @@ const FileSearchInput = ({
     adjustDropdownPosition();
     if (isWebPlatform()) {
       const handleScroll = () => {
-          adjustDropdownPosition();
-        
+        adjustDropdownPosition();
       };
 
       window.addEventListener('scroll', handleScroll, { passive: true });
 
       return () => window.removeEventListener('scroll', handleScroll);
     }
-  }, [adjustDropdownPosition]);
+  }, [windowHeight, adjustDropdownPosition]);
   return (
     <SafeAreaView style={styles.container}>
       <View>
