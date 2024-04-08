@@ -1,5 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { View, TouchableOpacity, Text, SafeAreaView } from 'react-native';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  SafeAreaView,
+  Dimensions,
+  TextInput,
+} from 'react-native';
 import InputBase from '../InputBase';
 
 // Import styles
@@ -20,7 +27,8 @@ import {
   PaperclipIcon,
   XIcon,
 } from '../../../assets/images/icons';
-import { RightButtons, SvgImageProps } from '../InputBase.types';
+import { RightButtons } from '../InputBase.types';
+
 
 // Import DocumentPicker for mobile platforms only
 let DocumentPicker: any = null;
@@ -37,6 +45,9 @@ if (!isWebPlatform()) {
     console.error('Error importing DocumentPicker', error);
   }
 }
+
+const POSITION_UP_FILE = 76
+const POSITION_DOWN_FILE = -38
 
 const FileSearchInput = ({
   value,
@@ -62,7 +73,15 @@ const FileSearchInput = ({
     'none' | 'loaded' | 'canceled' | 'error'
   >('none');
 
+  const [modalPosition, setModalPosition] = useState<{
+    top: number;
+    left: number;
+    width: number;
+  }>({ top: 0, left: 0, width: 0 });
+  const { height: windowHeight } = Dimensions.get('window');
+
   // References
+  const refInput = useRef<TextInput>(null);
   const dropAreaRef = useRef(null);
   const fileInputRef = useRef<any>(null);
   const abortControllerRef = useRef<any>(null);
@@ -196,7 +215,7 @@ const FileSearchInput = ({
       typeStyle="white"
       onPress={handleFileButtonClick}
       disabled={isAttachDisable}
-      iconLeft={<PaperclipIcon />}
+      iconLeft={<PaperclipIcon style={styles.fileIcon} />}
     />
   );
   const SendButton = (
@@ -205,7 +224,7 @@ const FileSearchInput = ({
       typeStyle="white"
       onPress={handleSendMessage}
       disabled={isSendDisable}
-      iconLeft={<CornerDownRightIcon />}
+      iconLeft={<CornerDownRightIcon style={styles.fileIcon} />}
     />
   );
 
@@ -299,51 +318,40 @@ const FileSearchInput = ({
     };
   }, []);
 
+  const adjustDropdownPosition = useCallback(() => {
+    if (refInput.current) {
+      refInput.current.measure((x, y, width, height, pageX, pageY) => {
+        if (height + 16 > pageY) {
+          setModalPosition({
+            top: POSITION_UP_FILE,
+            left: pageX,
+            width: width,
+          });
+        } else {
+          setModalPosition({
+            top: POSITION_DOWN_FILE,
+            left: pageX,
+            width: width,
+          });
+        }
+      });
+    }
+  }, [windowHeight]);
+  useEffect(() => {
+    adjustDropdownPosition();
+    if (isWebPlatform()) {
+      const handleScroll = () => {
+          adjustDropdownPosition();
+        
+      };
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
+  }, [adjustDropdownPosition]);
   return (
     <SafeAreaView style={styles.container}>
-      {/* Display when file is selected */}
-      {file && isFileValid && fileStatus !== 'canceled' && (
-        <View style={styles.fileNameContainer}>
-          <View style={styles.fileNameLoadedLeftContainer}>
-            <View style={styles.fileIconContainer}>
-              <FileIcon style={styles.fileIcon} />
-            </View>
-            <View style={styles.fileContent}>
-              <Text
-                style={styles.fileNameText}
-                numberOfLines={1}
-                ellipsizeMode="tail">
-                {file.name}
-              </Text>
-              {progress > 0 && (
-                <View style={styles.progressBarContainer}>
-                  <SkeletonItem
-                    width={`${progress}%`}
-                    height={8}
-                    color={NEUTRAL_1000}
-                    borderRadius={16}
-                  />
-                </View>
-              )}
-            </View>
-          </View>
-
-          <View style={styles.fileNameRightContainer}>
-            {fileStatus === 'loaded' && (
-              <CheckCircleFillIcon
-                style={styles.checkCircleIcon}
-                fill={SUCCESS_600}
-              />
-            )}
-            <TouchableOpacity
-              style={styles.containerXicon}
-              onPress={handleCancelFile}>
-              <XIcon style={styles.deleteIcon} />
-            </TouchableOpacity>
-          </View>
-        </View>
-      )}
-      {/* Input base with right buttons */}
       <View>
         {isWebPlatform() ? (
           <div
@@ -354,6 +362,7 @@ const FileSearchInput = ({
             onDragLeave={handleDragOver}>
             <InputBase
               {...inputBaseProps}
+              refInputContainer={refInput}
               value={value}
               onChangeText={onChangeText}
               rightButtons={buttons}
@@ -376,6 +385,60 @@ const FileSearchInput = ({
           />
         )}
       </View>
+      {file && isFileValid && fileStatus !== 'canceled' && (
+        <View
+          onStartShouldSetResponder={() => true}
+          style={[
+            styles.fileContainer,
+            {
+              top: modalPosition.top,
+              left: modalPosition.left,
+            },
+            {
+              width: modalPosition.width,
+            },
+          ]}>
+          <View style={styles.fileNameContainer}>
+            <View style={styles.fileNameLoadedLeftContainer}>
+              <View style={styles.fileIconContainer}>
+                <FileIcon style={styles.fileIcon} />
+              </View>
+              <View style={styles.fileContent}>
+                <Text
+                  style={styles.fileNameText}
+                  numberOfLines={1}
+                  ellipsizeMode="tail">
+                  {file?.name}
+                </Text>
+                {progress > 0 && (
+                  <View style={styles.progressBarContainer}>
+                    <SkeletonItem
+                      width={`${progress}%`}
+                      height={8}
+                      color={NEUTRAL_1000}
+                      borderRadius={16}
+                    />
+                  </View>
+                )}
+              </View>
+            </View>
+
+            <View style={styles.fileNameRightContainer}>
+              {fileStatus === 'loaded' && (
+                <CheckCircleFillIcon
+                  style={styles.checkCircleIcon}
+                  fill={SUCCESS_600}
+                />
+              )}
+              <TouchableOpacity
+                style={styles.containerXicon}
+                onPress={handleCancelFile}>
+                <XIcon style={styles.deleteIcon} />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      )}
     </SafeAreaView>
   );
 };
