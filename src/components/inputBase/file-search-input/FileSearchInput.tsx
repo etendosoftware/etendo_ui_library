@@ -320,19 +320,11 @@ const FileSearchInput = ({
   const adjustDropdownPosition = useCallback(() => {
     if (refInput.current) {
       refInput.current.measure((x, y, width, height, pageX, pageY) => {
-        if (height + 12 > pageY) {
           setModalPosition({
-            top: POSITION_DOWN_FILE,
+            top:height + 12 > pageY ? POSITION_DOWN_FILE : POSITION_UP_FILE,
             left: pageX,
             width: width,
           });
-        } else {
-          setModalPosition({
-            top: POSITION_UP_FILE,
-            left: pageX,
-            width: width,
-          });
-        }
       });
     }
   }, [windowHeight]);
