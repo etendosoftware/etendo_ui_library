@@ -46,8 +46,8 @@ if (!isWebPlatform()) {
   }
 }
 
-const POSITION_UP_FILE = 76
-const POSITION_DOWN_FILE = -38
+const POSITION_DOWN_FILE = 52
+const POSITION_UP_FILE = -60
 
 const FileSearchInput = ({
   value,
@@ -321,15 +321,15 @@ const FileSearchInput = ({
   const adjustDropdownPosition = useCallback(() => {
     if (refInput.current) {
       refInput.current.measure((x, y, width, height, pageX, pageY) => {
-        if (height + 16 > pageY) {
+        if (height + 12 > pageY) {
           setModalPosition({
-            top: POSITION_UP_FILE,
+            top: POSITION_DOWN_FILE,
             left: pageX,
             width: width,
           });
         } else {
           setModalPosition({
-            top: POSITION_DOWN_FILE,
+            top: POSITION_UP_FILE,
             left: pageX,
             width: width,
           });
