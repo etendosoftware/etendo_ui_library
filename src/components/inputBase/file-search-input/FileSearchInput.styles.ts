@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 4,
     paddingHorizontal: 8,
-    minHeight: 64,
+    minHeight: 56,
     flex: 1,
   },
   fileNameLeftContainer: {
@@ -88,11 +88,11 @@ export const styles = StyleSheet.create({
     marginLeft: Platform.OS === 'web' ? undefined : 8,
   },
   fileIcon: {
-    height: 36,
-    width: 36,
+    height: 24,
+    width: 24,
   },
   fileContainer: {
-    height: Platform.OS === 'web' ? undefined : 28,
+   position: 'absolute' 
   },
   progressBarFill: {
     backgroundColor: NEUTRAL_100,
