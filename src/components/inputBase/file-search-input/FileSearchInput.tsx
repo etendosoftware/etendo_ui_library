@@ -72,17 +72,16 @@ const FileSearchInput = ({
   const [fileStatus, setFileStatus] = useState<
     'none' | 'loaded' | 'canceled' | 'error'
   >('none');
-  const refInput = useRef<TextInput>(null);
-  const [isVisibleDropdown, setIsVisibleDropdown] = useState<boolean>(false);
 
   const [modalPosition, setModalPosition] = useState<{
     top: number;
     left: number;
     width: number;
   }>({ top: 0, left: 0, width: 0 });
-  const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
+  const { height: windowHeight } = Dimensions.get('window');
 
   // References
+  const refInput = useRef<TextInput>(null);
   const dropAreaRef = useRef(null);
   const fileInputRef = useRef<any>(null);
   const abortControllerRef = useRef<any>(null);
@@ -342,16 +341,15 @@ const FileSearchInput = ({
     adjustDropdownPosition();
     if (isWebPlatform()) {
       const handleScroll = () => {
-        if (isVisibleDropdown) {
           adjustDropdownPosition();
-        }
+        
       };
 
       window.addEventListener('scroll', handleScroll, { passive: true });
 
       return () => window.removeEventListener('scroll', handleScroll);
     }
-  }, [isVisibleDropdown, adjustDropdownPosition]);
+  }, [adjustDropdownPosition]);
   return (
     <SafeAreaView style={styles.container}>
       <View>
