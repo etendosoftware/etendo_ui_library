@@ -1,4 +1,9 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+} from 'react';
 import {
   View,
   TouchableOpacity,
@@ -77,7 +82,7 @@ const FileSearchInput = ({
     left: number;
     width: number;
   }>({ top: 0, left: 0, width: 0 });
-  const { height: windowHeight } = Dimensions.get('window');
+  const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
 
   // References
   const refInput = useRef<TextInput>(null);
@@ -320,11 +325,11 @@ const FileSearchInput = ({
   const adjustDropdownPosition = useCallback(() => {
     if (refInput.current) {
       refInput.current.measure((x, y, width, height, pageX, pageY) => {
-          setModalPosition({
-            top:height + 12 > pageY ? POSITION_DOWN_FILE : POSITION_UP_FILE,
-            left: pageX,
-            width: width,
-          });
+        setModalPosition({
+          top: height + 12 > pageY ? POSITION_DOWN_FILE : POSITION_UP_FILE,
+          left: pageX,
+          width: width,
+        });
       });
     }
   }, [windowHeight]);
@@ -339,7 +344,7 @@ const FileSearchInput = ({
 
       return () => window.removeEventListener('scroll', handleScroll);
     }
-  }, [windowHeight, adjustDropdownPosition]);
+  }, [windowHeight, windowWidth, adjustDropdownPosition]);
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -382,7 +387,6 @@ const FileSearchInput = ({
             styles.fileContainer,
             {
               top: modalPosition.top,
-              left: modalPosition.left,
             },
             {
               width: modalPosition.width,
