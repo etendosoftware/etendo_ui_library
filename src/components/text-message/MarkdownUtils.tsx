@@ -7,7 +7,7 @@ import { AnchorComponent } from './AnchorComponent';
 import { getTextColorByType } from './TextMessage.utils';
 import { styleMarkdown, styles } from './MarkdownUtils.styles';
 import { Button } from '../button';
-import { PlusIcon } from '../../assets/images/icons';
+import { ExternalLinkIcon } from '../../assets/images/icons';
 import { PRIMARY_100 } from '../../styles/colors';
 
 const InlineCode = ({ children }: any) => (
@@ -54,7 +54,7 @@ const ImageComponent = ({ src, alt, style }: any) => {
             opacity: isHovered ? 1 : 0,
             visibility: isHovered ? 'visible' : 'hidden',
           }}>
-          <Button typeStyle="primary" iconLeft={<PlusIcon />} />
+          <Button typeStyle="primary" iconLeft={<ExternalLinkIcon />} />
         </div>
       </div>
     </a>
