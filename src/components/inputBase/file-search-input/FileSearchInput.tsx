@@ -195,10 +195,12 @@ const FileSearchInput = ({
 
   // Handles the sending of the message
   const handleSendMessage = () => {
+    if (!!setFile){
+      setFile(null);
+    }
     if (!loadingFile && value.trim() !== '') {
       onSubmit?.(value, isFileValid ? file : null);
       resetProgress();
-      if (!!setFile) setFile(null);
       setLocalFile(null);
       setIsFileValid(false);
     } else {
