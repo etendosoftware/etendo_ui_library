@@ -7,7 +7,7 @@ interface UploadConfig {
     headers?: any;
 }
 
-export interface FileSearchInputProps extends Omit<IInputBase, 'keyboardType' | 'secureTextEntry'>{
+export interface FileSearchInputProps extends Omit<IInputBase, 'keyboardType' | 'secureTextEntry' | 'multiline' | 'numberOfLines'>{
     value: string;
     onChangeText: (text: string) => void;
     onSubmit: (message: string, file?: any) => void;
