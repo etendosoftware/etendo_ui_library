@@ -11,6 +11,8 @@ import {
   SafeAreaView,
   Dimensions,
   TextInput,
+  NativeSyntheticEvent,
+  TextInputKeyPressEventData,
 } from 'react-native';
 import InputBase from '../InputBase';
 
@@ -345,6 +347,18 @@ const FileSearchInput = ({
       return () => window.removeEventListener('scroll', handleScroll);
     }
   }, [windowHeight, windowWidth, adjustDropdownPosition]);
+
+
+  const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement> | NativeSyntheticEvent<TextInputKeyPressEventData>) => {
+    if ('metaKey' in e && e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+    else if ('shiftKey' in e && e.nativeEvent.key === 'Enter' && !e.nativeEvent.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -363,6 +377,7 @@ const FileSearchInput = ({
               rightButtons={buttons}
               onSubmitEditing={handleSendMessage}
               placeholder={placeholder}
+              onKeyPress={onKeyPressHandler}
             />
             <input
               type="file"

@@ -11,7 +11,6 @@ export const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: NEUTRAL_50,
-    height: 48,
     borderRadius: 8,
     borderColor: PRIMARY_100,
     overflow: 'hidden',
@@ -20,25 +19,23 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   containerInput: {
-    height: 45,
     flex: 1,
   },
   textInput: {
-    paddingHorizontal: 0,
-    height: 48,
     backgroundColor: NEUTRAL_50,
     fontSize: 16,
     fontStyle: 'normal',
     fontWeight: '500',
-    lineHeight: 22,
     letterSpacing: -0.16,
+    lineHeight:24,
     color: PRIMARY_100,
-    flex: 1,
+    flex:1,
+    textAlignVertical:'center',
   },
   helperText: {
     fontSize: 14,
     fontWeight: '500',
-    lineHeight: 22,
+    lineHeight: 24,
     letterSpacing: -0.14,
   },
   gridContainer: {
