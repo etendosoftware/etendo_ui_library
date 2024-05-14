@@ -35,7 +35,7 @@ import {
   XIcon,
 } from '../../../assets/images/icons';
 import { RightButtons } from '../InputBase.types';
-import { KEY_CMD, KEY_ENTER, KEY_SHIFT } from './FileSearchInput.constants';
+import { KEY_ENTER, KEY_SHIFT } from './FileSearchInput.constants';
 
 // Import DocumentPicker for mobile platforms only
 let DocumentPicker: any = null;
@@ -352,11 +352,8 @@ const FileSearchInput = ({
 
 
   const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement> | NativeSyntheticEvent<TextInputKeyPressEventData>) => {
-    if (KEY_CMD in e && e.key === KEY_ENTER && (e.metaKey || e.ctrlKey)) {
-      e.preventDefault();
-      handleSendMessage();
-    }
-    else if (KEY_SHIFT in e && e.nativeEvent.key === KEY_ENTER && !e.nativeEvent.shiftKey) {
+
+    if (KEY_SHIFT in e && e.nativeEvent.key === KEY_ENTER && !e.nativeEvent.shiftKey) {
       e.preventDefault();
       handleSendMessage();
     }
