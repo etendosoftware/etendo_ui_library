@@ -4,6 +4,7 @@ import {
   ImageStyle,
   NativeSyntheticEvent,
   TextInput,
+  TextInputKeyPressEventData,
   TextInputSubmitEditingEventData,
   View,
   ViewStyle,
@@ -27,6 +28,7 @@ export interface IInputBase {
   onSubmitEditing?: (
     event: NativeSyntheticEvent<TextInputSubmitEditingEventData>,
   ) => void;
+  onKeyPress?:(e: NativeSyntheticEvent<TextInputKeyPressEventData>)=>void,
   placeholder?: string;
   rightButtons?: RightButtons;
   title?: string;
@@ -46,5 +48,7 @@ export interface IInputBase {
   styleContainer?: ViewStyle;
   isFocusable?: boolean;
   refInputContainer?: RefObject<View>;
-  refInput?: RefObject<TextInput>
+  refInput?: RefObject<TextInput>;
+  multiline?: boolean;
+  numberOfLines?: number;
 }

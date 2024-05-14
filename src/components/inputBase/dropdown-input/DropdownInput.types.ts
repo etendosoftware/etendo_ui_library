@@ -8,7 +8,7 @@ import { IInputBase } from '../InputBase.types';
 import { RefObject } from 'react';
 
 export interface IDropdownInput
-  extends Omit<IInputBase, 'keyboardType' | 'secureTextEntry'> {
+  extends Omit<IInputBase, 'keyboardType' | 'secureTextEntry' | 'multiline' | 'numberOfLines'> {
   staticData?: any[];
   displayKey?: string;
   maxVisibleOptions?: number;

@@ -1,17 +1,19 @@
 import {
   ColorValue,
+  NativeSyntheticEvent,
   Platform,
   Text,
   TextInput,
-  TouchableOpacity,
+  TextInputContentSizeChangeEventData,
   View,
-} from 'react-native';
-import React, { useState } from 'react';
-import { styles } from './InputBase.styles';
-import { IInputBase } from './InputBase.types';
-import { DANGER_700, NEUTRAL_500, PRIMARY_100 } from '../../styles/colors';
-import { cursorPointer } from '../../helpers/table_utils';
-import { GridContainer } from '../containers/gridContainer';
+  ViewStyle,
+} from "react-native";
+import React, { useState } from "react";
+import { styles } from "./InputBase.styles";
+import { IInputBase } from "./InputBase.types";
+import { DANGER_700, NEUTRAL_500, PRIMARY_100 } from "../../styles/colors";
+import { cursorPointer } from "../../helpers/table_utils";
+import { GridContainer } from "../containers/gridContainer";
 
 const InputBase = ({
   value,
@@ -26,18 +28,30 @@ const InputBase = ({
   onPress,
   onBlur,
   onSubmitEditing,
+  onKeyPress,
   secureTextEntry,
-  keyboardType = 'default',
+  keyboardType = "default",
   styleContainer,
   isFocusable = true,
   refInputContainer,
-  refInput
+  refInput,
+  multiline,
+  numberOfLines,
 }: IInputBase) => {
+  const heightTextInputLine = styles.textInput.lineHeight;
+  const borderMultiline: ViewStyle = {
+    borderWidth: 0.001,
+    borderColor: "transparent",
+  };
+  const isEditable: boolean = onPress ? false : !isDisabled;
+
   const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [inputHeight, setInputHeight] = useState<number>(heightTextInputLine);
+  const [isScrollMultiline, setIsScrollMultiline] = useState<boolean>(false);
+
   const borderWidth: number = isFocused ? 3 : 1;
-  const paddingVertical: number = 13 - borderWidth;
+  const paddingVertical: number = 7 - borderWidth;
   const paddingHorizontal: number = 12 - borderWidth;
-  const isEditable = onPress ? false : !isDisabled;
 
   const onFocusChange = () => {
     if (!isDisabled && isFocusable) {
@@ -90,19 +104,19 @@ const InputBase = ({
 
   const textInputStyle = [styles.textInput, { color: textColorStyle() }];
 
-  if (Platform.OS === 'web') {
+  if (Platform.OS === "web") {
     textInputStyle.push({ outlineWidth: 0 } as any);
   }
 
   const handleChange = (string: string) => {
     if (onChangeText) {
       if (
-        ['numeric', 'number-pad', 'phone-pad', 'decimal-pad'].includes(
-          keyboardType,
+        ["numeric", "number-pad", "phone-pad", "decimal-pad"].includes(
+          keyboardType
         )
       ) {
         const regexNumber = /^[\d.,\/]*$/;
-        if (regexNumber.test(string) || string === '') {
+        if (regexNumber.test(string) || string === "") {
           onChangeText(string);
         }
       } else {
@@ -111,7 +125,7 @@ const InputBase = ({
     }
   };
 
-  const determineIconStyles = (icon: any, disable?:boolean) => {
+  const determineIconStyles = (icon: any, disable?: boolean) => {
     if (!icon) return null;
     const { style = {}, ...otherIconProps } = icon.props;
     return React.cloneElement(icon, {
@@ -125,13 +139,27 @@ const InputBase = ({
     });
   };
 
+  const handleContentSizeChange = (e: NativeSyntheticEvent<TextInputContentSizeChangeEventData>) => {
+    if (multiline) {
+      const { height } = e.nativeEvent.contentSize;
+      const maxHeight = heightTextInputLine * 5;
+      setIsScrollMultiline(height > heightTextInputLine);
+      if (height < maxHeight) {
+        setInputHeight(height);
+      } else {
+        setInputHeight(maxHeight);
+      }
+    }
+  };
+
   return (
     <>
       {!!title && (
         <Text
           numberOfLines={1}
           ellipsizeMode="tail"
-          style={[styles.title, { color: determineColor() }]}>
+          style={[styles.title, { color: determineColor() }]}
+        >
           {title}
         </Text>
       )}
@@ -146,7 +174,8 @@ const InputBase = ({
             borderWidth,
           },
           { ...styleContainer },
-        ]}>
+        ]}
+      >
         {!!icon && (
           <View style={styles.iconContainer}>
             {React.cloneElement(icon, {
@@ -155,25 +184,31 @@ const InputBase = ({
             })}
           </View>
         )}
-        <TouchableOpacity
-          disabled={isDisabled}
-          style={styles.containerInput}
-          onPress={onPress}>
-          <TextInput
+        <TextInput
           ref={refInput}
-            value={value}
-            onPressIn={onPress}
-            onChangeText={handleChange}
-            placeholder={placeholder}
-            editable={isEditable}
-            onFocus={onFocusChange}
-            onBlur={onBlurChange}
-            onSubmitEditing={onSubmitEditing}
-            style={[textInputStyle, onPress && cursorPointer()]}
-            keyboardType={keyboardType}
-            secureTextEntry={secureTextEntry}
-          />
-        </TouchableOpacity>
+          value={value}
+          onPressIn={onPress}
+          onChangeText={handleChange}
+          placeholder={placeholder}
+          editable={isEditable}
+          onFocus={onFocusChange}
+          onBlur={onBlurChange}
+          onSubmitEditing={onSubmitEditing}
+          keyboardType={keyboardType}
+          secureTextEntry={secureTextEntry}
+          multiline={multiline}
+          onContentSizeChange={handleContentSizeChange}
+          numberOfLines={numberOfLines}
+          onKeyPress={onKeyPress}
+          style={[
+            textInputStyle,
+            onPress && cursorPointer(),
+            {
+              maxHeight: inputHeight,
+            },
+            isScrollMultiline && borderMultiline,
+          ]}
+        />
         {!!rightButtons && (
           <GridContainer
             gapHorizontal={12}
@@ -186,16 +221,22 @@ const InputBase = ({
                 modifiedProps?.paddingVertical || 0;
               modifiedProps.paddingHorizontal =
                 modifiedProps?.paddingHorizontal || 0;
-              modifiedProps.iconLeft = determineIconStyles(iconLeft, modifiedProps.disabled || isDisabled);
-              modifiedProps.iconRight = determineIconStyles(iconRight, modifiedProps.disabled || isDisabled);
-              modifiedProps.text = '';
+              modifiedProps.iconLeft = determineIconStyles(
+                iconLeft,
+                modifiedProps.disabled || isDisabled
+              );
+              modifiedProps.iconRight = determineIconStyles(
+                iconRight,
+                modifiedProps.disabled || isDisabled
+              );
+              modifiedProps.text = "";
 
               return (
                 <ButtonComponent.type
                   {...modifiedProps}
                   key={index}
                   disabled={isDisabled || modifiedProps.disabled}
-                  typeStyle={'white'}
+                  typeStyle={"white"}
                 />
               );
             })}
@@ -206,7 +247,8 @@ const InputBase = ({
         <Text
           numberOfLines={1}
           ellipsizeMode="tail"
-          style={[styles.helperText, { color: determineColor() }]}>
+          style={[styles.helperText, { color: determineColor() }]}
+        >
           {helperText}
         </Text>
       )}

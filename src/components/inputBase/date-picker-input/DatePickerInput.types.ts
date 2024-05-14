@@ -9,7 +9,7 @@ export type DateFormat = "DD/MM/YYYY" | "MM/DD/YYYY";
 export type LanguageFormat = "en-US" | "es-ES";
 
 export interface DatePickerInputProps
-  extends Omit<IInputBase, "keyboardType" | "secureTextEntry"> {
+  extends Omit<IInputBase, "keyboardType" | "secureTextEntry" | 'multiline' | 'numberOfLines'> {
   language: LanguageFormat;
   dateFormat: DateFormat;
   showCalendar?: boolean;

@@ -11,6 +11,8 @@ import {
   SafeAreaView,
   Dimensions,
   TextInput,
+  NativeSyntheticEvent,
+  TextInputKeyPressEventData,
 } from 'react-native';
 import InputBase from '../InputBase';
 
@@ -33,6 +35,7 @@ import {
   XIcon,
 } from '../../../assets/images/icons';
 import { RightButtons } from '../InputBase.types';
+import { KEY_ENTER, KEY_SHIFT } from './FileSearchInput.constants';
 
 // Import DocumentPicker for mobile platforms only
 let DocumentPicker: any = null;
@@ -52,6 +55,7 @@ if (!isWebPlatform()) {
 
 const POSITION_DOWN_FILE = 52;
 const POSITION_UP_FILE = -60;
+
 
 const FileSearchInput = ({
   value,
@@ -345,6 +349,15 @@ const FileSearchInput = ({
       return () => window.removeEventListener('scroll', handleScroll);
     }
   }, [windowHeight, windowWidth, adjustDropdownPosition]);
+
+
+  const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement> | NativeSyntheticEvent<TextInputKeyPressEventData>) => {
+
+    if (KEY_SHIFT in e && e.nativeEvent.key === KEY_ENTER && !e.nativeEvent.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -363,6 +376,7 @@ const FileSearchInput = ({
               rightButtons={buttons}
               onSubmitEditing={handleSendMessage}
               placeholder={placeholder}
+              onKeyPress={onKeyPressHandler}
             />
             <input
               type="file"
