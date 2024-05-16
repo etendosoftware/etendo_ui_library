@@ -152,6 +152,13 @@ const InputBase = ({
     }
   };
 
+  const centerButtons = ():ViewStyle => {
+    if(isScrollMultiline){
+      return {alignSelf:'flex-end'}
+    }
+    return {alignSelf:'center'}
+  }
+
   return (
     <>
       {!!title && (
@@ -212,7 +219,7 @@ const InputBase = ({
         {!!rightButtons && (
           <GridContainer
             gapHorizontal={12}
-            stylesContainer={styles.gridContainer}
+            stylesContainer={[styles.gridContainer, centerButtons()]}
             components={rightButtons.map((ButtonComponent: any, index) => {
               const { iconLeft, iconRight, ...otherProps } =
                 ButtonComponent.props;
