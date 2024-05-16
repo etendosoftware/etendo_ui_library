@@ -40,7 +40,7 @@ const InputBase = ({
 }: IInputBase) => {
   const heightTextInputLine = styles.textInput.lineHeight;
   const borderMultiline: ViewStyle = {
-    borderWidth: 0.001,
+    borderWidth: 1,
     borderColor: "transparent",
   };
   const isEditable: boolean = onPress ? false : !isDisabled;

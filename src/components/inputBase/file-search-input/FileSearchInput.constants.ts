@@ -31,4 +31,4 @@ export const SUPPORTED_MIME_TYPES = [
 ];
 
 export const KEY_SHIFT = 'shiftKey';
-export const KEY_ENTER = 'enter';
+export const KEY_ENTER = 'Enter';
