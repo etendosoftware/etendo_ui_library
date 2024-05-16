@@ -5,5 +5,5 @@ export interface IGridContainer {
   gapHorizontal?: number;
   gapVertical?:number;
   components?: ReactNode[];
-  stylesContainer?: ViewStyle;
+  stylesContainer?: ViewStyle | ViewStyle[];
 }
