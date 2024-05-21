@@ -66,7 +66,7 @@ export const RenderMarkdownText: React.FC<TextMessageProps> = ({
   text,
   type = 'left-user',
 }) => {
-  const addLineBreakMarkdown = text.replace(/\n/gi, '\n &nbsp;');
+  const addLineBreakMarkdown = text.replace(/\n/gi, "&nbsp; \n");
   return (
     <ScrollView horizontal={false} style={{ flex: 1 }}>
       <ReactMarkdown
