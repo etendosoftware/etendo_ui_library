@@ -19,7 +19,7 @@ const PasswordInput = ({ ...inputBaseProps }: IPasswordInput) => {
         <Button
           typeStyle={'white'}
           paddingHorizontal={0}
-          paddingVertical={7}
+          paddingVertical={0}
           onPress={handleOnPress}
           iconLeft={
             isVisiblePassword ? (
