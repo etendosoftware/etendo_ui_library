@@ -1,6 +1,6 @@
 {
   "name": "etendo-ui-library",
-  "version": "1.4.28",
+  "version": "1.4.29",
   "private": false,
   "scripts": {
     "android": "react-native run-android",
