@@ -66,6 +66,7 @@ export const RenderMarkdownText: React.FC<TextMessageProps> = ({
   text,
   type = 'left-user',
 }) => {
+  const textWithJumpLine = text.replace(/\n/gi, '\n &nbsp;');
   return (
     <ScrollView horizontal={false} style={{ flex: 1 }}>
       <ReactMarkdown
@@ -76,7 +77,7 @@ export const RenderMarkdownText: React.FC<TextMessageProps> = ({
           p: ({ node, ...props }) => <Paragraph {...props} type={type} />,
           img: ImageComponent,
         }}>
-        {text}
+        {textWithJumpLine}
       </ReactMarkdown>
     </ScrollView>
   );

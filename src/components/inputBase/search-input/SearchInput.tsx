@@ -16,7 +16,7 @@ const SearchInput = ({ onSubmit,rightButtons, ...inputBaseProps }: ISearchInput)
     <Button
           typeStyle={'white'}
           paddingHorizontal={0}
-          paddingVertical={7}
+          paddingVertical={0}
           onPress={handleOnPress}
           iconLeft={<SearchIcon style={styles.icon} />}
         />

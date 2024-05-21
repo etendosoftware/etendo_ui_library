@@ -50,7 +50,7 @@ const InputBase = ({
   const [isScrollMultiline, setIsScrollMultiline] = useState<boolean>(false);
 
   const borderWidth: number = isFocused ? 3 : 1;
-  const paddingVertical: number = 7 - borderWidth;
+  const paddingVertical: number = 7 - borderWidth ;
   const paddingHorizontal: number = 12 - borderWidth;
 
   const onFocusChange = () => {
@@ -175,8 +175,7 @@ const InputBase = ({
         style={[
           styles.container,
           { borderColor: determineColor() },
-          {
-            paddingHorizontal,
+          {              paddingHorizontal,
             paddingVertical,
             borderWidth,
           },
@@ -211,6 +210,7 @@ const InputBase = ({
             textInputStyle,
             onPress && cursorPointer(),
             {
+              height: inputHeight,
               maxHeight: inputHeight,
             },
             isScrollMultiline && borderMultiline,
@@ -219,6 +219,7 @@ const InputBase = ({
         {!!rightButtons && (
           <GridContainer
             gapHorizontal={12}
+            gapVertical={0}
             stylesContainer={[styles.gridContainer, centerButtons()]}
             components={rightButtons.map((ButtonComponent: any, index) => {
               const { iconLeft, iconRight, ...otherProps } =

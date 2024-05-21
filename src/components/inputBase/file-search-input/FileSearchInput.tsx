@@ -219,7 +219,7 @@ const FileSearchInput = ({
 
   const UploadButton = (
     <Button
-      paddingVertical={7}
+      paddingVertical={0}
       typeStyle="white"
       onPress={handleFileButtonClick}
       disabled={isAttachDisable}
@@ -228,7 +228,7 @@ const FileSearchInput = ({
   );
   const SendButton = (
     <Button
-      paddingVertical={7}
+      paddingVertical={0}
       typeStyle="white"
       onPress={handleSendMessage}
       disabled={isSendDisable}
@@ -360,7 +360,7 @@ const FileSearchInput = ({
   };
   return (
     <SafeAreaView style={styles.container}>
-      <View>
+      <>
         {isWebPlatform() ? (
           <div
             ref={dropAreaRef}
@@ -394,7 +394,7 @@ const FileSearchInput = ({
             placeholder={placeholder}
           />
         )}
-      </View>
+      </>
       {file && isFileValid && fileStatus !== 'canceled' && (
         <View
           onStartShouldSetResponder={() => true}
