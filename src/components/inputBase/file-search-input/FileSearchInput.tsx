@@ -1,9 +1,4 @@
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
-} from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import {
   View,
   TouchableOpacity,
@@ -55,7 +50,6 @@ if (!isWebPlatform()) {
 
 const POSITION_DOWN_FILE = 52;
 const POSITION_UP_FILE = -60;
-
 
 const FileSearchInput = ({
   value,
@@ -350,10 +344,16 @@ const FileSearchInput = ({
     }
   }, [windowHeight, windowWidth, adjustDropdownPosition]);
 
-
-  const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement> | NativeSyntheticEvent<TextInputKeyPressEventData>) => {
-
-    if (KEY_SHIFT in e && e.nativeEvent.key === KEY_ENTER && !e.nativeEvent.shiftKey) {
+  const onKeyPressHandler = (
+    e:
+      | React.KeyboardEvent<HTMLInputElement>
+      | NativeSyntheticEvent<TextInputKeyPressEventData>,
+  ) => {
+    if (
+      KEY_SHIFT in e &&
+      e.nativeEvent.key === KEY_ENTER &&
+      !e.nativeEvent.shiftKey
+    ) {
       e.preventDefault();
       handleSendMessage();
     }
@@ -402,8 +402,6 @@ const FileSearchInput = ({
             styles.fileContainer,
             {
               top: modalPosition.top,
-            },
-            {
               width: modalPosition.width,
             },
           ]}>
