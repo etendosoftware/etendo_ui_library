@@ -173,6 +173,7 @@ const InputBase = ({
         </Text>
       )}
       <View
+        ref={refInputContainer}
         style={[
           styles.container,
           {
@@ -184,7 +185,7 @@ const InputBase = ({
             ...styleContainer,
           },
         ]}>
-        <View style={styles.containerInput} ref={refInputContainer}>
+        <View style={styles.containerInput}>
           {!!icon && (
             <View
               style={[
