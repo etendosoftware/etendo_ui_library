@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: '500',
     letterSpacing: -0.16,
-    lineHeight: 24,
+    lineHeight: 26,
     color: PRIMARY_100,
     flex: 1,
     textAlignVertical: 'center',

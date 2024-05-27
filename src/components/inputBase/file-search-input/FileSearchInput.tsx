@@ -48,7 +48,7 @@ if (!isWebPlatform()) {
   }
 }
 
-const POSITION_DOWN_FILE = 50;
+const POSITION_DOWN_FILE = 55;
 const POSITION_UP_FILE = 60;
 
 const FileSearchInput = ({
