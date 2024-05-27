@@ -19,7 +19,11 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   containerInput: {
-    flex: 1,
+    flexDirection: 'row',
+    borderRadius: 7,
+    overflow: 'hidden',
+    width: '100%',
+    height: '100%',
   },
   textInput: {
     backgroundColor: NEUTRAL_50,
@@ -27,10 +31,10 @@ export const styles = StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: '500',
     letterSpacing: -0.16,
-    lineHeight:24,
+    lineHeight: 24,
     color: PRIMARY_100,
-    flex:1,
-    textAlignVertical:'center',
+    flex: 1,
+    textAlignVertical: 'center',
   },
   helperText: {
     fontSize: 14,
@@ -40,13 +44,20 @@ export const styles = StyleSheet.create({
   },
   gridContainer: {
     alignItems: 'center',
-    paddingLeft: 12,
+    backgroundColor: NEUTRAL_50,
+    height: '100%',
   },
   iconContainer: {
-    marginRight: 8,
+    display: 'flex',
+    alignItems: 'center',
+    backgroundColor: NEUTRAL_50,
+    height: '100%',
   },
   icon: {
     width: 24,
     height: 24,
   },
 });
+export const heightTextInput = 52;
+export const paddingTopTextInputMultiline = 13;
+export const paddingHorizontalTextInput = 8;

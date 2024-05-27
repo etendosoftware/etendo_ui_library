@@ -15,16 +15,12 @@ const GridContainer = ({
         styles.container,
         stylesContainer,
         {
-          marginHorizontal: -(gapHorizontal / 2),
-          marginVertical: -(gapVertical / 2),
+          rowGap: gapVertical,
+          columnGap: gapHorizontal,
         },
       ]}>
       {components.map((item, index) => (
-        <View
-          key={index}
-          style={{ marginHorizontal: gapHorizontal / 2, marginVertical: gapVertical / 2 }}>
-          {item}
-        </View>
+        <View key={index}>{item}</View>
       ))}
     </View>
   );

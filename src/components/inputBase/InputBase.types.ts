@@ -28,7 +28,7 @@ export interface IInputBase {
   onSubmitEditing?: (
     event: NativeSyntheticEvent<TextInputSubmitEditingEventData>,
   ) => void;
-  onKeyPress?:(e: NativeSyntheticEvent<TextInputKeyPressEventData>)=>void,
+  onKeyPress?: (e: NativeSyntheticEvent<TextInputKeyPressEventData>) => void;
   placeholder?: string;
   rightButtons?: RightButtons;
   title?: string;

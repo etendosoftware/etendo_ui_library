@@ -1,19 +1,15 @@
+import { ColorValue, Platform, Text, TextInput, View } from 'react-native';
+import React, { useState } from 'react';
 import {
-  ColorValue,
-  NativeSyntheticEvent,
-  Platform,
-  Text,
-  TextInput,
-  TextInputContentSizeChangeEventData,
-  View,
-  ViewStyle,
-} from "react-native";
-import React, { useState } from "react";
-import { styles } from "./InputBase.styles";
-import { IInputBase } from "./InputBase.types";
-import { DANGER_700, NEUTRAL_500, PRIMARY_100 } from "../../styles/colors";
-import { cursorPointer } from "../../helpers/table_utils";
-import { GridContainer } from "../containers/gridContainer";
+  heightTextInput,
+  paddingHorizontalTextInput,
+  paddingTopTextInputMultiline,
+  styles,
+} from './InputBase.styles';
+import { IInputBase } from './InputBase.types';
+import { DANGER_700, NEUTRAL_500, PRIMARY_100 } from '../../styles/colors';
+import { cursorPointer } from '../../helpers/table_utils';
+import { GridContainer } from '../containers/gridContainer';
 
 const InputBase = ({
   value,
@@ -30,28 +26,25 @@ const InputBase = ({
   onSubmitEditing,
   onKeyPress,
   secureTextEntry,
-  keyboardType = "default",
+  keyboardType = 'default',
   styleContainer,
   isFocusable = true,
   refInputContainer,
   refInput,
   multiline,
-  numberOfLines,
+  numberOfLines = 1,
 }: IInputBase) => {
-  const heightTextInputLine = styles.textInput.lineHeight;
-  const borderMultiline: ViewStyle = {
-    borderWidth: 1,
-    borderColor: "transparent",
-  };
   const isEditable: boolean = onPress ? false : !isDisabled;
 
   const [isFocused, setIsFocused] = useState<boolean>(false);
-  const [inputHeight, setInputHeight] = useState<number>(heightTextInputLine);
-  const [isScrollMultiline, setIsScrollMultiline] = useState<boolean>(false);
-
-  const borderWidth: number = isFocused ? 3 : 1;
-  const paddingVertical: number = 7 - borderWidth ;
-  const paddingHorizontal: number = 12 - borderWidth;
+  const [inputHeight, setInputHeight] = useState<number>(heightTextInput);
+  const [currentLines, setCurrentLines] = useState<number>(1);
+  const inputFocusPadding = isFocused ? 3 : 1;
+  const inputFocusPaddingTextHorizontal = isFocused ? 10 : 12;
+  const inputFocusPaddingTextVertical = isFocused ? 6 : 8;
+  const inputFocusPaddingTextHight = isFocused ? 6 : 2;
+  const paddingVertical: number = inputFocusPadding;
+  const paddingHorizontal: number = inputFocusPadding;
 
   const onFocusChange = () => {
     if (!isDisabled && isFocusable) {
@@ -104,19 +97,19 @@ const InputBase = ({
 
   const textInputStyle = [styles.textInput, { color: textColorStyle() }];
 
-  if (Platform.OS === "web") {
+  if (Platform.OS === 'web') {
     textInputStyle.push({ outlineWidth: 0 } as any);
   }
 
   const handleChange = (string: string) => {
     if (onChangeText) {
       if (
-        ["numeric", "number-pad", "phone-pad", "decimal-pad"].includes(
-          keyboardType
+        ['numeric', 'number-pad', 'phone-pad', 'decimal-pad'].includes(
+          keyboardType,
         )
       ) {
         const regexNumber = /^[\d.,\/]*$/;
-        if (regexNumber.test(string) || string === "") {
+        if (regexNumber.test(string) || string === '') {
           onChangeText(string);
         }
       } else {
@@ -139,25 +132,35 @@ const InputBase = ({
     });
   };
 
-  const handleContentSizeChange = (e: NativeSyntheticEvent<TextInputContentSizeChangeEventData>) => {
-    if (multiline) {
-      const { height } = e.nativeEvent.contentSize;
-      const maxHeight = heightTextInputLine * 5;
-      setIsScrollMultiline(height > heightTextInputLine);
-      if (height < maxHeight) {
-        setInputHeight(height);
-      } else {
-        setInputHeight(maxHeight);
-      }
+  const alignIcons = (): 'center' | 'flex-end' => {
+    if (currentLines > 1 && multiline) {
+      return 'flex-end';
+    }
+    return 'center';
+  };
+  const handleContentSizeChange = (event: any) => {
+    const { height } = event.nativeEvent.contentSize;
+    const lineHeight = styles.textInput.lineHeight;
+    const newLineCount = Math.floor(height / lineHeight);
+    if (newLineCount > numberOfLines) {
+      return;
+    }
+    setCurrentLines(newLineCount);
+    if (newLineCount > 1) {
+      setInputHeight(lineHeight * newLineCount);
     }
   };
 
-  const centerButtons = ():ViewStyle => {
-    if(isScrollMultiline){
-      return {alignSelf:'flex-end'}
+  const addPaddingTop = () => {
+    if (multiline) return paddingTopTextInputMultiline - inputFocusPadding;
+  };
+
+  const addPaddingHorizontalTextInput = () => {
+    if (!icon) {
+      return inputFocusPaddingTextHorizontal;
     }
-    return {alignSelf:'center'}
-  }
+    return paddingHorizontalTextInput;
+  };
 
   return (
     <>
@@ -165,8 +168,7 @@ const InputBase = ({
         <Text
           numberOfLines={1}
           ellipsizeMode="tail"
-          style={[styles.title, { color: determineColor() }]}
-        >
+          style={[styles.title, { color: determineColor() }]}>
           {title}
         </Text>
       )}
@@ -174,89 +176,107 @@ const InputBase = ({
         ref={refInputContainer}
         style={[
           styles.container,
-          { borderColor: determineColor() },
-          {              paddingHorizontal,
+          {
+            paddingHorizontal,
             paddingVertical,
-            borderWidth,
+            backgroundColor: determineColor(),
+            height: inputHeight,
+            maxHeight: inputHeight,
+            ...styleContainer,
           },
-          { ...styleContainer },
-        ]}
-      >
-        {!!icon && (
-          <View style={styles.iconContainer}>
-            {React.cloneElement(icon, {
-              style: styles.icon,
-              fill: determineColor(true),
-            })}
-          </View>
-        )}
-        <TextInput
-          ref={refInput}
-          value={value}
-          onPressIn={onPress}
-          onChangeText={handleChange}
-          placeholder={placeholder}
-          editable={isEditable}
-          onFocus={onFocusChange}
-          onBlur={onBlurChange}
-          onSubmitEditing={onSubmitEditing}
-          keyboardType={keyboardType}
-          secureTextEntry={secureTextEntry}
-          multiline={multiline}
-          onContentSizeChange={handleContentSizeChange}
-          numberOfLines={numberOfLines}
-          onKeyPress={onKeyPress}
-          style={[
-            textInputStyle,
-            onPress && cursorPointer(),
-            {
-              height: inputHeight,
-              maxHeight: inputHeight,
-            },
-            isScrollMultiline && borderMultiline,
-          ]}
-        />
-        {!!rightButtons && (
-          <GridContainer
-            gapHorizontal={12}
-            gapVertical={0}
-            stylesContainer={[styles.gridContainer, centerButtons()]}
-            components={rightButtons.map((ButtonComponent: any, index) => {
-              const { iconLeft, iconRight, ...otherProps } =
-                ButtonComponent.props;
-              const modifiedProps = { ...otherProps };
-              modifiedProps.paddingVertical =
-                modifiedProps?.paddingVertical || 0;
-              modifiedProps.paddingHorizontal =
-                modifiedProps?.paddingHorizontal || 0;
-              modifiedProps.iconLeft = determineIconStyles(
-                iconLeft,
-                modifiedProps.disabled || isDisabled
-              );
-              modifiedProps.iconRight = determineIconStyles(
-                iconRight,
-                modifiedProps.disabled || isDisabled
-              );
-              modifiedProps.text = "";
-
-              return (
-                <ButtonComponent.type
-                  {...modifiedProps}
-                  key={index}
-                  disabled={isDisabled || modifiedProps.disabled}
-                  typeStyle={"white"}
-                />
-              );
-            })}
+        ]}>
+        <View style={styles.containerInput}>
+          {!!icon && (
+            <View
+              style={[
+                styles.iconContainer,
+                {
+                  justifyContent: alignIcons(),
+                  paddingVertical: inputFocusPaddingTextVertical,
+                  paddingLeft: inputFocusPaddingTextHorizontal,
+                },
+              ]}>
+              {React.cloneElement(icon, {
+                style: styles.icon,
+                fill: determineColor(true),
+              })}
+            </View>
+          )}
+          <TextInput
+            ref={refInput}
+            value={value}
+            onPressIn={onPress}
+            onChangeText={handleChange}
+            placeholder={placeholder}
+            editable={isEditable}
+            onFocus={onFocusChange}
+            onBlur={onBlurChange}
+            onSubmitEditing={onSubmitEditing}
+            keyboardType={keyboardType}
+            secureTextEntry={secureTextEntry}
+            onKeyPress={onKeyPress}
+            multiline={multiline}
+            numberOfLines={numberOfLines}
+            onContentSizeChange={handleContentSizeChange}
+            style={[
+              textInputStyle,
+              onPress && cursorPointer(),
+              {
+                height: inputHeight - inputFocusPaddingTextHight,
+                maxHeight: inputHeight - inputFocusPaddingTextHight,
+                paddingHorizontal: addPaddingHorizontalTextInput(),
+                paddingTop: addPaddingTop(),
+              },
+            ]}
           />
-        )}
+          {!!rightButtons && (
+            <GridContainer
+              gapHorizontal={12}
+              gapVertical={0}
+              stylesContainer={[
+                styles.gridContainer,
+                {
+                  alignItems: alignIcons(),
+                  paddingVertical: inputFocusPaddingTextVertical,
+                  paddingRight: inputFocusPaddingTextHorizontal,
+                },
+              ]}
+              components={rightButtons.map((ButtonComponent: any, index) => {
+                const { iconLeft, iconRight, ...otherProps } =
+                  ButtonComponent.props;
+                const modifiedProps = { ...otherProps };
+                modifiedProps.paddingVertical =
+                  modifiedProps?.paddingVertical || 0;
+                modifiedProps.paddingHorizontal =
+                  modifiedProps?.paddingHorizontal || 0;
+                modifiedProps.iconLeft = determineIconStyles(
+                  iconLeft,
+                  modifiedProps.disabled || isDisabled,
+                );
+                modifiedProps.iconRight = determineIconStyles(
+                  iconRight,
+                  modifiedProps.disabled || isDisabled,
+                );
+                modifiedProps.text = '';
+
+                return (
+                  <ButtonComponent.type
+                    {...modifiedProps}
+                    key={index}
+                    disabled={isDisabled || modifiedProps.disabled}
+                    typeStyle={'white'}
+                  />
+                );
+              })}
+            />
+          )}
+        </View>
       </View>
       {!!helperText && (
         <Text
           numberOfLines={1}
           ellipsizeMode="tail"
-          style={[styles.helperText, { color: determineColor() }]}
-        >
+          style={[styles.helperText, { color: determineColor() }]}>
           {helperText}
         </Text>
       )}
