@@ -48,7 +48,8 @@ if (!isWebPlatform()) {
   }
 }
 
-const POSITION_UP_FILE = -36;
+const POSITION_DOWN_FILE = 50;
+const POSITION_UP_FILE = 60;
 
 const FileSearchInput = ({
   value,
@@ -323,7 +324,7 @@ const FileSearchInput = ({
     if (refInput.current) {
       refInput.current.measure((x, y, width, height, pageX, pageY) => {
         setModalPosition({
-          top: POSITION_UP_FILE,
+          top: pageY >= POSITION_UP_FILE ? -POSITION_UP_FILE : POSITION_DOWN_FILE,
           left: pageX,
           width: width,
         });
