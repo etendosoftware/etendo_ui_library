@@ -258,7 +258,6 @@ const InputBase = ({
                   modifiedProps.disabled || isDisabled,
                 );
                 modifiedProps.text = '';
-
                 return (
                   <ButtonComponent.type
                     {...modifiedProps}
