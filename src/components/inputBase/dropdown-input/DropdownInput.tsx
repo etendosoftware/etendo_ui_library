@@ -16,6 +16,8 @@ import {
   BUFFER,
   MAX_VISIBLE_OPTION,
   NO_RESULT_TEXT,
+  OFFSET,
+  OFFSET_LOADING,
   PAGE_SIZE,
   SEARCH_PLACEHOLDER,
 } from './DropdownInput.constants';
@@ -42,9 +44,6 @@ const DropdownInput = ({
   const [heightOptions, setHeightOptions] = useState<number>(0);
   const [isModalUp, setIsModalUp] = useState<boolean>(false);
   const [filterText, setFilterText] = useState<string>('');
-  const offSet = 48 + 48 + 16
-  const offSetLoading = 48 + 16
-
 
   const [modalPosition, setModalPosition] = useState<{
     top: number;
@@ -77,14 +76,14 @@ const DropdownInput = ({
     if (isWebPlatform()) {
       if (dataList?.length === 0) {
         if (isLoading) {
-          return setHeightOptions(offSetLoading);
+          return setHeightOptions(OFFSET_LOADING);
         }
-        return setHeightOptions(offSet);
+        return setHeightOptions(OFFSET);
       }
       if (maxVisibleOptions && dataList?.length <= maxVisibleOptions) {
-        return setHeightOptions(dataList?.length * offSet);
+        return setHeightOptions(dataList?.length * OFFSET);
       }
-      setHeightOptions(maxVisibleOptions * offSet);
+      setHeightOptions(maxVisibleOptions * OFFSET);
     }
   }, [dataList, isLoading, windowHeight]);
 

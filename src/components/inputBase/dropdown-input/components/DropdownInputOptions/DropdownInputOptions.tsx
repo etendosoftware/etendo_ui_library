@@ -18,6 +18,7 @@ import { SearchInput } from '../../../search-input';
 
 import { styles } from '../../DropdownInput.styles';
 import { IDropdownInputOptions } from '../../DropdownInput.types';
+import { OFFSET } from '../../DropdownInput.constants';
 
 const DropdownInputOptions = ({
   isVisibleDropdown,
@@ -39,7 +40,6 @@ const DropdownInputOptions = ({
   isModalUp,
 }: IDropdownInputOptions) => {
   const [filterText, setFilterText] = useState<string>('');
-
   const isCenteredModal = Platform.OS === 'android' || Platform.OS === 'ios';
 
   useEffect(() => {
@@ -106,13 +106,13 @@ const DropdownInputOptions = ({
           style={[
             styles.optionsContainer,
             isCenteredModal && {
-              height: maxVisibleOptions && maxVisibleOptions * 48 + 48 + 16,
+              height: maxVisibleOptions && maxVisibleOptions * OFFSET,
             },
             {
               maxHeight:
                 maxVisibleOptions && data && data?.length <= maxVisibleOptions
                   ? 'auto'
-                  : maxVisibleOptions && maxVisibleOptions * 48 + 48 + 16,
+                  : maxVisibleOptions && maxVisibleOptions * OFFSET,
             },
             !isCenteredModal && {
               top: modalPosition.top + 8,
