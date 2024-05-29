@@ -5,7 +5,6 @@ import {
   NativeSyntheticEvent,
   NativeScrollEvent,
   TextInput,
-  ScrollView,
 } from 'react-native';
 import InputBase from '../InputBase';
 import { IDropdownInput } from './DropdownInput.types';
@@ -43,6 +42,9 @@ const DropdownInput = ({
   const [heightOptions, setHeightOptions] = useState<number>(0);
   const [isModalUp, setIsModalUp] = useState<boolean>(false);
   const [filterText, setFilterText] = useState<string>('');
+  const offSet = 48 + 48 + 16
+  const offSetLoading = 48 + 16
+
 
   const [modalPosition, setModalPosition] = useState<{
     top: number;
@@ -75,14 +77,14 @@ const DropdownInput = ({
     if (isWebPlatform()) {
       if (dataList?.length === 0) {
         if (isLoading) {
-          return setHeightOptions(48 + 16);
+          return setHeightOptions(offSetLoading);
         }
-        return setHeightOptions(48 + 48 + 16);
+        return setHeightOptions(offSet);
       }
       if (maxVisibleOptions && dataList?.length <= maxVisibleOptions) {
-        return setHeightOptions(dataList?.length * 48 + 48 + 16);
+        return setHeightOptions(dataList?.length * offSet);
       }
-      setHeightOptions(maxVisibleOptions * 48 + 48 + 16);
+      setHeightOptions(maxVisibleOptions * offSet);
     }
   }, [dataList, isLoading, windowHeight]);
 
