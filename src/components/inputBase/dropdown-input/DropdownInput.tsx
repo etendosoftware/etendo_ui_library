@@ -71,7 +71,6 @@ const DropdownInput = ({
     }
   }, [heightOptions, windowHeight]);
 
-
   useEffect(() => {
     if (isWebPlatform()) {
       if (dataList?.length === 0) {
@@ -94,7 +93,7 @@ const DropdownInput = ({
   }, [staticData]);
 
   useEffect(() => {
-    setFilterText('')
+    setFilterText('');
     if (isVisibleDropdown && !staticData) {
       setDataList([]);
       setIsLoadMoreData(true);
@@ -103,9 +102,8 @@ const DropdownInput = ({
   }, [isVisibleDropdown]);
 
   useEffect(() => {
-      adjustDropdownPosition();
-      if (isWebPlatform()) {
-
+    adjustDropdownPosition();
+    if (isWebPlatform()) {
       const handleScroll = () => {
         if (isVisibleDropdown) {
           adjustDropdownPosition();
@@ -127,7 +125,6 @@ const DropdownInput = ({
         selection: { start: 0, end: 0 },
       });
     }
-    
   };
 
   const onScroll = async (event: NativeSyntheticEvent<NativeScrollEvent>) => {
@@ -190,7 +187,7 @@ const DropdownInput = ({
           rightButtons={[
             <Button
               onPress={() => {
-                setIsVisibleDropdown(prev => !prev);
+                setIsVisibleDropdown(true);
               }}
               typeStyle={'primary'}
               iconLeft={
@@ -200,7 +197,7 @@ const DropdownInput = ({
           ]}
           value={value?.toString()}
           onPress={() => {
-            setIsVisibleDropdown(prev => !prev);
+            setIsVisibleDropdown(true);
           }}
         />
       </View>

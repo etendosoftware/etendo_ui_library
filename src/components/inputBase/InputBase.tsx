@@ -1,4 +1,14 @@
-import { ColorValue, Platform, Text, TextInput, View } from 'react-native';
+import {
+  ColorValue,
+  NativeSyntheticEvent,
+  Platform,
+  Pressable,
+  Text,
+  TextInput,
+  TextInputFocusEventData,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, { useState } from 'react';
 import {
   heightTextInput,
@@ -22,6 +32,7 @@ const InputBase = ({
   icon,
   rightButtons,
   onPress,
+  onFocus,
   onBlur,
   onSubmitEditing,
   onKeyPress,
@@ -46,8 +57,11 @@ const InputBase = ({
   const paddingVertical: number = inputFocusPadding;
   const paddingHorizontal: number = inputFocusPadding;
 
-  const onFocusChange = () => {
+  const onFocusChange = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
     if (!isDisabled && isFocusable) {
+      if (onFocus) {
+        onFocus(e);
+      }
       setIsFocused(true);
     }
   };
@@ -133,7 +147,7 @@ const InputBase = ({
   };
 
   const alignIcons = (): 'center' | 'flex-end' => {
-    if (currentLines > 1 && multiline) {
+    if (currentLines > 2 && multiline) {
       return 'flex-end';
     }
     return 'center';
@@ -185,7 +199,7 @@ const InputBase = ({
             ...styleContainer,
           },
         ]}>
-        <View style={styles.containerInput}>
+        <Pressable style={styles.containerInput} onPress={onPress}>
           {!!icon && (
             <View
               style={[
@@ -205,7 +219,6 @@ const InputBase = ({
           <TextInput
             ref={refInput}
             value={value}
-            onPressIn={onPress}
             onChangeText={handleChange}
             placeholder={placeholder}
             editable={isEditable}
@@ -269,7 +282,7 @@ const InputBase = ({
               })}
             />
           )}
-        </View>
+        </Pressable>
       </View>
       {!!helperText && (
         <Text

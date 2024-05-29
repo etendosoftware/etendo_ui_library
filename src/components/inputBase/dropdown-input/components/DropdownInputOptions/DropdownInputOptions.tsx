@@ -88,80 +88,78 @@ const DropdownInputOptions = ({
       onRequestClose={() => {
         onClose();
       }}>
-      <TouchableOpacity
-        onPress={() => {
-          onClose();
-        }}
-        activeOpacity={1}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={[
+          isCenteredModal && styles.containerNative,
+          { width: windowWidth, height: windowHeight },
+        ]}>
+        <TouchableOpacity
+          onPress={() => {
+            onClose();
+          }}
+          style={{ width: windowWidth, height: windowHeight }}
+          activeOpacity={1}
+        />
+        <View
+          onStartShouldSetResponder={() => true}
           style={[
-            isCenteredModal && styles.containerNative,
-            { width: windowWidth, height: windowHeight },
+            styles.optionsContainer,
+            isCenteredModal && {
+              height: maxVisibleOptions && maxVisibleOptions * 48 + 48 + 16,
+            },
+            {
+              maxHeight:
+                maxVisibleOptions && data && data?.length <= maxVisibleOptions
+                  ? 'auto'
+                  : maxVisibleOptions && maxVisibleOptions * 48 + 48 + 16,
+            },
+            !isCenteredModal && {
+              top: modalPosition.top + 8,
+              left: modalPosition.left,
+            },
+            {
+              width: modalPosition.width,
+            },
           ]}>
-          <View
-            onStartShouldSetResponder={() => true}
-            style={[
-              styles.optionsContainer,
-              isCenteredModal && {
-                height: maxVisibleOptions && maxVisibleOptions * 48 + 48 + 16,
-              },
-              {
-                maxHeight:
-                  maxVisibleOptions && data && data?.length <= maxVisibleOptions
-                    ? 'auto'
-                    : maxVisibleOptions && maxVisibleOptions * 48 + 48 + 16,
-              },
-              !isCenteredModal && {
-                top: modalPosition.top + 8,
-                left: modalPosition.left,
-              },
-              {
-                width: modalPosition.width,
-              },
-            ]}>
-            {!!(
-              (!isStaticData && !isModalUp) ||
-              (!isStaticData && isCenteredModal)
-            ) && filterComponent()}
-            <ScrollView
-              contentContainerStyle={{ flexGrow: 1 }}
-              scrollEventThrottle={16}
-              onScroll={onScroll}>
-              {displayKey &&
-                data?.map((item, index) => {
-                  return (
-                    <TouchableOpacity
-                      key={'dropdown' + index}
-                      onPress={() => {
-                        onSelectOption(item);
-                      }}
-                      style={[
-                        styles.option,
-                        !!value &&
-                          item[displayKey] === value && {
-                            backgroundColor: TERTIARY_101,
-                          },
-                      ]}>
-                      <Text style={styles.optionText} numberOfLines={2}>
-                        {item[displayKey]}
-                      </Text>
-                    </TouchableOpacity>
-                  );
-                })}
-              {!isLoading && !data?.length && (
-                <View style={styles.option}>
-                  <Text style={styles.optionText}>{noResultsText}</Text>
-                </View>
-              )}
-            </ScrollView>
-            {!isStaticData &&
-              isModalUp &&
-              !isCenteredModal &&
-              filterComponent()}
-          </View>
-        </KeyboardAvoidingView>
-      </TouchableOpacity>
+          {!!(
+            (!isStaticData && !isModalUp) ||
+            (!isStaticData && isCenteredModal)
+          ) && filterComponent()}
+          <ScrollView
+            contentContainerStyle={{ flexGrow: 1 }}
+            scrollEventThrottle={16}
+            onScroll={onScroll}>
+            {displayKey &&
+              data?.map((item, index) => {
+                return (
+                  <TouchableOpacity
+                    key={'dropdown' + index}
+                    onPress={() => {
+                      onSelectOption(item);
+                    }}
+                    style={[
+                      styles.option,
+                      !!value &&
+                        item[displayKey] === value && {
+                          backgroundColor: TERTIARY_101,
+                        },
+                    ]}>
+                    <Text style={styles.optionText} numberOfLines={2}>
+                      {item[displayKey]}
+                    </Text>
+                  </TouchableOpacity>
+                );
+              })}
+            {!isLoading && !data?.length && (
+              <View style={styles.option}>
+                <Text style={styles.optionText}>{noResultsText}</Text>
+              </View>
+            )}
+          </ScrollView>
+          {!isStaticData && isModalUp && !isCenteredModal && filterComponent()}
+        </View>
+      </KeyboardAvoidingView>
     </Modal>
   );
 };
