@@ -259,7 +259,7 @@ const InputBase = ({
                   ButtonComponent.props;
                 const modifiedProps = { ...otherProps };
                 modifiedProps.paddingVertical =
-                  modifiedProps?.paddingVertical || 0;
+                  modifiedProps?.paddingVertical || 6;
                 modifiedProps.paddingHorizontal =
                   modifiedProps?.paddingHorizontal || 0;
                 modifiedProps.iconLeft = determineIconStyles(

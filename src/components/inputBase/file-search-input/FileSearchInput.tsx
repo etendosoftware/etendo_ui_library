@@ -213,7 +213,6 @@ const FileSearchInput = ({
 
   const UploadButton = (
     <Button
-      paddingVertical={0}
       typeStyle="white"
       onPress={handleFileButtonClick}
       disabled={isAttachDisable}
@@ -222,7 +221,6 @@ const FileSearchInput = ({
   );
   const SendButton = (
     <Button
-      paddingVertical={0}
       typeStyle="white"
       onPress={handleSendMessage}
       disabled={isSendDisable}
