@@ -4,6 +4,7 @@ import {
   ImageStyle,
   NativeSyntheticEvent,
   TextInput,
+  TextInputFocusEventData,
   TextInputKeyPressEventData,
   TextInputSubmitEditingEventData,
   View,
@@ -34,6 +35,7 @@ export interface IInputBase {
   title?: string;
   value?: string;
   onPress?: () => void;
+  onFocus?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   secureTextEntry?: boolean;
   keyboardType?:
     | 'default'

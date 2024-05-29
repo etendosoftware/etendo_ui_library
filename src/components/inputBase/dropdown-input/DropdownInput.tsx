@@ -5,7 +5,6 @@ import {
   NativeSyntheticEvent,
   NativeScrollEvent,
   TextInput,
-  ScrollView,
 } from 'react-native';
 import InputBase from '../InputBase';
 import { IDropdownInput } from './DropdownInput.types';
@@ -17,6 +16,8 @@ import {
   BUFFER,
   MAX_VISIBLE_OPTION,
   NO_RESULT_TEXT,
+  OFFSET,
+  OFFSET_LOADING,
   PAGE_SIZE,
   SEARCH_PLACEHOLDER,
 } from './DropdownInput.constants';
@@ -71,19 +72,18 @@ const DropdownInput = ({
     }
   }, [heightOptions, windowHeight]);
 
-
   useEffect(() => {
     if (isWebPlatform()) {
       if (dataList?.length === 0) {
         if (isLoading) {
-          return setHeightOptions(48 + 16);
+          return setHeightOptions(OFFSET_LOADING);
         }
-        return setHeightOptions(48 + 48 + 16);
+        return setHeightOptions(OFFSET);
       }
       if (maxVisibleOptions && dataList?.length <= maxVisibleOptions) {
-        return setHeightOptions(dataList?.length * 48 + 48 + 16);
+        return setHeightOptions(dataList?.length * OFFSET);
       }
-      setHeightOptions(maxVisibleOptions * 48 + 48 + 16);
+      setHeightOptions(maxVisibleOptions * OFFSET);
     }
   }, [dataList, isLoading, windowHeight]);
 
@@ -94,7 +94,7 @@ const DropdownInput = ({
   }, [staticData]);
 
   useEffect(() => {
-    setFilterText('')
+    setFilterText('');
     if (isVisibleDropdown && !staticData) {
       setDataList([]);
       setIsLoadMoreData(true);
@@ -103,9 +103,8 @@ const DropdownInput = ({
   }, [isVisibleDropdown]);
 
   useEffect(() => {
-      adjustDropdownPosition();
-      if (isWebPlatform()) {
-
+    adjustDropdownPosition();
+    if (isWebPlatform()) {
       const handleScroll = () => {
         if (isVisibleDropdown) {
           adjustDropdownPosition();
@@ -127,7 +126,6 @@ const DropdownInput = ({
         selection: { start: 0, end: 0 },
       });
     }
-    
   };
 
   const onScroll = async (event: NativeSyntheticEvent<NativeScrollEvent>) => {
@@ -190,7 +188,7 @@ const DropdownInput = ({
           rightButtons={[
             <Button
               onPress={() => {
-                setIsVisibleDropdown(prev => !prev);
+                setIsVisibleDropdown(true);
               }}
               typeStyle={'primary'}
               iconLeft={
@@ -200,7 +198,7 @@ const DropdownInput = ({
           ]}
           value={value?.toString()}
           onPress={() => {
-            setIsVisibleDropdown(prev => !prev);
+            setIsVisibleDropdown(true);
           }}
         />
       </View>
