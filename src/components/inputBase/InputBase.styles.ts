@@ -24,6 +24,7 @@ export const styles = StyleSheet.create({
     overflow: 'hidden',
     width: '100%',
     height: '100%',
+    backgroundColor: NEUTRAL_50,
   },
   textInput: {
     backgroundColor: NEUTRAL_50,

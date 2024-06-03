@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useCallback, useState } from 'react';
+import React, {useRef, useEffect, useCallback, useState} from 'react';
 import {
   View,
   Dimensions,
@@ -7,10 +7,10 @@ import {
   TextInput,
 } from 'react-native';
 import InputBase from '../InputBase';
-import { IDropdownInput } from './DropdownInput.types';
-import { Button } from '../../button';
-import { ChevronDownIcon, ChevronUpIcon } from '../../../assets/images/icons';
-import { isWebPlatform } from '../../../helpers/functions_utils';
+import {IDropdownInput} from './DropdownInput.types';
+import {Button} from '../../button';
+import {ChevronDownIcon, ChevronUpIcon} from '../../../assets/images/icons';
+import {isWebPlatform} from '../../../helpers/functions_utils';
 import InputOptions from './components/DropdownInputOptions/DropdownInputOptions';
 import {
   BUFFER,
@@ -32,6 +32,7 @@ const DropdownInput = ({
   pageSize = PAGE_SIZE,
   searchPlaceholder = SEARCH_PLACEHOLDER,
   noResultsText = NO_RESULT_TEXT,
+  isDisabled,
   ...inputBaseProps
 }: IDropdownInput) => {
   const ref = useRef<View>(null);
@@ -49,9 +50,9 @@ const DropdownInput = ({
     top: number;
     left: number;
     width: number;
-  }>({ top: 0, left: 0, width: 0 });
+  }>({top: 0, left: 0, width: 0});
 
-  const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
+  const {width: windowWidth, height: windowHeight} = Dimensions.get('window');
 
   const adjustDropdownPosition = useCallback(() => {
     if (ref.current) {
@@ -65,7 +66,7 @@ const DropdownInput = ({
           });
           setIsModalUp(true);
         } else {
-          setModalPosition({ top: pageY + height, left: pageX, width: width });
+          setModalPosition({top: pageY + height, left: pageX, width: width});
           setIsModalUp(false);
         }
       });
@@ -111,7 +112,7 @@ const DropdownInput = ({
         }
       };
 
-      window.addEventListener('scroll', handleScroll, { passive: true });
+      window.addEventListener('scroll', handleScroll, {passive: true});
 
       return () => window.removeEventListener('scroll', handleScroll);
     }
@@ -123,7 +124,7 @@ const DropdownInput = ({
 
     if (refInput?.current?.setNativeProps) {
       refInput?.current?.setNativeProps({
-        selection: { start: 0, end: 0 },
+        selection: {start: 0, end: 0},
       });
     }
   };
@@ -182,13 +183,16 @@ const DropdownInput = ({
           }
         }}>
         <InputBase
+          {...inputBaseProps}
+          isDisabled={isDisabled}
           refInput={refInput}
           refInputContainer={ref}
-          {...inputBaseProps}
           rightButtons={[
             <Button
               onPress={() => {
-                setIsVisibleDropdown(true);
+                !isDisabled &&
+                  maxVisibleOptions > 0 &&
+                  setIsVisibleDropdown(true);
               }}
               typeStyle={'primary'}
               iconLeft={
@@ -198,11 +202,11 @@ const DropdownInput = ({
           ]}
           value={value?.toString()}
           onPress={() => {
-            setIsVisibleDropdown(true);
+            !isDisabled && maxVisibleOptions > 0 && setIsVisibleDropdown(true);
           }}
         />
       </View>
-      {isVisibleDropdown && !!modalPosition.width && (
+      {isVisibleDropdown && !!modalPosition.width && maxVisibleOptions > 0 && (
         <InputOptions
           isVisibleDropdown={isVisibleDropdown}
           onClose={() => {
