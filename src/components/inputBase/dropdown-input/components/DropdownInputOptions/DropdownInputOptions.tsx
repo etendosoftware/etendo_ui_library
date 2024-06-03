@@ -18,7 +18,11 @@ import { SearchInput } from '../../../search-input';
 
 import { styles } from '../../DropdownInput.styles';
 import { IDropdownInputOptions } from '../../DropdownInput.types';
-import { OFFSET, OFFSET_PADDING, SEARCH_HEIGH } from '../../DropdownInput.constants';
+import {
+  OFFSET,
+  OFFSET_PADDING,
+  SEARCH_HEIGH,
+} from '../../DropdownInput.constants';
 
 const DropdownInputOptions = ({
   isVisibleDropdown,
@@ -81,7 +85,6 @@ const DropdownInputOptions = ({
     );
   };
 
-
   return (
     <Modal
       transparent={true}
@@ -107,13 +110,20 @@ const DropdownInputOptions = ({
           style={[
             styles.optionsContainer,
             isCenteredModal && {
-              height: maxVisibleOptions && (maxVisibleOptions * OFFSET) + OFFSET_PADDING +(isStaticData ? 0 : SEARCH_HEIGH),
+              height:
+                maxVisibleOptions &&
+                maxVisibleOptions * OFFSET +
+                  OFFSET_PADDING +
+                  (isStaticData ? 0 : SEARCH_HEIGH),
             },
             {
               maxHeight:
                 maxVisibleOptions && data && data?.length <= maxVisibleOptions
                   ? 'auto'
-                  : maxVisibleOptions && (maxVisibleOptions * OFFSET) + OFFSET_PADDING +(isStaticData ? 0 : SEARCH_HEIGH),
+                  : maxVisibleOptions &&
+                    maxVisibleOptions * OFFSET +
+                      OFFSET_PADDING +
+                      (isStaticData ? 0 : SEARCH_HEIGH),
             },
             !isCenteredModal && {
               top: modalPosition.top + 8,
