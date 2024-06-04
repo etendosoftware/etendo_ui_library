@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 import {
   DESTRUCTIVE_10,
   DESTRUCTIVE_100,
@@ -11,13 +11,13 @@ import {
   PRIMARY_100,
   QUATERNARY_50,
   TERTIARY_70,
-} from "../../../styles/colors";
-import { isWebPlatform } from "../../../helpers/functions_utils";
+} from '../../../styles/colors';
+import { isWebPlatform } from '../../../helpers/functions_utils';
 
 export const sizeStyles = {
   small: {
     modalWidth: 280,
-    calendarBody: 180,
+    calendarBody: 190,
     heightCalendar: 300,
     textFontSize: 14,
     itemHeight: 30,
@@ -58,7 +58,7 @@ export const sizeStyles = {
     dayItem: { marginVertical: 1 },
     currentDayBorder: { width: 28, height: 28 },
     dayHeaderText: { fontSize: 14 },
-    dayItemText: { padding: 8, width: 30, height: 30 },
+    dayItemText: { width: 30, height: 30 },
     list: {
       height: 240,
       paddingHorizontal: 10,
@@ -71,10 +71,10 @@ export const sizeStyles = {
     modalWidth: 360,
     calendarBody: 300,
     heightCalendar: 431,
-    textFontSize: 18,
+    textFontSize: 14,
     itemHeight: 50,
-    monthText: 16,
-    yearText: 16,
+    monthText: 14,
+    yearText: 14,
     iconStyle: { width: 26, height: 26 },
     iconDownStyle: { width: 24, height: 24 },
     iconContainer: { padding: 14 },
@@ -83,14 +83,14 @@ export const sizeStyles = {
     dayText: { fontSize: 14 },
     dayItem: { marginVertical: 2 },
     currentDayBorder: { width: 36, height: 36 },
-    dayHeaderText: { fontSize: 16 },
-    dayItemText: { padding: 12, width: 40, height: 40 },
+    dayHeaderText: { fontSize: 14 },
+    dayItemText: { width: 40, height: 40 },
     list: {
       height: 300,
       paddingHorizontal: 10,
       paddingVertical: 8,
     },
-    listFontSize: 16,
+    listFontSize: 14,
     listItemPadding: 10,
   },
 };
@@ -101,9 +101,9 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   inputWrapper: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingHorizontal: 16,
     height: 40,
   },
@@ -116,25 +116,25 @@ export const styles = StyleSheet.create({
   inputContainerWrapper: {
     borderRadius: 8,
     borderWidth: 4,
-    borderColor: "transparent",
-    position: "relative",
+    borderColor: 'transparent',
+    position: 'relative',
   },
   monthAndYearContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   iconContainer: {
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   iconStyle: {
     width: 26,
     height: 26,
   },
   monthAndYearContent: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 4,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   inputWrapperFocused: {
     backgroundColor: QUATERNARY_50,
@@ -144,22 +144,22 @@ export const styles = StyleSheet.create({
   },
   modalContainer: {
     flex: 1,
-    justifyContent: isWebPlatform() ? undefined : "center",
-    alignItems: isWebPlatform() ? "flex-end" : "center",
-    backgroundColor: isWebPlatform() ? "rgba(0,0,0,0)" : "rgba(0,0,0,0.5)",
+    justifyContent: isWebPlatform() ? undefined : 'center',
+    alignItems: isWebPlatform() ? 'flex-end' : 'center',
+    backgroundColor: isWebPlatform() ? 'rgba(0,0,0,0)' : 'rgba(0,0,0,0.5)',
   },
   modalContent: {
     backgroundColor: NEUTRAL_50,
     borderRadius: 8,
     borderColor: NEUTRAL_300,
-    alignSelf: isWebPlatform() ? undefined : "center",
-    width: "90%",
+    alignSelf: isWebPlatform() ? undefined : 'center',
+    width: '90%',
     marginTop: isWebPlatform() ? 8 : undefined,
   },
   header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingHorizontal: 16,
     borderBottomWidth: 1,
   },
@@ -173,12 +173,12 @@ export const styles = StyleSheet.create({
     color: NEUTRAL_400,
   },
   dayHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   dayHeaderText: {
-    width: "14.28%",
-    textAlign: "center",
+    width: '14.28%',
+    textAlign: 'center',
     color: NEUTRAL_800,
   },
   notCurrentMonthStyle: {
@@ -189,15 +189,15 @@ export const styles = StyleSheet.create({
     backgroundColor: NEUTRAL_50,
   },
   dayItem: {
-    width: "14.28%",
-    justifyContent: "center",
-    alignItems: "center",
+    width: '14.28%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   dayItemText: {
     borderRadius: 100,
-    textAlign: "center",
-    justifyContent: "center",
-    alignItems: "center",
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   dayItemTextHover: {
     backgroundColor: NEUTRAL_200,
@@ -206,30 +206,29 @@ export const styles = StyleSheet.create({
     backgroundColor: TERTIARY_70,
     borderWidth: 1,
     borderColor: PRIMARY_100,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   selectedDayBackground: {
     backgroundColor: PRIMARY_100,
     borderRadius: 100,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   selectedDayText: {
     color: NEUTRAL_0,
   },
   dayText: {
-    textAlign: "center",
+    textAlign: 'center',
   },
   currentDayBorder: {
     borderRadius: 100,
     borderWidth: 1,
     borderColor: PRIMARY_100,
-    padding: 8,
-    justifyContent: "center",
-    alignItems: "center",
   },
   item: {
-    justifyContent: "center",
-    width: "100%",
+    justifyContent: 'center',
+    width: '100%',
     margin: 2,
   },
   yearText: {
@@ -242,12 +241,12 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
   },
   optionsContainer: {
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "flex-end",
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
     gap: 4,
     padding: 10,
-    paddingHorizontal:20,
+    paddingHorizontal: 20,
     backgroundColor: NEUTRAL_50,
     borderBottomLeftRadius: 8,
     borderBottomRightRadius: 8,

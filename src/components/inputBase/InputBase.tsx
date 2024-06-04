@@ -1,12 +1,12 @@
 import {
   ColorValue,
+  GestureResponderEvent,
   NativeSyntheticEvent,
   Platform,
   Pressable,
   Text,
   TextInput,
   TextInputFocusEventData,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import React, { useState } from 'react';
@@ -50,7 +50,7 @@ const InputBase = ({
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [inputHeight, setInputHeight] = useState<number>(heightTextInput);
   const [currentLines, setCurrentLines] = useState<number>(1);
-  const inputFocusPadding = isFocused ? 3 : 1;
+  const inputFocusPadding = isFocused ? 2 : 0;
   const inputFocusPaddingTextHorizontal = isFocused ? 10 : 12;
   const inputFocusPaddingTextVertical = isFocused ? 6 : 8;
   const inputFocusPaddingTextHight = isFocused ? 6 : 2;
@@ -176,6 +176,16 @@ const InputBase = ({
     return paddingHorizontalTextInput;
   };
 
+  const handleOnPress = () => {
+    if (onPress && !isDisabled) {
+      onPress();
+    }
+  };
+
+  const determineFocusBackgroundColor = (): ColorValue => {
+    return isFocused ? determineColor() : 'transparent';
+  };
+
   return (
     <>
       {!!title && (
@@ -193,13 +203,14 @@ const InputBase = ({
           {
             paddingHorizontal,
             paddingVertical,
-            backgroundColor: determineColor(),
+            borderColor: determineColor(),
+            backgroundColor: determineFocusBackgroundColor(),
             height: inputHeight,
             maxHeight: inputHeight,
             ...styleContainer,
           },
         ]}>
-        <Pressable style={styles.containerInput} onPress={onPress}>
+        <Pressable style={styles.containerInput} onPress={handleOnPress}>
           {!!icon && (
             <View
               style={[

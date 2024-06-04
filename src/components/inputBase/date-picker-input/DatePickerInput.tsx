@@ -83,9 +83,7 @@ const DatePickerInput = ({
     setCurrentYear,
   } = useDatePickerInput(value, dateFormat);
   // Get responsive styles
-  const currentSizeStyles = isWebPlatform()
-    ? sizeStyles[size]
-    : sizeStyles['large'];
+  const currentSizeStyles = sizeStyles[size];
 
   // States
   const [hoveredDay, setHoveredDay] = useState<any>(null);

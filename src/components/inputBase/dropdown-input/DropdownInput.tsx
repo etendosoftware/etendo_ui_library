@@ -32,6 +32,7 @@ const DropdownInput = ({
   pageSize = PAGE_SIZE,
   searchPlaceholder = SEARCH_PLACEHOLDER,
   noResultsText = NO_RESULT_TEXT,
+  isDisabled,
   ...inputBaseProps
 }: IDropdownInput) => {
   const ref = useRef<View>(null);
@@ -182,13 +183,16 @@ const DropdownInput = ({
           }
         }}>
         <InputBase
+          {...inputBaseProps}
+          isDisabled={isDisabled}
           refInput={refInput}
           refInputContainer={ref}
-          {...inputBaseProps}
           rightButtons={[
             <Button
               onPress={() => {
-                setIsVisibleDropdown(true);
+                !isDisabled &&
+                  maxVisibleOptions > 0 &&
+                  setIsVisibleDropdown(true);
               }}
               typeStyle={'primary'}
               iconLeft={
@@ -198,11 +202,11 @@ const DropdownInput = ({
           ]}
           value={value?.toString()}
           onPress={() => {
-            setIsVisibleDropdown(true);
+            !isDisabled && maxVisibleOptions > 0 && setIsVisibleDropdown(true);
           }}
         />
       </View>
-      {isVisibleDropdown && !!modalPosition.width && (
+      {isVisibleDropdown && !!modalPosition.width && maxVisibleOptions > 0 && (
         <InputOptions
           isVisibleDropdown={isVisibleDropdown}
           onClose={() => {

@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
   container: {
     backgroundColor: NEUTRAL_50,
     borderRadius: 8,
-    borderColor: PRIMARY_100,
+    borderWidth:1,  
     overflow: 'hidden',
     justifyContent: 'center',
     alignItems: 'center',
@@ -22,8 +22,10 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     borderRadius: 7,
     overflow: 'hidden',
+    alignItems: 'center',
     width: '100%',
     height: '100%',
+    backgroundColor: NEUTRAL_50,
   },
   textInput: {
     backgroundColor: NEUTRAL_50,
@@ -59,5 +61,5 @@ export const styles = StyleSheet.create({
   },
 });
 export const heightTextInput = 52;
-export const paddingTopTextInputMultiline = 13;
+export const paddingTopTextInputMultiline = 12;
 export const paddingHorizontalTextInput = 8;

@@ -50,9 +50,9 @@ const TextInput = ({
 
   return (
     <InputBase
+      {...inputBaseProps}
       isDisabled={isDisabled}
       rightButtons={getValidation()}
-      {...inputBaseProps}
     />
   );
 };
