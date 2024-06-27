@@ -5,7 +5,7 @@ import { IPasswordInput } from './PasswordInput.types';
 import { EyeIcon, EyeOffIcon } from '../../../assets/images/icons';
 import { styles } from './PasswordInput.style';
 
-const PassowordInput = ({ ...inputBaseProps }: IPasswordInput) => {
+const PasswordInput = ({ ...inputBaseProps }: IPasswordInput) => {
   const handleOnPress = () => {
     setIsVisiblePassword(prev => !prev);
   };
@@ -19,7 +19,7 @@ const PassowordInput = ({ ...inputBaseProps }: IPasswordInput) => {
         <Button
           typeStyle={'white'}
           paddingHorizontal={0}
-          paddingVertical={7}
+          paddingVertical={0}
           onPress={handleOnPress}
           iconLeft={
             isVisiblePassword ? (
@@ -34,4 +34,4 @@ const PassowordInput = ({ ...inputBaseProps }: IPasswordInput) => {
   );
 };
 
-export default PassowordInput;
+export default PasswordInput;

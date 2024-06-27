@@ -68,7 +68,7 @@ const TextMessage: React.FC<TextMessageProps> = ({
               : styles.otherUserFileContainer,
           ]}>
           <FileIcon style={styles.fileIcon} />
-          <Text style={styles.file}>{file}</Text>
+          <Text style={styles.file} numberOfLines={1} ellipsizeMode='tail'>{file}</Text>
         </View>
       )}
 

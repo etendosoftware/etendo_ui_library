@@ -6,6 +6,7 @@ export interface ITitleContainer {
   styleContainer?: ViewStyle;
   styleGridContainer?: ViewStyle;
   styleTitle?: TextStyle;
-  buttonsGap?: number;
+  gridGapHorizontal?: number;
+  gridGapVertical?: number;
   title: string;
 }

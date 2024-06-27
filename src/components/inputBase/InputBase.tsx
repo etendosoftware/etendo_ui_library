@@ -1,13 +1,21 @@
 import {
   ColorValue,
+  GestureResponderEvent,
+  NativeSyntheticEvent,
   Platform,
+  Pressable,
   Text,
   TextInput,
-  TouchableOpacity,
+  TextInputFocusEventData,
   View,
 } from 'react-native';
 import React, { useState } from 'react';
-import { styles } from './InputBase.styles';
+import {
+  heightTextInput,
+  paddingHorizontalTextInput,
+  paddingTopTextInputMultiline,
+  styles,
+} from './InputBase.styles';
 import { IInputBase } from './InputBase.types';
 import { DANGER_700, NEUTRAL_500, PRIMARY_100 } from '../../styles/colors';
 import { cursorPointer } from '../../helpers/table_utils';
@@ -24,19 +32,36 @@ const InputBase = ({
   icon,
   rightButtons,
   onPress,
+  onFocus,
   onBlur,
   onSubmitEditing,
+  onKeyPress,
   secureTextEntry,
   keyboardType = 'default',
+  styleContainer,
+  isFocusable = true,
+  refInputContainer,
+  refInput,
+  multiline,
+  numberOfLines = 1,
 }: IInputBase) => {
-  const [isFocused, setIsFocused] = useState<boolean>(false);
-  const borderWidth: number = isFocused ? 3 : 1;
-  const paddingVertical: number = 13 - (borderWidth - 1);
-  const paddingHorizontal: number = 12 - (borderWidth - 1);
-  const isEditable = onPress ? false : !isDisabled;
+  const isEditable: boolean = onPress ? false : !isDisabled;
 
-  const onFocusChange = () => {
-    if(!isDisabled){
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [inputHeight, setInputHeight] = useState<number>(heightTextInput);
+  const [currentLines, setCurrentLines] = useState<number>(1);
+  const inputFocusPadding = isFocused ? 2 : 0;
+  const inputFocusPaddingTextHorizontal = isFocused ? 10 : 12;
+  const inputFocusPaddingTextVertical = isFocused ? 6 : 8;
+  const inputFocusPaddingTextHight = isFocused ? 6 : 2;
+  const paddingVertical: number = inputFocusPadding;
+  const paddingHorizontal: number = inputFocusPadding;
+
+  const onFocusChange = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
+    if (!isDisabled && isFocusable) {
+      if (onFocus) {
+        onFocus(e);
+      }
       setIsFocused(true);
     }
   };
@@ -46,7 +71,7 @@ const InputBase = ({
     onBlur?.();
   };
 
-  const determineColor = (icon?:boolean) => {
+  const determineColor = (icon?: boolean) => {
     if (icon) {
       return iconColorStyle();
     }
@@ -70,7 +95,7 @@ const InputBase = ({
     return PRIMARY_100;
   };
 
-   const iconColorStyle = (): ColorValue => {
+  const iconColorStyle = (): ColorValue => {
     if (isDisabled) {
       return NEUTRAL_500;
     }
@@ -83,7 +108,6 @@ const InputBase = ({
     }
     return PRIMARY_100;
   };
-
 
   const textInputStyle = [styles.textInput, { color: textColorStyle() }];
 
@@ -108,11 +132,11 @@ const InputBase = ({
     }
   };
 
-  const determineIconStyles = (icon: any) => {
+  const determineIconStyles = (icon: any, disable?: boolean) => {
     if (!icon) return null;
     const { style = {}, ...otherIconProps } = icon.props;
     return React.cloneElement(icon, {
-      fill: determineColor(true),
+      fill: disable ? NEUTRAL_500 : determineColor(true),
       style: {
         ...style,
         height: style.height || styles.icon.height,
@@ -120,6 +144,46 @@ const InputBase = ({
       },
       ...otherIconProps,
     });
+  };
+
+  const alignIcons = (): 'center' | 'flex-end' => {
+    if (currentLines > 2 && multiline) {
+      return 'flex-end';
+    }
+    return 'center';
+  };
+  const handleContentSizeChange = (event: any) => {
+    const { height } = event.nativeEvent.contentSize;
+    const lineHeight = styles.textInput.lineHeight;
+    const newLineCount = Math.floor(height / lineHeight);
+    if (newLineCount > numberOfLines) {
+      return;
+    }
+    setCurrentLines(newLineCount);
+    if (newLineCount > 1) {
+      setInputHeight(lineHeight * newLineCount);
+    }
+  };
+
+  const addPaddingTop = () => {
+    if (multiline) return paddingTopTextInputMultiline - inputFocusPadding;
+  };
+
+  const addPaddingHorizontalTextInput = () => {
+    if (!icon) {
+      return inputFocusPaddingTextHorizontal;
+    }
+    return paddingHorizontalTextInput;
+  };
+
+  const handleOnPress = () => {
+    if (onPress && !isDisabled) {
+      onPress();
+    }
+  };
+
+  const determineFocusBackgroundColor = (): ColorValue => {
+    return isFocused ? determineColor() : 'transparent';
   };
 
   return (
@@ -133,67 +197,103 @@ const InputBase = ({
         </Text>
       )}
       <View
+        ref={refInputContainer}
         style={[
           styles.container,
-          { borderColor: determineColor() },
           {
             paddingHorizontal,
             paddingVertical,
-            borderWidth,
+            borderColor: determineColor(),
+            backgroundColor: determineFocusBackgroundColor(),
+            height: inputHeight,
+            maxHeight: inputHeight,
+            ...styleContainer,
           },
         ]}>
-        {!!icon && (
-          <View style={styles.iconContainer}>
-            {React.cloneElement(icon, {
-              style: styles.icon,
-              fill: determineColor(true),
-            })}
-          </View>
-        )}
-        <TouchableOpacity
-          disabled={isDisabled}
-          style={styles.containerInput}
-          onPress={onPress}>
+        <Pressable style={styles.containerInput} onPress={handleOnPress}>
+          {!!icon && (
+            <View
+              style={[
+                styles.iconContainer,
+                {
+                  justifyContent: alignIcons(),
+                  paddingVertical: inputFocusPaddingTextVertical,
+                  paddingLeft: inputFocusPaddingTextHorizontal,
+                },
+              ]}>
+              {React.cloneElement(icon, {
+                style: styles.icon,
+                fill: determineColor(true),
+              })}
+            </View>
+          )}
           <TextInput
+            ref={refInput}
             value={value}
-            onPressIn={onPress}
             onChangeText={handleChange}
             placeholder={placeholder}
             editable={isEditable}
             onFocus={onFocusChange}
             onBlur={onBlurChange}
             onSubmitEditing={onSubmitEditing}
-            style={[textInputStyle, onPress && cursorPointer()]}
             keyboardType={keyboardType}
             secureTextEntry={secureTextEntry}
+            onKeyPress={onKeyPress}
+            multiline={multiline}
+            numberOfLines={numberOfLines}
+            onContentSizeChange={handleContentSizeChange}
+            style={[
+              textInputStyle,
+              onPress && cursorPointer(),
+              {
+                height: inputHeight - inputFocusPaddingTextHight,
+                maxHeight: inputHeight - inputFocusPaddingTextHight,
+                paddingHorizontal: addPaddingHorizontalTextInput(),
+                paddingTop: addPaddingTop(),
+              },
+            ]}
           />
-        </TouchableOpacity>
-        {!!rightButtons && (
-          <GridContainer
-            gapHorizontal={12}
-            stylesContainer={styles.gridContainer}
-            components={rightButtons.map((ButtonComponent: any, index) => {
-              const { iconLeft, iconRight, ...otherProps } =
-                ButtonComponent.props;
-              const modifiedProps = { ...otherProps };
-
-              modifiedProps.paddingVertical = modifiedProps?.paddingVertical || 0;
-              modifiedProps.paddingHorizontal = modifiedProps?.paddingHorizontal || 0;
-              modifiedProps.iconLeft = determineIconStyles(iconLeft);
-              modifiedProps.iconRight = determineIconStyles(iconRight);
-              modifiedProps.text = ''
-
-              return (
-                <ButtonComponent.type
-                  {...modifiedProps}
-                  key={index}
-                  disabled={isDisabled}
-                  typeStyle={'white'}
-                />
-              );
-            })}
-          />
-        )}
+          {!!rightButtons && (
+            <GridContainer
+              gapHorizontal={12}
+              gapVertical={0}
+              stylesContainer={[
+                styles.gridContainer,
+                {
+                  alignItems: alignIcons(),
+                  paddingVertical: inputFocusPaddingTextVertical,
+                  paddingRight: inputFocusPaddingTextHorizontal,
+                },
+              ]}
+              components={rightButtons.map((ButtonComponent: any, index) => {
+                const { iconLeft, iconRight, ...otherProps } =
+                  ButtonComponent.props;
+                const modifiedProps = { ...otherProps };
+                modifiedProps.paddingVertical =
+                  modifiedProps?.paddingVertical || 6;
+                modifiedProps.paddingHorizontal =
+                  modifiedProps?.paddingHorizontal || 0;
+                modifiedProps.iconLeft = determineIconStyles(
+                  iconLeft,
+                  modifiedProps.disabled || isDisabled,
+                );
+                modifiedProps.iconRight = determineIconStyles(
+                  iconRight,
+                  modifiedProps.disabled || isDisabled,
+                );
+                modifiedProps.text = '';
+                return (
+                  <ButtonComponent.type
+                    {...modifiedProps}
+                    key={index}
+                    disabled={isDisabled || modifiedProps.disabled}
+                    typeStyle={'white'}
+                  />
+                );
+              })}
+            />
+          )}
+        </Pressable>
       </View>
       {!!helperText && (
         <Text

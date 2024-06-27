@@ -1,26 +1,21 @@
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  ReactElement,
-  JSXElementConstructor,
-} from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import {
   View,
   TouchableOpacity,
   Text,
   SafeAreaView,
-  ButtonProps,
+  Dimensions,
+  TextInput,
+  NativeSyntheticEvent,
+  TextInputKeyPressEventData,
 } from 'react-native';
 import InputBase from '../InputBase';
 
 // Import styles
 import { styles } from './FileSearchInput.styles';
-import { NEUTRAL_1000, PRIMARY_100, SUCCESS_600 } from '../../../styles/colors';
+import { NEUTRAL_1000, SUCCESS_600 } from '../../../styles/colors';
 
 // Import icons
-import { CheckCircleIcon } from '../../../assets/images/icons/CheckCircleIcon';
-import { DeleteIcon } from '../../../assets/images/icons/DeleteIcon';
 import { FileIcon } from '../../../assets/images/icons/FileIcon';
 
 // Import types
@@ -29,10 +24,13 @@ import { Button } from '../../button';
 import { SkeletonItem } from '../../secondaryComponents';
 import { isWebPlatform } from '../../../helpers/functions_utils';
 import {
+  CheckCircleFillIcon,
   CornerDownRightIcon,
   PaperclipIcon,
+  XIcon,
 } from '../../../assets/images/icons';
-import { RightButtons, SvgImageProps } from '../InputBase.types';
+import { RightButtons } from '../InputBase.types';
+import { KEY_ENTER, KEY_SHIFT } from './FileSearchInput.constants';
 
 // Import DocumentPicker for mobile platforms only
 let DocumentPicker: any = null;
@@ -50,6 +48,9 @@ if (!isWebPlatform()) {
   }
 }
 
+const POSITION_DOWN_FILE = 55;
+const POSITION_UP_FILE = 60;
+
 const FileSearchInput = ({
   value,
   placeholder,
@@ -61,6 +62,8 @@ const FileSearchInput = ({
   uploadConfig,
   maxFileSize = 512,
   rightButtons,
+  isAttachDisable,
+  isSendDisable,
   ...inputBaseProps
 }: FileSearchInputProps) => {
   // States
@@ -72,7 +75,15 @@ const FileSearchInput = ({
     'none' | 'loaded' | 'canceled' | 'error'
   >('none');
 
+  const [modalPosition, setModalPosition] = useState<{
+    top: number;
+    left: number;
+    width: number;
+  }>({ top: 0, left: 0, width: 0 });
+  const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
+
   // References
+  const refInput = useRef<TextInput>(null);
   const dropAreaRef = useRef(null);
   const fileInputRef = useRef<any>(null);
   const abortControllerRef = useRef<any>(null);
@@ -197,27 +208,23 @@ const FileSearchInput = ({
       }
     }
   };
-  
+
   // Define the right buttons for the input
 
   const UploadButton = (
     <Button
-      paddingVertical={7}
       typeStyle="white"
       onPress={handleFileButtonClick}
-      iconLeft={
-        <PaperclipIcon />
-      }
+      disabled={isAttachDisable}
+      iconLeft={<PaperclipIcon style={styles.fileIcon} />}
     />
   );
   const SendButton = (
     <Button
-      paddingVertical={7}
       typeStyle="white"
       onPress={handleSendMessage}
-      iconLeft={
-        <CornerDownRightIcon />
-      }
+      disabled={isSendDisable}
+      iconLeft={<CornerDownRightIcon style={styles.fileIcon} />}
     />
   );
 
@@ -226,7 +233,7 @@ const FileSearchInput = ({
     buttons = buttons ? [...buttons, UploadButton] : [UploadButton];
   }
 
-  if (!!onSubmit){
+  if (!!onSubmit) {
     buttons = buttons ? [...buttons, SendButton] : [SendButton];
   }
 
@@ -311,49 +318,47 @@ const FileSearchInput = ({
     };
   }, []);
 
+  const adjustDropdownPosition = useCallback(() => {
+    if (refInput.current) {
+      refInput.current.measure((x, y, width, height, pageX, pageY) => {
+        setModalPosition({
+          top: pageY >= POSITION_UP_FILE ? -POSITION_UP_FILE : POSITION_DOWN_FILE,
+          left: pageX,
+          width: width,
+        });
+      });
+    }
+  }, [windowHeight]);
+  useEffect(() => {
+    adjustDropdownPosition();
+    if (isWebPlatform()) {
+      const handleScroll = () => {
+        adjustDropdownPosition();
+      };
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
+  }, [windowHeight, windowWidth, adjustDropdownPosition]);
+
+  const onKeyPressHandler = (
+    e:
+      | React.KeyboardEvent<HTMLInputElement>
+      | NativeSyntheticEvent<TextInputKeyPressEventData>,
+  ) => {
+    if (
+      KEY_SHIFT in e &&
+      e.nativeEvent.key === KEY_ENTER &&
+      !e.nativeEvent.shiftKey
+    ) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
   return (
     <SafeAreaView style={styles.container}>
-      {/* Display when file is selected */}
-      {file && isFileValid && fileStatus !== 'canceled' && (
-        <View style={styles.fileNameContainer}>
-          <View style={styles.fileNameLoadedLeftContainer}>
-            <FileIcon style={styles.fileIcon} />
-
-            <View style={styles.fileContent}>
-              <Text
-                style={styles.fileNameText}
-                numberOfLines={1}
-                ellipsizeMode="tail">
-                {file.name}
-              </Text>
-              {progress > 0 && (
-                <View style={styles.progressBarContainer}>
-                  <SkeletonItem
-                    width={`${progress}%`}
-                    height={8}
-                    color={NEUTRAL_1000}
-                    borderRadius={16}
-                  />
-                </View>
-              )}
-            </View>
-          </View>
-
-          <View style={styles.fileNameRightContainer}>
-            {fileStatus === 'loaded' && (
-              <CheckCircleIcon
-                style={styles.checkCircleIcon}
-                fill={SUCCESS_600}
-              />
-            )}
-            <TouchableOpacity onPress={handleCancelFile}>
-              <DeleteIcon style={styles.deleteIcon} />
-            </TouchableOpacity>
-          </View>
-        </View>
-      )}
-      {/* Input base with right buttons */}
-      <View>
+      <>
         {isWebPlatform() ? (
           <div
             ref={dropAreaRef}
@@ -363,10 +368,13 @@ const FileSearchInput = ({
             onDragLeave={handleDragOver}>
             <InputBase
               {...inputBaseProps}
+              refInputContainer={refInput}
               value={value}
               onChangeText={onChangeText}
               rightButtons={buttons}
+              onSubmitEditing={handleSendMessage}
               placeholder={placeholder}
+              onKeyPress={onKeyPressHandler}
             />
             <input
               type="file"
@@ -384,7 +392,58 @@ const FileSearchInput = ({
             placeholder={placeholder}
           />
         )}
-      </View>
+      </>
+      {file && isFileValid && fileStatus !== 'canceled' && (
+        <View
+          onStartShouldSetResponder={() => true}
+          style={[
+            styles.fileContainer,
+            {
+              top: modalPosition.top,
+              width: modalPosition.width,
+            },
+          ]}>
+          <View style={styles.fileNameContainer}>
+            <View style={styles.fileNameLoadedLeftContainer}>
+              <View style={styles.fileIconContainer}>
+                <FileIcon style={styles.fileIcon} />
+              </View>
+              <View style={styles.fileContent}>
+                <Text
+                  style={styles.fileNameText}
+                  numberOfLines={1}
+                  ellipsizeMode="tail">
+                  {file?.name}
+                </Text>
+                {progress > 0 && (
+                  <View style={styles.progressBarContainer}>
+                    <SkeletonItem
+                      width={`${progress}%`}
+                      height={8}
+                      color={NEUTRAL_1000}
+                      borderRadius={16}
+                    />
+                  </View>
+                )}
+              </View>
+            </View>
+
+            <View style={styles.fileNameRightContainer}>
+              {fileStatus === 'loaded' && (
+                <CheckCircleFillIcon
+                  style={styles.checkCircleIcon}
+                  fill={SUCCESS_600}
+                />
+              )}
+              <TouchableOpacity
+                style={styles.containerXicon}
+                onPress={handleCancelFile}>
+                <XIcon style={styles.deleteIcon} />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      )}
     </SafeAreaView>
   );
 };

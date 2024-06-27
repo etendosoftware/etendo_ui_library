@@ -1,12 +1,12 @@
-import { ReactNode } from 'react';
-import { DimensionValue, StyleProp, ViewStyle } from 'react-native';
+import { DimensionValue, ViewStyle} from 'react-native';
+import { RightButtons } from '../../inputBase/InputBase.types';
+import { ISearchInput } from '../../inputBase/search-input/SearchInput.types';
 
-export interface ISearchContainer {
-  buttons: ReactNode[];
-  height?: number;
-  onSubmit: (...params: any[]) => void;
-  placeholder?: string;
-  style?: StyleProp<ViewStyle>;
-  value?: string;
+export interface ISearchContainer extends Omit<ISearchInput, 'styleContainer'>{
+  buttons?: RightButtons;
   widthSearchInput?: DimensionValue;
+  styleContainer?: ViewStyle;
+  styleGridContainer?: ViewStyle;
+  gridGapHorizontal?: number;
+  gridGapVertical?: number;
 }

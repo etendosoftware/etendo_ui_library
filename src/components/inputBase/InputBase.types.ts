@@ -1,9 +1,14 @@
-import { ReactElement } from 'react';
+import { ReactElement, RefObject } from 'react';
 import {
   ColorValue,
   ImageStyle,
   NativeSyntheticEvent,
+  TextInput,
+  TextInputFocusEventData,
+  TextInputKeyPressEventData,
   TextInputSubmitEditingEventData,
+  View,
+  ViewStyle,
 } from 'react-native';
 import { ButtonProps } from '../button/Button.types';
 
@@ -24,24 +29,28 @@ export interface IInputBase {
   onSubmitEditing?: (
     event: NativeSyntheticEvent<TextInputSubmitEditingEventData>,
   ) => void;
+  onKeyPress?: (e: NativeSyntheticEvent<TextInputKeyPressEventData>) => void;
   placeholder?: string;
   rightButtons?: RightButtons;
   title?: string;
   value?: string;
   onPress?: () => void;
+  onFocus?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   secureTextEntry?: boolean;
   keyboardType?:
     | 'default'
     | 'numeric'
     | 'email-address'
-    | 'ascii-capable'
-    | 'numbers-and-punctuation'
     | 'url'
     | 'number-pad'
     | 'phone-pad'
-    | 'name-phone-pad'
     | 'decimal-pad'
-    | 'twitter'
     | 'web-search'
     | 'visible-password';
+  styleContainer?: ViewStyle;
+  isFocusable?: boolean;
+  refInputContainer?: RefObject<View>;
+  refInput?: RefObject<TextInput>;
+  multiline?: boolean;
+  numberOfLines?: number;
 }
