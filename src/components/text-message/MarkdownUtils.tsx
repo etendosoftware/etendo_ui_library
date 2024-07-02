@@ -60,13 +60,29 @@ const ImageComponent = ({ src, alt, style }: any) => {
     </a>
   );
 };
+const addLineBreaks = (text:string) => {
+  const regex = /(```[\s\S]*?```|`[^`\n]*`)/g;
+  let match;
+  let parts = [];
+  let lastIndex = 0;
+
+  while ((match = regex.exec(text)) !== null) {
+    const nonCodePart = text.slice(lastIndex, match.index).replace(/\n/g, "&nbsp; \n");
+    parts.push(nonCodePart);
+    parts.push(match[0]);
+    lastIndex = regex.lastIndex;
+  }
+
+  parts.push(text.slice(lastIndex).replace(/\n/g, "&nbsp; \n"));
+  return parts.join('');
+};
 
 // Component to render markdown text
 export const RenderMarkdownText: React.FC<TextMessageProps> = ({
   text,
   type = 'left-user',
 }) => {
-  const addLineBreakMarkdown = text.replace(/\n/gi, "&nbsp; \n");
+  const formattedText = addLineBreaks(text);
   return (
     <ScrollView horizontal={false} style={{ flex: 1 }}>
       <ReactMarkdown
@@ -77,7 +93,7 @@ export const RenderMarkdownText: React.FC<TextMessageProps> = ({
           p: ({ node, ...props }) => <Paragraph {...props} type={type} />,
           img: ImageComponent,
         }}>
-        {addLineBreakMarkdown}
+        {formattedText}
       </ReactMarkdown>
     </ScrollView>
   );
