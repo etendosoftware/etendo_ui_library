@@ -8,7 +8,10 @@ pipeline {
         NPM_TOKEN           = credentials("npmjs-access-token")
         EMAIL_ADDRESS       = credentials("email_builds")
         REPO_URL            = "git@github.com:etendosoftware/etendo_ui_library.git"
+        URL_REPO            = "https://github.com/etendosoftware/etendo_ui_library"
         REPO_NAME           = "etendo_ui_library"
+        GITHUB_USER         = "etendobot"
+        GITHUB_EMAIL        = credentials("email_noreply")
         ACCESS_TOKEN        = credentials("access_token_github")
         OWNER_REPOSITORY    = "etendosoftware"
         CONTEXT_BUILD       = "Etendo UI Library Test"
@@ -19,7 +22,7 @@ pipeline {
 
         COMMIT_STATUS_PENDING  = "pending"
         COMMIT_STATUS_SUCCESS  = "success"
-        COMMIT_STATUS_FAILURE  = "failure"   
+        COMMIT_STATUS_FAILURE  = "failure"
 
     }
 
@@ -111,7 +114,7 @@ spec:
                                     echo "....Build Succesful...."
                                     def rootDir = pwd()
                                     def infoCommit = load "${rootDir}/pipelines/utils/infoCommits.groovy"
-                                    env.URL_ORG_GITHUB = "${REPO_URL}/${OWNER_REPOSITORY}"
+                                    env.URL_ORG_GITHUB = "${URL_REPO}"
                                     def commitInfoTemplate = infoCommit.generateCommitInfo(env.URL_ORG_GITHUB, null, REPO_NAME, true, null)
                                     env.COMMIT_INFO_TEMPLATE = "${commitInfoTemplate}"
                                     echo "${env.COMMIT_INFO_TEMPLATE}"
@@ -176,18 +179,16 @@ spec:
                         dir("etendo_ui_library") {
                             try {
                                 withCredentials([sshUserPrivateKey(credentialsId: 'my-credentials', keyFileVariable: 'keyfile')]) {
-                                    withCredentials([usernamePassword(credentialsId: "etendo_bot_credentials", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                                        sh """
-                                        git config user.name "Etendo Bot"
-                                        git config user.email "$GIT_USERNAME"
-                                        """
-                                        echo "....Publishing Next Version...."
-                                        sh "git checkout $GIT_BRANCH"
-                                        sh 'yarn config set version-git-message "Upgrade version to %s :zap:"'
-                                        sh 'yarn version --patch'
-                                        sh "npm publish --tag next --access public"
-                                        sh 'GIT_SSH_COMMAND=\"ssh -i ${keyfile} -o \"UserKnownHostsFile=/dev/null\" -o \"StrictHostKeyChecking=no\"\" git push $GIT_URL'
-                                    }
+                                    sh """
+                                    git config user.name ${GITHUB_USER}
+                                    git config user.email ${GITHUB_EMAIL}
+                                    """
+                                    echo "....Publishing Next Version...."
+                                    sh "git checkout $GIT_BRANCH"
+                                    sh 'yarn config set version-git-message "Upgrade version to %s :zap:"'
+                                    sh 'yarn version --patch'
+                                    sh "npm publish --tag next --access public"
+                                    sh 'GIT_SSH_COMMAND=\"ssh -i ${keyfile} -o \"UserKnownHostsFile=/dev/null\" -o \"StrictHostKeyChecking=no\"\" git push $GIT_URL'
                                 }
                             } catch (Exception e) {
                               echo "Exception occurred: " + e.toString()
