@@ -5,30 +5,36 @@ pipeline {
     }
 
     environment {
-        NPM_TOKEN           = credentials('npmjs-access-token')
-        EMAIL_ADDRESS       = credentials('email_builds')
-        URL_REPO            = "https://bitbucket.org/koodu_software/etendo_ui_library"
-        URL_REPO_GIT        = "git@bitbucket.org:koodu_software/etendo_ui_library.git"
-        COMMIT_AUTHOR_NAME  = sh(returnStdout: true, script: "git log -1 --pretty=format:'%an'").trim()
-        COMMIT_AUTHOR_EMAIL = sh(returnStdout: true, script: "git log -1 --pretty=format:'%ae'").trim()
+        NPM_TOKEN           = credentials("npmjs-access-token")
+        EMAIL_ADDRESS       = credentials("email_builds")
+        REPO_URL            = "git@github.com:etendosoftware/etendo_ui_library.git"
+        REPO_NAME           = "etendo_ui_library"
+        ACCESS_TOKEN        = credentials("access_token_github")
+        OWNER_REPOSITORY    = "etendosoftware"
+        CONTEXT_BUILD       = "Etendo UI Library Test"
+
         SUCCESS             = "SUCCESS"
         FAILED              = "FAILED"
         UNSTABLE            = "UNSTABLE"
+
+        COMMIT_STATUS_PENDING  = "pending"
+        COMMIT_STATUS_SUCCESS  = "success"
+        COMMIT_STATUS_FAILURE  = "failure"   
 
     }
 
     agent {
         kubernetes {
-            inheritFrom 'jenkins-node-library'
+            inheritFrom 'jenkins-ui-library'
             defaultContainer 'jnlp'
             yaml """
 apiVersion: v1
 kind: Pod
 metadata:
-  name: jenkins-node-library
+  name: jenkins-ui-library
   namespace: jenkins
   labels:
-    app.kubernetes.io/name: jenkins-node-library
+    app.kubernetes.io/name: jenkins-ui-library
 spec:
   volumes:
     - name: rsa-keys
@@ -89,9 +95,11 @@ spec:
                     script {
                         try {
                             env.STATUSBUILD = "1"
+                            sh "./pipelines/utils/build-update.sh ${REPO_NAME} ${COMMIT_STATUS_PENDING} \"Starting Build\" ${ACCESS_TOKEN} ${GIT_COMMIT} ${BUILD_URL} \"${CONTEXT_BUILD}\""
                             withCredentials([sshUserPrivateKey(credentialsId: 'my-credentials', keyFileVariable: 'keyfile')]) {
-                                sh 'GIT_SSH_COMMAND=\"ssh -i ${keyfile} -o \"UserKnownHostsFile=/dev/null\" -o \"StrictHostKeyChecking=no\"\" git clone --branch ${GIT_BRANCH} ${URL_REPO_GIT} etendo_ui_library'
+                                sh 'GIT_SSH_COMMAND=\"ssh -i ${keyfile} -o \"UserKnownHostsFile=/dev/null\" -o \"StrictHostKeyChecking=no\"\" git clone ${REPO_URL} etendo_ui_library'
                                 dir("etendo_ui_library") {
+                                    sh "git checkout ${GIT_COMMIT}"
                                     echo "....Building Environment...."
                                     sh "curl -sL https://deb.nodesource.com/setup_16.x | bash -"
                                     sh "apt-get install -y nodejs"
@@ -101,6 +109,13 @@ spec:
                                     sh 'yarn install'
                                     sh 'yarn build'
                                     echo "....Build Succesful...."
+                                    def rootDir = pwd()
+                                    def infoCommit = load "${rootDir}/pipelines/utils/infoCommits.groovy"
+                                    env.URL_ORG_GITHUB = "${REPO_URL}/${OWNER_REPOSITORY}"
+                                    def commitInfoTemplate = infoCommit.generateCommitInfo(env.URL_ORG_GITHUB, null, REPO_NAME, true, null)
+                                    env.COMMIT_INFO_TEMPLATE = "${commitInfoTemplate}"
+                                    echo "${env.COMMIT_INFO_TEMPLATE}"
+            
                                 }
                             }
                         } catch (Exception e) {
@@ -127,6 +142,7 @@ spec:
                     script {
                         dir("etendo_ui_library") {
                             try {
+                                sh "./pipelines/utils/build-update.sh ${REPO_NAME} ${COMMIT_STATUS_PENDING} \"Running Tests\" ${ACCESS_TOKEN} ${GIT_COMMIT} ${BUILD_URL} \"${CONTEXT_BUILD}\""
                                 env.STATUSTEST = "1"
                                 echo "....Running Tests...."
                                 sh "yarn test"
@@ -135,7 +151,7 @@ spec:
                                 echo "Exception occurred: " + e.toString()
                                 echo "....FAILED Tests...."
                                 currentBuild.result = UNSTABLE
-                                unstable('TEST FAILED')
+                                unstable('TESTS FAILED')
                                 env.STATUSTEST = "0"
                             }
                         }
@@ -160,7 +176,7 @@ spec:
                         dir("etendo_ui_library") {
                             try {
                                 withCredentials([sshUserPrivateKey(credentialsId: 'my-credentials', keyFileVariable: 'keyfile')]) {
-                                    withCredentials([usernamePassword(credentialsId: "etendo-bot-bitbucket", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                                    withCredentials([usernamePassword(credentialsId: "etendo_bot_credentials", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                                         sh """
                                         git config user.name "Etendo Bot"
                                         git config user.email "$GIT_USERNAME"
@@ -186,61 +202,104 @@ spec:
             }
         }
     }
-    
     post {
+        success {
+            script {
+                sh "./pipelines/utils/build-update.sh ${REPO_NAME} ${COMMIT_STATUS_SUCCESS} \"Tests Successful\" ${ACCESS_TOKEN} ${GIT_COMMIT} ${BUILD_URL} \"${CONTEXT_BUILD}\""
+            }
+        }
         fixed {
             mail to: EMAIL_ADDRESS,
-            subject: "✅ FIXED - ${currentBuild.fullDisplayName}",
+            subject: "✅ Errors Fixed on ${currentBuild.fullDisplayName} on ${GIT_BRANCH} branch",
+            mimeType: "text/html",
             body: """
-${new Date()}
-__________________________________________________________
+                <html>
+                    <head>
+                        <style>
+                            body { font-family: 'Arial', sans-serif; }
+                            .header { font-size: 16px; font-weight: bold; color: #333; }
+                        </style>
+                    </head>
+                    <body>
+                        <p><em>${new Date()}</em></p>
+                        <p>__________________________________________________________</p>
 
-✅ ERRORS FIXED ✅
+                        <h2 class="header">✅ ERRORS FIXED ✅</h2>
 
-Commit: ${URL_REPO}/commits/${env.GIT_COMMIT}
-Author: ${COMMIT_AUTHOR_NAME} <${COMMIT_AUTHOR_EMAIL}>
-            
-The problems found in the previous run/s have been fixed!  💪
-Check out the output in the following link: 
-${env.BUILD_URL}
-__________________________________________________________
+                        ${env.COMMIT_INFO_TEMPLATE}
+
+                        <p>The problems found in the previous run/s have been fixed! 💪<br>
+                        Check out the output in the following link: ${env.BUILD_URL}</p>
+
+                        <p class="footer"><em>Best regards,<br>#EtendoBot 🤖</em></p>
+                        <p>__________________________________________________________</p>
+                    </body>
+                </html>
             """
         }
         unstable {
+            script {
+                sh "./pipelines/utils/build-update.sh ${REPO_NAME} ${COMMIT_STATUS_FAILURE} \"Tests Failed\" ${ACCESS_TOKEN} ${GIT_COMMIT} ${BUILD_URL} \"${CONTEXT_BUILD}\""
+            }
             mail to: EMAIL_ADDRESS,
-            subject: "🚨 TESTS FAILED - ${currentBuild.fullDisplayName}",
+            subject: "🚨 Failed Tests of '${REPO_NAME}' on '${GIT_BRANCH}' branch",
+            mimeType: "text/html",
             body: """
-${new Date()}
-__________________________________________________________
+                <html>
+                    <head>
+                        <style>
+                            body { font-family: 'Arial', sans-serif; }
+                            .header { font-size: 16px; font-weight: bold; color: #333; }
+                        </style>
+                    </head>
+                    <body>
+                        <p><em>${new Date()}</em></p>
+                        <p>__________________________________________________________</p>
 
-🚨 BUILD UNSTABLE 🚨
+                        <h2 class="header">🚨 BUILD UNSTABLE 🚨</h2>
 
-Commit: ${URL_REPO}/commits/${env.GIT_COMMIT}
-Author: ${COMMIT_AUTHOR_NAME} <${COMMIT_AUTHOR_EMAIL}>
-            
-Some etendo-ui-library tests have failed!
-Check out the output in the following link: 
-${env.BUILD_URL}
-__________________________________________________________
+                        ${env.COMMIT_INFO_TEMPLATE}
+
+                        <p>Some tests have failed.<br>
+                        Check out the output in the following link: ${env.BUILD_URL}</p>
+
+                        <p class="footer"><em>Best regards,<br>#EtendoBot 🤖</em></p>
+                        <p>__________________________________________________________</p>
+                    </body>
+                </html>
             """
         }
         failure {
+            script {
+                sh "./pipelines/utils/build-update.sh ${REPO_NAME} ${COMMIT_STATUS_FAILURE} \"Build Failed\" ${ACCESS_TOKEN} ${GIT_COMMIT} ${BUILD_URL} \"${CONTEXT_BUILD}\""
+            }
             mail to: EMAIL_ADDRESS,
-            subject: "🚫 ERROR - ${currentBuild.fullDisplayName}",
-            body:  """
-${new Date()}
-__________________________________________________________
+            subject: "🚫 Build Failed in ${currentBuild.fullDisplayName} on '${GIT_BRANCH}' branch",
+            mimeType: "text/html",
+            body: """
+                <html>
+                    <head>
+                        <style>
+                            body { font-family: 'Arial', sans-serif; }
+                            .header { font-size: 16px; font-weight: bold; color: #333; }
+                        </style>
+                    </head>
+                    <body>
+                        <p><em>${new Date()}</em></p>
+                        <p>__________________________________________________________</p>
 
-🚫 ERROR 🚫
+                        <h2 class="header">🚫 BUILD FAILED 🚫</h2>
 
-Commit: ${URL_REPO}/commits/${env.GIT_COMMIT}
-Author: ${COMMIT_AUTHOR_NAME} <${COMMIT_AUTHOR_EMAIL}>
+                        ${env.COMMIT_INFO_TEMPLATE}
 
-The build or publication has failed unexpectedly.
-To more information on the failing run visit: ${env.BUILD_URL}
-__________________________________________________________
+                        <p>The build has failed unexpectedly. This failure isn't likely to be caused by failing tests.<br>
+                        For more information on the failing run visit: ${env.BUILD_URL}</p>
+
+                        <p class="footer"><em>Best regards,<br>#EtendoBot 🤖</em></p>
+                        <p>__________________________________________________________</p>
+                    </body>
+                </html>
             """
         }
     }
-    
 }
