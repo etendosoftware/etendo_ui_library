@@ -7,8 +7,8 @@ pipeline {
     environment {
         NPM_TOKEN           = credentials("npmjs-access-token")
         EMAIL_ADDRESS       = credentials("email_builds")
-        REPO_URL            = "git@github.com:etendosoftware/etendo_ui_library.git"
-        URL_REPO            = "https://github.com/etendosoftware/etendo_ui_library"
+        REPO_URL_SSH            = "git@github.com:etendosoftware/etendo_ui_library.git"
+        REPO_URL            = "https://github.com/etendosoftware/etendo_ui_library"
         REPO_NAME           = "etendo_ui_library"
         GITHUB_USER         = "etendobot"
         GITHUB_EMAIL        = credentials("email_noreply")
@@ -100,7 +100,7 @@ spec:
                             env.STATUSBUILD = "1"
                             sh "./pipelines/utils/build-update.sh ${REPO_NAME} ${COMMIT_STATUS_PENDING} \"Starting Build\" ${ACCESS_TOKEN} ${GIT_COMMIT} ${BUILD_URL} \"${CONTEXT_BUILD}\""
                             withCredentials([sshUserPrivateKey(credentialsId: 'my-credentials', keyFileVariable: 'keyfile')]) {
-                                sh 'GIT_SSH_COMMAND=\"ssh -i ${keyfile} -o \"UserKnownHostsFile=/dev/null\" -o \"StrictHostKeyChecking=no\"\" git clone ${REPO_URL} etendo_ui_library'
+                                sh 'GIT_SSH_COMMAND=\"ssh -i ${keyfile} -o \"UserKnownHostsFile=/dev/null\" -o \"StrictHostKeyChecking=no\"\" git clone ${REPO_URL_SSH} etendo_ui_library'
                                 dir("etendo_ui_library") {
                                     sh "git checkout ${GIT_COMMIT}"
                                     echo "....Building Environment...."
@@ -114,8 +114,7 @@ spec:
                                     echo "....Build Succesful...."
                                     def rootDir = pwd()
                                     def infoCommit = load "${rootDir}/pipelines/utils/infoCommits.groovy"
-                                    env.URL_ORG_GITHUB = "${URL_REPO}"
-                                    def commitInfoTemplate = infoCommit.generateCommitInfo(env.URL_ORG_GITHUB, null, REPO_NAME, true, null)
+                                    def commitInfoTemplate = infoCommit.generateCommitInfo(REPO_URL, null, REPO_NAME, true, null)
                                     env.COMMIT_INFO_TEMPLATE = "${commitInfoTemplate}"
                                     echo "${env.COMMIT_INFO_TEMPLATE}"
             
