@@ -7,7 +7,7 @@ pipeline {
     environment {
         NPM_TOKEN           = credentials("npmjs-access-token")
         EMAIL_ADDRESS       = credentials("email_builds")
-        REPO_URL_SSH            = "git@github.com:etendosoftware/etendo_ui_library.git"
+        REPO_URL_SSH        = "git@github.com:etendosoftware/etendo_ui_library.git"
         REPO_URL            = "https://github.com/etendosoftware/etendo_ui_library"
         REPO_NAME           = "etendo_ui_library"
         GITHUB_USER         = "etendobot"
