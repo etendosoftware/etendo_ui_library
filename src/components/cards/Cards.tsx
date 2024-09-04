@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   View,
   Text,
@@ -8,13 +8,13 @@ import {
   NativeScrollEvent,
   LayoutChangeEvent,
 } from 'react-native';
-import { styles } from './Cards.style';
+import {styles} from './Cards.style';
 import SkeletonCard from './components/card/components/skeletonCard/SkeletonCard';
 import SwitchStateCards from './components/card/components/switchStateCards/SwitchStateCards';
-import { Button } from '../button';
-import { PlusIcon, TrashIcon } from '../../assets/images/icons';
-import { CardsProps } from './Cards.types';
-import { Modal } from '../modal';
+import {Button} from '../button';
+import {PlusIcon, TrashIcon} from '../../assets/images/icons';
+import {CardsProps} from './Cards.types';
+import {Modal} from '../modal';
 import CARDS from './Cards.constants';
 const {
   TITLE,
@@ -24,8 +24,6 @@ const {
   SELECTED_LABEL,
   CANCEL_SELECTED_LABEL,
 } = CARDS;
-
-const BUFFER = 5;
 
 const Cards = ({
   data,
@@ -48,6 +46,8 @@ const Cards = ({
   cancelSelectionLabel = CANCEL_SELECTED_LABEL,
   isSelectionMode = false,
   isResetFetching = true,
+  maxTitles,
+  maxRows
 }: CardsProps) => {
   const [containerHeight, setContainerHeight] = useState(0);
   const [selectionMode, setSelectionMode] = useState(false);
@@ -60,6 +60,7 @@ const Cards = ({
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isInitial, setIsInitial] = useState<boolean>(isResetFetching);
   const [isLoadMoreData, setIsLoadMoreData] = useState<boolean>(true);
+  const [updating, setUpdating] = useState(false);
 
   const scrollViewRef = useRef<ScrollView>(null);
 
@@ -79,9 +80,18 @@ const Cards = ({
   }, [data]);
 
   useEffect(() => {
-    if (isLoading && dataList.length) {
-      scrollViewRef.current?.scrollToEnd({ animated: true });
+    if (updating) {
+      setTimeout(() => {
+        setUpdating(false);
+      }, 100);
     }
+  }, [updating]);
+
+  useEffect(() => {
+    if (isLoading && dataList.length && !updating) {
+      scrollViewRef.current?.scrollToEnd({animated: true});
+    }
+    console.log(isLoading)
   }, [isLoading]);
 
   const handleLoadMore = async (
@@ -99,7 +109,6 @@ const Cards = ({
       setSelectedItem(item);
       setSelectionMode(true);
       const selectedItemsSet = new Set(selectedItems);
-      const dataSet = new Set(dataList);
       if (selectedItemsSet.size > 0) {
         selectedItemsSet.clear();
       } else {
@@ -119,19 +128,17 @@ const Cards = ({
     contentOffset,
     contentSize,
   }: NativeScrollEvent) => {
-    return (
-      layoutMeasurement.height + contentOffset.y >= contentSize.height - BUFFER
-    );
+    return layoutMeasurement.height + contentOffset.y >= contentSize.height;
   };
 
   const onScroll = async (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    if (isAtEndOfScroll(event.nativeEvent)) {
+    if (isAtEndOfScroll(event.nativeEvent) && !isLoading && !updating) {
       await handleLoadMore(currentPage, dataList, isLoadMoreData);
     }
   };
 
   const onLayout = (event: LayoutChangeEvent) => {
-    const { height } = event.nativeEvent.layout;
+    const {height} = event.nativeEvent.layout;
     setContainerHeight(height);
   };
 
@@ -164,6 +171,7 @@ const Cards = ({
         .finally(() => {
           setCurrentPage(currentPage + 1);
           setIsLoading(false);
+          setUpdating(true);
         });
     }
   };
@@ -197,9 +205,9 @@ const Cards = ({
     <View
       onLayout={onLayout}
       style={[
-        { maxHeight: cardsHeight, height: cardsHeight },
+        {maxHeight: cardsHeight, height: cardsHeight},
         styles.container,
-        { backgroundColor },
+        {backgroundColor},
       ]}>
       <View style={styles.selectionModeContainer}>
         {isSelectionMode && selectionMode && (
@@ -250,6 +258,8 @@ const Cards = ({
           onHoldCard={setSelectionMode}
           isSelectionMode={isSelectionMode && selectionMode}
           handleItemsSelected={handleItemsSelected}
+          maxTitles={maxTitles}
+          maxRows={maxRows}
         />
         {!!dataList.length && isLoading && <SkeletonCard />}
       </ScrollView>

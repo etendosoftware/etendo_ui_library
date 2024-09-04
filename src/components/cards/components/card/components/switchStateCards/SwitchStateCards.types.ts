@@ -1,5 +1,5 @@
-import { DimensionValue } from 'react-native';
-import { CardsMetadata } from '../../../../Cards.types';
+import {DimensionValue} from 'react-native';
+import {CardsMetadata} from '../../../../Cards.types';
 
 export interface SwitchStateCardsProps {
   data: Array<any>;
@@ -13,4 +13,6 @@ export interface SwitchStateCardsProps {
   onHoldCard: (...params: any[]) => void;
   handleItemsSelected: (...params: any[]) => void;
   isSelectionMode: boolean;
+  maxRows?: number;
+  maxTitles?: number;
 }
