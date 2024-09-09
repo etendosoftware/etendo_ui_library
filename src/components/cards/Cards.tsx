@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -8,14 +8,14 @@ import {
   NativeScrollEvent,
   LayoutChangeEvent,
 } from 'react-native';
-import {styles} from './Cards.style';
+import { styles } from './Cards.style';
 import SkeletonCard from './components/card/components/skeletonCard/SkeletonCard';
 import SwitchStateCards from './components/card/components/switchStateCards/SwitchStateCards';
-import {Button} from '../button';
-import {PlusIcon, TrashIcon} from '../../assets/images/icons';
-import {CardsProps} from './Cards.types';
-import {Modal} from '../modal';
-import CARDS from './Cards.constants';
+import { Button } from '../button';
+import { PlusIcon, TrashIcon } from '../../assets/images/icons';
+import { CardsProps } from './Cards.types';
+import { Modal } from '../modal';
+import CARDS, { DEFAULT_MAX_ROWS, DEFAULT_MAX_TITLES } from './Cards.constants';
 const {
   TITLE,
   SUBTITLE,
@@ -46,8 +46,8 @@ const Cards = ({
   cancelSelectionLabel = CANCEL_SELECTED_LABEL,
   isSelectionMode = false,
   isResetFetching = true,
-  maxTitles,
-  maxRows
+  maxTitles = DEFAULT_MAX_TITLES,
+  maxRows = DEFAULT_MAX_ROWS,
 }: CardsProps) => {
   const [containerHeight, setContainerHeight] = useState(0);
   const [selectionMode, setSelectionMode] = useState(false);
@@ -89,9 +89,8 @@ const Cards = ({
 
   useEffect(() => {
     if (isLoading && dataList.length && !updating) {
-      scrollViewRef.current?.scrollToEnd({animated: true});
+      scrollViewRef.current?.scrollToEnd({ animated: true });
     }
-    console.log(isLoading)
   }, [isLoading]);
 
   const handleLoadMore = async (
@@ -138,7 +137,7 @@ const Cards = ({
   };
 
   const onLayout = (event: LayoutChangeEvent) => {
-    const {height} = event.nativeEvent.layout;
+    const { height } = event.nativeEvent.layout;
     setContainerHeight(height);
   };
 
@@ -205,9 +204,9 @@ const Cards = ({
     <View
       onLayout={onLayout}
       style={[
-        {maxHeight: cardsHeight, height: cardsHeight},
+        { maxHeight: cardsHeight, height: cardsHeight },
         styles.container,
-        {backgroundColor},
+        { backgroundColor },
       ]}>
       <View style={styles.selectionModeContainer}>
         {isSelectionMode && selectionMode && (

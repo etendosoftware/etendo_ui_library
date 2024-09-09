@@ -12,16 +12,13 @@ import {
 } from '../../../../styles/colors';
 import SwitchColumnCard from './components/switchRowCard/SwitchRowCard';
 import SwitchTitleCard from './components/switchTitleCard/SwitchTitleCard';
-import { DEFAULT_MAX_ROWS, DEFAULT_MAX_TITLES } from '../../Cards.constants';
-
-
 
 const Card = ({
   item,
   index,
   metadata,
-  maxRows = DEFAULT_MAX_ROWS, 
-  maxTitles = DEFAULT_MAX_TITLES, 
+  maxRows,
+  maxTitles,
   onPress,
   onHoldCard,
   handleItemsSelected,
@@ -99,13 +96,15 @@ const Card = ({
     return {};
   };
 
-  const visibleRows = useMemo(() => {
-    return metadata.filter(row => row.visible).slice(0, maxRows);
-  }, [metadata, maxRows]);
-
-  const visibleTitles = useMemo(() => {
-    return metadata.filter(row => row.visible && row.title).slice(0, maxTitles);
-  }, [metadata, maxTitles]);
+  const { visibleRows, visibleTitles } = useMemo(() => {
+    const visibleMetadata = metadata.filter(row => row.visible);
+    return {
+      visibleRows: visibleMetadata.slice(0, maxRows),
+      visibleTitles: visibleMetadata
+        .filter(row => row.title)
+        .slice(0, maxTitles),
+    };
+  }, [metadata, maxRows, maxTitles]);
 
   return (
     <Pressable
@@ -128,8 +127,7 @@ const Card = ({
           setIsSelected(!isSelected);
         }
       }}>
-      <View
-        style={[styles.container, shadowOpacity, changeBackground()]}>
+      <View style={[styles.container, shadowOpacity, changeBackground()]}>
         <View style={[styles.status, changeStatusBackground()]} />
         <View style={[addBorderColor()]}>
           <View style={[styles.spacingCard]} />
