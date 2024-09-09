@@ -1,27 +1,32 @@
 import { StyleSheet } from 'react-native';
-import { NEUTRAL_0, NEUTRAL_100 } from '../../styles/colors';
+import { NEUTRAL_100, NEUTRAL_50 } from '../../styles/colors';
 
 export const styles = StyleSheet.create({
   container: {
-    height: 300,
-    width: 400,
-    backgroundColor: NEUTRAL_0,
-    borderRadius: 8,
     display: 'flex',
+    width: 400,
+    height: 360,
+  },
+  svgContainer: {
+    flex: 1,
+    borderRadius: 8,
+    backgroundColor: NEUTRAL_50,
     shadowColor: NEUTRAL_100,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
     elevation: 5,
-  },
-  svg: {
     display: 'flex',
   },
   buttons: {
+    display: 'flex',
+    height: 60,
     flexDirection: 'row',
-    justifyContent: 'space-between',
   },
-  buttonContainer: { flex: 0.5, marginTop: 8 },
+  buttonContainer: {
+    marginTop: 8,
+    flex: 0.5,
+  },
   buttonSpace: {
     marginRight: 4,
   },

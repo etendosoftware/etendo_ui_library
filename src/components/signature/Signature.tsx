@@ -1,10 +1,9 @@
 import React, { useRef, useState } from 'react';
-import { GestureResponderEvent, View } from 'react-native';
+import { GestureResponderEvent, View, LayoutChangeEvent } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import { encodeBase64 } from '../../helpers/base64_utils';
-import { Button } from '../button';
 import { styles } from './Signature.style';
-import { SignaturePadProps } from './Signature.types';
+import { ISignaturePadProps } from './Signature.types';
 import {
   CLEAR_BUTTON_LABEL_DEFAULT,
   SAVE_BUTTON_LABEL_DEFAULT,
@@ -16,12 +15,11 @@ import {
   SAVE_HEIGHT_SVG_DEFAULT,
   SAVE_WIDTH_SVG_DEFAULT,
   SVG_XMLNS,
-  WIDTH_BUTTON,
-  TYPE_STYLE_BUTTON,
   FILL_DEFAULT,
 } from './Signature.constants';
+import SignatureButtons from './components/SignatureButtons';
 
-const SignaturePad: React.FC<SignaturePadProps> = ({
+const Signature: React.FC<ISignaturePadProps> = ({
   containerStyle,
   strokeColor = STROKE_COLOR_DEFAULT,
   strokeWidth = STROKE_WIDTH_DEFAULT,
@@ -41,30 +39,59 @@ const SignaturePad: React.FC<SignaturePadProps> = ({
   const [pathData, setPathData] = useState<string>('');
   const [paths, setPaths] = useState<string[]>([]);
   const pathRef = useRef<string>('');
+  const [isDrawing, setIsDrawing] = useState(false);
+  const [svgDimensions, setSvgDimensions] = useState({ width: 0, height: 0 });
+
+  const handleLayout = (event: LayoutChangeEvent) => {
+    const { width, height } = event.nativeEvent.layout;
+    setSvgDimensions({ width, height });
+  };
+
+  const isWithinBounds = (x: number, y: number) => {
+    return (
+      x > 0 && x < svgDimensions.width && y > 0 && y < svgDimensions.height
+    );
+  };
 
   const handleTouchStart = (event: GestureResponderEvent) => {
-    onStart?.(event);
     const { locationX, locationY } = event.nativeEvent;
-    pathRef.current = `M${locationX},${locationY}`;
-    setPathData(pathRef.current);
+
+    if (isWithinBounds(locationX, locationY)) {
+      pathRef.current = `M${locationX},${locationY}`;
+      setPathData(pathRef.current);
+      setIsDrawing(true);
+      onStart?.(event);
+    }
   };
 
   const handleTouchMove = (event: GestureResponderEvent) => {
-    onMove?.(event);
+    if (!isDrawing) return;
+
     const { locationX, locationY } = event.nativeEvent;
-    pathRef.current += ` L${locationX},${locationY}`;
-    setPathData(pathRef.current);
+
+    if (isWithinBounds(locationX, locationY)) {
+      pathRef.current += ` L${locationX},${locationY}`;
+      setPathData(pathRef.current);
+      onMove?.(event);
+    } else {
+      setIsDrawing(false);
+      handleTouchEnd();
+    }
   };
 
   const handleTouchEnd = () => {
-    onEnd?.();
-    setPaths([...paths, pathRef.current]);
-    pathRef.current = '';
-    setPathData('');
+    if (isDrawing) {
+      setPaths([...paths, pathRef.current]);
+      pathRef.current = '';
+      setPathData('');
+      setIsDrawing(false);
+      onEnd?.();
+    }
   };
 
   const handleClear = () => {
     setPaths([]);
+    setPathData('');
     onClear?.();
   };
 
@@ -98,55 +125,39 @@ const SignaturePad: React.FC<SignaturePadProps> = ({
 
   return (
     <View style={[styles.container, containerStyle]}>
-      <Svg
-        style={styles.svg}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}>
-        {paths.map((p: string, index: number) => (
+      <View style={styles.svgContainer}>
+        <Svg
+          onLayout={handleLayout}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}>
+          {paths.map((d: string, index: number) => (
+            <Path
+              key={index + 'Signature'}
+              d={d}
+              stroke={strokeColor}
+              strokeWidth={strokeWidth}
+              fill={FILL_DEFAULT}
+            />
+          ))}
           <Path
-            key={index + 'Signature'}
-            d={p}
+            d={pathData}
             stroke={strokeColor}
             strokeWidth={strokeWidth}
             fill={FILL_DEFAULT}
           />
-        ))}
-        <Path
-          d={pathData}
-          stroke={strokeColor}
-          strokeWidth={strokeWidth}
-          fill={FILL_DEFAULT}
-        />
-      </Svg>
-      <View style={styles.buttons}>
-        {renderSaveButton ? (
-          renderSaveButton(saveSignature)
-        ) : (
-          <View style={[styles.buttonContainer, styles.buttonSpace]}>
-            <Button
-              text={saveButtonLabel}
-              onPress={saveSignature}
-              typeStyle={TYPE_STYLE_BUTTON}
-              width={WIDTH_BUTTON}
-            />
-          </View>
-        )}
-        {renderClearButton ? (
-          renderClearButton(handleClear)
-        ) : (
-          <View style={styles.buttonContainer}>
-            <Button
-              text={clearButtonLabel}
-              onPress={handleClear}
-              typeStyle={TYPE_STYLE_BUTTON}
-              width={WIDTH_BUTTON}
-            />
-          </View>
-        )}
+        </Svg>
       </View>
+      <SignatureButtons
+        renderSaveButton={renderSaveButton}
+        renderClearButton={renderClearButton}
+        saveSignature={saveSignature}
+        handleClear={handleClear}
+        saveButtonLabel={saveButtonLabel}
+        clearButtonLabel={clearButtonLabel}
+      />
     </View>
   );
 };
 
-export default SignaturePad;
+export default Signature;
