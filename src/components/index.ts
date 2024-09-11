@@ -18,13 +18,10 @@ import { StatusBar } from './statusbar';
 import { Tab } from './tab';
 import { Table } from './table';
 import { ViewEtendo } from './viewEtendo/ViewEtendo';
-import {
-  Layout,
-  SearchContainer,
-  TitleContainer,
-} from './containers';
+import { Layout, SearchContainer, TitleContainer } from './containers';
 import { Cards } from './cards';
 import { Alert, setAlertDefaultDuration, show } from './alert';
+import { Signature } from './signature';
 
 export {
   Alert,
@@ -49,6 +46,7 @@ export {
   show,
   SkeletonItem,
   StatusBar,
+  Signature,
   Tab,
   Table,
   TitleContainer,
