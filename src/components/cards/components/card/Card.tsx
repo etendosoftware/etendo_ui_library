@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { View, Pressable, Animated, ViewStyle, TextStyle } from 'react-native';
+import { View, Pressable, ViewStyle, TextStyle } from 'react-native';
 import { findPrimaryId } from '../../../../helpers/table_utils';
 import { CardProps } from './Card.types';
 import { styles } from './Card.style';
@@ -12,15 +12,13 @@ import {
 } from '../../../../styles/colors';
 import SwitchColumnCard from './components/switchRowCard/SwitchRowCard';
 import SwitchTitleCard from './components/switchTitleCard/SwitchTitleCard';
-import { findRowTitle } from '../../../../helpers/cards_utils';
-import { CardsMetadata } from '../../Cards.types';
-
-const MAX_ROWS: number = 4;
 
 const Card = ({
   item,
   index,
   metadata,
+  maxRows,
+  maxTitles,
   onPress,
   onHoldCard,
   handleItemsSelected,
@@ -98,9 +96,15 @@ const Card = ({
     return {};
   };
 
-  const getColumnTitle: CardsMetadata | undefined = useMemo(() => {
-    return findRowTitle(metadata);
-  }, [metadata]);
+  const { visibleRows, visibleTitles } = useMemo(() => {
+    const visibleMetadata = metadata.filter(row => row.visible);
+    return {
+      visibleRows: visibleMetadata.slice(0, maxRows),
+      visibleTitles: visibleMetadata
+        .filter(row => row.title)
+        .slice(0, maxTitles),
+    };
+  }, [metadata, maxRows, maxTitles]);
 
   return (
     <Pressable
@@ -123,40 +127,30 @@ const Card = ({
           setIsSelected(!isSelected);
         }
       }}>
-      <Animated.View
-        style={[styles.container, shadowOpacity, changeBackground()]}>
+      <View style={[styles.container, shadowOpacity, changeBackground()]}>
         <View style={[styles.status, changeStatusBackground()]} />
-        <Animated.View style={[addBorderColor()]}>
+        <View style={[addBorderColor()]}>
           <View style={[styles.spacingCard]} />
-          <SwitchTitleCard
-            row={getColumnTitle}
-            item={item}
-            color={changeTextColor()}
-            isEmptyData={
-              !(
-                metadata.filter(row => row.visible).slice(0, MAX_ROWS).length -
-                1
-              )
-            }
-          />
-          {metadata
-            .filter(row => row.visible)
-            .slice(0, MAX_ROWS)
-            .map(
-              (row, rowIndex) =>
-                row.visible &&
-                !row.title && (
-                  <SwitchColumnCard
-                    key={'rowCard' + index + rowIndex}
-                    row={row}
-                    item={item}
-                    color={changeTextColor()}
-                    backgroundColor={changeBackground()}
-                  />
-                ),
-            )}
-        </Animated.View>
-      </Animated.View>
+          {visibleTitles.map((row, rowIndex) => (
+            <SwitchTitleCard
+              key={`title-${index}-${rowIndex}`}
+              row={row}
+              item={item}
+              color={changeTextColor()}
+              isEmptyData={!visibleRows.length}
+            />
+          ))}
+          {visibleRows.map((row, rowIndex) => (
+            <SwitchColumnCard
+              key={`rowCard-${index}-${rowIndex}`}
+              row={row}
+              item={item}
+              color={changeTextColor()}
+              backgroundColor={changeBackground()}
+            />
+          ))}
+        </View>
+      </View>
     </Pressable>
   );
 };

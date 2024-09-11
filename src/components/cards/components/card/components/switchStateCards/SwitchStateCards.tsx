@@ -23,6 +23,8 @@ const SwitchStateCards = ({
   onHoldCard,
   handleItemsSelected,
   isSelectionMode,
+  maxRows,
+  maxTitles,
 }: SwitchStateCardsProps): ReactElement | null  => {
   if (
     isLoading &&
@@ -60,6 +62,8 @@ const SwitchStateCards = ({
       onHoldCard={onHoldCard}
       handleItemsSelected={handleItemsSelected}
       isSelectionMode={isSelectionMode}
+      maxRows={maxRows}
+      maxTitles={maxTitles}
     />
   );
   return <>{data.map(renderCard)}</>

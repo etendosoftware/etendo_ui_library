@@ -20,4 +20,6 @@ export interface CardsProps extends CommonTableProps {
   cancelSelectionLabel?: string;
   isSelectionMode?: boolean;
   isResetFetching?: boolean;
+  maxTitles?:number;
+  maxRows?:number;
 }

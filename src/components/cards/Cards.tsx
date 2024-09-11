@@ -15,7 +15,7 @@ import { Button } from '../button';
 import { PlusIcon, TrashIcon } from '../../assets/images/icons';
 import { CardsProps } from './Cards.types';
 import { Modal } from '../modal';
-import CARDS from './Cards.constants';
+import CARDS, { DEFAULT_MAX_ROWS, DEFAULT_MAX_TITLES } from './Cards.constants';
 const {
   TITLE,
   SUBTITLE,
@@ -24,8 +24,6 @@ const {
   SELECTED_LABEL,
   CANCEL_SELECTED_LABEL,
 } = CARDS;
-
-const BUFFER = 5;
 
 const Cards = ({
   data,
@@ -48,6 +46,8 @@ const Cards = ({
   cancelSelectionLabel = CANCEL_SELECTED_LABEL,
   isSelectionMode = false,
   isResetFetching = true,
+  maxTitles = DEFAULT_MAX_TITLES,
+  maxRows = DEFAULT_MAX_ROWS,
 }: CardsProps) => {
   const [containerHeight, setContainerHeight] = useState(0);
   const [selectionMode, setSelectionMode] = useState(false);
@@ -60,6 +60,7 @@ const Cards = ({
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isInitial, setIsInitial] = useState<boolean>(isResetFetching);
   const [isLoadMoreData, setIsLoadMoreData] = useState<boolean>(true);
+  const [updating, setUpdating] = useState(false);
 
   const scrollViewRef = useRef<ScrollView>(null);
 
@@ -79,7 +80,15 @@ const Cards = ({
   }, [data]);
 
   useEffect(() => {
-    if (isLoading && dataList.length) {
+    if (updating) {
+      setTimeout(() => {
+        setUpdating(false);
+      }, 100);
+    }
+  }, [updating]);
+
+  useEffect(() => {
+    if (isLoading && dataList.length && !updating) {
       scrollViewRef.current?.scrollToEnd({ animated: true });
     }
   }, [isLoading]);
@@ -99,7 +108,6 @@ const Cards = ({
       setSelectedItem(item);
       setSelectionMode(true);
       const selectedItemsSet = new Set(selectedItems);
-      const dataSet = new Set(dataList);
       if (selectedItemsSet.size > 0) {
         selectedItemsSet.clear();
       } else {
@@ -119,13 +127,11 @@ const Cards = ({
     contentOffset,
     contentSize,
   }: NativeScrollEvent) => {
-    return (
-      layoutMeasurement.height + contentOffset.y >= contentSize.height - BUFFER
-    );
+    return layoutMeasurement.height + contentOffset.y >= contentSize.height;
   };
 
   const onScroll = async (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    if (isAtEndOfScroll(event.nativeEvent)) {
+    if (isAtEndOfScroll(event.nativeEvent) && !isLoading && !updating) {
       await handleLoadMore(currentPage, dataList, isLoadMoreData);
     }
   };
@@ -164,6 +170,7 @@ const Cards = ({
         .finally(() => {
           setCurrentPage(currentPage + 1);
           setIsLoading(false);
+          setUpdating(true);
         });
     }
   };
@@ -250,6 +257,8 @@ const Cards = ({
           onHoldCard={setSelectionMode}
           isSelectionMode={isSelectionMode && selectionMode}
           handleItemsSelected={handleItemsSelected}
+          maxTitles={maxTitles}
+          maxRows={maxRows}
         />
         {!!dataList.length && isLoading && <SkeletonCard />}
       </ScrollView>
