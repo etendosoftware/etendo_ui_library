@@ -9,13 +9,13 @@ import {
   NEUTRAL_200,
 } from '../../styles/colors';
 import { XCircleFillIcon } from '../../assets/images/icons/XCircleFillIcon';
-import { RenderMarkdownText } from './MarkdownUtils';
-import { TextMessageProps } from './TextMessage.types';
+import { RenderMarkdownText } from './MarkdownUtilsRN';
+import { TextMessageProps } from './TextMessageRN.types';
 import { FileIcon } from '../../assets/images/icons/FileIcon';
-import { styles } from './TextMessage.styles';
+import { styles } from './TextMessageRN.styles';
 
 // TextMessage component definition
-const TextMessage: React.FC<TextMessageProps> = ({
+const TextMessageRN: React.FC<TextMessageProps> = ({
   title,
   text,
   file,
@@ -97,4 +97,4 @@ const TextMessage: React.FC<TextMessageProps> = ({
   );
 };
 
-export default TextMessage;
+export default TextMessageRN;
