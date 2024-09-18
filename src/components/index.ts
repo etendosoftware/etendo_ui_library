@@ -22,6 +22,7 @@ import { Layout, SearchContainer, TitleContainer } from './containers';
 import { Cards } from './cards';
 import { Alert, setAlertDefaultDuration, show } from './alert';
 import { Signature } from './signature';
+import { TextMessageRN } from './text-message-rn';
 
 export {
   Alert,
@@ -49,6 +50,7 @@ export {
   Signature,
   Tab,
   Table,
+  TextMessageRN,
   TitleContainer,
   ViewEtendo,
 };
