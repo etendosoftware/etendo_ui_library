@@ -50,7 +50,7 @@ export {
   Signature,
   Tab,
   Table,
-  TextMessageRN,
   TitleContainer,
+  TextMessageRN,
   ViewEtendo,
 };
