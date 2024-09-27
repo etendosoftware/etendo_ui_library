@@ -7,7 +7,6 @@ import {
   NEUTRAL_50,
 } from '../../../styles/colors';
 import { isWebPlatform } from '../../../helpers/functions_utils';
-const windowWidth = Dimensions.get('window').width;
 export const mediaQueryWidths = {
   MOBILE: 480,
   TABLET: 768,
@@ -92,7 +91,8 @@ export const styles = StyleSheet.create({
     width: 24,
   },
   fileContainer: {
-   position: 'absolute' 
+    position: 'absolute',
+    width: "100%",
   },
   progressBarFill: {
     backgroundColor: NEUTRAL_100,

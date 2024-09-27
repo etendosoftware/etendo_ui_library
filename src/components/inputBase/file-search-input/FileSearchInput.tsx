@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   Dimensions,
   TextInput,
+  Platform,
   NativeSyntheticEvent,
   TextInputKeyPressEventData,
 } from 'react-native';
@@ -23,13 +24,9 @@ import { FileSearchInputProps } from './FileSearchInput.types';
 import { Button } from '../../button';
 import { SkeletonItem } from '../../secondaryComponents';
 import { isWebPlatform } from '../../../helpers/functions_utils';
-import {
-  CheckCircleFillIcon,
-  CornerDownRightIcon,
-  PaperclipIcon,
-  XIcon,
-} from '../../../assets/images/icons';
 import { RightButtons } from '../InputBase.types';
+import { CheckCircleFillIcon, CornerDownRightIcon, PaperclipIcon, XIcon } from '../../../assets/images/icons';
+import { AppPlatform } from '../../../helpers/utilsTypes';
 import { KEY_ENTER, KEY_SHIFT } from './FileSearchInput.constants';
 
 // Import DocumentPicker for mobile platforms only
@@ -210,7 +207,6 @@ const FileSearchInput = ({
   };
 
   // Define the right buttons for the input
-
   const UploadButton = (
     <Button
       typeStyle="white"
@@ -399,8 +395,7 @@ const FileSearchInput = ({
           style={[
             styles.fileContainer,
             {
-              top: modalPosition.top,
-              width: modalPosition.width,
+              top: Platform.OS === AppPlatform.web ? modalPosition.top : modalPosition.top - POSITION_UP_FILE,
             },
           ]}>
           <View style={styles.fileNameContainer}>
