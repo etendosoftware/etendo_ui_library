@@ -29,6 +29,7 @@ import { CheckCircleFillIcon, CornerDownRightIcon, PaperclipIcon, XIcon } from '
 import { AppPlatform } from '../../../helpers/utilsTypes';
 import { KEY_ENTER, KEY_SHIFT } from './FileSearchInput.constants';
 
+const token = "eyJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJzd3MiLCJyb2xlIjoiNDJEMEVFQjFDNjZGNDk3QTkwREQ1MjZEQzU5N0U2RjAiLCJvcmdhbml6YXRpb24iOiIwIiwiaXNzIjoic3dzIiwiY2xpZW50IjoiMjNDNTk1NzVCOUNGNDY3Qzk2MjA3NjBFQjI1NUIzODkiLCJ3YXJlaG91c2UiOiJCMkQ0MEQ4QTVENjQ0REQ4OUUzMjlEQzI5NzMwOTA1NSIsInVzZXIiOiIxMDAiLCJpYXQiOjE3Mjc3MjE0NDF9.g8Hpgo99MA2TXb-8jujD9T6_36OdhYxJnGD38R-lv1vlRkFMC9O1le6xgOkyzgYuEoLKhR24V69jXsKKFxYZ5nRY9cZwNUifMfX79gkTUthy4A-dC0X2q0vdA_KST4b06tWAXTHh9Xq5WDq33h15yXX5QaJIRjY9DZN-OE5g3iWsqjKyoflNJbBph_kcffttPrYEa1GJlOuLPFv9aQ4tRHeTbpLk_-8MM4_4iI9mTd1Sr8wFvZVrDfWGkiik1rtQ6STRZbjtth8qfP6Sul9Me4SE0vjXytng-YKpoKWPKLCHrpu6QCxcZzbWzEWXmJBjN7Yw9BOMSmp1uytyBHy4-Q"
 // Import DocumentPicker for mobile platforms only
 let DocumentPicker: any = null;
 if (!isWebPlatform()) {
@@ -247,6 +248,9 @@ const FileSearchInput = ({
 
   const uploadFile = async (pickedFile: File) => {
     if (!!uploadConfig) {
+        uploadConfig.headers = {
+          Authorization: `Bearer ${token}`,
+        };
       const formData = new FormData();
       formData.append('file', pickedFile);
 
