@@ -62,6 +62,7 @@ const FileSearchInput = ({
   rightButtons,
   isAttachDisable,
   isSendDisable,
+  initialFile,
   ...inputBaseProps
 }: FileSearchInputProps) => {
   // States
@@ -85,6 +86,13 @@ const FileSearchInput = ({
   const dropAreaRef = useRef(null);
   const fileInputRef = useRef<any>(null);
   const abortControllerRef = useRef<any>(null);
+
+  // Handle initial file
+  useEffect(() => {
+    if (initialFile) {
+      validateAndLoadFile(initialFile);
+    }
+  }, [initialFile]);
 
   // Function to reset progress bar
   const resetProgress = () => {

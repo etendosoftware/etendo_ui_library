@@ -7,7 +7,7 @@ interface UploadConfig {
     headers?: any;
 }
 
-export interface FileSearchInputProps extends Omit<IInputBase, 'keyboardType' | 'secureTextEntry'>{
+export interface FileSearchInputProps extends Omit<IInputBase, 'keyboardType' | 'secureTextEntry'> {
     value: string;
     onChangeText: (text: string) => void;
     onSubmit: (message: string, file?: any) => void;
@@ -20,4 +20,5 @@ export interface FileSearchInputProps extends Omit<IInputBase, 'keyboardType' | 
     uploadConfig?: UploadConfig | undefined,
     isSendDisable?: boolean;
     isAttachDisable?: boolean;
+    initialFile?: File | null;
 }
