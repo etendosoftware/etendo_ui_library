@@ -386,6 +386,7 @@ const FileSearchInput = ({
             />
             <input
               type="file"
+              multiple={true}
               ref={fileInputRef}
               style={{ display: 'none' }}
               onChange={handleFileSelect}
