@@ -18,7 +18,7 @@ import { styles } from './TextMessage.styles';
 const TextMessage: React.FC<TextMessageProps> = ({
   title,
   text,
-  file,
+  files,
   time,
   type,
   backgroundColor,
@@ -59,16 +59,22 @@ const TextMessage: React.FC<TextMessageProps> = ({
       {title && renderTitle(title, type)}
 
       {/* Optionally display file name if it exists */}
-      {file && (
+      {files && files.length > 0 && (
         <View
           style={[
             styles.fileContainer,
             type === 'right-user'
               ? styles.rightUserFileContainer
               : styles.otherUserFileContainer,
-          ]}>
+          ]}
+        >
           <FileIcon style={styles.fileIcon} />
-          <Text style={styles.file} numberOfLines={1} ellipsizeMode='tail'>{file}</Text>
+
+          <Text style={styles.file} numberOfLines={1} ellipsizeMode='tail'>
+            {files.length === 1
+              ? files[0].name
+              : `There are ${files.length} files uploaded`}
+          </Text>
         </View>
       )}
 
