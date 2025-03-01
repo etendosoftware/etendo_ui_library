@@ -9,7 +9,7 @@ const CARDS = {
 
 const DEFAULT_MAX_ROWS = 3;
 const DEFAULT_MAX_TITLES = 1;
-
+const EPSILON = 0.5;
 
 export default CARDS;
-export { DEFAULT_MAX_ROWS, DEFAULT_MAX_TITLES };
+export { DEFAULT_MAX_ROWS, DEFAULT_MAX_TITLES, EPSILON };
