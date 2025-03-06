@@ -15,7 +15,7 @@ import { Button } from '../button';
 import { PlusIcon, TrashIcon } from '../../assets/images/icons';
 import { CardsProps } from './Cards.types';
 import { Modal } from '../modal';
-import CARDS, { DEFAULT_MAX_ROWS, DEFAULT_MAX_TITLES } from './Cards.constants';
+import CARDS, { DEFAULT_MAX_ROWS, DEFAULT_MAX_TITLES, EPSILON } from './Cards.constants';
 const {
   TITLE,
   SUBTITLE,
@@ -127,7 +127,9 @@ const Cards = ({
     contentOffset,
     contentSize,
   }: NativeScrollEvent) => {
-    return layoutMeasurement.height + contentOffset.y >= contentSize.height;
+    return (
+      layoutMeasurement.height + contentOffset.y >= contentSize.height - EPSILON
+    );
   };
 
   const onScroll = async (event: NativeSyntheticEvent<NativeScrollEvent>) => {
