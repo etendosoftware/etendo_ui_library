@@ -9,16 +9,16 @@ import {
   NEUTRAL_200,
 } from '../../styles/colors';
 import { XCircleFillIcon } from '../../assets/images/icons/XCircleFillIcon';
-import { RenderMarkdownText } from './MarkdownUtils';
-import { TextMessageProps } from './TextMessage.types';
+import { RenderMarkdownText } from './MarkdownUtilsRN';
+import { TextMessageProps } from './TextMessageRN.types';
 import { FileIcon } from '../../assets/images/icons/FileIcon';
-import { styles } from './TextMessage.styles';
+import { styles } from './TextMessageRN.styles';
 
 // TextMessage component definition
-const TextMessage: React.FC<TextMessageProps> = ({
+const TextMessageRN: React.FC<TextMessageProps> = ({
   title,
   text,
-  files,
+  file,
   time,
   type,
   backgroundColor,
@@ -59,22 +59,16 @@ const TextMessage: React.FC<TextMessageProps> = ({
       {title && renderTitle(title, type)}
 
       {/* Optionally display file name if it exists */}
-      {files && files.length > 0 && (
+      {file && (
         <View
           style={[
             styles.fileContainer,
             type === 'right-user'
               ? styles.rightUserFileContainer
               : styles.otherUserFileContainer,
-          ]}
-        >
+          ]}>
           <FileIcon style={styles.fileIcon} />
-
-          <Text style={styles.file} numberOfLines={1} ellipsizeMode='tail'>
-            {files.length === 1
-              ? files[0].name
-              : `There are ${files.length} files uploaded`}
-          </Text>
+          <Text style={styles.file} numberOfLines={1} ellipsizeMode='tail'>{file}</Text>
         </View>
       )}
 
@@ -103,4 +97,4 @@ const TextMessage: React.FC<TextMessageProps> = ({
   );
 };
 
-export default TextMessage;
+export default TextMessageRN;

@@ -36,6 +36,7 @@ const {
   Tab,
   Table,
   TitleContainer,
+  TextMessageRN,
   ViewEtendo,
 } = isNativeEnvironment ? NativeComponents : WebComponents;
 
@@ -361,6 +362,7 @@ export {
   Tab,
   Table,
   TitleContainer,
+  TextMessageRN,
   ViewEtendo,
   ActivityIcon,
   ArrowUpRightIcon,

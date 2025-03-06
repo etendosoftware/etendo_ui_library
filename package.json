@@ -1,6 +1,6 @@
 {
   "name": "etendo-ui-library",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "private": false,
   "scripts": {
     "android": "react-native run-android",
@@ -47,7 +47,6 @@
     "@babel/preset-typescript": "^7.22.5",
     "@babel/runtime": "^7.20.0",
     "@react-native-async-storage/async-storage": "^1.17.3",
-    "@react-native-clipboard/clipboard": "^1.11.1",
     "@react-native-community/datetimepicker": "^6.1.2",
     "@react-native-community/eslint-config": "^3.2.0",
     "@react-native-community/slider": "^4.4.2",
@@ -74,6 +73,7 @@
     "react-markdown": "^9.0.1",
     "react-native": "0.70.6",
     "react-native-document-picker": "^9.1.0",
+    "react-native-markdown-display": "^7.0.2",
     "react-native-svg": "^13.9.0",
     "react-native-svg-transformer": "^1.0.0",
     "react-native-svg-web": "^1.0.9",
