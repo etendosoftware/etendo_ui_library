@@ -8,10 +8,12 @@ import {
   NEUTRAL_1000,
   NEUTRAL_200,
 } from '../../styles/colors';
+import MessageDetailBox from './MessageDetailBox';
 import { XCircleFillIcon } from '../../assets/images/icons/XCircleFillIcon';
 import { RenderMarkdownText } from './MarkdownUtils';
 import { TextMessageProps } from './TextMessage.types';
 import { FileIcon } from '../../assets/images/icons/FileIcon';
+import { IconInfo } from '../../assets/images/icons';
 import { styles } from './TextMessage.styles';
 
 // TextMessage component definition
@@ -19,10 +21,15 @@ const TextMessage: React.FC<TextMessageProps> = ({
   title,
   text,
   files,
+  context,
   time,
   type,
   backgroundColor,
+  fileIcon,
+  multipleFilesText,
 }) => {
+  const IconComponent = fileIcon || FileIcon;
+
   const messageStyle: any = [
     styles.messageContainer,
     { borderTopLeftRadius: type === 'left-user' || type === 'error' ? 0 : 8 },
@@ -58,24 +65,26 @@ const TextMessage: React.FC<TextMessageProps> = ({
       {/* Optionally display title if it exists */}
       {title && renderTitle(title, type)}
 
-      {/* Optionally display file name if it exists */}
-      {files && files.length > 0 && (
-        <View
-          style={[
-            styles.fileContainer,
-            type === 'right-user'
-              ? styles.rightUserFileContainer
-              : styles.otherUserFileContainer,
-          ]}
-        >
-          <FileIcon style={styles.fileIcon} />
+      {/* If context exists, render the context box */}
+      {context && (
+        <MessageDetailBox
+          Icon={IconInfo}
+          detailText={context}
+          type={type}
+        />
+      )}
 
-          <Text style={styles.file} numberOfLines={1} ellipsizeMode='tail'>
-            {files.length === 1
+      {/* If files exist, render the file box */}
+      {files && files.length > 0 && (
+        <MessageDetailBox
+          Icon={IconComponent}
+          detailText={
+            files.length === 1
               ? files[0].name
-              : `There are ${files.length} files uploaded`}
-          </Text>
-        </View>
+              : multipleFilesText!!
+          }
+          type={type}
+        />
       )}
 
       {/* Container for the error icon and the text */}
