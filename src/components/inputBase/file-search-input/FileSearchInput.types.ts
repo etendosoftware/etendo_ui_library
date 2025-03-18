@@ -21,4 +21,6 @@ export interface FileSearchInputProps extends Omit<IInputBase, 'keyboardType' | 
     isSendDisable?: boolean;
     isAttachDisable?: boolean;
     initialFile?: File | null;
+    fileIcon?: React.ComponentType;
+    multipleFilesText?: string;
 }

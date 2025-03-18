@@ -49,8 +49,12 @@ const FileSearchInput = ({
   rightButtons,
   isAttachDisable,
   isSendDisable,
+  fileIcon,
+  multipleFilesText,
   ...inputBaseProps
 }: FileSearchInputProps) => {
+  const IconComponent = fileIcon || FileIcon;
+
   // States
   const [progress, setProgress] = useState<number>(0);
   const [files, setFiles] = useState<File[]>([]);
@@ -301,7 +305,8 @@ const FileSearchInput = ({
           handleSendMessage();
         }}
         onKeyPress={(e) => {
-          if (e.nativeEvent.key === 'Enter') {
+          const nativeEvent = e.nativeEvent as any;
+          if (nativeEvent.key === 'Enter' && !nativeEvent.shiftKey) {
             e.preventDefault();
             handleSendMessage();
           }
@@ -325,7 +330,7 @@ const FileSearchInput = ({
             <View style={styles.fileNameLoadedLeftContainer}>
               <View style={styles.fileIconContainer}>
                 <View style={styles.iconWrapper}>
-                  <FileIcon style={styles.fileIcon} />
+                  <IconComponent style={styles.fileIcon} />
                   {files.length > 1 && (
                     <View style={styles.badge}>
                       <Text style={styles.badgeText}>{files.length}</Text>
@@ -340,7 +345,7 @@ const FileSearchInput = ({
                   </Text>
                 ) : (
                   <Text style={styles.fileNameText}>
-                    {`There are ${files.length} files uploaded`}
+                    {multipleFilesText}
                   </Text>
                 )}
                 {progress > 0 && (
