@@ -78,11 +78,8 @@ const TextMessage: React.FC<TextMessageProps> = ({
       {files && files.length > 0 && (
         <MessageDetailBox
           Icon={IconComponent}
-          detailText={
-            files.length === 1
-              ? files[0].name
-              : multipleFilesText!!
-          }
+          files={files}
+          multipleFilesText={multipleFilesText}
           type={type}
         />
       )}
