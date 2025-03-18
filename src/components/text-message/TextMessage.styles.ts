@@ -8,6 +8,7 @@ import {
   NEUTRAL_1000,
   NEUTRAL_200,
   NEUTRAL_400,
+  PRIMARY_100,
   TERTIARY_100,
   TERTIARY_30,
 } from '../../styles/colors';
@@ -131,5 +132,30 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     paddingTop: 4,
     alignSelf: 'flex-end',
+  },
+  fileIconContainer: {
+    paddingRight: 8,
+  },
+  iconWrapper: {
+    position: 'relative',
+  },
+  badge: {
+    position: 'absolute',
+    bottom: -4,
+    right: -4,
+    backgroundColor: PRIMARY_100,
+    borderRadius: 8,
+    height: 16,
+    minWidth: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 2,
+    borderWidth: 1,
+    borderColor: NEUTRAL_0,
+  },
+  badgeText: {
+    color: NEUTRAL_0,
+    fontSize: 10,
+    fontWeight: 'bold',
   },
 });
