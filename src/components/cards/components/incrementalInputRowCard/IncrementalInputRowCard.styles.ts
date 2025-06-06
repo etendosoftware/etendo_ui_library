@@ -49,6 +49,6 @@ export const styles = StyleSheet.create({
     fontSize: 16,
   },
   inputContainer: { width: 100, marginHorizontal: 8 },
-  textContainerStyle: { height: 40 },
+  textContainerStyle: { height: 40, flex: 1 },
   textInputStyle: { textAlign: 'center' },
 });

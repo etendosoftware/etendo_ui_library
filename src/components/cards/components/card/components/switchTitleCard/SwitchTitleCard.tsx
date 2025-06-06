@@ -41,8 +41,8 @@ const SwitchTitleCard = ({
         {row.label}
       </Text>
       <View style={styles.titleRowValue}>
-        {getIconByType({ row, item, color })}
-        {row.type !== 'boolean' && (
+        {getIconByType({ row, item, color, disabled })}
+        {!['boolean', 'status'].includes(row.type) && (
           <Text
             style={[styles.textValueBold, color]}
             ellipsizeMode="tail"

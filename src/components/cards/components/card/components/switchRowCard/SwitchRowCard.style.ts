@@ -79,12 +79,19 @@ export const styles = StyleSheet.create({
     maxWidth: '50%',
     flexDirection: 'row',
     alignItems: 'center',
-    height: 20,
   },
   paddingLeft: {
     paddingLeft: 8,
   },
   paddingRight: {
     paddingRight: 8,
+  },
+  statusContainer: {
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 4,
+  },
+  spaceLeft: {
+    marginLeft: 12,
   },
 });

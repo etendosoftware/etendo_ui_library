@@ -8,6 +8,7 @@ import {
 } from '../../../../../../assets/images/icons';
 import { styles } from './SwitchRowCard.style';
 import { SwitchRowCardProps } from './SwitchRowCard.type';
+import { NEUTRAL_0, PRIMARY_100 } from '../../../../../../styles/colors';
 
 const DOTS: string = '··························';
 const MAX_VALUE_LENGTH = 20;
@@ -16,8 +17,9 @@ export const getIconByType = ({
   row,
   item,
   color = {},
+  disabled,
 }: SwitchRowCardProps) => {
-  if (row?.key && (item[row.key] || item[row.key] === false)) {
+  if (row?.key) {
     switch (row.type) {
       case 'date':
         return <CalendarIcon style={styles.calendar} fill={color.color} />;
@@ -29,6 +31,33 @@ export const getIconByType = ({
         ) : (
           <SquareIcon style={styles.check} fill={color.color} />
         );
+      case 'status':
+        const value = row.key ? item[row.key] : undefined;
+        const styleForValue = row?.statusMetadata?.[value] ??
+          row?.statusMetadata?.default ?? {
+            label: row?.label ?? '',
+            backgroundColor: PRIMARY_100,
+            textColor: NEUTRAL_0,
+          };
+
+        const displayValue = styleForValue.label ?? String(value);
+        const opacity = disabled ? 0.2 : 1;
+        return (
+          <View
+            style={[
+              styles.statusContainer,
+              !row?.title && styles.spaceLeft,
+              {
+                opacity: opacity,
+                backgroundColor: styleForValue.backgroundColor,
+              },
+            ]}>
+            <Text style={{ color: styleForValue.textColor }}>
+              {displayValue}
+            </Text>
+          </View>
+        );
+
       default:
         break;
     }
@@ -85,8 +114,8 @@ const SwitchRowCard = ({
           {DOTS}
         </Text>
         <View style={[styles.contentMiddleRow, styles.paddingLeft]}>
-          {getIconByType({ row, item, color })}
-          {row.type !== 'boolean' && (
+          {getIconByType({ row, item, color, disabled })}
+          {!['boolean', 'status'].includes(row.type) && (
             <Text
               style={[styles.textValue, color]}
               ellipsizeMode="tail"

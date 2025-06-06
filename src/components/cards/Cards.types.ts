@@ -9,10 +9,16 @@ export interface CustomComponentProps {
   label?: string;
   [key: string]: any;
 }
+export type StatusInfo = {
+  label: string;
+  backgroundColor: string;
+  textColor: string;
+};
 
 export interface CardsMetadata extends Metadata {
   customComponent?: (props: CustomComponentProps) => React.ReactNode;
   customProps?: Record<string, any>;
+  statusMetadata?: Record<string, StatusInfo>;
 }
 
 export interface CardsProps {
