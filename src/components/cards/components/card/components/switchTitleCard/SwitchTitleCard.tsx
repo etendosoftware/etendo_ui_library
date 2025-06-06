@@ -8,13 +8,32 @@ const SwitchTitleCard = ({
   row,
   item,
   color = {},
-  isEmptyData = false,
+  isDivisor = false,
+  disabled,
+  onChange,
 }: SwitchTitleCardProps) => {
   if (!row) {
     return <></>;
   }
+  if (row.type === 'custom' && row.customComponent) {
+    const CustomComponent = row.customComponent;
+
+    return (
+      <View style={[styles.rowTitle, !isDivisor && styles.noBorderBottom]}>
+        <CustomComponent
+          label={row?.label}
+          value={row?.key ? item[row.key] : undefined}
+          fieldKey={row.key || ''}
+          onChange={onChange}
+          disabled={disabled}
+          {...row.customProps}
+        />
+      </View>
+    );
+  }
+
   return (
-    <View style={[styles.row, isEmptyData && { borderBottomWidth: 0 }]}>
+    <View style={[styles.row, !isDivisor && styles.noBorderBottom]}>
       <Text
         style={[styles.textName, color]}
         ellipsizeMode="tail"

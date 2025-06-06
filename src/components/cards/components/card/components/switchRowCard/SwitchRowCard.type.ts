@@ -1,4 +1,4 @@
-import { ViewStyle, TextStyle } from 'react-native';
+import { TextStyle } from 'react-native';
 import { CardsMetadata } from '../../../../Cards.types';
 
 export interface SwitchRowCardProps {
@@ -6,5 +6,6 @@ export interface SwitchRowCardProps {
   item: any;
   color: TextStyle | undefined;
   margin?: boolean;
-  backgroundColor?: ViewStyle;
+  disabled?: boolean;
+  onChange?: (key?: string, value?: any) => void;
 }

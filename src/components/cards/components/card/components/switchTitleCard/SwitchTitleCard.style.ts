@@ -28,9 +28,16 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: NEUTRAL_300,
   },
+  rowTitle: {
+    width: '100%',
+    marginBottom: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: NEUTRAL_300,
+  },
   titleRowValue: {
     flexDirection: 'row',
     alignItems: 'center',
+    columnGap: 4,
   },
   check: { width: 16, height: 16, minWidth: 16, maxWidth: 16 },
   calendar: {
@@ -40,4 +47,5 @@ export const styles = StyleSheet.create({
     minWidth: 16,
     maxWidth: 16,
   },
+  noBorderBottom: { borderBottomWidth: 0 },
 });

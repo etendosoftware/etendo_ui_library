@@ -3,10 +3,12 @@ import {
   ColorValue,
   ImageStyle,
   NativeSyntheticEvent,
+  StyleProp,
   TextInput,
   TextInputFocusEventData,
   TextInputKeyPressEventData,
   TextInputSubmitEditingEventData,
+  TextStyle,
   View,
   ViewStyle,
 } from 'react-native';
@@ -53,4 +55,5 @@ export interface IInputBase {
   refInput?: RefObject<TextInput>;
   multiline?: boolean;
   numberOfLines?: number;
+  styleInput?: StyleProp<TextStyle>;
 }

@@ -8,12 +8,12 @@ export interface Metadata {
   title?: boolean;
   type?: MetadataType;
   visible?: boolean;
-  numberOfLines?:number;
+  numberOfLines?: number;
 }
 
 export interface CommonTableProps {
   currentPage?: number;
-  data?: any[];
+  data?: unknown[];
   isLoading?: boolean;
   isLoadingMoreData?: boolean;
   onLoadMoreData?: (currentPage: number, pageSize: number) => void;

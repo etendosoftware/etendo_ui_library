@@ -3,7 +3,7 @@ import {
   NEUTRAL_1000,
   NEUTRAL_400,
   NEUTRAL_800,
-} from '../../../../../../styles/colors';
+} from '../../../../styles/colors';
 
 export const styles = StyleSheet.create({
   textName: {
@@ -17,36 +17,19 @@ export const styles = StyleSheet.create({
   textValue: {
     fontFamily: 'Inter',
     color: NEUTRAL_1000,
-    fontWeight: '600',
-    fontSize: 14,
-    lineHeight: 20,
-    marginLeft: 4,
-  },
-  textValueLong: {
-    fontFamily: 'Inter',
-    color: NEUTRAL_1000,
-    fontWeight: '600',
+    fontWeight: '800',
     fontSize: 14,
     lineHeight: 20,
     marginLeft: 12,
-  },
-  textValueShort: {
-    fontFamily: 'Inter',
-    color: NEUTRAL_1000,
-    fontWeight: '600',
-    fontSize: 14,
-    lineHeight: 20,
-    marginLeft: 4,
   },
   row: {
     width: '100%',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    paddingRight: 12,
+    paddingRight: 8,
     marginBottom: 8,
     alignItems: 'center',
   },
-
   column: {
     flexDirection: 'column',
     paddingRight: 12,
@@ -61,6 +44,7 @@ export const styles = StyleSheet.create({
   calendar: {
     width: 16,
     height: 16,
+    marginRight: 4,
     minWidth: 16,
     maxWidth: 16,
   },
@@ -71,20 +55,26 @@ export const styles = StyleSheet.create({
     overflow: 'hidden',
     lineHeight: 20,
     alignSelf: 'center',
-    flex: 1,
     textAlignVertical: 'center',
     display: 'flex',
+    flex: 1,
   },
   contentMiddleRow: {
     maxWidth: '50%',
     flexDirection: 'row',
     alignItems: 'center',
-    height: 20,
+    height: 30,
   },
   paddingLeft: {
     paddingLeft: 8,
   },
   paddingRight: {
     paddingRight: 8,
+  },
+  statusContainer: {
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 4,
+    marginLeft: 12,
   },
 });

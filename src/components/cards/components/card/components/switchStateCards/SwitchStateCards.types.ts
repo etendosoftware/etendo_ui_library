@@ -1,18 +1,22 @@
-import {DimensionValue} from 'react-native';
-import {CardsMetadata} from '../../../../Cards.types';
+import { CardsMetadata } from '../../../../Cards.types';
 
 export interface SwitchStateCardsProps {
-  data: Array<any>;
+  data?: Array<any>;
   metadata: CardsMetadata[];
   isLoading?: boolean;
-  onPressCard?: (primary: string) => void;
   textEmptyCards?: string;
   commentEmptyCards?: string;
-  tableHeight?: DimensionValue;
-  isTitle?: boolean;
-  onHoldCard: (...params: any[]) => void;
-  handleItemsSelected: (...params: any[]) => void;
-  isSelectionMode: boolean;
+  cardsHeight?: number;
   maxRows?: number;
   maxTitles?: number;
+  selectedIndex?: number | null;
+  onPressCard?: (primary: string, index: number) => void;
+  onCardLayout?: (index: number, y: number) => void;
+  onSelectCard?: (id: any, index: number) => void;
+  onChange?: (
+    primary?: string,
+    itemIndex?: number,
+    key?: string,
+    value?: any,
+  ) => void;
 }
