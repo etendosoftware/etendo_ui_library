@@ -230,7 +230,7 @@ const Cards = ({
           )}
           {title && (
             <Text numberOfLines={1} ellipsizeMode="tail" style={styles.title}>
-              {`${title} ${`(${dataList?.length ?? 0})`}`}
+              {title} ({dataList?.length ?? 0})
             </Text>
           )}
         </View>
