@@ -4,4 +4,5 @@ export type MetadataType =
   | 'boolean'
   | 'date'
   | 'time'
+  | 'status'
   | 'custom';
