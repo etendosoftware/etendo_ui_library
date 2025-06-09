@@ -7,5 +7,5 @@ export interface SwitchTitleCardProps {
   color?: TextStyle;
   isDivisor?: boolean;
   disabled?: boolean;
-  onChange?: (key: string, value: any) => void;
+  onChange?: (key?: string, value?: any) => void;
 }
