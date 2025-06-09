@@ -44,6 +44,7 @@ const InputBase = ({
   refInput,
   multiline,
   numberOfLines = 1,
+  styleInput,
 }: IInputBase) => {
   const isEditable: boolean = onPress ? false : !isDisabled;
 
@@ -243,6 +244,7 @@ const InputBase = ({
             numberOfLines={numberOfLines}
             onContentSizeChange={handleContentSizeChange}
             style={[
+              styleInput,
               textInputStyle,
               onPress && cursorPointer(),
               {
