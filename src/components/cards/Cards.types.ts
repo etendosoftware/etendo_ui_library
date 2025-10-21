@@ -19,6 +19,8 @@ export interface CardsMetadata extends Metadata {
   customComponent?: (props: CustomComponentProps) => React.ReactNode;
   customProps?: Record<string, any>;
   statusMetadata?: Record<string, StatusInfo>;
+  isEditing?: boolean;
+  debounceDelay?: number;
 }
 
 export interface CardsProps {
@@ -34,12 +36,7 @@ export interface CardsProps {
   onPressCard?: (primary: string, index: number) => void;
   onSelectCard?: (primary: string, index: number) => void;
   onFetchData?: (currentPage: number, pageSize?: number) => Promise<any[]>;
-  onChange?: (
-    primary?: string,
-    itemIndex?: number,
-    key?: string,
-    value?: any,
-  ) => void;
+  onChange?: (newValue: unknown, oldValue: unknown, index: number) => void;
   isResetFetching?: boolean;
   maxTitles?: number;
   maxRows?: number;

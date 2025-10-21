@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text } from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import { View, Text, Pressable } from 'react-native';
 import {
   CalendarIcon,
   CheckSquareicon,
@@ -9,6 +9,9 @@ import {
 import { styles } from './SwitchRowCard.style';
 import { SwitchRowCardProps } from './SwitchRowCard.type';
 import { NEUTRAL_0, PRIMARY_100 } from '../../../../../../styles/colors';
+import TextInput from '../../../../../inputBase/text-input/TextInput';
+import DatePickerInput from '../../../../../inputBase/date-picker-input/DatePickerInput';
+import { useDebounce } from '../../../../../../hooks';
 
 const DOTS: string = '··························';
 const MAX_VALUE_LENGTH = 20;
@@ -70,15 +73,44 @@ const SwitchRowCard = ({
   color = {},
   disabled,
   onChange,
+  debounceDelay = 500,
 }: SwitchRowCardProps) => {
   const [shouldUseColumnLayout, setShouldUseColumnLayout] = useState(false);
+
+  // Local state for input values while typing (before debounce)
+  const [localValue, setLocalValue] = useState<any>(null);
 
   useEffect(() => {
     if (row?.type === 'string' && row?.key && item[row.key]) {
       const valueText = String(item[row.key]);
-      setShouldUseColumnLayout(valueText.length > MAX_VALUE_LENGTH);
+      const shouldUseColumn = valueText.length > MAX_VALUE_LENGTH;
+      if (shouldUseColumn !== shouldUseColumnLayout) {
+        setShouldUseColumnLayout(shouldUseColumn);
+      }
     }
-  }, [row, item]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [row?.type, row?.key, item[row?.key || '']]);
+
+  // Reset local value when item changes from parent
+  useEffect(() => {
+    if (row?.key && localValue !== null && item[row.key] !== localValue) {
+      setLocalValue(null);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [item, row?.key]);
+
+  // Memoize the onChange callback to prevent recreating debounced function
+  const memoizedOnChange = useCallback(
+    (key: string | undefined, value: any) => {
+      if (onChange && key) {
+        onChange(key, value);
+      }
+    },
+    [onChange],
+  );
+
+  // Create debounced onChange handler for text inputs
+  const debouncedOnChange = useDebounce(memoizedOnChange, debounceDelay);
 
   if (!row) {
     return <></>;
@@ -97,6 +129,149 @@ const SwitchRowCard = ({
         {...row.customProps}
       />
     );
+  }
+
+  // Handle editable fields
+  if (row.isEditing && row.key && !disabled) {
+    const currentValue = localValue !== null ? localValue : item[row.key];
+
+    // Immediate onChange (for boolean, calendar clicks, etc)
+    const handleChange = (value: any) => {
+      if (onChange) {
+        onChange(row.key, value);
+      }
+    };
+
+    // Debounced onChange (for text inputs)
+    const handleDebouncedChange = (value: any) => {
+      // Update local state immediately (for UI responsiveness)
+      setLocalValue(value);
+      // Call debounced onChange (will execute after delay)
+      debouncedOnChange(row.key, value);
+    };
+
+    // Editable String
+    if (row.type === 'string') {
+      return (
+        <View style={styles.row}>
+          <View style={[styles.contentMiddleRow, styles.paddingRight]}>
+            <Text
+              style={[styles.textName, color]}
+              ellipsizeMode="tail"
+              numberOfLines={1}>
+              {row?.label}
+            </Text>
+          </View>
+          <View
+            style={[
+              styles.contentMiddleRow,
+              styles.paddingLeft,
+              styles.editableInput,
+            ]}>
+            <TextInput
+              value={String(currentValue || '')}
+              onChangeText={handleDebouncedChange}
+              isDisabled={false}
+              styleContainer={styles.inputContainer}
+              styleInput={styles.inputStyle}
+            />
+          </View>
+        </View>
+      );
+    }
+
+    // Editable Number
+    if (row.type === 'number') {
+      return (
+        <View style={styles.row}>
+          <View style={[styles.contentMiddleRow, styles.paddingRight]}>
+            <Text
+              style={[styles.textName, color]}
+              ellipsizeMode="tail"
+              numberOfLines={1}>
+              {row?.label}
+            </Text>
+          </View>
+          <View
+            style={[
+              styles.contentMiddleRow,
+              styles.paddingLeft,
+              styles.editableInput,
+            ]}>
+            <TextInput
+              value={String(currentValue || '')}
+              onChangeText={text => {
+                const numValue = parseFloat(text);
+                handleDebouncedChange(isNaN(numValue) ? 0 : numValue);
+              }}
+              keyboardType="numeric"
+              isDisabled={false}
+              styleContainer={styles.inputContainer}
+              styleInput={styles.inputStyle}
+            />
+          </View>
+        </View>
+      );
+    }
+
+    // Editable Date
+    if (row.type === 'date') {
+      return (
+        <View style={styles.row}>
+          <View style={[styles.contentMiddleRow, styles.paddingRight]}>
+            <Text
+              style={[styles.textName, color]}
+              ellipsizeMode="tail"
+              numberOfLines={1}>
+              {row?.label}
+            </Text>
+          </View>
+          <View
+            style={[
+              styles.contentMiddleRow,
+              styles.paddingLeft,
+              styles.editableInput,
+            ]}>
+            <DatePickerInput
+              value={currentValue ? String(currentValue) : undefined}
+              onChangeText={handleDebouncedChange}
+              isDisabled={false}
+              size="small"
+              language="es-ES"
+              dateFormat="DD/MM/YYYY"
+            />
+          </View>
+        </View>
+      );
+    }
+
+    // Editable Boolean
+    if (row.type === 'boolean') {
+      return (
+        <Pressable
+          style={styles.row}
+          onPress={() => handleChange(!currentValue)}>
+          <View style={[styles.contentMiddleRow, styles.paddingRight]}>
+            <Text
+              style={[styles.textName, color]}
+              ellipsizeMode="tail"
+              numberOfLines={1}>
+              {row?.label}
+            </Text>
+          </View>
+          <Text numberOfLines={1} ellipsizeMode="clip" style={styles.dots}>
+            {DOTS}
+          </Text>
+          <View style={[styles.contentMiddleRow, styles.paddingLeft]}>
+            {currentValue ? (
+              <CheckSquareicon style={styles.check} fill={PRIMARY_100} />
+            ) : (
+              <SquareIcon style={styles.check} fill={PRIMARY_100} />
+            )}
+          </View>
+        </Pressable>
+      );
+    }
   }
 
   if (row.type !== 'string' && row.type) {
