@@ -11,6 +11,15 @@ import { PRIMARY_100 } from '../../../../../../../styles/colors';
 import { styles } from '../SwitchTitleCard.style';
 import { CardsMetadata } from '../../../../../Cards.types';
 
+// Helper para extraer el valor a mostrar en el dropdown
+const getDisplayValue = (value: any, displayKey?: string): string => {
+  if (value === null || value === undefined) return '';
+  if (typeof value === 'object' && displayKey) {
+    return String(value[displayKey] || '');
+  }
+  return String(value);
+};
+
 interface EditableTitleFieldProps {
   row: CardsMetadata;
   currentValue: any;
@@ -84,7 +93,7 @@ const EditableTitleField: React.FC<EditableTitleFieldProps> = ({
       case 'selector':
         return (
           <DropdownInput
-            value={currentValue?.[row.displayKey || 'name'] || currentValue}
+            value={getDisplayValue(currentValue, row.displayKey)}
             onSelect={handleChange}
             staticData={row.staticData}
             displayKey={row.displayKey}

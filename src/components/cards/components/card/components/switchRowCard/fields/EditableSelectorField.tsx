@@ -3,6 +3,15 @@ import { View, Text } from 'react-native';
 import DropdownInput from '../../../../../../inputBase/dropdown-input/DropdownInput';
 import { styles } from '../SwitchRowCard.style';
 
+// Helper para extraer el valor a mostrar en el dropdown
+const getDisplayValue = (value: any, displayKey?: string): string => {
+  if (value === null || value === undefined) return '';
+  if (typeof value === 'object' && displayKey) {
+    return String(value[displayKey] || '');
+  }
+  return String(value);
+};
+
 interface EditableSelectorFieldProps {
   label: string;
   value: any;
@@ -46,7 +55,7 @@ const EditableSelectorField: React.FC<EditableSelectorFieldProps> = ({
             styles.editableInput,
           ]}>
           <DropdownInput
-            value={value?.[displayKey || 'name'] || value}
+            value={getDisplayValue(value, displayKey)}
             onSelect={onSelect}
             staticData={staticData}
             displayKey={displayKey}
@@ -69,7 +78,7 @@ const EditableSelectorField: React.FC<EditableSelectorFieldProps> = ({
       </Text>
       <View style={styles.editableInputColumn}>
         <DropdownInput
-          value={value?.[displayKey || 'name'] || value}
+          value={getDisplayValue(value, displayKey)}
           onSelect={onSelect}
           staticData={staticData}
           displayKey={displayKey}
