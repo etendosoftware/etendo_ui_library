@@ -105,6 +105,17 @@ const ExampleApp = () => {
   >();
   const [isLegendExpanded, setIsLegendExpanded] = useState(true);
 
+  // Función setValue que se recibe desde el componente Cards
+  const setValueFnRef = React.useRef<
+    ((index: number, key: string, value: any) => void) | null
+  >(null);
+
+  const handleSetValueFn = (
+    fn: (index: number, key: string, value: any) => void,
+  ) => {
+    setValueFnRef.current = fn;
+  };
+
   // Metadata SOLO LECTURA - Todos los campos visibles pero no editables
   const metadataReadOnly: CardsMetadata[] = [
     // Títulos
@@ -450,6 +461,84 @@ const ExampleApp = () => {
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
   };
 
+  // Ejemplos de uso de setValue - Modificar cards externamente
+  const handleIncreaseAllSalaries = () => {
+    if (!setValueFnRef.current) {
+      console.warn('⚠️ setValue no está disponible aún');
+      return;
+    }
+
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log('💰 INCREMENTANDO SALARIOS +10%');
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+
+    cardsData.forEach((card, index) => {
+      const currentSalary = (card as any).salary || 0;
+      const newSalary = Math.round(currentSalary * 1.1);
+      setValueFnRef.current!(index, 'salary', newSalary);
+      console.log(
+        `Card ${index + 1}: ${currentSalary} → ${newSalary} (+${newSalary - currentSalary})`,
+      );
+    });
+
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+  };
+
+  const handleVerifySelected = () => {
+    if (!setValueFnRef.current) {
+      console.warn('⚠️ setValue no está disponible aún');
+      return;
+    }
+
+    if (selectedCardIndex === undefined) {
+      console.warn('⚠️ No hay ninguna card seleccionada');
+      return;
+    }
+
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log('✅ VERIFICANDO CARD SELECCIONADA');
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log('Índice:', selectedCardIndex);
+
+    setValueFnRef.current(selectedCardIndex, 'verified', true);
+    setValueFnRef.current(selectedCardIndex, 'status', 'active');
+
+    console.log('✅ Card verificada y activada');
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+  };
+
+  const handleUpdateFirstCardName = () => {
+    if (!setValueFnRef.current) {
+      console.warn('⚠️ setValue no está disponible aún');
+      return;
+    }
+
+    if (cardsData.length === 0) {
+      console.warn('⚠️ No hay cards disponibles');
+      return;
+    }
+
+    const randomNames = [
+      'Roberto García',
+      'Laura Fernández',
+      'Miguel Ángel Torres',
+      'Sofía Ramírez',
+      'Andrés Castillo',
+    ];
+    const randomName =
+      randomNames[Math.floor(Math.random() * randomNames.length)];
+
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log('📝 CAMBIANDO NOMBRE DE PRIMERA CARD');
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log('Nombre anterior:', (cardsData[0] as any).name);
+    console.log('Nombre nuevo:', randomName);
+
+    setValueFnRef.current(0, 'name', randomName);
+
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -466,6 +555,33 @@ const ExampleApp = () => {
           typeStyle={editMode ? 'primary' : 'secondary'}
         />
         <Button text="🔄 Resetear" onPress={handleReset} typeStyle="white" />
+      </View>
+
+      <View style={styles.setValueExamples}>
+        <Text style={styles.setValueTitle}>
+          🎯 Ejemplos de setValue (Control Externo)
+        </Text>
+        <View style={styles.setValueButtons}>
+          <Button
+            text="💰 +10% Salarios"
+            onPress={handleIncreaseAllSalaries}
+            typeStyle="secondary"
+            height={36}
+          />
+          <Button
+            text="✅ Verificar Seleccionada"
+            onPress={handleVerifySelected}
+            typeStyle="secondary"
+            height={36}
+            disabled={selectedCardIndex === undefined}
+          />
+          <Button
+            text="📝 Cambiar 1er Nombre"
+            onPress={handleUpdateFirstCardName}
+            typeStyle="secondary"
+            height={36}
+          />
+        </View>
       </View>
 
       <View style={styles.info}>
@@ -493,6 +609,7 @@ const ExampleApp = () => {
           onPressCard={handlePressCard}
           onSelectCard={handleSelectCard}
           onChange={handleCardChange}
+          onSetValue={handleSetValueFn}
           onPressButton={handleAddCard}
           scrollToIndex={selectedCardIndex}
           textEmptyCards="No hay empleados registrados"
@@ -561,6 +678,19 @@ const ExampleApp = () => {
               <Text style={styles.legendSubtitle}>Campos Solo Lectura:</Text>
               <Text style={styles.legendItem}>
                 🔒 ID, Estado (Status Badge)
+              </Text>
+            </View>
+
+            <View style={styles.legendSection}>
+              <Text style={styles.legendSubtitle}>setValue API:</Text>
+              <Text style={styles.legendItem}>
+                • Modifica valores desde componente externo
+              </Text>
+              <Text style={styles.legendItem}>
+                • Uso: setValue(index, key, value)
+              </Text>
+              <Text style={styles.legendItem}>
+                • Ejemplo: Botones de control externo arriba
               </Text>
             </View>
           </>
@@ -644,6 +774,23 @@ const styles = StyleSheet.create({
     color: '#6B7280',
     marginBottom: 3,
     marginLeft: 8,
+  },
+  setValueExamples: {
+    padding: 16,
+    backgroundColor: '#FEF3C7',
+    borderBottomWidth: 1,
+    borderBottomColor: '#FDE68A',
+  },
+  setValueTitle: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#92400E',
+    marginBottom: 12,
+  },
+  setValueButtons: {
+    flexDirection: 'row',
+    gap: 8,
+    flexWrap: 'wrap',
   },
 });
 

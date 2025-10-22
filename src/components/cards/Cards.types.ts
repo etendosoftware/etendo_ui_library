@@ -38,6 +38,7 @@ export interface CardsProps {
   onSelectCard?: (primary: string, index: number) => void;
   onFetchData?: (currentPage: number, pageSize?: number) => Promise<any[]>;
   onChange?: (newValue: unknown, oldValue: unknown, index: number) => void;
+  onSetValue?: (setValueFn: (index: number, key: string, value: any) => void) => void;
   isResetFetching?: boolean;
   maxTitles?: number;
   maxRows?: number;
