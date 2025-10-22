@@ -5,4 +5,5 @@ export type MetadataType =
   | 'date'
   | 'time'
   | 'status'
-  | 'custom';
+  | 'custom'
+  | 'selector';

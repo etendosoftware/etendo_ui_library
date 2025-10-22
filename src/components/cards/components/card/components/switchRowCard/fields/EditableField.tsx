@@ -3,6 +3,7 @@ import EditableStringField from './EditableStringField';
 import EditableNumberField from './EditableNumberField';
 import EditableDateField from './EditableDateField';
 import EditableBooleanField from './EditableBooleanField';
+import EditableSelectorField from './EditableSelectorField';
 import { SwitchRowCardProps } from '../SwitchRowCard.type';
 
 interface EditableFieldProps {
@@ -66,6 +67,20 @@ const EditableField: React.FC<EditableFieldProps> = ({
           onPress={() => handleChange(!currentValue)}
           useInlineLayout={useInlineLayout}
           color={color}
+        />
+      );
+
+    case 'selector':
+      return (
+        <EditableSelectorField
+          label={label}
+          value={currentValue}
+          onSelect={handleChange}
+          useInlineLayout={useInlineLayout}
+          color={color}
+          staticData={row.staticData}
+          displayKey={row.displayKey}
+          onFetchData={row.onFetchData}
         />
       );
 

@@ -6,6 +6,15 @@ import { getIconByType } from '../switchRowCard/SwitchRowCard';
 import { useDebounce } from '../../../../../../hooks';
 import EditableTitleField from './fields/EditableTitleField';
 
+// Helper para extraer el valor a mostrar
+const getDisplayValue = (value: any, displayKey?: string): string => {
+  if (value === null || value === undefined) return '';
+  if (typeof value === 'object' && displayKey) {
+    return String(value[displayKey] || '');
+  }
+  return String(value);
+};
+
 const SwitchTitleCard = ({
   row,
   item,
@@ -103,7 +112,7 @@ const SwitchTitleCard = ({
             style={[styles.textValueBold, color]}
             ellipsizeMode="tail"
             numberOfLines={2}>
-            {row?.key ? item[row.key] : ''}
+            {row?.key ? getDisplayValue(item[row.key], row.displayKey) : ''}
           </Text>
         )}
       </View>

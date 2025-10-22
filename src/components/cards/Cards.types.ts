@@ -22,6 +22,13 @@ export interface CardsMetadata extends Metadata {
   isEditing?: boolean;
   debounceDelay?: number;
   inLineEditable?: boolean;
+  staticData?: any[];
+  displayKey?: string;
+  onFetchData?: (
+    currentPage: number,
+    pageSize?: number,
+    filterText?: string,
+  ) => Promise<any[]>;
 }
 
 export interface CardsProps {

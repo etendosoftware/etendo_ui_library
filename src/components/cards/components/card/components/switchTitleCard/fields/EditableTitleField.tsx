@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import TextInput from '../../../../../../inputBase/text-input/TextInput';
 import DatePickerInput from '../../../../../../inputBase/date-picker-input/DatePickerInput';
+import DropdownInput from '../../../../../../inputBase/dropdown-input/DropdownInput';
 import {
   CheckSquareicon,
   SquareIcon,
@@ -78,6 +79,19 @@ const EditableTitleField: React.FC<EditableTitleFieldProps> = ({
           <Pressable onPress={() => handleChange(!currentValue)}>
             <CheckboxIcon style={styles.check} fill={PRIMARY_100} />
           </Pressable>
+        );
+
+      case 'selector':
+        return (
+          <DropdownInput
+            value={currentValue?.[row.displayKey || 'name'] || currentValue}
+            onSelect={handleChange}
+            staticData={row.staticData}
+            displayKey={row.displayKey}
+            onFetchData={row.onFetchData}
+            styleContainer={styles.titleInputContainer}
+            styleInput={styles.titleInputStyle}
+          />
         );
 
       default:

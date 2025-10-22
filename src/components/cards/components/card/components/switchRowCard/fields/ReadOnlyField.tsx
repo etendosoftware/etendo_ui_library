@@ -14,6 +14,15 @@ interface ReadOnlyFieldProps {
   shouldUseColumnLayout: boolean;
 }
 
+// Helper para extraer el valor a mostrar
+const getDisplayValue = (value: any, displayKey?: string): string => {
+  if (value === null || value === undefined) return '';
+  if (typeof value === 'object' && displayKey) {
+    return String(value[displayKey] || '');
+  }
+  return String(value);
+};
+
 const ReadOnlyField: React.FC<ReadOnlyFieldProps> = ({
   row,
   item,
@@ -43,7 +52,7 @@ const ReadOnlyField: React.FC<ReadOnlyFieldProps> = ({
               style={[styles.textValue, color]}
               ellipsizeMode="tail"
               numberOfLines={1}>
-              {row?.key ? item[row.key] : ''}
+              {row?.key ? getDisplayValue(item[row.key], row.displayKey) : ''}
             </Text>
           )}
         </View>
@@ -65,7 +74,7 @@ const ReadOnlyField: React.FC<ReadOnlyFieldProps> = ({
           style={[styles.textValueLong, color]}
           ellipsizeMode="tail"
           numberOfLines={row?.numberOfLines ?? 2}>
-          {row?.key ? item[row.key] : ''}
+          {row?.key ? getDisplayValue(item[row.key], row.displayKey) : ''}
         </Text>
       </View>
     );
@@ -87,7 +96,7 @@ const ReadOnlyField: React.FC<ReadOnlyFieldProps> = ({
       </Text>
       <View style={[styles.contentMiddleRow, styles.paddingLeft]}>
         <Text style={[styles.textValueShort, color]} numberOfLines={1}>
-          {row?.key ? item[row.key] : ''}
+          {row?.key ? getDisplayValue(item[row.key], row.displayKey) : ''}
         </Text>
       </View>
     </View>
