@@ -134,6 +134,7 @@ const SwitchRowCard = ({
   // Handle editable fields
   if (row.isEditing && row.key && !disabled) {
     const currentValue = localValue !== null ? localValue : item[row.key];
+    const useInlineLayout = row.inLineEditable ?? true;
 
     // Immediate onChange (for boolean, calendar clicks, etc)
     const handleChange = (value: any) => {
@@ -152,125 +153,218 @@ const SwitchRowCard = ({
 
     // Editable String
     if (row.type === 'string') {
-      return (
-        <View style={styles.row}>
-          <View style={[styles.contentMiddleRow, styles.paddingRight]}>
+      if (useInlineLayout) {
+        return (
+          <View style={styles.row}>
+            <View style={[styles.contentMiddleRow, styles.paddingRight]}>
+              <Text
+                style={[styles.textName, color]}
+                ellipsizeMode="tail"
+                numberOfLines={1}>
+                {row?.label}
+              </Text>
+            </View>
+            <View
+              style={[
+                styles.contentMiddleRow,
+                styles.paddingLeft,
+                styles.editableInput,
+              ]}>
+              <TextInput
+                value={String(currentValue || '')}
+                onChangeText={handleDebouncedChange}
+                isDisabled={false}
+                styleContainer={styles.inputContainer}
+                styleInput={styles.inputStyle}
+              />
+            </View>
+          </View>
+        );
+      } else {
+        return (
+          <View style={styles.columnEditable}>
             <Text
               style={[styles.textName, color]}
               ellipsizeMode="tail"
               numberOfLines={1}>
               {row?.label}
             </Text>
+            <View style={styles.editableInputColumn}>
+              <TextInput
+                value={String(currentValue || '')}
+                onChangeText={handleDebouncedChange}
+                isDisabled={false}
+                styleContainer={styles.inputContainer}
+                styleInput={styles.inputStyle}
+              />
+            </View>
           </View>
-          <View
-            style={[
-              styles.contentMiddleRow,
-              styles.paddingLeft,
-              styles.editableInput,
-            ]}>
-            <TextInput
-              value={String(currentValue || '')}
-              onChangeText={handleDebouncedChange}
-              isDisabled={false}
-              styleContainer={styles.inputContainer}
-              styleInput={styles.inputStyle}
-            />
-          </View>
-        </View>
-      );
+        );
+      }
     }
 
     // Editable Number
     if (row.type === 'number') {
-      return (
-        <View style={styles.row}>
-          <View style={[styles.contentMiddleRow, styles.paddingRight]}>
+      if (useInlineLayout) {
+        return (
+          <View style={styles.row}>
+            <View style={[styles.contentMiddleRow, styles.paddingRight]}>
+              <Text
+                style={[styles.textName, color]}
+                ellipsizeMode="tail"
+                numberOfLines={1}>
+                {row?.label}
+              </Text>
+            </View>
+            <View
+              style={[
+                styles.contentMiddleRow,
+                styles.paddingLeft,
+                styles.editableInput,
+              ]}>
+              <TextInput
+                value={String(currentValue || '')}
+                onChangeText={text => {
+                  const numValue = parseFloat(text);
+                  handleDebouncedChange(isNaN(numValue) ? 0 : numValue);
+                }}
+                keyboardType="numeric"
+                isDisabled={false}
+                styleContainer={styles.inputContainer}
+                styleInput={styles.inputStyle}
+              />
+            </View>
+          </View>
+        );
+      } else {
+        return (
+          <View style={styles.columnEditable}>
             <Text
               style={[styles.textName, color]}
               ellipsizeMode="tail"
               numberOfLines={1}>
               {row?.label}
             </Text>
+            <View style={styles.editableInputColumn}>
+              <TextInput
+                value={String(currentValue || '')}
+                onChangeText={text => {
+                  const numValue = parseFloat(text);
+                  handleDebouncedChange(isNaN(numValue) ? 0 : numValue);
+                }}
+                keyboardType="numeric"
+                isDisabled={false}
+                styleContainer={styles.inputContainer}
+                styleInput={styles.inputStyle}
+              />
+            </View>
           </View>
-          <View
-            style={[
-              styles.contentMiddleRow,
-              styles.paddingLeft,
-              styles.editableInput,
-            ]}>
-            <TextInput
-              value={String(currentValue || '')}
-              onChangeText={text => {
-                const numValue = parseFloat(text);
-                handleDebouncedChange(isNaN(numValue) ? 0 : numValue);
-              }}
-              keyboardType="numeric"
-              isDisabled={false}
-              styleContainer={styles.inputContainer}
-              styleInput={styles.inputStyle}
-            />
-          </View>
-        </View>
-      );
+        );
+      }
     }
 
     // Editable Date
     if (row.type === 'date') {
-      return (
-        <View style={styles.row}>
-          <View style={[styles.contentMiddleRow, styles.paddingRight]}>
+      if (useInlineLayout) {
+        return (
+          <View style={styles.row}>
+            <View style={[styles.contentMiddleRow, styles.paddingRight]}>
+              <Text
+                style={[styles.textName, color]}
+                ellipsizeMode="tail"
+                numberOfLines={1}>
+                {row?.label}
+              </Text>
+            </View>
+            <View
+              style={[
+                styles.contentMiddleRow,
+                styles.paddingLeft,
+                styles.editableInput,
+              ]}>
+              <DatePickerInput
+                value={currentValue ? String(currentValue) : undefined}
+                onChangeText={handleDebouncedChange}
+                isDisabled={false}
+                size="small"
+                language="es-ES"
+                dateFormat="DD/MM/YYYY"
+              />
+            </View>
+          </View>
+        );
+      } else {
+        return (
+          <View style={styles.columnEditable}>
             <Text
               style={[styles.textName, color]}
               ellipsizeMode="tail"
               numberOfLines={1}>
               {row?.label}
             </Text>
+            <View style={styles.editableInputColumn}>
+              <DatePickerInput
+                value={currentValue ? String(currentValue) : undefined}
+                onChangeText={handleDebouncedChange}
+                isDisabled={false}
+                size="small"
+                language="es-ES"
+                dateFormat="DD/MM/YYYY"
+              />
+            </View>
           </View>
-          <View
-            style={[
-              styles.contentMiddleRow,
-              styles.paddingLeft,
-              styles.editableInput,
-            ]}>
-            <DatePickerInput
-              value={currentValue ? String(currentValue) : undefined}
-              onChangeText={handleDebouncedChange}
-              isDisabled={false}
-              size="small"
-              language="es-ES"
-              dateFormat="DD/MM/YYYY"
-            />
-          </View>
-        </View>
-      );
+        );
+      }
     }
 
     // Editable Boolean
     if (row.type === 'boolean') {
-      return (
-        <Pressable
-          style={styles.row}
-          onPress={() => handleChange(!currentValue)}>
-          <View style={[styles.contentMiddleRow, styles.paddingRight]}>
+      if (useInlineLayout) {
+        return (
+          <Pressable
+            style={styles.row}
+            onPress={() => handleChange(!currentValue)}>
+            <View style={[styles.contentMiddleRow, styles.paddingRight]}>
+              <Text
+                style={[styles.textName, color]}
+                ellipsizeMode="tail"
+                numberOfLines={1}>
+                {row?.label}
+              </Text>
+            </View>
+            <Text numberOfLines={1} ellipsizeMode="clip" style={styles.dots}>
+              {DOTS}
+            </Text>
+            <View style={[styles.contentMiddleRow, styles.paddingLeft]}>
+              {currentValue ? (
+                <CheckSquareicon style={styles.check} fill={PRIMARY_100} />
+              ) : (
+                <SquareIcon style={styles.check} fill={PRIMARY_100} />
+              )}
+            </View>
+          </Pressable>
+        );
+      } else {
+        return (
+          <Pressable
+            style={styles.columnEditable}
+            onPress={() => handleChange(!currentValue)}>
             <Text
               style={[styles.textName, color]}
               ellipsizeMode="tail"
               numberOfLines={1}>
               {row?.label}
             </Text>
-          </View>
-          <Text numberOfLines={1} ellipsizeMode="clip" style={styles.dots}>
-            {DOTS}
-          </Text>
-          <View style={[styles.contentMiddleRow, styles.paddingLeft]}>
-            {currentValue ? (
-              <CheckSquareicon style={styles.check} fill={PRIMARY_100} />
-            ) : (
-              <SquareIcon style={styles.check} fill={PRIMARY_100} />
-            )}
-          </View>
-        </Pressable>
-      );
+            <View style={styles.editableInputColumn}>
+              {currentValue ? (
+                <CheckSquareicon style={styles.check} fill={PRIMARY_100} />
+              ) : (
+                <SquareIcon style={styles.check} fill={PRIMARY_100} />
+              )}
+            </View>
+          </Pressable>
+        );
+      }
     }
   }
 

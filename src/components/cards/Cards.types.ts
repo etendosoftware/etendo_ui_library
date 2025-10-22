@@ -21,6 +21,7 @@ export interface CardsMetadata extends Metadata {
   statusMetadata?: Record<string, StatusInfo>;
   isEditing?: boolean;
   debounceDelay?: number;
+  inLineEditable?: boolean;
 }
 
 export interface CardsProps {

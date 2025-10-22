@@ -104,4 +104,14 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     padding: 8,
   },
+  columnEditable: {
+    flexDirection: 'column',
+    paddingBottom: 8,
+    flex: 1,
+  },
+  editableInputColumn: {
+    paddingHorizontal: 12,
+    flex: 1,
+    marginTop: 4,
+  },
 });
