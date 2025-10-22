@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text } from 'react-native';
 import DropdownInput from '../../../../../../inputBase/dropdown-input/DropdownInput';
 import { styles } from '../SwitchRowCard.style';
+import FieldLayout from './FieldLayout';
 
 // Helper para extraer el valor a mostrar en el dropdown
 const getDisplayValue = (value: any, displayKey?: string): string => {
@@ -37,57 +37,18 @@ const EditableSelectorField: React.FC<EditableSelectorFieldProps> = ({
   displayKey,
   onFetchData,
 }) => {
-  if (useInlineLayout) {
-    return (
-      <View style={styles.row}>
-        <View style={[styles.contentMiddleRow, styles.paddingRight]}>
-          <Text
-            style={[styles.textName, color]}
-            ellipsizeMode="tail"
-            numberOfLines={1}>
-            {label}
-          </Text>
-        </View>
-        <View
-          style={[
-            styles.contentMiddleRow,
-            styles.paddingLeft,
-            styles.editableInput,
-          ]}>
-          <DropdownInput
-            value={getDisplayValue(value, displayKey)}
-            onSelect={onSelect}
-            staticData={staticData}
-            displayKey={displayKey}
-            onFetchData={onFetchData}
-            styleContainer={styles.inputContainer}
-            styleInput={styles.inputStyle}
-          />
-        </View>
-      </View>
-    );
-  }
-
   return (
-    <View style={styles.columnEditable}>
-      <Text
-        style={[styles.textName, color]}
-        ellipsizeMode="tail"
-        numberOfLines={1}>
-        {label}
-      </Text>
-      <View style={styles.editableInputColumn}>
-        <DropdownInput
-          value={getDisplayValue(value, displayKey)}
-          onSelect={onSelect}
-          staticData={staticData}
-          displayKey={displayKey}
-          onFetchData={onFetchData}
-          styleContainer={styles.inputContainer}
-          styleInput={styles.inputStyle}
-        />
-      </View>
-    </View>
+    <FieldLayout label={label} color={color} useInlineLayout={useInlineLayout}>
+      <DropdownInput
+        value={getDisplayValue(value, displayKey)}
+        onSelect={onSelect}
+        staticData={staticData}
+        displayKey={displayKey}
+        onFetchData={onFetchData}
+        styleContainer={styles.inputContainer}
+        styleInput={styles.inputStyle}
+      />
+    </FieldLayout>
   );
 };
 
