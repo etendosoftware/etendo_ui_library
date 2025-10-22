@@ -6,7 +6,6 @@ import { getIconByType } from '../switchRowCard/SwitchRowCard';
 import { useDebounce } from '../../../../../../hooks';
 import EditableTitleField from './fields/EditableTitleField';
 
-// Helper para extraer el valor a mostrar
 const getDisplayValue = (value: any, displayKey?: string): string => {
   if (value === null || value === undefined) return '';
   if (typeof value === 'object' && displayKey) {
