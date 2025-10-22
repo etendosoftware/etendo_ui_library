@@ -27,6 +27,7 @@ const Cards = ({
   onFetchData,
   onSelectCard,
   onChange,
+  onSetValue,
   styleContainer,
   maxTitles = DEFAULT_MAX_TITLES,
   maxRows = DEFAULT_MAX_ROWS,
@@ -212,6 +213,34 @@ const Cards = ({
     },
     [onPressCard, onSelectCard],
   );
+
+  const handleSetValue = useCallback(
+    (index: number, key: string, value: any) => {
+      setDataList(prevData => {
+        // Validate index inside the setter to use current data
+        if (index < 0 || index >= prevData.length) {
+          console.warn(
+            `Cards: Invalid index ${index}. Current length: ${prevData.length}`,
+          );
+          return prevData;
+        }
+
+        const newData = [...prevData];
+        const item = newData[index] as Record<string, any>;
+        newData[index] = { ...item, [key]: value };
+        return newData;
+      });
+    },
+    [],
+  );
+
+  // Expose setValue to parent component only once
+  useEffect(() => {
+    if (onSetValue) {
+      onSetValue(handleSetValue);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [onSetValue]);
 
   return (
     <View style={[styles.container, styleContainer]}>

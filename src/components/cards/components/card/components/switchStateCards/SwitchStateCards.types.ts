@@ -13,10 +13,5 @@ export interface SwitchStateCardsProps {
   onPressCard?: (primary: string, index: number) => void;
   onCardLayout?: (index: number, y: number) => void;
   onSelectCard?: (id: any, index: number) => void;
-  onChange?: (
-    primary?: string,
-    itemIndex?: number,
-    key?: string,
-    value?: any,
-  ) => void;
+  onChange?: (newValue: unknown, oldValue: unknown, index: number) => void;
 }

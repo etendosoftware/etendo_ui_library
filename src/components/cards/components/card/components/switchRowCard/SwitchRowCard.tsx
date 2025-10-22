@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text } from 'react-native';
 import {
   CalendarIcon,
@@ -9,8 +9,10 @@ import {
 import { styles } from './SwitchRowCard.style';
 import { SwitchRowCardProps } from './SwitchRowCard.type';
 import { NEUTRAL_0, PRIMARY_100 } from '../../../../../../styles/colors';
+import { useDebounce } from '../../../../../../hooks';
+import EditableField from './fields/EditableField';
+import ReadOnlyField from './fields/ReadOnlyField';
 
-const DOTS: string = '··························';
 const MAX_VALUE_LENGTH = 20;
 
 export const getIconByType = ({
@@ -70,20 +72,47 @@ const SwitchRowCard = ({
   color = {},
   disabled,
   onChange,
+  debounceDelay = 500,
 }: SwitchRowCardProps) => {
   const [shouldUseColumnLayout, setShouldUseColumnLayout] = useState(false);
+  const [localValue, setLocalValue] = useState<any>(null);
 
+  // Check if string value should use column layout
   useEffect(() => {
     if (row?.type === 'string' && row?.key && item[row.key]) {
       const valueText = String(item[row.key]);
-      setShouldUseColumnLayout(valueText.length > MAX_VALUE_LENGTH);
+      const shouldUseColumn = valueText.length > MAX_VALUE_LENGTH;
+      if (shouldUseColumn !== shouldUseColumnLayout) {
+        setShouldUseColumnLayout(shouldUseColumn);
+      }
     }
-  }, [row, item]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [row?.type, row?.key, item[row?.key || '']]);
+
+  // Reset local value when item changes from parent
+  useEffect(() => {
+    if (row?.key && localValue !== null && item[row.key] !== localValue) {
+      setLocalValue(null);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [item, row?.key]);
+
+  const memoizedOnChange = useCallback(
+    (key: string | undefined, value: any) => {
+      if (onChange && key) {
+        onChange(key, value);
+      }
+    },
+    [onChange],
+  );
+
+  const debouncedOnChange = useDebounce(memoizedOnChange, debounceDelay);
 
   if (!row) {
     return <></>;
   }
 
+  // Custom component rendering
   if (row.type === 'custom' && row.customComponent) {
     const CustomComponent = row.customComponent;
 
@@ -99,74 +128,44 @@ const SwitchRowCard = ({
     );
   }
 
-  if (row.type !== 'string' && row.type) {
+  // Editable field rendering
+  if (row.isEditing && row.key && !disabled) {
+    const currentValue = localValue !== null ? localValue : item[row.key];
+    const useInlineLayout = row.inLineEditable ?? true;
+
+    const handleChange = (value: any) => {
+      if (onChange) {
+        onChange(row.key, value);
+      }
+    };
+
+    const handleDebouncedChange = (value: any) => {
+      setLocalValue(value);
+      debouncedOnChange(row.key, value);
+    };
+
     return (
-      <View style={styles.row}>
-        <View style={[styles.contentMiddleRow, styles.paddingRight]}>
-          <Text
-            style={[styles.textName, color]}
-            ellipsizeMode="tail"
-            numberOfLines={1}>
-            {row?.label}
-          </Text>
-        </View>
-        <Text numberOfLines={1} ellipsizeMode="clip" style={styles.dots}>
-          {DOTS}
-        </Text>
-        <View style={[styles.contentMiddleRow, styles.paddingLeft]}>
-          {getIconByType({ row, item, color, disabled })}
-          {!['boolean', 'status'].includes(row.type) && (
-            <Text
-              style={[styles.textValue, color]}
-              ellipsizeMode="tail"
-              numberOfLines={1}>
-              {row?.key ? item[row.key] : ''}
-            </Text>
-          )}
-        </View>
-      </View>
+      <EditableField
+        row={row}
+        currentValue={currentValue}
+        handleChange={handleChange}
+        handleDebouncedChange={handleDebouncedChange}
+        useInlineLayout={useInlineLayout}
+        color={color}
+      />
     );
   }
 
-  if (shouldUseColumnLayout) {
-    return (
-      <View style={[styles.column]}>
-        <Text
-          style={[styles.textName, color]}
-          ellipsizeMode="tail"
-          numberOfLines={1}>
-          {row?.label}
-        </Text>
-        <Text
-          style={[styles.textValueLong, color]}
-          ellipsizeMode="tail"
-          numberOfLines={row?.numberOfLines ?? 2}>
-          {row?.key ? item[row.key] : ''}
-        </Text>
-      </View>
-    );
-  } else {
-    return (
-      <View style={styles.row}>
-        <View style={[styles.contentMiddleRow, styles.paddingRight]}>
-          <Text
-            style={[styles.textName, color]}
-            ellipsizeMode="tail"
-            numberOfLines={1}>
-            {row?.label}
-          </Text>
-        </View>
-        <Text numberOfLines={1} ellipsizeMode="clip" style={styles.dots}>
-          {DOTS}
-        </Text>
-        <View style={[styles.contentMiddleRow, styles.paddingLeft]}>
-          <Text style={[styles.textValueShort, color]} numberOfLines={1}>
-            {row?.key ? item[row.key] : ''}
-          </Text>
-        </View>
-      </View>
-    );
-  }
+  // Read-only field rendering
+  return (
+    <ReadOnlyField
+      row={row}
+      item={item}
+      color={color}
+      disabled={disabled}
+      shouldUseColumnLayout={shouldUseColumnLayout}
+    />
+  );
 };
 
 export default SwitchRowCard;

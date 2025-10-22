@@ -8,4 +8,5 @@ export interface SwitchRowCardProps {
   margin?: boolean;
   disabled?: boolean;
   onChange?: (key?: string, value?: any) => void;
+  debounceDelay?: number;
 }

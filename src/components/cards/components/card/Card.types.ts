@@ -9,12 +9,7 @@ export interface CardProps {
   disabled?: boolean;
   isSelected?: boolean;
   onPress?: (primary: string, index: number) => void;
-  onChange?: (
-    primary?: string,
-    itemIndex?: number,
-    key?: string,
-    value?: any,
-  ) => void;
+  onChange?: (newValue: unknown, oldValue: unknown, index: number) => void;
   onCardLayout?: (index: number, y: number) => void;
   onLongPress?: (id: any, index: number) => void;
 }

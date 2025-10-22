@@ -94,4 +94,24 @@ export const styles = StyleSheet.create({
   spaceLeft: {
     marginLeft: 12,
   },
+  editableInput: {
+    flex: 1,
+  },
+  inputContainer: {
+    marginBottom: 0,
+  },
+  inputStyle: {
+    fontSize: 14,
+    padding: 8,
+  },
+  columnEditable: {
+    flexDirection: 'column',
+    paddingBottom: 8,
+    flex: 1,
+  },
+  editableInputColumn: {
+    paddingHorizontal: 12,
+    flex: 1,
+    marginTop: 4,
+  },
 });

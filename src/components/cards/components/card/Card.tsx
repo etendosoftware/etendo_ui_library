@@ -136,10 +136,12 @@ const Card = ({
   const handleCustomChange = useCallback(
     (key?: string, value?: any) => {
       if (onChange) {
-        onChange(findPrimaryId(metadata, item), index, key, value);
+        const oldValue = item;
+        const newValue = { ...item, [key!]: value };
+        onChange(newValue, oldValue, index);
       }
     },
-    [onChange, metadata, item, index],
+    [onChange, item, index],
   );
 
   const handleLongPress = useCallback(() => {
@@ -187,6 +189,7 @@ const Card = ({
               color={changeTextColor()}
               onChange={handleCustomChange}
               disabled={isDisabled()}
+              debounceDelay={row.debounceDelay}
             />
           ))}
         </View>
