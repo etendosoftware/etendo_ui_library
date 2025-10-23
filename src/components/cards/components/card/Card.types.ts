@@ -6,8 +6,10 @@ export interface CardProps {
   metadata: CardsMetadata[];
   maxRows?: number;
   maxTitles?: number;
-  onPress?: (primary: string) => void;
-  onHoldCard: (...params: any[]) => void;
-  handleItemsSelected: (...params: any[]) => void;
-  isSelectionMode: boolean;
+  disabled?: boolean;
+  isSelected?: boolean;
+  onPress?: (primary: string, index: number) => void;
+  onChange?: (newValue: unknown, oldValue: unknown, index: number) => void;
+  onCardLayout?: (index: number, y: number) => void;
+  onLongPress?: (id: any, index: number) => void;
 }

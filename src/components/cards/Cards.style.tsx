@@ -3,22 +3,29 @@ import { PRIMARY_100 } from '../../styles/colors';
 
 export const styles = StyleSheet.create({
   container: {
-    paddingTop: 12,
     maxWidth: 428,
     display: 'flex',
+    marginTop: 10,
   },
   containerFlex: {
+    flex: 1,
     marginTop: 12,
     marginHorizontal: 12,
   },
   titleContainer: {
-    paddingHorizontal: 12,
-    height: 48,
+    marginHorizontal: 24,
+    maxWidth: 428,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    width: '100%',
+  },
+  titleLeftContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    columnGap: 8,
+    flex: 1,
+    marginRight: 8,
   },
   selectionModeContainer: {
     paddingHorizontal: 25,
@@ -44,5 +51,6 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   icon: { height: 16, width: 16 },
+  iconCancel: { height: 20, width: 20 },
   buttonContainer: { alignItems: 'flex-end', flex: 1 },
 });

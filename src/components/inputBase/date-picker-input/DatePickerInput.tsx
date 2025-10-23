@@ -32,7 +32,6 @@ import {
 } from '../../../assets/images/icons';
 import {
   buildMonth,
-  convertDateToEtendoERPFormat,
   formatterDate,
   generateYearList,
   parseDateString,
@@ -145,9 +144,8 @@ const DatePickerInput = ({
   const onAccept = () => {
     const dateObject = parseDateString(selectedDate, dateFormat);
     if (dateObject && !isNaN(dateObject.getTime())) {
-      const formattedDateForERP = convertDateToEtendoERPFormat(dateObject);
       if (typeof onChangeText === 'function') {
-        onChangeText(formattedDateForERP);
+        onChangeText(selectedDate);
       }
       setIsPickerShow(false);
     }
@@ -301,11 +299,7 @@ const DatePickerInput = ({
     const formattedDateForDisplay = formatterDate(date, dateFormat);
     setSelectedDate(formattedDateForDisplay.toString());
     setIsDateSelected(true);
-
-    if (onChangeText) {
-      const formattedDateForERP = convertDateToEtendoERPFormat(date);
-      onChangeText(formattedDateForERP);
-    }
+    // Don't call onChangeText here - wait for Accept button
   };
 
   // Control when text is changed by keyboard
@@ -325,6 +319,11 @@ const DatePickerInput = ({
     }
 
     setSelectedDate(processedText);
+
+    // Call the user's onChangeText callback if provided
+    if (onChangeText) {
+      onChangeText(processedText);
+    }
   };
 
   // Function to handle the onBlur event

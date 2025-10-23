@@ -35,7 +35,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: jenkins-ui-library
-  namespace: jenkins
+  namespace: jenkins2025
   labels:
     app.kubernetes.io/name: jenkins-ui-library
 spec:

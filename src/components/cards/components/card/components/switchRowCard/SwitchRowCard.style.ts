@@ -20,7 +20,23 @@ export const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 14,
     lineHeight: 20,
+    marginLeft: 4,
+  },
+  textValueLong: {
+    fontFamily: 'Inter',
+    color: NEUTRAL_1000,
+    fontWeight: '600',
+    fontSize: 14,
+    lineHeight: 20,
     marginLeft: 12,
+  },
+  textValueShort: {
+    fontFamily: 'Inter',
+    color: NEUTRAL_1000,
+    fontWeight: '600',
+    fontSize: 14,
+    lineHeight: 20,
+    marginLeft: 4,
   },
   row: {
     width: '100%',
@@ -45,7 +61,6 @@ export const styles = StyleSheet.create({
   calendar: {
     width: 16,
     height: 16,
-    marginRight: 4,
     minWidth: 16,
     maxWidth: 16,
   },
@@ -53,10 +68,10 @@ export const styles = StyleSheet.create({
     letterSpacing: 8,
     color: NEUTRAL_400,
     fontWeight: '700',
-    position: 'absolute',
     overflow: 'hidden',
     lineHeight: 20,
     alignSelf: 'center',
+    flex: 1,
     textAlignVertical: 'center',
     display: 'flex',
   },
@@ -64,12 +79,39 @@ export const styles = StyleSheet.create({
     maxWidth: '50%',
     flexDirection: 'row',
     alignItems: 'center',
-    height: 20,
   },
   paddingLeft: {
     paddingLeft: 8,
   },
   paddingRight: {
     paddingRight: 8,
+  },
+  statusContainer: {
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 4,
+  },
+  spaceLeft: {
+    marginLeft: 12,
+  },
+  editableInput: {
+    flex: 1,
+  },
+  inputContainer: {
+    marginBottom: 0,
+  },
+  inputStyle: {
+    fontSize: 14,
+    padding: 8,
+  },
+  columnEditable: {
+    flexDirection: 'column',
+    paddingBottom: 8,
+    flex: 1,
+  },
+  editableInputColumn: {
+    paddingHorizontal: 12,
+    flex: 1,
+    marginTop: 4,
   },
 });

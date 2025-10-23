@@ -1,11 +1,11 @@
-import { useState, useEffect, useRef } from 'react';
-import { formatterDate, generateYearList, validateDate, adjustDateForMonth } from '../DatePickerInput.utils';
+import { useState, useRef } from 'react';
+import { formatterDate, generateYearList, validateDate, adjustDateForMonth, parseDateString } from '../DatePickerInput.utils';
 
 export const useDatePickerInput = (initialValue: any, dateFormat = 'MM/DD/YYYY') => {
     const yearListRef = useRef<any>(null);
     const monthListRef = useRef<any>(null);
 
-    const [selectedDate, setSelectedDate] = useState<any>(initialValue ? new Date(initialValue) : undefined);
+    const [selectedDate, setSelectedDate] = useState<string>(initialValue || '');
     const [isPickerShow, setIsPickerShow] = useState(false);
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
@@ -74,8 +74,13 @@ export const useDatePickerInput = (initialValue: any, dateFormat = 'MM/DD/YYYY')
     const selectYear = (year: any) => {
         setCurrentYear(year);
         setIsYearSelection(false);
-        const adjustedDate = adjustDateForMonth(year, currentMonth, selectedDate);
-        setSelectedDate(adjustedDate);
+        // Parse selectedDate to Date object if it's a string
+        const currentDateObj = typeof selectedDate === 'string' && selectedDate
+            ? parseDateString(selectedDate, dateFormat)
+            : new Date(year, currentMonth, 1);
+        const adjustedDate = adjustDateForMonth(year, currentMonth, currentDateObj);
+        const formattedDate = formatterDate(adjustedDate, dateFormat);
+        setSelectedDate(formattedDate);
     };
 
     // Handle date change
@@ -83,7 +88,7 @@ export const useDatePickerInput = (initialValue: any, dateFormat = 'MM/DD/YYYY')
         const formattedDate = formatterDate(date, dateFormat);
         const isValidDate = validateDate(date, formattedDate, dateFormat);
         if (isValidDate) {
-            setSelectedDate(date);
+            setSelectedDate(formattedDate);
         }
         return { date: formattedDate, isValid: isValidDate };
     };
