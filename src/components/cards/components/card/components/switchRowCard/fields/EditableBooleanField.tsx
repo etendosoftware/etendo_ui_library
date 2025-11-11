@@ -15,6 +15,7 @@ interface EditableBooleanFieldProps {
   onPress: () => void;
   useInlineLayout: boolean;
   color: any;
+  actionButton?: React.ReactNode;
 }
 
 const EditableBooleanField: React.FC<EditableBooleanFieldProps> = ({
@@ -23,42 +24,49 @@ const EditableBooleanField: React.FC<EditableBooleanFieldProps> = ({
   onPress,
   useInlineLayout,
   color,
+  actionButton,
 }) => {
   const CheckboxIcon = value ? CheckSquareicon : SquareIcon;
 
   if (useInlineLayout) {
     return (
-      <Pressable style={styles.row} onPress={onPress}>
-        <View style={[styles.contentMiddleRow, styles.paddingRight]}>
+      <View style={styles.row}>
+        <Pressable style={[styles.contentMiddleRow, styles.paddingRight]} onPress={onPress}>
           <Text
             style={[styles.textName, color]}
             ellipsizeMode="tail"
             numberOfLines={1}>
             {label}
           </Text>
-        </View>
+        </Pressable>
         <Text numberOfLines={1} ellipsizeMode="clip" style={styles.dots}>
           {DOTS}
         </Text>
-        <View style={[styles.contentMiddleRow, styles.paddingLeft]}>
+        <Pressable style={[styles.contentMiddleRow, styles.paddingLeft]} onPress={onPress}>
           <CheckboxIcon style={styles.check} fill={PRIMARY_100} />
-        </View>
-      </Pressable>
+        </Pressable>
+        {actionButton}
+      </View>
     );
   }
 
   return (
-    <Pressable style={styles.columnEditable} onPress={onPress}>
-      <Text
-        style={[styles.textName, color]}
-        ellipsizeMode="tail"
-        numberOfLines={1}>
-        {label}
-      </Text>
+    <View style={styles.columnEditable}>
+      <Pressable onPress={onPress}>
+        <Text
+          style={[styles.textName, color]}
+          ellipsizeMode="tail"
+          numberOfLines={1}>
+          {label}
+        </Text>
+      </Pressable>
       <View style={styles.editableInputColumn}>
-        <CheckboxIcon style={styles.check} fill={PRIMARY_100} />
+        <Pressable onPress={onPress}>
+          <CheckboxIcon style={styles.check} fill={PRIMARY_100} />
+        </Pressable>
       </View>
-    </Pressable>
+      {actionButton}
+    </View>
   );
 };
 

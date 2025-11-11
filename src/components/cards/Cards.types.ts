@@ -29,6 +29,10 @@ export interface CardsMetadata extends Metadata {
     pageSize?: number,
     filterText?: string,
   ) => Promise<any[]>;
+  actionButton?: {
+    icon?: React.ReactNode | string;
+    onPress: (cardData: any, fieldKey: string) => void;
+  };
 }
 
 export interface CardsProps {
@@ -43,9 +47,12 @@ export interface CardsProps {
   onPressButton?: () => void;
   onPressCard?: (primary: string, index: number) => void;
   onSelectCard?: (primary: string, index: number) => void;
+  onClearSelection?: () => void;
   onFetchData?: (currentPage: number, pageSize?: number) => Promise<any[]>;
   onChange?: (newValue: unknown, oldValue: unknown, index: number) => void;
-  onSetValue?: (setValueFn: (index: number, key: string, value: any) => void) => void;
+  onSetValue?: (
+    setValueFn: (index: number, key: string, value: any) => void,
+  ) => void;
   isResetFetching?: boolean;
   maxTitles?: number;
   maxRows?: number;
