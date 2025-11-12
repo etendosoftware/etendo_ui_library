@@ -48,6 +48,7 @@ export const styles = StyleSheet.create({
   column: {
     flexDirection: 'column',
     paddingBottom: 8,
+    flex: 1,
   },
   check: {
     width: 16,

@@ -1,10 +1,9 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { View, Text } from 'react-native';
+import ActionButton from './ActionButton';
 import { styles } from '../SwitchRowCard.style';
 import { getIconByType } from '../SwitchRowCard';
 import { SwitchRowCardProps } from '../SwitchRowCard.type';
-import { SearchIcon } from '../../../../../../../assets/images/icons';
-import { Button } from '../../../../../../../components/button';
 
 const DOTS: string = '··························';
 
@@ -21,7 +20,9 @@ interface ReadOnlyFieldProps {
 }
 
 const getDisplayValue = (value: any, displayKey?: string): string => {
-  if (value === null || value === undefined) return '';
+  if (value === null || value === undefined) {
+    return '';
+  }
   if (typeof value === 'object' && displayKey) {
     return String(value[displayKey] || '');
   }
@@ -36,42 +37,6 @@ const ReadOnlyField: React.FC<ReadOnlyFieldProps> = ({
   shouldUseColumnLayout,
   actionButton,
 }) => {
-  const handleActionButtonPress = useCallback(() => {
-    if (actionButton?.onPress && row?.key) {
-      actionButton.onPress(item, row.key);
-    }
-  }, [actionButton, item, row?.key]);
-
-  const getActionButtonIcon = (): React.ReactElement | undefined => {
-    if (actionButton?.icon) {
-      if (typeof actionButton.icon === 'string') {
-        return <Text style={styles.textValue}>{actionButton.icon}</Text>;
-      }
-      if (React.isValidElement(actionButton.icon)) {
-        return actionButton.icon;
-      }
-    }
-
-    // Default icon (magnifying glass)
-    return <SearchIcon />;
-  };
-
-  const renderActionButton = () => {
-    if (!actionButton) return null;
-    return (
-      <Button
-        onPress={handleActionButtonPress}
-        disabled={disabled}
-        typeStyle="primary"
-        width={32}
-        height={32}
-        paddingHorizontal={0}
-        paddingVertical={0}
-        iconLeft={getActionButtonIcon()}
-      />
-    );
-  };
-
   // Read-only non-string types (date, time, boolean, status, etc)
   if (row.type !== 'string' && row.type) {
     return (
@@ -98,7 +63,12 @@ const ReadOnlyField: React.FC<ReadOnlyFieldProps> = ({
             </Text>
           )}
         </View>
-        {renderActionButton()}
+        <ActionButton
+          actionButton={actionButton}
+          row={row}
+          item={item}
+          disabled={disabled}
+        />
       </View>
     );
   }
@@ -107,7 +77,7 @@ const ReadOnlyField: React.FC<ReadOnlyFieldProps> = ({
   if (shouldUseColumnLayout) {
     return (
       <View style={[styles.row]}>
-        <View style={[styles.column, { flex: 1 }]}>
+        <View style={[styles.column]}>
           <Text
             style={[styles.textName, color]}
             ellipsizeMode="tail"
@@ -121,7 +91,12 @@ const ReadOnlyField: React.FC<ReadOnlyFieldProps> = ({
             {row?.key ? getDisplayValue(item[row.key], row.displayKey) : ''}
           </Text>
         </View>
-        {renderActionButton()}
+        <ActionButton
+          actionButton={actionButton}
+          row={row}
+          item={item}
+          disabled={disabled}
+        />
       </View>
     );
   }
@@ -145,6 +120,12 @@ const ReadOnlyField: React.FC<ReadOnlyFieldProps> = ({
           {row?.key ? getDisplayValue(item[row.key], row.displayKey) : ''}
         </Text>
       </View>
+      <ActionButton
+        actionButton={actionButton}
+        row={row}
+        item={item}
+        disabled={disabled}
+      />
     </View>
   );
 };

@@ -1,14 +1,11 @@
-import React, { useCallback } from 'react';
-import { Text } from 'react-native';
+import React from 'react';
 import EditableStringField from './EditableStringField';
 import EditableNumberField from './EditableNumberField';
 import EditableDateField from './EditableDateField';
 import EditableBooleanField from './EditableBooleanField';
 import EditableSelectorField from './EditableSelectorField';
+import ActionButton from './ActionButton';
 import { SwitchRowCardProps } from '../SwitchRowCard.type';
-import { SearchIcon } from '../../../../../../../assets/images/icons';
-import { Button } from '../../../../../../../components/button';
-import { styles } from '../SwitchRowCard.style';
 
 interface EditableFieldProps {
   row: NonNullable<SwitchRowCardProps['row']>;
@@ -36,39 +33,9 @@ const EditableField: React.FC<EditableFieldProps> = ({
 }) => {
   const label = row?.label || '';
 
-  const handleActionButtonPress = useCallback(() => {
-    if (actionButton?.onPress && row?.key && item) {
-      actionButton.onPress(item, row.key);
-    }
-  }, [actionButton, item, row?.key]);
-
-  const getActionButtonIcon = (): React.ReactElement | undefined => {
-    if (actionButton?.icon) {
-      if (typeof actionButton.icon === 'string') {
-        return <Text style={styles.textValue}>{actionButton.icon}</Text>;
-      }
-      if (React.isValidElement(actionButton.icon)) {
-        return actionButton.icon;
-      }
-    }
-
-    // Default icon (magnifying glass)
-    return <SearchIcon />;
-  };
-
-  const renderActionButton = () => (
-    <Button
-      onPress={handleActionButtonPress}
-      typeStyle="primary"
-      width={32}
-      height={32}
-      paddingHorizontal={0}
-      paddingVertical={0}
-      iconLeft={getActionButtonIcon()}
-    />
-  );
-
-  const actionButtonNode = actionButton ? renderActionButton() : undefined;
+  const actionButtonNode = actionButton ? (
+    <ActionButton actionButton={actionButton} row={row} item={item} />
+  ) : undefined;
 
   switch (row.type) {
     case 'string':
