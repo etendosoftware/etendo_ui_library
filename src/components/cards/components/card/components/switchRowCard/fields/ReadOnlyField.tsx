@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import ActionButton from './ActionButton';
 import { styles } from '../SwitchRowCard.style';
 import { getIconByType } from '../SwitchRowCard';
 import { SwitchRowCardProps } from '../SwitchRowCard.type';
@@ -12,10 +13,16 @@ interface ReadOnlyFieldProps {
   color: any;
   disabled?: boolean;
   shouldUseColumnLayout: boolean;
+  actionButton?: {
+    icon?: React.ReactNode | string;
+    onPress: (cardData: any, fieldKey: string) => void;
+  };
 }
 
 const getDisplayValue = (value: any, displayKey?: string): string => {
-  if (value === null || value === undefined) return '';
+  if (value === null || value === undefined) {
+    return '';
+  }
   if (typeof value === 'object' && displayKey) {
     return String(value[displayKey] || '');
   }
@@ -28,12 +35,13 @@ const ReadOnlyField: React.FC<ReadOnlyFieldProps> = ({
   color,
   disabled,
   shouldUseColumnLayout,
+  actionButton,
 }) => {
   // Read-only non-string types (date, time, boolean, status, etc)
   if (row.type !== 'string' && row.type) {
     return (
       <View style={styles.row}>
-        <View style={[styles.contentMiddleRow, styles.paddingRight]}>
+        <View style={[styles.contentMiddleRow]}>
           <Text
             style={[styles.textName, color]}
             ellipsizeMode="tail"
@@ -55,6 +63,12 @@ const ReadOnlyField: React.FC<ReadOnlyFieldProps> = ({
             </Text>
           )}
         </View>
+        <ActionButton
+          actionButton={actionButton}
+          row={row}
+          item={item}
+          disabled={disabled}
+        />
       </View>
     );
   }
@@ -62,19 +76,27 @@ const ReadOnlyField: React.FC<ReadOnlyFieldProps> = ({
   // Read-only string type - column layout
   if (shouldUseColumnLayout) {
     return (
-      <View style={[styles.column]}>
-        <Text
-          style={[styles.textName, color]}
-          ellipsizeMode="tail"
-          numberOfLines={1}>
-          {row?.label}
-        </Text>
-        <Text
-          style={[styles.textValueLong, color]}
-          ellipsizeMode="tail"
-          numberOfLines={row?.numberOfLines ?? 2}>
-          {row?.key ? getDisplayValue(item[row.key], row.displayKey) : ''}
-        </Text>
+      <View style={[styles.row]}>
+        <View style={[styles.column]}>
+          <Text
+            style={[styles.textName, color]}
+            ellipsizeMode="tail"
+            numberOfLines={1}>
+            {row?.label}
+          </Text>
+          <Text
+            style={[styles.textValueLong, color]}
+            ellipsizeMode="tail"
+            numberOfLines={row?.numberOfLines ?? 2}>
+            {row?.key ? getDisplayValue(item[row.key], row.displayKey) : ''}
+          </Text>
+        </View>
+        <ActionButton
+          actionButton={actionButton}
+          row={row}
+          item={item}
+          disabled={disabled}
+        />
       </View>
     );
   }
@@ -82,7 +104,7 @@ const ReadOnlyField: React.FC<ReadOnlyFieldProps> = ({
   // Read-only string type - row layout
   return (
     <View style={styles.row}>
-      <View style={[styles.contentMiddleRow, styles.paddingRight]}>
+      <View style={[styles.contentMiddleRow]}>
         <Text
           style={[styles.textName, color]}
           ellipsizeMode="tail"
@@ -93,11 +115,17 @@ const ReadOnlyField: React.FC<ReadOnlyFieldProps> = ({
       <Text numberOfLines={1} ellipsizeMode="clip" style={styles.dots}>
         {DOTS}
       </Text>
-      <View style={[styles.contentMiddleRow, styles.paddingLeft]}>
+      <View style={[styles.contentMiddleRow]}>
         <Text style={[styles.textValueShort, color]} numberOfLines={1}>
           {row?.key ? getDisplayValue(item[row.key], row.displayKey) : ''}
         </Text>
       </View>
+      <ActionButton
+        actionButton={actionButton}
+        row={row}
+        item={item}
+        disabled={disabled}
+      />
     </View>
   );
 };

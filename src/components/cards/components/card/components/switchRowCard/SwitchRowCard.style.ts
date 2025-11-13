@@ -12,7 +12,6 @@ export const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 14,
     lineHeight: 20,
-    marginLeft: 12,
   },
   textValue: {
     fontFamily: 'Inter',
@@ -28,7 +27,6 @@ export const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 14,
     lineHeight: 20,
-    marginLeft: 12,
   },
   textValueShort: {
     fontFamily: 'Inter',
@@ -36,21 +34,21 @@ export const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 14,
     lineHeight: 20,
-    marginLeft: 4,
   },
   row: {
     width: '100%',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     flexDirection: 'row',
-    paddingRight: 12,
+    paddingHorizontal: 12,
     marginBottom: 8,
+    gap: 8,
     alignItems: 'center',
   },
 
   column: {
     flexDirection: 'column',
-    paddingRight: 12,
     paddingBottom: 8,
+    flex: 1,
   },
   check: {
     width: 16,
@@ -96,6 +94,7 @@ export const styles = StyleSheet.create({
   },
   editableInput: {
     flex: 1,
+    minWidth: 0,
   },
   inputContainer: {
     marginBottom: 0,
@@ -107,11 +106,29 @@ export const styles = StyleSheet.create({
   columnEditable: {
     flexDirection: 'column',
     paddingBottom: 8,
+    paddingHorizontal: 12,
     flex: 1,
   },
   editableInputColumn: {
-    paddingHorizontal: 12,
     flex: 1,
     marginTop: 4,
+  },
+  fieldWithActionButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flex: 1,
+    gap: 3,
+  },
+  actionButtonContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  inlineInputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    flex: 1,
+    overflow: 'hidden',
   },
 });

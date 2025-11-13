@@ -9,6 +9,7 @@ interface EditableNumberFieldProps {
   onChangeText: (value: number) => void;
   useInlineLayout: boolean;
   color: any;
+  actionButton?: React.ReactNode;
 }
 
 const EditableNumberField: React.FC<EditableNumberFieldProps> = ({
@@ -17,6 +18,7 @@ const EditableNumberField: React.FC<EditableNumberFieldProps> = ({
   onChangeText,
   useInlineLayout,
   color,
+  actionButton,
 }) => {
   const handleTextChange = (text: string) => {
     const numValue = parseFloat(text);
@@ -24,7 +26,7 @@ const EditableNumberField: React.FC<EditableNumberFieldProps> = ({
   };
 
   return (
-    <FieldLayout label={label} color={color} useInlineLayout={useInlineLayout}>
+    <FieldLayout label={label} color={color} useInlineLayout={useInlineLayout} actionButton={actionButton}>
       <TextInput
         value={value}
         onChangeText={handleTextChange}

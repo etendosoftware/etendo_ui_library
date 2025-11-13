@@ -26,6 +26,7 @@ const Cards = ({
   pageSize = 10,
   onFetchData,
   onSelectCard,
+  onClearSelection,
   onChange,
   onSetValue,
   styleContainer,
@@ -50,8 +51,8 @@ const Cards = ({
 
   const cardPositions = useRef<Map<number, number>>(new Map());
   const pendingScrollIndex = useRef<number | undefined>(undefined);
-  const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(
-    null,
+  const [selectedCardIndices, setSelectedCardIndices] = useState<Set<number>>(
+    new Set(),
   );
 
   const hasExternalData = Array.isArray(staticData) && staticData.length > 0;
@@ -60,6 +61,7 @@ const Cards = ({
     if (Array.isArray(staticData)) {
       setDataList(staticData);
       cardPositions.current.clear();
+      setSelectedCardIndices(new Set());
     }
   }, [staticData]);
 
@@ -93,7 +95,7 @@ const Cards = ({
         pendingScrollIndex.current = scrollToIndex;
       }
       if (onSelectCard) {
-        setSelectedCardIndex(scrollToIndex);
+        setSelectedCardIndices(new Set([scrollToIndex]));
       }
       prevScrollToIndex.current = scrollToIndex;
     }
@@ -181,7 +183,7 @@ const Cards = ({
       setIsLoadMoreData(true);
       fetchIdRef.current++;
       cardPositions.current.clear();
-      setSelectedCardIndex(null);
+      setSelectedCardIndices(new Set());
       fetchMoreData(0, true);
     }
     prevResetFetching.current = isResetFetching;
@@ -195,7 +197,15 @@ const Cards = ({
   const handleSelectCard = useCallback(
     (id: string, index: number) => {
       if (onSelectCard) {
-        setSelectedCardIndex(index);
+        setSelectedCardIndices(prev => {
+          const newSet = new Set(prev);
+          if (newSet.has(index)) {
+            newSet.delete(index);
+          } else {
+            newSet.add(index);
+          }
+          return newSet;
+        });
         onSelectCard(id, index);
       }
     },
@@ -205,13 +215,10 @@ const Cards = ({
   const handleOnClick = useCallback(
     (primary: string, index: number) => {
       if (onPressCard) {
-        if (onSelectCard) {
-          setSelectedCardIndex(null);
-        }
         onPressCard(primary, index);
       }
     },
-    [onPressCard, onSelectCard],
+    [onPressCard],
   );
 
   const handleSetValue = useCallback(
@@ -246,10 +253,13 @@ const Cards = ({
     <View style={[styles.container, styleContainer]}>
       <View style={styles.titleContainer}>
         <View style={styles.titleLeftContainer}>
-          {onSelectCard && selectedCardIndex !== null && (
+          {onSelectCard && selectedCardIndices.size > 0 && (
             <Button
               onPress={() => {
-                setSelectedCardIndex(null);
+                setSelectedCardIndices(new Set());
+                if (onClearSelection) {
+                  onClearSelection();
+                }
               }}
               typeStyle={'primary'}
               height={40}
@@ -293,7 +303,7 @@ const Cards = ({
           onCardLayout={onCardLayout}
           onSelectCard={handleSelectCard}
           onChange={onChange}
-          selectedIndex={selectedCardIndex}
+          selectedIndices={selectedCardIndices}
         />
         {Boolean(dataList?.length) && isLoading && <SkeletonCard />}
       </ScrollView>

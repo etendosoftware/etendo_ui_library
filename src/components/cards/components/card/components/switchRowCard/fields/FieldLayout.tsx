@@ -7,6 +7,7 @@ interface FieldLayoutProps {
   color: any;
   useInlineLayout: boolean;
   children: React.ReactNode;
+  actionButton?: React.ReactNode;
 }
 
 const FieldLayout: React.FC<FieldLayoutProps> = ({
@@ -14,6 +15,7 @@ const FieldLayout: React.FC<FieldLayoutProps> = ({
   color,
   useInlineLayout,
   children,
+  actionButton,
 }) => {
   if (useInlineLayout) {
     return (
@@ -26,13 +28,11 @@ const FieldLayout: React.FC<FieldLayoutProps> = ({
             {label}
           </Text>
         </View>
-        <View
-          style={[
-            styles.contentMiddleRow,
-            styles.paddingLeft,
-            styles.editableInput,
-          ]}>
-          {children}
+        <View style={styles.inlineInputContainer}>
+          <View style={styles.editableInput}>{children}</View>
+          {actionButton && (
+            <View style={styles.actionButtonContainer}>{actionButton}</View>
+          )}
         </View>
       </View>
     );
@@ -46,7 +46,14 @@ const FieldLayout: React.FC<FieldLayoutProps> = ({
         numberOfLines={1}>
         {label}
       </Text>
-      <View style={styles.editableInputColumn}>{children}</View>
+      <View style={[{ display: 'flex', flexDirection: 'row', gap: 12 }]}>
+        <View style={[styles.editableInputColumn, { flex: 1 }]}>
+          {children}
+        </View>
+        {actionButton && (
+          <View style={styles.actionButtonContainer}>{actionButton}</View>
+        )}
+      </View>
     </View>
   );
 };

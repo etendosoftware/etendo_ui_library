@@ -5,11 +5,13 @@ import {
   CheckSquareicon,
   ClockIcon,
   SquareIcon,
+  SearchIcon,
 } from '../../../../../../assets/images/icons';
 import { styles } from './SwitchRowCard.style';
 import { SwitchRowCardProps } from './SwitchRowCard.type';
 import { NEUTRAL_0, PRIMARY_100 } from '../../../../../../styles/colors';
 import { useDebounce } from '../../../../../../hooks';
+import { Button } from '../../../../../../components/button';
 import EditableField from './fields/EditableField';
 import ReadOnlyField from './fields/ReadOnlyField';
 
@@ -116,7 +118,7 @@ const SwitchRowCard = ({
   if (row.type === 'custom' && row.customComponent) {
     const CustomComponent = row.customComponent;
 
-    return (
+    const customComponent = (
       <CustomComponent
         label={row?.label}
         value={row?.key ? item[row.key] : undefined}
@@ -126,6 +128,42 @@ const SwitchRowCard = ({
         {...row.customProps}
       />
     );
+
+    // Agregar actionButton si existe
+    if (row.actionButton && row.key) {
+      const handleActionButtonPress = () => {
+        row.actionButton!.onPress(item, row.key!);
+      };
+
+      const getActionButtonIcon = (): React.ReactElement | undefined => {
+        if (row.actionButton!.icon) {
+          if (typeof row.actionButton!.icon === 'string') {
+            return (
+              <Text style={styles.textValue}>{row.actionButton!.icon}</Text>
+            );
+          }
+          if (React.isValidElement(row.actionButton!.icon)) {
+            return row.actionButton!.icon;
+          }
+        }
+        return <SearchIcon />;
+      };
+
+      return (
+        <View style={[styles.row]}>
+          <View style={{ flex: 1 }}>{customComponent}</View>
+          <Button
+            height={52}
+            onPress={handleActionButtonPress}
+            disabled={disabled}
+            typeStyle="primary"
+            iconLeft={getActionButtonIcon()}
+          />
+        </View>
+      );
+    }
+
+    return customComponent;
   }
 
   // Editable field rendering
@@ -152,6 +190,8 @@ const SwitchRowCard = ({
         handleDebouncedChange={handleDebouncedChange}
         useInlineLayout={useInlineLayout}
         color={color}
+        actionButton={row.actionButton}
+        item={item}
       />
     );
   }
@@ -164,6 +204,7 @@ const SwitchRowCard = ({
       color={color}
       disabled={disabled}
       shouldUseColumnLayout={shouldUseColumnLayout}
+      actionButton={row.actionButton}
     />
   );
 };

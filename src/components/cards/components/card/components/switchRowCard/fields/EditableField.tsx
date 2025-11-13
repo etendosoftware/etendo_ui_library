@@ -4,6 +4,7 @@ import EditableNumberField from './EditableNumberField';
 import EditableDateField from './EditableDateField';
 import EditableBooleanField from './EditableBooleanField';
 import EditableSelectorField from './EditableSelectorField';
+import ActionButton from './ActionButton';
 import { SwitchRowCardProps } from '../SwitchRowCard.type';
 
 interface EditableFieldProps {
@@ -13,6 +14,11 @@ interface EditableFieldProps {
   handleDebouncedChange: (value: any) => void;
   useInlineLayout: boolean;
   color: any;
+  actionButton?: {
+    icon?: React.ReactNode | string;
+    onPress: (cardData: any, fieldKey: string) => void;
+  };
+  item?: any;
 }
 
 const EditableField: React.FC<EditableFieldProps> = ({
@@ -22,8 +28,14 @@ const EditableField: React.FC<EditableFieldProps> = ({
   handleDebouncedChange,
   useInlineLayout,
   color,
+  actionButton,
+  item,
 }) => {
   const label = row?.label || '';
+
+  const actionButtonNode = actionButton ? (
+    <ActionButton actionButton={actionButton} row={row} item={item} />
+  ) : undefined;
 
   switch (row.type) {
     case 'string':
@@ -34,6 +46,7 @@ const EditableField: React.FC<EditableFieldProps> = ({
           onChangeText={handleDebouncedChange}
           useInlineLayout={useInlineLayout}
           color={color}
+          actionButton={actionButtonNode}
         />
       );
 
@@ -45,6 +58,7 @@ const EditableField: React.FC<EditableFieldProps> = ({
           onChangeText={handleDebouncedChange}
           useInlineLayout={useInlineLayout}
           color={color}
+          actionButton={actionButtonNode}
         />
       );
 
@@ -56,6 +70,7 @@ const EditableField: React.FC<EditableFieldProps> = ({
           onChangeText={handleDebouncedChange}
           useInlineLayout={useInlineLayout}
           color={color}
+          actionButton={actionButtonNode}
         />
       );
 
@@ -67,6 +82,7 @@ const EditableField: React.FC<EditableFieldProps> = ({
           onPress={() => handleChange(!currentValue)}
           useInlineLayout={useInlineLayout}
           color={color}
+          actionButton={actionButtonNode}
         />
       );
 
@@ -81,6 +97,7 @@ const EditableField: React.FC<EditableFieldProps> = ({
           staticData={row.staticData}
           displayKey={row.displayKey}
           onFetchData={row.onFetchData}
+          actionButton={actionButtonNode}
         />
       );
 

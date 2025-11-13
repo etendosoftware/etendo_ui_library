@@ -13,7 +13,7 @@ const SwitchStateCards = ({
   isLoading,
   metadata,
   onPressCard,
-  selectedIndex,
+  selectedIndices = new Set(),
   textEmptyCards,
   commentEmptyCards,
   cardsHeight = 0,
@@ -54,7 +54,7 @@ const SwitchStateCards = ({
           index={index}
           metadata={metadata}
           onPress={onPressCard}
-          isSelected={selectedIndex === index}
+          isSelected={selectedIndices.has(index)}
           maxRows={maxRows}
           maxTitles={maxTitles}
           onCardLayout={onCardLayout}
