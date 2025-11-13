@@ -9,6 +9,7 @@ interface EditableStringFieldProps {
   onChangeText: (value: string) => void;
   useInlineLayout: boolean;
   color: any;
+  actionButton?: React.ReactNode;
 }
 
 const EditableStringField: React.FC<EditableStringFieldProps> = ({
@@ -17,9 +18,14 @@ const EditableStringField: React.FC<EditableStringFieldProps> = ({
   onChangeText,
   useInlineLayout,
   color,
+  actionButton,
 }) => {
   return (
-    <FieldLayout label={label} color={color} useInlineLayout={useInlineLayout}>
+    <FieldLayout
+      label={label}
+      color={color}
+      useInlineLayout={useInlineLayout}
+      actionButton={actionButton}>
       <TextInput
         value={value}
         onChangeText={onChangeText}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import TextInput from '../../../../../../inputBase/text-input/TextInput';
 import DatePickerInput from '../../../../../../inputBase/date-picker-input/DatePickerInput';
@@ -6,8 +6,10 @@ import DropdownInput from '../../../../../../inputBase/dropdown-input/DropdownIn
 import {
   CheckSquareicon,
   SquareIcon,
+  SearchIcon,
 } from '../../../../../../../assets/images/icons';
 import { PRIMARY_100 } from '../../../../../../../styles/colors';
+import { Button } from '../../../../../../../components/button';
 import { styles } from '../SwitchTitleCard.style';
 import { CardsMetadata } from '../../../../../Cards.types';
 
@@ -27,6 +29,12 @@ interface EditableTitleFieldProps {
   useInlineLayout: boolean;
   color: any;
   isDivisor: boolean;
+  disabled?: boolean;
+  actionButton?: {
+    icon?: React.ReactNode | string;
+    onPress: (cardData: any, fieldKey: string) => void;
+  };
+  item?: any;
 }
 
 const EditableTitleField: React.FC<EditableTitleFieldProps> = ({
@@ -37,8 +45,44 @@ const EditableTitleField: React.FC<EditableTitleFieldProps> = ({
   useInlineLayout,
   color,
   isDivisor,
+  disabled,
+  actionButton,
+  item,
 }) => {
   const label = row?.label || '';
+
+  const handleActionButtonPress = useCallback(() => {
+    if (actionButton?.onPress && row?.key && item) {
+      actionButton.onPress(item, row.key);
+    }
+  }, [actionButton, item, row?.key]);
+
+  const getActionButtonIcon = (): React.ReactElement | undefined => {
+    if (actionButton?.icon) {
+      if (typeof actionButton.icon === 'string') {
+        return <Text style={styles.textValueBold}>{actionButton.icon}</Text>;
+      }
+      if (React.isValidElement(actionButton.icon)) {
+        return actionButton.icon;
+      }
+    }
+    return <SearchIcon />;
+  };
+
+  const renderActionButton = () => (
+    <Button
+      onPress={handleActionButtonPress}
+      typeStyle="primary"
+      width={32}
+      height={32}
+      paddingHorizontal={0}
+      paddingVertical={0}
+      disabled={disabled}
+      iconLeft={getActionButtonIcon()}
+    />
+  );
+
+  const actionButtonNode = actionButton ? renderActionButton() : undefined;
 
   // Render editable input based on type
   const renderEditableInput = () => {
@@ -114,8 +158,11 @@ const EditableTitleField: React.FC<EditableTitleFieldProps> = ({
     }
   };
 
+  // Force inline layout if actionButton exists
+  const shouldUseInlineLayout = actionButton ? true : useInlineLayout;
+
   // Inline layout (label and input on same row)
-  if (useInlineLayout) {
+  if (shouldUseInlineLayout) {
     return (
       <View style={[styles.rowInline, !isDivisor && styles.noBorderBottom]}>
         <View style={[styles.titleLabelContainer, styles.paddingRight]}>
@@ -126,14 +173,15 @@ const EditableTitleField: React.FC<EditableTitleFieldProps> = ({
             {label}
           </Text>
         </View>
-        <View style={[styles.titleLabelContainer, styles.paddingLeft]}>
-          {renderEditableInput()}
-        </View>
+        <View style={[{ flex: 1 }]}>{renderEditableInput()}</View>
+        {actionButtonNode && (
+          <View style={{ paddingLeft: 8 }}>{actionButtonNode}</View>
+        )}
       </View>
     );
   }
 
-  // Column layout (label above input)
+  // Column layout (label above input) - only used when no actionButton
   return (
     <View style={[styles.row, !isDivisor && styles.noBorderBottom]}>
       <View style={styles.titleColumnContainer}>

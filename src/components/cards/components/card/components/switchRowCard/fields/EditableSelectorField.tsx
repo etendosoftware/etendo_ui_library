@@ -24,6 +24,7 @@ interface EditableSelectorFieldProps {
     pageSize?: number,
     filterText?: string,
   ) => Promise<any[]>;
+  actionButton?: React.ReactNode;
 }
 
 const EditableSelectorField: React.FC<EditableSelectorFieldProps> = ({
@@ -35,9 +36,10 @@ const EditableSelectorField: React.FC<EditableSelectorFieldProps> = ({
   staticData,
   displayKey,
   onFetchData,
+  actionButton,
 }) => {
   return (
-    <FieldLayout label={label} color={color} useInlineLayout={useInlineLayout}>
+    <FieldLayout label={label} color={color} useInlineLayout={useInlineLayout} actionButton={actionButton}>
       <DropdownInput
         value={getDisplayValue(value, displayKey)}
         onSelect={onSelect}

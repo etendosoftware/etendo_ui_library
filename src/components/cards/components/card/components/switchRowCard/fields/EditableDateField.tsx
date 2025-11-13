@@ -8,6 +8,7 @@ interface EditableDateFieldProps {
   onChangeText: (value: any) => void;
   useInlineLayout: boolean;
   color: any;
+  actionButton?: React.ReactNode;
 }
 
 const EditableDateField: React.FC<EditableDateFieldProps> = ({
@@ -16,9 +17,10 @@ const EditableDateField: React.FC<EditableDateFieldProps> = ({
   onChangeText,
   useInlineLayout,
   color,
+  actionButton,
 }) => {
   return (
-    <FieldLayout label={label} color={color} useInlineLayout={useInlineLayout}>
+    <FieldLayout label={label} color={color} useInlineLayout={useInlineLayout} actionButton={actionButton}>
       <DatePickerInput
         value={value}
         onChangeText={onChangeText}

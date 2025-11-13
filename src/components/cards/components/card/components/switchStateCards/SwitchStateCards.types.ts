@@ -9,7 +9,7 @@ export interface SwitchStateCardsProps {
   cardsHeight?: number;
   maxRows?: number;
   maxTitles?: number;
-  selectedIndex?: number | null;
+  selectedIndices?: Set<number>;
   onPressCard?: (primary: string, index: number) => void;
   onCardLayout?: (index: number, y: number) => void;
   onSelectCard?: (id: any, index: number) => void;

@@ -4,6 +4,8 @@ import { styles } from './SwitchTitleCard.style';
 import { SwitchTitleCardProps } from './SwitchTitleCard.type';
 import { getIconByType } from '../switchRowCard/SwitchRowCard';
 import { useDebounce } from '../../../../../../hooks';
+import { Button } from '../../../../../../components/button';
+import { SearchIcon } from '../../../../../../assets/images/icons';
 import EditableTitleField from './fields/EditableTitleField';
 
 const getDisplayValue = (value: any, displayKey?: string): string => {
@@ -43,6 +45,42 @@ const SwitchTitleCard = ({
 
   const debounceDelay = row?.debounceDelay ?? 500;
   const debouncedOnChange = useDebounce(memoizedOnChange, debounceDelay);
+
+  const handleActionButtonPress = useCallback(() => {
+    if (row?.actionButton?.onPress && row?.key) {
+      row.actionButton.onPress(item, row.key);
+    }
+  }, [row?.actionButton, item, row?.key]);
+
+  const getActionButtonIcon = (): React.ReactElement | undefined => {
+    if (row?.actionButton?.icon) {
+      if (typeof row.actionButton.icon === 'string') {
+        return (
+          <Text style={styles.textValueBold}>{row.actionButton.icon}</Text>
+        );
+      }
+      if (React.isValidElement(row.actionButton.icon)) {
+        return row.actionButton.icon;
+      }
+    }
+    return <SearchIcon />;
+  };
+
+  const renderActionButton = () => {
+    if (!row?.actionButton) return null;
+    return (
+      <Button
+        onPress={handleActionButtonPress}
+        typeStyle="primary"
+        width={32}
+        height={32}
+        paddingHorizontal={0}
+        paddingVertical={0}
+        disabled={disabled}
+        iconLeft={getActionButtonIcon()}
+      />
+    );
+  };
 
   if (!row) {
     return <></>;
@@ -91,29 +129,46 @@ const SwitchTitleCard = ({
         useInlineLayout={useInlineLayout}
         color={color}
         isDivisor={isDivisor}
+        disabled={disabled}
+        actionButton={row.actionButton}
+        item={item}
       />
     );
   }
 
   // Read-only title rendering (default)
   return (
-    <View style={[styles.row, !isDivisor && styles.noBorderBottom]}>
-      <Text
-        style={[styles.textName, color]}
-        ellipsizeMode="tail"
-        numberOfLines={1}>
-        {row.label}
-      </Text>
-      <View style={styles.titleRowValue}>
-        {getIconByType({ row, item, color, disabled })}
-        {!['boolean', 'status'].includes(row.type ?? '') && (
-          <Text
-            style={[styles.textValueBold, color]}
-            ellipsizeMode="tail"
-            numberOfLines={2}>
-            {row?.key ? getDisplayValue(item[row.key], row.displayKey) : ''}
-          </Text>
-        )}
+    <View
+      style={[
+        styles.row,
+        !isDivisor && styles.noBorderBottom,
+        {
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        },
+      ]}>
+      <View style={{ flex: 1 }}>
+        <Text
+          style={[styles.textName, color]}
+          ellipsizeMode="tail"
+          numberOfLines={1}>
+          {row.label}
+        </Text>
+        <View style={styles.titleRowValue}>
+          {getIconByType({ row, item, color, disabled })}
+          {!['boolean', 'status'].includes(row.type ?? '') && (
+            <Text
+              style={[styles.textValueBold, color]}
+              ellipsizeMode="tail"
+              numberOfLines={2}>
+              {row?.key ? getDisplayValue(item[row.key], row.displayKey) : ''}
+            </Text>
+          )}
+        </View>
+      </View>
+      <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+        {renderActionButton()}
       </View>
     </View>
   );
