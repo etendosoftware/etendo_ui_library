@@ -89,14 +89,22 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
   }, [applyMode, onClear]);
 
   const handleApply = useCallback(() => {
-    // Notify changes for each section that was modified
-    Object.keys(localSelectedFilters).forEach(key => {
-      onChange(key, localSelectedFilters[key]);
-    });
-    // Or call a dedicated onApply if provided
+    const isAllClear = Object.values(localSelectedFilters).every(
+      (values) => !values || values.length === 0
+    );
+
+    if (isAllClear) {
+      onClear();
+    } else {
+      // Notify changes for each section defined in props
+      filters.forEach((section) => {
+        onChange(section.key, localSelectedFilters[section.key] || []);
+      });
+    }
+
     onApply?.();
     onClose?.();
-  }, [localSelectedFilters, onChange, onApply, onClose]);
+  }, [localSelectedFilters, filters, onChange, onClear, onApply, onClose]);
 
   const hasAnyFilters = Object.values(localSelectedFilters).some(
     (values) => values && values.length > 0
