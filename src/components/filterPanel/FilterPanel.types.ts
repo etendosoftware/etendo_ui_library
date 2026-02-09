@@ -1,4 +1,4 @@
-import { DimensionValue, ViewStyle } from 'react-native';
+import { ViewStyle } from 'react-native';
 
 /**
  * Represents a single option within a filter section.

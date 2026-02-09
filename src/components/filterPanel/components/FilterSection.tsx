@@ -3,7 +3,7 @@ import { View, Text, Pressable } from 'react-native';
 import { FilterSectionProps, FilterOption } from '../FilterPanel.types';
 import { styles } from '../FilterPanel.styles';
 import { ChevronDownIcon, ChevronUpIcon } from '../../../assets/images/icons';
-import { PRIMARY_100, NEUTRAL_600, NEUTRAL_10 } from '../../../styles/colors';
+import { PRIMARY_100, NEUTRAL_600 } from '../../../styles/colors';
 import FilterOptionComponent from './FilterOption';
 import Input from '../../input/Input';
 import SkeletonItem from '../../secondaryComponents/SkeletonItem';
@@ -85,7 +85,11 @@ const FilterSection: React.FC<FilterSectionProps> = ({
           pressed && styles.sectionHeaderPressed,
         ]}
         accessibilityState={{ expanded: isExpanded }}
-        accessibilityLabel={`${section.title}${hasSelections ? `, ${selectedCount} selected` : ''}`}>
+        accessibilityLabel={
+          hasSelections
+            ? `${section.title}, ${selectedCount} selected`
+            : section.title
+        }>
         <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}>
           <Text
             style={[

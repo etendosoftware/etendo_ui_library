@@ -3,7 +3,7 @@ import { View, Text, Pressable } from 'react-native';
 import { FilterButtonProps } from './FilterPanel.types';
 import { styles } from './FilterPanel.styles';
 import { FilterIcon } from '../../assets/images/icons';
-import { PRIMARY_100, NEUTRAL_0 } from '../../styles/colors';
+import { PRIMARY_100 } from '../../styles/colors';
 
 /**
  * FilterButton - A trigger button that opens the FilterPanel.
@@ -27,10 +27,14 @@ const FilterButton: React.FC<FilterButtonProps> = ({
         hasActiveFilters && styles.filterButtonActive,
       ]}
       accessibilityRole="button"
-      accessibilityLabel={`Filter${hasActiveFilters ? `, ${activeFilterCount || ''} active` : ''}`}
+      accessibilityLabel={
+        hasActiveFilters
+          ? `Filter, ${activeFilterCount || ''} active`
+          : 'Filter'
+      }
       accessibilityState={{ disabled }}>
       <FilterIcon
-        fill={hasActiveFilters ? PRIMARY_100 : PRIMARY_100}
+        fill={PRIMARY_100}
         style={{ width: size * 0.5, height: size * 0.5 }}
       />
       {hasActiveFilters && activeFilterCount !== undefined && activeFilterCount > 0 && (
