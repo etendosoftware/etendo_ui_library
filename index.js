@@ -38,6 +38,8 @@ const {
   TitleContainer,
   TextMessageRN,
   ViewEtendo,
+  FilterPanel,
+  FilterButton,
 } = isNativeEnvironment ? NativeComponents : WebComponents;
 
 const {
@@ -364,6 +366,8 @@ export {
   TitleContainer,
   TextMessageRN,
   ViewEtendo,
+  FilterPanel,
+  FilterButton,
   ActivityIcon,
   ArrowUpRightIcon,
   ChevronDownIcon,
