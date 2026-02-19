@@ -23,6 +23,7 @@ import { Cards } from './cards';
 import { Alert, setAlertDefaultDuration, show } from './alert';
 import { Signature } from './signature';
 import { TextMessageRN } from './text-message-rn';
+import { FilterPanel, FilterButton } from './filterPanel';
 
 export {
   Alert,
@@ -53,4 +54,6 @@ export {
   TitleContainer,
   TextMessageRN,
   ViewEtendo,
+  FilterPanel,
+  FilterButton,
 };
