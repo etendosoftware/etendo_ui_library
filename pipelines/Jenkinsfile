@@ -104,7 +104,7 @@ spec:
                                 dir("etendo_ui_library") {
                                     sh "git checkout ${GIT_COMMIT}"
                                     echo "....Building Environment...."
-                                    sh "curl -sL https://deb.nodesource.com/setup_16.x | bash -"
+                                    sh "curl -sL https://deb.nodesource.com/setup_20.x | bash -"
                                     sh "apt-get install -y nodejs"
                                     sh 'npm install -g yarn'
                                     sh 'npm config set registry "https://registry.npmjs.org/"'
