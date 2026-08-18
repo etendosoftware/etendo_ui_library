@@ -1,5 +1,6 @@
-import { TouchableOpacity, Modal } from 'react-native';
+import { Platform, TouchableOpacity, Modal } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { styles } from './Profile.styles';
 import ProfileOptions from './ProfileOptions';
 import ProfileImage from './ProfileImage';
@@ -26,6 +27,7 @@ const Profile = ({
   });
 
   const refComponente = useRef<TouchableOpacity>(null);
+  const insets = useSafeAreaInsets();
 
   useEffect(() => {
     if (showOptions) {
@@ -44,7 +46,13 @@ const Profile = ({
           pageX: number,
           pageY: number,
         ) => {
-          setPosicionModal({ top: pageY + height, left: pageX, width, height });
+          const statusBarOffset = Platform.OS === 'android' ? insets.top : 0;
+          setPosicionModal({
+            top: pageY + height - statusBarOffset,
+            left: pageX,
+            width,
+            height,
+          });
         },
       );
     }
