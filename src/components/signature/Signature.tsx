@@ -125,9 +125,8 @@ const Signature: React.FC<ISignaturePadProps> = ({
 
   return (
     <View style={[styles.container, containerStyle]}>
-      <View style={styles.svgContainer}>
+      <View style={styles.svgContainer} onLayout={handleLayout}>
         <Svg
-          onLayout={handleLayout}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}>
