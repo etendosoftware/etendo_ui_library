@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
-import { Modal, TouchableOpacity } from 'react-native';
+import { Modal, Platform, TouchableOpacity } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BellIcon } from '../../../../assets/images/icons/BellIcon';
 import { BellOffIcon } from '../../../../assets/images/icons/BellOffIcon';
 import {
@@ -27,6 +28,7 @@ const Notification = ({
     height: 0,
   });
   const refComponente = useRef<TouchableOpacity>(null);
+  const insets = useSafeAreaInsets();
 
   const handleOptionSelected = useMemo(
     () => (item: OptionNotificationItem, index: number) => {
@@ -47,7 +49,13 @@ const Notification = ({
           pageX: number,
           pageY: number,
         ) => {
-          setPosicionModal({ top: pageY + height, left: pageX, width, height });
+          const statusBarOffset = Platform.OS === 'android' ? insets.top : 0;
+          setPosicionModal({
+            top: pageY + height - statusBarOffset,
+            left: pageX,
+            width,
+            height,
+          });
         },
       );
     }

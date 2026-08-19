@@ -3,9 +3,11 @@ import {
   TouchableOpacity,
   Dimensions,
   LayoutChangeEvent,
+  Platform,
   Text,
 } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CardVariant, styles } from './CardDropdown.styles';
 import CardSkeleton from './component/CardSkeleton';
 import { CardDrpopdownProps, PositionModalType } from './CardDropdown.types';
@@ -90,16 +92,18 @@ const CardDropdown = ({
           pageX: number,
           pageY: number,
         ) => {
-          let dropdownHeight = pageY + heightDropdown;
+          const statusBarOffset = Platform.OS === 'android' ? insets.top : 0;
+          const adjustedPageY = pageY - statusBarOffset;
+          let dropdownHeight = adjustedPageY + heightDropdown;
           if (dropdownHeight > windowHeight) {
             setpositionModal({
-              top: handleTopLeft(pageY, height),
+              top: handleTopLeft(adjustedPageY, height),
               left: pageX,
               width,
               height,
             });
           } else {
-            setpositionModal({ top: pageY, left: pageX, width, height });
+            setpositionModal({ top: adjustedPageY, left: pageX, width, height });
           }
         },
       );
@@ -115,6 +119,7 @@ const CardDropdown = ({
 
   const windowHeight = Dimensions.get('window').height;
   const refComponente = useRef<TouchableOpacity>(null);
+  const insets = useSafeAreaInsets();
   const heightExtra = 20;
 
   return title && image ? (
