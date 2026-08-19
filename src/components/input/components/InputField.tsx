@@ -10,8 +10,10 @@ import {
   ViewStyle,
   Dimensions,
   GestureResponderEvent,
+  Platform,
   Text,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { styles } from '../Input.style';
 import {
   InputFieldProps,
@@ -69,6 +71,7 @@ const InputField = ({
   });
   const windowHeight = Dimensions.get('window').height;
   const refComponent = useRef<TouchableOpacity>(null);
+  const insets = useSafeAreaInsets();
   const regex = /^[0-9.,]+$/g;
 
   const getStyleText = (): TextStyle | TextStyle[] => {
@@ -93,8 +96,10 @@ const InputField = ({
   const getTopLeft = () => {
     if (refComponent.current) {
       refComponent.current.measure((x, y, width, height, pageX, pageY) => {
+        const statusBarOffset = Platform.OS === 'android' ? insets.top : 0;
+        const adjustedPageY = pageY - statusBarOffset;
         const calcDropdownTopLeft =
-          pageY + height + styles.spaceInOptionsAndInput.height;
+          adjustedPageY + height + styles.spaceInOptionsAndInput.height;
 
         const showFilterHeight: any = showSearchInPicker
           ? styles.optionFilterContainer.height
@@ -112,7 +117,7 @@ const InputField = ({
           optionsHeight + calcDropdownTopLeft + styles.offSet.height >
           windowHeight
         ) {
-          topPosition = pageY - optionsHeight;
+          topPosition = adjustedPageY - optionsHeight;
           setOptionsTop(true);
         } else {
           topPosition = calcDropdownTopLeft;
